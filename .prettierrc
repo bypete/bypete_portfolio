@@ -1,0 +1,26 @@
+{
+  "tabWidth": 4,
+  "singleQuote": true,
+  "printWidth": 80,
+  "bracketSpacing": true,
+  "semi": true,
+  "overrides": [
+    {
+      "files": "*.njk",
+      "options": {
+        "tabWidth": 4,
+        "parser": "html"
+      }
+    },
+    {
+      "files": "*.md",
+      "options": {
+        "tabWidth": 4
+      }
+    }
+  ],
+  "plugins": [
+    "prettier-plugin-tailwindcss"
+  ],
+  "pluginSearchDirs": false
+}
