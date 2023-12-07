@@ -1,0 +1,25 @@
+---
+const a11yLinks = [
+    {
+        anchor: '#main-content',
+        link: 'content',
+    },
+    {
+        anchor: '#navigation',
+        link: 'navigation',
+    },
+];
+---
+
+<h2 class="sr-only">Accessibility links</h2>
+
+{
+    a11yLinks.map((jump) => (
+        <a
+            class="absolute left-1/2 -translate-x-1/2 -translate-y-full bg-accent p-3 text-white transition focus:z-[10000] focus:translate-y-0"
+            href={jump.anchor}
+        >
+            Skip to {jump.link}
+        </a>
+    ))
+}

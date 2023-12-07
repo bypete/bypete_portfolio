@@ -3,10 +3,10 @@ import utilities from '../data/utilities.json';
 import { Icon } from 'astro-icon';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
-const pageTitle = 'Connect';
+const title = 'Connect';
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout title={title}>
     <div
         class:list={['grid grid-cols-1 md:grid-cols-2', utilities.tramline.all]}
     >

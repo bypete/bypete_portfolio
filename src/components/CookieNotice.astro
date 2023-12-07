@@ -1,5 +1,7 @@
 ---
 import Toast from './Toast.astro';
+import Button from './ui/Button.astro';
+import Link from './ui/Link.astro';
 import { Icon } from 'astro-icon';
 const { bg } = Astro.props;
 ---
@@ -32,15 +34,17 @@ const { bg } = Astro.props;
             <Icon name="mdi:hide" class="h-4 w-4" />
         </button>
         <p class="flex justify-between grid-in-action">
-            <a href="/about/legal#cookie-policy" class="btn btn--link btn--sm"
-                >Cookie policy</a
-            >
-            <button
+            <Link theme="link" size="sm" href="/about/legal#cookie-policy">
+                Cookie policy
+            </Link>
+            <Button
                 type="button"
+                size="sm"
                 @click="accept()"
-                class="btn btn--primary btn--sm"
-                aria-label="Dismiss">OK, continue</button
+                aria-label="Dismiss"
             >
+                OK, continue
+            </Button>
         </p>
     </div>
 </Toast>
