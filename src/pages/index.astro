@@ -1,10 +1,9 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Greeting from "../components/Greetings";
-const pageTitle = "Home page";
+import HomeLayout from '../layouts/HomeLayout.astro';
+const pageTitle = 'Home page';
 ---
 
-<BaseLayout pageTitle={pageTitle}>
-  <h2>My Awesome blog subtitle</h2>
-  <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
-</BaseLayout>
+<HomeLayout>
+    <title slot="head">Astro</title>
+    <h1>Astro</h1>
+</HomeLayout>

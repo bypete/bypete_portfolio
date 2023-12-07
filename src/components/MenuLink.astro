@@ -1,0 +1,24 @@
+---
+const { title, url, pathname, isHeroDark, class: className } = Astro.props;
+const shade = isHeroDark
+    ? 'text-white ring-transparent hover:bg-white hover:text-slate-800 focus:bg-white focus:text-slate-800'
+    : 'text-accent ring-transparent hover:bg-white hover:text-slate-800 focus:bg-white focus:text-slate-800';
+const activeState = isHeroDark
+    ? 'data-[state=active]:text-slate-white data-[state=active]:ring-brand data-[state=active]:hover:text-slate-800'
+    : 'data-[state=active]:text-800 data-[state=active]:ring-brand data-[state=active]:hover:text-slate-800';
+---
+
+<a
+    href={url}
+    class:list={['menulink p-2', className, shade, activeState]}
+    data-state={pathname === url ? 'active' : ''}>{title}</a
+>
+
+<style is:global>
+    .menulink {
+        @apply flex h-full items-center rounded-full text-base/none font-medium ring-2 transition duration-150 focus:outline-none;
+        &__toggle {
+            @apply bg-white text-accent focus:bg-white focus:text-slate-800;
+        }
+    }
+</style>

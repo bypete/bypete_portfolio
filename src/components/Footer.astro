@@ -1,16 +1,46 @@
 ---
 import Social from './Social.astro';
+import socialData from '../data/social.json';
 ---
-<style>
-  footer {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-  </style>
 
-<footer>
-    <Social platform="twitter" username="astrodotbuild" />
-    <Social platform="github" username="withastro" />
-    <Social platform="youtube" username="astrodotbuild" />
+<footer
+    class="relative bg-slate-900 bg-gradient-to-b from-slate-800 to-slate-900 py-16 text-white"
+>
+    <div
+        class="relative mx-auto grid max-w-container grid-cols-1 gap-8 md:grid-cols-3 2xl:grid-cols-2"
+    >
+        <div>
+            <p>
+                <img
+                    src="/img/logos/bypete--white.svg"
+                    class="h-10 w-auto"
+                    height="40"
+                    width="140"
+                    alt="byPete logo in white"
+                />
+            </p>
+            <ul class="-mx-2 mt-2 inline-flex">
+                <li class="border-r border-white px-2 last:border-0">©2024</li>
+                <li class="border-r border-white px-2 last:border-0">
+                    <a href="/about/legal" class="link">Legal notices</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="self-end">
+            <div
+                class="-mx-2 inline-flex md:flex md:items-end md:justify-center 2xl:justify-end"
+            >
+                {
+                    socialData.map((channel) => (
+                        <Social
+                            platform={channel.platform}
+                            url={channel.url}
+                            name={channel.name}
+                        />
+                    ))
+                }
+            </div>
+        </div>
+    </div>
 </footer>

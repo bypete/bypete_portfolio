@@ -1,7 +1,115 @@
 ---
+import { getCollection } from 'astro:content';
+import MenuLink from './MenuLink.astro';
+import MenuLinkChild from './MenuLinkChild.astro';
+
+const allPosts = await getCollection('work');
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1); // remove the first "/"
+const { isHeroDark } = Astro.props;
+const year = new Date().getFullYear();
 ---
-<div class="hamburger">
-  <span class="line"></span>
-  <span class="line"></span>
-  <span class="line"></span>
+
+<div
+    class="fixed inset-0 z-banner flex h-full bg-brand"
+    x-show="smNav"
+    x-cloak
+    x-transition:enter="transition ease-out duration-500"
+    x-transition:enter-start="transform opacity-0"
+    x-transition:enter-end="transform opacity-100 "
+    x-transition:leave="transition ease-in duration-75"
+    x-transition:leave-start="transform opacity-100 "
+    x-transition:leave-end="transform opacity-0 "
+>
+    <div class="mr-20 flex h-full w-full flex-col py-6 pl-4">
+        <div class="flex-shrink text-left">
+            <a href="/" aria-label="byPete - home">
+                <img
+                    src="/img/logos/bypete--white.svg"
+                    height="40"
+                    width="140"
+                    class="banner__logo h-10 w-auto !shadow-brand-darker transition-all"
+                    alt="byPete"
+                />
+            </a>
+        </div>
+        <ul
+            id="mobilenavigation"
+            class="flex w-full grow flex-col justify-center space-y-3"
+        >
+            <li class="relative">
+                <MenuLink
+                    url={`/about`}
+                    title="About"
+                    {pathname}
+                    {isHeroDark}
+                />
+                <!-- <a class="w-full block py-0.5 font-headline font-black text-4xl tracking-tight data-[state=active]:text-white" href="/About" >About</a> -->
+            </li>
+            <li>
+                <MenuLink url={`/blog`} title="Blog" {pathname} {isHeroDark} />
+            </li>
+
+            <li x-data="{ open: false }">
+                <div class="relative flex items-center justify-between">
+                    <a
+                        href="{{ entry.url }}"
+                        class="block font-headline text-4xl font-black tracking-tight data-[state=active]:text-white"
+                        >title</a
+                    >
+                    <button
+                        @click="open = !open"
+                        class="flex h-10 w-10 items-center justify-center rounded-full p-0 focus:outline-none"
+                        :class="{ 'bg-white': open }"
+                    >
+                        <svg
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            :class="{'rotate-180': open, 'rotate-0': !open}"
+                            class="inline h-8 w-8 transform transition-transform duration-200"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd"
+                            >
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div
+                    x-cloak
+                    x-ref="children"
+                    class="h-0 w-full origin-top transition-all duration-500"
+                    :class="open ? 'overflow-auto mt-2' : 'overflow-hidden pointer-events-none' "
+                    :style="open ? {height: `${$refs.children.scrollHeight}px`} : {height: `0px`}"
+                >
+                    <div
+                        class="max-h-[33vh] overflow-y-scroll rounded-tight bg-white p-2 shadow-inner shadow-gray-200"
+                    >
+                        {
+                            allPosts.map((post) => (
+                                <MenuLinkChild
+                                    url={`/work/${post.slug}/`}
+                                    title={post.data.title}
+                                    {pathname}
+                                    {currentPath}
+                                />
+                            ))
+                        }
+                        <!-- <a class="block px-2 py-1.5 text-base font-light text-slate-700 hover:bg-white focus:bg-white focus:outline-none focus:ring-1 data-[state=active]:font-bold  data-[state=active]:bg-brand " href="{{ child.url }}" >title</a> -->
+                    </div>
+                </div>
+            </li>
+            <li class="relative">
+                <MenuLink url={`/blog`} title="Blog" {pathname} {isHeroDark} />
+            </li>
+        </ul>
+        <ul class="-mx-2 mt-8 inline-flex">
+            <li class="border-r border-white px-2 last:border-0">©{year}</li>
+            <li class="border-r border-white px-2 last:border-0">
+                <a href="/about/legal" class="link">Legal notices</a>
+            </li>
+        </ul>
+    </div>
 </div>

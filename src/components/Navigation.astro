@@ -1,10 +1,32 @@
 ---
+import { getCollection } from 'astro:content';
+import MenuLink from './MenuLink.astro';
+import MenuLinkChild from './MenuLinkChild.astro';
+import MenuDropdown from './MenuDropdown.astro';
 
+const allPosts = await getCollection('work');
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1); // remove the first "/"
+const { isHeroDark } = Astro.props;
 ---
 
-<div class="nav-links">
-  <a href="/">Home</a>
-  <a href="/about">About</a>
-  <a href="/blog">Blog</a>
-  <a href="/tags">Tags</a>
-</div>
+<nav id="navigation" aria-label="Main">
+    <ul class="hidden space-x-2 md:flex" x-ref="menu">
+        <li>
+            <MenuLink url={`/about`} title="About" {pathname} {isHeroDark} />
+        </li>
+        <MenuDropdown url={`/work`} title="Work" {pathname} {isHeroDark}>
+            {
+                allPosts.map((post) => (
+                    <MenuLinkChild
+                        url={`/work/${post.slug}/`}
+                        title={post.data.title}
+                        {pathname}
+                        {currentPath}
+                    />
+                ))
+            }
+        </MenuDropdown>
+        <li><MenuLink url={`/blog`} title="Blog" {pathname} {isHeroDark} /></li>
+    </ul>
+</nav>

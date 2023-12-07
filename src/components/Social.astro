@@ -1,13 +1,21 @@
 ---
-const { platform, username } = Astro.props;
+import { Icon } from 'astro-icon';
+interface Props {
+    name: string;
+    url: string;
+    platform: string;
+    wrap?: string;
+    css?: string;
+}
+const {
+    platform,
+    url,
+    name,
+    wrap = 'text-white hover:text-brand mx-2',
+    css = 'w-auto h-6 fill-current',
+} = Astro.props;
 ---
-<a href={`https://www.${platform}.com/${username}`}>{platform}</a>
 
-<style>
-  a {
-    padding: 0.5rem 1rem;
-    color: white;
-    background-color: #4c1d95;
-    text-decoration: none;
-  }
-  </style>
+<a href={`${url}`} rel="nofollow" class={wrap} title={platform}>
+    <Icon {name} class={css} />
+</a>

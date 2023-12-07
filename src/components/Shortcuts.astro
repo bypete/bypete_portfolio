@@ -1,0 +1,81 @@
+---
+
+---
+
+<div
+    class="fixed bottom-16 right-4 z-shortcuts flex flex-col items-center space-y-2 md:right-8"
+>
+    <a
+        id="pagetop"
+        x-ref="pagetop"
+        x-cloak
+        :class="pageTop ? '' : 'translate-y-12 md:translate-y-0 md:translate-x-16'"
+        href="#top"
+        aria-hidden="true"
+        class="scroll focus:shadow-outline flex h-8 w-8 items-center justify-center rounded-full bg-accent text-white shadow-floated transition duration-700 focus:outline-none focus:ring-2"
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 rotate-90"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"></path>
+        </svg>
+    </a>
+    <button
+        class="focus:shadow-outline group relative flex h-16 w-16 flex-col items-center justify-center rounded-full bg-accent text-white shadow-floated focus:outline-none focus:ring-2 md:hidden"
+        name="hamburger"
+        type="button"
+        x-data="hamburger"
+        x-ref="button"
+        @click="toggle()"
+    >
+        <span
+            :class="smNav ? 'rotate-45 translate-y-2' : ''"
+            class="ease my-0.5 h-1 w-6 transform rounded-full bg-white transition duration-300"
+        ></span>
+        <span
+            :class="smNav ? 'opacity-0' : ''"
+            class="ease my-0.5 h-1 w-6 transform rounded-full bg-white transition duration-300"
+        ></span>
+        <span
+            :class="smNav ? '-rotate-45 -translate-y-2' : ''"
+            class="ease my-0.5 h-1 w-6 transform rounded-full bg-white transition duration-300"
+        ></span>
+    </button>
+</div>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.store('cache', {
+            theme: null,
+            banner: null,
+        });
+        Alpine.data('hamburger', () => ({
+            freeze(freezeState) {
+                document.body.classList.toggle('overflow-hidden', freezeState);
+            },
+            toggle() {
+                const themeMeta = document.querySelector(
+                    'meta[name="theme-color"]',
+                );
+                const cache =
+                    this.$store.cache.theme ||
+                    themeMeta.getAttribute('content');
+                this.$store.cache.theme = cache;
+                this.smNav = !this.smNav;
+                themeMeta.setAttribute(
+                    'content',
+                    this.smNav ? '#ffd200' : cache,
+                );
+                this.freeze(this.smNav);
+            },
+        }));
+    });
+</script>

@@ -1,26 +1,64 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import "../styles/global.css";
-const { pageTitle } = Astro.props;
+// import Loader from "../components/Loader.astro";
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Underlay from '../components/Underlay.astro';
+import CookieNotice from '../components/CookieNotice.astro';
+import Shortcuts from '../components/Shortcuts.astro';
+interface Props {
+    pageTitle?: string;
+    description?: string;
+    image?: string;
+    isHeroDark?: boolean;
+}
+// import "../styles/global.css";
+const {
+    pageTitle = 'byPete',
+    description = 'Portfolio site',
+    image = '/images/pete.jpg',
+    isHeroDark = false,
+} = Astro.props.frontmatter || Astro.props;
 ---
+
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
-    <ViewTransitions />
-  </head>
-  <body>
-    <Header />
-    <h1>{pageTitle}</h1>
-    <slot />
-    <Footer />
-    <script>
-      import "../scripts/menu.js";
-    </script>
-  </body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <meta name="theme-color" content={isHeroDark ? '#0f172a' : '#ffffff'} />
+        <title>{pageTitle}</title>
+        <slot name="head" />
+        <ViewTransitions />
+    </head>
+    <body
+        class:list={['grid min-h-screen grid-rows-[auto,1fr,auto]']}
+        x-data="{ pageTop: false, smNav: false, showOverlay: false, showUnderlay: false, }"
+        x-ref="body"
+    >
+        <!-- <Loader /> -->
+        <Header {isHeroDark} />
+        <div>
+            <h1>{pageTitle}</h1>
+            <slot />
+        </div>
+        <Footer />
+        <Underlay {isHeroDark} class="bg-gray-900" />
+        <CookieNotice />
+        <Shortcuts />
+        <script>
+            // import '../scripts/menu.js';
+        </script>
+        <style>
+            /* Alpine.js
+---------------------------------------------------------------------------------*/
+            [x-cloak] {
+                /* display: none !important; */
+                visibility: hidden;
+                opacity: 0;
+            }
+        </style>
+    </body>
 </html>

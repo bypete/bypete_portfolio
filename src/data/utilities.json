@@ -1,0 +1,97 @@
+{
+  "container": "px-4 md:px-8 2xl:px-0",
+  "containerPull": "-mx-4 md:-mx-8 2xl:mx-0",
+  "headergap": "md:mt-[var(--headerheight)]",
+  "breakout": "w-screen max-w-none left-1/2 right-1/2 relative  -ml-[50vw] -mr-[50vw]",
+  "breakoutcontainer": "max-w-container left-1/2 right-1/2 relative -ml-[384px] -mr-[384px]",
+  "tramline": {
+    "all": "p-4 md:p-8",
+    "x": "px-4 md:px-8",
+    "y": "py-4 md:py-8",
+    "t": "pt-4 md:pt-8",
+    "r": "pr-4 md:pr-8",
+    "b": "pb-4 md:pb-8",
+    "l": "pl-4 md:pl-8",
+    "double": {
+      "all": "p-8 md:p-16",
+      "x": "px-8 md:px-16",
+      "y": "py-8 md:py-16",
+      "t": "pt-8 md:pt-16",
+      "r": "pr-8 md:pr-16",
+      "b": "pb-8 md:pb-16",
+      "l": "pl-8 md:pl-16"
+    },
+    "triple": {
+      "all": "p-12 md:p-24",
+      "x": "px-12 md:px-24",
+      "y": "py-12 md:py-24",
+      "t": "pt-12 md:pt-24",
+      "r": "pr-12 md:pr-24",
+      "b": "pb-12 md:pb-24",
+      "l": "pl-12 md:pl-24"
+    },
+    "narrow": {
+      "all": "p-2 md:p-2.5",
+      "x": "px-2 md:px-2.5",
+      "y": "py-2 md:py-2.5",
+      "t": "pt-2 md:pt-2.5",
+      "r": "pr-2 md:pr-2.5",
+      "b": "pb-2 md:pb-2.5",
+      "l": "pl-2 md:pl-2.5"
+    }
+  },
+  "margin": {
+    "all": "m-4 md:m-8",
+    "x": "mx-4 md:mx-8",
+    "y": "my-4 md:my-8",
+    "t": "mt-4 md:mt-8",
+    "r": "mr-4 md:mr-8",
+    "b": "mb-4 md:mb-8",
+    "l": "ml-4 md:ml-8",
+    "double": {
+      "all": "m-8 md:m-16",
+      "x": "mx-8 md:mx-16",
+      "y": "my-8 md:my-16",
+      "t": "mt-8 md:mt-16",
+      "r": "mr-8 md:mr-16",
+      "b": "mb-8 md:mb-16",
+      "l": "ml-8 md:ml-16"
+    },
+    "narrow": {
+      "all": "m-2 md:m-2.5",
+      "x": "mx-2 md:mx-2.5",
+      "y": "my-2 md:my-2.5",
+      "t": "mt-2 md:mt-2.5",
+      "r": "mr-2 md:mr-2.5",
+      "b": "mb-2 md:mb-2.5",
+      "l": "ml-2 md:ml-2.5"
+    }
+  },
+  "pull": {
+    "all": "-m-4 md:-m-8",
+    "x": "-mx-4 md:-mx-8",
+    "y": "-my-4 md:-my-8",
+    "t": "-mt-4 md:-mt-8",
+    "r": "-mr-4 md:-mr-8",
+    "b": "-mb-4 md:-mb-8",
+    "l": "-ml-4 md:-ml-8",
+    "double": {
+      "all": "-m-8 md:-m-16",
+      "x": "-mx-8 md:-mx-16",
+      "y": "-my-8 md:-my-16",
+      "t": "-mt-8 md:-mt-16",
+      "r": "-mr-8 md:-mr-16",
+      "b": "-mb-8 md:-mb-16",
+      "l": "-ml-8 md:-ml-16"
+    },
+    "narrow": {
+      "all": "-m-2 md:-m-2.5",
+      "x": "-mx-2 md:-mx-2.5",
+      "y": "-my-2 md:-my-2.5",
+      "t": "-mt-2 md:-mt-2.5",
+      "r": "-mr-2 md:-mr-2.5",
+      "b": "-mb-2 md:-mb-2.5",
+      "l": "-ml-2 md:-ml-2.5"
+    }
+  }
+}

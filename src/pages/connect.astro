@@ -1,0 +1,56 @@
+---
+import utilities from '../data/utilities.json';
+import { Icon } from 'astro-icon';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+const pageTitle = 'Connect';
+---
+
+<BaseLayout pageTitle={pageTitle}>
+    <div
+        class:list={['grid grid-cols-1 md:grid-cols-2', utilities.tramline.all]}
+    >
+        <div
+            class:list={[
+                'rte flex items-center border border-gray-100 md:order-2',
+                utilities.tramline.all,
+            ]}
+        >
+            <div
+                class:list={[
+                    'mx-auto  w-full max-w-sm ',
+                    utilities.tramline.all,
+                ]}
+            >
+                <p>
+                    Use this form to send me a message and I'll get back to you
+                    shortly.
+                </p>
+                <p>
+                    Please read my <a href="/about">bio</a> or visit my LinkedIn
+                    profile to find out more about me.
+                </p>
+                <p class:list={[utilities.margin.b]}>
+                    <a
+                        href="https://www.linkedin.com/in/peter-wallace-a5002a7a/"
+                        class="link external flex items-center justify-between gap-2 rounded border border-solid border-slate-800 bg-slate-800 px-3 py-2 text-sky-400 no-underline hover:border-sky-500 hover:bg-sky-500 hover:text-white hover:no-underline"
+                    >
+                        <Icon
+                            name="mdi:linkedin"
+                            class="h-8 w-auto fill-current"
+                        />
+                         View my profile
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div
+            class:list={[
+                'rounded bg-gray-100/50 md:order-1',
+                utilities.tramline.all,
+            ]}
+        >
+            <ContactForm />
+        </div>
+    </div>
+</BaseLayout>

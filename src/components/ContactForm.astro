@@ -1,0 +1,160 @@
+---
+import Alpine from 'alpinejs';
+import JustValidate from 'just-validate';
+---
+
+<!-- https://just-validate.dev/docs/intro -->
+<div x-data="justvalidate" class="not-prose">
+    <form
+        x-ref="form"
+        x-on:submit.prevent="onSubmit()"
+        class="form"
+        accept-charset="UTF-8"
+        action="https://usebasin.com/f/64b35c1258c2"
+        method="post"
+        enctype="multipart/form-data"
+        novalidate="novalidate"
+    >
+        <div class="group mt-4">
+            <label class="font-medium" for="InputName">Name</label>
+            <input
+                type="text"
+                name="name"
+                class="form__input w-full"
+                id="InputName"
+                placeholder="Enter your name and surname"
+                required="required"
+            />
+        </div>
+        <div class="group mt-4">
+            <label class="font-medium" for="InputEmail">Email address</label>
+            <div class="relative">
+                <input
+                    type="email"
+                    name="email"
+                    class="form__input w-full pr-10"
+                    id="InputEmail"
+                    placeholder="you@example.com"
+                    required
+                />
+                <div
+                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        class="success-svg hidden h-5 w-5 group-[.has-success]:block"
+                    >
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            class="fill-current text-green-200"></circle>
+                        <path
+                            d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"
+                            class="fill-current text-green-600"
+                        >
+                        </path>
+                    </svg>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        class="error-svg hidden h-5 w-5 group-[.has-error]:block"
+                    >
+                        <circle cx="12" cy="12" r="10" fill="#fed7d7"></circle>
+                        <path
+                            fill="#f56565"
+                            d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"
+                        >
+                        </path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="absolute -z-10 h-0 w-0 opacity-0">
+            <label class="font-medium" for="_byPete">When to call?</label>
+            <input
+                tabindex="-1"
+                autocomplete="off"
+                type="text"
+                name="contact"
+                aria-hidden="true"
+                id="_byPete"
+            />
+        </div>
+        <div class="group mt-4">
+            <label class="font-medium" for="InputMessage">Your message</label>
+            <textarea
+                rows="6"
+                cols="50"
+                name="message"
+                class="form__input w-full"
+                id="InputMessage"
+                placeholder="Add a message"
+                data-pristine-required-message="Don't forget to add your message..."
+                required></textarea>
+        </div>
+        <div class="mt-4">
+            <button type="submit" class="btn btn--primary">Send now</button>
+        </div>
+    </form>
+</div>
+
+<script lang="js">
+    Alpine.data('justvalidate', () => ({
+        form: undefined,
+        validator: undefined,
+        wordcount: undefined,
+        init() {
+            this.form = this.$refs.form;
+            this.validator = new JustValidate(this.form, {
+                errorFieldCssClass: ['error'],
+                errorLabelCssClass: ['text-red-600', 'text-sm', 'mt-1'],
+                errorLabelStyle: false,
+                errorFieldStyle: false,
+                successFieldCssClass: ['valid'],
+                successLabelCssClass: ['valid'],
+                validateBeforeSubmitting: true,
+            });
+            this.validator
+                .addField('#InputName', [
+                    {
+                        rule: 'required',
+                        errorMessage: 'Please add your name',
+                    },
+                ])
+                .addField('#InputEmail', [
+                    {
+                        rule: 'required',
+                        errorMessage: 'Please add your email',
+                    },
+                    {
+                        rule: 'email',
+                        errorMessage: 'Please check your email address',
+                    },
+                ])
+                .addField('#InputMessage', [
+                    {
+                        rule: 'required',
+                        errorMessage: "Don't forget to add your message!",
+                    },
+                    {
+                        validator: (value) =>
+                            value !== undefined &&
+                            value.trim().split(' ').length > 3,
+                        errorMessage: 'Message should be more than 3 words.',
+                    },
+                ])
+                .addField('#_byPete', [
+                    {
+                        validator: (value) => value === '',
+                    },
+                ]);
+        },
+        onSubmit() {
+            this.validator.onSuccess((event) => {
+                this.form.submit();
+            });
+        },
+    }));
+</script>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" style="enable-background:new 0 0 600 600" xml:space="preserve">
+    <style>
+        .st1{fill:#fff}
+    </style>
+    <g id="Layer_1">
+        <circle class="st1" cx="400" cy="72" r="8"/>
+        <circle class="st1" cx="432" cy="72" r="8"/>
+        <circle class="st1" cx="464" cy="72" r="8"/>
+        <circle class="st1" cx="400" cy="104" r="8"/>
+        <circle class="st1" cx="432" cy="104" r="8"/>
+        <circle class="st1" cx="464" cy="104" r="8"/>
+        <circle class="st1" cx="400" cy="136" r="8"/>
+        <circle class="st1" cx="432" cy="136" r="8"/>
+        <circle class="st1" cx="464" cy="136" r="8"/>
+        <circle class="st1" cx="496" cy="72" r="8"/>
+        <circle class="st1" cx="528" cy="72" r="8"/>
+        <circle class="st1" cx="496" cy="104" r="8"/>
+        <circle class="st1" cx="528" cy="104" r="8"/>
+        <circle class="st1" cx="496" cy="136" r="8"/>
+        <circle class="st1" cx="528" cy="136" r="8"/>
+        <circle class="st1" cx="400" cy="136" r="8"/>
+        <circle class="st1" cx="432" cy="136" r="8"/>
+        <circle class="st1" cx="464" cy="136" r="8"/>
+        <circle class="st1" cx="400" cy="168" r="8"/>
+        <circle class="st1" cx="432" cy="168" r="8"/>
+        <circle class="st1" cx="464" cy="168" r="8"/>
+        <circle class="st1" cx="400" cy="200" r="8"/>
+        <circle class="st1" cx="432" cy="200" r="8"/>
+        <circle class="st1" cx="464" cy="200" r="8"/>
+        <circle class="st1" cx="496" cy="136" r="8"/>
+        <circle class="st1" cx="528" cy="136" r="8"/>
+        <circle class="st1" cx="496" cy="168" r="8"/>
+        <circle class="st1" cx="528" cy="168" r="8"/>
+        <circle class="st1" cx="496" cy="200" r="8"/>
+        <circle class="st1" cx="528" cy="200" r="8"/>
+        <path class="st1" d="M48 0H0v48h2V2h46zM0 552v48h48v-2H2v-46zM552 600h48v-48h-2v46h-46zM600 48V0h-48v2h46v46z"/>
+    </g>
+</svg>

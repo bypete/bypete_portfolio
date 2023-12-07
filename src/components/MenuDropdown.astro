@@ -1,0 +1,91 @@
+---
+const { title, url, pathname, isHeroDark } = Astro.props;
+import MenuLink from './MenuLink.astro';
+---
+
+<li class="relative" x-data="menu">
+    <div class="flex items-center">
+        <MenuLink {url} class="block pr-9" {title} {pathname} {isHeroDark} />
+        <button
+            @click="toggle()"
+            x-ref="button"
+            type="button"
+            :aria-expanded="open"
+            :aria-controls="$id('dropdown-button')"
+            class="menulink__toggle absolute right-2 flex h-5 w-5 items-center justify-center rounded-full p-0 focus:outline-none focus:ring-2"
+        >
+            <svg
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                :class="{'rotate-180': open, 'rotate-0': !open}"
+                class="inline h-4 w-4 transform transition-transform duration-200"
+            >
+                <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                >
+                </path>
+            </svg>
+        </button>
+    </div>
+    <div
+        x-ref="panel"
+        x-show="open"
+        @click.outside="close($refs.button)"
+        :id="$id('dropdown-button')"
+        x-cloak
+        x-transition:enter="transition ease-out duration-500"
+        x-transition:enter-start="transform opacity-0 scale-95"
+        x-transition:enter-end="transform opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-75"
+        x-transition:leave-start="transform opacity-100 scale-100"
+        x-transition:leave-end="transform opacity-0 scale-95"
+        class="absolute right-0 mt-3 w-48 origin-top-right"
+    >
+        <div
+            class="max-h-[calc(100vh-3rem-var(--headerheight))] overflow-y-scroll rounded-tight bg-white shadow-menu shadow-gray-900/25"
+        >
+            <slot />
+        </div>
+    </div>
+</li>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('menu', () => ({
+            open: false,
+
+            freeze(freezeState) {
+                document.body.classList.toggle('overflow-hidden', freezeState);
+                this.$dispatch('show-underlay', { visible: freezeState });
+            },
+            checkAriaExpanded() {
+                const buttons = this.$refs.banner.querySelectorAll('button');
+                const expandedButtonFound = [...buttons].some(
+                    (button) => button.getAttribute('aria-expanded') === 'true',
+                );
+                this.freeze(expandedButtonFound);
+            },
+            toggle() {
+                this.open = !this.open;
+                if (this.open) {
+                    this.$refs.button.focus();
+                }
+                this.checkAriaExpanded();
+            },
+            close(focusAfter) {
+                this.open = false;
+                this.checkAriaExpanded();
+                if (focusAfter) {
+                    focusAfter.focus();
+                }
+            },
+            init() {
+                this.$watch('open', (value, oldValue) => {
+                    this.checkAriaExpanded();
+                });
+            },
+        }));
+    });
+</script>
