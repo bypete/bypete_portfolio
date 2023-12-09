@@ -49,8 +49,13 @@ const {
         >
             <Header {isHeroDark} />
             <div class="bg-white outline-none">
+                <slot name="header" />
+
                 <h1>{title}</h1>
+
+                <slot name="main" />
                 <slot />
+                <slot name="footer" />
             </div>
             <Footer />
         </div>

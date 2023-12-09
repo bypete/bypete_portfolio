@@ -1,0 +1,64 @@
+---
+import utilities from '../data/utilities.json';
+
+interface SkillsetKeys {
+    bg?: string;
+    text?: string;
+    icon?: string;
+    heading?: string;
+    shadow?: string;
+    areas: object;
+}
+
+interface Props {
+    breakout?: boolean;
+    class?: string;
+    skillset?: Partial<SkillsetKeys>;
+}
+
+const { breakout = false, class: className, skillset } = Astro.props;
+const { bg, text, icon, heading, shadow, areas } = skillset as SkillsetKeys;
+---
+
+<div
+    class:list={[
+        'not-prose relative',
+        breakout ? utilities.breakout : utilities.pull.x,
+        bg || 'bg-slate-900',
+    ]}
+>
+    <div
+        class:list={[
+            'relative mx-auto max-w-3xl px-4 md:px-8 conpad:px-0',
+            heading || 'permalink:text-white',
+            utilities.tramline.double.y,
+        ]}
+    >
+        <slot />
+        <ul
+            class:list={[
+                'grid grid-cols-1 gap-8 lg:grid-cols-2',
+                text || 'text-white',
+                shadow || 'shadow-black/25 text-shadow-emboss',
+            ]}
+        >
+            {
+                areas.map((area) => (
+                    <li class:list={[area.class]}>
+                        <h3>{area.title}</h3>
+                        <ul
+                            class:list={[
+                                'list list--checklist',
+                                icon || '[&>li]:before:!text-white',
+                            ]}
+                        >
+                            {area.skills.map((skill) => (
+                                <li>{skill}</li>
+                            ))}
+                        </ul>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</div>

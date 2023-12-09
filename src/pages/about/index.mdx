@@ -1,0 +1,77 @@
+---
+title: 'Hello!'
+taster: 'I’m a Surrey based Front-End developer with over two decades of experience in digital.'
+excerpt: 'I’m a Surrey based Front-End developer with over two decades of experience in digital.'
+description: 'Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.'
+keywords: 'Surrey based Front-End developer, Bespoke website development, HTML, CSS, Creative development, The Great Outdoors, Balance and wellbeing'
+opengraph:
+    image: 'img/social/og__about.jpg'
+hero:
+    dark: true
+    bg: 'bg-brand md:bg-teal-400'
+date: Last Modified
+brand:
+    bg: 'bg-gradient-to-b from-putty to-putty-dark'
+    color: 'text-[#00a3e2]'
+skillset:
+    bg: 'bg-white'
+    text: 'text-gray-700'
+    icon: '[&>li]:before:!text-accent'
+    heading: 'permalink:text-gray-700 permalink:before:text-[#00a3e2]'
+    shadow: 'text-shadow-emboss shadow-white/20'
+    areas:
+        - title: 'Front-End Development'
+          skills:
+              - 'Tailwind CSS, SCSS, Foundation'
+              - '11ty (SSG), Nunjucks, Panini, Handlebars'
+              - 'Alpine.js, ES6, jQuery, JSON'
+              - 'Gulp, npm, Webpack'
+              - 'Xamarin.Forms'
+        - title: 'Email Development'
+          skills:
+              - 'Foundation for Emails'
+              - 'Maizzle (Tailwind for email)'
+              - 'SCSS/ Inline CSS'
+        - title: 'Development tools'
+          skills:
+              - 'Visual Studio Code, Visual Studio'
+              - 'Adobe Creative Cloud (Photoshop, Illustrator, Acrobat, Lightroom)'
+              - 'Microsoft Office'
+        - title: 'SaaS / PaaS'
+          skills:
+              - 'Mailchimp'
+              - 'Zoho CRM'
+              - 'Slack'
+              - 'Microsoft Teams'
+              - 'Azure Dev Ops'
+        - title: 'Key Competencies'
+          class: 'col-span-full'
+          skills:
+              - 'Creativity and problem solving'
+        - title: 'Role-Specific Responsibilities'
+          class: 'col-span-full'
+          skills:
+              - 'HTML Templates'
+              - 'HTML Email templates'
+              - 'Content management'
+              - 'Wireframes'
+              - 'Asset generation'
+              - 'UX/UI'
+---
+
+import Skills from '../../components/Skills.astro'
+import PageLayout from '../../layouts/PageLayout.astro'
+
+<PageLayout>
+  <slot  slot="header">
+    <h1>Welcome to my legal website</h1>
+  </slot>
+
+<slot slot="main" name="main">
+<p>We are a fantastic mdx team doing amazing things.</p>
+<Skills skillset={frontmatter.skillset} >
+## Skills
+</Skills>
+</slot>
+
+</PageLayout>

@@ -1,8 +1,8 @@
 ---
+layout: '../../layouts/PageLayout.astro'
 title: 'About Me'
 ---
 
-<PageLayout>
 <div  slot="header">
   <!-- Custom header content for PageLayout -->
   <h1>Welcome to my legal website</h1>
@@ -30,5 +30,3 @@ Every effort is made to keep the website up and running smoothly. However, byPet
 | Google analytics **\_ga\*** | Gives insights to improve the user experience | On page load                      | Identify computer                                 | 2years    |
 
 ## Privacy notice
-
-</PageLayout>

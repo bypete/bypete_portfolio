@@ -1,0 +1,23 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import utilities from '../data/utilities.json';
+---
+
+<BaseLayout>
+    <slot name="header" slot="header">
+        <!-- Custom header content for PageLayout -->
+        <h1>Welcome to my website</h1>
+    </slot>
+
+    <slot />
+
+    <slot name="main" slot="main">
+        <!-- Custom main content for PageLayout -->
+        <p>This is the main content of the page.</p>
+    </slot>
+
+    <slot name="footer" slot="footer">
+        <!-- Custom footer content for PageLayout -->
+        <p>&copy; 2023 My Website</p>
+    </slot>
+</BaseLayout>
