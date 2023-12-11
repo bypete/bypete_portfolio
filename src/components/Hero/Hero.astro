@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import GridImage from '../../components/Hero/GridImage.astro';
 
 interface Props extends HTMLAttributes<'div'> {
     isHeroDark?: boolean;
@@ -9,11 +10,13 @@ interface Props extends HTMLAttributes<'div'> {
     legibility?: string;
     shadow?: string;
     isContained?: boolean;
+    mode?: 'red' | 'blue' | 'yellow';
 }
 
 const {
     class: ClassName,
     isHeroDark,
+    mode,
     wrapper,
     bg,
     legibility,
@@ -27,7 +30,7 @@ const color = legibility || (isHeroDark ? 'text-white' : 'text-slate-800');
 <div
     id="hero"
     class:list={[
-        'relative w-full outline-none',
+        'relative h-0 w-full outline-none',
         bg ? bg : '',
         color ? color : '',
         ClassName,
@@ -37,5 +40,36 @@ const color = legibility || (isHeroDark ? 'text-white' : 'text-slate-800');
     ]}
     {...rest}
 >
+    {
+        mode === 'red' && (
+            <>
+                <GridImage {isHeroDark}>
+                    <slot slot="gridleft" name="leftcontent" />
+                    <slot slot="gridright" name="rightcontent" />
+                </GridImage>
+            </>
+        )
+    }
+
+    {
+        mode === 'blue' && (
+            <>
+                <h1>Example 2</h1>
+
+                <p>This is blue 2.</p>
+            </>
+        )
+    }
+
+    {
+        mode === 'yellow' && (
+            <>
+                <h1>Example 3</h1>
+
+                <p>This is yellow 3.</p>
+            </>
+        )
+    }
+
     <slot />
 </div>

@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import Hero from '../../components/Hero/Hero.astro';
+import GridImage from '../../components/Hero/GridImage.astro';
 
 const title = 'About Me';
 const isHeroDark = true;
@@ -13,73 +14,10 @@ const isHeroDark = true;
         slot="header"
         x-data="{ shown: false }"
         x-intersect.threshold.25="shown = true"
+        mode="red"
     >
-        <div class="absolute inset-0 h-full w-full">
-            <!-- {% image { src: './concrete--teal.webp', detailSrc: './concrete--teal@sm.webp', alt: 'Rustic Teal background', widths: [720, 1280, 'auto'], sizes: '100vw', detailMedia: '(max-width: 767px)', classlist: 'object-cover object-bottom md:object-center w-full h-full', loading: 'eager' } %} -->
-        </div>
-        <div
-            class="relative mx-auto grid max-w-container grid-cols-1 grid-rows-1 gap-4 pt-[var(--smheaderheight)] md:min-h-widescreen md:grid-cols-block50 md:gap-8 md:pt-[var(--headerheight)] lg:h-block lg:min-h-block 2xl:grid-cols-block33"
-        >
-            <div
-                class="w-full self-center"
-                x-cloak
-                :class="shown ? 'animate-fade-in-down' : 'invisible'"
-            >
-                <h1
-                    id="headline"
-                    class="relative text-4xl/normal text-shadow-headline lg:text-7xl/none"
-                >
-                    {{ title }}
-                </h1>
-                <div class="rte mt-4 max-w-prose md:mt-6">
-                    <p class="text-xl font-medium lg:text-2xl 2xl:text-3xl">
-                        I’m a Surrey based Front-End developer with over two
-                        decades of experience in digital.
-                    </p>
-                    <p class="flex flex-row gap-2">
-                        <a
-                            href="#main-content"
-                            class="btn btn--secondary btn--icon inline-flex transform duration-300"
-                            >Read my bio
-                            <i
-                                class="fa-regular fa-circle-down animate-nudge-down"
-                            ></i>
-                        </a>
-                        <a
-                            href="/connect"
-                            class="btn btn--outline transform duration-300"
-                            >Connect</a
-                        >
-                    </p>
-                </div>
-            </div>
-            <!-- image options [default]: [items-center] items-start items-end items-stretch -->
-            <div class="relative flex justify-center">
-                <div
-                    class="absolute aspect-1 h-full w-auto rounded-egg bg-white"
-                >
-                </div>
-                <div
-                    class="absolute aspect-1 h-full w-auto animate-morph-delay border border-white/30"
-                >
-                </div>
-                <div
-                    class="absolute aspect-1 h-full w-auto animate-morph border border-white/95"
-                >
-                </div>
-                <div
-                    class="h-full w-full"
-                    :class="shown ? 'animate-stretch' : 'invisible'"
-                >
-                    <!-- {%- image { src: "/profile__hd.png", alt: "Profile headshot", widths: [640, 800], sizes:'(max-width: 48em) calc(100vw - 2rem), 50vw', classlist: 'relative w-full h-full object-contain object-bottom' } %} -->
-                </div>
-            </div>
-        </div>
-        <div
-            class="pointer-events-none absolute bottom-0 left-1/2 z-shortcuts -translate-x-1/2 pb-4 md:pb-8"
-        >
-            <!-- scrollprompt -->
-        </div>
+        <p slot="leftcontent">LeftyContent</p>
+        <p slot="rightcontent">RightyContent</p>
     </Hero>
 
     <slot name="main">

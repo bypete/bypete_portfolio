@@ -6,13 +6,7 @@ description: 'Get to know more about my experience in the digital landscape, how
 keywords: 'Surrey based Front-End developer, Bespoke website development, HTML, CSS, Creative development, The Great Outdoors, Balance and wellbeing'
 opengraph:
     image: 'img/social/og__about.jpg'
-hero:
-    dark: true
-    bg: 'bg-brand md:bg-teal-400'
-date: Last Modified
-brand:
-    bg: 'bg-gradient-to-b from-putty to-putty-dark'
-    color: 'text-[#00a3e2]'
+isHeroDark: true
 skillset:
     bg: 'bg-white'
     text: 'text-gray-700'
@@ -61,13 +55,37 @@ skillset:
 
 import Skills from '../../components/Skills.astro'
 import PageLayout from '../../layouts/PageLayout.astro'
+import Hero from '../../components/Hero/Hero.astro'
+import GridImage from '../../components/Hero/GridImage.astro'
 
 <PageLayout>
-  <slot  slot="header">
-    <h1>Welcome to my legal website</h1>
+  <slot name="header" slot="header" >
+    <Hero
+        isHeroDark={frontmatter.isHeroDark}
+        bg="bg-red-600"
+        slot="header"
+        x-data="{ shown: false }"
+        mode="yellow"
+        
+    >
+    </Hero>
   </slot>
+  
 
-<slot slot="main" name="main">
+<slot name="main">
+        <GridImage>
+        text
+        <slot name="copy">
+        <h1 id="headline" class="relative text-4xl/normal text-shadow-headline lg:text-7xl/none">Headline</h1>
+        <div class="rte mt-4 max-w-prose md:mt-6">
+            <p class="text-xl font-medium lg:text-2xl 2xl:text-3xl">I’m a Surrey based Front-End developer with over two decades of experience in digital.</p>
+            <p class="flex flex-row gap-2">
+                <a href="#main-content" class="btn btn--secondary btn--icon inline-flex transform duration-300">Read my bio<i class="fa-regular fa-circle-down animate-nudge-down"></i></a>
+                <a href="/connect" class="btn btn--outline transform duration-300">Connect</a>
+            </p>
+        </div>
+        </slot>
+        </GridImage>
 <p>We are a fantastic mdx team doing amazing things.</p>
 <Skills skillset={frontmatter.skillset} >
 ## Skills

@@ -1,0 +1,26 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'div'> {
+    isHeroDark?: boolean;
+    wrapper?: string;
+    class?: string;
+    bg?: string;
+    legibility?: string;
+}
+
+const {
+    class: ClassName,
+    isHeroDark,
+    wrapper,
+    bg,
+    legibility,
+    ...rest
+} = Astro.props;
+---
+
+<div class:list={['flex h-full w-full', { 'text-black': isHeroDark }]}>
+    <div class="h-full w-1/2 bg-green-300"><slot name="gridleft" /></div>
+    <div class="w-1/2"><slot name="gridright" /></div>
+    <slot />
+</div>
