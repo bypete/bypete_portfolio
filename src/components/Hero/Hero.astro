@@ -1,58 +1,113 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import GridImage from '../../components/Hero/GridImage.astro';
+import GridImage from '~/components/Hero/GridImage.astro';
+import utilities from '~/data/utilities.json';
 
-interface Props extends HTMLAttributes<'div'> {
-    isHeroDark?: boolean;
+interface HeroKeys {
     wrapper?: string;
-    class?: string;
+    dark?: boolean;
     bg?: string;
+    mode?: 'plain' | 'image' | 'custom';
+    class?: string;
     legibility?: string;
+    threshold?: number;
     shadow?: string;
     isContained?: boolean;
-    mode?: 'red' | 'blue' | 'yellow';
+    scrollprompt?: boolean;
 }
 
-const {
-    class: ClassName,
-    isHeroDark,
-    mode,
-    wrapper,
-    bg,
-    legibility,
-    isContained = false,
-    ...rest
-} = Astro.props;
+interface Props extends HTMLAttributes<'div'> {
+    title?: string;
+    hero?: Partial<HeroKeys>;
+}
 
-const color = legibility || (isHeroDark ? 'text-white' : 'text-slate-800');
+const frontmatter = Astro.props.frontmatter || Astro.props;
+const { title: headline, hero = {} } = frontmatter;
+const { ...rest } = frontmatter;
+// const { title, hero = {}, ...rest } = Astro.props.frontmatter || Astro.props;
+const {
+    dark = false,
+    wrapper = '',
+    bg = '',
+    mode = 'plain',
+    class: ClassName = '',
+    legibility,
+    shadow,
+    isContained,
+    scrollprompt,
+    threshold,
+} = hero as HeroKeys;
+
+const intersect = {
+    'x-data': `{ shown: false }`,
+    [`x-intersect.threshold.${threshold}`]: `shown = true`,
+};
+
+const color = legibility || (dark ? 'text-white' : 'text-slate-800');
+let wrapperClass = '';
+
+switch (mode) {
+    case 'plain':
+        wrapperClass = `${
+            wrapper || ''
+        } max-w-container mx-auto pt-[var(--smheaderheight)] `;
+        break;
+    case 'image':
+        wrapperClass = wrapper || '';
+        // wrapperClass = `${
+        //     wrapper || ''
+        // } min-h-photo pt-[var(--smheaderheight)] md:min-h-33vw  xl:min-h-block`;
+        break;
+    case 'custom':
+        wrapperClass = `${wrapper || ''} custom-wrapper`;
+        break;
+    // Add more cases as needed
+    default:
+    // Handle default case, if necessary
+}
 ---
 
 <div
     id="hero"
     class:list={[
-        'relative h-0 w-full outline-none',
+        'relative w-full outline-none md:pt-[var(--headerheight)]',
         bg ? bg : '',
         color ? color : '',
         ClassName,
-        wrapper ||
-            'min-h-photo pt-[var(--smheaderheight)] md:min-h-33vw md:pt-[var(--headerheight)] xl:min-h-block',
+        wrapperClass,
         { 'overflow-hidden': isContained },
     ]}
+    {...threshold ? intersect : {}}
     {...rest}
 >
     {
-        mode === 'red' && (
+        mode === 'plain' && (
             <>
-                <GridImage {isHeroDark}>
-                    <slot slot="gridleft" name="leftcontent" />
-                    <slot slot="gridright" name="rightcontent" />
+                <h1
+                    id="headline"
+                    class:list={[
+                        'heading relative mx-auto max-w-3xl text-center text-3xl lg:text-7xl',
+                        utilities.tramline.double.t,
+                    ]}
+                >
+                    {headline}
+                </h1>
+            </>
+        )
+    }
+    {
+        mode === 'image' && (
+            <>
+                <GridImage>
+                    <slot slot="content" name="content" />
+                    <slot slot="visual" name="visual" />
                 </GridImage>
             </>
         )
     }
 
     {
-        mode === 'blue' && (
+        mode === 'custom' && (
             <>
                 <h1>Example 2</h1>
 
@@ -61,15 +116,19 @@ const color = legibility || (isHeroDark ? 'text-white' : 'text-slate-800');
         )
     }
 
+    <slot />
     {
-        mode === 'yellow' && (
-            <>
-                <h1>Example 3</h1>
-
-                <p>This is yellow 3.</p>
-            </>
+        scrollprompt && (
+            <div class="pointer-events-none absolute bottom-0 left-1/2 z-shortcuts -translate-x-1/2 pb-4 md:pb-8">
+                scrollprompt
+            </div>
         )
     }
-
-    <slot />
 </div>
+
+<script>
+    import intersect from '@alpinejs/intersect';
+    document.addEventListener('alpine:init', () => {
+        Alpine.plugin(intersect);
+    });
+</script>

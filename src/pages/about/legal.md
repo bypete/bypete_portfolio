@@ -1,17 +1,8 @@
 ---
 title: 'About Me'
+description: 'Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.'
+layout: '../../layouts/PageLayout.astro'
 ---
-
-<PageLayout>
-<div  slot="header">
-  <!-- Custom header content for PageLayout -->
-  <h1>Welcome to my legal website</h1>
-</div>
-
-  <slot name="main">
-    <!-- Custom main content for the about page -->
-    <p>We are a fantastic team doing amazing things.</p>
-  </slot>
 
 ## Disclaimer
 
@@ -30,5 +21,3 @@ Every effort is made to keep the website up and running smoothly. However, byPet
 | Google analytics **\_ga\*** | Gives insights to improve the user experience | On page load                      | Identify computer                                 | 2years    |
 
 ## Privacy notice
-
-</PageLayout>

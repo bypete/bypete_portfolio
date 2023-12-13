@@ -1,23 +1,57 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import Hero from '../../components/Hero/Hero.astro';
-import GridImage from '../../components/Hero/GridImage.astro';
+import Link from '../../components/ui/Link.astro';
 
 const title = 'About Me';
-const isHeroDark = true;
+const hero = {
+    mode: 'image',
+    bg: 'bg-teal-400',
+    scrollprompt: true,
+    dark: true,
+};
 ---
 
 <PageLayout {title}>
     <Hero
-        {isHeroDark}
-        bg="bg-red-600"
-        slot="header"
+        {title}
+        hero={hero}
+        slot="hero"
         x-data="{ shown: false }"
         x-intersect.threshold.25="shown = true"
-        mode="red"
     >
-        <p slot="leftcontent">LeftyContent</p>
-        <p slot="rightcontent">RightyContent</p>
+        <Fragment slot="content">
+            <h1
+                class="relative text-4xl/normal text-shadow-headline lg:text-7xl/none"
+            >
+                {title}
+            </h1>
+            <div class="rte">
+                <p class="text-xl font-medium lg:text-2xl 2xl:text-3xl">
+                    I’m a Surrey based Front-End developer with over two decades
+                    of experience in digital.
+                </p>
+                <p class="flex flex-row gap-2">
+                    <Link
+                        theme="secondary"
+                        class="inline-flex transform duration-300"
+                        href="#main-content"
+                    >
+                        Read my bio <i
+                            class="fa-regular fa-circle-down animate-nudge-down"
+                        ></i>
+                    </Link>
+                    <Link theme="outline" href="/connect">Connect</Link>
+                </p>
+            </div>
+        </Fragment>
+        <Fragment slot="visual">
+            <img
+                src="/img/profile__hd.png"
+                class="relative h-full w-full object-contain object-bottom"
+                alt=""
+            />
+        </Fragment>
     </Hero>
 
     <slot name="main">
@@ -26,29 +60,4 @@ const isHeroDark = true;
     </slot>
 
     <p>Hello</p>
-
-     ## Disclaimer The information contained in this website is for general information
-    purposes only. The information is provided by byPete and while we endeavour to
-    keep the information up to date and correct, we make no representations or warranties
-    of any kind, express or implied, about the completeness, accuracy, reliability,
-    suitability or availability with respect to the website or the information, products,
-    services, or related graphics contained on the website for any purpose. Any reliance
-    you place on such information is therefore strictly at your own risk. In no event
-    will we be liable for any loss or damage including without limitation, indirect
-    or consequential loss or damage, or any loss or damage whatsoever arising from
-    loss of data or profits arising out of, or in connection with, the use of this
-    website. Through this website you are able to link to other websites which are
-    not under the control of byPete. We have no control over the nature, content
-    and availability of those sites. The inclusion of any links does not necessarily
-    imply a recommendation or endorse the views expressed within them. Every effort
-    is made to keep the website up and running smoothly. However, byPete takes no
-    responsibility for, and will not be liable for, the website being temporarily
-    unavailable due to technical issues beyond our control. ## Cookie policy | Name
-    | Why? | When? | What is collected | How long? | | ---------------------------
-    | --------------------------------------------- | ---------------------------------
-    | ------------------------------------------------- | --------- | | cnotice |
-    Stops the cookie notice appearing repeatedly | Once user clicks 'ok' to continue
-    | Nothing collected; JS checks if cookie is present | 1 year | | Google analytics
-    **\_ga\*** | Gives insights to improve the user experience | On page load | Identify
-    computer | 2years | ## Privacy notice
 </PageLayout>

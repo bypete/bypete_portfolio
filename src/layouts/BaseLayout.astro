@@ -10,19 +10,31 @@ import Shortcuts from '../components/Shortcuts.astro';
 import Accessibility from '../components/Accessibility.astro';
 import Overlay from '../components/ui/Overlay.astro';
 
-interface Props {
-    title?: string | undefined;
-    description?: string | undefined;
+import site from '../data/site.json';
+
+export interface Props {
+    title?: string;
+    description?: string;
     image?: string;
-    isHeroDark?: boolean;
+    hero?: Partial<HeroKeys>;
 }
+interface HeroKeys {
+    dark?: boolean;
+    mode?: 'plain' | 'image' | 'custom';
+}
+
+const frontmatter = Astro.props.frontmatter || Astro.props;
+
+const { title: defaultTitle, description: defaultDescription } = site;
+
+const { title = defaultTitle, description = defaultDescription } =
+    frontmatter as Props;
+
+const { hero = {} } = frontmatter as Props;
+console.log(hero);
+const { dark: isHeroDark = false } = hero as HeroKeys;
+// console.log(isHeroDark);
 // import "../styles/global.css";
-const {
-    title,
-    description,
-    image,
-    isHeroDark = false,
-} = Astro.props.frontmatter || Astro.props;
 ---
 
 <html
@@ -30,7 +42,7 @@ const {
     class="relative h-full max-w-full scroll-pt-[var(--headerheight)] scroll-smooth"
 >
     <head>
-        <MainHead title={title} description={description} image={image} />
+        <MainHead {title} {description} />
         <ViewTransitions />
     </head>
     <body
@@ -47,20 +59,16 @@ const {
             id="wrapper"
             class="grid w-full grid-cols-1 grid-rows-[auto,1fr,auto]"
         >
-            <Header {isHeroDark} />
+            <Header isHeroDark={isHeroDark} />
             <div class="bg-white outline-none">
-                <slot name="header" />
+                <slot name="hero"> base hero</slot>
 
-                <h1>{title}</h1>
-
-                <slot name="main" />
                 <slot />
-                <slot name="footer" />
             </div>
             <Footer />
         </div>
 
-        <Underlay {isHeroDark} />
+        <Underlay isHeroDark={isHeroDark} />
         <CookieNotice />
         <Shortcuts />
         <Overlay class="bg-gray-800" />
@@ -72,6 +80,16 @@ const {
                 /* display: none !important; */
                 visibility: hidden;
                 opacity: 0;
+            }
+        </style>
+        <style is:global>
+            :root {
+                --swiper-theme-color: theme('colors.accent.DEFAULT');
+                /* --swiper-pagination-color: theme('colors.white'); */
+                --swiper-pagination-bullet-inactive-color: white;
+                --swiper-pagination-bullet-inactive-opacity: 1;
+                --headerheight: 88px; /* 24px + 40px +24px */
+                --smheaderheight: 88px; /* 24px + 40px +24px */
             }
         </style>
     </body>

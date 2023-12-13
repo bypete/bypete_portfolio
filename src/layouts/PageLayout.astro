@@ -1,23 +1,33 @@
 ---
-import BaseLayout from './BaseLayout.astro';
-import utilities from '../data/utilities.json';
+import BaseLayout, { type Props } from './BaseLayout.astro';
+import Hero from '~/components/Hero/Hero.astro';
+import utilities from '~/data/utilities.json';
+import type { MDXLayoutProps, MDXInstance } from 'astro';
+
+const props = Astro.props;
+
+const frontmatter = Astro.props.frontmatter || Astro.props;
+// const { hero = {} } = frontmatter as Props;
+console.log(frontmatter.hero);
+console.log('frontmatter:', frontmatter);
+// console.log('hero:', hero);
 ---
 
 <BaseLayout>
-    <slot name="header" slot="header">
-        <!-- Custom header content for PageLayout -->
-        <h1>Welcome to my website</h1>
+    <slot name="hero" slot="hero">
+        <Hero hero={frontmatter.hero} title={frontmatter.title} />
     </slot>
 
-    <slot />
-
-    <slot name="main" slot="main">
-        <!-- Custom main content for PageLayout -->
-        <p>This is the main content of the page.</p>
-    </slot>
-
-    <slot name="footer" slot="footer">
-        <!-- Custom footer content for PageLayout -->
-        <p>&copy; 2023 My Website</p>
-    </slot>
+    <main
+        id="main-content"
+        class:list={[
+            'relative mx-auto max-w-container ',
+            utilities.headergap,
+            utilities.tramline.double.b,
+        ]}
+    >
+        <div class="rte prose mx-auto max-w-3xl lg:prose-lg">
+            <slot />
+        </div>
+    </main>
 </BaseLayout>

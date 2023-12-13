@@ -11,7 +11,7 @@ interface Props extends HTMLAttributes<'div'> {
 
 const {
     class: ClassName,
-    isHeroDark,
+    isHeroDark = false,
     wrapper,
     bg,
     legibility,
@@ -19,8 +19,41 @@ const {
 } = Astro.props;
 ---
 
-<div class:list={['flex h-full w-full', { 'text-black': isHeroDark }]}>
-    <div class="h-full w-1/2 bg-green-300"><slot name="gridleft" /></div>
-    <div class="w-1/2"><slot name="gridright" /></div>
-    <slot />
+<div class="absolute inset-0 h-full w-full">
+    <slot name="leftcontent" />
+</div>
+
+<div
+    class="relative mx-auto grid max-w-container grid-cols-1 grid-rows-1 gap-4 pt-[var(--smheaderheight)] md:min-h-widescreen md:grid-cols-block50 md:gap-8 md:pt-[var(--headerheight)] lg:h-block lg:min-h-block 2xl:grid-cols-block33"
+>
+    <div
+        class="w-full self-center"
+        x-cloak
+        :class="shown ? 'animate-fade-in-down' : 'invisible'"
+    >
+        <!-- content -->
+        <slot name="content" />
+        <!-- END content -->
+    </div>
+
+    <!-- visual -->
+    <div class="relative flex justify-center">
+        <div class="absolute aspect-1 h-full w-auto rounded-egg bg-white"></div>
+        <div
+            class="absolute aspect-1 h-full w-auto animate-morph-delay border border-white/30"
+        >
+        </div>
+        <div
+            class="absolute aspect-1 h-full w-auto animate-morph border border-white/95"
+        >
+        </div>
+
+        <div
+            class="h-full w-full"
+            :class="shown ? 'animate-stretch' : 'invisible'"
+        >
+            <slot name="visual" />
+        </div>
+    </div>
+    <!-- END visual -->
 </div>
