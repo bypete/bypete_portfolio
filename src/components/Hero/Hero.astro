@@ -21,10 +21,8 @@ export interface Props extends HTMLAttributes<'div'> {
     hero?: Partial<HeroKeys>;
 }
 
-const frontmatter = Astro.props.frontmatter || Astro.props;
-const { title: headline, hero = {} } = frontmatter;
-const { ...rest } = frontmatter;
-// const { title, hero = {}, ...rest } = Astro.props.frontmatter || Astro.props;
+const fm = Astro.props.frontmatter || Astro.props;
+const { title: headline, hero = {}, ...rest } = fm;
 const {
     dark = false,
     wrapper = '',
