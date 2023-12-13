@@ -1,5 +1,6 @@
 ---
 title: 'Hello'
+layout: '../../layouts/BaseLayout.astro'
 peter: 'james'
 esther: 'madeline'
 taster: 'I’m a Surrey based Front-End developer with over two decades of experience in digital.'
@@ -58,20 +59,12 @@ skillset:
               - 'Asset generation'
               - 'UX/UI'
 ---
-import PageLayout from '../../layouts/PageLayout.astro'
 import Skills from '../../components/Skills.astro'
 import Hero from '../../components/Hero/Hero.astro'
 
-
-<PageLayout>
-
-<Hero hero={frontmatter.hero} slot="hero">
-
-</Hero>
+<Hero hero={frontmatter.hero} slot="hero" />
 
 <p>We are a fantastic mdx team doing amazing things.</p>
 <Skills skillset={frontmatter.skillset} >
 ## Skills
 </Skills>
-</PageLayout>
-

@@ -1,9 +1,16 @@
 ---
-import HomeLayout from '../layouts/HomeLayout.astro';
+import BaseLayout from '~/layouts/BaseLayout.astro';
 const title = 'Home page';
+const hero = {
+    title: 'Welcome to the website',
+    subtitle: 'Expolore amazing content',
+};
 ---
 
-<HomeLayout>
-    <title slot="head">Astro</title>
+<BaseLayout
+    {title}
+    {hero}
+    ogImage={{ src: '/og/astro.jpg', alt: 'Astro - Build the web you want.' }}
+>
     <h1>Astro</h1>
-</HomeLayout>
+</BaseLayout>

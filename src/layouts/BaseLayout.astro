@@ -1,39 +1,39 @@
 ---
+import MainSEO, { type Props as HeadProps } from '~/components/SEO/Main.astro';
+import { type Props as HeroProps } from '~/components/Hero/Hero.astro';
 import { ViewTransitions } from 'astro:transitions';
 // import Loader from "../components/Loader.astro";
-import MainHead from '../components/MainHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Hero from '~/components/Hero/Hero.astro';
 import Underlay from '../components/ui/Underlay.astro';
 import CookieNotice from '../components/CookieNotice.astro';
 import Shortcuts from '../components/Shortcuts.astro';
 import Accessibility from '../components/Accessibility.astro';
 import Overlay from '../components/ui/Overlay.astro';
+import type { Code } from 'astro:components';
 
-import site from '../data/site.json';
+export type hdProps = HeadProps;
+export type hoProps = HeroProps;
 
-export interface Props {
-    title?: string;
-    description?: string;
-    image?: string;
-    hero?: Partial<HeroKeys>;
-}
-interface HeroKeys {
-    dark?: boolean;
-    mode?: 'plain' | 'image' | 'custom';
-}
+// fm represents frontmatter
+const fm = Astro.props.frontmatter || Astro.props;
 
-const frontmatter = Astro.props.frontmatter || Astro.props;
+const head: HeadProps = {
+    title: fm.title,
+    description: fm.description,
+};
 
-const { title: defaultTitle, description: defaultDescription } = site;
+const hero: HeroProps = {
+    title: fm.title,
+    hero: { ...fm.hero }, // Spread the hero properties
+};
 
-const { title = defaultTitle, description = defaultDescription } =
-    frontmatter as Props;
+const isHeroDark = hero.hero && hero.hero.dark ? true : false;
+console.log('isHeroDark:', isHeroDark);
+console.log(`head | ${Astro.request.url}:`, head);
+console.log(`hero| ${Astro.request.url}:`, hero);
 
-const { hero = {} } = frontmatter as Props;
-console.log(hero);
-const { dark: isHeroDark = false } = hero as HeroKeys;
-// console.log(isHeroDark);
 // import "../styles/global.css";
 ---
 
@@ -42,7 +42,7 @@ const { dark: isHeroDark = false } = hero as HeroKeys;
     class="relative h-full max-w-full scroll-pt-[var(--headerheight)] scroll-smooth"
 >
     <head>
-        <MainHead {title} {description} />
+        <MainSEO {...head} />
         <ViewTransitions />
     </head>
     <body
@@ -59,16 +59,18 @@ const { dark: isHeroDark = false } = hero as HeroKeys;
             id="wrapper"
             class="grid w-full grid-cols-1 grid-rows-[auto,1fr,auto]"
         >
-            <Header isHeroDark={isHeroDark} />
+            <Header {isHeroDark} />
             <div class="bg-white outline-none">
-                <slot name="hero"> base hero</slot>
+                <slot name="hero">
+                    <Hero {...hero} />
+                </slot>
 
                 <slot />
             </div>
             <Footer />
         </div>
 
-        <Underlay isHeroDark={isHeroDark} />
+        <Underlay />
         <CookieNotice />
         <Shortcuts />
         <Overlay class="bg-gray-800" />

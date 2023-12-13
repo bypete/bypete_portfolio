@@ -1,0 +1,87 @@
+---
+import smartypants from 'smartypants';
+import siteInfo from '~/data/site';
+import pjson from './package.json';
+import Favicon from '../Favicon.astro';
+import { SEO } from 'astro-seo';
+
+export type Props = {
+    title?: string;
+    description?: string;
+    ogTitle?: string;
+    ogImage?: {
+        src: string;
+        alt: string;
+    };
+    ogDescription?: string;
+    canonicalURL?: URL;
+    pageType?: 'website' | 'article';
+    includeSiteTitle?: boolean;
+};
+
+const {
+    title,
+    description = siteInfo.description,
+    ogTitle = siteInfo.og.title,
+    ogImage = siteInfo.og.image,
+    ogDescription = siteInfo.og.description,
+    canonicalURL = new URL(Astro.request.url, Astro.site),
+    pageType = 'website',
+    includeSiteTitle = true,
+} = Astro.props;
+
+// const title = [Astro.props.title, siteInfo.name].filter(Boolean).join(' | ');
+
+const resolvedTitle = includeSiteTitle ? `${title} - ${siteInfo.title}` : title;
+const resolvedImage = {
+    src: new URL(ogImage.src, Astro.site).toString(),
+    alt: ogImage.alt,
+};
+---
+
+<!-- High Priority Global Metadata -->
+<meta charset="utf-8" />
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+/>
+<title set:html={smartypants(resolvedTitle, 1)} />
+<meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#ffd200" />
+
+<!-- Low Priority Global Metadata -->
+<Favicon />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+<meta name="msapplication-TileColor" content="#00aba9" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" />
+
+<SEO
+    description={description}
+    canonical={canonicalURL}
+    openGraph={{
+        basic: {
+            title: ogTitle,
+            type: pageType,
+            image: resolvedImage.src,
+        },
+        optional: {
+            siteName: siteInfo.name,
+            description: ogDescription,
+        },
+        image: {
+            alt: resolvedImage.alt,
+        },
+    }}
+    extend={{
+        // extending the default meta tags
+        meta: [
+            { name: 'theme-color', content: '#0f172a' },
+            { name: 'version', content: `v${pjson.version}` },
+        ],
+    }}
+/>

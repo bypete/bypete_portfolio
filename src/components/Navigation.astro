@@ -9,7 +9,7 @@ const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1); // remove the first "/"
 
 const { isHeroDark = false } = Astro.props;
-console.log('Navigation.astro - isHeroDark:', isHeroDark);
+// console.log('Navigation.astro - isHeroDark:', isHeroDark);
 ---
 
 <nav id="navigation" aria-label="Main">

@@ -1,0 +1,82 @@
+---
+import smartypants from 'smartypants';
+import siteInfo from '~/data/site';
+import Favicon from '../Favicon.astro';
+import { SEO } from 'astro-seo';
+
+export type Props = {
+    title?: string;
+    description?: string;
+    image?: { src: string; alt: string };
+    canonicalURL?: URL | null;
+    pageType?: 'website' | 'article';
+    includeSiteTitle?: boolean;
+
+    // Article
+    published_time: string;
+    author: string[];
+    section: string;
+    tags: string[];
+    images: string[];
+};
+
+const {
+    title,
+    description = siteInfo.description,
+    image = siteInfo.image,
+    // canonicalURL = new URL(Astro.request.url, Astro.site),
+    pageType = 'website',
+    includeSiteTitle,
+    published_time,
+    author,
+    section,
+    tags,
+    images,
+} = Astro.props;
+
+// const title = [Astro.props.title, siteInfo.name].filter(Boolean).join(' | ');
+
+const resolvedImage = {
+    src: new URL(image.src, Astro.site).toString(),
+    alt: image.alt,
+};
+---
+
+<!-- High Priority Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title set:html={smartypants(title, 1)} />
+<meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#ffd200" />
+
+<!-- Low Priority Global Metadata -->
+<Favicon />
+<link rel="mask-icon" href="/favicon.svg" color="#ffd200" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" />
+
+<SEO
+    title={includeSiteTitle ? `${siteInfo.title} - ${title}` : title}
+    canonical={siteInfo.url}
+    description={description}
+    openGraph={{
+        basic: {
+            title: title,
+            type: 'website',
+            image: siteInfo.icon,
+        },
+    }}
+    extend={{
+        // extending the default meta tags
+        meta: [
+            {
+                name: 'twitter:image',
+                content:
+                    'https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png',
+            },
+            { name: 'twitter:title', content: title },
+            { name: 'twitter:description', content: description },
+        ],
+    }}
+/>
+ ~/data/site
