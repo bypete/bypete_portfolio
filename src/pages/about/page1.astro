@@ -1,63 +1,62 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import Hero from '../../components/Hero/Hero.astro';
+import Block from '~/components/Blocks/Block.astro';
 import Link from '../../components/ui/Link.astro';
 
 const title = 'About Me';
+const description =
+    'Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.';
 const hero = {
     mode: 'image',
     bg: 'bg-teal-400',
-    scrollprompt: true,
+    scrollprompt: false,
     dark: true,
+    threshold: 25,
 };
 ---
 
-<PageLayout {title}>
-    <Hero
-        {title}
-        hero={hero}
-        slot="hero"
-        x-data="{ shown: false }"
-        x-intersect.threshold.25="shown = true"
-    >
-        <Fragment slot="content">
-            <h1
-                class="relative text-4xl/normal text-shadow-headline lg:text-7xl/none"
-            >
-                {title}
-            </h1>
-            <div class="rte">
-                <p class="text-xl font-medium lg:text-2xl 2xl:text-3xl">
-                    I’m a Surrey based Front-End developer with over two decades
-                    of experience in digital.
-                </p>
-                <p class="flex flex-row gap-2">
-                    <Link
-                        theme="secondary"
-                        class="inline-flex transform duration-300"
-                        href="#main-content"
-                    >
-                        Read my bio <i
-                            class="fa-regular fa-circle-down animate-nudge-down"
-                        ></i>
-                    </Link>
-                    <Link theme="outline" href="/connect">Connect</Link>
-                </p>
-            </div>
-        </Fragment>
-        <Fragment slot="visual">
-            <img
-                src="/img/profile__hd.png"
-                class="relative h-full w-full object-contain object-bottom"
-                alt=""
-            />
-        </Fragment>
-    </Hero>
+<PageLayout title={title} description={description} hero={hero}>
+    <slot slot="hero">
+        <Hero hero={hero}>
+            <Fragment slot="content">
+                <h1
+                    class="relative text-4xl/normal text-shadow-headline lg:text-7xl/none"
+                >
+                    {title}
+                </h1>
+                <div class="rte">
+                    <p class="text-xl font-medium lg:text-2xl 2xl:text-3xl">
+                        I’m a Surrey based Front-End developer with over two
+                        decades of experience in digital.
+                    </p>
+                    <p class="flex flex-row gap-2">
+                        <Link
+                            theme="secondary"
+                            class="inline-flex transform duration-300"
+                            href="#main-content"
+                        >
+                            Read my bio <i
+                                class="fa-regular fa-circle-down animate-nudge-down"
+                            ></i>
+                        </Link>
+                        <Link theme="outline" href="/connect">Connect</Link>
+                    </p>
+                </div>
+            </Fragment>
+            <Fragment slot="visual">
+                <img
+                    src="/img/profile__hd.png"
+                    class="relative h-full w-full object-contain object-bottom"
+                    alt=""
+                />
+            </Fragment>
+        </Hero>
+    </slot>
 
     <slot name="main">
-        <!-- Custom main content for the about page -->
         <p>We are a fantastic team doing amazing things.</p>
     </slot>
 
-    <p>Hello</p>
+    <Block bg="bg-red-200" breakout={true}>This is the block content</Block>
 </PageLayout>

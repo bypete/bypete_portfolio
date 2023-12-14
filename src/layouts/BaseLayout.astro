@@ -1,11 +1,10 @@
 ---
 import MainSEO, { type Props as HeadProps } from '~/components/SEO/Main.astro';
-import { type Props as HeroProps } from '~/components/Hero/Hero.astro';
+import Hero, { type Props as HeroProps } from '~/components/Hero/Hero.astro';
 import { ViewTransitions } from 'astro:transitions';
 // import Loader from "../components/Loader.astro";
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Hero from '~/components/Hero/Hero.astro';
 import Underlay from '../components/ui/Underlay.astro';
 import CookieNotice from '../components/CookieNotice.astro';
 import Shortcuts from '../components/Shortcuts.astro';
@@ -26,13 +25,16 @@ const head: HeadProps = {
 
 const hero: HeroProps = {
     title: fm.title,
-    hero: { ...fm.hero }, // Spread the hero properties
+    ...fm.hero, // Spread the hero properties
 };
 
-const isHeroDark = hero.hero && hero.hero.dark ? true : false;
-console.log('isHeroDark:', isHeroDark);
-console.log(`head | ${Astro.request.url}:`, head);
-console.log(`hero| ${Astro.request.url}:`, hero);
+const isHeroDark = hero.dark || false;
+
+// const isHeroDark = hero.hero && hero.hero.dark ? true : false;
+// const isHeroDark = hero.dark;
+console.log('BL | isHeroDark:', isHeroDark);
+console.log(`BL | head | ${Astro.request.url}:`, head);
+console.log(`BL | hero| ${Astro.request.url}:`, hero);
 
 // import "../styles/global.css";
 ---

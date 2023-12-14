@@ -1,25 +1,15 @@
 ---
-import BaseLayout, { type Props } from './BaseLayout.astro';
+import BaseLayout from './BaseLayout.astro';
 import Hero from '~/components/Hero/Hero.astro';
 import utilities from '~/data/utilities.json';
-import type { MDXLayoutProps, MDXInstance } from 'astro';
-import type { Code } from 'astro:components';
 
-const { props } = Astro.props;
-
-const frontmatter = Astro.props.frontmatter || Astro.props;
-// const { hero = {} } = frontmatter as Props;
-console.log('PL:frontmatter.hero:', frontmatter.hero);
-console.log('PL:frontmatter:', frontmatter);
-// console.log('hero:', hero);
-
-
-
+const props = Astro.props.frontmatter || Astro.props;
+console.log(`PL | ${Astro.request.url} | Props:`, props);
 ---
 
-<BaseLayout {...props} >
+<BaseLayout {...props}>
     <slot name="hero" slot="hero">
-        <Hero hero={frontmatter.hero} title={frontmatter.title} />
+        <Hero hero={props.hero} title={props.title} />
     </slot>
 
     <main
