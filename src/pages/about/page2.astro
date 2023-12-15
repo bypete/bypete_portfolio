@@ -5,61 +5,20 @@ import Block from '~/components/Blocks/Block.astro';
 import Link from '../../components/ui/Link.astro';
 import utilities from '~/data/utilities.json';
 
-import imgProfile__hd from '~/assets/profile__hd.png';
+import astroImage from '~/assets/profile__hd.png';
 import BlockImage from '~/components/Images/BlockImage.astro';
 
 const title = 'About Me';
 const description =
     'Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.';
-const hero = {
-    mode: 'image',
-    bg: 'bg-teal-400',
-    scrollprompt: false,
-    dark: true,
-    threshold: 25,
-};
+const hero = {};
 ---
 
 <PageLayout title={title} description={description} hero={hero}>
-    <slot slot="hero">
-        <Hero hero={hero}>
-            <Fragment slot="content">
-                <h1
-                    class="relative text-4xl/normal text-shadow-headline lg:text-7xl/none"
-                >
-                    {title}
-                </h1>
-                <div class="rte">
-                    <p class="text-xl font-medium lg:text-2xl 2xl:text-3xl">
-                        I’m a Surrey based Front-End developer with over two
-                        decades of experience in digital.
-                    </p>
-                    <p class="flex flex-row gap-2">
-                        <Link
-                            theme="secondary"
-                            class="inline-flex transform duration-300"
-                            href="#main-content"
-                        >
-                            Read my bio <i
-                                class="fa-regular fa-circle-down animate-nudge-down"
-                            ></i>
-                        </Link>
-                        <Link theme="outline" href="/connect">Connect</Link>
-                    </p>
-                </div>
-            </Fragment>
-            <BlockImage
-                slot="visual"
-                src={imgProfile__hd}
-                class="relative h-full w-full object-contain object-bottom"
-                alt="Block picture"
-                loading="eager"
-            />
-        </Hero>
-    </slot>
-
     <slot name="main">
         <p>We are a fantastic team doing amazing things.</p>
+
+        <BlockImage src={astroImage} alt="Block picture" loading="eager" />
     </slot>
 
     <Block
