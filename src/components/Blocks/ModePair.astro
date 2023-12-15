@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'div'> {
+    grid?: string;
+    class?: string;
+    legibility?: string;
+}
+
+const { grid, class: ClassName = '', legibility, ...rest } = Astro.props;
+---
+
+<div class:list={['relative', ClassName, grid]}>
+    <slot name="mc1" />
+    <slot name="mc2" />
+    <slot />
+</div>
