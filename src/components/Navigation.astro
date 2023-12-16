@@ -29,6 +29,14 @@ const { isHeroDark = false } = Astro.props;
                 ))
             }
         </MenuDropdown>
-        <li><MenuLink url={`/blog`} title="Blog" {pathname} {isHeroDark} /></li>
+        <!-- <li><MenuLink url={`/blog`} title="Blog" {pathname} {isHeroDark} /></li> -->
+        <li>
+            <MenuLink
+                url={`/connect`}
+                title="Connect"
+                {pathname}
+                {isHeroDark}
+            />
+        </li>
     </ul>
 </nav>

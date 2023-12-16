@@ -1,0 +1,46 @@
+---
+const {
+    tags,
+    url = false,
+    class: className = 'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
+} = Astro.props;
+const pathname = new URL(Astro.request.url).pathname;
+import Icon from 'astro-icon';
+---
+
+{
+    tags && Array.isArray(tags) && (
+        <ul class={className}>
+            {tags.map((tag) => {
+                const isFeature = tag === 'featured';
+                const content = isFeature ? (
+                    <>
+                        <Icon
+                            name="mdi:star"
+                            class="-my-2 -ml-0.5 h-4 w-4 text-yellow-500"
+                        />
+                        {tag}
+                    </>
+                ) : (
+                    <>{tag}</>
+                );
+                return (
+                    <li>
+                        {url ? (
+                            <a
+                                class="flex items-center gap-x-1 whitespace-nowrap rounded-[12px] bg-yellow-300 px-2 py-5px text-2sm leading-none text-neutral-800 hover:bg-accent hover:text-white hover:ring-accent"
+                                href={`/tags/${tag}`}
+                            >
+                                {content}
+                            </a>
+                        ) : (
+                            <span class="flex items-center gap-x-1 whitespace-nowrap rounded-[12px] bg-yellow-300 px-2 py-1.5 text-2xs leading-none text-neutral-800">
+                                {content}
+                            </span>
+                        )}
+                    </li>
+                );
+            })}
+        </ul>
+    )
+}

@@ -1,0 +1,68 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Tags from '~/components/ui/Tags.astro';
+import utilities from '~/data/utilities.json';
+import Link from '~/components/ui/Link.astro';
+import Icon from 'astro-icon';
+import { Image } from 'astro:assets';
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout {...frontmatter}>
+    <slot name="hero" slot="hero">
+        <div
+            class="relative z-10 grid w-full grid-cols-1 shadow-xl shadow-black/10 lg:grid-cols-work conpad:grid-cols-workcontianer"
+        >
+            <Image src={frontmatter.cover.url} alt={frontmatter.cover.alt} />
+            <div
+                class:list={[
+                    'rte self-end py-4 md:pb-8 lg:pb-12 conpad:pr-0',
+                    utilities.tramline.x,
+                ]}
+            >
+                <h1>{frontmatter.title}</h1>
+                <p>{frontmatter.taster}</p>
+
+                <Tags
+                    tags={frontmatter.tags}
+                    url="true"
+                    class:list={[
+                        'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
+                        utilities.margin.y,
+                    ]}
+                />
+
+                <p>
+                    <Link
+                        theme="link"
+                        isIcon={true}
+                        size="sm"
+                        class="hidden transform duration-300 md:inline-flex"
+                        href="#start"
+                    >
+                        Scroll to start <Icon
+                            name="mdi:arrow-down-bold-circle-outline"
+                            class="h-4 w-4 animate-nudge-down"
+                        />
+                    </Link>
+                </p>
+            </div>
+        </div>
+    </slot>
+
+    <p>Published on: {frontmatter.pubDate.toString().slice(0, 10)}</p>
+    <p><em>{frontmatter.description}</em></p>
+    <p>Written by {frontmatter.author}</p>
+
+    <div>
+        {
+            frontmatter.tags.map((tag) => (
+                <p>
+                    <a href={`/tags/${tag}`}>{tag}</a>
+                </p>
+            ))
+        }
+    </div>
+
+    <slot />
+</BaseLayout>
