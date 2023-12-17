@@ -1,6 +1,6 @@
 ---
 import utilities from '../data/utilities.json';
-
+import type { HTMLAttributes } from 'astro/types';
 interface SkillsetKeys {
     bg?: string;
     text?: string;
@@ -10,13 +10,13 @@ interface SkillsetKeys {
     areas: object;
 }
 
-interface Props {
+export interface Props extends HTMLAttributes<'div'> {
     breakout?: boolean;
     class?: string;
     skillset?: Partial<SkillsetKeys>;
 }
 
-const { breakout = true, class: className, skillset } = Astro.props;
+const { breakout = true, class: className, skillset, ...rest } = Astro.props;
 const {
     bg = 'bg-slate-900',
     text,
@@ -33,6 +33,7 @@ const {
         breakout ? utilities.breakout : utilities.pull.x,
         bg,
     ]}
+    {...rest}
 >
     <div
         class:list={[

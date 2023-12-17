@@ -37,13 +37,18 @@ skillset:
         - 'UX/UI'
 tags: ['work', 'featured', 'posts', 'fintech']
 ---
-import { Image } from 'astro:assets';
 import BlockImage from '~/components/Images/BlockImage.astro';
 import laptop_iphone_front from './images/afv/laptop_iphone_front.jpg';
+import Skills from '~/components/Skills.astro'
 
-<BlockImage src={laptop_iphone_front} alt="A profile" wrapper={true} />
+<Skills skillset={frontmatter.skillset} >
+## Skills I know
+</Skills>
+
+<BlockImage src={laptop_iphone_front} class="my-0" alt="A profile" wrapper={true} />
 
 
+<Fragment  slot="2">
 Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
 
 ## What I've accomplished
@@ -57,3 +62,4 @@ Welcome to my _new blog_ about learning Astro! Here, I will share my learning jo
 ## What's next
 
 I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come.
+</Fragment>

@@ -59,12 +59,7 @@ const { frontmatter } = Astro.props;
         ]}
     >
         <article id="start" class="mx-auto max-w-3xl">
-            {
-                frontmatter.skillset && (
-                    <Skills skillset={frontmatter.skillset}>## Skills</Skills>
-                )
-            }
-
+            <slot name="skills" />
             <div class="rte prose mx-auto max-w-3xl lg:prose-lg">
                 <slot />
             </div>

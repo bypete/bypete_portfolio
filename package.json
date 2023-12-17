@@ -9,7 +9,11 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "sync": "astro sync"
+    "sync": "astro sync",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major",
+    "checkupdates": "npm-check-updates -i"
   },
   "dependencies": {
     "@alpinejs/intersect": "^3.13.3",
@@ -41,6 +45,7 @@
     "eslint-plugin-mdx": "^3.0.0",
     "just-validate": "^4.3.0",
     "luxon": "^3.4.4",
+    "npm-check-updates": "^16.14.12",
     "prettier-plugin-astro": "^0.12.2",
     "prettier-plugin-tailwindcss": "^0.5.9",
     "save": "^2.9.0",
