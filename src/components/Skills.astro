@@ -16,15 +16,22 @@ interface Props {
     skillset?: Partial<SkillsetKeys>;
 }
 
-const { breakout = false, class: className, skillset } = Astro.props;
-const { bg, text, icon, heading, shadow, areas } = skillset as SkillsetKeys;
+const { breakout = true, class: className, skillset } = Astro.props;
+const {
+    bg = 'bg-slate-900',
+    text,
+    icon,
+    heading,
+    shadow,
+    areas,
+} = skillset as SkillsetKeys;
 ---
 
 <div
     class:list={[
-        'not-prose relative',
+        'not-prose relative bg-[#384c55]',
         breakout ? utilities.breakout : utilities.pull.x,
-        bg || 'bg-slate-900',
+        bg,
     ]}
 >
     <div

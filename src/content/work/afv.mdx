@@ -6,12 +6,15 @@ readtime: 2-3
 taster: 'Armed Forces & Veterans is a veterans-led organisation that assists serving and retired members of the British Armed Forces with financial and housing needs. See how they launched their branded prepaid MasterCard'
 description: 'Read on to learn about my role in the launch of the Armed Forces & Veterans prepaid MasterCard, an exclusive cashback programme available to serving and retired members of the British Armed Forces and their immediate families.'
 author: 'Astro Learner'
+brand: 
+  bg: 'bg-[#384c55]'
+  color: 'text-[#384c55]'
 cover:
   url: './images/afv/listing.jpg'
   alt: 'Listing Image Alt Text'
   credit: 'AFV Estates Limited'
 skillset:
-  bg: '#384c55'
+  bg: 'bg-[#384c55]'
   text: 'text-white'
   icon: ''
   heading: 'permalink:text-white permalink:before:text-[#00a3e2]'
@@ -34,7 +37,12 @@ skillset:
         - 'UX/UI'
 tags: ['work', 'featured', 'posts', 'fintech']
 ---
-import Skills from '../../components/Skills.astro'
+import { Image } from 'astro:assets';
+import BlockImage from '~/components/Images/BlockImage.astro';
+import laptop_iphone_front from './images/afv/laptop_iphone_front.jpg';
+
+<BlockImage src={laptop_iphone_front} alt="A profile" wrapper={true} />
+
 
 Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
 

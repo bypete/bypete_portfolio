@@ -25,6 +25,10 @@ const workCollection = defineCollection({
     taster: z.string(),
     description: z.string(),
     author: z.string(),
+    brand: z.object({
+      bg: z.string(),
+      color: z.string(),
+    }),
     cover: z.object({
       url: image().refine((img) => img.width >= 500, {
         message: "cover image must be at least 500 wide!",

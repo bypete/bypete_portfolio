@@ -5,6 +5,8 @@ import utilities from '~/data/utilities.json';
 import Link from '~/components/ui/Link.astro';
 import Icon from 'astro-icon';
 import { Image } from 'astro:assets';
+import { readableDate, htmlDateString } from '~/components/Utils/formatDate.js';
+import Skills from '~/components/Skills.astro';
 const { frontmatter } = Astro.props;
 ---
 
@@ -34,9 +36,8 @@ const { frontmatter } = Astro.props;
 
                 <p>
                     <Link
-                        theme="link"
+                        theme="outline"
                         isIcon={true}
-                        size="sm"
                         class="hidden transform duration-300 md:inline-flex"
                         href="#start"
                     >
@@ -50,19 +51,47 @@ const { frontmatter } = Astro.props;
         </div>
     </slot>
 
-    <p>Published on: {frontmatter.pubDate.toString().slice(0, 10)}</p>
-    <p><em>{frontmatter.description}</em></p>
-    <p>Written by {frontmatter.author}</p>
+    <main
+        id="main-content"
+        class:list={[
+            'relative mx-auto max-w-container ',
+            utilities.tramline.double.b,
+        ]}
+    >
+        <article id="start" class="mx-auto max-w-3xl">
+            {
+                frontmatter.skillset && (
+                    <Skills skillset={frontmatter.skillset}>## Skills</Skills>
+                )
+            }
 
-    <div>
-        {
-            frontmatter.tags.map((tag) => (
+            <div class="rte prose mx-auto max-w-3xl lg:prose-lg">
+                <slot />
+            </div>
+            <aside
+                class="w-full"
+                class:list={[
+                    'w-full',
+                    utilities.tramline.y,
+                    utilities.margin.t,
+                ]}
+            >
                 <p>
-                    <a href={`/tags/${tag}`}>{tag}</a>
+                    Last updated <time
+                        class="inline-block rounded bg-neutral-100 px-2"
+                        datetime={htmlDateString(frontmatter.pubDate)}
+                        >{readableDate(frontmatter.pubDate)}
+                    </time>
                 </p>
-            ))
-        }
-    </div>
-
-    <slot />
+                <Tags
+                    tags={frontmatter.tags}
+                    url="true"
+                    class:list={[
+                        'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
+                        utilities.margin.t,
+                    ]}
+                />
+            </aside>
+        </article>
+    </main>
 </BaseLayout>
