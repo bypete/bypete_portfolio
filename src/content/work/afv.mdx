@@ -41,9 +41,11 @@ import BlockImage from '~/components/Images/BlockImage.astro';
 import laptop_iphone_front from './images/afv/laptop_iphone_front.jpg';
 import Skills from '~/components/Skills.astro'
 
-<Skills skillset={frontmatter.skillset} >
+<Fragment slot="skills">
+<Skills skillset={frontmatter.skillset}>
 ## Skills I know
 </Skills>
+</Fragment>
 
 <BlockImage src={laptop_iphone_front} class="my-0" alt="A profile" wrapper={true} />
 
