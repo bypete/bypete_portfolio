@@ -1,0 +1,12 @@
+/* Add styles here to allow utilities to override them */
+@layer utilities {
+  .scroll-snap-none {
+    scroll-snap-type: none;
+  }
+  .scroll-snap-x {
+    scroll-snap-type: x;
+  }
+  .scroll-snap-y {
+    scroll-snap-type: y;
+  }
+}

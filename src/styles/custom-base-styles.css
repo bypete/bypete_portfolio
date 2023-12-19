@@ -1,0 +1,122 @@
+@layer base {
+    .max-w-container {
+        @apply px-4 md:px-8 conpad:px-0; /* max width plus 32px + 32px
+    /* @apply conpad:px-0; /* max width plus 32px + 32px */
+    }
+}
+
+/* Editorial
+---------------------------------------------------------------------------------*/
+.link {
+    @apply font-medium text-accent decoration-solid decoration-2 hover:underline;
+}
+
+.external {
+    @apply after:ml-1 after:inline-block after:font-awesome after:font-black after:not-italic after:content-['\f35d'];
+}
+
+.font-headline a {
+    @apply font-extrabold;
+}
+
+.capline {
+    @apply relative mb-[1em] before:absolute before:-bottom-[0.5em] before:left-0 before:w-16 before:border-b-3 before:border-b-teal-400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply font-headline tracking-tight;
+}
+
+h1 {
+    @apply font-headline font-extrabold tracking-tight;
+}
+
+/* Richtext editor content */
+.rte h1 {
+    @apply capline text-3xl lg:text-5xl;
+}
+
+.rte h2 {
+    @apply capline  text-3xl font-bold tracking-tight md:text-4xl;
+}
+
+.rte h3 {
+    @apply mb-1 text-xl font-semibold md:text-2xl;
+}
+
+.rte h4 {
+    @apply mb-1 text-base font-medium;
+}
+
+.rte-content > p {
+    @apply mb-4;
+}
+
+.rte-content > :last-child {
+    @apply mb-0;
+}
+
+.rte-content strong {
+    @apply font-bold;
+}
+
+/*.rte-content .heading {
+  @apply mb-[1em];
+} */
+
+/* subsequent-sibling combinator */
+.rte-content .heading ~ .heading {
+    @apply mt-[1.5em];
+}
+
+.text {
+    &--hotline {
+        @apply text-lg font-bold md:text-2xl;
+    }
+    &--smallprint {
+        @apply text-xs;
+    }
+}
+
+/* Typography | Superscript */
+sup.new {
+    @apply rounded-sm bg-accent px-0.5 py-px align-top text-sm font-medium leading-none !text-white;
+}
+
+/* Tables
+---------------------------------------------------------------------------------*/
+.table thead {
+    @apply text-left font-bold;
+}
+
+.table th {
+    @apply border-b pb-2 pt-0;
+}
+
+.table th,
+.table tbody td {
+    @apply py-1;
+}
+
+.table--rows tr {
+    @apply border-b border-gray-300 last:border-0;
+}
+
+.table--padded th,
+.table--padded tbody td {
+    @apply py-2 pl-2 lg:pl-4;
+}
+.table--padded tr th,
+.table--padded tr td {
+    @apply last:pr-2 last:lg:pr-4;
+}
+
+.table--noindent tr td,
+.table--noindent thead th {
+    @apply first:pl-0 last:pr-0;
+}

@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 import { remarkReadingTime } from './remark-reading-time.mjs';
 import preact from '@astrojs/preact';
-import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import rehypeAttrs from 'rehype-attr';
 import rehypeExternalLinks from 'rehype-external-links';
@@ -22,7 +21,6 @@ export default defineConfig({
 
     integrations: [
         preact(),
-        tailwind(),
         mdx({
             rehypePlugins: [rehypeAttrs, rehypeExternalLinksConfig],
         }),

@@ -1,0 +1,79 @@
+@import 'tailwindcss/base';
+@import './custom-base-styles.css';
+
+@import 'tailwindcss/components';
+@import './custom-components.css';
+
+@import 'tailwindcss/utilities';
+@import './custom-utilities.css';
+
+/* These styles will always be included in the build and take precedence */
+:root {
+    --swiper-theme-color: theme('colors.accent.DEFAULT');
+    /* --swiper-pagination-color: theme('colors.white'); */
+    --swiper-pagination-bullet-inactive-color: white;
+    --swiper-pagination-bullet-inactive-opacity: 1;
+    --headerheight: 88px; /* 24px + 40px +24px */
+    --smheaderheight: 88px; /* 24px + 40px +24px */
+}
+.pswp {
+    --pswp-bg: theme('colors.slate.950');
+}
+
+.swiper-pagination-bullet {
+    @apply rounded-full border border-solid border-black/10 shadow-floated transition-all duration-300;
+}
+
+.swiper-pagination-bullet-active {
+    @apply w-4 border-accent;
+}
+
+/* Alpine.js
+---------------------------------------------------------------------------------*/
+[x-cloak] {
+    /* display: none !important; */
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* Prism | New diff- syntax
+---------------------------------------------------------------------------------*/
+pre[class*='language-diff-'] {
+    --eleventy-code-padding: 1.25em;
+    padding-left: var(--eleventy-code-padding);
+    padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+    background-color: hsl(0, 51%, 37%);
+}
+.token.inserted {
+    background-color: hsl(126, 31%, 39%);
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+    -webkit-user-select: none;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--eleventy-code-padding);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+    display: block;
+    margin-left: calc(-1 * var(--eleventy-code-padding));
+    margin-right: calc(-1 * var(--eleventy-code-padding));
+    text-decoration: none; /* override del, ins, mark defaults */
+    color: inherit; /* override del, ins, mark defaults */
+}
+
+/* Media Queries
+---------------------------------------------------------------------------------*/
