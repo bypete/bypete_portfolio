@@ -1,0 +1,38 @@
+---
+import { Picture } from 'astro:assets';
+import utilities from '~/data/utilities.json';
+
+const {
+    src,
+    widths = [],
+    sizes,
+    formats = ['avif', 'webp'],
+    breakout = true,
+    wrapper = '',
+    ...attrs
+} = Astro.props;
+
+const resolvedWidths = widths.length ? widths : [240, 540, 720, src.width];
+const resolvedSizes =
+    sizes ||
+    `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${src.width}px`;
+
+const imageProps = {
+    src,
+    ...attrs,
+    quality: 'high',
+    sizes: resolvedSizes,
+    widths: resolvedWidths,
+    formats,
+};
+---
+
+{
+    wrapper ? (
+        <div class:list={[wrapper || '', breakout ? utilities.breakout : '']}>
+            <Picture {...imageProps} />
+        </div>
+    ) : (
+        <Picture {...imageProps} />
+    )
+}

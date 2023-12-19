@@ -29,7 +29,7 @@ const {
 
 <div
     class:list={[
-        'not-prose relative bg-[#384c55]',
+        'not-prose relative',
         breakout ? utilities.breakout : utilities.pull.x,
         bg,
     ]}
@@ -45,23 +45,29 @@ const {
         <slot />
         <ul
             class:list={[
-                'grid grid-cols-1 gap-8 lg:grid-cols-2',
+                'grid grid-cols-1 gap-8 space-y-2 lg:grid-cols-2',
                 text || 'text-white',
                 shadow || 'shadow-black/25 text-shadow-emboss',
             ]}
         >
             {
                 areas.map((area) => (
-                    <li class:list={[area.class]}>
+                    <li class:list={['  list-none  ', area.class]}>
                         <h3>{area.title}</h3>
                         <ul
                             class:list={[
-                                'list list--checklist',
+                                'space-y-2',
                                 icon || '[&>li]:before:!text-white',
                             ]}
                         >
                             {area.skills.map((skill) => (
-                                <li>{skill}</li>
+                                <li
+                                    class:list={[
+                                        'before:icon-[lucide--check-circle-2] before:top-tight relative pl-8 leading-normal before:absolute before:left-0 before:w-6 before:leading-normal',
+                                    ]}
+                                >
+                                    {skill}
+                                </li>
                             ))}
                         </ul>
                     </li>

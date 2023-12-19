@@ -11,7 +11,7 @@ brand:
   color: 'text-[#384c55]'
 cover:
   url: './images/afv/listing.jpg'
-  alt: 'Listing Image Alt Text'
+  alt: 'AFV Estates logo'
   credit: 'AFV Estates Limited'
 skillset:
   bg: 'bg-[#384c55]'
@@ -37,28 +37,34 @@ skillset:
         - 'UX/UI'
 tags: ['work', 'featured', 'posts', 'fintech']
 ---
-import BlockImage from '~/components/Images/BlockImage.astro';
+import BlockPicture from '~/components/Images/BlockPicture.astro';
 import laptop_iphone_front from './images/afv/laptop_iphone_front.jpg';
 import Skills from '~/components/Skills.astro'
+import UL from '~/components/MDX/ul.astro'
+export const components = {ul: UL}
 
 <Skills skillset={frontmatter.skillset} >
 ## Skills
 </Skills>
 
 
-<BlockImage src={laptop_iphone_front} class="my-0" alt="A profile" wrapper={true} />
+<BlockPicture src={laptop_iphone_front} class="my-0" alt="A profile" wrapper={true} />
+## Overview
 
+Armed Forces & Veterans is a veterans-led organisation that provides financial and housing assistance to serving and retired members of the British Armed Forces.
 
-Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
+Fifth Dimension was tasked with launching their branded prepaid MasterCard as well as ensuring the success of the AF&V Privilege Card, which was critical given that the program's proceeds go towards other initiatives such as the Homes for Heroes programme.
 
-## What I've accomplished
+The website needed to emphasise the benefits of their prepaid AF&V Privilege Card while also promoting the exclusive cashback available at leading retailers.
 
-1. **Installing Astro**: First, I created a new Astro project and set up my online accounts.
+## My responsibilities...
 
-2. **Making Pages**: I then learned how to make pages by creating new `.astro` files and placing them in the `src/pages/` folder.
+[github](https://github.com)
 
-3. **Making Blog Posts**: This is my first blog post! I now have Astro pages and Markdown posts!
-
-## What's next
-
-I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come.
+<div class="bg-red-600 [&>ul>li]:before:icon-[lucide--circle-dot]">
+-   The designs and static templates were hosted in a secure listing to keep stakeholders informed throughout the development process. <span class="label label--info !m-0">Project management</span>
+-   I took the lead on the website's visual layouts, collaborating closely with in-house designers who were primarily preparing print work assets. To maintain message consistency, assets were shared across digital and print media. The website needed to be instantly recognisable; many users would learn about the programme for the first time at events or through printed materials.
+-   I created all of the Front-End HTML templates – working to a mobile-first mindset. These were then handed over to a team of back-end developers, complete with detailed annotations, listing indexes, and support documentation.
+-   I collaborated closely with the developers to ensure that the site stayed true to the visuals approved by the client.
+-   I assisted in configuring the content management system (Umbraco) and took responsibility for the initial population of all launch content. <span class="label label--info !m-0">collaboration</span>
+</div>

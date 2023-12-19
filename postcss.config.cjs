@@ -1,8 +1,11 @@
 module.exports = {
-  plugins: {
-    'postcss-import': {},
-    'tailwindcss/nesting': {},
-    tailwindcss: {},
-    autoprefixer: {},
-  }
+    plugins: {
+        'postcss-inline-svg': {
+            paths: ['src/assets/svg/'],
+        },
+        'postcss-import': {},
+        'tailwindcss/nesting': {},
+        tailwindcss: {},
+        autoprefixer: {},
+    },
 };

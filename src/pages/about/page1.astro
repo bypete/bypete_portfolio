@@ -7,6 +7,7 @@ import utilities from '~/data/utilities.json';
 
 import imgProfile__hd from '~/assets/profile__hd.png';
 import BlockImage from '~/components/Images/BlockImage.astro';
+import Icon from 'astro-icon';
 
 const title = 'About Me';
 const description =
@@ -59,7 +60,12 @@ const hero = {
     </slot>
 
     <slot name="main">
-        <p>We are a fantastic team doing amazing things.</p>
+        <p>
+            <Icon name="lucide:wifi" class="h-6 w-6" />
+             We are a fantastic team doing amazing things.
+        </p>
+
+        <span class="icon-[lucide--wifi] h-6 w-6"></span>
     </slot>
 
     <Block

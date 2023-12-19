@@ -1,0 +1,51 @@
+---
+const { class: className, ...attrs } = Astro.props;
+---
+
+<Fragment>
+    <ul {...attrs} class:list={['list list--bullet not-prose', className]}>
+        <slot />
+    </ul>
+</Fragment>
+
+<style>
+    .list {
+        @apply space-y-2 !pl-0;
+    }
+    .list li {
+        @apply relative  leading-normal;
+    }
+    .list--compact li {
+        @apply my-0.5;
+    }
+
+    .list--underlined li {
+        @apply border-b border-gray-300 last:border-0;
+    }
+
+    .list--bullet li,
+    .list--checklist li {
+        @apply list-none pl-8 before:absolute before:left-0 before:top-0 before:w-6 before:leading-normal;
+    }
+
+    .list--bullet li {
+        @apply before:icon-[lucide--wifi] before:text-base before:text-accent;
+    }
+
+    .list--checklist li {
+        @apply before:icon-[lucide--check-circle-2] before:text-teal-500;
+    }
+
+    .list--counter {
+    }
+
+    .list--counter > li {
+        @apply relative list-none pl-12;
+        counter-increment: a;
+    }
+
+    .list--counter > li:before {
+        @apply absolute left-0 top-1.5 mr-4 block h-7 w-7 rounded-full bg-accent text-center text-xl font-black text-white lg:h-8 lg:w-8 lg:text-2xl;
+        content: counter(a);
+    }
+</style>

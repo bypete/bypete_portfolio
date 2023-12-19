@@ -7,7 +7,7 @@ import Icon from 'astro-icon';
 import { Image } from 'astro:assets';
 import { readableDate, htmlDateString } from '~/components/Utils/formatDate.js';
 import Skills from '~/components/Skills.astro';
-const { frontmatter } = Astro.props;
+const { frontmatter, minutesRead } = Astro.props;
 ---
 
 <BaseLayout {...frontmatter}>
@@ -24,7 +24,13 @@ const { frontmatter } = Astro.props;
             >
                 <h1>{frontmatter.title}</h1>
                 <p>{frontmatter.taster}</p>
-
+                <p class="inline-flex items-center">
+                    <Icon
+                        name="lucide:timer"
+                        class="mr-1 inline-block h-4 w-auto"
+                    />
+                    {minutesRead}
+                </p>
                 <Tags
                     tags={frontmatter.tags}
                     url="true"

@@ -1,4 +1,5 @@
 const plugin = require('tailwindcss/plugin');
+const { addDynamicIconSelectors } = require('@iconify/tailwind');
 /** @type {import('tailwindcss').Config} */
 export default {
     content: ['./src/**/*.{astro,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}'],
@@ -118,6 +119,7 @@ export default {
                 mobilenav: 'minmax(auto, 1fr) auto',
             },
             spacing: {
+                tight: '3px',
                 50: '12.5rem', // 200px
                 120: '30rem', // 480px
                 100: '25rem', // 400px
@@ -404,12 +406,14 @@ export default {
                             },
                         },
                         img: null,
+                        picture: null,
                         figure: null,
                     },
                 },
                 lg: {
                     css: {
                         img: null,
+                        picture: null,
                         figure: null,
                     },
                 },
@@ -729,6 +733,7 @@ export default {
         require('@tailwindcss/aspect-ratio'),
         require('@savvywombat/tailwindcss-grid-areas'),
         require('tailwindcss-animate'),
+        addDynamicIconSelectors(),
         // https://laravel-code.tips/you-can-add-this-tailwind-plugin-to-generate-child-selector-variants/
         plugin(({ addVariant }) => {
             // Targets any img tag inside the element with img: class
