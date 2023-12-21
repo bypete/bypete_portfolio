@@ -1,16 +1,27 @@
 ---
 import Lightbox from './Lightbox.astro';
-// import data from '~/data/work/afv.data.json';
+
+interface Asset {
+    title: string;
+    image: string;
+    class?: string;
+    caption?: string;
+}
+
+interface DataKeys {
+    folder: string;
+    [key: string]: Asset[] | string; // Allow for dynamic keys with specific types
+}
 
 export interface Props {
-    data: object;
-    folder: string;
+    data?: Partial<DataKeys>;
+    collection: string;
     title?: string | ImageMetadata;
     caption?: string | ImageMetadata;
     class?: string | ImageMetadata;
 }
 
-const { folder, data } = Astro.props;
+const { data, collection } = Astro.props;
 
 const imageFiles = import.meta.glob<ImageMetadata>(
     '../../assets/work/**/*.{png,webp,jpg,jpeg}',
@@ -21,36 +32,34 @@ const imageFiles = import.meta.glob<ImageMetadata>(
 );
 
 const folderFiles = Object.keys(imageFiles).filter((image) => {
-    // Check if the 'image' property exists in the gScreens array
-    const isInGScreens = data.gScreens.some(
-        (screen) => `../../${data.folder}/${screen.image}` === image,
+    // Check if the 'image' property exists in the collection array
+    const isInCollection = data[collection].some(
+        (asset) => `../../${data.folder}/${asset.image}` === image,
     );
 
     // Return true if the condition is satisfied
-    return isInGScreens;
+    return isInCollection;
 });
 
 const imageSrcs = folderFiles.map((image) => {
-    const screen = data.gScreens.find(
-        (screen) => `../../${data.folder}/${screen.image}` === image,
+    const asset = data[collection].find(
+        (asset) => `../../${data.folder}/${asset.image}` === image,
     );
 
-    if (screen) {
-        // Include additional properties from gScreens in the imageFiles object
+    if (asset) {
+        // Include additional properties from collection in the imageFiles object
         return {
             ...imageFiles[image],
-            title: screen.title,
-            caption: screen.caption,
-            class: screen.class,
+            title: asset.title,
+            caption: asset.caption,
+            class: asset.class,
         };
     }
 
     return imageFiles[image];
 });
 
-console.log(imageSrcs);
-
-const gallery = 'work-' + folder;
+const gallery = 'work-' + collection;
 ---
 
-<Lightbox id={gallery} images={imageSrcs} />
+{data && data[collection] && <Lightbox id={gallery} images={imageSrcs} />}
