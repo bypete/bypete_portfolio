@@ -1,7 +1,7 @@
 ---
 import Lightbox from './Lightbox.astro';
 
-interface Asset {
+interface LightboxSet {
     title: string;
     image: string;
     class?: string;
@@ -10,7 +10,7 @@ interface Asset {
 
 interface DataKeys {
     folder: string;
-    [key: string]: Asset[] | string; // Allow for dynamic keys with specific types
+    [key: string]: LightboxSet[] | string; // Allow for dynamic keys with specific types
 }
 
 export interface Props {
