@@ -21,6 +21,64 @@ export interface Props {
     class?: string | ImageMetadata;
 }
 
+const isDataValid = (
+    data: Props['data'],
+    collection: Props['collection'],
+): data is DataKeys => {
+    return !!data && !!collection && Array.isArray(data[collection]);
+};
+
+const getFolderFiles = (
+    data: Props['data'],
+    collection: Props['collection'],
+    imageFiles: Record<string, ImageMetadata>,
+): string[] => {
+    if (!isDataValid(data, collection)) {
+        console.warn('Invalid data or collection provided to Work component', {
+            data,
+            collection,
+        });
+        return [];
+    }
+
+    return Object.keys(imageFiles).filter((image) => {
+        // Check if the 'image' property exists in the collection array
+        const isInCollection =
+            Array.isArray(data?.[collection]) &&
+            data[collection]!.some(
+                (asset) => `../../${data.folder}/${asset.image}` === image,
+            );
+
+        // Return true if the condition is satisfied
+        return isInCollection;
+    });
+};
+
+const getImageSrcs = (
+    data: Props['data'],
+    collection: Props['collection'],
+    folderFiles: string[],
+    imageFiles: Record<string, ImageMetadata>,
+): Array<ImageMetadata & Asset> => {
+    return folderFiles.map((image) => {
+        const asset = data[collection]?.find(
+            (asset) => `../../${data.folder}/${asset.image}` === image,
+        );
+
+        if (asset) {
+            // Include additional properties from collection in the imageFiles object
+            return {
+                ...imageFiles[image],
+                title: asset.title,
+                caption: asset.caption,
+                class: asset.class,
+            };
+        }
+
+        return imageFiles[image];
+    });
+};
+
 const { data, collection } = Astro.props;
 
 const imageFiles = import.meta.glob<ImageMetadata>(
@@ -31,35 +89,10 @@ const imageFiles = import.meta.glob<ImageMetadata>(
     },
 );
 
-const folderFiles = Object.keys(imageFiles).filter((image) => {
-    // Check if the 'image' property exists in the collection array
-    const isInCollection = data[collection].some(
-        (asset) => `../../${data.folder}/${asset.image}` === image,
-    );
-
-    // Return true if the condition is satisfied
-    return isInCollection;
-});
-
-const imageSrcs = folderFiles.map((image) => {
-    const asset = data[collection].find(
-        (asset) => `../../${data.folder}/${asset.image}` === image,
-    );
-
-    if (asset) {
-        // Include additional properties from collection in the imageFiles object
-        return {
-            ...imageFiles[image],
-            title: asset.title,
-            caption: asset.caption,
-            class: asset.class,
-        };
-    }
-
-    return imageFiles[image];
-});
+const folderFiles = getFolderFiles(data, collection, imageFiles);
+const imageSrcs = getImageSrcs(data, collection, folderFiles, imageFiles);
 
 const gallery = 'work-' + collection;
 ---
 
-{data && data[collection] && <Lightbox id={gallery} images={imageSrcs} />}
+<Lightbox id={gallery} images={imageSrcs} />
