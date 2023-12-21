@@ -43,6 +43,7 @@ import Skills from '~/components/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
 import Lightbox from '~/components/Lightbox/Lightbox.astro'
 import Gallery from '~/components/Lightbox/Gallery.astro'
+import data from '~/data/work/afv.data.json'
 export const components = {ul: UL}
 
 <Skills skillset={frontmatter.skillset} >
@@ -59,7 +60,7 @@ Fifth Dimension was tasked with launching their branded prepaid MasterCard as we
 
 The website needed to emphasise the benefits of their prepaid AF&V Privilege Card while also promoting the exclusive cashback available at leading retailers.
 
-<Gallery folder='afv' />
+<Gallery folder='afv' data={data} />
 
 
 

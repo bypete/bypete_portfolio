@@ -16,8 +16,6 @@ export interface Props extends HTMLAttributes<'div'> {
     bg?: string;
     breakout?: boolean;
 }
-// const images = import.meta.glob('../../assets/**/*.{png,jpg,jpeg,PNG,JPEG}');
-// console.log(images['../../assets/work/twotw/tablet.jpg']);
 
 const fm = Astro.props.frontmatter || Astro.props;
 const {
@@ -63,24 +61,30 @@ const {
     >
         {
             images.map((image, i) => (
-                <a
-                    href={image.src}
-                    data-lightbox
-                    data-pswp-width={image.width}
-                    data-pswp-height={image.height}
-                    class="relative block h-full w-full overflow-hidden rounded shadow-sm hover:cursor-pointer"
-                >
-                    <Image
-                        src={image}
-                        alt="image"
-                        width={320}
-                        quality={90}
-                        height={(image.height * 320) / image.width}
-                        format="webp"
-                        class="absolute inset-0 h-full w-full object-cover object-top"
-                    />
-                    <span class="pswp-caption-content">caption content</span>
-                </a>
+                <div class:list={[image.class || '']}>
+                    <a
+                        href={image.src}
+                        data-lightbox
+                        data-pswp-width={image.width}
+                        data-pswp-height={image.height}
+                        class="relative block h-full w-full overflow-hidden rounded shadow-sm hover:cursor-pointer"
+                    >
+                        <Image
+                            src={image}
+                            alt="image"
+                            width={480}
+                            quality={90}
+                            height={(image.height * 480) / image.width}
+                            format="webp"
+                            class="absolute inset-0 h-full w-full object-cover object-top"
+                        />
+                        image.caption && (
+                        <span class="pswp-caption-content">
+                            {image.caption}
+                        </span>
+                        )
+                    </a>
+                </div>
             ))
         }
     </div>

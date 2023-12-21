@@ -1,11 +1,16 @@
 ---
 import Lightbox from './Lightbox.astro';
+// import data from '~/data/work/afv.data.json';
 
 export interface Props {
+    data: object;
     folder: string;
+    title?: string | ImageMetadata;
+    caption?: string | ImageMetadata;
+    class?: string | ImageMetadata;
 }
 
-const { folder } = Astro.props;
+const { folder, data } = Astro.props;
 
 const imageFiles = import.meta.glob<ImageMetadata>(
     '../../assets/work/**/*.{png,webp,jpg,jpeg}',
@@ -15,10 +20,36 @@ const imageFiles = import.meta.glob<ImageMetadata>(
     },
 );
 
-const folderFiles = Object.keys(imageFiles).filter(
-    (image) => image.search(folder) >= 0,
-);
-const imageSrcs = folderFiles.map((image) => imageFiles[image]);
+const folderFiles = Object.keys(imageFiles).filter((image) => {
+    // Check if the 'image' property exists in the gScreens array
+    const isInGScreens = data.gScreens.some(
+        (screen) => `../../${data.folder}/${screen.image}` === image,
+    );
+
+    // Return true if the condition is satisfied
+    return isInGScreens;
+});
+
+const imageSrcs = folderFiles.map((image) => {
+    const screen = data.gScreens.find(
+        (screen) => `../../${data.folder}/${screen.image}` === image,
+    );
+
+    if (screen) {
+        // Include additional properties from gScreens in the imageFiles object
+        return {
+            ...imageFiles[image],
+            title: screen.title,
+            caption: screen.caption,
+            class: screen.class,
+        };
+    }
+
+    return imageFiles[image];
+});
+
+console.log(imageSrcs);
+
 const gallery = 'work-' + folder;
 ---
 
