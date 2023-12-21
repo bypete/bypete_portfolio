@@ -1,0 +1,25 @@
+---
+import Lightbox from './Lightbox.astro';
+
+export interface Props {
+    folder: string;
+}
+
+const { folder } = Astro.props;
+
+const imageFiles = import.meta.glob<ImageMetadata>(
+    '../../assets/work/**/*.{png,webp,jpg,jpeg}',
+    {
+        import: 'default',
+        eager: true,
+    },
+);
+
+const folderFiles = Object.keys(imageFiles).filter(
+    (image) => image.search(folder) >= 0,
+);
+const imageSrcs = folderFiles.map((image) => imageFiles[image]);
+const gallery = 'work-' + folder;
+---
+
+<Lightbox id={gallery} images={imageSrcs} />

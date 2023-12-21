@@ -12,6 +12,8 @@ const {
     ...attrs
 } = Astro.props;
 
+// console.log(src);
+
 const resolvedWidths = widths.length ? widths : [240, 540, 720, src.width];
 const resolvedSizes =
     sizes ||
@@ -27,12 +29,15 @@ const imageProps = {
 ---
 
 {
-    wrapper || credit.length ? (
-        <div class:list={[wrapper || '', breakout ? utilities.breakout : '']}>
+    (
+        <a
+            href={src.src}
+            data-lightbox
+            data-pswp-width={src.width}
+            data-pswp-height={src.height}
+            class="relative block h-full w-full overflow-hidden rounded shadow-sm hover:cursor-pointer"
+        >
             <Image {...imageProps} />
-            {credit && `yes there is credit`}
-        </div>
-    ) : (
-        <Image {...imageProps} />
+        </a>
     )
 }

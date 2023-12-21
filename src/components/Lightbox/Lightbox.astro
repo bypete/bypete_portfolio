@@ -1,0 +1,115 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import 'photoswipe/style.css';
+import 'photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.css';
+import Icon from 'astro-icon';
+import { Image } from 'astro:assets';
+import data from '~/data/work/afv.data.json';
+
+import utilities from '~/data/utilities.json';
+
+export interface Props extends HTMLAttributes<'div'> {
+    id: string;
+    images: ImageMetadata[];
+    wrapper?: string;
+    class?: string;
+    bg?: string;
+    breakout?: boolean;
+}
+// const images = import.meta.glob('../../assets/**/*.{png,jpg,jpeg,PNG,JPEG}');
+// console.log(images['../../assets/work/twotw/tablet.jpg']);
+
+const fm = Astro.props.frontmatter || Astro.props;
+const {
+    id,
+    images,
+    wrapper = '',
+    bg = 'bg-gray-50',
+    class: ClassName = '',
+    breakout,
+    ...rest
+} = fm as Props;
+---
+
+<section
+    class:list={[
+        'lightbox relative',
+        bg ? bg : '',
+        wrapper ? wrapper : '',
+        breakout ? utilities.breakout : '',
+        utilities.tramline.all,
+        utilities.margin.y,
+    ]}
+    {...rest}
+    x-data="{ shown: false }"
+    x-intersect.threshold.25="shown = true"
+>
+    <div class="flex flex-col justify-between md:flex-row md:items-center">
+        <slot name="title" />
+        <p
+            class="pointer-events-none transform"
+            :class="shown ? 'animate-fade-out-delay' : 'invisible'"
+        >
+            Tap to zoom any image <Icon
+                name="lucide:zoom-in"
+                class="inline-block h-5 w-auto"
+            />
+        </p>
+    </div>
+    <p>Some extra text used to describe the gallery</p>
+
+    <div
+        class="not-prose grid grid-flow-dense auto-rows-[100px] grid-cols-3 gap-4 bg-gray-50 md:auto-rows-[160px] md:grid-cols-4 md:gap-8"
+    >
+        {
+            images.map((image, i) => (
+                <a
+                    href={image.src}
+                    data-lightbox
+                    data-pswp-width={image.width}
+                    data-pswp-height={image.height}
+                    class="relative block h-full w-full overflow-hidden rounded shadow-sm hover:cursor-pointer"
+                >
+                    <Image
+                        src={image}
+                        alt="image"
+                        width={320}
+                        quality={90}
+                        height={(image.height * 320) / image.width}
+                        format="webp"
+                        class="absolute inset-0 h-full w-full object-cover object-top"
+                    />
+                    <span class="pswp-caption-content">caption content</span>
+                </a>
+            ))
+        }
+    </div>
+</section>
+<script>
+    import PhotoSwipeLightbox from 'photoswipe/lightbox';
+    import PhotoSwipeDynamicCaption from 'photoswipe-dynamic-caption-plugin';
+
+    const lightbox = new PhotoSwipeLightbox({
+        gallery: '#lightbox, .lightbox',
+        children: 'a[data-lightbox]',
+        wheelToZoom: true,
+        bgOpacity: 0.85,
+        padding: { top: 48, bottom: 48, left: 32, right: 32 },
+        pswpModule: () => import('photoswipe'),
+    });
+
+    const captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
+        // Plugins options, for example:
+        type: 'auto',
+    });
+
+    lightbox.init();
+</script>
+
+<style>
+    [data-lightbox] {
+        @apply relative text-white after:icon-[lucide--zoom-in];
+        @apply after:absolute after:left-1/2 after:top-1/2 after:z-10 after:flex after:-translate-x-1/2 after:-translate-y-1/2  after:items-center  after:justify-center after:text-2xl/none after:leading-inherit after:opacity-0 after:duration-300 after:hover:opacity-100;
+        @apply before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-full before:opacity-0  before:backdrop-blur-sm before:backdrop-brightness-125 before:transition before:duration-300 before:hover:bg-slate-900/75 before:hover:opacity-100;
+    }
+</style>

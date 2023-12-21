@@ -1,0 +1,68 @@
+{
+  "folder": "assets/work/afv/lightbox",
+  "gScreens": [
+    {
+      "title": "Home",
+      "image": "home.jpg",
+      "class": "row-span-2 col-span-2",
+      "width": "1200",
+      "height": "1907",
+      "caption": "First image has a caption"
+    },
+    {
+      "title": "Landing",
+      "image": "landing.jpg",
+      "width": "1200",
+      "height": "3664"
+    },
+    {
+      "title": "Landing",
+      "image": "landing--detail.jpg",
+      "class": "hidden",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "Landing",
+      "image": "landing__002--detail.jpg",
+      "class": "hidden",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "Landing",
+      "image": "landing__003--detail.jpg",
+      "class": "hidden",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "Registration",
+      "image": "registration.jpg",
+      "class": "row-span-2 col-span-2",
+      "width": "1200",
+      "height": "2083"
+    },
+    {
+      "title": "Registration detail",
+      "image": "registration--detail.jpg",
+      "class": "hidden",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "Mobile registration",
+      "image": "sm_registration--detail.jpg",
+      "class": "hidden",
+      "width": "780",
+      "height": "1688"
+    },
+    {
+      "title": "Home",
+      "image": "sm_registration.jpg",
+      "class": "row-span-3 col-span-1",
+      "width": "780",
+      "height": "5350"
+    }
+  ]
+}

@@ -79,8 +79,14 @@ const { frontmatter, minutesRead } = Astro.props;
                 <p>
                     Last updated <time
                         class="inline-block rounded bg-neutral-100 px-2"
-                        datetime={htmlDateString(frontmatter.pubDate)}
-                        >{readableDate(frontmatter.pubDate)}
+                        datetime={htmlDateString(
+                            frontmatter.modDate || frontmatter.pubDate,
+                        )}
+                        >{
+                            readableDate(
+                                frontmatter.modDate || frontmatter.pubDate,
+                            )
+                        }
                     </time>
                 </p>
                 <Tags

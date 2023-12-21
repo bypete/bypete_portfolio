@@ -14,6 +14,6 @@ export default {
         },
     ],
     plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
-    tailwindConfig: './tailwind.config.mjs',
+    tailwindConfig: './tailwind.config.cjs',
     pluginSearchDirs: false,
 };

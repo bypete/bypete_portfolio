@@ -315,6 +315,7 @@ before:not-italic before:leading-inherit before:text-blue-500 before:content-['\
 
     /* Lists
 ---------------------------------------------------------------------------------*/
+
     .list {
         @apply space-y-2 !pl-0;
     }
@@ -331,15 +332,15 @@ before:not-italic before:leading-inherit before:text-blue-500 before:content-['\
 
     .list--bullet li,
     .list--checklist li {
-        @apply list-none pl-8 before:absolute before:left-0 before:top-0 before:w-6 before:font-awesome before:font-normal before:not-italic before:leading-normal;
+        @apply list-none pl-8 before:absolute before:left-0 before:top-0 before:w-6 before:leading-normal;
     }
 
     .list--bullet li {
-        @apply before:text-base before:text-accent before:content-['\f35a'];
+        @apply before:icon-[ci--dummy-square-small] before:translate-y-px before:text-[24px] before:text-accent;
     }
 
     .list--checklist li {
-        @apply before:text-teal-500 before:content-['\f058'];
+        @apply before:icon-[lucide--check-circle-2] before:text-teal-500;
     }
 
     .list--counter {
@@ -420,7 +421,7 @@ before:font-awesome before:text-[1.5em] before:font-black before:not-italic befo
 
     /* Media
 ---------------------------------------------------------------------------------*/
-    .credit {
+    /* .credit {
         @apply absolute bottom-2 left-3 z-50 grid cursor-help grid-cols-credit items-end gap-2 text-left text-white md:left-8;
     }
     .credit__icon {
@@ -429,7 +430,7 @@ before:font-awesome before:text-[1.5em] before:font-black before:not-italic befo
 
     .credit__text {
         @apply rounded rounded-bl-none bg-slate-900/25 px-2 py-1 text-xs;
-    }
+    } */
 
     .media figcaption {
         @apply mt-0 border-b border-slate-200 p-3 text-sm md:px-0;
@@ -554,10 +555,10 @@ before:font-awesome before:text-[1.5em] before:font-black before:not-italic befo
     }
     /* Javascript | Photoswipe
   ---------------------------------------------------------------------------------*/
-    [data-lightbox] {
+    /* [data-lightbox] {
         @apply relative
         z-0 before:absolute before:inset-0
         before:z-10 before:flex before:items-center  before:justify-center before:bg-slate-900/75 before:font-awesome before:text-2xl/none before:font-black before:not-italic before:leading-inherit before:text-white before:opacity-0 before:backdrop-blur-sm
         before:backdrop-brightness-125 before:transition before:duration-300 before:content-['\f00e'] before:hover:opacity-100;
-    }
+    } */
 }
