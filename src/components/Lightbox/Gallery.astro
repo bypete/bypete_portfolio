@@ -14,12 +14,14 @@ interface DataKeys {
 }
 
 export interface Props {
-    data?: Partial<DataKeys>;
+    data: Partial<DataKeys>;
     collection: string;
-    title?: string | ImageMetadata;
+    title: string | ImageMetadata;
     caption?: string | ImageMetadata;
     class?: string | ImageMetadata;
 }
+
+const { data, collection } = Astro.props;
 
 const isDataValid = (
     data: Props['data'],
@@ -79,8 +81,6 @@ const getImageSrcs = (
     });
 };
 
-const { data, collection } = Astro.props;
-
 const imageFiles = import.meta.glob<ImageMetadata>(
     '../../assets/work/**/*.{png,webp,jpg,jpeg}',
     {
@@ -95,4 +95,7 @@ const imageSrcs = getImageSrcs(data, collection, folderFiles, imageFiles);
 const gallery = 'work-' + collection;
 ---
 
-<Lightbox id={gallery} images={imageSrcs} />
+<Lightbox id={gallery} images={imageSrcs}>
+    <slot slot="title" name="title" />
+    <slot />
+</Lightbox>
