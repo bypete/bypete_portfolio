@@ -2,7 +2,6 @@
 import utilities from '../data/utilities.json';
 import type { HTMLAttributes } from 'astro/types';
 interface SkillsetKeys {
-    bg?: string;
     text?: string;
     icon?: string;
     heading?: string;
@@ -12,19 +11,19 @@ interface SkillsetKeys {
 
 export interface Props extends HTMLAttributes<'div'> {
     breakout?: boolean;
+    bg?: string;
     class?: string;
     skillset?: Partial<SkillsetKeys>;
 }
 
-const { breakout = true, class: className, skillset, ...rest } = Astro.props;
 const {
+    breakout = true,
+    class: className,
     bg = 'bg-slate-900',
-    text,
-    icon,
-    heading,
-    shadow,
-    areas,
-} = skillset as SkillsetKeys;
+    skillset,
+    ...rest
+} = Astro.props;
+const { text, icon, heading, shadow, areas } = skillset as SkillsetKeys;
 ---
 
 <div
@@ -63,7 +62,7 @@ const {
                             {area.skills.map((skill) => (
                                 <li
                                     class:list={[
-                                        'before:icon-[lucide--check-circle-2] before:top-tight relative pl-8 leading-normal before:absolute before:left-0 before:w-6 before:leading-normal',
+                                        'relative pl-8 leading-normal before:icon-[lucide--check-circle-2] before:absolute before:left-0 before:top-tight before:w-6 before:leading-normal',
                                     ]}
                                 >
                                     {skill}

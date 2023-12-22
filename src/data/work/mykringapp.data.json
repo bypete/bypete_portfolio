@@ -1,0 +1,137 @@
+{
+  "folder": "assets/work/mykringapp/lightbox",
+  "reviews": [
+    {
+      "headline": "Awesome product, great app",
+      "comment": "<p>I have loved my K Ring for several years. Never take it off. Always there. My primary payment. Could not imagine life without the flexibility of contactless payments from a ring! The app now completes the journey. Easy access. Everything in one place. Everything at hand. Brilliant job guys!</p>",
+      "cite": "Andrew1975.1975, 02/04/2022",
+      "rating": 5
+    },
+    {
+      "headline": "Intuitive and easy to use",
+      "comment": "<p>So good to finally be able to manage my payment ring on my phone</p>",
+      "cite": "Noodl05, 27/10/2021",
+      "rating": 5
+    },
+    {
+      "headline": "Excellent User Interface",
+      "comment": "<p>The MyKRing App is simple to navigate with all key features accessible from the Home Page. The Auto Top-Up function is fantastic...</p>",
+      "cite": "ScottPrez, 31/10/2021",
+      "rating": 5
+    },
+    {
+      "headline": "Fantastic addition to the KW tech",
+      "comment": "<p>Nice to see all the feature there and easy to use bank load features. Really easy to use!</p>",
+      "cite": "SimonSpeirs, 29/10/2021",
+      "rating": 5
+    },
+    {
+      "headline": "Great App at last!",
+      "comment": "<p>Works well and quick, great contact with Dev team if needed. Well done guys.</p>",
+      "cite": " Matt ardin, 29 December 2021 (Play store)",
+      "rating": 5
+    }
+  ],
+  "gScreens": [
+    {
+      "title": "Welcome",
+      "image": "1.1.0_welcome.jpg",
+      "class": "row-span-2",
+      "width": "828",
+      "height": "1792",
+      "cropped": "false"
+    },
+    {
+      "title": "Devices",
+      "image": "1.1.0_devices.jpg",
+      "width": "828",
+      "height": "1792"
+    },
+    {
+      "title": "Manage cards",
+      "image": "1.1.0_managecards.jpg",
+      "class": "row-span-2 col-span-2",
+      "width": "828",
+      "height": "1792"
+    },
+    {
+      "title": "Auto top-up - active",
+      "image": "1.1.0_auto-topup-open.jpg",
+      "width": "828",
+      "height": "1792"
+    },
+    {
+      "title": "Dialog",
+      "image": "1.1.0_dialog.jpg",
+      "class": "row-span-2",
+      "width": "828",
+      "height": "1792",
+      "cropped": "false"
+    },
+    {
+      "title": "Log out",
+      "image": "1.1.0_logout.jpg",
+      "class": "row-span-2",
+      "width": "828",
+      "height": "1792",
+      "cropped": "false"
+    }
+  ],
+  "gUx": [
+    {
+      "title": "Auto top-up",
+      "caption": "Auto top-up has been turned off so the options are hidden",
+      "image": "1.1.0_auto-topup.jpg",
+      "width": "828",
+      "height": "1792"
+    },
+    {
+      "title": "Auto top-up - active",
+      "caption": "Auto top-up is on so the relevant options are shown",
+      "image": "1.1.0_auto-topup-open.jpg",
+      "width": "828",
+      "height": "1792"
+    },
+    {
+      "title": "Dialog",
+      "image": "1.1.0_dialog.jpg",
+      "caption": "This step confirms an action. ",
+      "class": "row-span-2",
+      "width": "828",
+      "height": "1792",
+      "cropped": "false"
+    },
+    {
+      "title": "Log out",
+      "image": "1.1.0_logout.jpg",
+      "class": "row-span-2",
+      "width": "828",
+      "height": "1792",
+      "cropped": "false"
+    },
+    {
+      "title": "Devices",
+      "image": "1.1.0_devices.jpg",
+      "width": "828",
+      "height": "1792"
+    },
+    {
+      "title": "Devices locked",
+      "image": "1.1.0_devices-locked.jpg",
+      "width": "828",
+      "height": "1792"
+    },
+    {
+      "title": "Load disabled",
+      "image": "1.1.0_load_amount--disabled.jpg",
+      "width": "828",
+      "height": "1792"
+    },
+    {
+      "title": "Load Active",
+      "image": "1.1.0_load_amount.jpg",
+      "width": "828",
+      "height": "1792"
+    }
+  ]
+}

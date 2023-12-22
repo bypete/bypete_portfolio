@@ -21,8 +21,8 @@ const workCollection = defineCollection({
     title: z.string(),
     pubDate: z.date(),
     modDate: z.date().optional(),
-    readtime: z.string(),
     taster: z.string(),
+    excerpt: z.string().optional(),
     description: z.string(),
     author: z.string(),
     brand: z.object({
@@ -43,7 +43,6 @@ const workCollection = defineCollection({
       alt: z.string(),
     }).optional(),
     skillset: z.object({
-      bg: z.string(),
       text: z.string(),
       icon: z.string(),
       heading: z.string(),

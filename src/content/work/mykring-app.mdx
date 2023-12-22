@@ -1,0 +1,96 @@
+---
+title: 'MyKRing App'
+pubDate: 2022-09-01
+modDate: 2023-10-18
+excerpt: 'See how Xamarin.Forms was used to create a cross-platform app to improve the customer experience and make authentication easier.'
+taster: 'At launch, K Ring users could only manage their rings online. Despite having an advanced responsive framework the website, customers still anticipated a separate app and all the simplicity it provides. See how we created a cross-platform solution with Xamarin.Forms.'
+description: 'See how I helped to create a cross-platform app to improve the customer experience and make authentication easier.'
+author: 'Astro Learner'
+brand: 
+  bg: 'bg-[#FF0069]'
+  color: 'text-[#FF0069]'
+cover:
+  url: '../../assets/work/mykringapp/listing.jpg'
+  alt: 'K Ring logo'
+  credit: 'K Wearables'
+skillset:
+  text: 'text-white'
+  icon: ''
+  heading: 'permalink:text-white permalink:before:text-[#00a3e2]'
+  shadow: ''
+  areas:
+    - title: 'Apps'
+      skills:
+          - 'Visual Studio - Xamarin.Forms'
+          - 'Adobe Photoshop'
+          - 'Adobe Illustrator'
+          - 'Azure DevOps'
+          - 'Subversion (SVN) version control'
+    - title: 'Development'
+      skills:
+          - 'XAML Templates'
+          - 'App support page templates'
+          - 'Content population'
+          - 'Asset preparation'
+          - 'UX/UI'
+tags: ['featured', 'posts', 'app', 'xamarin.forms', 'fintech']
+---
+import BlockPicture from '~/components/Images/BlockPicture.astro';
+import floating_handsets from '../../assets/work/mykringapp/floating-handsets.jpg';
+import Skills from '~/components/Skills.astro'
+import UL from '~/components/MDX/ul.astro'
+import Gallery from '~/components/Lightbox/Gallery.astro'
+import data from '~/data/work/mykringapp.data.json'
+export const components = {ul: UL}
+
+<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg} >
+## Skills
+</Skills>
+
+
+
+<p class="lead">
+    At launch, K&nbsp;Ring users could only manage their rings online. Although a responsive framework was used during the development of the website, customers still anticipated a separate app and all the benefits it provides.
+  </p>
+  With no prior app development experience, the learning curve was steep. [Xamarin.Forms](https://dotnet.microsoft.com/en-us/apps/xamarin/xamarin-forms) was chosen because it offers a cross-platform framework with a single code base. The main website already used the .NET developer platform, so extending that to the app made sense.
+  Although an initial wireframe document was provided, it was essentially an imitation of the mykring.com responsive pages. Rather than simply replicating what we had, we wanted to improve the user experience wherever possible.
+
+## My responsibilities
+
+-   Re-design the supplied `.ppt` wireframes to make use of the xaml display collections in Xamarin.Forms.
+-   I created the static layouts directly in Visual Studio - using temporary static pages to speed up development. A developer would then duplicate these pages into the appropriate locations and assign the required dynamic properties. Subversion (SVN) was used to control the development versioning.
+-   I oversaw the image library, ensuring that all assets were available in the appropriate resolutions for iOS and Android devices. This was a combination of converting existing assets and creating new artwork for the app.
+-   I assisted in the configuration of the content management system (Umbraco) and was in charge of the initial populating of all app-specific launch content. <span class="label label--info !m-0">collaboration</span>
+-   I helped with the testing, creating user test scripts and reporting any bugs as issues within **Azure DevOps**
+-   After launch, I began a review process of the product website to see what updates could be applied to provide a consistent user experience across the app and site.
+
+The '**Auto top-up**' feature is a good example of a user path that was enhanced during the app development process. It was previously a load method but is now only available as an action for validated cards (a prerequisite of the auto top-up service) in the Manage Cards section.
+Each card has its own set of available actions, which update as the user swipes through their collection. Cards that have not been validated will show a button to begin the validation process. This is followed by a 'Complete validation' state and, finally, a 'Validated' indicator. At this point the 'Auto top-up' button becomes active. Cards used for auto top-up cannot be removed until auto top-up has been turned off. As a result, the 'Remove' option is set to disabled.
+By controlling visibility, we can remove redundant options, resulting in a smoother experience.
+
+The Auto top-up form was also streamlined and only appears when 'Use Auto top-up' is toggled to on. The input sliders were removed as they became too fiddley within the mobile viewport. The minimum and maximum values are now displayed alongside the input field.
+
+<Gallery collection='gScreens' data={data} >
+<Fragment slot="title">
+## App screens
+</Fragment>
+
+</Gallery>
+
+<Gallery collection='gUx' data={data} >
+<Fragment slot="title">
+## UX details
+</Fragment>
+
+</Gallery>
+
+## Ratings and Reviews
+
+<p>
+  <a href="https://apps.apple.com/gb/app/mykring/id1578688520?see-all=reviews"
+     class="link external"
+     target="_blank"><span class="text-4xl font-black">4.6</span></a> out of 5 <span class="text-sm">(Sept &rsquo;22)</span>
+</p>
+
+
+<BlockPicture src={floating_handsets} class="my-0" alt="Laptop and iPhone image showing K Ring website" credit={frontmatter.title} wrapper={true} />

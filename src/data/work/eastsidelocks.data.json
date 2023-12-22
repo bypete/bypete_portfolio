@@ -1,0 +1,105 @@
+{
+  "folder": "assets/work/eastsidelocks/lightbox",
+  "gScreens": [
+    {
+      "title": "Home",
+      "image": "home--detail.jpg",
+      "class": "row-span-1 col-span-2",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "Home",
+      "image": "home.jpg",
+      "class": "hidden",
+      "width": "1200",
+      "height": "5968"
+    },
+    {
+      "title": "Responsive Home",
+      "image": "sm_home--detail.jpg",
+      "class": "row-span-2 col-span-1",
+      "width": "780",
+      "height": "1688"
+    },
+    {
+      "title": "Home",
+      "image": "sm_home.jpg",
+      "class": "hidden",
+      "width": "780",
+      "height": "12852"
+    },
+    {
+      "title": "Vision",
+      "image": "vision.jpg",
+      "class": "row-span-2 col-span-1",
+      "width": "1200",
+      "height": "4421"
+    },
+    {
+      "title": "News",
+      "image": "news.jpg",
+      "width": "1200",
+      "height": "2594"
+    },
+    {
+      "title": "News detail",
+      "image": "news--detail.jpg",
+      "class": "hidden",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "Gallery",
+      "image": "gallery.jpg",
+      "class": "row-span-3 col-span-2",
+      "width": "1200",
+      "height": "3065"
+    },
+    {
+      "title": "Timeline",
+      "image": "sm_timeline.jpg",
+      "class": "row-span-2 col-span-1",
+      "width": "780",
+      "height": "7640"
+    }
+  ],
+  "gUi": [
+    {
+      "title": "Gallery detail",
+      "image": "gallery__pop--detail.jpg",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "Timeline detail",
+      "image": "sm_timeline--detail.jpg",
+      "width": "780",
+      "height": "1688"
+    },
+    {
+      "title": "Timeline popup",
+      "image": "sm_timeline__pop--detail.jpg",
+      "width": "780",
+      "height": "1688"
+    },
+    {
+      "title": "Gallery popup detail",
+      "image": "gallery--detail.jpg",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "Vision detail",
+      "image": "vision--detail.jpg",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "Vision popup detail",
+      "image": "vision__pop--detail.jpg",
+      "width": "1200",
+      "height": "750"
+    }
+  ]
+}

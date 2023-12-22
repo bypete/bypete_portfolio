@@ -1,0 +1,129 @@
+{
+  "folder": "assets/work/twotw/lightbox",
+  "gOld": [
+    {
+      "title": "Homepage",
+      "image": "old_home.jpg",
+      "width": "1200",
+      "height": "1393"
+    },
+    {
+      "title": "Homepage detail",
+      "image": "old_home--detail.jpg",
+      "class": "hidden",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "News",
+      "image": "old_news.jpg",
+      "width": "1200",
+      "height": "1633"
+    },
+    {
+      "title": "News detail",
+      "image": "old_news--detail.jpg",
+      "class": "hidden",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "News",
+      "image": "old_news__listing.jpg",
+      "width": "1200",
+      "height": "2141"
+    },
+    {
+      "title": "News detail",
+      "image": "old_news__listing--detail.jpg",
+      "class": "hidden",
+      "width": "1200",
+      "height": "750"
+    }
+  ],
+  "gScreens": [
+    {
+      "title": "Homepage",
+      "image": "home.jpg",
+      "class": "row-span-2 col-span-1",
+      "width": "2880",
+      "height": "3924"
+    },
+    {
+      "title": "Homepage detail",
+      "image": "home--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Media",
+      "image": "media.jpg",
+      "class": "row-span-2 col-span-1",
+      "width": "2880",
+      "height": "4544"
+    },
+    {
+      "title": "Media detail",
+      "image": "media--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "News listing",
+      "image": "news__listing.jpg",
+      "class": "row-span-1 col-span-2",
+      "width": "1200",
+      "height": "2548"
+    },
+    {
+      "title": "News listing detail",
+      "image": "news__listing--detail.jpg",
+      "class": "hidden",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "Tour",
+      "image": "tour.jpg",
+      "class": "row-span-2 col-span-2",
+      "width": "2880",
+      "height": "3848"
+    },
+    {
+      "title": "Tour detail",
+      "image": "tour--detail.jpg",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Alternative",
+      "image": "alt.jpg",
+      "class": "row-span-2 col-span-1",
+      "width": "2880",
+      "height": "4618"
+    },
+    {
+      "title": "Alternative detail",
+      "image": "alt--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Alternative 2",
+      "image": "alt2.jpg",
+      "class": "row-span-2 col-span-1",
+      "width": "2880",
+      "height": "3848"
+    },
+    {
+      "title": "Alternative 2 detail",
+      "image": "alt2--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    }
+  ]
+}

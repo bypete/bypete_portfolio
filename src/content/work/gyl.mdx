@@ -1,0 +1,93 @@
+---
+title: 'GamesYouLoved'
+pubDate: 2022-09-01
+modDate: 2023-07-01
+taster: 'A fun website lovingly curated by gaming enthusiasts that quickly became a huge retro hit. Every genre of game was meticulously documented to help fans relive those sweet nostalgic childhood memories.'
+excerpt: 'A fun website lovingly curated by gaming enthusiasts that quickly became a huge retro hit.'
+description: 'Discover how I helped launch an immensely fun website lovingly curated by gaming enthusiasts - and see how it quickly became a huge retro hit. Learn how each genre was meticulously documented in order to help fans relive those sweet nostalgic childhood memories.'
+author: 'Astro Learner'
+brand: 
+  bg: 'bg-[#24a7be]'
+  color: 'text-[#24a7be]'
+cover:
+  url: '../../assets/work/gyl/listing.jpg'
+  alt: 'GamesYouLoved logo'
+  credit: 'GamesYouLoved'
+skillset:
+  text: 'text-white'
+  icon: ''
+  heading: 'permalink:text-white permalink:before:text-[#00a3e2]'
+  shadow: ''
+  areas:
+    - title: 'Apps'
+      skills:
+          - 'Adobe Photoshop'
+          - 'Adobe Dreamweaver'
+    - title: 'Frameworks'
+      skills:
+          - 'Skeleton (Responsive CSS)'
+          - 'jQuery and vanilla js'
+    - title: 'Development'
+      skills:
+          - 'HTML Templates'
+          - 'HTML Email templates'
+          - 'Content population'
+          - 'Asset preparation'
+          - 'UX/UI'
+tags: ['work', 'posts', 'Entertainment']
+---
+import BlockPicture from '~/components/Images/BlockPicture.astro';
+import Skills from '~/components/Skills.astro'
+import UL from '~/components/MDX/ul.astro'
+import Gallery from '~/components/Lightbox/Gallery.astro'
+export const components = {ul: UL}
+
+import laptop_iphone_front from '../../assets/work/gyl/laptop_iphone_front.jpg';
+import block__sw_40 from '../../assets/work/gyl/block__sw_40.jpg';
+
+import data from '~/data/work/gyl.data.json'
+
+<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg} >
+## Skills
+</Skills>
+
+
+<BlockPicture src={laptop_iphone_front} class="my-0" alt="Laptop and iPhone image showing GamesYouLoved website" credit={frontmatter.title} wrapper={true} />
+
+## Overview
+
+Gamesyouloved.com began as a fun website lovingly curated by gaming enthusiasts and quickly became a huge retro hit. Every genre of game was meticulously documented to help fans relive those sweet nostalgic childhood memories.
+
+The site encouraged the community to submit their own game reviews, effectively crowdsourcing content and giving the fanbase a genuine sense of ownership. An article submission form kept editorial content consistent and streamlined the publishing/moderation process. This was the impetus behind the site's rapid expansion, which until recently, included twelve game genres and several hundred entries.
+
+GYL has a substantial social media presence across multiple platforms and the site served as a central hub for these platforms, allowing for deeper engagement through rich editorial content.
+
+## My responsibilities
+
+- My first task was to design the brand logo. An analogue TV brandmark was then introduced to connect with the retro audience and provide a consistent identity across all social channels. This provided a clear visual framework from which to design the site.
+- The designs and static templates were hosted in a secure listing to keep stakeholders informed throughout the development process. <span class="label label--info !m-0">Project management</span>
+- Working closely with the client's direction, I created a few key screens for visual approval. The website needed to strike a balance between being distinctively recognisable and also evoking vintage styling from the past.
+- I created all of the Front-End HTML templates – working to a mobile-first mindset. These were then handed over to a team of back-end developers, complete with detailed annotations, listing indexes, and support documentation.
+- I collaborated closely with the developers to ensure that the site stayed true to the visuals approved by the client.
+- I assisted in configuring the content management system (Umbraco) and took responsibility for the initial population of all launch content. <span class="label label--info !m-0">collaboration</span>
+- At handover, I provided documentation to help the client understand the different template types as well as instructions on how to populate the content. <span class="label label--info !m-0">Documentation</span>
+
+
+> ...They evolved a simple idea of our love for everything retrogaming into an exciting and fun digital experience.
+> GamesYouLoved.com
+
+<Gallery collection='gScreens' data={data} >
+<Fragment slot="title">
+## Site visuals
+</Fragment>
+
+</Gallery>
+
+<BlockPicture src={block__sw_40} class="my-0" alt="Exhibition event" credit='GamesYouLoved' wrapper={true} />
+
+
+## Final comments
+
+These images have been captured from static templates, but they accurately represent the site that was launched. Fifth dimension (the agency) reformed as K Wearables, a start-up focused on launching the world’s first contactless payment ring, [K Ring](/work/mykring), and this site has since been retired.
+
+<p class="note text-base">Client quotes originally published at fifthdimension.com</p>

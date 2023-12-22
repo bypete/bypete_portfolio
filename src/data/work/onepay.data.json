@@ -1,0 +1,300 @@
+{
+  "folder": "assets/work/onepay/lightbox",
+  "gScreens": [
+    {
+      "title": "Homepage",
+      "image": "you.jpg",
+      "class": "row-span-2 col-span-2",
+      "width": "2880",
+      "height": "6266"
+    },
+    {
+      "title": "Homepage",
+      "image": "you--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Homepage",
+      "image": "sm_you.jpg",
+      "class": "row-span-2",
+      "width": "780",
+      "height": "7702"
+    },
+    {
+      "title": "Business Homepage",
+      "image": "business.jpg",
+      "class": "row-span-2 col-span-2",
+      "width": "2880",
+      "height": "4800"
+    },
+    {
+      "title": "Business Homepage",
+      "image": "sm_business.jpg",
+      "class": "row-span-2",
+      "width": "780",
+      "height": "6550"
+    },
+    {
+      "title": "Business Homepage detail",
+      "image": "sm_business--detail.jpg",
+      "class": "hidden",
+      "width": "780",
+      "height": "1688"
+    },
+    {
+      "title": "Business landing",
+      "image": "business__landing.jpg",
+      "width": "1200",
+      "height": "1558"
+    },
+    {
+      "title": "Homepage",
+      "image": "business__landing--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Log in",
+      "image": "login.jpg",
+      "width": "2880",
+      "height": "2964"
+    },
+    {
+      "title": "Dashboard",
+      "image": "you__dashboard.jpg",
+      "width": "2880",
+      "height": "3644"
+    },
+    {
+      "title": "Mobile Dashboard",
+      "image": "sm_you__dashboard.jpg",
+      "width": "780",
+      "height": "3960"
+    },
+    {
+      "title": "Statement",
+      "image": "you__statement.jpg",
+      "class": "row-span-2 col-span-2",
+      "width": "2880",
+      "height": "4006"
+    },
+    {
+      "title": "Mobile Statement",
+      "image": "sm_you__statement.jpg",
+      "width": "780",
+      "height": "3876",
+      "cropped": "false"
+    },
+    {
+      "title": "Mobile Statement",
+      "image": "sm_you__statement--detail.jpg",
+      "class": "hidden",
+      "width": "780",
+      "height": "1688",
+      "cropped": "false"
+    },
+    {
+      "title": "Load",
+      "image": "you__load.jpg",
+      "width": "2880",
+      "height": "7602"
+    },
+    {
+      "title": "Profile",
+      "image": "you__profile.jpg",
+      "width": "2880",
+      "height": "3816"
+    },
+    {
+      "title": "Profile detail",
+      "image": "you__profile--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Help",
+      "image": "you__help.jpg",
+      "width": "2880",
+      "height": "3586"
+    }
+  ],
+  "gAgency": [
+    {
+      "title": "Register Online",
+      "image": "register.jpg",
+      "width": "2880",
+      "height": "6318"
+    },
+    {
+      "title": "Register Online - detail",
+      "image": "register--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Register Email",
+      "image": "register__email.jpg",
+      "width": "2880",
+      "height": "3558"
+    },
+    {
+      "title": "Register Email - detail",
+      "image": "register__email--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Activate",
+      "image": "activate.jpg",
+      "width": "2880",
+      "height": "3306"
+    },
+    {
+      "title": "Activate - detail",
+      "image": "activate--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Reports",
+      "image": "reports.jpg",
+      "width": "2880",
+      "height": "4028"
+    },
+    {
+      "title": "Reports - detail",
+      "image": "reports--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Reports",
+      "image": "reports.jpg",
+      "width": "2880",
+      "height": "4028"
+    },
+    {
+      "title": "Reports - detail",
+      "image": "reports--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    }
+  ],
+  "gCs": [
+    {
+      "title": "CS Profile",
+      "image": "cs__profile.jpg",
+      "width": "2880",
+      "height": "3850"
+    },
+    {
+      "title": "CS Profile - detail",
+      "image": "cs__profile--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "CS Users",
+      "image": "cs__users.jpg",
+      "width": "2880",
+      "height": "4084"
+    },
+    {
+      "title": "CS Users - detail",
+      "image": "cs__users--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "CS Profile",
+      "image": "cs__profile.jpg",
+      "width": "2880",
+      "height": "3850"
+    },
+    {
+      "title": "CS Profile - detail",
+      "image": "cs__profile--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "CS Fees",
+      "image": "cs__fees.jpg",
+      "width": "2880",
+      "height": "4076"
+    },
+    {
+      "title": "CS Fees - detail",
+      "image": "cs__fees--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    }
+  ],
+  "gEmail": [
+    {
+      "title": "For You | Apply",
+      "image": "email__fy_apply.jpg",
+      "class": "row-span-2 col-span-1",
+      "width": "800",
+      "height": "1827"
+    },
+    {
+      "title": "For You | Contact",
+      "image": "email__fy_contact.jpg",
+      "width": "800",
+      "height": "1280"
+    },
+    {
+      "title": "For You | Newsletter",
+      "image": "email__fy_newsletter.jpg",
+      "class": "row-span-2 col-span-1",
+      "width": "800",
+      "height": "2497"
+    },
+    {
+      "title": "For You | Password",
+      "image": "email__fy_password.jpg",
+      "width": "800",
+      "height": "1280"
+    },
+    {
+      "title": "For Business | Newsletter",
+      "image": "email__fb_newsletter.jpg",
+      "class": "row-span-2 col-span-1",
+      "width": "800",
+      "height": "2497"
+    },
+    {
+      "title": "For Business | Password",
+      "image": "email__fb_password.jpg",
+      "width": "800",
+      "height": "1280"
+    },
+    {
+      "title": "For Business | Upload",
+      "image": "email__fb_upload.jpg",
+      "class": "row-span-2 col-span-1",
+      "width": "800",
+      "height": "1605"
+    },
+    {
+      "title": "For Business | Contact",
+      "image": "email__fb_contact.jpg",
+      "width": "800",
+      "height": "1280"
+    }
+  ]
+}

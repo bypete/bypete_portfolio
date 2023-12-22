@@ -1,0 +1,126 @@
+{
+  "folder": "assets/work/epa/lightbox",
+  "gScreens": [
+    {
+      "title": "Home",
+      "image": "home--detail.jpg",
+      "class": "row-span-1 col-span-2",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Home",
+      "image": "home.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "5532"
+    },
+    {
+      "title": "Event",
+      "image": "event.jpg",
+      "class": "row-span-3 col-span-1",
+      "width": "2880",
+      "height": "8174"
+    },
+    {
+      "title": "Event detail",
+      "image": "event--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Member",
+      "image": "member.jpg",
+      "class": "row-span-2 col-span-1",
+      "width": "2880",
+      "height": "3336"
+    },
+    {
+      "title": "Member detail",
+      "image": "member--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Mobile Member detail",
+      "image": "sm_member--detail.jpg",
+      "width": "780",
+      "height": "1688"
+    },
+    {
+      "title": "News",
+      "image": "news.jpg",
+      "width": "2880",
+      "height": "5064"
+    },
+    {
+      "title": "News detail",
+      "image": "news--detail.jpg",
+      "class": "hidden",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Sign up",
+      "image": "signup.jpg",
+      "class": "row-span-2 col-span-3",
+      "width": "2880",
+      "height": "2626"
+    },
+    {
+      "title": "Sign detail",
+      "image": "sm_signup--detail.jpg",
+      "class": "hidden",
+      "width": "780",
+      "height": "1688"
+    }
+  ],
+  "gAwards": [
+    {
+      "title": "Awards",
+      "image": "awards.jpg",
+      "width": "2880",
+      "height": "5396"
+    },
+    {
+      "title": "Awards detail",
+      "image": "awards--detail.jpg",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Awards Event detail",
+      "image": "awards__event--detail.jpg",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Awards Landing detail",
+      "image": "awards__landing--detail.jpg",
+      "width": "2880",
+      "height": "1800"
+    },
+    {
+      "title": "Awards News detail",
+      "image": "awards__news--detail.jpg",
+      "width": "2880",
+      "height": "1800"
+    }
+  ],
+  "gEmail": [
+    {
+      "title": "Email newsletter",
+      "image": "email__newsletter--detail.jpg",
+      "width": "800",
+      "height": "750"
+    },
+    {
+      "title": "Email newsletter",
+      "image": "email__newsletter.jpg",
+      "width": "800",
+      "height": "2168"
+    }
+  ]
+}

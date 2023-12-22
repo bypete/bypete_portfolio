@@ -15,7 +15,6 @@ hero:
     scrollprompt: true
     dark: true
 skillset:
-    bg: 'bg-white'
     text: 'text-gray-700'
     icon: '[&>li]:before:!text-accent'
     heading: 'permalink:text-gray-700 permalink:before:text-[#00a3e2]'
@@ -62,6 +61,6 @@ skillset:
 import Skills from '../../components/Skills.astro'
 
 <p>We are a fantastic mdx team doing amazing things.</p>
-<Skills skillset={frontmatter.skillset} >
+<Skills skillset={frontmatter.skillset} bg='bg-white' >
 ## Skills I know
 </Skills>

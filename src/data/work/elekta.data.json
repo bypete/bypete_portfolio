@@ -1,0 +1,108 @@
+{
+  "folder": "assets/work/elekta/lightbox",
+  "gSales": [
+    {
+      "title": "Homepage",
+      "image": "homepage.jpg",
+      "class": "row-span-2 col-span-2",
+      "width": "1200",
+      "height": "1586"
+    },
+    {
+      "title": "Homepage detail",
+      "image": "homepage--detail.jpg",
+      "class": "hidden",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "Library",
+      "image": "library.jpg",
+      "width": "1200",
+      "height": "1237"
+    },
+    {
+      "title": "Result",
+      "image": "result.jpg",
+      "width": "1200",
+      "height": "2512"
+    },
+    {
+      "title": "Result detail",
+      "image": "result--detail.jpg",
+      "class": "hidden",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "Document",
+      "image": "document.jpg",
+      "class": "row-span-2 col-span-2",
+      "width": "1200",
+      "height": "1820"
+    },
+    {
+      "title": "Document detail",
+      "image": "document--detail.jpg",
+      "class": "hidden",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "Basket",
+      "image": "basket.jpg",
+      "class": "row-span-2 col-span-2",
+      "width": "1200",
+      "height": "2049"
+    },
+    {
+      "title": "Registration",
+      "image": "registration.jpg",
+      "width": "1200",
+      "height": "3098"
+    },
+    {
+      "title": "Profile",
+      "image": "profile.jpg",
+      "width": "1200",
+      "height": "1918"
+    }
+  ],
+  "gService": [
+    {
+      "title": "Oncology",
+      "image": "oncology.jpg",
+      "class": "row-span-2 col-span-2",
+      "width": "1200",
+      "height": "1522"
+    },
+    {
+      "title": "Listing",
+      "image": "listing.jpg",
+      "class": "row-span-2 col-span-1",
+      "width": "1200",
+      "height": "2129"
+    },
+    {
+      "title": "Catalog",
+      "image": "catalog.jpg",
+      "class": "row-span-2 col-span-2",
+      "width": "1200",
+      "height": "1996"
+    },
+    {
+      "title": "Catalog detail",
+      "image": "catalog--detail.jpg",
+      "class": "hidden",
+      "width": "1200",
+      "height": "750"
+    },
+    {
+      "title": "BAOS",
+      "image": "baos.jpg",
+      "class": "row-span-2 col-span-1",
+      "width": "1200",
+      "height": "1922"
+    }
+  ]
+}

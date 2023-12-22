@@ -1,0 +1,84 @@
+---
+title: Jeff Wayne's Musical version of The War of the Worlds
+pubDate: 2022-09-01
+modDate: 2023-07-01
+taster: 'The site quickly became the hub that connected everything together, serving both longtime fans and inspiring a new generation.'
+excerpt: 'A hub that connected everything together, serving both longtime fans and inspiring a new generation'
+description: 'Discover how I contributed to the creation of this online hub that linked everything together, serving both longtime fans and inspiring a new generation.'
+author: 'Astro Learner'
+brand: 
+  bg: 'bg-[#38422a]'
+  color: 'text-[#38422a]'
+cover:
+  url: '../../assets/work/elekta/listing.jpg'
+  alt: 'Elekta logo'
+  credit: 'Elekta'
+skillset:
+  text: 'text-white'
+  icon: ''
+  heading: 'permalink:text-white permalink:before:text-[#00a3e2]'
+  shadow: ''
+  areas:
+    - title: 'Apps'
+      skills:
+          - 'Adobe Photoshop'
+          - 'Adobe Dreamweaver'
+    - title: 'Development'
+      skills:
+          - 'HTML Templates'
+          - 'HTML Email templates'
+          - 'Content population'
+          - 'Wireframes'
+          - 'Asset preparation'
+          - 'UX/UI'
+tags: ['posts', 'Entertainment']
+---
+import BlockPicture from '~/components/Images/BlockPicture.astro';
+import Skills from '~/components/Skills.astro'
+import UL from '~/components/MDX/ul.astro'
+import Gallery from '~/components/Lightbox/Gallery.astro'
+export const components = {ul: UL}
+
+import data from '~/data/work/twotw.data.json'
+import tablet from '../../assets/work/twotw/tablet.jpg';
+
+
+<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg} >
+## Skills
+</Skills>
+
+
+<BlockPicture src={tablet} class="my-0" alt="iPad image showing twotw website" credit={frontmatter.title} wrapper={true} />
+
+## Overview
+
+Originally created to promote the discography of **Jeff Wayne's Musical Version of The War of the Worlds**, the site quickly evolved to become the primary resource for explaining the story, connecting with fans, and introducing new listeners to the TWOTW experience. A tour section was subsequently included to promote the hugely successful live musical version - _Jeff Wayne's Musical Version of The War of The Worlds - Alive on Stage!_ - as it toured the UK and Europe, Australia, and New Zealand.
+
+User engagement was critical to the site's success because the album had a large and devoted fan base. The forum grew to a community of over **20k users** with **19 message boards** and over **3.2K topics**. The brand had numerous social and merchandising channels so the website needed to be the central hub that connected everything.
+
+The site promoted and then documented **8 Arena tours**, culminating in the _40<sup>th</sup> Anniversary UK tour_ in 2018.
+
+
+## My responsibilities
+
+-   The designs and static templates were hosted in a secure listing to keep stakeholders informed throughout the development process. <span class="label label--info !m-0">Project management</span>
+-   I designed the visual layouts in Photoshop and oversaw all revisions to ensure the client was satisfied with the proposed solution.
+-   I created all of the Front-End HTML templates. These were then handed over to a team of back-end developers, complete with detailed annotations, listing indexes, and support documentation.
+-   I assisted in configuring the content management system (Custom) and oversaw the testing of the transferred site content throughout the development process. <span class="label label--info !m-0">collaboration</span>
+-   The client could write newsletters and some news items, but I was in charge of populating the majority of the content. Each tour or album release was usually preceded by a minor site rebranding.
+
+
+
+<Gallery collection='gOld' data={data} >
+<Fragment slot="title">
+## Previous site
+</Fragment>
+
+</Gallery>
+
+<Gallery collection='gScreens' data={data} >
+<Fragment slot="title">
+## Reworked visuals
+</Fragment>
+The images below were created for a site refresh in preparation for an Arena tour in the United Kingdom and Europe.
+</Gallery>

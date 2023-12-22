@@ -1,0 +1,177 @@
+---
+title: 'K&nbsp;Ring'
+pubDate: 2022-10-01
+modDate: 2023-10-01
+excerpt: 'Learn how myKRing.com evolved into a multilanguage hub for the K Ring product'
+taster: 'First launched as a crowdfunding support site, myKRing.com has evolved to a multilanguage hub for the K Ring product'
+description: 'Learn about my involvement in the launch of a crowdfunding support site and how I continued to contribute as it evolved into a multilingual hub for the K Ring product.'
+author: 'Astro Learner'
+brand: 
+  bg: 'bg-[#FF0069]'
+  color: 'text-[#FF0069]'
+cover:
+  url: '../../assets/work/mykring/listing.jpg'
+  alt: 'K Ring logo'
+  credit: 'K Wearables'
+skillset:
+  text: 'text-white'
+  icon: ''
+  heading: 'permalink:text-white permalink:before:text-[#00a3e2]'
+  shadow: ''
+  areas:
+    - title: 'Apps (Initial build)'
+      skills:
+          - 'Atom text editor'
+          - 'Adobe Photoshop'
+          - 'Adobe Illustrator'
+    - title: 'Apps (Site rebuild)'
+      skills:
+          - 'Visual Studio Code'
+          - 'Adobe Photoshop'
+          - 'Adobe Illustrator'
+    - title: 'Frameworks (Initial build)'
+      skills:
+          - 'Foundation for sites, via CLI'
+          - 'Foundation for emails, via CLI'
+          - 'jQuery and vanilla js'
+          - 'Gulp'
+    - title: 'Frameworks (Site rebuild)'
+      skills:
+          - 'Tailwind CSS'
+          - 'Maizzle (Tailwind for email)'
+          - 'Alpine.js and vanilla js'
+          - 'npm'
+          - 'Webpack'
+    - title: 'Responsibilities'
+      class: 'col-span-full'
+      skills:
+          - 'HTML Templates'
+          - 'HTML Email templates'
+          - 'Content population'
+          - 'Wireframes'
+          - 'Asset preparation'
+          - 'UX/UI'
+tags: ['posts', 'responsive', 'fintech', 'email']
+---
+import BlockPicture from '~/components/Images/BlockPicture.astro';
+import laptop_iphone_front from '../../assets/work/mykring/laptop_iphone_front.jpg';
+import block__cyclist_40 from '../../assets/work/mykring/block__cyclist_40.jpg';
+import Skills from '~/components/Skills.astro'
+import UL from '~/components/MDX/ul.astro'
+import Gallery from '~/components/Lightbox/Gallery.astro'
+import data from '~/data/work/mykring.data.json'
+export const components = {ul: UL}
+
+<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg} >
+## Skills
+</Skills>
+
+
+<BlockPicture src={laptop_iphone_front} class="my-0" alt="Laptop and iPhone image showing Kalixa website" credit={frontmatter.title} wrapper={true} />
+
+<p class="note text-base">The live site is currently unavailable but a detailed record of the templates and design process can be viewed below. The site was reimagined in 2022/3 to complement the app, but unfortunately the designs were frozen in the development phase due to funding issues.</p>
+
+## A brief history
+
+In Autumn 2015, the site, formerly known as kerv.com, debuted as a simple static support site for the Kickstarter crowdfunding campaign. I created the static templates using the Foundation v5 framework, which claimed to be at the cutting edge of responsive development at the time.
+
+> Foundation is the most advanced, responsive front-end framework in the world. The framework is mobile friendly and ready for you to customize it any way you want to use it.
+
+Foundation was kept as the project's framework until v6.3.3, when it was determined that our extensive modifications had significantly bloated the source html templates. Overwriting default foundation behaviour took up an increasing portion of the production CSS.
+
+The redesigned site would need to provide significant optimisation gains while also incorporating any recent improvements that had been applied to the official MyKRing app. As the site became more complex, it would also need to address the increasing specificity of CSS declarations. Despite the fact that [BEM](https://getbem.com/introduction/) naming conventions were used throughout the templates; some features had become overly complex.
+
+## Spring refresh
+
+[Tailwind CSS](https://tailwindcss.com/) and [Alpine.js](https://alpinejs.dev/) were chosen for their utility-first and minimal approaches, respectively. Both frameworks rely on inline markup, which can result in a cluttered source view, but the advantages are direct control and significantly reduced asset load.
+Tailwind dramatically reduces CSS bloat when building for production by scanning the markup and removing unused CSS. The minified CSS bundle has been reduced from **624kb** (multiple files) to **168KB**. Alpine uses directives within the markup to define HTML chunks as components, eliminating the need for referencing.
+
+Example markup:
+
+```html
+<div
+    class="credit  opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+    x-data="credit"
+>
+    <button
+        class="credit__icon "
+        @click="toggle"
+        :aria-expanded="open ? 'true' : 'false'"
+        aria-expanded="false"
+    >
+        <i class="fa-regular fa-image" aria-hidden="true"></i>
+        <span class="sr-only">Show image credit</span>
+    </button>
+    <div class="credit__text" x-show="open">Credit: K Wearables</div>
+</div>
+```
+
+I saw this project as an opportunity to use the static site generator [Eleventy](https://www.11ty.dev/) to manage the generation of the Front-End templates. The initial setup time is obviously longer when layouts, partials, and components are used, but for a complicated site like this, it makes any future features simple to apply and preview. Before any development is scheduled, new features can quickly be reviewed in a static site preview.
+
+Any screen can be directly accessed by developers, partner clients, and stakeholders. This was especially useful for translators, who often need more context to create concise translations. Some screens can only be accessed under certain conditions, which can be difficult and sometimes impossible for third parties to recreate.
+
+## My responsibilities
+
+-   The designs and static templates were hosted in a secure listing to keep stakeholders informed throughout the development process. <span class="label label--info !m-0">Project management</span>
+-   I built all of the Front-End HTML templates from scratch using an internal wireframe ppt document. These were then given to a team of back-end developers, along with detailed annotations, listing indexes, and support documentation.
+-   I created a complete set of email HTML templates that would work with Umbraco's dictionary to handle the multilanguage requirements.
+-   I assisted in the configuration of the content management system (Umbraco) and was in charge of the initial populating of all launch content. <span class="label label--info !m-0">collaboration</span>
+
+
+
+
+
+<Gallery collection='gPublic' data={data} >
+<Fragment slot="title">
+## Public access
+</Fragment>
+
+</Gallery>
+
+<Gallery collection='gAccount' data={data} >
+<Fragment slot="title">
+## Account access
+</Fragment>
+
+</Gallery>
+
+<Gallery collection='gEmail' data={data} >
+<Fragment slot="title">
+## Email templates
+</Fragment>
+Each template has multilingual content. Repeated items are stored as dictionary terms in the CMS and referenced using **[#Email.Content...#]**. System data is referenced using **[[Firstname]]**'
+</Gallery>
+
+
+
+<Gallery collection='gUx' data={data} >
+<Fragment slot="title">
+## UX
+</Fragment>
+
+</Gallery>
+
+
+<Gallery collection='gCs' data={data} >
+<Fragment slot="title">
+## Customer services
+</Fragment>
+
+</Gallery>
+
+## Learning points
+
+The redesign process provided an excellent opportunity for me to become acquainted with some new frameworks. During this period of intense self-development, I gained experience with **Tailwind CSS**, **Alpine JS**, **Webpack**, and **Eleventy**. Despite the steep (and at times daunting!) learning curve, I'm now ready to tackle the next project with confidence.
+
+## Scope for improvement
+
+The myKRing app accomodates "dark mode" functionality and it would be nice to offer that functionality on the website. Tailwind CSS includes a `dark:` variant that can be switched manually via javascript and `localstorage` or using the system preferences.
+
+<BlockPicture src={block__cyclist_40} class="my-0" alt="Close up of K Ring and cyclist" credit={frontmatter.title} wrapper={true} />
+
+## Final thoughts
+
+The redesign has improved the relationship between the app and the website. The design revisions should provide a more consistent user experience across all access points. The [Devices](#account-access) and [Load](#ux) sections received the most attention during app development, so it was critical to incorporate those changes back into the site.
+
+_Unfortunately, the reworked templates remain on hold at the time of writing, and have not been scheduled for development._
+

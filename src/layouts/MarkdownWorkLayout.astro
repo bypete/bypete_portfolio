@@ -22,7 +22,7 @@ const { frontmatter, minutesRead } = Astro.props;
                     utilities.tramline.x,
                 ]}
             >
-                <h1>{frontmatter.title}</h1>
+                <h1 set:html={frontmatter.title} />
                 <p>{frontmatter.taster}</p>
                 <p class="inline-flex items-center">
                     <Icon
