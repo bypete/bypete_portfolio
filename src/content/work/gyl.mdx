@@ -36,13 +36,20 @@ skillset:
           - 'UX/UI'
 tags: ['work', 'posts', 'Entertainment']
 ---
+import {Image} from 'astro:assets'
+import { Icon } from 'astro-icon/components';
+
 import BlockPicture from '~/components/Images/BlockPicture.astro';
 import Skills from '~/components/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
 import Gallery from '~/components/Lightbox/Gallery.astro'
+import Figure from '~/components/Figure.astro'
+import Block from '~/components/Blocks/Block.astro'
 export const components = {ul: UL}
+import utilities from '~/data/utilities.json';
 
 import laptop_iphone_front from '../../assets/work/gyl/laptop_iphone_front.jpg';
+import svgbg from '../../icons/contour.svg'
 import block__sw_40 from '../../assets/work/gyl/block__sw_40.jpg';
 
 import data from '~/data/work/gyl.data.json'
@@ -61,6 +68,24 @@ Gamesyouloved.com began as a fun website lovingly curated by gaming enthusiasts 
 The site encouraged the community to submit their own game reviews, effectively crowdsourcing content and giving the fanbase a genuine sense of ownership. An article submission form kept editorial content consistent and streamlined the publishing/moderation process. This was the impetus behind the site's rapid expansion, which until recently, included twelve game genres and several hundred entries.
 
 GYL has a substantial social media presence across multiple platforms and the site served as a central hub for these platforms, allowing for deeper engagement through rich editorial content.
+
+
+<Block
+        mode="plain"
+        bg="bg-neutral-100"
+        grid="grid grid-cols-2 md:grid-cols-4 py-16 md:py-32 xl:py-48 gap-8 content-center max-w-container mx-auto"
+        breakout={true}
+    >
+<Image src={svgbg} alt="background" class="object-cover w-full h-full absolute inset-0" />
+
+<div class="relative grid grid-cols-2 md:grid-cols-4 py-16 md:py-32 xl:py-48 gap-8 content-center max-w-container mx-auto">
+  <p class="text-center leading-snug"><span class="block text-4xl md:text-7xl text-[#24a7be] font-black"><Icon name="fa6-brands:youtube" class="w-12 h-12 mx-auto block" alt="youtube" />6.44K</span> Youtube subscribers</p>
+  <p class="text-center leading-snug"><span class="block text-4xl md:text-7xl text-[#24a7be] font-black"><Icon name="fa6-brands:instagram" class="w-12 h-12 mx-auto block" alt="instagram" />61.3K</span> Instagram followers</p>
+  <p class="text-center leading-snug"><span class="block text-4xl md:text-7xl text-[#24a7be] font-black"><Icon name="fa6-brands:x-twitter" class="w-12 h-12 mx-auto block" alt="x-twitter" />99.7K</span> X Followers</p>
+  <p class="text-center leading-snug"><span class="block text-4xl md:text-7xl text-[#24a7be] font-black"><Icon name="fa6-brands:facebook" class="w-12 h-12 mx-auto block" alt="facebook" />52K</span> Facebook Followers</p>
+</div>
+</Block>
+
 
 ## My responsibilities
 

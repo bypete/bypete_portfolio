@@ -1,0 +1,12 @@
+---
+const { class: className, ...attrs } = Astro.props;
+---
+
+<Fragment>
+    <blockquote
+        {...attrs}
+        class:list={['list list--bullet not-prose', className]}
+    >
+        <slot />
+    </blockquote>
+</Fragment>

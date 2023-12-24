@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon';
+import { Icon } from 'astro-icon/components';
 import Hamburger from './Hamburger.astro';
 import Navigation from './Navigation.astro';
 import ThemeIcon from './ThemeIcon.astro';
@@ -8,15 +8,21 @@ const { isHeroDark = false } = Astro.props;
 ---
 
 <header
+    :class="{'banner--freeze' : banner == 'freeze', 'banner--start': banner == 'start', 'banner--up': banner == 'up', 'banner--down ': banner == 'down'}"
     x-ref="banner"
+    x-data="{ banner:'start', cachedBanner: null, ...stickybanner()}"
+    x-init="reactOnScroll()"
     class="banner fixed top-0 z-banner w-full py-6 delay-150 duration-300"
+    @set-banner.window="banner = $event.detail"
+    @freeze-banner.window="$refs.banner.classList.add('banner--freeze', $event.detail)"
+    @thaw-banner.window="$refs.banner.classList.remove('banner--freeze', $event.detail)"
+    @scroll.window="reactOnScroll()"
 >
     <div class="mx-auto flex max-w-container items-center justify-between">
         <a href="/" aria-label="byPete - home">
             <Icon
-                name="bypete--ribbon"
+                name="bypete"
                 class="banner__logo h-10 w-auto transition-all"
-                alt="byPete logo"
             />
         </a>
 
@@ -25,3 +31,49 @@ const { isHeroDark = false } = Astro.props;
     </div>
 </header>
 <Hamburger />
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('stickybanner', () => ({
+            lastScrollTop: 0,
+            reactOnScroll() {
+                const ba = this.$refs.banner.clientHeight;
+                const sh = Math.max(
+                    document.body.scrollHeight,
+                    document.body.offsetHeight,
+                    document.documentElement.clientHeight,
+                    document.documentElement.scrollHeight,
+                    document.documentElement.offsetHeight,
+                );
+                const st =
+                    window.pageYOffset || document.documentElement.scrollTop;
+                const ch =
+                    window.innerHeight || document.documentElement.clientHeight;
+
+                // Only fix header for longer pages
+                if (sh >= ch * 1.25) {
+                    if (st > ch * 0.5) {
+                        // halfway viewport height
+                        this.pageTop = true;
+                    }
+
+                    if (st === 0 || st <= ba) {
+                        // at top
+                        this.$data.banner = 'start';
+                        this.pageTop = false;
+                    } else if (st > this.$data.lastScrollTop && st >= ba) {
+                        // going down
+                        this.$data.banner = 'down';
+                    } else if (st < this.$data.lastScrollTop) {
+                        // going up
+                        this.$data.banner = 'up';
+                        // this.pageTop = false;
+                    } else {
+                        this.$data.banner = 'unknown';
+                    }
+                }
+                this.$data.lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+            },
+        }));
+    });
+</script>

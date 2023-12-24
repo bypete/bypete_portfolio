@@ -35,12 +35,24 @@ skillset:
           - 'UX/UI'
 tags: ['featured', 'posts', 'app', 'xamarin.forms', 'fintech']
 ---
+import { Image } from 'astro:assets'
+import { Icon } from 'astro-icon/components';
+
 import BlockPicture from '~/components/Images/BlockPicture.astro';
 import floating_handsets from '../../assets/work/mykringapp/floating-handsets.jpg';
 import Skills from '~/components/Skills.astro'
+import Block from '~/components/Blocks/Block.astro'
+import utilities from '~/data/utilities.json'
+
 import UL from '~/components/MDX/ul.astro'
+import Figure from '~/components/Figure.astro'
 import Gallery from '~/components/Lightbox/Gallery.astro'
+import web_autotopup from '../../assets/work/mykringapp/web-autotopup.jpg'
+import auto_topup from '../../assets/work/mykringapp/1.1.0_auto-topup.jpg'
+import auto_topup_open from '../../assets/work/mykringapp/1.1.0_auto-topup-open.jpg'
 import data from '~/data/work/mykringapp.data.json'
+
+
 export const components = {ul: UL}
 
 <Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg} >
@@ -68,6 +80,12 @@ The '**Auto top-up**' feature is a good example of a user path that was enhanced
 Each card has its own set of available actions, which update as the user swipes through their collection. Cards that have not been validated will show a button to begin the validation process. This is followed by a 'Complete validation' state and, finally, a 'Validated' indicator. At this point the 'Auto top-up' button becomes active. Cards used for auto top-up cannot be removed until auto top-up has been turned off. As a result, the 'Remove' option is set to disabled.
 By controlling visibility, we can remove redundant options, resulting in a smoother experience.
 
+<Figure class:list={['grid grid-cols-1 items-center bg-gray-50 gap-4 md:gap-8', utilities.tramline.all]} caption='Unnecessary elements from the online responsive version (left) were stripped out to streamline the app layout (middle and right) ' credit='App v1.0.1, K Wearables Ltd.'>
+  <Image src={web_autotopup} alt="Homepage view" class="w-full h-auto shadow-md border border-gray-200" />
+  <Image src={auto_topup} alt="Map showing the development plan" class="w-full h-auto shadow-md border border-gray-200" />
+  <Image src={auto_topup_open} alt="Map showing the development plan" class="w-full h-auto shadow-md border border-gray-200" />
+</Figure>
+
 The Auto top-up form was also streamlined and only appears when 'Use Auto top-up' is toggled to on. The input sliders were removed as they became too fiddley within the mobile viewport. The minimum and maximum values are now displayed alongside the input field.
 
 <Gallery collection='gScreens' data={data} >
@@ -76,6 +94,47 @@ The Auto top-up form was also streamlined and only appears when 'Use Auto top-up
 </Fragment>
 
 </Gallery>
+
+
+
+<Block
+        mode="pair"
+        bg="bg-red-200"
+        grid="grid mx-auto grid-cols-1 md:grid-cols-2 md:grid-rows-1 lg:grid-cols-block60 min-h-block gap-8 max-w-container"
+        breakout={true}
+    >
+        <div
+            slot="mc1"
+            class:list={['self-center md:order-2', utilities.tramline.y]}
+        >
+            <blockquote
+                class="not-prose m-0 pl-0 text-xl italic md:text-2xl xl:text-3xl"
+            >
+                <p class="mb-4 font-headline">
+                    <strong>So glad there's finally an app for K&nbsp;Ring!</strong>
+                </p>
+                <p>
+                    Good user experience: same interface style you're used to
+                    from the website, but not just a web shell. Easy to navigate
+                    and use. Notifications through the app are a plus!
+                </p>
+                <p class="cite">
+                    <span class="mr-1 text-sm text-yellow-500"
+                        ><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i></span> James, 26 November 2021 Play store
+                </p>
+            </blockquote>
+        </div>
+        <div slot="mc2" class="not-prose self-end md:order-1">
+            <img
+                src="/img/work/mykringapp/iPhone__hand.png"
+                class="relative m-0 mt-8 h-[480px] w-full object-contain lg:h-[640px]"
+                alt="Hand holding an iPhone with mykring app in use" />
+        </div>
+    </Block>
 
 <Gallery collection='gUx' data={data} >
 <Fragment slot="title">
@@ -88,7 +147,7 @@ The Auto top-up form was also streamlined and only appears when 'Use Auto top-up
 
 <p>
   <a href="https://apps.apple.com/gb/app/mykring/id1578688520?see-all=reviews"
-     class="link external"
+     class="link"
      target="_blank"><span class="text-4xl font-black">4.6</span></a> out of 5 <span class="text-sm">(Sept &rsquo;22)</span>
 </p>
 

@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import icon from 'astro-icon';
 import { remarkReadingTime } from './remark-reading-time.mjs';
 import preact from '@astrojs/preact';
 import mdx from '@astrojs/mdx';
@@ -25,6 +26,12 @@ export default defineConfig({
             rehypePlugins: [rehypeAttrs, rehypeExternalLinksConfig],
         }),
         alpinejs(),
+        icon({
+            include: {
+                mdi: ['*'], // (Default) Loads entire Material Design Icon set
+                lucide: ['*'],
+            },
+        }),
     ],
     markdown: {
         rehypePlugins: [rehypeAttrs, rehypeExternalLinksConfig],

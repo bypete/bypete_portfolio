@@ -1,0 +1,28 @@
+---
+const { caption = '', credit = '', class: className, ...attrs } = Astro.props;
+import utilities from '~/data/utilities.json';
+---
+
+<figure class="not-prose">
+    <div
+        class:list={[
+            'grid grid-cols-1 items-center gap-4 bg-gray-50 md:gap-8',
+            utilities.tramline.all,
+        ]}
+    >
+        <slot />
+    </div>
+    {
+        caption && (
+            <figcaption
+                class:list={[
+                    'mt-4 flex w-full justify-between border-b border-gray-200 pb-4 text-sm',
+                    utilities.tramline.x,
+                ]}
+            >
+                <p>{caption}</p>
+                {credit && <span class="text-xs">{credit}</span>}
+            </figcaption>
+        )
+    }
+</figure>

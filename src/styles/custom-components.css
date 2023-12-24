@@ -359,8 +359,8 @@ before:not-italic before:leading-inherit before:text-blue-500 before:content-['\
     /* Blockquotes
   ---------------------------------------------------------------------------------*/
     blockquote {
-        @apply relative my-12 block pl-4 text-left font-Georgia text-xl before:block
-before:font-awesome before:text-[1.5em] before:font-black before:not-italic before:leading-none before:text-accent before:content-['\f10d'] md:text-xl;
+        @apply relative my-12 block pl-4 text-left font-Georgia text-xl before:icon-[lucide--message-square-quote]
+before:block before:text-[1.5em] before:leading-none before:text-accent md:text-xl;
     }
 
     blockquote .cite {
