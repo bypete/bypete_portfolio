@@ -1,8 +1,20 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import BlogPost from '~/components/BlogPost.astro';
+
+import { getCollection } from 'astro:content';
+const allWork = await getCollection('work');
+
 const title = 'Work page';
 ---
 
 <BaseLayout title={title}>
     <h2>My Awesome Work</h2>
+    <ul>
+        {
+            allWork.map((post) => (
+                <BlogPost url={`/work/${post.slug}/`} title={post.data.title} />
+            ))
+        }
+    </ul>
 </BaseLayout>

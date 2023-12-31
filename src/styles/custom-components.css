@@ -364,7 +364,7 @@ before:block before:text-[1.5em] before:leading-none before:text-accent md:text-
     }
 
     blockquote .cite {
-        @apply mb-0 mt-4 block text-base not-italic leading-8 text-gray-500;
+        @apply mb-0 mt-4 text-base not-italic leading-8 text-gray-500;
     }
 
     /* labels

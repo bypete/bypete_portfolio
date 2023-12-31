@@ -66,6 +66,7 @@
     "prettier-plugin-tailwindcss": "^0.5.9",
     "save": "^2.9.0",
     "smartypants": "^0.2.2",
+    "swiper": "^11.0.5",
     "tailwindcss-animate": "^1.0.7"
   }
 }

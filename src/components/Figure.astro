@@ -1,12 +1,24 @@
 ---
-const { caption = '', credit = '', class: className, ...attrs } = Astro.props;
+const {
+    caption = '',
+    credit = '',
+    class: className,
+    grid,
+    breakout,
+    ...attrs
+} = Astro.props;
 import utilities from '~/data/utilities.json';
 ---
 
-<figure class="not-prose">
+<figure
+    class:list={['not-prose', breakout ? utilities.breakout : '']}
+    {...attrs}
+>
     <div
         class:list={[
-            'grid grid-cols-1 items-center gap-4 bg-gray-50 md:gap-8',
+            grid
+                ? grid
+                : 'grid grid-cols-1 items-center gap-4 bg-gray-50 md:gap-8',
             utilities.tramline.all,
         ]}
     >

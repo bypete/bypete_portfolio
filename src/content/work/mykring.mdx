@@ -54,11 +54,18 @@ skillset:
 tags: ['posts', 'responsive', 'fintech', 'email']
 ---
 import BlockPicture from '~/components/Images/BlockPicture.astro';
+import { Image } from 'astro:assets';
+
 import laptop_iphone_front from '../../assets/work/mykring/laptop_iphone_front.jpg';
+import devices from '../../assets/work/mykring/devices.png';
+import devices_reworked from '../../assets/work/mykring/devices_reworked.jpg';
 import block__cyclist_40 from '../../assets/work/mykring/block__cyclist_40.jpg';
 import Skills from '~/components/Skills.astro'
+import Figure from '~/components/Figure.astro'
 import UL from '~/components/MDX/ul.astro'
 import Gallery from '~/components/Lightbox/Gallery.astro'
+import utilities from '~/data/utilities.json'
+
 import data from '~/data/work/mykring.data.json'
 export const components = {ul: UL}
 
@@ -109,6 +116,18 @@ Example markup:
 I saw this project as an opportunity to use the static site generator [Eleventy](https://www.11ty.dev/) to manage the generation of the Front-End templates. The initial setup time is obviously longer when layouts, partials, and components are used, but for a complicated site like this, it makes any future features simple to apply and preview. Before any development is scheduled, new features can quickly be reviewed in a static site preview.
 
 Any screen can be directly accessed by developers, partner clients, and stakeholders. This was especially useful for translators, who often need more context to create concise translations. Some screens can only be accessed under certain conditions, which can be difficult and sometimes impossible for third parties to recreate.
+
+<Figure x-data="{compare: true}" breakout={true} grid={['flex flex-col md:flex-row items-center bg-gray-50 gap-8', utilities.tramline.all]} caption='Unnecessary elements from the online responsive version (left) were stripped out to streamline the app layout (middle and right)' credit={frontmatter.title}>
+  <div class="transition-all duration-300" x-bind:class="compare ? 'w-1/3' : 'w-full md:w-2/3'" x-on:click="compare = ! compare">
+  <Image src={devices} alt="Devices view" class="w-full h-auto shadow-md border border-gray-200 hover:cursor-pointer" />
+  </div>
+  <div class="transition-all duration-300" x-bind:class="compare ? 'w-full md:w-2/3' : 'w-1/3'" x-on:click="compare = ! compare">
+  <Image src={devices_reworked} alt="Reworked devices view" class="w-full h-auto shadow-md border border-gray-200 hover:cursor-pointer" />
+  </div>
+</Figure>
+
+
+
 
 ## My responsibilities
 
