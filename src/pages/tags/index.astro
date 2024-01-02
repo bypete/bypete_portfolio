@@ -2,7 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 const allPosts = await getCollection('posts');
-const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+const allWorks = await getCollection('work');
+const collection = [...allPosts, ...allWorks];
+let tags = [...new Set(collection.map((post) => post.data.tags).flat())];
 const title = 'Tag index';
 ---
 

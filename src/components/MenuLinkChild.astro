@@ -1,6 +1,12 @@
 ---
-const { title, url, pathname, currentPath} = Astro.props;
+const { title, url, pathname, currentPath } = Astro.props;
 ---
-<a href={url} class:list={[ 
-  'block px-3 py-2 text-sm font-light first:rounded-t-tight last:rounded-b-tight  hover:bg-slate-200 focus:bg-slate-300 focus:outline-none focus:ring-1 data-[state=active]:bg-brand ', 
-   ]} data-state={pathname === url ? "active" : ""}>{title}</a>
+
+<a
+    href={url}
+    class:list={[
+        'block px-3 py-2 text-sm font-light first:rounded-t-tight last:rounded-b-tight  hover:bg-slate-200 focus:bg-slate-300 focus:outline-none focus:ring-1 data-[state=active]:bg-brand ',
+    ]}
+    data-state={pathname === url ? 'active' : ''}
+    set:html={title}
+/>

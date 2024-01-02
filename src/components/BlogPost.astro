@@ -1,4 +1,5 @@
 ---
 const { title, url, classList } = Astro.props;
 ---
-<li><a href={url} class={classList}>{title}</a></li>
+
+<li><a href={url} class={classList} set:html={title} /></li>
