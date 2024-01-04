@@ -1,0 +1,62 @@
+---
+import utilities from '~/data/utilities.json';
+import Tags from '~/components/ui/Tags.astro';
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+
+const {
+    title,
+    url,
+    featured = false,
+    classList,
+    cover,
+    taster,
+    tags,
+    readTime,
+} = Astro.props;
+---
+
+<div class="holder flex rounded-tight">
+    <a
+        href={url}
+        class="group relative flex w-full flex-col rounded-tight bg-white no-underline shadow-md transition-all duration-700 hover:no-underline hover:shadow-cardhover hover:duration-300 md:ring-white md:hover:ring-2"
+        x-data="{ shown: false }"
+        x-intersect.threshold.10="shown = true"
+        x-bind:class="shown ? 'animate-appear' : 'invisible'"
+    >
+        <div
+            class="relative block overflow-hidden bg-gray-100 pb-photo hover:rounded-t-tight"
+        >
+            <Image
+                src={cover.url}
+                alt={cover.alt}
+                class="absolute inset-0 m-0 h-full w-full object-cover"
+                quality="high"
+                widths={[240, 540, 720, cover.url.width]}
+                sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${cover.url.width}px`}
+            />
+        </div>
+        <div class="grow p-6">
+            <p class="flex items-center text-xs text-gray-400 md:text-sm">
+                <Icon
+                    name="lucide:timer"
+                    class="mr-1 inline-block h-4 w-auto"
+                />{readTime}
+            </p>
+            <h2
+                class="link mb-2 font-headline text-2xl font-extrabold"
+                set:html={title}
+            />
+            {taster && <p set:html={taster} />}
+        </div>
+        <div class="flex items-end justify-between px-6 pb-6">
+            <Tags
+                {tags}
+                class:list={[
+                    'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
+                    utilities.margin.t,
+                ]}
+            />
+        </div>
+    </a>
+</div>

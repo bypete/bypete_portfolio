@@ -1,10 +1,27 @@
 ---
+import { Image } from 'astro:assets';
+import slides from '~/data/homepage';
+import SwiperHomepage from '~/components/Swipers/SwiperHomepage.astro';
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import WorkGrid from '~/components/WorkGrid.astro';
+import Link from '~/components/ui/Link.astro';
+import { Icon } from 'astro-icon/components';
 const title = 'Home page';
 const hero = {
     title: 'Welcome to the website',
     subtitle: 'Expolore amazing content',
 };
+
+import { formatBlogPosts } from '~/js/utils';
+import { getCollection } from 'astro:content';
+const allWork = await getCollection('work');
+
+const formattedPosts = formatBlogPosts(allWork, {
+    filterOutDrafts: true,
+    filterOutFuturePosts: true,
+    sortByDate: true,
+    limit: 5,
+});
 ---
 
 <BaseLayout
@@ -12,5 +29,71 @@ const hero = {
     {hero}
     ogImage={{ src: '/og/astro.jpg', alt: 'Astro - Build the web you want.' }}
 >
-    <h1>Astro</h1>
+    <div class="h-100 w-100">
+        <SwiperHomepage slides={slides} />
+    </div>
+
+    <section
+        class="bg-putty bg-gradient-to-b from-white pb-4 md:pb-8"
+        x-data="{ section: false }"
+        x-intersect.threshold.10="section = true"
+    >
+        <div class="relative mx-auto max-w-container">
+            <h2
+                class="mt-8 text-center font-headline text-3xl font-bold tracking-tight text-white shadow-slate-900 text-shadow-emboss md:text-4xl"
+                x-cloak
+                x-bind:class="section ? 'animate-fade-in-up' : 'invisible'"
+            >
+                Featured work
+            </h2>
+            <div
+                class="my-8 grid grid-cols-1 gap-8 md:grid-cols-3 lg:my-10 lg:gap-10"
+                x-cloak
+            >
+                {
+                    formattedPosts.map(async (post) => {
+                        const { remarkPluginFrontmatter } = await post.render();
+                        const featured = post.data.tags.includes('featured');
+                        return (
+                            <WorkGrid
+                                url={`/work/${post.slug}/`}
+                                title={post.data.title}
+                                taster={post.data.taster}
+                                tags={post.data.tags}
+                                cover={post.data.cover}
+                                readTime={remarkPluginFrontmatter.minutesRead}
+                                featured={featured}
+                            />
+                        );
+                    })
+                }
+
+                <div class="rte self-center p-6">
+                    <Icon
+                        name="lucide:folder-archive"
+                        class="h-8 w-8 animate-pulse"
+                    />
+                    <h2 class="font-headline">Want to see more...?</h2>
+                    <p>
+                        A complete list of case studies can be found in the <strong
+                            >Work</strong
+                        > section.
+                    </p>
+                    <p>
+                        <Link
+                            theme="primary"
+                            isIcon={true}
+                            class="md:inline-flex"
+                            href="/work"
+                        >
+                            Explore the archive <Icon
+                                name="lucide:arrow-right-circle"
+                                class="h-6 w-6 animate-nudge-right"
+                            />
+                        </Link>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 </BaseLayout>

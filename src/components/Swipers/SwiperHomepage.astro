@@ -1,0 +1,142 @@
+---
+import { Image } from 'astro:assets';
+import { type SwiperImage } from '~/data/homepage';
+
+export interface Props {
+    slides: Partial<SwiperImage>;
+    class?: string | ImageMetadata;
+}
+
+const { slides } = Astro.props;
+---
+
+<div class="swiper swiper--homepage group h-full w-full">
+    <div class="swiper-wrapper not-prose flex items-center">
+        {
+            slides.map((slide, i) => (
+                <div class="slide swiper-slide ">
+                    <div class="flex h-full items-center justify-center">
+                        {slide.url ? (
+                            <a
+                                href={slide.url}
+                                class="flex h-full w-full items-center justify-center"
+                            >
+                                {slide.wrapper ? (
+                                    <div class={slide.wrapper}>
+                                        <Image
+                                            src={slide.src}
+                                            alt={slide.alt}
+                                            class={slide.class}
+                                        />
+                                    </div>
+                                ) : (
+                                    <Image
+                                        src={slide.src}
+                                        class={slide.class}
+                                        alt={slide.alt}
+                                    />
+                                )}
+                            </a>
+                        ) : (
+                            <div class="flex h-full w-full items-center justify-center ">
+                                {slide.wrapper ? (
+                                    <div class={slide.wrapper}>
+                                        <Image
+                                            src={slide.src}
+                                            class={slide.class}
+                                            alt={slide.alt}
+                                        />
+                                    </div>
+                                ) : (
+                                    <Image
+                                        src={slide.src}
+                                        class={slide.class}
+                                        alt={slide.alt}
+                                    />
+                                )}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+    <div
+        class="swiper-button-prev swiper--homepage__prev opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+    >
+    </div>
+    <div
+        class="swiper-button-next swiper--homepage__next opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+    >
+    </div>
+    <div class="swiper--homepage__pagination absolute z-10 mx-auto text-right">
+    </div>
+</div>
+
+<script>
+    // core version + navigation, pagination modules:
+    import Swiper from 'swiper';
+    import {
+        Navigation,
+        Pagination,
+        Autoplay,
+        Scrollbar,
+        EffectFade,
+        EffectCreative,
+    } from 'swiper/modules';
+    // import Swiper and modules styles
+    import 'swiper/css';
+    import 'swiper/css/navigation';
+    import 'swiper/css/pagination';
+
+    {
+        const swiperClass = '.swiper--homepage';
+        const SwiperHomepage = new Swiper(swiperClass, {
+            // Install modules
+            modules: [
+                Navigation,
+                Pagination,
+                Autoplay,
+                Scrollbar,
+                EffectCreative,
+            ],
+            centeredSlides: true,
+            effect: 'creative',
+            creativeEffect: {
+                perspective: false,
+                prev: {
+                    scale: 0.95,
+                    opacity: 0,
+                },
+                next: {
+                    scale: 0.95,
+                    opacity: 0,
+                },
+            },
+            speed: 250,
+            loop: true,
+            autoplay: {
+                pauseOnMouseEnter: true,
+                disableOnInteraction: false,
+                delay: 7500,
+            },
+            slidesPerView: 1,
+            navigation: {
+                nextEl: `${swiperClass}__next`,
+                prevEl: `${swiperClass}__prev`,
+            },
+            pagination: {
+                el: `${swiperClass}__pagination`,
+                clickable: true,
+            },
+            watchOverflow: true, // disable if only single slide
+            on: {
+                init: () => {},
+                autoplayStop: () => {
+                    SwiperHomepage.autoplay.start();
+                },
+                autoplayResume: () => {},
+            },
+        });
+    }
+</script>
