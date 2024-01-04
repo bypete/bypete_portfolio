@@ -1,0 +1,38 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'div'> {
+    isHeroDark?: boolean;
+    wrapper?: string;
+    class?: string;
+    bg?: string;
+    legibility?: string;
+}
+
+const {
+    class: ClassName,
+    isHeroDark = false,
+    wrapper,
+    bg,
+    legibility,
+    ...rest
+} = Astro.props;
+---
+
+<div class="absolute inset-0 h-full w-full">
+    <slot name="visual" />
+</div>
+
+<div
+    class="relative mx-auto grid max-w-container grid-cols-1 gap-4 py-[var(--smheaderheight)] md:grid-cols-block50 md:gap-8 md:py-[var(--headerheight)]"
+>
+    <div
+        class="w-full self-center"
+        x-cloak
+        :class="shown ? 'animate-fade-in-down' : 'invisible'"
+    >
+        <!-- content -->
+        <slot name="content" />
+        <!-- END content -->
+    </div>
+</div>

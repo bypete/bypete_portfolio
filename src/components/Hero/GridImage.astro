@@ -1,26 +1,33 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import BlockImage from '~/components/Images/BlockImage.astro';
+import { Image } from 'astro:assets';
+
+interface VisualKeys {
+    url: string;
+    alt: string;
+}
+interface CoverKeys {
+    url: string;
+    alt: string;
+    credit: string;
+}
 
 interface Props extends HTMLAttributes<'div'> {
-    isHeroDark?: boolean;
-    wrapper?: string;
-    class?: string;
-    bg?: string;
+    cover?: Partial<CoverKeys>;
+    visual?: Partial<VisualKeys>;
     legibility?: string;
 }
 
-const {
-    class: ClassName,
-    isHeroDark = false,
-    wrapper,
-    bg,
-    legibility,
-    ...rest
-} = Astro.props;
+const { cover, visual, legibility, ...rest } = Astro.props;
+let picture;
+if (visual) {
+    picture = await import(/* @vite-ignore */ `../../assets/${visual?.url}`); // this is async
+}
 ---
 
 <div class="absolute inset-0 h-full w-full">
-    <slot name="leftcontent" />
+    <slot name="background" />
 </div>
 
 <div
@@ -37,23 +44,20 @@ const {
     </div>
 
     <!-- visual -->
-    <div class="relative flex justify-center">
-        <div class="absolute aspect-1 h-full w-auto rounded-egg bg-white"></div>
-        <div
-            class="absolute aspect-1 h-full w-auto animate-morph-delay border border-white/30"
-        >
-        </div>
-        <div
-            class="absolute aspect-1 h-full w-auto animate-morph border border-white/95"
-        >
-        </div>
 
-        <div
-            class="h-full w-full"
-            :class="shown ? 'animate-stretch' : 'invisible'"
-        >
+    {
+        visual ? (
+            <div class="relative flex justify-center">
+                <div
+                    class="h-full w-full"
+                    x-bind:class="shown ? 'animate-stretch' : 'invisible'"
+                >
+                    <Image src={picture.default} alt="alt" />
+                </div>
+            </div>
+        ) : (
             <slot name="visual" />
-        </div>
-    </div>
+        )
+    }
     <!-- END visual -->
 </div>

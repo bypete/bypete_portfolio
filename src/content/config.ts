@@ -54,7 +54,8 @@ const workCollection = defineCollection({
           })
         ),
       }),
-      tags: z.array(z.string())
+      tags: z.array(z.string()),
+      readingTime: z.string().optional(), // readingTime frontmatter
   })
 
 

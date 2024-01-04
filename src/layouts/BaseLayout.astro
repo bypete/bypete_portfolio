@@ -27,15 +27,14 @@ const hero: HeroProps = {
     ...fm.hero, // Spread the hero properties
 };
 
-const isHeroDark = hero.dark || false;
+// console.log(hero);
 
-// const isHeroDark = hero.hero && hero.hero.dark ? true : false;
-// const isHeroDark = hero.dark;
-console.log('BL | isHeroDark:', isHeroDark);
-console.log(`BL | head | ${Astro.request.url}:`, head);
-console.log(`BL | hero| ${Astro.request.url}:`, hero);
+const isHeroDark = fm.isHeroDark ?? false;
+
+// console.log('BL | isHeroDark:', isHeroDark);
+// console.log(`BL | head | ${Astro.request.url}:`, head);
+// console.log(`BL | hero| ${Astro.request.url}:`, hero);
 import '~/styles/tailwind.css';
-// import "../styles/global.css";
 ---
 
 <html
@@ -71,7 +70,7 @@ import '~/styles/tailwind.css';
             <Footer />
         </div>
 
-        <Underlay />
+        <Underlay {isHeroDark} />
         <CookieNotice />
         <Shortcuts />
         <Overlay class="bg-gray-800" />

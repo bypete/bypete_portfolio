@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import icon from 'astro-icon';
-import { remarkReadingTime } from './remark-reading-time.mjs';
+import { remarkReadingTime } from './src/utils/remark-reading-time.mjs';
 import preact from '@astrojs/preact';
 import mdx from '@astrojs/mdx';
 import rehypeAttrs from 'rehype-attr';

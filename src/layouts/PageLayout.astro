@@ -1,15 +1,29 @@
 ---
+import { type Props as HeadProps } from '~/components/SEO/Main.astro';
 import BaseLayout from './BaseLayout.astro';
-import Hero from '~/components/Hero/Hero.astro';
+import Hero, { type Props as HeroProps } from '~/components/Hero/Hero.astro';
 import utilities from '~/data/utilities.json';
 
-const props = Astro.props.frontmatter || Astro.props;
-console.log(`PL | ${Astro.request.url} | Props:`, props);
+const fm = Astro.props.frontmatter || Astro.props;
+
+const head: HeadProps = {
+    title: fm.title,
+    description: fm.description,
+};
+
+const heroObj: HeroProps = {
+    title: fm.title,
+    ...fm.hero, // Spread the hero properties
+};
+
+const { isHeroDark } = fm;
+
+console.log(`PL | ${Astro.request.url} | Props:`, head, heroObj);
 ---
 
-<BaseLayout {...props}>
+<BaseLayout {...head} {isHeroDark}>
     <slot name="hero" slot="hero">
-        <Hero hero={props.hero} title={props.title} />
+        <Hero hero={fm.hero} title={fm.title} />
     </slot>
 
     <main

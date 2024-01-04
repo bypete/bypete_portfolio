@@ -1,8 +1,5 @@
 ---
 title: 'Hello'
-layout: '../../layouts/PageLayout.astro'
-peter: 'james'
-esther: 'madeline'
 taster: 'I’m a Surrey based Front-End developer with over two decades of experience in digital.'
 excerpt: 'I’m a Surrey based Front-End developer with over two decades of experience in digital.'
 description: 'Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.'
@@ -11,8 +8,9 @@ opengraph:
     image: 'img/social/og__about.jpg'
 hero:
     mode: 'image'
-    bg: 'bg-sky-300'
+    bg: 'bg-teal-400'
     scrollprompt: true
+    isContained: true
     dark: true
 skillset:
     text: 'text-gray-700'
@@ -58,9 +56,109 @@ skillset:
               - 'Asset generation'
               - 'UX/UI'
 ---
-import Skills from '../../components/Skills.astro'
+import Skills from '~/components/Skills.astro'
+import PageLayout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/Hero/Hero.astro';
+import Block from '~/components/Blocks/Block.astro';
+import Link from '~/components/ui/Link.astro';
+import utilities from '~/data/utilities.json';
 
-<p>We are a fantastic mdx team doing amazing things.</p>
+import imgProfile__hd from '~/assets/profile__hd.png';
+import listing_index from '~/assets/work/listing-index.jpg';
+import woodland from '~/assets/blocks/woodland.webp';
+import bg_teal from '~/assets/hero/concrete--teal.webp';
+import bg_teal_sm from '~/assets/hero/concrete--teal@sm.webp';
+import google_lens from '~/assets/google-lens.jpg';
+import { Image } from 'astro:assets';
+import Figure from '~/components/Figure.astro'
+import BlockImage from '~/components/Images/BlockImage.astro';
+import BlockPicture from '~/components/Images/BlockPicture.astro';
+import { Icon } from 'astro-icon/components';
+
+
+<PageLayout title={frontmatter.title} description={frontmatter.description} isHeroDark={frontmatter.hero.dark}>
+<slot slot="hero">
+  <Hero hero={frontmatter.hero}>
+    <Fragment slot="content">
+        <h1 class="relative text-4xl/normal text-shadow-headline lg:text-7xl/none">
+            {frontmatter.title}
+        </h1>
+        <div class="rte">
+            <p class="text-xl font-medium lg:text-2xl 2xl:text-3xl">
+                I'm a Surrey based Front-End developer with over two
+                decades of experience in digital.
+            </p>
+            <p class="flex flex-row gap-2">
+                <Link theme="secondary" class="inline-flex transform duration-300" href="#main-content">Read my bio <i class="fa-regular fa-circle-down animate-nudge-down"></i></Link>
+                <Link theme="outline" href="/connect">Connect</Link>
+            </p>
+        </div>
+    </Fragment>
+    <Fragment slot="visual">
+      <div class="relative flex justify-center" >
+        <div class="absolute aspect-1 h-full w-auto rounded-egg bg-white"></div>
+        <div class="absolute aspect-1 h-full w-auto animate-morph-delay border border-white/30"></div>
+        <div class="absolute aspect-1 h-full w-auto animate-morph border border-white/95"></div>
+        <div class="h-full w-full" x-bind:class="shown ? 'animate-stretch' : 'invisible'">
+            <BlockImage
+              src={imgProfile__hd}
+              class="relative w-full h-full object-contain object-bottom"
+              alt="Profile headshot"
+              loading="eager"
+              />
+        </div>
+      </div>
+    </Fragment>
+    <Fragment slot="background">
+      <BlockPicture src={bg_teal} breakout={false} class="object-cover object-bottom md:object-center w-full h-full" alt="Rustic Teal background" />
+    </Fragment>
+  </Hero>
+</slot>
+
+<slot name="main">
+## The backstory
+
+I cut my teeth in multimedia, primarily working on e-learning, training, and press pack applications for prominent publishers such as **BBC Worldwide**, **BBC Active**, **University of Cambridge**, **Oxford University Press**, **UKTV**, and **Kellogg's** with the award winning agency - Fifth Dimension Productions.
+
+As distribution shifted from physical (PC/Mac CD-ROMs) to online, I transferred my skills to Front-End development, initially creating support sites for physical products like [BBC Active's Get Into French - IVCA Gold award winner](https://www.cam.ac.uk/news/get-into-french-wins-gold-award) and then progressing to full online-only solutions.
+
+In 2009, the agency refocused its efforts and established itself as **the** marketing agency for Europe's emerging payments sector. Since then, I've concentrated solely on Front-End development, mostly within the fintech landscape.
+
 <Skills skillset={frontmatter.skillset} bg='bg-white' >
 ## Skills I know
 </Skills>
+
+## Workflow
+
+All of my prototypes are built with static site generators, previously [Panini](https://get.foundation/sites/docs/panini.html) within the Foundation framework, and more recently [nunjucks](https://mozilla.github.io/nunjucks/) within [11ty](https://www.11ty.dev/). This component-based approach ensures that the presentation is consistent and that each template is up to date with the most recent changes. Headers and footers, for example, can be changed and instantly applied across all templates.
+
+Using a <abbr title="Static Site Generator">SSG</abbr> to prototype allows me to respond to clients quickly while also reassuring the development team about any potentially breaking changes.
+
+A set of static templates that is well-maintained will bridge the client-development gap, keeping both parties informed. This reduces the likelihood of project creep due to assumptions or misunderstandings.
+
+Context is essential for a concise translation on multilingual websites. Third-party translators can use a static template listing to follow the user path or view the entire page context without the need for test accounts or sandbox transactions.
+
+<Figure x-data="{compare: true}" grid={['flex flex-col md:flex-row items-center bg-gray-50 gap-8', utilities.tramline.all]} caption='Snapshot of a typical listing index. Clients, developers, and third-party agencies have access to the most recent version of any page.' wrapper="my-4 md:my-8">
+  <Image src={listing_index} alt="Devices view" class="w-full h-auto shadow-md border border-gray-200 hover:cursor-pointer" />
+</Figure>
+
+## What comes next? 
+
+This static site was built with [11ty](https://www.11ty.dev/), [Tailwind CSS](https://tailwindcss.com/), [Alpine.js](https://alpinejs.dev/), and [Webpack](https://webpack.js.org/). Having no prior experience with any, it was a real labour of love, but I learned a great deal in the process.
+
+Moving forward, I would be keen to build on my recent experiences and explore a React based framework – probably Next.js or Gatsby.
+
+<BlockPicture src={woodland} class="my-0" alt="Woodland scene" credit="Adobe Photoshop (beta) - Generative fill" wrapper="my-4 md:my-8" />
+
+
+## Balance and wellbeing
+I love spending time exploring the great outdoors with my family; we have two adventurous young boys, and it gives me great joy to see them thrive in nature. I find that getting away from the interruptions and rhythms of daily life helps me regain a sense of balance and wellbeing.
+
+The boys are at a naturally inquisitive age and whilst I do my best to tackle their questions... we often have to resort to [Google Lens](https://lens.google/intl/en-GB/#cta-section) for the answers!
+
+<BlockPicture src={google_lens} breakout={false} class="my-0 w-full" alt="Beach scene with close up of jellyfish. Detail shows iPhone with google lens app" credit="Google Lens (App visuals)" wrapper="my-4 md:my-8 -mx-4 md:mx-0" />
+
+</slot>
+</PageLayout>
+
+

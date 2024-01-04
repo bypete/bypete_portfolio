@@ -1,20 +1,90 @@
 ---
-import BaseLayout from '~/layouts/BaseLayout.astro';
-import BlogPost from '~/components/BlogPost.astro';
+import ListingLayout from '~/layouts/ListingLayout.astro';
+import WorkPost from '~/components/WorkPost.astro';
+import Hero from '../../components/Hero/Hero.astro';
+
+import imgCover from '~/assets/blocks/inflated-half--slate--cr.webp';
+import BlockImage from '~/components/Images/BlockImage.astro';
 
 import { getCollection } from 'astro:content';
-const allWork = await getCollection('work');
 
-const title = 'Work page';
+const allWork = await getCollection('work');
+const postCount = allWork.length;
+
+const title = 'Show your workings';
+const description =
+    "Take a closer look at some of the projects I've worked on as a Front-End developer.";
+const hero = {
+    mode: 'cover',
+    bg: 'bg-slate-900',
+    wrapper:
+        'grid grid-cols-1 items-center overflow-x-hidden pb-[240px] min-h-square lg:min-h-block angleclip [&+*]:-mt-[240px]',
+    scrollprompt: false,
+    isContained: true,
+    dark: true,
+    threshold: 25,
+};
 ---
 
-<BaseLayout title={title}>
-    <h2>My Awesome Work</h2>
-    <ul>
+<ListingLayout title={title} {hero} isHeroDark={hero.dark}>
+    <slot slot="hero">
+        <Hero hero={hero}>
+            <Fragment slot="content">
+                <h1
+                    class="relative text-5xl/tight text-shadow-headline lg:text-7xl/none"
+                >
+                    <span
+                        class="inline-block -rotate-1 rounded bg-sky-400 p-[3px] text-[0.33em]/none font-semibold tracking-normal"
+                        >Portfolio</span
+                    >
+                    <span class="block">{title}</span>
+                </h1>
+                <div class="rte mt-4 md:mt-6">
+                    <p class="text-base lg:text-xl">
+                        Explore a selection of projects I have worked on.
+                    </p>
+                    {
+                        postCount > 1 ? (
+                            <p class="text-base lg:text-xl">
+                                There are currently{' '}
+                                <strong class="whitespace-nowrap">
+                                    {postCount} projects
+                                </strong>{' '}
+                                in the collection.
+                            </p>
+                        ) : (
+                            ``
+                        )
+                    }
+                </div>
+            </Fragment>
+            <BlockImage
+                src={imgCover}
+                slot="visual"
+                class="h-full w-full object-cover object-top md:object-center"
+                alt="Block picture"
+                loading="eager"
+            />
+        </Hero>
+    </slot>
+
+    <div class="grid grid-cols-1 gap-8 md:gap-32">
         {
-            allWork.map((post) => (
-                <BlogPost url={`/work/${post.slug}/`} title={post.data.title} />
-            ))
+            allWork.map(async (post) => {
+                const { remarkPluginFrontmatter } = await post.render();
+                const featured = post.data.tags.includes('featured');
+                return (
+                    <WorkPost
+                        url={`/work/${post.slug}/`}
+                        title={post.data.title}
+                        taster={post.data.taster}
+                        tags={post.data.tags}
+                        cover={post.data.cover}
+                        readTime={remarkPluginFrontmatter.minutesRead}
+                        featured={featured}
+                    />
+                );
+            })
         }
-    </ul>
-</BaseLayout>
+    </div>
+</ListingLayout>

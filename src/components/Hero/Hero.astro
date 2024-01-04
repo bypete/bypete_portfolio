@@ -1,14 +1,29 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 import GridImage from '~/components/Hero/GridImage.astro';
+import GridCover from '~/components/Hero/GridCover.astro';
+import { Icon } from 'astro-icon/components';
 import utilities from '~/data/utilities.json';
+import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
+
+interface VisualKeys {
+    url: string;
+    alt: string;
+}
+interface CoverKeys {
+    url: string;
+    alt: string;
+    credit: string;
+}
 
 interface HeroKeys {
     wrapper?: string;
     dark?: boolean;
     bg?: string;
-    mode?: 'plain' | 'image' | 'custom';
+    mode?: 'plain' | 'image' | 'cover' | 'custom';
     class?: string;
+    visual?: Partial<VisualKeys>;
+    cover?: Partial<CoverKeys>;
     legibility?: string;
     threshold?: number;
     shadow?: string;
@@ -34,6 +49,7 @@ const {
     isContained,
     scrollprompt,
     threshold,
+    visual,
 } = hero as HeroKeys;
 
 const intersect = {
@@ -48,7 +64,7 @@ switch (mode) {
     case 'plain':
         wrapperClass = `${
             wrapper || ''
-        } max-w-container mx-auto pt-[var(--smheaderheight)] `;
+        } max-w-container mx-auto pt-[var(--smheaderheight)] md:pt-[var(--headerheight)]`;
         break;
     case 'image':
         wrapperClass = wrapper || '';
@@ -61,14 +77,15 @@ switch (mode) {
         break;
     // Add more cases as needed
     default:
-    // Handle default case, if necessary
+        // Handle default case, if necessary
+        wrapperClass = wrapper || '';
 }
 ---
 
 <div
     id="hero"
     class:list={[
-        'relative w-full outline-none md:pt-[var(--headerheight)]',
+        'relative w-full outline-none ',
         bg ? bg : '',
         color ? color : '',
         ClassName,
@@ -96,7 +113,8 @@ switch (mode) {
     {
         mode === 'image' && (
             <>
-                <GridImage>
+                <GridImage {visual}>
+                    <slot slot="background" name="background" />
                     <slot slot="content" name="content" />
                     <slot slot="visual" name="visual" />
                 </GridImage>
@@ -105,11 +123,19 @@ switch (mode) {
     }
 
     {
+        mode === 'cover' && (
+            <>
+                <GridCover>
+                    <slot slot="content" name="content" />
+                    <slot slot="visual" name="visual" />
+                </GridCover>
+            </>
+        )
+    }
+    {
         mode === 'custom' && (
             <>
-                <h1>Example 2</h1>
-
-                <p>This is blue 2.</p>
+                <slot />
             </>
         )
     }
@@ -118,7 +144,7 @@ switch (mode) {
     {
         scrollprompt && (
             <div class="pointer-events-none absolute bottom-0 left-1/2 z-shortcuts -translate-x-1/2 pb-4 md:pb-8">
-                scrollprompt
+                <ScrollPrompt />
             </div>
         )
     }

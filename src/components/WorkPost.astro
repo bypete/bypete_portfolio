@@ -1,0 +1,88 @@
+---
+import utilities from '~/data/utilities.json';
+import Tags from '~/components/ui/Tags.astro';
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+
+const {
+    title,
+    url,
+    featured = false,
+    classList,
+    cover,
+    taster,
+    tags,
+    readTime,
+} = Astro.props;
+---
+
+<article
+    class="grid grid-cols-1 items-start rounded-sm bg-white grid-areas-listing_work lg:grid-cols-listing_work lg:grid-areas-listing_work_wide"
+>
+    <div
+        class:list={[
+            'rte top-0 grid-in-content lg:sticky',
+            utilities.tramline.all,
+        ]}
+        x-data="{ shown: false }"
+        x-intersect.threshold.25="shown = true"
+        :class="shown ? ' animate-appear' : 'invisible'"
+    >
+        <p class="flex items-center text-xs text-gray-400 md:text-sm">
+            <Icon name="lucide:timer" class="mr-1 inline-block h-4 w-auto" />{
+                readTime
+            }
+        </p>
+        <h2
+            class:list={[
+                'capline font-headline',
+                featured && 'text-3xl md:text-5xl',
+            ]}
+        >
+            <a href={url} class="link text-gray-700" set:html={title} />
+        </h2>
+        {taster && <p set:html={taster} />}
+        <Tags
+            {tags}
+            url={true}
+            class:list={[
+                'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
+                utilities.margin.t,
+            ]}
+        />
+    </div>
+
+    <div
+        class:list={[
+            'relative block overflow-hidden rounded-sm shadow-thumb shadow-black/20 grid-in-visual',
+            featured ? 'pb-square' : 'pb-photo',
+        ]}
+    >
+        <a href={url}>
+            {
+                featured && (
+                    <div class="before:bookmarkclip pointer-events-none absolute right-8 top-0 z-10 block w-12 pb-4 pt-8 text-center drop-shadow-md before:absolute before:inset-0 before:h-full before:w-full before:bg-brand">
+                        <div class="relative flex justify-center">
+                            <Icon
+                                name="mdi:star"
+                                class="relative mx-auto h-6 w-6 text-white"
+                            />
+                            <Icon
+                                name="mdi:star"
+                                class="absolute mx-auto h-6 w-6 animate-ping text-white opacity-70"
+                            />
+                        </div>
+                    </div>
+                )
+            }
+            <Image
+                src={cover.url}
+                alt={cover.alt}
+                class="absolute inset-0 m-0 h-full w-full object-cover"
+                quality="high"
+                widths={[240, 540, 720, cover.url.width]}
+                sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${cover.url.width}px`}
+            /></a
+        >
+    </div>
+</article>
