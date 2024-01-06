@@ -4,13 +4,24 @@ import slides from '~/data/homepage';
 import SwiperHomepage from '~/components/Swipers/SwiperHomepage.astro';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import WorkGrid from '~/components/WorkGrid.astro';
+import Hero from '~/components/Hero/Hero.astro';
+import BlockImage from '~/components/Images/BlockImage.astro';
 import Link from '~/components/ui/Link.astro';
 import { Icon } from 'astro-icon/components';
 const title = 'Home page';
 const hero = {
-    title: 'Welcome to the website',
-    subtitle: 'Expolore amazing content',
+    mode: 'home',
+    bg: 'bg-slate-900',
+    scrollprompt: true,
+    dark: true,
+    threshold: 25,
+    wrapper:
+        'grid grid-cols-1 items-center overflow-x-hidden pb-[240px] min-h-[calc(100svh+240px)] angleclip origin-top [&+*]:-mt-[240px]',
 };
+
+import heatmap from '~/assets/hero/heatmap--r.webp';
+import heatmap_sm from '~/assets/hero/heatmap--b@sm.webp';
+import contourHeatmap from '~/icons/contour__HeatmapMiddleRight.svg';
 
 import { formatBlogPosts } from '~/js/utils';
 import { getCollection } from 'astro:content';
@@ -25,14 +36,76 @@ const formattedPosts = formatBlogPosts(allWork, {
 ---
 
 <BaseLayout
-    {title}
-    {hero}
+    title={title}
+    isHeroDark={hero.dark}
     ogImage={{ src: '/og/astro.jpg', alt: 'Astro - Build the web you want.' }}
 >
-    <div class="h-100 w-100">
-        <SwiperHomepage slides={slides} />
-    </div>
+    <slot slot="hero">
+        <Hero hero={hero}>
+            <Fragment slot="background">
+                <Image
+                    src={heatmap}
+                    alt="Purple gradient background"
+                    class="h-full w-full object-cover object-bottom md:object-center"
+                />
+                <Image
+                    src={contourHeatmap}
+                    alt="background"
+                    class="fixed inset-0 h-full w-full object-cover"
+                />
+            </Fragment>
 
+            <Fragment slot="content">
+                <div class="lg:self-end" x-data="roles()">
+                    <h1
+                        class="font-headline text-2xl lg:text-3xl 2xl:text-[2.125rem]"
+                    >
+                        <span
+                            class="mb-2 block text-white shadow-black/40 text-shadow-emboss"
+                            >I like to <span
+                                x-text="preposition"
+                                class="text-brand">work on</span
+                            ></span
+                        >
+                        <span
+                            class="relative inline-block rounded-tight bg-white px-2 py-1 text-black mix-blend-screen duration-150 lg:px-3 lg:py-1.5"
+                            x-cloak
+                        >
+                            <span x-text="role">Ui</span><span
+                                class="animate-blink font-normal"
+                                x-text="(caret ? '|' : '')"></span>
+                        </span>
+                    </h1>
+                </div>
+                <div class="text-white shadow-slate-900 text-shadow-emboss">
+                    <p class="mb-4 text-lg">
+                        This space has been crafted to demonstrate my abilities,
+                        methods, and expertise.
+                    </p>
+                    <p
+                        class="flex flex-wrap items-center gap-4 text-shadow-none"
+                    >
+                        <Link
+                            theme="primary"
+                            isIcon={true}
+                            class="md:inline-flex"
+                            href="/work"
+                        >
+                            View some work <Icon
+                                name="lucide:arrow-right-circle"
+                                class="h-6 w-6 animate-nudge-right"
+                            />
+                        </Link>
+                        <Link href="/about" theme="outline">Read my bio</Link>
+                    </p>
+                </div>
+            </Fragment>
+
+            <Fragment slot="visual">
+                <SwiperHomepage slides={slides} />
+            </Fragment>
+        </Hero>
+    </slot>
     <section
         class="bg-putty bg-gradient-to-b from-white pb-4 md:pb-8"
         x-data="{ section: false }"
@@ -97,3 +170,57 @@ const formattedPosts = formatBlogPosts(allWork, {
         </div>
     </section>
 </BaseLayout>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('roles', () => ({
+            roleIndex: 0,
+            roleObj: [
+                { preposition: 'work in', role: 'Front-End Development' },
+                { preposition: 'work on', role: 'Ui/UX Design' },
+                { preposition: 'create', role: 'inspired products' },
+                { preposition: 'build', role: 'E-mail layouts' },
+                { preposition: 'oversee', role: 'Content management' },
+            ],
+            role: '',
+            preposition: '',
+            caret: true,
+            typingTimer: null,
+            doneTypingInterval: 6000,
+
+            startTyping() {
+                this.role = '';
+                this.preposition = this.roleObj[this.roleIndex].preposition;
+                this.typingTimer = setInterval(() => {
+                    if (
+                        this.role.length <
+                        this.roleObj[this.roleIndex].role.length
+                    ) {
+                        this.role +=
+                            this.roleObj[this.roleIndex].role[this.role.length];
+                    } else {
+                        clearInterval(this.typingTimer);
+                        setTimeout(() => {
+                            this.typingTimer = setInterval(() => {
+                                if (this.role.length > 0) {
+                                    this.role = this.role.slice(0, -1);
+                                } else {
+                                    clearInterval(this.typingTimer);
+                                    this.preposition = '';
+                                    this.roleIndex =
+                                        (this.roleIndex + 1) %
+                                        this.roleObj.length;
+                                    this.startTyping();
+                                }
+                            }, 25);
+                        }, this.doneTypingInterval);
+                    }
+                }, 75);
+            },
+
+            init() {
+                this.startTyping();
+            },
+        }));
+    });
+</script>

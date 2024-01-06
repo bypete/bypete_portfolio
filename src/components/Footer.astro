@@ -1,6 +1,7 @@
 ---
 import Social from './Social.astro';
 import socialData from '../data/social.json';
+import { Icon } from 'astro-icon/components';
 ---
 
 <footer
@@ -11,12 +12,10 @@ import socialData from '../data/social.json';
     >
         <div>
             <p>
-                <img
-                    src="/img/logos/bypete--white.svg"
+                <Icon
+                    name="bypete--white"
+                    title="byPete logo in white"
                     class="h-10 w-auto"
-                    height="40"
-                    width="140"
-                    alt="byPete logo in white"
                 />
             </p>
             <ul class="-mx-2 mt-2 inline-flex">

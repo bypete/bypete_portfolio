@@ -1,9 +1,12 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 const { frontmatter } = Astro.props;
+
+// Check if frontmatter.hero is defined before destructuring
+const { hero: { dark: isHeroDark = false } = {} } = frontmatter || {};
 ---
 
-<BaseLayout title={frontmatter.title} isHeroDark={frontmatter.hero.dark}>
+<BaseLayout title={frontmatter.title} {isHeroDark}>
     <p>Published on: {frontmatter.pubDate.toString().slice(0, 10)}</p>
     <p><em>{frontmatter.description}</em></p>
     <p>Written by {frontmatter.author}</p>

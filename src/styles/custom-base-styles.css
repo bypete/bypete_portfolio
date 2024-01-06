@@ -53,24 +53,24 @@ h1 {
     @apply mb-1 text-base font-medium;
 }
 
-.rte-content > p {
+.rte > p {
     @apply mb-4;
 }
 
-.rte-content > :last-child {
+.rte > :last-child {
     @apply mb-0;
 }
 
-.rte-content strong {
+.rte strong {
     @apply font-bold;
 }
 
-/*.rte-content .heading {
+/*.rte .heading {
   @apply mb-[1em];
 } */
 
 /* subsequent-sibling combinator */
-.rte-content .heading ~ .heading {
+.rte .heading ~ .heading {
     @apply mt-[1.5em];
 }
 

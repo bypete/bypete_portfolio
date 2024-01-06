@@ -1,32 +1,44 @@
 ---
-import Alpine from 'alpinejs';
-import JustValidate from 'just-validate';
+import { Icon } from 'astro-icon/components';
 ---
 
-<!-- https://just-validate.dev/docs/intro -->
-<div x-data="justvalidate" class="not-prose">
+<!-- https://usebasin.com/f/64b35c1258c2 -->
+<div x-data="formValidate" class="not-prose">
     <form
+        data-astro-reload
+        x-on:submit.prevent="onSubmitData()"
+        name="contact"
         x-ref="form"
-        x-on:submit.prevent="onSubmit()"
         class="form"
-        accept-charset="UTF-8"
         action="https://usebasin.com/f/64b35c1258c2"
         method="post"
+        accept-charset="UTF-8"
         enctype="multipart/form-data"
-        novalidate="novalidate"
     >
-        <div class="group mt-4">
+        <div
+            class="group mt-4"
+            x-data="observer()"
+            x-bind:class="{ 'has-error': isError, 'has-success': isValid }"
+        >
             <label class="font-medium" for="InputName">Name</label>
-            <input
-                type="text"
-                name="name"
-                class="form__input w-full"
-                id="InputName"
-                placeholder="Enter your name and surname"
-                required="required"
-            />
+            <div class="relative">
+                <input
+                    type="text"
+                    name="name"
+                    class="form__input w-full"
+                    id="InputName"
+                    placeholder="Enter your name and surname"
+                    required="required"
+                    x-ref="input"
+                />
+            </div>
+            <div id="InputNameError"></div>
         </div>
-        <div class="group mt-4">
+        <div
+            class="group mt-4"
+            x-data="observer()"
+            x-bind:class="{ 'has-error': isError, 'has-success': isValid }"
+        >
             <label class="font-medium" for="InputEmail">Email address</label>
             <div class="relative">
                 <input
@@ -35,126 +47,187 @@ import JustValidate from 'just-validate';
                     class="form__input w-full pr-10"
                     id="InputEmail"
                     placeholder="you@example.com"
+                    x-ref="input"
                     required
                 />
                 <div
                     class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        class="success-svg hidden h-5 w-5 group-[.has-success]:block"
-                    >
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            class="fill-current text-green-200"></circle>
-                        <path
-                            d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"
-                            class="fill-current text-green-600"
-                        >
-                        </path>
-                    </svg>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        class="error-svg hidden h-5 w-5 group-[.has-error]:block"
-                    >
-                        <circle cx="12" cy="12" r="10" fill="#fed7d7"></circle>
-                        <path
-                            fill="#f56565"
-                            d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"
-                        >
-                        </path>
-                    </svg>
+                    <Icon
+                        name="lucide:alert-circle"
+                        class="success-svg hidden h-5 w-5 text-red-500 group-[.has-error]:block"
+                    />
+                    <Icon
+                        name="lucide:check-circle"
+                        class="success-svg hidden h-5 w-5 text-green-500 group-[.has-success]:block"
+                    />
                 </div>
             </div>
+            <div id="InputEmailError"></div>
         </div>
         <div class="absolute -z-10 h-0 w-0 opacity-0">
             <label class="font-medium" for="_byPete">When to call?</label>
-            <input
-                tabindex="-1"
-                autocomplete="off"
-                type="text"
-                name="contact"
-                aria-hidden="true"
-                id="_byPete"
-            />
+            <div class="relative">
+                <input
+                    tabindex="-1"
+                    autocomplete="off"
+                    type="text"
+                    name="contact"
+                    aria-hidden="true"
+                    id="_byPete"
+                />
+            </div>
         </div>
-        <div class="group mt-4">
+        <div
+            class="group mt-4"
+            x-data="observer()"
+            x-bind:class="{ 'has-error': isError, 'has-success': isValid }"
+        >
             <label class="font-medium" for="InputMessage">Your message</label>
-            <textarea
-                rows="6"
-                cols="50"
-                name="message"
-                class="form__input w-full"
-                id="InputMessage"
-                placeholder="Add a message"
-                data-pristine-required-message="Don't forget to add your message..."
-                required></textarea>
+            <div class="relative">
+                <textarea
+                    rows="6"
+                    cols="50"
+                    name="message"
+                    class="form__input w-full"
+                    id="InputMessage"
+                    x-ref="input"
+                    placeholder="Add a message"
+                    data-pristine-required-message="Don't forget to add your message..."
+                    required></textarea>
+            </div>
+            <div id="InputMessageError"></div>
         </div>
         <div class="mt-4">
             <button type="submit" class="btn btn--primary">Send now</button>
         </div>
     </form>
-</div>
 
-<script lang="js">
-    Alpine.data('justvalidate', () => ({
-        form: undefined,
-        validator: undefined,
-        wordcount: undefined,
-        init() {
-            this.form = this.$refs.form;
-            this.validator = new JustValidate(this.form, {
-                errorFieldCssClass: ['error'],
-                errorLabelCssClass: ['text-red-600', 'text-sm', 'mt-1'],
-                errorLabelStyle: false,
-                errorFieldStyle: false,
-                successFieldCssClass: ['valid'],
-                successLabelCssClass: ['valid'],
-                validateBeforeSubmitting: true,
-            });
-            this.validator
-                .addField('#InputName', [
-                    {
-                        rule: 'required',
-                        errorMessage: 'Please add your name',
-                    },
-                ])
-                .addField('#InputEmail', [
-                    {
-                        rule: 'required',
-                        errorMessage: 'Please add your email',
-                    },
-                    {
-                        rule: 'email',
-                        errorMessage: 'Please check your email address',
-                    },
-                ])
-                .addField('#InputMessage', [
-                    {
-                        rule: 'required',
-                        errorMessage: "Don't forget to add your message!",
-                    },
-                    {
-                        validator: (value) =>
-                            value !== undefined &&
-                            value.trim().split(' ').length > 3,
-                        errorMessage: 'Message should be more than 3 words.',
-                    },
-                ])
-                .addField('#_byPete', [
-                    {
-                        validator: (value) => value === '',
-                    },
-                ]);
-        },
-        onSubmit() {
-            this.validator.onSuccess((event) => {
-                this.form.submit();
-            });
-        },
-    }));
-</script>
+    <script>
+        import JustValidate from '~/../node_modules/just-validate';
+
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('formValidate', () => ({
+                isError: false,
+                form: undefined,
+                validator: undefined,
+                init() {
+                    this.form = this.$refs.form;
+
+                    this.validator = new JustValidate(this.form, {
+                        errorFieldCssClass: ['error'],
+                        errorLabelCssClass: ['text-red-600', 'text-sm', 'mt-1'],
+                        errorLabelStyle: '',
+                        errorFieldStyle: '',
+                        successFieldCssClass: ['valid'],
+                        successLabelCssClass: ['valid'],
+                        validateBeforeSubmitting: true,
+                    })
+                        .addField(
+                            '#InputName',
+                            [
+                                {
+                                    rule: 'required',
+                                    errorMessage: 'Please add your name',
+                                },
+                            ],
+                            { errorsContainer: '#InputNameError' },
+                        )
+                        .addField(
+                            '#InputEmail',
+                            [
+                                {
+                                    rule: 'required',
+                                    errorMessage: 'Please add your email',
+                                },
+                                {
+                                    rule: 'email',
+                                    errorMessage:
+                                        'Please check your email address',
+                                },
+                            ],
+                            { errorsContainer: '#InputEmailError' },
+                        )
+                        .addField(
+                            '#InputMessage',
+                            [
+                                {
+                                    rule: 'required',
+                                    errorMessage:
+                                        "Don't forget to add your message!",
+                                },
+                                {
+                                    validator: (value) =>
+                                        value !== undefined &&
+                                        value.trim().split(' ').length > 3,
+                                    errorMessage:
+                                        'Message should be more than 3 words.',
+                                },
+                            ],
+                            { errorsContainer: '#InputMessageError' },
+                        )
+                        .addField('#_byPete', [
+                            {
+                                validator: (value) => value === '',
+                            },
+                        ]);
+                },
+                onSubmitData() {
+                    this.validator.validate();
+                    if (this.validator.isValid) {
+                        //this.form.submit();
+
+                        const formData = new FormData(this.form);
+                        fetch('https://usebasin.com/f/64b35c1258c2', {
+                            method: 'POST',
+                            headers: {
+                                Accept: 'application/json',
+                            },
+                            body: formData,
+                        })
+                            .then((response) => {
+                                if (response.status === 200) {
+                                    console.log('success');
+                                    window.location.href = '/connect/sent'; //relative to domain
+                                } else {
+                                    console.log('fail');
+                                }
+                            })
+                            .catch((error) => console.log(error));
+                    } else {
+                        console.log('failed validation');
+                    }
+                },
+            }));
+
+            Alpine.data('observer', () => ({
+                isError: false,
+                isValid: false,
+                checkStatus() {
+                    const observer = new MutationObserver((mutationList) => {
+                        mutationList.forEach((mutation) => {
+                            if (
+                                mutation.type === 'attributes' &&
+                                mutation.attributeName === 'class'
+                            ) {
+                                this.isError =
+                                    this.$refs.input.classList.contains(
+                                        'error',
+                                    );
+                                this.isValid =
+                                    this.$refs.input.classList.contains(
+                                        'valid',
+                                    );
+                            }
+                        });
+                    });
+
+                    observer.observe(this.$refs.input, { attributes: true });
+                },
+                init() {
+                    this.checkStatus();
+                },
+            }));
+        });
+    </script>
+</div>

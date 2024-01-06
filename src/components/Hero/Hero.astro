@@ -1,6 +1,7 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 import GridImage from '~/components/Hero/GridImage.astro';
+import GridHome from '~/components/Hero/GridHome.astro';
 import GridCover from '~/components/Hero/GridCover.astro';
 import { Icon } from 'astro-icon/components';
 import utilities from '~/data/utilities.json';
@@ -20,7 +21,7 @@ interface HeroKeys {
     wrapper?: string;
     dark?: boolean;
     bg?: string;
-    mode?: 'plain' | 'image' | 'cover' | 'custom';
+    mode?: 'plain' | 'home' | 'image' | 'cover' | 'custom';
     class?: string;
     visual?: Partial<VisualKeys>;
     cover?: Partial<CoverKeys>;
@@ -107,6 +108,17 @@ switch (mode) {
                 >
                     {headline}
                 </h1>
+            </>
+        )
+    }
+    {
+        mode === 'home' && (
+            <>
+                <GridHome>
+                    <slot slot="background" name="background" />
+                    <slot slot="content" name="content" />
+                    <slot slot="visual" name="visual" />
+                </GridHome>
             </>
         )
     }

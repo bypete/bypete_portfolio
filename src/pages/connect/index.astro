@@ -1,24 +1,24 @@
 ---
-import utilities from '../data/utilities.json';
+import utilities from '~/data/utilities.json';
 import { Icon } from 'astro-icon/components';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactForm from '../components/ContactForm.astro';
+import ContactForm from '~/components/ContactForm.astro';
+import WideLayout from '~/layouts/WideLayout.astro';
 const title = 'Connect';
 ---
 
-<BaseLayout title={title}>
+<WideLayout title={title}>
     <div
         class:list={['grid grid-cols-1 md:grid-cols-2', utilities.tramline.all]}
     >
         <div
             class:list={[
-                'rte flex items-center border border-gray-100 md:order-2',
+                'flex items-center border border-gray-100 md:order-2',
                 utilities.tramline.all,
             ]}
         >
             <div
                 class:list={[
-                    'mx-auto  w-full max-w-sm ',
+                    'rte mx-auto w-full max-w-sm',
                     utilities.tramline.all,
                 ]}
             >
@@ -53,4 +53,4 @@ const title = 'Connect';
             <ContactForm />
         </div>
     </div>
-</BaseLayout>
+</WideLayout>
