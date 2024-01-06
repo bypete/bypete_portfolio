@@ -3,7 +3,7 @@ import { Icon } from 'astro-icon/components';
 ---
 
 <!-- https://usebasin.com/f/64b35c1258c2 -->
-<div x-data="formValidate" class="not-prose">
+<div x-data="formValidate" class="not-prose h-full">
     <form
         data-astro-reload
         x-on:submit.prevent="onSubmitData()"
@@ -14,11 +14,12 @@ import { Icon } from 'astro-icon/components';
         method="post"
         accept-charset="UTF-8"
         enctype="multipart/form-data"
+        x-bind:class="{ 'hidden' : isSent }"
     >
         <div
             class="group mt-4"
             x-data="observer()"
-            x-bind:class="{ 'has-error': isError, 'has-success': isValid }"
+            x-bind:class="{ 'has-error': isError, 'has-success': isValid}"
         >
             <label class="font-medium" for="InputName">Name</label>
             <div class="relative">
@@ -37,7 +38,7 @@ import { Icon } from 'astro-icon/components';
         <div
             class="group mt-4"
             x-data="observer()"
-            x-bind:class="{ 'has-error': isError, 'has-success': isValid }"
+            x-bind:class="{ 'has-error': isError, 'has-success': isValid}"
         >
             <label class="font-medium" for="InputEmail">Email address</label>
             <div class="relative">
@@ -81,7 +82,7 @@ import { Icon } from 'astro-icon/components';
         <div
             class="group mt-4"
             x-data="observer()"
-            x-bind:class="{ 'has-error': isError, 'has-success': isValid }"
+            x-bind:class="{ 'has-error': isError, 'has-success': isValid}"
         >
             <label class="font-medium" for="InputMessage">Your message</label>
             <div class="relative">
@@ -102,132 +103,139 @@ import { Icon } from 'astro-icon/components';
             <button type="submit" class="btn btn--primary">Send now</button>
         </div>
     </form>
-
-    <script>
-        import JustValidate from '~/../node_modules/just-validate';
-
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('formValidate', () => ({
-                isError: false,
-                form: undefined,
-                validator: undefined,
-                init() {
-                    this.form = this.$refs.form;
-
-                    this.validator = new JustValidate(this.form, {
-                        errorFieldCssClass: ['error'],
-                        errorLabelCssClass: ['text-red-600', 'text-sm', 'mt-1'],
-                        errorLabelStyle: '',
-                        errorFieldStyle: '',
-                        successFieldCssClass: ['valid'],
-                        successLabelCssClass: ['valid'],
-                        validateBeforeSubmitting: true,
-                    })
-                        .addField(
-                            '#InputName',
-                            [
-                                {
-                                    rule: 'required',
-                                    errorMessage: 'Please add your name',
-                                },
-                            ],
-                            { errorsContainer: '#InputNameError' },
-                        )
-                        .addField(
-                            '#InputEmail',
-                            [
-                                {
-                                    rule: 'required',
-                                    errorMessage: 'Please add your email',
-                                },
-                                {
-                                    rule: 'email',
-                                    errorMessage:
-                                        'Please check your email address',
-                                },
-                            ],
-                            { errorsContainer: '#InputEmailError' },
-                        )
-                        .addField(
-                            '#InputMessage',
-                            [
-                                {
-                                    rule: 'required',
-                                    errorMessage:
-                                        "Don't forget to add your message!",
-                                },
-                                {
-                                    validator: (value) =>
-                                        value !== undefined &&
-                                        value.trim().split(' ').length > 3,
-                                    errorMessage:
-                                        'Message should be more than 3 words.',
-                                },
-                            ],
-                            { errorsContainer: '#InputMessageError' },
-                        )
-                        .addField('#_byPete', [
-                            {
-                                validator: (value) => value === '',
-                            },
-                        ]);
-                },
-                onSubmitData() {
-                    this.validator.validate();
-                    if (this.validator.isValid) {
-                        //this.form.submit();
-
-                        const formData = new FormData(this.form);
-                        fetch('https://usebasin.com/f/64b35c1258c2', {
-                            method: 'POST',
-                            headers: {
-                                Accept: 'application/json',
-                            },
-                            body: formData,
-                        })
-                            .then((response) => {
-                                if (response.status === 200) {
-                                    console.log('success');
-                                    window.location.href = '/connect/sent'; //relative to domain
-                                } else {
-                                    console.log('fail');
-                                }
-                            })
-                            .catch((error) => console.log(error));
-                    } else {
-                        console.log('failed validation');
-                    }
-                },
-            }));
-
-            Alpine.data('observer', () => ({
-                isError: false,
-                isValid: false,
-                checkStatus() {
-                    const observer = new MutationObserver((mutationList) => {
-                        mutationList.forEach((mutation) => {
-                            if (
-                                mutation.type === 'attributes' &&
-                                mutation.attributeName === 'class'
-                            ) {
-                                this.isError =
-                                    this.$refs.input.classList.contains(
-                                        'error',
-                                    );
-                                this.isValid =
-                                    this.$refs.input.classList.contains(
-                                        'valid',
-                                    );
-                            }
-                        });
-                    });
-
-                    observer.observe(this.$refs.input, { attributes: true });
-                },
-                init() {
-                    this.checkStatus();
-                },
-            }));
-        });
-    </script>
+    <div
+        x-cloak
+        x-bind:class="{ 'flex items-center justify-center h-full w-full animate-appear' : isSent, 'hidden' : !isSent }"
+    >
+        <div class="rte w-full text-center">
+            <Icon
+                name="lucide:mail-check"
+                class="mx-auto h-20 w-auto animate-fade-in-up text-green-500 duration-500"
+            />
+            <h3 class="text-center">Your message has been sent</h3>
+            <p>Thanks for getting in touch, I'll try to respond quickly.</p>
+        </div>
+    </div>
 </div>
+<script>
+    import JustValidate from '~/../node_modules/just-validate';
+
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('formValidate', () => ({
+            isSent: false,
+            form: undefined,
+            validator: undefined,
+            init() {
+                this.form = this.$refs.form;
+
+                this.validator = new JustValidate(this.form, {
+                    errorFieldCssClass: ['error'],
+                    errorLabelCssClass: ['text-red-600', 'text-sm', 'mt-1'],
+                    errorLabelStyle: '',
+                    errorFieldStyle: '',
+                    successFieldCssClass: ['valid'],
+                    successLabelCssClass: ['valid'],
+                    validateBeforeSubmitting: true,
+                })
+                    .addField(
+                        '#InputName',
+                        [
+                            {
+                                rule: 'required',
+                                errorMessage: 'Please add your name',
+                            },
+                        ],
+                        { errorsContainer: '#InputNameError' },
+                    )
+                    .addField(
+                        '#InputEmail',
+                        [
+                            {
+                                rule: 'required',
+                                errorMessage: 'Please add your email',
+                            },
+                            {
+                                rule: 'email',
+                                errorMessage: 'Please check your email address',
+                            },
+                        ],
+                        { errorsContainer: '#InputEmailError' },
+                    )
+                    .addField(
+                        '#InputMessage',
+                        [
+                            {
+                                rule: 'required',
+                                errorMessage:
+                                    "Don't forget to add your message!",
+                            },
+                            {
+                                validator: (value) =>
+                                    value !== undefined &&
+                                    value.trim().split(' ').length > 3,
+                                errorMessage:
+                                    'Message should be more than 3 words.',
+                            },
+                        ],
+                        { errorsContainer: '#InputMessageError' },
+                    )
+                    .addField('#_byPete', [
+                        {
+                            validator: (value) => value === '',
+                        },
+                    ]);
+            },
+            onSubmitData() {
+                this.validator.validate();
+                if (this.validator.isValid) {
+                    //this.form.submit();
+
+                    const formData = new FormData(this.form);
+                    fetch('https://usebasin.com/f/64b35c1258c2', {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                        },
+                        body: formData,
+                    })
+                        .then((response) => {
+                            if (response.status === 200) {
+                                this.isSent = true;
+                                //window.location.href = '/connect/sent'; //relative to domain
+                            } else {
+                                console.log('fail');
+                            }
+                        })
+                        .catch((error) => console.log(error));
+                } else {
+                    console.log('failed validation');
+                }
+            },
+        }));
+
+        Alpine.data('observer', () => ({
+            isError: false,
+            isValid: false,
+            checkStatus() {
+                const observer = new MutationObserver((mutationList) => {
+                    mutationList.forEach((mutation) => {
+                        if (
+                            mutation.type === 'attributes' &&
+                            mutation.attributeName === 'class'
+                        ) {
+                            this.isError =
+                                this.$refs.input.classList.contains('error');
+                            this.isValid =
+                                this.$refs.input.classList.contains('valid');
+                        }
+                    });
+                });
+
+                observer.observe(this.$refs.input, { attributes: true });
+            },
+            init() {
+                this.checkStatus();
+            },
+        }));
+    });
+</script>
