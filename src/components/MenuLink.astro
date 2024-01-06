@@ -4,7 +4,7 @@ const { title, url, pathname, isHeroDark, class: className } = Astro.props;
 const shade = isHeroDark ? 'text-white  ' : 'text-accent';
 const activeState = isHeroDark
     ? 'data-[state=active]:text-slate-white data-[state=active]:ring-brand data-[state=active]:hover:text-slate-800'
-    : 'data-[state=active]:text-800 data-[state=active]:ring-brand data-[state=active]:hover:text-slate-800';
+    : 'data-[state=active]:text-slate-800 data-[state=active]:ring-brand data-[state=active]:hover:text-slate-800';
 ---
 
 <a

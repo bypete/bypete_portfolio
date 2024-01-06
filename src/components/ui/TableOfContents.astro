@@ -1,0 +1,45 @@
+---
+import { buildToc } from '~/js/utils';
+import TableOfContentsHeading from './TableOfContentsHeading.astro';
+export type Props = {
+    headings: Array<{ depth: number; text: string; slug: string }>;
+};
+
+const { headings } = Astro.props;
+const toc = buildToc(headings);
+---
+
+<aside id="toc">
+    <ul>
+        {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
+    </ul>
+</aside>
+<script>
+    const setCurrent: IntersectionObserverCallback = (entries) => {
+        for (let entry of entries) {
+            const { id } = entry.target;
+            const tocHeadingEl = document.querySelector(
+                `#toc a[href="#${id}"]`,
+            );
+            if (!tocHeadingEl) return;
+            if (entry.isIntersecting) {
+                document
+                    .querySelectorAll('#toc a')
+                    .forEach((e) => e.setAttribute('data-state', ''));
+                tocHeadingEl.setAttribute('data-state', 'active');
+            }
+        }
+    };
+
+    const observerOption: IntersectionObserverInit = {
+        rootMargin: '0px 0px -66%',
+        threshold: 1,
+    };
+    const headingObserver = new IntersectionObserver(
+        setCurrent,
+        observerOption,
+    );
+    document
+        .querySelectorAll('article :is(h2,h3,h4)')
+        .forEach((heading) => headingObserver.observe(heading));
+</script>

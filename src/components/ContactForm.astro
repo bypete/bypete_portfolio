@@ -66,19 +66,6 @@ import { Icon } from 'astro-icon/components';
             </div>
             <div id="InputEmailError"></div>
         </div>
-        <div class="absolute -z-10 h-0 w-0 opacity-0">
-            <label class="font-medium" for="_byPete">When to call?</label>
-            <div class="relative">
-                <input
-                    tabindex="-1"
-                    autocomplete="off"
-                    type="text"
-                    name="contact"
-                    aria-hidden="true"
-                    id="_byPete"
-                />
-            </div>
-        </div>
         <div
             class="group mt-4"
             x-data="observer()"
@@ -98,6 +85,19 @@ import { Icon } from 'astro-icon/components';
                     required></textarea>
             </div>
             <div id="InputMessageError"></div>
+        </div>
+        <div class="absolute -z-10 h-0 w-0 opacity-0">
+            <label class="font-medium" for="_byPete">When to call?</label>
+            <div class="relative">
+                <input
+                    tabindex="-1"
+                    autocomplete="off"
+                    type="text"
+                    name="contact"
+                    aria-hidden="true"
+                    id="_byPete"
+                />
+            </div>
         </div>
         <div class="mt-4">
             <button type="submit" class="btn btn--primary">Send now</button>

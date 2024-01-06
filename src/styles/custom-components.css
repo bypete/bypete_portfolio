@@ -147,13 +147,13 @@
                 /* @apply max-md:my-4; */
             }
         }
-        .hero--light & {
+        .hero--light& {
             &--up {
                 @apply bg-white;
             }
         }
 
-        .hero--dark & {
+        .hero--dark& {
             @apply bg-slate-900;
             &--start,
             &--down {

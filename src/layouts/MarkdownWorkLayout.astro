@@ -7,7 +7,8 @@ import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import { readableDate, htmlDateString } from '~/components/Utils/formatDate.js';
 import Skills from '~/components/Skills.astro';
-const { frontmatter, minutesRead } = Astro.props;
+import TableOfContents from '~/components/ui/TableOfContents.astro';
+const { frontmatter, minutesRead, headings } = Astro.props;
 ---
 
 <BaseLayout {...frontmatter}>
@@ -65,6 +66,7 @@ const { frontmatter, minutesRead } = Astro.props;
         ]}
     >
         <article id="start" class="mx-auto max-w-3xl">
+            {headings && <TableOfContents headings={headings} />}
             <div class="rte prose mx-auto max-w-3xl lg:prose-lg">
                 <slot />
             </div>
