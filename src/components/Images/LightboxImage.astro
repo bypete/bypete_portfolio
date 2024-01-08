@@ -12,8 +12,6 @@ const {
     ...attrs
 } = Astro.props;
 
-// console.log(src);
-
 const resolvedWidths = widths.length ? widths : [240, 540, 720, src.width];
 const resolvedSizes =
     sizes ||

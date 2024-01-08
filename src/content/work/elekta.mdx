@@ -13,6 +13,10 @@ cover:
   url: '../../assets/work/elekta/listing.jpg'
   alt: 'Elekta logo'
   credit: 'Elekta'
+splash:
+  url: '../../assets/work/elekta/tablet.jpg'
+  alt: 'iPad image showing Elekta website'
+  credit: 'Elekta'
 skillset:
   text: 'text-white'
   icon: ''
@@ -40,14 +44,6 @@ export const components = {ul: UL}
 
 import data from '~/data/work/elekta.data.json'
 import tablet from '../../assets/work/elekta/tablet.jpg';
-
-
-<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg} >
-## Skills
-</Skills>
-
-
-<BlockPicture src={tablet} class="my-0" alt="iPad image showing Elekta website" credit={frontmatter.title} wrapper={true} />
 
 ## Overview
 

@@ -1,20 +1,77 @@
 ---
 import { buildToc } from '~/js/utils';
+import { Icon } from 'astro-icon/components';
 import TableOfContentsHeading from './TableOfContentsHeading.astro';
+import utilities from '~/data/utilities.json';
 export type Props = {
     headings: Array<{ depth: number; text: string; slug: string }>;
+    class?: string;
 };
 
-const { headings } = Astro.props;
+const { headings, class: className } = Astro.props;
 const toc = buildToc(headings);
 ---
 
-<aside id="toc">
-    <ul>
-        {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
-    </ul>
-</aside>
+<nav
+    id="toc"
+    aria-label="Content sections"
+    class:list={[
+        'sticky-root sticky -top-px z-toc flex w-full md:justify-center',
+        utilities.margin.y,
+        className ? className : '',
+    ]}
+>
+    <div
+        x-data="toc()"
+        class="relative w-full rounded border border-gray-200 bg-white px-4 py-2 transition-all duration-300 md:w-auto"
+        x-bind:class="open ? 'grow' : ''"
+        x-sticky="shadow-3xl shadow-black/5 rounded-t-none"
+    >
+        <button
+            x-bind="trigger"
+            class="flex w-full items-center justify-between gap-x-2 font-semibold"
+        >
+            On this page <Icon name="lucide:file-text" class="h-6 w-auto" />
+        </button>
+
+        <div class="relative z-10">
+            <div
+                x-cloak
+                x-show="open"
+                class="absolute left-0 top-0 block max-h-[calc(100vh-var(--headerheight))] w-full overflow-y-scroll rounded border border-gray-200 bg-white px-4 py-2 transition-all duration-300"
+            >
+                <ol>
+                    {
+                        toc.map((heading) => (
+                            <TableOfContentsHeading heading={heading} />
+                        ))
+                    }
+                </ol>
+            </div>
+        </div>
+    </div>
+</nav>
 <script>
+    import Alpine from 'alpinejs';
+    import sticky from 'alpinejs-sticky';
+
+    Alpine.plugin(sticky);
+
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('toc', () => ({
+            open: false,
+            trigger: {
+                '@click': function () {
+                    this.open = !this.open;
+                },
+                '@click.outside': function () {
+                    setTimeout(() => {
+                        this.open = false;
+                    }, 750);
+                },
+            },
+        }));
+    });
     const setCurrent: IntersectionObserverCallback = (entries) => {
         for (let entry of entries) {
             const { id } = entry.target;

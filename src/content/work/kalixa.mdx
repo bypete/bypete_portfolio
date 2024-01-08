@@ -7,12 +7,16 @@ excerpt: 'Highly targeted, affiliate focused landing pages to convert prospects 
 description: 'Discover how I helped to create highly targeted landing pages that converted prospects into Kalixa Pay cardholders. The site had to accommodate over 150,000 card holders as well as a global affiliate network.'
 author: 'Astro Learner'
 brand: 
-  bg: 'bg-[#384c55]'
-  color: 'text-[#384c55]'
+  bg: 'bg-[#ee8822]'
+  color: 'text-[#ee8822]'
 cover:
   url: '../../assets/work/kalixa/listing.jpg'
   alt: 'Kalixa logo'
-  credit: 'AFV Estates Limited'
+  credit: 'Kalixa'
+splash:
+  url: '../../assets/work/kalixa/laptop_iphone_front.jpg'
+  alt: 'Laptop and iPhone image showing Kalixa website'
+  credit: 'Kalixa'
 skillset:
   text: 'text-white'
   icon: ''
@@ -46,12 +50,6 @@ import Gallery from '~/components/Lightbox/Gallery.astro'
 import data from '~/data/work/kalixa.data.json'
 export const components = {ul: UL}
 
-<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg} >
-## Skills
-</Skills>
-
-
-<BlockPicture src={laptop_iphone_front} class="my-0" alt="Laptop and iPhone image showing Kalixa website" credit={frontmatter.title} wrapper={true} />
 ## Overview
 
 Kalixa Pay was marketed as a cost-effective contactless prepaid Mastercard with exclusive travel benefits. The site had to sell the product to potential customers, deliver relevant content to existing customers, and give access to accounts in a secure PCI environment.

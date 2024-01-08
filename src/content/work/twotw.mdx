@@ -12,7 +12,11 @@ brand:
 cover:
   url: '../../assets/work/twotw/listing.jpg'
   alt: 'TWOTW logo'
-  credit: 'Elekta'
+  credit: 'ORP'
+splash:
+  url: '../../assets/work/twotw/tablet.jpg'
+  alt: 'iPad image showing twotw website'
+  credit: 'ORP'
 skillset:
   text: 'text-white'
   icon: ''
@@ -33,26 +37,15 @@ skillset:
           - 'UX/UI'
 tags: ['Entertainment']
 ---
-import BlockPicture from '~/components/Images/BlockPicture.astro';
 import {Image} from 'astro:assets'
 import { Icon } from 'astro-icon/components';
-import Skills from '~/components/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
 import Gallery from '~/components/Lightbox/Gallery.astro'
 export const components = {ul: UL}
 import Block from '~/components/Blocks/Block.astro'
 
 import data from '~/data/work/twotw.data.json'
-import tablet from '../../assets/work/twotw/tablet.jpg';
 import svgbg from '../../icons/contour.svg'
-
-
-<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg} >
-## Skills
-</Skills>
-
-
-<BlockPicture src={tablet} class="my-0" alt="iPad image showing twotw website" credit={frontmatter.title} wrapper={true} />
 
 ## Overview
 

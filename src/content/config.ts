@@ -36,6 +36,13 @@ const workCollection = defineCollection({
       alt: z.string(),
       credit: z.string().optional()
     }),
+    splash: z.object({
+      url: image().refine((img) => img.width >= 500, {
+        message: "cover image must be at least 500 wide!",
+      }),
+      alt: z.string(),
+      credit: z.string().optional()
+    }).optional(),
     socialImage: z.object({
       url: image().refine((img) => img.width >= 315, {
           message: "social image must be at least 315 wide!",

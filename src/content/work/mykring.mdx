@@ -13,6 +13,10 @@ cover:
   url: '../../assets/work/mykring/listing.jpg'
   alt: 'K Ring logo'
   credit: 'K Wearables'
+splash:
+  url: '../../assets/work/mykring/laptop_iphone_front.jpg'
+  alt: 'Laptop and iPhone image showing Kalixa website'
+  credit: 'K Wearables'
 skillset:
   text: 'text-white'
   icon: ''
@@ -56,11 +60,9 @@ tags: ['responsive', 'fintech', 'email']
 import BlockPicture from '~/components/Images/BlockPicture.astro';
 import { Image } from 'astro:assets';
 
-import laptop_iphone_front from '../../assets/work/mykring/laptop_iphone_front.jpg';
 import devices from '../../assets/work/mykring/devices.png';
 import devices_reworked from '../../assets/work/mykring/devices_reworked.jpg';
 import block__cyclist_40 from '../../assets/work/mykring/block__cyclist_40.jpg';
-import Skills from '~/components/Skills.astro'
 import Figure from '~/components/Figure.astro'
 import UL from '~/components/MDX/ul.astro'
 import Gallery from '~/components/Lightbox/Gallery.astro'
@@ -68,13 +70,6 @@ import utilities from '~/data/utilities.json'
 
 import data from '~/data/work/mykring.data.json'
 export const components = {ul: UL}
-
-<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg} >
-## Skills
-</Skills>
-
-
-<BlockPicture src={laptop_iphone_front} class="my-0" alt="Laptop and iPhone image showing Kalixa website" credit={frontmatter.title} wrapper={true} />
 
 <p class="note text-base">The live site is currently unavailable but a detailed record of the templates and design process can be viewed below. The site was reimagined in 2022/3 to complement the app, but unfortunately the designs were frozen in the development phase due to funding issues.</p>
 

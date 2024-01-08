@@ -8,7 +8,14 @@ import { Image } from 'astro:assets';
 import { readableDate, htmlDateString } from '~/components/Utils/formatDate.js';
 import Skills from '~/components/Skills.astro';
 import TableOfContents from '~/components/ui/TableOfContents.astro';
+import BlockPicture from '~/components/Images/BlockPicture.astro';
 const { frontmatter, minutesRead, headings } = Astro.props;
+let resolvedHeadings = headings;
+
+if (frontmatter.skillset) {
+    const skillHeading = { depth: 2, slug: 'skills', text: 'Skills' };
+    resolvedHeadings = [skillHeading, ...headings];
+}
 ---
 
 <BaseLayout {...frontmatter}>
@@ -65,9 +72,27 @@ const { frontmatter, minutesRead, headings } = Astro.props;
             utilities.tramline.double.b,
         ]}
     >
-        <article id="start" class="mx-auto max-w-3xl">
-            {headings && <TableOfContents headings={headings} />}
+        <article id="start" class="relative">
             <div class="rte prose mx-auto max-w-3xl lg:prose-lg">
+                <Skills
+                    skillset={frontmatter.skillset}
+                    bg={frontmatter.brand.bg}
+                >
+                    <h2 id="skills">Skills</h2>
+                </Skills>
+
+                {
+                    frontmatter.splash && (
+                        <BlockPicture
+                            src={frontmatter.splash.url}
+                            class="my-0"
+                            alt={frontmatter.splash.alt}
+                            credit={frontmatter.splash.credit}
+                        />
+                    )
+                }
+
+                {headings && <TableOfContents headings={resolvedHeadings} />}
                 <slot />
             </div>
             <aside

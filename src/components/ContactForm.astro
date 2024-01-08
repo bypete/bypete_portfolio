@@ -202,8 +202,6 @@ import { Icon } from 'astro-icon/components';
                             if (response.status === 200) {
                                 this.isSent = true;
                                 //window.location.href = '/connect/sent'; //relative to domain
-                            } else {
-                                console.log('fail');
                             }
                         })
                         .catch((error) => console.log(error));

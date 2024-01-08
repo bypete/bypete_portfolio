@@ -13,6 +13,10 @@ cover:
   url: '../../assets/work/afv/listing.jpg'
   alt: 'AFV Estates logo'
   credit: 'AFV Estates Limited'
+splash:
+  url: '../../assets/work/afv/laptop_iphone_front.jpg'
+  alt: 'Laptop and mobile'
+  credit: 'AFV Estates Limited'
 skillset:
   text: 'text-white'
   icon: ''
@@ -36,20 +40,11 @@ skillset:
         - 'UX/UI'
 tags: ['work', 'featured', 'fintech']
 ---
-import BlockPicture from '~/components/Images/BlockPicture.astro';
-import laptop_iphone_front from '../../assets/work/afv/laptop_iphone_front.jpg';
-import Skills from '~/components/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
 import Gallery from '~/components/Lightbox/Gallery.astro'
 import data from '~/data/work/afv.data.json'
 export const components = {ul: UL}
 
-<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg} >
-## Skills
-</Skills>
-
-
-<BlockPicture src={laptop_iphone_front} class="my-0" alt="A profile" credit={frontmatter.title} wrapper={true} />
 
 ## Overview
 

@@ -13,11 +13,11 @@ const { heading } = Astro.props;
     </a>
     {
         heading.subheadings.length > 0 && (
-            <ul>
+            <ol>
                 {heading.subheadings.map((subheading) => (
                     <Astro.self heading={subheading} />
                 ))}
-            </ul>
+            </ol>
         )
     }
 </li>

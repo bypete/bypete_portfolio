@@ -1,6 +1,5 @@
 ---
 const { title, url, pathname, isHeroDark, class: className } = Astro.props;
-// console.log('MenuLink.astro:', isHeroDark);
 const shade = isHeroDark ? 'text-white  ' : 'text-accent';
 const activeState = isHeroDark
     ? 'data-[state=active]:text-slate-white data-[state=active]:ring-brand data-[state=active]:hover:text-slate-800'
