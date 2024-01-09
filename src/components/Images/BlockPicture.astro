@@ -30,7 +30,7 @@ const imageProps = {
 ---
 
 {
-    wrapper || credit ? (
+    wrapper || breakout == true || credit ? (
         <div
             class:list={[
                 'group relative',
@@ -63,7 +63,7 @@ const imageProps = {
                         x-transition:leave-end="opacity-0"
                         x-show="open"
                     >
-                        Credit: {credit}
+                        Credit: <Fragment set:html={credit} />
                     </div>
                 </div>
             )}

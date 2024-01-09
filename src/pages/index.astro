@@ -1,13 +1,14 @@
 ---
 import { Image } from 'astro:assets';
-import slides from '~/data/homepage';
+import { homepageSwiper, roles } from '~/data/homepage';
 import SwiperHomepage from '~/components/Swipers/SwiperHomepage.astro';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import WorkGrid from '~/components/WorkGrid.astro';
 import Hero from '~/components/Hero/Hero.astro';
-import BlockImage from '~/components/Images/BlockImage.astro';
 import Link from '~/components/ui/Link.astro';
 import { Icon } from 'astro-icon/components';
+import Roles from '~/components/Roles.astro';
+
 const title = 'Home page';
 const hero = {
     mode: 'home',
@@ -56,27 +57,7 @@ const formattedPosts = formatBlogPosts(allWork, {
             </Fragment>
 
             <Fragment slot="content">
-                <div class="lg:self-end" x-data="roles()">
-                    <h1
-                        class="font-headline text-2xl lg:text-3xl 2xl:text-[2.125rem]"
-                    >
-                        <span
-                            class="mb-2 block text-white shadow-black/40 text-shadow-emboss"
-                            >I like to <span
-                                x-text="preposition"
-                                class="text-brand">work on</span
-                            ></span
-                        >
-                        <span
-                            class="relative inline-block rounded-tight bg-white px-2 py-1 text-black mix-blend-screen duration-150 lg:px-3 lg:py-1.5"
-                            x-cloak
-                        >
-                            <span x-text="role">Ui</span><span
-                                class="animate-blink font-normal"
-                                x-text="(caret ? '|' : '')"></span>
-                        </span>
-                    </h1>
-                </div>
+                <Roles roles={roles} />
                 <div class="text-white shadow-slate-900 text-shadow-emboss">
                     <p class="mb-4 text-lg">
                         This space has been crafted to demonstrate my abilities,
@@ -102,12 +83,12 @@ const formattedPosts = formatBlogPosts(allWork, {
             </Fragment>
 
             <Fragment slot="visual">
-                <SwiperHomepage slides={slides} />
+                <SwiperHomepage slides={homepageSwiper} />
             </Fragment>
         </Hero>
     </slot>
     <section
-        class="bg-putty bg-gradient-to-b from-white pb-4 md:pb-8"
+        class="from-bkgd-contrast bg-gradient-to-b pb-4 md:pb-8"
         x-data="{ section: false }"
         x-intersect.threshold.10="section = true"
     >
@@ -170,57 +151,3 @@ const formattedPosts = formatBlogPosts(allWork, {
         </div>
     </section>
 </BaseLayout>
-
-<script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('roles', () => ({
-            roleIndex: 0,
-            roleObj: [
-                { preposition: 'work in', role: 'Front-End Development' },
-                { preposition: 'work on', role: 'Ui/UX Design' },
-                { preposition: 'create', role: 'inspired products' },
-                { preposition: 'build', role: 'E-mail layouts' },
-                { preposition: 'oversee', role: 'Content management' },
-            ],
-            role: '',
-            preposition: '',
-            caret: true,
-            typingTimer: null,
-            doneTypingInterval: 6000,
-
-            startTyping() {
-                this.role = '';
-                this.preposition = this.roleObj[this.roleIndex].preposition;
-                this.typingTimer = setInterval(() => {
-                    if (
-                        this.role.length <
-                        this.roleObj[this.roleIndex].role.length
-                    ) {
-                        this.role +=
-                            this.roleObj[this.roleIndex].role[this.role.length];
-                    } else {
-                        clearInterval(this.typingTimer);
-                        setTimeout(() => {
-                            this.typingTimer = setInterval(() => {
-                                if (this.role.length > 0) {
-                                    this.role = this.role.slice(0, -1);
-                                } else {
-                                    clearInterval(this.typingTimer);
-                                    this.preposition = '';
-                                    this.roleIndex =
-                                        (this.roleIndex + 1) %
-                                        this.roleObj.length;
-                                    this.startTyping();
-                                }
-                            }, 25);
-                        }, this.doneTypingInterval);
-                    }
-                }, 75);
-            },
-
-            init() {
-                this.startTyping();
-            },
-        }));
-    });
-</script>

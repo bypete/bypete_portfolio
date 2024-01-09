@@ -7,15 +7,14 @@ const { isHeroDark = false } = Astro.props;
 ---
 
 <header
-    :class="{'banner--freeze' : banner == 'freeze', 'banner--start': banner == 'start', 'banner--up': banner == 'up', 'banner--down ': banner == 'down'}"
+    x-bind:class="{'banner--freeze' : banner == 'freeze', 'banner--start': banner == 'start', 'banner--up': banner == 'up', 'banner--down ': banner == 'down'}"
     x-ref="banner"
     x-data="{ banner:'start', cachedBanner: null, ...stickybanner()}"
     x-init="reactOnScroll()"
     class:list={[
-        'banner fixed top-0 z-banner w-full py-6 delay-150 duration-300',
+        'banner banner--start fixed top-0 z-banner w-full py-6 delay-150 duration-300',
         isHeroDark ? 'hero--dark' : 'hero--light',
     ]}
-    class=""
     @set-banner.window="banner = $event.detail"
     @freeze-banner.window="$refs.banner.classList.add('banner--freeze', $event.detail)"
     @thaw-banner.window="$refs.banner.classList.remove('banner--freeze', $event.detail)"
@@ -36,6 +35,7 @@ const { isHeroDark = false } = Astro.props;
 <Hamburger />
 
 <script>
+    import Alpine from 'alpinejs';
     document.addEventListener('alpine:init', () => {
         Alpine.data('stickybanner', () => ({
             lastScrollTop: 0,

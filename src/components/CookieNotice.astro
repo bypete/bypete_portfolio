@@ -1,5 +1,5 @@
 ---
-import Toast from './Toast.astro';
+import Toast from './ui/Toast.astro';
 import Button from './ui/Button.astro';
 import Link from './ui/Link.astro';
 import { Icon } from 'astro-icon/components';
@@ -29,7 +29,7 @@ const { bg } = Astro.props;
             type="button"
             title="hide"
             @click="freeze(false)"
-            class="-mr-4 -mt-4 rounded-full bg-red-600 p-1 text-white shadow-floated grid-in-close hover:bg-red-800"
+            class="-mr-4 -mt-4 rounded-full bg-warning-light p-1 text-white shadow-floated grid-in-close hover:bg-warning-dark"
         >
             <Icon name="mdi:hide" class="h-4 w-4" />
         </button>
@@ -50,6 +50,7 @@ const { bg } = Astro.props;
 </Toast>
 
 <script>
+    import Alpine from 'alpinejs';
     import Cookies from 'js-cookie';
 
     document.addEventListener('alpine:init', () => {

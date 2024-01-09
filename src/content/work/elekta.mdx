@@ -41,6 +41,7 @@ import Skills from '~/components/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
 import Gallery from '~/components/Lightbox/Gallery.astro'
 export const components = {ul: UL}
+import Note from '~/components/ui/Note.astro'
 
 import data from '~/data/work/elekta.data.json'
 import tablet from '../../assets/work/elekta/tablet.jpg';
@@ -83,4 +84,6 @@ The client was very pleased with the improved performance, aesthetics, and user 
 
 These images have been captured from static templates, but they accurately represent the site that was launched. Fifth dimension (the agency) reformed as K Wearables, a start-up focused on launching the world’s first contactless payment ring, [K Ring](/work/mykring), and this site has since been relinquished.
 
-<p class="note text-base">Client quotes and performance metrics originally published at fifthdimension.com</p>
+<Note theme="note" display="inline-block" hasIcon={true}>
+Client quotes and performance metrics originally published at fifthdimension.com
+</Note>

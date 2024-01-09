@@ -1,11 +1,11 @@
 ---
 const { isHeroDark, class: className } = Astro.props;
-const shade = isHeroDark ? 'bg-gray-800' : 'bg-white';
+const shade = isHeroDark ? 'bg-underlay-dark/90' : 'bg-underlay-light/90';
 ---
 
 <div
     class:list={[
-        'fixed inset-0 z-underlay h-full min-h-screen bg-opacity-90 backdrop-blur-sm backdrop-grayscale',
+        'fixed inset-0 z-underlay h-full min-h-screen backdrop-blur-sm backdrop-grayscale',
         className,
         shade,
     ]}

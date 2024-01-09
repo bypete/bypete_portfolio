@@ -1,0 +1,85 @@
+---
+interface Role {
+    preposition: string;
+    role: string;
+}
+
+export interface Props {
+    roles?: Role[];
+    initialCount?: string;
+}
+
+const { roles, initialCount = 0 } = Astro.props;
+let stringRoles = JSON.stringify(roles);
+stringRoles = stringRoles.replace(/\"/g, "'");
+---
+
+<div class="lg:self-end" x-data={`roles(${stringRoles})`}>
+    <h1 class="font-headline text-2xl lg:text-3xl 2xl:text-[2.125rem]">
+        <span class="mb-2 block text-white shadow-black/40 text-shadow-emboss"
+            >I like to <span x-text="preposition" class="text-brand"
+                >work on</span
+            ></span
+        >
+        <span
+            class="bg-panel text-content relative inline-block rounded-tight px-2 py-1 mix-blend-screen duration-150 lg:px-3 lg:py-1.5"
+            x-cloak
+        >
+            <span x-text="role">Ui</span><span
+                class="animate-blink font-normal"
+                x-text="(caret ? '|' : '')"></span>
+        </span>
+    </h1>
+</div>
+
+<script>
+    import Alpine from 'alpinejs';
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('roles', (roleArray) => ({
+            roleIndex: 0,
+            roleArray: [],
+            role: '',
+            preposition: '',
+            caret: true,
+            typingTimer: null,
+            doneTypingInterval: 6000,
+
+            init() {
+                this.roleArray = roleArray;
+                this.startTyping();
+            },
+
+            startTyping() {
+                this.role = '';
+                this.preposition = this.roleArray[this.roleIndex].preposition;
+                this.typingTimer = setInterval(() => {
+                    if (
+                        this.role.length <
+                        this.roleArray[this.roleIndex].role.length
+                    ) {
+                        this.role +=
+                            this.roleArray[this.roleIndex].role[
+                                this.role.length
+                            ];
+                    } else {
+                        clearInterval(this.typingTimer);
+                        setTimeout(() => {
+                            this.typingTimer = setInterval(() => {
+                                if (this.role.length > 0) {
+                                    this.role = this.role.slice(0, -1);
+                                } else {
+                                    clearInterval(this.typingTimer);
+                                    this.preposition = '';
+                                    this.roleIndex =
+                                        (this.roleIndex + 1) %
+                                        this.roleArray.length;
+                                    this.startTyping();
+                                }
+                            }, 25);
+                        }, this.doneTypingInterval);
+                    }
+                }, 75);
+            },
+        }));
+    });
+</script>

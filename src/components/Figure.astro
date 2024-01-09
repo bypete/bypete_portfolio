@@ -1,9 +1,11 @@
 ---
+import { Icon } from 'astro-icon/components';
 const {
     caption = '',
     credit = '',
     class: className,
     grid,
+    bg = 'bg-underlay-light',
     breakout,
     ...attrs
 } = Astro.props;
@@ -11,15 +13,21 @@ import utilities from '~/data/utilities.json';
 ---
 
 <figure
-    class:list={['not-prose', breakout ? utilities.breakout : '']}
+    class:list={[
+        'not-prose',
+        breakout ? utilities.breakout : '',
+        className
+            ? className
+            : `${utilities.margin.y} ${!breakout ? utilities.pull.x : ''}`,
+    ]}
     {...attrs}
 >
     <div
         class:list={[
+            bg,
             grid
                 ? grid
-                : 'grid grid-cols-1 items-center gap-4 bg-gray-50 md:gap-8',
-            utilities.tramline.all,
+                : `grid grid-cols-1 items-center gap-4 md:gap-8 ${utilities.tramline.all} `,
         ]}
     >
         <slot />
@@ -28,12 +36,17 @@ import utilities from '~/data/utilities.json';
         caption && (
             <figcaption
                 class:list={[
-                    'mt-4 flex w-full justify-between border-b border-gray-200 pb-4 text-sm',
+                    'border-outline mt-4 w-full justify-between gap-4 border-b pb-4 text-sm md:flex',
                     utilities.tramline.x,
                 ]}
             >
                 <p>{caption}</p>
-                {credit && <span class="text-xs">{credit}</span>}
+                {credit && (
+                    <span class="grid-cols-icon mt-2 grid items-center gap-1.5 text-2xs/tight md:mt-0 md:items-start">
+                        <Icon name="lucide:camera" class="h-4 w-4" />
+                        <Fragment set:html={credit} />
+                    </span>
+                )}
             </figcaption>
         )
     }

@@ -17,7 +17,7 @@ const {
 ---
 
 <article
-    class="grid grid-cols-1 items-start rounded-sm bg-white grid-areas-listing_work lg:grid-cols-listing_work lg:grid-areas-listing_work_wide"
+    class="bg-panel grid grid-cols-1 items-start rounded-sm grid-areas-listing_work lg:grid-cols-listing_work lg:grid-areas-listing_work_wide"
 >
     <div
         class:list={[
@@ -39,7 +39,7 @@ const {
                 featured && 'text-3xl md:text-5xl',
             ]}
         >
-            <a href={url} class="link text-gray-700" set:html={title} />
+            <a href={url} class="link text-headline" set:html={title} />
         </h2>
         {taster && <p set:html={taster} />}
         <Tags

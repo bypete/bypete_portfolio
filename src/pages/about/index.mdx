@@ -11,12 +11,13 @@ hero:
     bg: 'bg-teal-400'
     scrollprompt: true
     isContained: true
+    threshold: 25
     dark: true
 skillset:
-    text: 'text-gray-700'
+    text: 'text-content'
     icon: '[&>li]:before:!text-accent'
-    heading: 'permalink:text-gray-700 permalink:before:text-[#00a3e2]'
-    shadow: 'text-shadow-emboss shadow-white/20'
+    heading: 'permalink:text-heading permalink:before:text-[#00a3e2]'
+    shadow: 'text-shadow-emboss shadow-panel/20'
     areas:
         - title: 'Front-End Development'
           skills:
@@ -121,8 +122,8 @@ As distribution shifted from physical (PC/Mac CD-ROMs) to online, I transferred 
 
 In 2009, the agency refocused its efforts and established itself as **the** marketing agency for Europe's emerging payments sector. Since then, I've concentrated solely on Front-End development, mostly within the fintech landscape.
 
-<Skills skillset={frontmatter.skillset} bg='bg-white' >
-## Skills I know
+<Skills skillset={frontmatter.skillset} bg='bg-bkgd-page' >
+## Skills
 </Skills>
 
 ## Workflow
@@ -135,8 +136,8 @@ A set of static templates that is well-maintained will bridge the client-develop
 
 Context is essential for a concise translation on multilingual websites. Third-party translators can use a static template listing to follow the user path or view the entire page context without the need for test accounts or sandbox transactions.
 
-<Figure x-data="{compare: true}" grid={['flex flex-col md:flex-row items-center bg-gray-50 gap-8', utilities.tramline.all]} caption='Snapshot of a typical listing index. Clients, developers, and third-party agencies have access to the most recent version of any page.' wrapper="my-4 md:my-8">
-  <Image src={listing_index} alt="Devices view" class="w-full h-auto shadow-md border border-gray-200 hover:cursor-pointer" />
+<Figure caption='Snapshot of a typical listing index. Clients, developers, and third-party agencies have access to the most recent version of any page.'>
+  <Image src={listing_index} alt="Devices view" class="w-full h-auto shadow-md border border-outline hover:cursor-pointer" />
 </Figure>
 
 ## What comes next? 
@@ -146,7 +147,6 @@ This static site was built with [11ty](https://www.11ty.dev/), [Tailwind CSS](ht
 Moving forward, I would be keen to build on my recent experiences and explore a React based framework – probably Next.js or Gatsby.
 
 <BlockPicture src={woodland} class="my-0" alt="Woodland scene" credit="Adobe Photoshop (beta) - Generative fill" wrapper="my-4 md:my-8" />
-
 
 ## Balance and wellbeing
 I love spending time exploring the great outdoors with my family; we have two adventurous young boys, and it gives me great joy to see them thrive in nature. I find that getting away from the interruptions and rhythms of daily life helps me regain a sense of balance and wellbeing.

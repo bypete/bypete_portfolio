@@ -27,7 +27,7 @@ const imageProps = {
 ---
 
 {
-    wrapper || credit.length ? (
+    wrapper || breakout == true || credit.length ? (
         <div class:list={[wrapper || '', breakout ? utilities.breakout : '']}>
             <Image {...imageProps} />
             {credit && `yes there is credit`}

@@ -51,6 +51,7 @@ import Figure from '~/components/Figure.astro'
 import Block from '~/components/Blocks/Block.astro'
 export const components = {ul: UL}
 import utilities from '~/data/utilities.json';
+import Note from '~/components/ui/Note.astro'
 
 import laptop_iphone_front from '../../assets/work/gyl/laptop_iphone_front.jpg';
 import svgbg from '../../icons/contour.svg'
@@ -112,4 +113,6 @@ GYL has a substantial social media presence across multiple platforms and the si
 
 These images have been captured from static templates, but they accurately represent the site that was launched. Fifth dimension (the agency) reformed as K Wearables, a start-up focused on launching the world’s first contactless payment ring, [K Ring](/work/mykring), and this site has since been retired.
 
-<p class="note text-base">Client quotes originally published at fifthdimension.com</p>
+<Note theme="note" display="block" hasIcon={true}>
+Client quotes and performance metrics originally published at fifthdimension.com
+</Note>

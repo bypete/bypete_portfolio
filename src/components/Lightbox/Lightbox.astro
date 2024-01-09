@@ -21,8 +21,8 @@ const {
     id,
     images,
     wrapper = '',
-    bg = 'bg-gray-50',
-    class: ClassName = '',
+    bg = 'bg-underlay-light',
+    class: className,
     breakout,
     ...rest
 } = fm as Props;
@@ -35,8 +35,11 @@ const {
         bg ? bg : '',
         wrapper ? wrapper : '',
         breakout ? utilities.breakout : '',
-        utilities.tramline.all,
-        utilities.margin.y,
+        className
+            ? className
+            : `${utilities.margin.y} ${utilities.tramline.all} ${
+                  !breakout ? utilities.pull.x : ''
+              }`,
     ]}
     {...rest}
     x-data="{ shown: false }"
@@ -57,7 +60,10 @@ const {
     <slot />
 
     <div
-        class="not-prose grid grid-flow-dense auto-rows-[100px] grid-cols-3 gap-4 bg-gray-50 md:auto-rows-[160px] md:grid-cols-4 md:gap-8"
+        class:list={[
+            'not-prose bg-underlay-light grid grid-flow-dense auto-rows-[100px] grid-cols-3 gap-4 md:auto-rows-[160px] md:grid-cols-4 md:gap-8',
+            utilities.margin.t,
+        ]}
     >
         {
             images.map((image, i) => (

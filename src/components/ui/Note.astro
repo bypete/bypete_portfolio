@@ -1,0 +1,92 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { Icon } from 'astro-icon/components';
+
+interface Props extends HTMLAttributes<'button'> {
+    theme?: 'note' | 'alert' | 'attention';
+    class?: string;
+    display?: 'inline-block' | 'block';
+    type?: 'button' | 'submit' | 'reset';
+    hasIcon?: boolean;
+}
+
+const {
+    theme = 'note',
+    class: className,
+    display = 'inline-block',
+    hasIcon = false,
+    ...rest
+} = Astro.props;
+
+const themeSet = {
+    note: {
+        icon: 'lucide:info',
+        bg: 'bg-note',
+        border: 'border-note',
+        inset: 'shadow-note-shade',
+        stroke: 'text-content-light',
+    },
+    alert: {
+        icon: 'alert-triangle',
+        bg: 'bg-alert',
+        border: 'border-alert',
+        inset: 'shadow-alert-shade',
+        stroke: 'text-content-light',
+    },
+    attention: {
+        icon: 'lucide:alert-triangle',
+        bg: 'bg-attention',
+        border: 'border-attention',
+        inset: 'shadow-attention-shade',
+        stroke: 'text-content-dark',
+    },
+};
+---
+
+<div
+    class:list={[
+        'not-prose text-sm/snug',
+        display,
+        className
+            ? className
+            : 'bg-panel text-content items-center justify-center rounded-tight shadow',
+        themeSet[theme].border && `${themeSet[theme].border} border-l-4`,
+    ]}
+    {...rest}
+>
+    {
+        hasIcon ? (
+            <>
+                <div class:list={['grid-cols-icon  grid h-full gap-x-1.5 ']}>
+                    <div
+                        class:list={[
+                            ' border-outline border-r-2 py-1.5 pl-1 pr-2',
+                            themeSet[theme].bg,
+                        ]}
+                    >
+                        <span
+                            class:list={[
+                                'flex items-center justify-center rounded-full p-2 shadow-inner',
+                                themeSet[theme].bg,
+                                themeSet[theme].stroke,
+                                themeSet[theme].inset,
+                            ]}
+                        >
+                            <Icon
+                                name={themeSet[theme].icon}
+                                class="h-auto w-5 "
+                            />
+                        </span>
+                    </div>
+                    <div class="p-1.5 pl-0">
+                        <slot />
+                    </div>
+                </div>
+            </>
+        ) : (
+            <div class="px-2 py-1">
+                <slot />
+            </div>
+        )
+    }
+</div>

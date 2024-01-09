@@ -44,7 +44,7 @@ import MenuLink from './MenuLink.astro';
         class="absolute right-0 mt-3 w-48 origin-top-right"
     >
         <div
-            class="max-h-[calc(100vh-3rem-var(--headerheight))] overflow-y-scroll rounded-tight bg-white shadow-menu shadow-gray-900/25"
+            class="bg-panel max-h-[calc(100vh-3rem-var(--headerheight))] overflow-y-scroll rounded-tight shadow-menu shadow-gray-900/25"
         >
             <slot />
         </div>
@@ -52,6 +52,7 @@ import MenuLink from './MenuLink.astro';
 </li>
 
 <script>
+    import Alpine from 'alpinejs';
     document.addEventListener('alpine:init', () => {
         Alpine.data('menu', () => ({
             open: false,

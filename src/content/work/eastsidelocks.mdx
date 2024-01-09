@@ -42,25 +42,16 @@ skillset:
           - 'UX/UI'
 tags: ['work', 'fintech']
 ---
-import BlockPicture from '~/components/Images/BlockPicture.astro';
 import { Image } from 'astro:assets';
-import Skills from '~/components/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
 import Gallery from '~/components/Lightbox/Gallery.astro'
 import Figure from '~/components/Figure.astro'
 export const components = {ul: UL}
 import utilities from '~/data/utilities.json'
 
-import laptop_iphone_front from '../../assets/work/eastsidelocks/laptop_iphone_front.jpg';
 import vision_detail from '../../assets/work/eastsidelocks/vision--detail.jpg'
 import home_detail from '../../assets/work/eastsidelocks/home--detail.jpg'
 import data from '~/data/work/eastsidelocks.data.json'
-
-
-<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg} >
-## Skills
-</Skills>
-
 
 ## Overview
 
@@ -75,9 +66,9 @@ Eastside Locks, Birmingham was an urban development of over 650,000 sq ft of pri
 -   I assisted in configuring the content management system (Umbraco) and took responsibility for the initial population of all launch content. <span class="label label--info !m-0">collaboration</span>
 
 
-<Figure class:list={['grid grid-cols-1 items-center bg-gray-50 gap-4 md:gap-8', utilities.tramline.all]} caption='Clear branding was required across all media formats' credit={frontmatter.title}>
-  <Image src={home_detail} alt="Homepage view" class="w-full h-auto shadow-md border border-gray-200" />
-  <Image src={vision_detail} alt="Map showing the development plan" class="w-full h-auto shadow-md border border-gray-200" />
+<Figure caption='Clear branding was required across all media formats' credit={frontmatter.title}>
+  <Image src={home_detail} alt="Homepage view" class="w-full h-auto shadow-md border border-outline" />
+  <Image src={vision_detail} alt="Map showing the development plan" class="w-full h-auto shadow-md border border-outline" />
 </Figure>
 
 

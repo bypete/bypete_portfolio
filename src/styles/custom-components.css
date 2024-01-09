@@ -113,13 +113,6 @@
         @apply text-gray-900  hover:bg-white;
     }
 
-    .btn--banner {
-        @apply relative rounded-full border-none px-2.5 py-1  font-medium text-slate-900 transition-all duration-300 hover:bg-slate-600 hover:text-white hover:shadow-bannerlink;
-    }
-    .btn--banner.active {
-        @apply bg-brand  text-slate-900  shadow-bannerlink shadow-brand-darker hover:text-slate-900;
-    }
-
     /* Buttons | Size variants */
     .btn--sm {
         @apply h-7 px-2.5 py-0 text-sm !leading-7;
@@ -196,7 +189,7 @@
 
     /* Placeholders */
     .holder {
-        @apply relative before:absolute before:inset-0 before:border-2 before:border-dashed before:border-gray-200;
+        @apply before:border-outline relative before:absolute before:inset-0 before:border-2 before:border-dashed;
     }
 
     /* Forms 
@@ -217,13 +210,13 @@
 
     .form__input,
     .form__select {
-        @apply block rounded  border border-gray-300 bg-white px-3 py-2 placeholder:text-gray-400  focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-200;
+        @apply bg-panel-contrast/50 focus:bg-panel-contrast  placeholder:text-content/40 border-panel-invert/50 focus:border-panel-invert/50 focus:ring-focus block rounded border  px-3  py-2 focus:outline-none focus:ring-2;
     }
 
     .form__input.error,
     .form__select.error,
     .form__checkbox.error {
-        @apply border-transparent ring-2 ring-red-200 focus:border-blue-500 focus:ring-blue-200;
+        @apply focus:border-focus focus:ring-focus border-transparent ring-2 ring-red-200;
     }
 
     .form__input.readonly {
@@ -231,20 +224,20 @@
     }
 
     .form__textarea {
-        @apply block rounded  border border-gray-300 bg-white px-3 py-2 placeholder:text-gray-400  focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-200;
+        @apply focus:border-focus focus:ring-focus  block rounded border border-gray-300 bg-white px-3  py-2 placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2;
     }
 
     .form__checkbox {
-        @apply rounded border border-gray-400 px-2 py-2 text-accent focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200;
+        @apply focus:border-focus focus:ring-focus rounded border border-gray-400 px-2 py-2 text-accent focus:outline-none focus:ring-2;
     }
 
     .form__checkbox,
     .form__radio {
-        @apply border border-gray-400 px-2 py-2 text-accent focus:border-blue-500 focus:outline-none  focus:ring-2 focus:ring-blue-200;
+        @apply focus:border-focus focus:ring-focus border border-gray-400 px-2 py-2 text-accent  focus:outline-none focus:ring-2;
     }
 
     .form__divider {
-        @apply -mx-4 my-8 border-gray-200 lg:mx-0 lg:w-full;
+        @apply border-outline -mx-4 my-8 lg:mx-0 lg:w-full;
     }
 
     .form__divider--panel {
@@ -280,39 +273,6 @@
         @apply rounded bg-slate-900 p-2 text-white;
     }
 
-    /* Notes
----------------------------------------------------------------------------------*/
-    .note {
-        @apply inline-block rounded border border-yellow-100 bg-yellow-50 px-2 py-1;
-    }
-
-    .note--alert {
-        @apply rounded border-attention bg-red-600;
-    }
-
-    .note--attention {
-        @apply border border-yellow-300 bg-yellow-300;
-    }
-
-    .note--promo {
-        @apply border border-dashed border-black bg-yellow-300 px-1.5 py-1 font-bold;
-    }
-
-    .note--help,
-    .note--error {
-        @apply relative block pl-5 text-sm leading-note;
-    }
-
-    .note--error {
-        @apply text-red-600 before:absolute before:left-0 before:block before:font-awesome before:text-base
-  before:font-black before:not-italic before:leading-inherit before:content-['\f06a'];
-    }
-
-    .note--help {
-        @apply before:absolute before:left-0 before:block before:font-awesome before:text-base before:font-black
-before:not-italic before:leading-inherit before:text-blue-500 before:content-['\f05a'];
-    }
-
     /* Lists
 ---------------------------------------------------------------------------------*/
 
@@ -327,7 +287,7 @@ before:not-italic before:leading-inherit before:text-blue-500 before:content-['\
     }
 
     .list--underlined li {
-        @apply border-b border-gray-300 last:border-0;
+        @apply border-b border-gray-300  last:border-0;
     }
 
     .list--bullet li,
@@ -390,7 +350,7 @@ before:block before:text-[1.5em] before:leading-none before:text-accent md:text-
     }
 
     .label--alert {
-        @apply border-red-600 bg-red-600 text-white;
+        @apply border-red-600 bg-warning text-white;
     }
 
     /* Pagination
@@ -416,7 +376,7 @@ before:block before:text-[1.5em] before:leading-none before:text-accent md:text-
     }
 
     .pagination .active {
-        @apply relative z-10 items-center border border-gray-300 bg-white px-4 py-2 text-sm font-bold  ring-1 ring-blue-200;
+        @apply ring-focus relative z-10 items-center border border-gray-300 bg-white px-4 py-2 text-sm  font-bold ring-1;
     }
 
     /* Media

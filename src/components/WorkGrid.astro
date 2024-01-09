@@ -19,7 +19,7 @@ const {
 <div class="holder flex rounded-tight">
     <a
         href={url}
-        class="group relative flex w-full flex-col rounded-tight bg-white no-underline shadow-md transition-all duration-700 hover:no-underline hover:shadow-cardhover hover:duration-300 md:ring-white md:hover:ring-2"
+        class="bg-panel group relative flex w-full flex-col rounded-tight no-underline shadow-md transition-all duration-700 hover:no-underline hover:shadow-cardhover hover:duration-300 md:ring-white md:hover:ring-2"
         x-data="{ shown: false }"
         x-intersect.threshold.10="shown = true"
         x-bind:class="shown ? 'animate-appear' : 'invisible'"

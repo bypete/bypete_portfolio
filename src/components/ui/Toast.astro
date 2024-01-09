@@ -10,7 +10,7 @@ const { bg } = Astro.props;
     <div
         class:list={[
             'rounded-tight  shadow shadow-slate-900/75',
-            bg || 'bg-gradient-to-b from-white to-neutral-200',
+            bg || 'to-panel-contrast from-panel bg-gradient-to-b',
         ]}
     >
         <slot />

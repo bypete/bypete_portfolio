@@ -23,7 +23,7 @@ const toc = buildToc(headings);
 >
     <div
         x-data="toc()"
-        class="relative w-full rounded border border-gray-200 bg-white px-4 py-2 transition-all duration-300 md:w-auto"
+        class="bg-panel border-outline relative w-full rounded border px-4 py-2 transition-all duration-300 md:w-auto"
         x-bind:class="open ? 'grow' : ''"
         x-sticky="shadow-3xl shadow-black/5 rounded-t-none"
     >
@@ -38,7 +38,7 @@ const toc = buildToc(headings);
             <div
                 x-cloak
                 x-show="open"
-                class="absolute left-0 top-0 block max-h-[calc(100vh-var(--headerheight))] w-full overflow-y-scroll rounded border border-gray-200 bg-white px-4 py-2 transition-all duration-300"
+                class="bg-panel border-outline absolute left-0 top-0 block max-h-[calc(100vh-var(--headerheight))] w-full overflow-y-scroll rounded border px-4 py-2 transition-all duration-300"
             >
                 <ol>
                     {

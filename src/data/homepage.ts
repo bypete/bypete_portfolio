@@ -1,19 +1,18 @@
-import slide1 from "~/assets/homepage/profile__cutout--circle.png";
-import slide2 from "~/assets/homepage/slide__3mobile.png";
-import slide3 from "~/assets/homepage/slide__laptop.png";
-import slide4 from "~/assets/homepage/slide__2mobile.png";
-import slide5 from "~/assets/homepage/slide__ipad.png";
-
 export interface SwiperImage {
-  src: string
-  title: string
+  src: string | ImageMetadata
   alt: string
   url?: string
   wrapper?: string
   class?: string
 }
 
-const homepageSwiper: SwiperImage[] = [
+import slide1 from "~/assets/homepage/profile__cutout--circle.png";
+import slide2 from "~/assets/homepage/slide__3mobile.png";
+import slide3 from "~/assets/homepage/slide__laptop.png";
+import slide4 from "~/assets/homepage/slide__2mobile.png";
+import slide5 from "~/assets/homepage/slide__ipad.png";
+
+export const homepageSwiper: SwiperImage[] = [
   {
     src: slide1,
     alt: "Headshot of Peter Wallace",
@@ -38,9 +37,21 @@ const homepageSwiper: SwiperImage[] = [
   },
   {
     src: slide5,
-    alt: "iPad mockup of twotw websit",
+    alt: "iPad mockup of twotw website",
     url: '/work/twotw',
   },
 ];
 
-export default homepageSwiper;
+export interface Activity {
+  preposition: string
+  role: string
+}
+
+export const roles: Activity[] = [
+  { preposition: 'work in', role: 'Front-End Development' },
+  { preposition: 'work on', role: 'Ui/UX Design' },
+  { preposition: 'create', role: 'inspired products' },
+  { preposition: 'build', role: 'E-mail layouts' },
+  { preposition: 'oversee', role: 'Content management' },
+];
+

@@ -101,6 +101,7 @@ export default {
                 listing_work: 'minmax(0, 2fr) minmax(0, 3fr)',
                 logos: 'repeat(auto-fill, minmax(100px, 1fr))',
                 credit: 'auto minmax(auto, 1fr)',
+                icon: 'auto minmax(auto, 1fr)',
                 work: 'repeat(2, minmax(0, 1fr))',
                 social: 'repeat(auto-fit, minmax(0, 48px))',
                 workcontianer:
@@ -362,47 +363,95 @@ export default {
             colors: {
                 transparent: 'transparent',
                 current: 'currentColor',
+                content: {
+                    DEFAULT: 'rgb(var(--color-content) / <alpha-value>)',
+                    invert: 'rgb(var(--color-content-invert) / <alpha-value>)',
+                    light: 'rgb(var(--color-content-light) / <alpha-value>)',
+                    dark: 'rgb(var(--color-content-dark) / <alpha-value>)',
+                },
+                focus: 'rgb(var(--color-focus) / <alpha-value>)',
+                link: {
+                    DEFAULT: 'rgb(var(--color-link) / <alpha-value>)',
+                },
+                bkgd: {
+                    DEFAULT: 'rgb(var(--color-bkgd-page) / <alpha-value>)',
+                    page: 'rgb(var(--color-bkgd-page) / <alpha-value>)',
+                    contrast: 'rgb(var(--color-bkgd-contrast) / <alpha-value>)',
+                },
+                underlay: {
+                    light: 'rgb(var(--color-underlay-light) / <alpha-value>)',
+                    dark: 'rgb(var(--color-underlay-dark) / <alpha-value>)',
+                },
+                overlay: {
+                    light: 'rgb(var(--color-overlay-light) / <alpha-value>)',
+                    dark: 'rgb(var(--color-overlay-dark) / <alpha-value>)',
+                },
+                panel: {
+                    contrast:
+                        'rgb(var(--color-panel-contrast) / <alpha-value>)',
+                    invert: 'rgb(var(--color-panel-invert) / <alpha-value>)',
+                    DEFAULT: 'rgb(var(--color-panel) / <alpha-value>)',
+                },
+                outline: {
+                    pale: 'rgb(var(--color-outline-pale) / <alpha-value>)',
+                    DEFAULT: 'rgb(var(--color-outline) / <alpha-value>)',
+                    hard: 'rgb(var(--color-outline-hard) / <alpha-value>)',
+                },
+                note: {
+                    DEFAULT: 'rgb(var(--color-note) / <alpha-value>)',
+                    shade: 'rgb(var(--color-note-shade) / <alpha-value>)',
+                },
+                alert: {
+                    DEFAULT: 'rgb(var(--color-alert) / <alpha-value>)',
+                    shade: 'rgb(var(--color-alert-shade) / <alpha-value>)',
+                },
+                attention: {
+                    DEFAULT: 'rgb(var(--color-attention) / <alpha-value>)',
+                    shade: 'rgb(var(--color-attention-shade) / <alpha-value>)',
+                },
+                footer: {
+                    light: 'rgb(var(--color-footer-light) / <alpha-value>)',
+                    DEFAULT: 'rgb(var(--color-footer) / <alpha-value>)',
+                    dark: 'rgb(var(--color-footer-dark) / <alpha-value>)',
+                },
+                warning: {
+                    light: 'rgb(var(--color-warning-light) / <alpha-value>)',
+                    DEFAULT: 'rgb(var(--color-warning) / <alpha-value>)',
+                    dark: 'rgb(var(--color-warning-dark) / <alpha-value>)',
+                },
                 brand: {
-                    lightest: '#ffe04d',
-                    lighter: '#ffdb33',
-                    light: '#ffd71a',
-                    DEFAULT: '#ffd200', // Brand yellow / #ffd200 https://www.colorhexa.com/ffd200
-                    dark: '#e6bd00',
-                    darker: '#cca800',
-                    darkest: '#b39300',
+                    lightest:
+                        'rgb(var(--color-brand-lightest) / <alpha-value>)',
+                    light: 'rgb(var(--color-brand-light) / <alpha-value>)',
+                    DEFAULT: 'rgb(var(--color-brand) / <alpha-value>)',
+                    dark: 'rgb(var(--color-brand-dark) / <alpha-value>)',
+                    darkest: 'rgb(var(--color-brand-darkest) / <alpha-value>)',
                 },
-                // accent: {
-                //   light: '#38bdf8', // sky-400
-                //   DEFAULT: '#0EA5E9', // sky-500
-                //   dark: '#fab914', // sky-600
-                // },
                 accent: {
-                    light: '#ff006a',
-                    DEFAULT: '#e6005f', // Accent Magenta / #e6005f https://www.colorhexa.com/e6005f
-                    dark: '#cd0054',
+                    light: 'rgb(var(--color-accent-light) / <alpha-value>)',
+                    DEFAULT: 'rgb(var(--color-accent) / <alpha-value>)',
+                    dark: 'rgb(var(--color-accent-dark) / <alpha-value>)',
                 },
-                putty: {
-                    light: '#fdfdfc',
-                    DEFAULT: '#f5f4f0', // https://www.colorhexa.com/f5f4f0
-                    dark: '#ebe9e1',
-                },
-                colorblock: {
-                    1: '#145364', // dark blue
-                    2: '#fd703b', // orange
-                    3: '#fe9b3d', // light orange
-                    4: '#fdca3b', // yellow
-                },
-                attention: '#ffff00',
             },
             // https://github.com/tailwindlabs/tailwindcss-typography/blob/master/src/styles.js
             typography: (theme) => ({
                 DEFAULT: {
                     css: {
-                        color: theme('colors.gray.700'),
+                        '--tw-prose-body': 'rgb(var(--color-content))',
+                        '--tw-prose-headings': 'rgb(var(--color-headline))',
+                        '--tw-prose-bold': 'rgb(var(--color-content))',
+                        '--tw-prose-code': 'rgb(var(--color-content))',
+                        '--tw-prose-quotes': 'rgb(var(--color-blockquote))',
+                        code: {
+                            background: 'rgb(var(--color-outline))',
+                            padding: [theme('spacing.[1.5]')],
+                            'border-radius': [theme('spacing.tight')],
+                            border: '1px solid rgb(var(--color-outline-hard))',
+                        },
                         a: {
-                            color: '#FF0069',
+                            color: 'rgb(var(--color-accent))',
                             '&:hover': {
-                                color: '#ff3387',
+                                color: 'rgb(var(--color-accent-dark))',
                             },
                         },
                         img: null,
