@@ -136,23 +136,19 @@
         }
         &--freeze {
             @apply translate-y-0 duration-0;
-            .banner__logo {
-                /* @apply max-md:my-4; */
-            }
         }
         .hero--light& {
             &--up {
-                @apply bg-white;
+                @apply bg-herolight-header-up;
             }
         }
 
         .hero--dark& {
-            @apply bg-slate-900;
             &--start,
             &--down {
-                @apply bg-transparent;
             }
             &--up {
+                @apply bg-herodark-header-up;
             }
             &__logo {
                 @apply shadow-black/50 drop-shadow-logo;
@@ -160,36 +156,9 @@
         }
     }
 
-    /* Menu links */
-    .menulink {
-        @apply flex h-full items-center rounded-full text-base/none font-medium transition duration-150 focus:outline-none focus:ring-2;
-        &__toggle {
-            @apply bg-white text-accent  focus:bg-white focus:text-slate-800;
-        }
-
-        .hero--light & {
-            @apply text-accent hover:bg-white hover:text-slate-800 focus:bg-white  focus:text-slate-800;
-            &[data-state='active'] {
-                @apply text-slate-800 ring-2 ring-brand  hover:text-slate-800;
-            }
-            .menulink__toggle {
-                @apply text-slate-800;
-            }
-        }
-        .hero--dark & {
-            @apply text-white hover:bg-white hover:text-slate-800 focus:bg-white  focus:text-slate-800;
-            &[data-state='active'] {
-                @apply text-white ring-2 ring-brand  hover:text-slate-800;
-            }
-            .menulink__toggle {
-                @apply text-slate-800;
-            }
-        }
-    }
-
     /* Placeholders */
     .holder {
-        @apply before:border-outline relative before:absolute before:inset-0 before:border-2 before:border-dashed;
+        @apply relative before:absolute before:inset-0 before:border-2 before:border-dashed before:border-outline;
     }
 
     /* Forms 
@@ -210,13 +179,13 @@
 
     .form__input,
     .form__select {
-        @apply bg-panel-contrast/50 focus:bg-panel-contrast  placeholder:text-content/40 border-panel-invert/50 focus:border-panel-invert/50 focus:ring-focus block rounded border  px-3  py-2 focus:outline-none focus:ring-2;
+        @apply block rounded  border border-panel-invert/50 bg-panel-contrast/50 px-3 py-2 placeholder:text-content/40 focus:border-panel-invert/50  focus:bg-panel-contrast  focus:outline-none focus:ring-2 focus:ring-focus;
     }
 
     .form__input.error,
     .form__select.error,
     .form__checkbox.error {
-        @apply focus:border-focus focus:ring-focus border-transparent ring-2 ring-red-200;
+        @apply border-transparent ring-2 ring-red-200 focus:border-focus focus:ring-focus;
     }
 
     .form__input.readonly {
@@ -224,20 +193,20 @@
     }
 
     .form__textarea {
-        @apply focus:border-focus focus:ring-focus  block rounded border border-gray-300 bg-white px-3  py-2 placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2;
+        @apply block rounded  border border-gray-300 bg-white px-3 py-2 placeholder:text-gray-400  focus:border-focus focus:bg-white focus:outline-none focus:ring-2 focus:ring-focus;
     }
 
     .form__checkbox {
-        @apply focus:border-focus focus:ring-focus rounded border border-gray-400 px-2 py-2 text-accent focus:outline-none focus:ring-2;
+        @apply rounded border border-gray-400 px-2 py-2 text-accent focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus;
     }
 
     .form__checkbox,
     .form__radio {
-        @apply focus:border-focus focus:ring-focus border border-gray-400 px-2 py-2 text-accent  focus:outline-none focus:ring-2;
+        @apply border border-gray-400 px-2 py-2 text-accent focus:border-focus focus:outline-none  focus:ring-2 focus:ring-focus;
     }
 
     .form__divider {
-        @apply border-outline -mx-4 my-8 lg:mx-0 lg:w-full;
+        @apply -mx-4 my-8 border-outline lg:mx-0 lg:w-full;
     }
 
     .form__divider--panel {
@@ -342,15 +311,15 @@ before:block before:text-[1.5em] before:leading-none before:text-accent md:text-
     }
 
     .label--info {
-        @apply border border-brand bg-brand;
+        @apply border border-brand bg-brand text-content-dark;
     }
 
     .label--disabled {
-        @apply border border-gray-300 bg-gray-300 text-gray-500;
+        @apply border border-gray-300 bg-gray-300 text-content-dark/25;
     }
 
     .label--alert {
-        @apply border-red-600 bg-warning text-white;
+        @apply border-red-600 bg-warning text-content-light;
     }
 
     /* Pagination
@@ -376,7 +345,7 @@ before:block before:text-[1.5em] before:leading-none before:text-accent md:text-
     }
 
     .pagination .active {
-        @apply ring-focus relative z-10 items-center border border-gray-300 bg-white px-4 py-2 text-sm  font-bold ring-1;
+        @apply relative z-10 items-center border border-gray-300 bg-white px-4 py-2 text-sm font-bold  ring-1 ring-focus;
     }
 
     /* Media

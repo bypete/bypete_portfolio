@@ -1,27 +1,20 @@
 ---
 const { title, url, pathname, isHeroDark, class: className } = Astro.props;
-const shade = isHeroDark ? 'text-white  ' : 'text-accent';
+const shade = isHeroDark
+    ? 'text-herodark-menul1 hover:text-herodark-active focus:text-herodark-active'
+    : 'text-herolight-menul1 hover:text-herolight-active focus:text-herolight-active';
 const activeState = isHeroDark
-    ? 'data-[state=active]:text-slate-white data-[state=active]:ring-brand data-[state=active]:hover:text-slate-800'
-    : 'data-[state=active]:text-slate-800 data-[state=active]:ring-brand data-[state=active]:hover:text-slate-800';
+    ? ' data-[state=active]:ring-herodark-highlight data-[state=active]:hover:text-herodark-menul1 data-[state=active]:hover:bg-transparent'
+    : ' data-[state=active]:ring-herolight-highlight data-[state=active]:hover:text-herolight-menul1';
 ---
 
 <a
     href={url}
     class:list={[
-        'menulink p-2 ring-transparent hover:bg-white hover:text-slate-800 focus:bg-white focus:text-slate-800',
+        'flex h-full items-center rounded-full p-2 text-base/none font-medium ring-2 ring-transparent transition duration-150 hover:bg-panel focus:bg-panel focus:outline-none',
         className,
         shade,
         activeState,
     ]}
     data-state={pathname === url ? 'active' : ''}>{title}</a
 >
-
-<style is:global>
-    .menulink {
-        @apply flex h-full items-center rounded-full text-base/none font-medium ring-2 transition duration-150 focus:outline-none;
-        &__toggle {
-            @apply bg-white text-accent focus:bg-white focus:text-slate-800;
-        }
-    }
-</style>

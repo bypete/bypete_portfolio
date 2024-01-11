@@ -4,11 +4,28 @@
         --color-bkgd-page: 250 250 250; /* zinc-50 */
         --color-bkgd-contrast: 250 250 250; /* putty | https://www.colorhexa.com/f5f4f0 */
 
+        --color-header: transparent; /* transparent */
+
+        --color-herolight-menul1: 230 0 95; /* Accent Magenta / #e6005f */
+        --color-herolight-menul2: 55 65 81; /* gray-700 */
+        --color-herolight-active: 55 65 81; /* gray-700 */
+        --color-herolight-highlight: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-herolight-header-up: 255 255 255; /* white */
+
+        --color-herodark-menul1: 255 255 255; /* White */
+        --color-herodark-menul2: 255 255 255; /* White */
+        --color-herodark-active: 55 65 81; /* gray-700 */
+        --color-herodark-highlight: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-herodark-header-up: 15 23 42; /* slate-950 */
+
+        --color-childlink: 55 65 81; /* gray-700 */
+        --color-childlink-herodark: 55 65 81; /* gray-700 */
+
         --color-underlay-light: 249 250 251; /* gray-50  */
         --color-underlay-dark: 24 24 27; /* zinc-800  */
 
         --color-overlay-light: 249 250 251; /* gray-50  */
-        --color-overlay-dark: 24 24 27; /* zinc-800  */
+        --color-overlay-dark: 24 24 27; /* zinc-800 */
 
         --color-panel-contrast: 244 244 245; /* zinc-100 */
         --color-panel: 255 255 255; /* white */
@@ -22,8 +39,11 @@
         --color-footer: 15 23 42; /* slate 900 */
         --color-footer-dark: 2 6 23; /* slate 950 */
 
-        --color-note: 56 189 248; /* sky-400 */
-        --color-note-shade: 2 132 199; /* sky-600 */
+        --color-note: 254 240 138; /* yellow-200 */
+        --color-note-shade: 250 204 21; /* yellow-400 */
+
+        --color-info: 56 189 248; /* sky-400 */
+        --color-info-shade: 2 132 199; /* sky-600 */
 
         --color-alert: 220 38 38; /* red-600 */
         --color-alert-shade: 153 27 27; /* red-800 */
@@ -67,8 +87,22 @@
         --color-underlay-light: 39 39 42; /* zinc-800  */
         --color-underlay-dark: 9 9 11; /* zinc 950  */
 
-        --color-bkgd-page: 24 24 27; /* zinc-900 */
+        --color-bkgd-page: 39 39 42; /* zinc-800 */
         --color-bkgd-contrast: 63 63 70; /* zinc 700 */
+
+        --color-header: transparent; /* transparent */
+
+        --color-herolight-menul1: 230 0 95; /* Accent Magenta / #e6005f */
+        --color-herolight-menul2: 55 65 81; /* gray-700 */
+        --color-herolight-active: 55 65 81; /* gray-700 */
+        --color-herolight-highlight: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-herolight-header-up: 255 255 255; /* white */
+
+        --color-herodark-menul1: 228 228 231; /* zinc-200 */
+        --color-herodark-menul2: 255 255 255; /* White */
+        --color-herodark-active: 255 255 255; /* White */
+        --color-herodark-highlight: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-herodark-header-up: 7 7 8; /* zinc darkest hsl(240, 10%, 3%) */
 
         --color-overlay-light: 39 39 42; /* zinc-800  */
         --color-overlay-dark: 9 9 11; /* zinc 950  */
@@ -89,8 +123,11 @@
         --color-footer: 24 24 27; /* zinc 900 */
         --color-footer-dark: 9 9 11; /* zinc 950 */
 
-        --color-note: 56 189 248; /* sky-400 */
-        --color-note-shade: 2 132 199; /* sky-600 */
+        --color-info: 2 132 199; /* sky-600 */
+        --color-info-shade: 7 89 133; /* sky-800 */
+
+        --color-note: 253 224 71; /* yellow-300 */
+        --color-note-shade: 234 179 8; /* yellow-500 */
 
         --color-alert: 220 38 38; /* red-600 */
         --color-alert-shade: 153 27 27; /* red-800 */

@@ -338,6 +338,7 @@ export default {
                 cookie: '0px 2px 5px -1px var(--tw-shadow-color) ,  0px 0px 100px 25px var(--tw-shadow-color)',
                 thumb: 'var(--tw-shadow-color) 0px 2px 5px -1px, var(--tw-shadow-color) 0px 1px 3px -1px',
                 inset: 'inset 0 2px 2px -1px rgba(35,31,32,.25)',
+                icon: 'inset 0 2px 6px -1px var(--tw-shadow-color)',
                 smframe:
                     '0px 0px 10px 5px var(--tw-shadow-color), 0px 0px 30px 0px var(--tw-shadow-color), 0px 0px 3px 3px var(--tw-shadow-color)',
                 frame: '0px 4px 12px 0px var(--tw-shadow-color)',
@@ -378,6 +379,39 @@ export default {
                     page: 'rgb(var(--color-bkgd-page) / <alpha-value>)',
                     contrast: 'rgb(var(--color-bkgd-contrast) / <alpha-value>)',
                 },
+                header: {
+                    DEFAULT: 'transparent',
+                    up: 'rgb(var(--color-header-up) / <alpha-value>)',
+                },
+                herolight: {
+                    menul1: 'rgb(var(--color-herolight-menul1) / <alpha-value>)',
+                    menul2: 'rgb(var(--color-herolight-menul2) / <alpha-value>)',
+                    active: 'rgb(var(--color-herolight-active) / <alpha-value>)',
+                    highlight:
+                        'rgb(var(--color-herolight-highlight) / <alpha-value>)',
+                    'header-up':
+                        'rgb(var(--color-herolight-header-up) / <alpha-value>)',
+                },
+                herodark: {
+                    menul1: 'rgb(var(--color-herodark-menul1) / <alpha-value>)',
+                    menul2: 'rgb(var(--color-herodark-menul2) / <alpha-value>)',
+                    active: 'rgb(var(--color-herodark-active) / <alpha-value>)',
+                    highlight:
+                        'rgb(var(--color-herodark-highlight) / <alpha-value>)',
+                    'header-up':
+                        'rgb(var(--color-herodark-header-up) / <alpha-value>)',
+                },
+                menulink: {
+                    DEFAULT: 'rgb(var(--color-menulink) / <alpha-value>)',
+                    active: 'rgb(var(--color-menulink-active) / <alpha-value>)',
+                    herodark:
+                        'rgb(var(--color-menulink-herodark) / <alpha-value>)',
+                },
+                childlink: {
+                    DEFAULT: 'rgb(var(--color-childlink) / <alpha-value>)',
+                    herodark:
+                        'rgb(var(--color-childlink-herodark) / <alpha-value>)',
+                },
                 underlay: {
                     light: 'rgb(var(--color-underlay-light) / <alpha-value>)',
                     dark: 'rgb(var(--color-underlay-dark) / <alpha-value>)',
@@ -396,6 +430,10 @@ export default {
                     pale: 'rgb(var(--color-outline-pale) / <alpha-value>)',
                     DEFAULT: 'rgb(var(--color-outline) / <alpha-value>)',
                     hard: 'rgb(var(--color-outline-hard) / <alpha-value>)',
+                },
+                info: {
+                    DEFAULT: 'rgb(var(--color-info) / <alpha-value>)',
+                    shade: 'rgb(var(--color-info-shade) / <alpha-value>)',
                 },
                 note: {
                     DEFAULT: 'rgb(var(--color-note) / <alpha-value>)',
