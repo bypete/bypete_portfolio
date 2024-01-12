@@ -72,7 +72,7 @@ import bg_teal_sm from '~/assets/hero/concrete--teal@sm.webp';
 import google_lens from '~/assets/google-lens.jpg';
 import { Image } from 'astro:assets';
 import Figure from '~/components/Figure.astro'
-import BlockImage from '~/components/Images/BlockImage.astro';
+import HeroImage from '~/components/Images/HeroImage.astro';
 import BlockPicture from '~/components/Images/BlockPicture.astro';
 import { Icon } from 'astro-icon/components';
 
@@ -98,7 +98,7 @@ import { Icon } from 'astro-icon/components';
         <div class="absolute aspect-1 h-full w-auto animate-morph-delay border border-white/30"></div>
         <div class="absolute aspect-1 h-full w-auto animate-morph border border-white/95"></div>
         <div class="h-full w-full" x-bind:class="shown ? 'animate-stretch' : 'invisible'">
-            <BlockImage
+            <HeroImage
               src={imgProfile__hd}
               class="relative w-full h-full object-contain object-bottom"
               alt="Profile headshot"
@@ -122,7 +122,7 @@ As distribution shifted from physical (PC/Mac CD-ROMs) to online, I transferred 
 
 In 2009, the agency refocused its efforts and established itself as **the** marketing agency for Europe's emerging payments sector. Since then, I've concentrated solely on Front-End development, mostly within the fintech landscape.
 
-<Skills skillset={frontmatter.skillset} bg='bg-bkgd-page' >
+<Skills skillset={frontmatter.skillset} bg='bg-page' >
 ## Skills
 </Skills>
 

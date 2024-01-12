@@ -139,7 +139,7 @@
         }
         .hero--light& {
             &--up {
-                @apply bg-herolight-header-up;
+                @apply bg-header-up;
             }
         }
 
@@ -148,7 +148,7 @@
             &--down {
             }
             &--up {
-                @apply bg-herodark-header-up;
+                @apply bg-headerdark-up;
             }
             &__logo {
                 @apply shadow-black/50 drop-shadow-logo;

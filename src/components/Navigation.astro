@@ -8,27 +8,43 @@ const allPosts = await getCollection('work');
 const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1); // remove the first "/"
 
-const { isHeroDark = false } = Astro.props;
+const { class: ClassList, isHeroDark = false } = Astro.props;
 ---
 
-<nav id="navigation" aria-label="Main">
+<nav
+    id="navigation"
+    aria-label="Main"
+    class:list={[ClassList ? ClassList : '']}
+>
     <ul class="hidden space-x-2 md:flex" x-ref="menu">
         <li>
             <MenuLink url={`/about`} title="About" {pathname} {isHeroDark} />
         </li>
         <MenuDropdown url={`/work`} title="Work" {pathname} {isHeroDark}>
             {
-                allPosts.map((post) => (
-                    <MenuLinkChild
-                        url={`/work/${post.slug}/`}
-                        title={post.data.title}
-                        {pathname}
-                        {currentPath}
-                    />
-                ))
+                (
+                    <ul
+                        class:list={[
+                            '',
+                            allPosts.length > 6
+                                ? 'grid-cols-dropmenu m-1.5 grid w-auto max-w-[500px] gap-1.5'
+                                : 'm-1.5 grid w-auto grid-cols-1 gap-1.5',
+                        ]}
+                    >
+                        {allPosts.map((post) => (
+                            <li>
+                                <MenuLinkChild
+                                    url={`/work/${post.slug}/`}
+                                    title={post.data.title}
+                                    {pathname}
+                                    {currentPath}
+                                />
+                            </li>
+                        ))}
+                    </ul>
+                )
             }
         </MenuDropdown>
-        <!-- <li><MenuLink url={`/blog`} title="Blog" {pathname} {isHeroDark} /></li> -->
         <li>
             <MenuLink
                 url={`/connect`}

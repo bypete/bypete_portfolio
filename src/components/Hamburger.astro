@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import MenuLink from './MenuLink.astro';
+import { Icon } from 'astro-icon/components';
+import MobileLink from './MobileLink.astro';
 import MenuLinkChild from './MenuLinkChild.astro';
 
 const allPosts = await getCollection('work');
@@ -24,12 +25,10 @@ const year = new Date().getFullYear();
     <div class="mr-20 flex h-full w-full flex-col py-6 pl-4">
         <div class="flex-shrink text-left">
             <a href="/" aria-label="byPete - home">
-                <img
-                    src="/img/logos/bypete--white.svg"
-                    height="40"
-                    width="140"
+                <Icon
+                    name="bypete--white"
+                    title="byPete logo in white"
                     class="banner__logo h-10 w-auto !shadow-brand-dark transition-all"
-                    alt="byPete"
                 />
             </a>
         </div>
@@ -38,54 +37,32 @@ const year = new Date().getFullYear();
             class="flex w-full grow flex-col justify-center space-y-3"
         >
             <li class="relative">
-                <MenuLink
-                    url={`/about`}
-                    title="About"
-                    {pathname}
-                    {isHeroDark}
-                />
-                <!-- <a class="w-full block py-0.5 font-headline font-black text-4xl tracking-tight data-[state=active]:text-white" href="/About" >About</a> -->
-            </li>
-            <li>
-                <MenuLink url={`/blog`} title="Blog" {pathname} {isHeroDark} />
+                <MobileLink url={`/about`} title="About" {pathname} />
             </li>
 
             <li x-data="{ open: false }">
                 <div class="relative flex items-center justify-between">
-                    <a
-                        href="{{ entry.url }}"
-                        class="block font-headline text-4xl font-black tracking-tight data-[state=active]:text-white"
-                        >title</a
-                    >
+                    <MobileLink url={`/work`} title="Work" {pathname} />
                     <button
                         @click="open = !open"
-                        class="flex h-10 w-10 items-center justify-center rounded-full p-0 focus:outline-none"
-                        :class="{ 'bg-white': open }"
+                        class="text-menusm flex h-10 w-10 items-center justify-center rounded-full p-0 transition-transform duration-700 focus:outline-none"
+                        :class="{'rotate-45': open, 'rotate-0': !open}"
                     >
-                        <svg
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            :class="{'rotate-180': open, 'rotate-0': !open}"
-                            class="inline h-8 w-8 transform transition-transform duration-200"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd"
-                            >
-                            </path>
-                        </svg>
+                        <Icon
+                            name="lucide:plus-circle"
+                            class="inline h-8 w-8 transform duration-200"
+                        />
                     </button>
                 </div>
                 <div
                     x-cloak
                     x-ref="children"
-                    class="h-0 w-full origin-top transition-all duration-500"
+                    class="h-0 w-full origin-top transition-all duration-700"
                     :class="open ? 'overflow-auto mt-2' : 'overflow-hidden pointer-events-none' "
                     :style="open ? {height: `${$refs.children.scrollHeight}px`} : {height: `0px`}"
                 >
                     <div
-                        class="max-h-[33vh] overflow-y-scroll rounded-tight bg-white p-2 shadow-inner shadow-gray-200"
+                        class="max-h-[33vh] overflow-y-scroll rounded-tight bg-panel p-2 shadow-inner shadow-panel-contrast"
                     >
                         {
                             allPosts.map((post) => (
@@ -97,15 +74,14 @@ const year = new Date().getFullYear();
                                 />
                             ))
                         }
-                        <!-- <a class="block px-2 py-1.5 text-base font-light text-slate-700 hover:bg-white focus:bg-white focus:outline-none focus:ring-1 data-[state=active]:font-bold  data-[state=active]:bg-brand " href="{{ child.url }}" >title</a> -->
                     </div>
                 </div>
             </li>
             <li class="relative">
-                <MenuLink url={`/blog`} title="Blog" {pathname} {isHeroDark} />
+                <MobileLink url={`/connect`} title="Connect" {pathname} />
             </li>
         </ul>
-        <ul class="-mx-2 mt-8 inline-flex">
+        <ul class="text-menusm -mx-2 mt-8 inline-flex">
             <li class="border-r border-white px-2 last:border-0">©{year}</li>
             <li class="border-r border-white px-2 last:border-0">
                 <a href="/about/legal" class="link">Legal notices</a>

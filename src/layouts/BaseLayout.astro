@@ -47,7 +47,7 @@ import '~/styles/tailwind.css';
     </head>
     <body
         class:list={[
-            'relative flex min-h-screen max-w-full scroll-pt-[var(--headerheight)]  overflow-x-hidden bg-bkgd-page  font-Roboto text-content antialiased',
+            'bg-page relative flex min-h-screen max-w-full  scroll-pt-[var(--headerheight)] overflow-x-hidden  font-Roboto text-content antialiased',
         ]}
         x-data="{ pageTop: false, smNav: false, showOverlay: false, showUnderlay: false, }"
         x-ref="body"
@@ -60,7 +60,7 @@ import '~/styles/tailwind.css';
             class="grid w-full grid-cols-1 grid-rows-[auto,1fr,auto]"
         >
             <Header {isHeroDark} />
-            <div class="bg-bkgd-page outline-none">
+            <div class="bg-page outline-none">
                 <slot name="hero">
                     <Hero {...hero} />
                 </slot>

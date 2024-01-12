@@ -90,6 +90,7 @@ export default {
                 toast: ['message close', 'action action'],
             },
             gridTemplateColumns: {
+                header: '1fr, auto, 1fr',
                 featuredcard: '2fr 1fr',
                 // listing: '48px 1fr',
                 block33: 'minmax(0, 1fr) minmax(0, 2fr)',
@@ -99,6 +100,7 @@ export default {
                 block66: 'minmax(0, 2fr) minmax(0, 1fr)',
                 listing: 'minmax(0, 2fr) minmax(0, 1fr)',
                 listing_work: 'minmax(0, 2fr) minmax(0, 3fr)',
+                dropmenu: 'repeat(auto-fit, minmax(160px, 1fr))',
                 logos: 'repeat(auto-fill, minmax(100px, 1fr))',
                 credit: 'auto minmax(auto, 1fr)',
                 icon: 'auto minmax(auto, 1fr)',
@@ -352,7 +354,8 @@ export default {
                 heroimageMedium: 'inset 0 0px 150px 96px rgba(35,31,32,.25)',
                 heroimageLarge: 'inset 0 0px 150px 96px rgba(35,31,32,.25)',
                 banner: '0px -2px 6px 4px var(--tw-shadow-color)',
-                menu: '0px 5px 15px var(--tw-shadow-color)',
+                dropdown: '0px 5px 15px var(--tw-shadow-color)',
+                d1: '0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color)',
                 floated:
                     '0px 2px 1px -1px rgba(255,255,255,0.30), inset 0px 2px 1px 1px rgba(30,41,59, 0.15), 0px 0px 10px 5px rgba(30,41,59, 0.15)',
                 floatedborder:
@@ -374,43 +377,58 @@ export default {
                 link: {
                     DEFAULT: 'rgb(var(--color-link) / <alpha-value>)',
                 },
-                bkgd: {
-                    DEFAULT: 'rgb(var(--color-bkgd-page) / <alpha-value>)',
-                    page: 'rgb(var(--color-bkgd-page) / <alpha-value>)',
-                    contrast: 'rgb(var(--color-bkgd-contrast) / <alpha-value>)',
+                page: {
+                    DEFAULT: 'rgb(var(--color-page__bg) / <alpha-value>)',
+                    contrast:
+                        'rgb(var(--color-page__bg--contrast) / <alpha-value>)',
                 },
                 header: {
                     DEFAULT: 'transparent',
                     up: 'rgb(var(--color-header-up) / <alpha-value>)',
                 },
-                herolight: {
-                    menul1: 'rgb(var(--color-herolight-menul1) / <alpha-value>)',
-                    menul2: 'rgb(var(--color-herolight-menul2) / <alpha-value>)',
-                    active: 'rgb(var(--color-herolight-active) / <alpha-value>)',
+                headerdark: {
+                    DEFAULT: 'transparent',
+                    up: 'rgb(var(--color-headerdark-up) / <alpha-value>)',
+                },
+                menu: {
+                    DEFAULT: 'rgb(var(--color-menu) / <alpha-value>)',
+                    active: 'rgb(var(--color-menu-active) / <alpha-value>)',
                     highlight:
-                        'rgb(var(--color-herolight-highlight) / <alpha-value>)',
-                    'header-up':
-                        'rgb(var(--color-herolight-header-up) / <alpha-value>)',
+                        'rgb(var(--color-menu-highlight) / <alpha-value>)',
+                    bg__active:
+                        'rgb(var(--color-menu__bg-active) / <alpha-value>)',
+                    bg__hover:
+                        'rgb(var(--color-menu__bg-active) / <alpha-value>)',
+                    marker: 'rgb(var(--color-menu__marker) / <alpha-value>)',
                 },
-                herodark: {
-                    menul1: 'rgb(var(--color-herodark-menul1) / <alpha-value>)',
-                    menul2: 'rgb(var(--color-herodark-menul2) / <alpha-value>)',
-                    active: 'rgb(var(--color-herodark-active) / <alpha-value>)',
+                menudark: {
+                    DEFAULT: 'rgb(var(--color-menudark) / <alpha-value>)',
+                    active: 'rgb(var(--color-menudark-active) / <alpha-value>)',
                     highlight:
-                        'rgb(var(--color-herodark-highlight) / <alpha-value>)',
-                    'header-up':
-                        'rgb(var(--color-herodark-header-up) / <alpha-value>)',
+                        'rgb(var(--color-menudark-highlight) / <alpha-value>)',
+                    bg__active:
+                        'rgb(var(--color-menudark__bg-active) / <alpha-value>)',
+                    bg__hover:
+                        'rgb(var(--color-menudark__bg-active) / <alpha-value>)',
+                    marker: 'rgb(var(--color-menudark__marker) / <alpha-value>)',
                 },
-                menulink: {
-                    DEFAULT: 'rgb(var(--color-menulink) / <alpha-value>)',
-                    active: 'rgb(var(--color-menulink-active) / <alpha-value>)',
-                    herodark:
-                        'rgb(var(--color-menulink-herodark) / <alpha-value>)',
+                menusm: {
+                    DEFAULT: 'rgb(var(--color-menusm) / <alpha-value>)',
+                    hover: 'rgb(var(--color-menusm-hover) / <alpha-value>)',
+                    active: 'rgb(var(--color-menusm-active) / <alpha-value>)',
+                    highlight:
+                        'rgb(var(--color-menusm-highlight) / <alpha-value>)',
                 },
-                childlink: {
-                    DEFAULT: 'rgb(var(--color-childlink) / <alpha-value>)',
-                    herodark:
-                        'rgb(var(--color-childlink-herodark) / <alpha-value>)',
+                dropdown: {
+                    DEFAULT: 'rgb(var(--color-dropdown) / <alpha-value>)',
+                    hover: 'rgb(var(--color-dropdown-hover) / <alpha-value>)',
+                    active: 'rgb(var(--color-dropdown-active) / <alpha-value>)',
+                    bg__hover:
+                        'rgb(var(--color-dropdown__bg-hover) / <alpha-value>)',
+                    bg__active:
+                        'rgb(var(--color-dropdown__bg-active) / <alpha-value>)',
+                    bg__highlight:
+                        'rgb(var(--color-dropdown__bg-highlight) / <alpha-value>)',
                 },
                 underlay: {
                     light: 'rgb(var(--color-underlay-light) / <alpha-value>)',
@@ -423,6 +441,7 @@ export default {
                 panel: {
                     contrast:
                         'rgb(var(--color-panel-contrast) / <alpha-value>)',
+                    shadow: 'rgb(var(--color-panel-shadow) / <alpha-value>)',
                     invert: 'rgb(var(--color-panel-invert) / <alpha-value>)',
                     DEFAULT: 'rgb(var(--color-panel) / <alpha-value>)',
                 },
@@ -469,6 +488,17 @@ export default {
                     light: 'rgb(var(--color-accent-light) / <alpha-value>)',
                     DEFAULT: 'rgb(var(--color-accent) / <alpha-value>)',
                     dark: 'rgb(var(--color-accent-dark) / <alpha-value>)',
+                },
+                secondary: {
+                    light: 'rgb(var(--color-secondary-light) / <alpha-value>)',
+                    DEFAULT: 'rgb(var(--color-secondary) / <alpha-value>)',
+                    dark: 'rgb(var(--color-secondary-dark) / <alpha-value>)',
+                },
+                quiet: {
+                    DEFAULT: 'rgb(var(--color-quiet) / <alpha-value>)',
+                },
+                disabled: {
+                    DEFAULT: 'rgb(var(--color-disabled) / <alpha-value>)',
                 },
             },
             // https://github.com/tailwindlabs/tailwindcss-typography/blob/master/src/styles.js

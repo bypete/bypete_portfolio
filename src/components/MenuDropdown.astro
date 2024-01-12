@@ -2,9 +2,9 @@
 const { title, url, pathname, isHeroDark } = Astro.props;
 import MenuLink from './MenuLink.astro';
 
-const shade = isHeroDark
-    ? 'hover:text-herodark-active focus:text-herodark-active;'
-    : 'hover:text-herolight-active focus:text-herolight-active;';
+const legibility = isHeroDark
+    ? 'hover:text-menudark-active focus:text-menudark-active;'
+    : 'hover:text-menu-active focus:text-menu-active;';
 ---
 
 <li class="relative" x-data="menu">
@@ -18,7 +18,7 @@ const shade = isHeroDark
             :aria-controls="$id('dropdown-button')"
             class:list={[
                 'absolute right-2 flex h-5 w-5 items-center justify-center rounded-full bg-panel p-0 focus:outline-none focus:ring-2',
-                shade,
+                legibility,
             ]}
         >
             <svg
@@ -48,10 +48,10 @@ const shade = isHeroDark
         x-transition:leave="transition ease-in duration-75"
         x-transition:leave-start="transform opacity-100 scale-100"
         x-transition:leave-end="transform opacity-0 scale-95"
-        class="absolute right-0 mt-3 w-48 origin-top-right"
+        class="absolute right-0 mt-3 w-auto origin-top-right"
     >
         <div
-            class="max-h-[calc(100vh-3rem-var(--headerheight))] overflow-y-scroll rounded-tight bg-panel shadow-menu shadow-gray-900/25"
+            class="shadow-d1 max-h-[calc(100vh-3rem-var(--headerheight))] overflow-y-scroll rounded-tight bg-panel shadow-gray-900/20"
         >
             <slot />
         </div>

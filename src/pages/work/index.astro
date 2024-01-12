@@ -42,20 +42,20 @@ const hero = {
                 <div class="rte mt-4 md:mt-6">
                     <p class="text-base lg:text-xl">
                         Explore a selection of projects I have worked on.
+                        {
+                            postCount > 1 ? (
+                                <>
+                                    There are currently{' '}
+                                    <strong class="whitespace-nowrap">
+                                        {postCount} projects
+                                    </strong>{' '}
+                                    in the collection.
+                                </>
+                            ) : (
+                                ``
+                            )
+                        }
                     </p>
-                    {
-                        postCount > 1 ? (
-                            <p class="text-base lg:text-xl">
-                                There are currently{' '}
-                                <strong class="whitespace-nowrap">
-                                    {postCount} projects
-                                </strong>{' '}
-                                in the collection.
-                            </p>
-                        ) : (
-                            ``
-                        )
-                    }
                 </div>
             </Fragment>
             <BlockImage

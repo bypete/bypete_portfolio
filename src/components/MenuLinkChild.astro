@@ -5,8 +5,9 @@ const { title, url, pathname, currentPath } = Astro.props;
 <a
     href={url}
     class:list={[
-        'block px-3 py-2 text-sm font-light first:rounded-t-tight last:rounded-b-tight  hover:bg-slate-200 focus:bg-slate-300 focus:outline-none focus:ring-1 data-[state=active]:bg-brand ',
+        'focus:text-dropdown-hover data-[state=active]:text-dropdown-active data-[state=active]:bg-dropdown-bg__active text-dropdown block rounded-tight px-3 py-2 text-sm font-light hover:bg-panel-contrast focus:bg-panel-contrast focus:outline-none ',
     ]}
     data-state={pathname === url ? 'active' : ''}
-    set:html={title}
-/>
+>
+    <span class="line-clamp-2" set:html={title} />
+</a>

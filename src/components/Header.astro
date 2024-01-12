@@ -20,7 +20,9 @@ const { isHeroDark = false } = Astro.props;
     @thaw-banner.window="$refs.banner.classList.remove('banner--freeze', $event.detail)"
     @scroll.window="reactOnScroll()"
 >
-    <div class="mx-auto flex max-w-container items-center justify-between">
+    <div
+        class="md:grid-cols-header mx-auto grid max-w-container grid-cols-2 items-center"
+    >
         <a href="/" aria-label="byPete - home">
             <Icon
                 name="bypete"
@@ -29,7 +31,7 @@ const { isHeroDark = false } = Astro.props;
         </a>
 
         <ThemeIcon />
-        <Navigation isHeroDark={isHeroDark} />
+        <Navigation class="justify-self-end" isHeroDark={isHeroDark} />
     </div>
 </header>
 <Hamburger />

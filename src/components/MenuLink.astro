@@ -1,11 +1,11 @@
 ---
 const { title, url, pathname, isHeroDark, class: className } = Astro.props;
-const shade = isHeroDark
-    ? 'text-herodark-menul1 hover:text-herodark-active focus:text-herodark-active'
-    : 'text-herolight-menul1 hover:text-herolight-active focus:text-herolight-active';
+const legibility = isHeroDark
+    ? 'text-menudark hover:text-menudark-active focus:text-menudark-active'
+    : 'text-menu hover:text-menu-active focus:text-menu-active';
 const activeState = isHeroDark
-    ? ' data-[state=active]:ring-herodark-highlight data-[state=active]:hover:text-herodark-menul1 data-[state=active]:hover:bg-transparent'
-    : ' data-[state=active]:ring-herolight-highlight data-[state=active]:hover:text-herolight-menul1';
+    ? ' data-[state=active]:ring-menudark-marker data-[state=active]:hover:text-menudark-active '
+    : ' data-[state=active]:ring-menu-marker data-[state=active]:hover:text-menu-active';
 ---
 
 <a
@@ -13,7 +13,7 @@ const activeState = isHeroDark
     class:list={[
         'flex h-full items-center rounded-full p-2 text-base/none font-medium ring-2 ring-transparent transition duration-150 hover:bg-panel focus:bg-panel focus:outline-none',
         className,
-        shade,
+        legibility,
         activeState,
     ]}
     data-state={pathname === url ? 'active' : ''}>{title}</a

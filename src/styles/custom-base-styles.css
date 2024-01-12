@@ -1,25 +1,39 @@
 @layer base {
     /* https://divmagic.com/tools/color-converter */
+    /* --[type: color]- */
     :root {
-        --color-bkgd-page: 250 250 250; /* zinc-50 */
-        --color-bkgd-contrast: 250 250 250; /* putty | https://www.colorhexa.com/f5f4f0 */
+        --color-page__bg: 250 250 250; /* zinc-50 */
+        --color-page__bg--contrast: 250 250 250; /* putty | https://www.colorhexa.com/f5f4f0 */
 
         --color-header: transparent; /* transparent */
+        --color-header-up: 255 255 255; /* white */
 
-        --color-herolight-menul1: 230 0 95; /* Accent Magenta / #e6005f */
-        --color-herolight-menul2: 55 65 81; /* gray-700 */
-        --color-herolight-active: 55 65 81; /* gray-700 */
-        --color-herolight-highlight: 255 210 0; /* Brand yellow / #ffd200 */
-        --color-herolight-header-up: 255 255 255; /* white */
+        --color-headerdark: transparent; /* transparent */
+        --color-headerdark-up: 15 23 42; /* slate-950 */
 
-        --color-herodark-menul1: 255 255 255; /* White */
-        --color-herodark-menul2: 255 255 255; /* White */
-        --color-herodark-active: 55 65 81; /* gray-700 */
-        --color-herodark-highlight: 255 210 0; /* Brand yellow / #ffd200 */
-        --color-herodark-header-up: 15 23 42; /* slate-950 */
+        --color-menu: 230 0 95; /* Accent Magenta / #e6005f */
+        --color-menu-active: 55 65 81; /* gray-700 */
+        --color-menu__bg-hover: 255 255 255; /* white */
+        --color-menu__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-menu__marker: 255 210 0; /* Brand yellow / #ffd200 */
 
-        --color-childlink: 55 65 81; /* gray-700 */
-        --color-childlink-herodark: 55 65 81; /* gray-700 */
+        --color-menudark: 255 255 255; /* White */
+        --color-menudark-active: 55 65 81; /* gray-700 */
+        --color-menudark__bg-hover: 255 255 255; /* white */
+        --color-menudark__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-menudark__marker: 255 210 0; /* Brand yellow / #ffd200 */
+
+        --color-dropdown: 55 65 81; /* gray-700 */
+        --color-dropdown-hover: 228 228 231; /* zinc-200 */
+        --color-dropdown-active: 55 65 81; /* gray-700 */
+        --color-dropdown-highlight: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-dropdown__bg-hover: 228 228 231; /* zinc-200 */
+        --color-dropdown__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-dropdown__bg-highlight: 255 210 0; /* Brand yellow / #ffd200 */
+
+        --color-menusm: 55 65 81; /* gray-700 */
+        --color-menusm-hover: 255 255 255; /* white */
+        --color-menusm-active: 255 255 255; /* white */
 
         --color-underlay-light: 249 250 251; /* gray-50  */
         --color-underlay-dark: 24 24 27; /* zinc-800  */
@@ -29,6 +43,7 @@
 
         --color-panel-contrast: 244 244 245; /* zinc-100 */
         --color-panel: 255 255 255; /* white */
+        --color-panel-shadow: 31 41 55; /* gray-800 */
         --color-panel-invert: 31 41 55; /* gray-800 */
 
         --color-outline-pale: 250 250 250; /* zinc-50 */
@@ -74,12 +89,108 @@
         --color-accent-light: 255 0 106; /* #ff006a */
         --color-accent: 230 0 95; /* Accent Magenta / #e6005f https://www.colorhexa.com/e6005f */
         --color-accent-dark: 205 0 84; /* #cd0054 */
+
+        --color-secondary-light: 51 65 85; /* slate-700 */
+        --color-secondary: 30 41 59; /* slate-800 */
+        --color-secondary-dark: 2 6 23; /* slate-950 */
+
+        --color-quiet-light: 209 213 219; /* gray-300 */
+        --color-quiet: 107 114 128; /* gray-500 */
+
+        --color-disabled: 209 213 219; /* gray-300 */
     }
 
     @media (prefers-color-scheme: dark) {
         :root {
-            --color-bkgd: 24 24 27; /* gray-900 */
-            --color-content: 249 250 251; /* gray-50 */
+            --color-underlay-light: 39 39 42; /* zinc-800  */
+            --color-underlay-dark: 9 9 11; /* zinc 950  */
+
+            --color-page__bg: 39 39 42; /* zinc-800 */
+            --color-page__bg--contrast: 63 63 70; /* zinc 700 */
+
+            --color-header: transparent; /* transparent */
+            --color-header-up: 9 9 11; /* zinc 950 */
+
+            --color-herolight-menul1: 230 0 95; /* Accent Magenta / #e6005f */
+            --color-herolight-menul2: 55 65 81; /* gray-700 */
+            --color-herolight-active: 55 65 81; /* gray-700 */
+            --color-herolight-highlight: 255 210 0; /* Brand yellow / #ffd200 */
+            --color-herolight-header-up: 255 255 255; /* white */
+
+            --color-herodark-menul1: 228 228 231; /* zinc-200 */
+            --color-herodark-menul2: 255 255 255; /* White */
+            --color-herodark-active: 255 255 255; /* White */
+            --color-herodark-highlight: 255 210 0; /* Brand yellow / #ffd200 */
+            --color-herodark-header-up: 7 7 8; /* zinc darkest hsl(240, 10%, 3%) */
+
+            --color-menu: 228 228 231; /* zinc-200 */
+            --color-menu-active: 255 255 255; /* White */
+            --color-menu__bg-hover: 255 255 255; /* white */
+            --color-menu__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
+            --color-menu__marker: 255 210 0; /* Brand yellow / #ffd200 */
+
+            --color-menudark: 255 255 255; /* White */
+            --color-menudark-active: 255 255 255; /* White */
+            --color-menudark__bg-hover: 255 255 255; /* white */
+            --color-menudark__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
+            --color-menudark__marker: 255 210 0; /* Brand yellow / #ffd200 */
+
+            --color-dropdown: 228 228 231; /* zinc-200 */
+            --color-dropdown-hover: 228 228 231; /* zinc-200 */
+            --color-dropdown-active: 55 65 81; /* gray-700 */
+            --color-dropdown-highlight: 255 210 0; /* Brand yellow / #ffd200 */
+            --color-dropdown__bg-hover: 228 228 231; /* zinc-200 */
+            --color-dropdown__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
+            --color-dropdown__bg-highlight: 255 210 0; /* Brand yellow / #ffd200 */
+
+            --color-overlay-light: 39 39 42; /* zinc-800  */
+            --color-overlay-dark: 9 9 11; /* zinc 950  */
+
+            --color-warning-light: 220 38 38; /* red-600 */
+            --color-warning: 220 38 38; /* red-600 */
+            --color-warning-dark: 153 27 27; /* red-800 */
+
+            --color-panel-invert: 82 82 91; /* zinc-600 */
+            --color-panel: 39 39 42; /* zinc 800 */
+            --color-panel-contrast: 24 24 27; /* zinc-900 */
+
+            --color-outline-pale: 39 39 42; /* zinc-800 */
+            --color-outline: 63 63 70; /* zinc-700 */
+            --color-outline-hard: 82 82 91; /* zinc-600 */
+
+            --color-footer-light: 39 39 42; /* zinc 800 */
+            --color-footer: 24 24 27; /* zinc 900 */
+            --color-footer-dark: 9 9 11; /* zinc 950 */
+
+            --color-info: 2 132 199; /* sky-600 */
+            --color-info-shade: 7 89 133; /* sky-800 */
+
+            --color-note: 253 224 71; /* yellow-300 */
+            --color-note-shade: 234 179 8; /* yellow-500 */
+
+            --color-alert: 220 38 38; /* red-600 */
+            --color-alert-shade: 153 27 27; /* red-800 */
+
+            --color-attention: 253 224 71; /* yellow-300 */
+            --color-attention-shade: 234 179 8; /* yellow-500 */
+
+            --color-content: 228 228 231; /* zinc-200 */
+            --color-content-invert: 55 65 81; /* gray-700 */
+            --color-content-light: 250 250 250; /* zinc-50 */
+            --color-content-dark: 55 65 81; /* gray-700 */
+
+            --color-headline: 244 244 245; /* zinc-100 */
+            --color-blockquote: 250 250 250; /* zinc-50 */
+
+            --color-accent-lightest: 255 224 77; /* #ffe04d */
+            --color-accent-light: 255 215 26; /* #ffd71a */
+            --color-brand: 255 210 0; /* Brand yellow / #ffd200 https://www.colorhexa.com/ffd200 */
+            --color-accent-dark: 230 189 0; /* #e6bd00 */
+            --color-accent-darkest: 179 147 0; /* #b39300 */
+
+            --color-accent-light: 255 0 106; /* #ff006a */
+            --color-accent: 230 0 95; /* Accent Magenta / #e6005f https://www.colorhexa.com/e6005f */
+            --color-accent-dark: 205 0 84; /* #cd0054 */
         }
     }
 
@@ -87,10 +198,11 @@
         --color-underlay-light: 39 39 42; /* zinc-800  */
         --color-underlay-dark: 9 9 11; /* zinc 950  */
 
-        --color-bkgd-page: 39 39 42; /* zinc-800 */
-        --color-bkgd-contrast: 63 63 70; /* zinc 700 */
+        --color-page__bg: 39 39 42; /* zinc-800 */
+        --color-page__bg--contrast: 63 63 70; /* zinc 700 */
 
         --color-header: transparent; /* transparent */
+        --color-header-up: 9 9 11; /* zinc 950 */
 
         --color-herolight-menul1: 230 0 95; /* Accent Magenta / #e6005f */
         --color-herolight-menul2: 55 65 81; /* gray-700 */
@@ -103,6 +215,26 @@
         --color-herodark-active: 255 255 255; /* White */
         --color-herodark-highlight: 255 210 0; /* Brand yellow / #ffd200 */
         --color-herodark-header-up: 7 7 8; /* zinc darkest hsl(240, 10%, 3%) */
+
+        --color-menu: 228 228 231; /* zinc-200 */
+        --color-menu-active: 255 255 255; /* White */
+        --color-menu__bg-hover: 255 255 255; /* white */
+        --color-menu__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-menu__marker: 255 210 0; /* Brand yellow / #ffd200 */
+
+        --color-menudark: 255 255 255; /* White */
+        --color-menudark-active: 255 255 255; /* White */
+        --color-menudark__bg-hover: 255 255 255; /* white */
+        --color-menudark__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-menudark__marker: 255 210 0; /* Brand yellow / #ffd200 */
+
+        --color-dropdown: 228 228 231; /* zinc-200 */
+        --color-dropdown-hover: 228 228 231; /* zinc-200 */
+        --color-dropdown-active: 55 65 81; /* gray-700 */
+        --color-dropdown-highlight: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-dropdown__bg-hover: 228 228 231; /* zinc-200 */
+        --color-dropdown__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-dropdown__bg-highlight: 255 210 0; /* Brand yellow / #ffd200 */
 
         --color-overlay-light: 39 39 42; /* zinc-800  */
         --color-overlay-dark: 9 9 11; /* zinc 950  */
