@@ -7,30 +7,28 @@ const { isHeroDark = false } = Astro.props;
 ---
 
 <header
-    x-bind:class="{'banner--freeze' : banner == 'freeze', 'banner--start': banner == 'start', 'banner--up': banner == 'up', 'banner--down ': banner == 'down'}"
+    x-bind:class="{'translate-y-0 duration-0' : banner == 'freeze', 'bg-banner': banner == 'start', 'bg-banner-up shadow-banner shadow-gray-950/10': banner == 'up', '-translate-y-full ': banner == 'down' }"
     x-ref="banner"
-    x-data="{ banner:'start', cachedBanner: null, ...stickybanner()}"
+    :data-banner="banner"
+    x-data="{ banner:'start', ...stickybanner()}"
     x-init="reactOnScroll()"
-    class:list={[
-        'banner banner--start fixed top-0 z-banner w-full py-6 duration-300',
-        isHeroDark ? 'hero--dark' : 'hero--light',
-    ]}
+    class:list={['group fixed fixed top-0 z-banner w-full py-4 duration-300']}
     @set-banner.window="banner = $event.detail"
     @freeze-banner.window="$refs.banner.classList.add('banner--freeze', $event.detail)"
     @thaw-banner.window="$refs.banner.classList.remove('banner--freeze', $event.detail)"
     @scroll.window="reactOnScroll()"
 >
     <div
-        class="md:grid-cols-header mx-auto grid max-w-container grid-cols-2 items-center"
+        class="mx-auto grid max-w-container grid-cols-2 items-center md:grid-cols-header"
     >
         <a href="/" aria-label="byPete - home">
             <Icon
                 name="bypete"
-                class="banner__logo h-10 w-auto transition-all"
+                class="banner__logo h-8 w-auto transition-all md:h-10"
             />
         </a>
 
-        <ThemeIcon />
+        <ThemeIcon isHeroDark={isHeroDark} />
         <Navigation class="justify-self-end" isHeroDark={isHeroDark} />
     </div>
 </header>
@@ -58,21 +56,16 @@ const { isHeroDark = false } = Astro.props;
                 // Only fix header for longer pages
                 if (sh >= ch * 1.25) {
                     if (st > ch * 0.5) {
-                        // halfway viewport height
                         this.pageTop = true;
                     }
 
                     if (st === 0 || st <= ba) {
-                        // at top
                         this.$data.banner = 'start';
                         this.pageTop = false;
                     } else if (st > this.$data.lastScrollTop && st >= ba) {
-                        // going down
                         this.$data.banner = 'down';
                     } else if (st < this.$data.lastScrollTop) {
-                        // going up
                         this.$data.banner = 'up';
-                        // this.pageTop = false;
                     } else {
                         this.$data.banner = 'unknown';
                     }

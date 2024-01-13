@@ -2,14 +2,14 @@
     /* https://divmagic.com/tools/color-converter */
     /* --[type: color]- */
     :root {
+        --headerheight: 88px; /* 24px + 40px +24px */
+        --smheaderheight: 64px; /* 16px + 32px +16px */
+
         --color-page__bg: 250 250 250; /* zinc-50 */
         --color-page__bg--contrast: 250 250 250; /* putty | https://www.colorhexa.com/f5f4f0 */
 
-        --color-header: transparent; /* transparent */
-        --color-header-up: 255 255 255; /* white */
-
-        --color-headerdark: transparent; /* transparent */
-        --color-headerdark-up: 15 23 42; /* slate-950 */
+        --color-banner: transparent; /* transparent */
+        --color-banner-up: 255 255 255; /* white */
 
         --color-menu: 230 0 95; /* Accent Magenta / #e6005f */
         --color-menu-active: 55 65 81; /* gray-700 */
@@ -109,11 +109,8 @@
             --color-page__bg: 39 39 42; /* zinc-800 */
             --color-page__bg--contrast: 63 63 70; /* zinc 700 */
 
-            --color-header: transparent; /* transparent */
-            --color-header-up: 9 9 11; /* zinc 950 */
-
-            --color-headerdark: transparent; /* transparent */
-            --color-headerdark-up: 9 9 11; /* zinc 950 */
+            --color-banner: transparent; /* transparent */
+            --color-banner-up: 9 9 11; /* zinc 950 */
 
             --color-menu: 228 228 231; /* zinc-200 */
             --color-menu-active: 255 255 255; /* White */
@@ -193,8 +190,8 @@
         --color-page__bg: 39 39 42; /* zinc-800 */
         --color-page__bg--contrast: 63 63 70; /* zinc 700 */
 
-        --color-header: transparent; /* transparent */
-        --color-header-up: 9 9 11; /* zinc 950 */
+        --color-banner: transparent; /* transparent */
+        --color-banner-up: 9 9 11; /* zinc 950 */
 
         --color-menu: 228 228 231; /* zinc-200 */
         --color-menu-active: 255 255 255; /* White */

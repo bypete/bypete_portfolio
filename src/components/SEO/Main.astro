@@ -17,6 +17,7 @@ export type Props = {
     canonicalURL?: URL;
     pageType?: 'website' | 'article';
     includeSiteTitle?: boolean;
+    isHeroDark?: boolean;
 };
 
 const {
@@ -50,9 +51,9 @@ const resolvedImage = {
 <meta name="generator" content={Astro.generator} />
 {
     isHeroDark ? (
-        <meta name="theme-color" content="#0f172a" />
+        <meta name="theme-color" content="#09090b" />
     ) : (
-        <meta name="theme-color" content="#ffd200" />
+        <meta name="theme-color" content="#ffffff" />
     )
 }
 
@@ -94,9 +95,6 @@ const resolvedImage = {
     }}
     extend={{
         // extending the default meta tags
-        meta: [
-            { name: 'theme-color', content: '#0f172a' },
-            { name: 'version', content: `v${pjson.version}` },
-        ],
+        meta: [{ name: 'version', content: `v${pjson.version}` }],
     }}
 />

@@ -13,8 +13,6 @@
     /* --swiper-pagination-color: theme('colors.white'); */
     --swiper-pagination-bullet-inactive-color: white;
     --swiper-pagination-bullet-inactive-opacity: 1;
-    --headerheight: 88px; /* 24px + 40px +24px */
-    --smheaderheight: 88px; /* 24px + 40px +24px */
 }
 .pswp {
     --pswp-bg: theme('colors.slate.950');

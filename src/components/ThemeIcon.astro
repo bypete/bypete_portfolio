@@ -1,18 +1,32 @@
 ---
 import { Icon } from 'astro-icon/components';
+const { class: ClassList, isHeroDark = false } = Astro.props;
+const legibility = isHeroDark
+    ? ' group-data-[banner=start]:focus:text-menudark-active group-data-[banner=start]:text-menudark'
+    : '';
 ---
 
-<span x-data="theme" x-cloak class="text-right md:text-center">
+<span
+    x-data="theme"
+    x-cloak
+    class:list={[
+        'relative flex h-6 w-6 items-center justify-center overflow-hidden text-right text-base/none md:text-center',
+        legibility,
+    ]}
+    x-bind:class="{'' : theme === 'light'}"
+>
     <button
         type="button"
         @click="theme = 'light'"
-        x-bind:class="{'hidden' : theme === 'light'}"
+        class="absolute inset-0 block h-6 w-6 transform duration-300"
+        x-bind:class="{'translate-y-full rotate-90  ' : theme === 'light'}"
         ><Icon name="lucide:sun" class="h-6 w-6" /></button
     >
     <button
         type="button"
         @click="theme = 'dark'"
-        x-bind:class="{'hidden' : theme === 'dark'}"
+        class="absolute inset-0 block h-6 w-6 rotate-0 transform duration-300"
+        x-bind:class="{'translate-y-full -rotate-90' : theme === 'dark'}"
         ><Icon name="lucide:sun-moon" class="h-6 w-6" /></button
     >
 </span>

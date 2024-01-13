@@ -22,13 +22,13 @@ const year = new Date().getFullYear();
     x-transition:leave-start="transform opacity-100 "
     x-transition:leave-end="transform opacity-0 "
 >
-    <div class="mr-20 flex h-full w-full flex-col py-6 pl-4">
+    <div class="mr-20 flex h-full w-full flex-col py-4 pl-4">
         <div class="flex-shrink text-left">
             <a href="/" aria-label="byPete - home">
                 <Icon
                     name="bypete--white"
                     title="byPete logo in white"
-                    class="banner__logo h-10 w-auto !shadow-brand-dark transition-all"
+                    class="banner__logo h-8 w-auto !shadow-brand-dark transition-all"
                 />
             </a>
         </div>
@@ -45,7 +45,7 @@ const year = new Date().getFullYear();
                     <MobileLink url={`/work`} title="Work" {pathname} />
                     <button
                         @click="open = !open"
-                        class="text-menusm flex h-10 w-10 items-center justify-center rounded-full p-0 transition-transform duration-700 focus:outline-none"
+                        class="flex h-10 w-10 items-center justify-center rounded-full p-0 text-menusm transition-transform duration-700 focus:outline-none"
                         :class="{'rotate-45': open, 'rotate-0': !open}"
                     >
                         <Icon
@@ -81,7 +81,7 @@ const year = new Date().getFullYear();
                 <MobileLink url={`/connect`} title="Connect" {pathname} />
             </li>
         </ul>
-        <ul class="text-menusm -mx-2 mt-8 inline-flex">
+        <ul class="-mx-2 mt-8 inline-flex text-menusm">
             <li class="border-r border-white px-2 last:border-0">©{year}</li>
             <li class="border-r border-white px-2 last:border-0">
                 <a href="/about/legal" class="link">Legal notices</a>

@@ -38,7 +38,8 @@ import '~/styles/tailwind.css';
 <!-- data-theme="dark" -->
 <html
     lang="en"
-    data-theme=""
+    data-theme="light"
+    data-hero={isHeroDark ? 'dark' : 'light'}
     class="relative h-full max-w-full scroll-pt-[var(--headerheight)] scroll-smooth"
 >
     <head>
@@ -47,7 +48,7 @@ import '~/styles/tailwind.css';
     </head>
     <body
         class:list={[
-            'bg-page relative flex min-h-screen max-w-full  scroll-pt-[var(--headerheight)] overflow-x-hidden  font-Roboto text-content antialiased',
+            'relative flex min-h-screen max-w-full scroll-pt-[var(--headerheight)]  overflow-x-hidden bg-page  font-Roboto text-content antialiased',
         ]}
         x-data="{ pageTop: false, smNav: false, showOverlay: false, showUnderlay: false, }"
         x-ref="body"

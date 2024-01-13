@@ -382,13 +382,9 @@ export default {
                     contrast:
                         'rgb(var(--color-page__bg--contrast) / <alpha-value>)',
                 },
-                header: {
+                banner: {
                     DEFAULT: 'transparent',
-                    up: 'rgb(var(--color-header-up) / <alpha-value>)',
-                },
-                headerdark: {
-                    DEFAULT: 'transparent',
-                    up: 'rgb(var(--color-headerdark-up) / <alpha-value>)',
+                    up: 'rgb(var(--color-banner-up) / <alpha-value>)',
                 },
                 menu: {
                     DEFAULT: 'rgb(var(--color-menu) / <alpha-value>)',

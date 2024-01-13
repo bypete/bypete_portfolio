@@ -123,39 +123,6 @@
         @apply justify-between gap-x-2 pr-3;
     }
 
-    /* Header */
-    .banner {
-        @apply fixed;
-        &--down {
-            @apply -translate-y-full;
-        }
-        &--up {
-            @apply shadow-banner shadow-gray-950/10;
-        }
-        &--start {
-        }
-        &--freeze {
-            @apply translate-y-0 duration-0;
-        }
-        .hero--light& {
-            &--up {
-                @apply bg-header-up;
-            }
-        }
-
-        .hero--dark& {
-            &--start,
-            &--down {
-            }
-            &--up {
-                @apply bg-headerdark-up;
-            }
-            &__logo {
-                @apply shadow-black/50 drop-shadow-logo;
-            }
-        }
-    }
-
     /* Placeholders */
     .holder {
         @apply relative before:absolute before:inset-0 before:border-2 before:border-dashed before:border-outline;
