@@ -50,9 +50,10 @@
         --color-outline: 228 228 231; /* zinc-200 */
         --color-outline-hard: 212 212 216; /* zinc-300 */
 
-        --color-footer-light: 30 41 59; /* slate 800 */
-        --color-footer: 15 23 42; /* slate 900 */
-        --color-footer-dark: 2 6 23; /* slate 950 */
+        --color-footer: 255 255 255; /* white */
+        --color-footer__bg-light: 30 41 59; /* slate 800 */
+        --color-footer__bg: 15 23 42; /* slate 900 */
+        --color-footer__bg-dark: 2 6 23; /* slate 950 */
 
         --color-note: 254 240 138; /* yellow-200 */
         --color-note-shade: 250 204 21; /* yellow-400 */
@@ -111,17 +112,8 @@
             --color-header: transparent; /* transparent */
             --color-header-up: 9 9 11; /* zinc 950 */
 
-            --color-herolight-menul1: 230 0 95; /* Accent Magenta / #e6005f */
-            --color-herolight-menul2: 55 65 81; /* gray-700 */
-            --color-herolight-active: 55 65 81; /* gray-700 */
-            --color-herolight-highlight: 255 210 0; /* Brand yellow / #ffd200 */
-            --color-herolight-header-up: 255 255 255; /* white */
-
-            --color-herodark-menul1: 228 228 231; /* zinc-200 */
-            --color-herodark-menul2: 255 255 255; /* White */
-            --color-herodark-active: 255 255 255; /* White */
-            --color-herodark-highlight: 255 210 0; /* Brand yellow / #ffd200 */
-            --color-herodark-header-up: 7 7 8; /* zinc darkest hsl(240, 10%, 3%) */
+            --color-headerdark: transparent; /* transparent */
+            --color-headerdark-up: 9 9 11; /* zinc 950 */
 
             --color-menu: 228 228 231; /* zinc-200 */
             --color-menu-active: 255 255 255; /* White */
@@ -204,18 +196,6 @@
         --color-header: transparent; /* transparent */
         --color-header-up: 9 9 11; /* zinc 950 */
 
-        --color-herolight-menul1: 230 0 95; /* Accent Magenta / #e6005f */
-        --color-herolight-menul2: 55 65 81; /* gray-700 */
-        --color-herolight-active: 55 65 81; /* gray-700 */
-        --color-herolight-highlight: 255 210 0; /* Brand yellow / #ffd200 */
-        --color-herolight-header-up: 255 255 255; /* white */
-
-        --color-herodark-menul1: 228 228 231; /* zinc-200 */
-        --color-herodark-menul2: 255 255 255; /* White */
-        --color-herodark-active: 255 255 255; /* White */
-        --color-herodark-highlight: 255 210 0; /* Brand yellow / #ffd200 */
-        --color-herodark-header-up: 7 7 8; /* zinc darkest hsl(240, 10%, 3%) */
-
         --color-menu: 228 228 231; /* zinc-200 */
         --color-menu-active: 255 255 255; /* White */
         --color-menu__bg-hover: 255 255 255; /* white */
@@ -251,9 +231,10 @@
         --color-outline: 63 63 70; /* zinc-700 */
         --color-outline-hard: 82 82 91; /* zinc-600 */
 
-        --color-footer-light: 39 39 42; /* zinc 800 */
-        --color-footer: 24 24 27; /* zinc 900 */
-        --color-footer-dark: 9 9 11; /* zinc 950 */
+        --color-footer: 255 255 255; /* white */
+        --color-footer__bg-light: 39 39 42; /* zinc 800 */
+        --color-footer__bg: 24 24 27; /* zinc 900 */
+        --color-footer__bg-dark: 9 9 11; /* zinc 950 */
 
         --color-info: 2 132 199; /* sky-600 */
         --color-info-shade: 7 89 133; /* sky-800 */

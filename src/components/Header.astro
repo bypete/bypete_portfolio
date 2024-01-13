@@ -12,7 +12,7 @@ const { isHeroDark = false } = Astro.props;
     x-data="{ banner:'start', cachedBanner: null, ...stickybanner()}"
     x-init="reactOnScroll()"
     class:list={[
-        'banner banner--start fixed top-0 z-banner w-full py-6 delay-150 duration-300',
+        'banner banner--start fixed top-0 z-banner w-full py-6 duration-300',
         isHeroDark ? 'hero--dark' : 'hero--light',
     ]}
     @set-banner.window="banner = $event.detail"

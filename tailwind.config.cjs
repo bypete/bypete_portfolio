@@ -467,9 +467,12 @@ export default {
                     shade: 'rgb(var(--color-attention-shade) / <alpha-value>)',
                 },
                 footer: {
-                    light: 'rgb(var(--color-footer-light) / <alpha-value>)',
+                    bg: 'rgb(var(--color-footer__bg) / <alpha-value>)',
+                    bg__light:
+                        'rgb(var(--color-footer__bg-light) / <alpha-value>)',
                     DEFAULT: 'rgb(var(--color-footer) / <alpha-value>)',
-                    dark: 'rgb(var(--color-footer-dark) / <alpha-value>)',
+                    bg__dark:
+                        'rgb(var(--color-footer__bg-dark) / <alpha-value>)',
                 },
                 warning: {
                     light: 'rgb(var(--color-warning-light) / <alpha-value>)',

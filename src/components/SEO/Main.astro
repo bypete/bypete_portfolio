@@ -28,6 +28,7 @@ const {
     canonicalURL = new URL(Astro.request.url, Astro.site),
     pageType = 'website',
     includeSiteTitle = true,
+    isHeroDark = false,
 } = Astro.props;
 
 // const title = [Astro.props.title, siteInfo.name].filter(Boolean).join(' | ');
@@ -47,7 +48,13 @@ const resolvedImage = {
 />
 <title set:html={smartypants(resolvedTitle, 1)} />
 <meta name="generator" content={Astro.generator} />
-<meta name="theme-color" content="#ffd200" />
+{
+    isHeroDark ? (
+        <meta name="theme-color" content="#0f172a" />
+    ) : (
+        <meta name="theme-color" content="#ffd200" />
+    )
+}
 
 <!-- Low Priority Global Metadata -->
 <Favicon />

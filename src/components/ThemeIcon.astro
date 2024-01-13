@@ -34,12 +34,24 @@ import { Icon } from 'astro-icon/components';
                 }
                 return 'light';
             },
+
+            setMetaTheme(value) {
+                const meta = document.querySelector('meta[name="theme-color"]');
+                if (value === 'dark') {
+                    meta?.setAttribute('content', '#09090b');
+                }
+                if (value === 'light') {
+                    meta?.setAttribute('content', '#ffffff');
+                }
+            },
+
             init() {
                 this.$watch('theme', (value, oldValue) => {
                     localStorage.setItem('theme', value);
                     document
                         .querySelector('html')
                         ?.setAttribute('data-theme', this.theme);
+                    this.setMetaTheme(value);
                 });
 
                 this.theme = this.getTheme();

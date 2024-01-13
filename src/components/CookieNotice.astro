@@ -73,7 +73,7 @@ const { bg } = Astro.props;
             },
             accept() {
                 this.freeze(false);
-                Cookies.set(this.cookie_name, true, {
+                Cookies.set(this.cookie_name, 'true', {
                     expires: 365,
                     path: '/',
                     secure: true,
