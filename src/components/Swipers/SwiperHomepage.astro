@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import Slide from '~/components/Swipers/Slide.astro';
 import { type SwiperImage } from '~/data/homepage';
 
 export interface Props {
@@ -15,48 +16,7 @@ const { slides } = Astro.props;
         {
             slides.map((slide, i) => (
                 <div class="slide swiper-slide ">
-                    <div class="flex h-full items-center justify-center">
-                        {slide.url ? (
-                            <a
-                                href={slide.url}
-                                class="flex h-full w-full items-center justify-center"
-                            >
-                                {slide.wrapper ? (
-                                    <div class={slide.wrapper}>
-                                        <Image
-                                            src={slide.src}
-                                            alt={slide.alt}
-                                            class={slide.class}
-                                        />
-                                    </div>
-                                ) : (
-                                    <Image
-                                        src={slide.src}
-                                        class={slide.class}
-                                        alt={slide.alt}
-                                    />
-                                )}
-                            </a>
-                        ) : (
-                            <div class="flex h-full w-full items-center justify-center ">
-                                {slide.wrapper ? (
-                                    <div class={slide.wrapper}>
-                                        <Image
-                                            src={slide.src}
-                                            class={slide.class}
-                                            alt={slide.alt}
-                                        />
-                                    </div>
-                                ) : (
-                                    <Image
-                                        src={slide.src}
-                                        class={slide.class}
-                                        alt={slide.alt}
-                                    />
-                                )}
-                            </div>
-                        )}
-                    </div>
+                    <Slide slide={slide} />
                 </div>
             ))
         }

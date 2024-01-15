@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import { type SwiperImage } from '~/data/homepage';
+
+export interface Props {
+    slide: Partial<SwiperImage>;
+}
+
+const { slide } = Astro.props;
+
+const slideClass =
+    slide.class ||
+    'absolute inset-0 h-full max-h-full w-full max-w-full object-scale-down object-center';
+
+const imageProps = {
+    src: slide.src,
+    alt: slide.alt,
+    class: slideClass,
+    quality: 'high',
+};
+---
+
+{
+    (
+        <a
+            href={slide.url}
+            class="flex h-full w-full items-center justify-center"
+        >
+            {slide.wrapper ? (
+                <div class={slide.wrapper}>
+                    <Image {...imageProps} />
+                </div>
+            ) : (
+                <Image {...imageProps} />
+            )}
+        </a>
+    )
+}

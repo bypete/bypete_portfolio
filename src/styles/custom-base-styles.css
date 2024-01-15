@@ -264,6 +264,14 @@
         --color-accent-dark: 205 0 84; /* #cd0054 */
     }
 
+    /* Alpine.js
+---------------------------------------------------------------------------------*/
+    [x-cloak] {
+        /* display: none !important; */
+        visibility: hidden;
+        opacity: 0;
+    }
+
     .max-w-container {
         @apply px-4 md:px-8 conpad:px-0; /* max width plus 32px + 32px
     /* @apply conpad:px-0; /* max width plus 32px + 32px */

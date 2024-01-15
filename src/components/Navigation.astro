@@ -27,8 +27,8 @@ const { class: ClassList, isHeroDark = false } = Astro.props;
                         class:list={[
                             '',
                             allPosts.length > 6
-                                ? 'grid-cols-dropmenu m-1.5 grid w-auto max-w-[500px] gap-1.5'
-                                : 'm-1.5 grid w-auto grid-cols-1 gap-1.5',
+                                ? 'grid w-auto max-w-[420px] grid-cols-dropmenu p-1.5'
+                                : 'grid w-auto min-w-[200px] grid-cols-1 p-1.5',
                         ]}
                     >
                         {allPosts.map((post) => (

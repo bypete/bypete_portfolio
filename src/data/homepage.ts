@@ -1,7 +1,7 @@
 export interface SwiperImage {
   src: string | ImageMetadata
   alt: string
-  url?: string
+  url: string
   wrapper?: string
   class?: string
 }

@@ -100,7 +100,7 @@ export default {
                 block66: 'minmax(0, 2fr) minmax(0, 1fr)',
                 listing: 'minmax(0, 2fr) minmax(0, 1fr)',
                 listing_work: 'minmax(0, 2fr) minmax(0, 3fr)',
-                dropmenu: 'repeat(auto-fit, minmax(160px, 1fr))',
+                dropmenu: 'repeat(auto-fit, minmax(200px, 1fr))',
                 logos: 'repeat(auto-fill, minmax(100px, 1fr))',
                 credit: 'auto minmax(auto, 1fr)',
                 icon: 'auto minmax(auto, 1fr)',

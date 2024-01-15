@@ -26,14 +26,6 @@
     @apply w-4 border-accent;
 }
 
-/* Alpine.js
----------------------------------------------------------------------------------*/
-[x-cloak] {
-    /* display: none !important; */
-    visibility: hidden;
-    opacity: 0;
-}
-
 /* Prism | New diff- syntax
 ---------------------------------------------------------------------------------*/
 pre[class*='language-diff-'] {

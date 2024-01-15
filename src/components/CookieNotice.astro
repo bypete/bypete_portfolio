@@ -54,6 +54,10 @@ const { bg } = Astro.props;
     import Cookies from 'js-cookie';
 
     document.addEventListener('alpine:init', () => {
+        const isProduction = import.meta.env.MODE === 'production';
+        const domain = isProduction ? import.meta.env.SITE : 'localhost';
+        const isSecure = isProduction; // Set to true for production, false for localhost
+
         Alpine.data('cookie', () => ({
             cookie: '',
             toastCookie: false,
@@ -76,8 +80,9 @@ const { bg } = Astro.props;
                 Cookies.set(this.cookie_name, 'true', {
                     expires: 365,
                     path: '/',
-                    secure: true,
+                    secure: isSecure,
                     sameSite: 'strict',
+                    ...(isProduction && { domain }), // Include domain only for production
                 });
             },
         }));
