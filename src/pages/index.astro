@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import { homepageSwiper, roles } from '~/data/homepage';
 import SwiperHomepage from '~/components/Swipers/SwiperHomepage.astro';
-import BaseLayout from '~/layouts/BaseLayout.astro';
+import HomeLayout from '~/layouts/HomeLayout.astro';
 import WorkGrid from '~/components/WorkGrid.astro';
 import Hero from '~/components/Hero/Hero.astro';
 import Link from '~/components/ui/Link.astro';
@@ -36,59 +36,55 @@ const formattedPosts = formatBlogPosts(allWork, {
 });
 ---
 
-<BaseLayout
+<HomeLayout
     title={title}
     isHeroDark={hero.dark}
     ogImage={{ src: '/og/astro.jpg', alt: 'Astro - Build the web you want.' }}
 >
-    <slot slot="hero">
-        <Hero hero={hero}>
-            <Fragment slot="background">
-                <Image
-                    src={heatmap}
-                    alt="Purple gradient background"
-                    class="h-full w-full object-cover object-bottom md:object-center"
-                />
-                <Image
-                    src={contourHeatmap}
-                    alt="background"
-                    class="fixed inset-0 h-full w-full object-cover"
-                />
-            </Fragment>
+    <Hero slot="slothero" hero={hero}>
+        <Fragment slot="background">
+            <Image
+                src={heatmap}
+                alt="Purple gradient background"
+                class="h-full w-full object-cover object-bottom md:object-center"
+            />
+            <Image
+                src={contourHeatmap}
+                alt="background"
+                class="fixed inset-0 h-full w-full object-cover"
+            />
+        </Fragment>
 
-            <Fragment slot="content">
-                <Roles roles={roles} />
-                <div class="text-white shadow-slate-900 text-shadow-emboss">
-                    <p class="mb-4 text-lg">
-                        This space has been crafted to demonstrate my abilities,
-                        methods, and expertise.
-                    </p>
-                    <p
-                        class="flex flex-wrap items-center gap-4 text-shadow-none"
+        <Fragment slot="content">
+            <Roles roles={roles} />
+            <div class="text-white shadow-slate-900 text-shadow-emboss">
+                <p class="mb-4 text-lg">
+                    This space has been crafted to demonstrate my abilities,
+                    methods, and expertise.
+                </p>
+                <p class="flex flex-wrap items-center gap-4 text-shadow-none">
+                    <Link
+                        theme="primary"
+                        isIcon={true}
+                        class="md:inline-flex"
+                        href="/work"
                     >
-                        <Link
-                            theme="primary"
-                            isIcon={true}
-                            class="md:inline-flex"
-                            href="/work"
-                        >
-                            View some work <Icon
-                                name="lucide:arrow-right-circle"
-                                class="h-6 w-6 animate-nudge-right"
-                            />
-                        </Link>
-                        <Link href="/about" theme="outline">Read my bio</Link>
-                    </p>
-                </div>
-            </Fragment>
+                        View some work <Icon
+                            name="lucide:arrow-right-circle"
+                            class="h-6 w-6 animate-nudge-right"
+                        />
+                    </Link>
+                    <Link href="/about" theme="outline">Read my bio</Link>
+                </p>
+            </div>
+        </Fragment>
 
-            <Fragment slot="visual">
-                <SwiperHomepage slides={homepageSwiper} />
-            </Fragment>
-        </Hero>
-    </slot>
+        <Fragment slot="visual">
+            <SwiperHomepage slides={homepageSwiper} />
+        </Fragment>
+    </Hero>
     <section
-        class="from-page-contrast bg-gradient-to-b pb-4 md:pb-8"
+        class="bg-gradient-to-b from-page-contrast pb-4 md:pb-8"
         x-data="{ section: false }"
         x-intersect.threshold.10="section = true"
     >
@@ -110,7 +106,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                         const featured = post.data.tags.includes('featured');
                         return (
                             <WorkGrid
-                                url={`/work/${post.slug}/`}
+                                url={`/${post.collection}/${post.slug}/`}
                                 title={post.data.title}
                                 taster={post.data.taster}
                                 tags={post.data.tags}
@@ -150,4 +146,4 @@ const formattedPosts = formatBlogPosts(allWork, {
             </div>
         </div>
     </section>
-</BaseLayout>
+</HomeLayout>

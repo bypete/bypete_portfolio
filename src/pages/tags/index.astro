@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingLayout from '../../layouts/ListingLayout.astro';
+import Tags from '~/components/ui/Tags.astro';
+import utilities from '~/data/utilities.json';
 const allPosts = await getCollection('posts');
 const allWorks = await getCollection('work');
 const collection = [...allPosts, ...allWorks];
@@ -8,14 +10,10 @@ let tags = [...new Set(collection.map((post) => post.data.tags).flat())];
 const title = 'Tag index';
 ---
 
-<BaseLayout title={title}>
-    <div>
-        {
-            tags.map((tag) => (
-                <p>
-                    <a href={`/tags/${tag}`}>{tag}</a>
-                </p>
-            ))
-        }
-    </div>
-</BaseLayout>
+<ListingLayout title={title}>
+    <Tags
+        {tags}
+        url={true}
+        class="mx-auto flex w-full flex-wrap items-center gap-3 text-sm leading-none md:gap-4"
+    />
+</ListingLayout>

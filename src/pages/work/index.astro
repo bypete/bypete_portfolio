@@ -26,47 +26,45 @@ const hero = {
 };
 ---
 
-<ListingLayout title={title} {hero} isHeroDark={hero.dark}>
-    <slot slot="hero">
-        <Hero hero={hero}>
-            <Fragment slot="content">
-                <h1
-                    class="relative text-5xl/tight text-shadow-headline lg:text-7xl/none"
+<ListingLayout title={title} isWide={true} {hero} isHeroDark={hero.dark}>
+    <Hero slot="slothero" hero={hero}>
+        <Fragment slot="content">
+            <h1
+                class="relative text-5xl/tight text-shadow-headline lg:text-7xl/none"
+            >
+                <span
+                    class="inline-block -rotate-1 rounded bg-sky-400 p-[3px] text-[0.33em]/none font-semibold tracking-normal"
+                    >Portfolio</span
                 >
-                    <span
-                        class="inline-block -rotate-1 rounded bg-sky-400 p-[3px] text-[0.33em]/none font-semibold tracking-normal"
-                        >Portfolio</span
-                    >
-                    <span class="block">{title}</span>
-                </h1>
-                <div class="rte mt-4 md:mt-6">
-                    <p class="text-base lg:text-xl">
-                        Explore a selection of projects I have worked on.
-                        {
-                            postCount > 1 ? (
-                                <>
-                                    There are currently{' '}
-                                    <strong class="whitespace-nowrap">
-                                        {postCount} projects
-                                    </strong>{' '}
-                                    in the collection.
-                                </>
-                            ) : (
-                                ``
-                            )
-                        }
-                    </p>
-                </div>
-            </Fragment>
-            <BlockImage
-                src={imgCover}
-                slot="visual"
-                class="h-full w-full object-cover object-top md:object-center"
-                alt="Block picture"
-                loading="eager"
-            />
-        </Hero>
-    </slot>
+                <span class="block">{title}</span>
+            </h1>
+            <div class="rte mt-4 md:mt-6">
+                <p class="text-base lg:text-xl">
+                    Explore a selection of projects I have worked on.
+                    {
+                        postCount > 1 ? (
+                            <>
+                                There are currently{' '}
+                                <strong class="whitespace-nowrap">
+                                    {postCount} projects
+                                </strong>{' '}
+                                in the collection.
+                            </>
+                        ) : (
+                            ``
+                        )
+                    }
+                </p>
+            </div>
+        </Fragment>
+        <BlockImage
+            src={imgCover}
+            slot="visual"
+            class="h-full w-full object-cover object-top md:object-center"
+            alt="Block picture"
+            loading="eager"
+        />
+    </Hero>
 
     <div class="grid grid-cols-1 gap-8 md:gap-32">
         {
@@ -75,7 +73,7 @@ const hero = {
                 const featured = post.data.tags.includes('featured');
                 return (
                     <WorkPost
-                        url={`/work/${post.slug}/`}
+                        url={`/${post.collection}/${post.slug}/`}
                         title={post.data.title}
                         taster={post.data.taster}
                         tags={post.data.tags}

@@ -1,11 +1,20 @@
 ---
-const { title, url, pathname, isHeroDark, class: className } = Astro.props;
+const {
+    title,
+    url,
+    parent = undefined,
+    pathname,
+    isHeroDark,
+    class: className,
+} = Astro.props;
 const legibility = isHeroDark
     ? ' group-data-[banner=start]:hover:text-menudark-active group-data-[banner=start]:focus:text-menudark-active group-data-[banner=start]:text-menudark'
     : '';
 const activeState = isHeroDark
     ? ' data-[state=active]:ring-menudark-marker data-[state=active]:hover:text-menudark-active '
     : ' data-[state=active]:ring-menu-marker data-[state=active]:hover:text-menu-active';
+
+const isCurrentChild = parent !== undefined && pathname.includes(parent);
 ---
 
 <a
@@ -16,5 +25,5 @@ const activeState = isHeroDark
         legibility,
         activeState,
     ]}
-    data-state={pathname === url ? 'active' : ''}>{title}</a
+    data-state={pathname === url || isCurrentChild ? 'active' : ''}>{title}</a
 >

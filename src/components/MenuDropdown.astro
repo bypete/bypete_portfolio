@@ -9,7 +9,14 @@ const legibility = isHeroDark
 
 <li class="relative" x-data="menu">
     <div class="flex items-center">
-        <MenuLink {url} class="block pr-9" {title} {pathname} {isHeroDark} />
+        <MenuLink
+            {url}
+            parent={url}
+            class="block pr-9"
+            {title}
+            {pathname}
+            {isHeroDark}
+        />
         <button
             @click="toggle()"
             x-ref="button"
@@ -51,7 +58,7 @@ const legibility = isHeroDark
         class="absolute right-0 mt-3 w-auto origin-top-right"
     >
         <div
-            class="shadow-d1 max-h-[calc(100vh-3rem-var(--headerheight))] overflow-y-scroll rounded-tight bg-panel shadow-gray-900/20"
+            class="max-h-[calc(100vh-3rem-var(--headerheight))] overflow-y-scroll rounded-tight bg-panel shadow-d1 shadow-gray-900/20"
         >
             <slot />
         </div>

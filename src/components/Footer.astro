@@ -1,11 +1,12 @@
 ---
 import Social from './Social.astro';
 import socialData from '../data/social.json';
+import siteInfo from '~/data/site';
 import { Icon } from 'astro-icon/components';
 ---
 
 <footer
-    class="bg-footer-bg from-footer-bg__light to-footer-bg__dark relative bg-gradient-to-b py-16 text-footer"
+    class="relative bg-footer-bg bg-gradient-to-b from-footer-bg__light to-footer-bg__dark py-16 text-footer"
 >
     <div
         class="relative mx-auto grid max-w-container grid-cols-1 gap-8 md:grid-cols-3 2xl:grid-cols-2"
@@ -31,11 +32,11 @@ import { Icon } from 'astro-icon/components';
                 class="-mx-2 inline-flex md:flex md:items-end md:justify-center 2xl:justify-end"
             >
                 {
-                    socialData.map((channel) => (
+                    siteInfo.socials.map((channel) => (
                         <Social
                             platform={channel.platform}
                             url={channel.url}
-                            name={channel.name}
+                            name={channel.icon}
                         />
                     ))
                 }

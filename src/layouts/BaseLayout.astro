@@ -62,10 +62,6 @@ import '~/styles/tailwind.css';
         >
             <Header {isHeroDark} />
             <div class="bg-page outline-none">
-                <slot name="hero">
-                    <Hero {...hero} />
-                </slot>
-
                 <slot />
             </div>
             <Footer />
@@ -80,7 +76,7 @@ import '~/styles/tailwind.css';
             /* Alpine.js
 ---------------------------------------------------------------------------------*/
             [x-cloak] {
-                /* display: none !important; */
+                display: none !important;
                 visibility: hidden;
                 opacity: 0;
             }

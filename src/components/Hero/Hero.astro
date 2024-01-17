@@ -38,7 +38,7 @@ export interface Props extends HTMLAttributes<'div'> {
 }
 
 const fm = Astro.props.frontmatter || Astro.props;
-const { title: headline, hero = {}, ...rest } = fm;
+const { title, hero = {}, ...rest } = fm;
 const {
     dark = false,
     wrapper = '',
@@ -106,7 +106,7 @@ switch (mode) {
                         utilities.tramline.double.t,
                     ]}
                 >
-                    {headline}
+                    {title}
                 </h1>
             </>
         )
@@ -155,7 +155,7 @@ switch (mode) {
     <slot />
     {
         scrollprompt && (
-            <div class="pointer-events-none absolute bottom-0 left-1/2 z-shortcuts -translate-x-1/2 pb-4 md:pb-8">
+            <div class="pointer-events-none absolute left-1/2 top-screenSvh z-shortcuts -translate-x-1/2 -translate-y-full pb-4 md:pb-8 ">
                 <ScrollPrompt />
             </div>
         )

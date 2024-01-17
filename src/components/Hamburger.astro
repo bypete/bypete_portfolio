@@ -67,7 +67,7 @@ const year = new Date().getFullYear();
                         {
                             allPosts.map((post) => (
                                 <MenuLinkChild
-                                    url={`/work/${post.slug}/`}
+                                    url={`/${post.collection}/${post.slug}/`}
                                     title={post.data.title}
                                     {pathname}
                                     {currentPath}

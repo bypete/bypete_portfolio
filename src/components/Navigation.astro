@@ -34,7 +34,7 @@ const { class: ClassList, isHeroDark = false } = Astro.props;
                         {allPosts.map((post) => (
                             <li>
                                 <MenuLinkChild
-                                    url={`/work/${post.slug}/`}
+                                    url={`/${post.collection}/${post.slug}/`}
                                     title={post.data.title}
                                     {pathname}
                                     {currentPath}

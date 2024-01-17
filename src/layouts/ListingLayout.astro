@@ -1,14 +1,28 @@
 ---
+import { type Props as HeadProps } from '~/components/SEO/Main.astro';
+import Hero, { type Props as HeroProps } from '~/components/Hero/Hero.astro';
+
 import BaseLayout from './BaseLayout.astro';
-import Hero from '~/components/Hero/Hero.astro';
 import utilities from '~/data/utilities.json';
 
-const props = Astro.props.frontmatter || Astro.props;
+const fm = Astro.props.frontmatter || Astro.props;
+
+const head: HeadProps = {
+    title: fm.title,
+    description: fm.description,
+};
+
+const heroConfig: HeroProps = {
+    title: fm.title,
+    hero: fm.hero,
+};
+
+const { title, isHeroDark = false, isWide = false } = fm;
 ---
 
-<BaseLayout {...props}>
-    <slot name="hero" slot="hero">
-        <Hero hero={props.hero} title={props.title} />
+<BaseLayout {...head} {isHeroDark}>
+    <slot name="slothero">
+        <Hero {...heroConfig} />
     </slot>
 
     <main
@@ -19,6 +33,14 @@ const props = Astro.props.frontmatter || Astro.props;
             utilities.tramline.double.b,
         ]}
     >
-        <slot />
+        {
+            isWide ? (
+                <slot />
+            ) : (
+                <div class="mx-auto max-w-3xl">
+                    <slot />
+                </div>
+            )
+        }
     </main>
 </BaseLayout>

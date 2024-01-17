@@ -1,8 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import ListingLayout from '../../layouts/ListingLayout.astro';
 import BlogPost from '../../components/BlogPost.astro';
-
+import Link from '~/components/ui/Link.astro';
+import { formatBlogPosts } from '~/js/utils';
 export async function getStaticPaths() {
     const allPosts = await getCollection('posts');
     const allWorks = await getCollection('work');
@@ -23,18 +24,34 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
+
+const formattedPosts = formatBlogPosts(posts, {
+    filterOutDrafts: true,
+    filterOutFuturePosts: true,
+    sortByDate: true,
+    limit: 5,
+});
 ---
 
-<BaseLayout title={tag}>
-    <p>Posts tagged with {tag}</p>
-    <ul>
+<ListingLayout title={tag} isWide={false}>
+    <p class="mb-4 md:mb-8">Posts tagged with <strong>{tag}</strong></p>
+    <div class="grid columns-1 gap-4 md:gap-8">
         {
-            posts.map((post) => (
-                <BlogPost
-                    url={`/${post.collection}/${post.slug}/`}
-                    title={post.data.title}
-                />
-            ))
+            formattedPosts.map(async (post) => {
+                const { remarkPluginFrontmatter } = await post.render();
+                const featured = post.data.tags.includes('featured');
+                return (
+                    <BlogPost
+                        url={`/${post.collection}/${post.slug}/`}
+                        title={post.data.title}
+                        taster={post.data.taster}
+                        tags={post.data.tags}
+                        cover={post.data.cover}
+                        readTime={remarkPluginFrontmatter.minutesRead}
+                    />
+                );
+            })
         }
-    </ul>
-</BaseLayout>
+    </div>
+    <p>View <Link theme="primary" size="sm" href="/tags">all tags</Link></p>
+</ListingLayout>

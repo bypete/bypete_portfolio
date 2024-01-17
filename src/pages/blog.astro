@@ -1,22 +1,28 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import ListingLayout from '../layouts/ListingLayout.astro';
 import BlogPost from '../components/BlogPost.astro';
 
-const title = 'My Astro Learning Blog';
+const title = 'Blog';
 const allPosts = await getCollection('posts');
 ---
 
-<BaseLayout title={title}>
-    <p>I will post about my journey learning Astro</p>
-    <ul>
+<ListingLayout title={title}>
+    <div class="grid grid-cols-1 gap-8 md:gap-32">
         {
-            allPosts.map((post) => (
-                <BlogPost
-                    url={`/posts/${post.slug}/`}
-                    title={post.data.title}
-                />
-            ))
+            allPosts.map(async (post) => {
+                const { remarkPluginFrontmatter } = await post.render();
+                return (
+                    <BlogPost
+                        url={`/${post.collection}/${post.slug}/`}
+                        title={post.data.title}
+                        taster={post.data.taster}
+                        tags={post.data.tags}
+                        cover={post.data.cover}
+                        readTime={remarkPluginFrontmatter.minutesRead}
+                    />
+                );
+            })
         }
-    </ul>
-</BaseLayout>
+    </div>
+</ListingLayout>

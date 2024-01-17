@@ -11,19 +11,18 @@ const head: HeadProps = {
     description: fm.description,
 };
 
-const heroObj: HeroProps = {
+const heroConfig: HeroProps = {
     title: fm.title,
-    ...fm.hero, // Spread the hero properties
+    hero: fm.hero,
 };
 
-const { isHeroDark } = fm;
-
+const { isHeroDark, isWide = false } = fm;
 // console.log(`PL | ${Astro.request.url} | Props:`, head, heroObj);
 ---
 
 <BaseLayout {...head} {isHeroDark}>
-    <slot name="hero" slot="hero">
-        <Hero hero={fm.hero} title={fm.title} />
+    <slot name="slothero">
+        <Hero {...heroConfig} />
     </slot>
 
     <main
@@ -34,8 +33,14 @@ const { isHeroDark } = fm;
             utilities.tramline.double.b,
         ]}
     >
-        <div class="rte prose mx-auto max-w-3xl lg:prose-lg">
-            <slot />
-        </div>
+        {
+            isWide ? (
+                <slot />
+            ) : (
+                <div class="rte prose mx-auto max-w-3xl lg:prose-lg">
+                    <slot />
+                </div>
+            )
+        }
     </main>
 </BaseLayout>

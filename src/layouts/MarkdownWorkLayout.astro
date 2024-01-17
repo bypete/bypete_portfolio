@@ -19,7 +19,7 @@ if (frontmatter.skillset) {
 ---
 
 <BaseLayout {...frontmatter}>
-    <slot name="hero" slot="hero">
+    <slot name="slothero">
         <div
             class="relative z-10 grid w-full grid-cols-1 shadow-xl shadow-black/10 lg:grid-cols-work conpad:grid-cols-workcontianer"
         >
@@ -108,7 +108,7 @@ if (frontmatter.skillset) {
                         />
                         <span class="mx-1.5">Last updated:</span>
                         <time
-                            class="bg-outline-pale inline-block rounded px-1.5"
+                            class="inline-block rounded bg-outline-pale px-1.5"
                             datetime={htmlDateString(
                                 frontmatter.modDate || frontmatter.pubDate,
                             )}

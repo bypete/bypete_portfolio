@@ -2,17 +2,17 @@
 import utilities from '~/data/utilities.json';
 import { Icon } from 'astro-icon/components';
 import ContactForm from '~/components/Forms/ContactForm.astro';
-import WideLayout from '~/layouts/WideLayout.astro';
+import PageLayout from '~/layouts/PageLayout.astro';
 const title = 'Connect';
 ---
 
-<WideLayout title={title}>
+<PageLayout title={title} isWide={true}>
     <div
         class:list={['grid grid-cols-1 md:grid-cols-2', utilities.tramline.all]}
     >
         <div
             class:list={[
-                'border-panel/75 flex items-center border md:order-2',
+                'flex items-center border border-panel/75 md:order-2',
                 utilities.tramline.all,
             ]}
         >
@@ -50,11 +50,11 @@ const title = 'Connect';
         </div>
         <div
             class:list={[
-                'bg-panel/75 rounded md:order-1',
+                'rounded bg-panel/75 md:order-1',
                 utilities.tramline.all,
             ]}
         >
             <ContactForm />
         </div>
     </div>
-</WideLayout>
+</PageLayout>

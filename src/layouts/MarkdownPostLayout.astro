@@ -1,26 +1,92 @@
 ---
+import { type Props as HeadProps } from '~/components/SEO/Main.astro';
 import BaseLayout from './BaseLayout.astro';
-const { frontmatter } = Astro.props;
+import Tags from '~/components/ui/Tags.astro';
+import utilities from '~/data/utilities.json';
+import { Icon } from 'astro-icon/components';
+
+import Hero, { type Props as HeroProps } from '~/components/Hero/Hero.astro';
+import { readableDate, htmlDateString } from '~/components/Utils/formatDate.js';
+import BlockPicture from '~/components/Images/BlockPicture.astro';
+import TableOfContents from '~/components/ui/TableOfContents.astro';
+
+const { frontmatter, minutesRead, headings } = Astro.props;
+
+const head: HeadProps = {
+    title: frontmatter.title,
+    description: frontmatter.description,
+};
+
+const heroConfig: HeroProps = {
+    title: frontmatter.title,
+    hero: frontmatter.hero,
+};
 
 // Check if frontmatter.hero is defined before destructuring
 const { hero: { dark: isHeroDark = false } = {} } = frontmatter || {};
 ---
 
-<BaseLayout title={frontmatter.title} {isHeroDark}>
-    <p>Published on: {frontmatter.pubDate.toString().slice(0, 10)}</p>
-    <p><em>{frontmatter.description}</em></p>
-    <p>Written by {frontmatter.author}</p>
-    <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+<BaseLayout {...head} {isHeroDark}>
+    <slot name="slothero">
+        <Hero {...heroConfig} />
+    </slot>
 
-    <div>
-        {
-            frontmatter.tags.map((tag) => (
-                <p>
-                    <a href={`/tags/${tag}`}>{tag}</a>
-                </p>
-            ))
-        }
-    </div>
-
-    <slot />
+    <main
+        id="main-content"
+        class:list={[
+            'relative mx-auto max-w-container ',
+            utilities.tramline.double.y,
+        ]}
+    >
+        <article class="relative">
+            <div class="rte prose mx-auto max-w-3xl lg:prose-lg">
+                {
+                    frontmatter.splash && (
+                        <BlockPicture
+                            src={frontmatter.splash.url}
+                            class="my-0"
+                            alt={frontmatter.splash.alt}
+                            credit={frontmatter.splash.credit}
+                        />
+                    )
+                }
+                {headings && <TableOfContents headings={headings} />}
+                <slot />
+                <aside
+                    class:list={[
+                        'not-prose w-full',
+                        utilities.tramline.y,
+                        utilities.margin.t,
+                    ]}
+                >
+                    <p class="inline-flex items-center">
+                        <Icon
+                            name="lucide:calendar"
+                            class="inline-block h-4 w-auto"
+                        />
+                        <span class="mx-1.5">Last updated:</span>
+                        <time
+                            class="inline-block rounded bg-outline-pale px-1.5"
+                            datetime={htmlDateString(
+                                frontmatter.modDate || frontmatter.pubDate,
+                            )}
+                            >{
+                                readableDate(
+                                    frontmatter.modDate || frontmatter.pubDate,
+                                )
+                            }
+                        </time>
+                    </p>
+                    <Tags
+                        tags={frontmatter.tags}
+                        url="true"
+                        class:list={[
+                            'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
+                            utilities.margin.t,
+                        ]}
+                    />
+                </aside>
+            </div>
+        </article>
+    </main>
 </BaseLayout>

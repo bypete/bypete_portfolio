@@ -77,9 +77,8 @@ import BlockPicture from '~/components/Images/BlockPicture.astro';
 import { Icon } from 'astro-icon/components';
 
 
-<PageLayout title={frontmatter.title} description={frontmatter.description} isHeroDark={frontmatter.hero.dark}>
-<slot slot="hero">
-  <Hero hero={frontmatter.hero}>
+<PageLayout hero={frontmatter.hero} title={frontmatter.title} description={frontmatter.description} isHeroDark={frontmatter.hero.dark}>
+  <Hero slot="slothero" hero={frontmatter.hero} >
     <Fragment slot="content">
         <h1 class="relative text-4xl/normal text-shadow-headline lg:text-7xl/none">
             {frontmatter.title}
@@ -111,9 +110,7 @@ import { Icon } from 'astro-icon/components';
       <BlockPicture src={bg_teal} breakout={false} class="object-cover object-bottom md:object-center w-full h-full" alt="Rustic Teal background" />
     </Fragment>
   </Hero>
-</slot>
 
-<slot name="main">
 ## The backstory
 
 I cut my teeth in multimedia, primarily working on e-learning, training, and press pack applications for prominent publishers such as **BBC Worldwide**, **BBC Active**, **University of Cambridge**, **Oxford University Press**, **UKTV**, and **Kellogg's** with the award winning agency - Fifth Dimension Productions.
@@ -155,7 +152,6 @@ The boys are at a naturally inquisitive age and whilst I do my best to tackle th
 
 <BlockPicture src={google_lens} breakout={false} class="my-0 w-full" alt="Beach scene with close up of jellyfish. Detail shows iPhone with google lens app" credit="Google Lens (App visuals)" wrapper="my-4 md:my-8 -mx-4 md:mx-0" />
 
-</slot>
 </PageLayout>
 
 

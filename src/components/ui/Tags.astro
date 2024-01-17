@@ -16,7 +16,7 @@ import { Icon } from 'astro-icon/components';
                     {url ? (
                         <a
                             href={`/tags/${tag}`}
-                            class="flex items-center gap-x-1 whitespace-nowrap rounded-[12px] bg-yellow-300 px-2 py-5px text-sm font-medium lowercase leading-none text-neutral-800 hover:bg-accent hover:text-white hover:ring-accent"
+                            class="inline-flex items-center gap-x-1 whitespace-nowrap rounded-[12px] bg-yellow-300 px-2 py-5px text-sm font-medium lowercase leading-none text-neutral-800 hover:bg-accent hover:text-white hover:ring-accent"
                         >
                             {tag === 'featured' && (
                                 <Icon
@@ -27,7 +27,7 @@ import { Icon } from 'astro-icon/components';
                             {tag}
                         </a>
                     ) : (
-                        <span class="flex items-center gap-x-1 whitespace-nowrap rounded-[12px] bg-yellow-300 px-2 py-1.5 text-sm font-medium lowercase leading-none text-neutral-800">
+                        <span class="inline-flex items-center gap-x-1 whitespace-nowrap rounded-[12px] bg-yellow-300 px-2 py-1.5 text-sm font-medium lowercase leading-none text-neutral-800">
                             {tag === 'featured' && (
                                 <Icon
                                     name="mdi:star"
