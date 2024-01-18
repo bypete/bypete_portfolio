@@ -1,41 +1,46 @@
 ---
 import { Image } from 'astro:assets';
-import utilities from '~/data/utilities.json';
+import { getImage } from 'astro:assets';
 
 const {
     src,
     widths = [],
     sizes,
     breakout = true,
-    wrapper = '',
-    credit = '',
+    format = 'webp',
     ...attrs
 } = Astro.props;
 
-const resolvedWidths = widths.length ? widths : [240, 540, 720, src.width];
-const resolvedSizes =
-    sizes ||
-    `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${src.width}px`;
+const resolvedWidths = widths.length ? widths : [120, 480];
+const resolvedSizes = sizes || `(max-width: 360px) 120px, 480px`;
 
 const imageProps = {
     src,
     ...attrs,
+    format: format,
     quality: 'high',
     sizes: resolvedSizes,
     widths: resolvedWidths,
 };
+
+const optimizedSrc = await getImage({ src: src, format: 'webp' });
 ---
 
 {
     (
         <a
             href={src.src}
+            data-cropped={src.cropped || ''}
             data-lightbox
+            data-pswp-srcset={optimizedSrc.src}
             data-pswp-width={src.width}
             data-pswp-height={src.height}
             class="relative block h-full w-full overflow-hidden rounded shadow-sm hover:cursor-pointer"
         >
             <Image {...imageProps} />
+            {src.caption && (
+                <span data-caption="" class="hidden" set:html={src.caption} />
+            )}
         </a>
     )
 }

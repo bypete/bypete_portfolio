@@ -1,16 +1,40 @@
 ---
 import { getCollection } from 'astro:content';
 import MarkdownWorkLayout from '~/layouts/MarkdownWorkLayout.astro';
+import { formatBlogPosts } from '~/js/utils';
 
 export async function getStaticPaths() {
     const workEntries = await getCollection('work');
-    return workEntries.map((entry) => ({
+    const numberOfPosts = workEntries.length;
+
+    const formattedPosts = formatBlogPosts(workEntries, {
+        filterOutDrafts: true,
+        filterOutFuturePosts: true,
+        sortByDate: true,
+    });
+
+    // return workEntries.map((entry) => ({
+    //     params: { slug: entry.slug },
+    //     props: { entry },
+    // }));
+
+    return formattedPosts.map((entry, i) => ({
         params: { slug: entry.slug },
-        props: { entry },
+        props: {
+            entry,
+            prevPost:
+                i + 1 === numberOfPosts // If the current post is the oldest
+                    ? ''
+                    : workEntries[i + 1],
+            nextPost:
+                i === 0 // If the current post is the newest
+                    ? ''
+                    : workEntries[i - 1],
+        },
     }));
 }
 
-const { entry } = Astro.props;
+const { entry, prevPost, nextPost } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await entry.render();
 ---
 
@@ -18,6 +42,8 @@ const { Content, headings, remarkPluginFrontmatter } = await entry.render();
     frontmatter={entry.data}
     minutesRead={remarkPluginFrontmatter.minutesRead}
     {headings}
+    {prevPost}
+    {nextPost}
 >
     <Content />
 </MarkdownWorkLayout>

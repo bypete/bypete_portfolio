@@ -1,9 +1,8 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 import 'photoswipe/style.css';
-import 'photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.css';
 import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
+import LightboxImage from '~/components/Images/LightboxImage.astro';
 
 import utilities from '~/data/utilities.json';
 
@@ -61,36 +60,24 @@ const {
 
     <div
         class:list={[
-            'not-prose bg-underlay-light grid grid-flow-dense auto-rows-[100px] grid-cols-3 gap-4 md:auto-rows-[160px] md:grid-cols-4 md:gap-8',
+            'not-prose grid grid-flow-dense auto-rows-[100px] grid-cols-3 gap-4 bg-underlay-light md:auto-rows-[160px] md:grid-cols-4 md:gap-8',
             utilities.margin.t,
         ]}
     >
         {
             images.map((image, i) => (
-                <div class:list={[image.class || '']}>
-                    <a
-                        href={image.src}
-                        data-lightbox
-                        data-pswp-width={image.width}
-                        data-pswp-height={image.height}
-                        class="relative block h-full w-full overflow-hidden rounded shadow-sm hover:cursor-pointer"
-                    >
-                        <Image
+                <>
+                    <div class:list={[image.class || '']}>
+                        <LightboxImage
                             src={image}
-                            alt="image"
+                            alt={image.title}
                             width={480}
-                            quality={90}
-                            height={(image.height * 480) / image.width}
                             format="webp"
+                            height={(image.height * 480) / image.width}
                             class="absolute inset-0 h-full w-full object-cover object-top"
                         />
-                        image.caption && (
-                        <span class="pswp-caption-content">
-                            {image.caption}
-                        </span>
-                        )
-                    </a>
-                </div>
+                    </div>
+                </>
             ))
         }
     </div>
@@ -98,19 +85,73 @@ const {
 <script>
     import PhotoSwipeLightbox from 'photoswipe/lightbox';
     import PhotoSwipeDynamicCaption from 'photoswipe-dynamic-caption-plugin';
+    const smallScreenPadding = {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+    };
+    const largeScreenPadding = {
+        top: 48,
+        bottom: 48,
+        left: 32,
+        right: 32,
+    };
 
     const lightbox = new PhotoSwipeLightbox({
         gallery: '#lightbox, .lightbox',
         children: 'a[data-lightbox]',
+        // optionaly adjust viewport
+        paddingFn: (viewportSize) => {
+            return viewportSize.x < 700
+                ? smallScreenPadding
+                : largeScreenPadding;
+        },
         wheelToZoom: true,
         bgOpacity: 0.85,
-        padding: { top: 48, bottom: 48, left: 32, right: 32 },
         pswpModule: () => import('photoswipe'),
     });
 
-    const captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
-        // Plugins options, for example:
-        type: 'auto',
+    lightbox.on('uiRegister', () => {
+        lightbox.pswp.ui.registerElement({
+            name: 'custom-caption',
+            order: 9,
+            isButton: false,
+            appendTo: 'root',
+            className:
+                'bg-slate-900/75 !opacity-0 duration-300 rounded text-white text-sm max-w-[calc(100%-4rem)] w-auto absolute left-1/2 -translate-x-1/2 bottom-2.5 px-2 py-1',
+            html: 'Caption text',
+            // eslint-disable-next-line no-unused-vars
+            onInit: (el, pswp) => {
+                const captionDom = el;
+                lightbox.pswp.on('change', () => {
+                    if (!captionDom.classList.contains('!opacity-0')) {
+                        captionDom.classList.add('!opacity-0');
+                    }
+                    const currSlideElement =
+                        lightbox.pswp.currSlide.data.element;
+                    let captionHTML = '';
+                    if (currSlideElement) {
+                        const hiddenCaption =
+                            currSlideElement.querySelector('[data-caption]');
+                        if (hiddenCaption) {
+                            // get caption from element with class hidden-caption-content
+                            captionHTML = hiddenCaption.innerHTML;
+                            captionDom.classList.remove('!opacity-0');
+                        } else {
+                            // get caption from alt attribute
+                            if (!captionDom.classList.contains('!opacity-0')) {
+                                el.classList.add('!opacity-0');
+                            }
+                            captionHTML = currSlideElement
+                                .querySelector('img')
+                                .getAttribute('alt');
+                        }
+                    }
+                    captionDom.innerHTML = captionHTML || '';
+                });
+            },
+        });
     });
 
     lightbox.init();

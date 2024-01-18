@@ -9,9 +9,9 @@ import Hero, { type Props as HeroProps } from '~/components/Hero/Hero.astro';
 import { readableDate, htmlDateString } from '~/components/Utils/formatDate.js';
 import BlockPicture from '~/components/Images/BlockPicture.astro';
 import TableOfContents from '~/components/ui/TableOfContents.astro';
+import PrevNext from '~/components/ui/PrevNext.astro';
 
-const { frontmatter, minutesRead, headings } = Astro.props;
-
+const { frontmatter, minutesRead, headings, prevPost, nextPost } = Astro.props;
 const head: HeadProps = {
     title: frontmatter.title,
     description: frontmatter.description,
@@ -86,6 +86,7 @@ const { hero: { dark: isHeroDark = false } = {} } = frontmatter || {};
                         ]}
                     />
                 </aside>
+                <PrevNext {prevPost} {nextPost} />
             </div>
         </article>
     </main>

@@ -6,6 +6,7 @@ interface LightboxSet {
     image: string;
     class?: string;
     caption?: string;
+    cropped?: boolean;
 }
 
 interface DataKeys {
@@ -16,9 +17,9 @@ interface DataKeys {
 export interface Props {
     data: Partial<DataKeys>;
     collection: string;
-    title: string | ImageMetadata;
-    caption?: string | ImageMetadata;
-    class?: string | ImageMetadata;
+    title: string;
+    caption?: string;
+    class?: string;
 }
 
 const { data, collection } = Astro.props;
@@ -74,6 +75,7 @@ const getImageSrcs = (
                 title: asset.title,
                 caption: asset.caption,
                 class: asset.class,
+                cropped: asset.cropped,
             };
         }
 

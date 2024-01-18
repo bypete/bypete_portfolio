@@ -8,16 +8,16 @@ export function formatBlogPosts(
         filterOutDrafts = true,
         filterOutFuturePosts = true,
         sortByDate = true,
-        limit = 0,
+        limit = undefined,
     } = {},
 ) {
     const filteredPosts = posts.reduce((acc, post) => {
-        const { date, draft } = post.data;
+        const { pubDate, draft } = post.data;
         // filterOutDrafts if true
         if (filterOutDrafts && draft) return acc;
 
         // filterOutFuturePosts if true
-        if (filterOutFuturePosts && new Date(date) > new Date()) return acc;
+        if (filterOutFuturePosts && new Date(pubDate) > new Date()) return acc;
 
         // add post to acc
         acc.push(post);
@@ -27,7 +27,7 @@ export function formatBlogPosts(
 
     if (sortByDate) {
         filteredPosts.sort(
-            (a, b) => Date.parse(b.data.date) - Date.parse(a.data.date),
+            (a, b) => Date.parse(b.data.pubDate) - Date.parse(a.data.pubDate),
         );
     } else {
         filteredPosts.sort(() => Math.random() - 0.5);

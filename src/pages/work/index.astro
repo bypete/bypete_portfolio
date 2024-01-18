@@ -5,10 +5,17 @@ import Hero from '../../components/Hero/Hero.astro';
 
 import imgCover from '~/assets/blocks/inflated-half--slate--cr.webp';
 import BlockImage from '~/components/Images/BlockImage.astro';
+import HeroPicture from '~/components/Images/HeroPicture.astro';
 
+import { formatBlogPosts } from '~/js/utils';
 import { getCollection } from 'astro:content';
-
 const allWork = await getCollection('work');
+
+const formattedPosts = formatBlogPosts(allWork, {
+    filterOutDrafts: true,
+    filterOutFuturePosts: true,
+    sortByDate: true,
+});
 const postCount = allWork.length;
 
 const title = 'Show your workings';
@@ -57,18 +64,18 @@ const hero = {
                 </p>
             </div>
         </Fragment>
-        <BlockImage
-            src={imgCover}
+
+        <HeroPicture
             slot="visual"
+            src={imgCover}
             class="h-full w-full object-cover object-top md:object-center"
-            alt="Block picture"
-            loading="eager"
+            alt="Abstract inflated background"
         />
     </Hero>
 
     <div class="grid grid-cols-1 gap-8 md:gap-32">
         {
-            allWork.map(async (post) => {
+            formattedPosts.map(async (post) => {
                 const { remarkPluginFrontmatter } = await post.render();
                 const featured = post.data.tags.includes('featured');
                 return (

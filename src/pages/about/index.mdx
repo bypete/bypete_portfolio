@@ -71,8 +71,9 @@ import bg_teal from '~/assets/hero/concrete--teal.webp';
 import bg_teal_sm from '~/assets/hero/concrete--teal@sm.webp';
 import google_lens from '~/assets/google-lens.jpg';
 import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import Figure from '~/components/Figure.astro'
-import HeroImage from '~/components/Images/HeroImage.astro';
+import HeroPicture from '~/components/Images/HeroPicture.astro';
 import BlockPicture from '~/components/Images/BlockPicture.astro';
 import { Icon } from 'astro-icon/components';
 
@@ -97,8 +98,10 @@ import { Icon } from 'astro-icon/components';
         <div class="absolute aspect-1 h-full w-auto animate-morph-delay border border-white/30"></div>
         <div class="absolute aspect-1 h-full w-auto animate-morph border border-white/95"></div>
         <div class="h-full w-full" x-bind:class="shown ? 'animate-stretch' : 'invisible'">
-            <HeroImage
+            <Picture
               src={imgProfile__hd}
+              widths={[300, 640, 800]}
+              sizes={'(max-width: 48em) calc(100vw - 2rem), 50vw'}
               class="relative w-full h-full object-contain object-bottom"
               alt="Profile headshot"
               loading="eager"
@@ -107,7 +110,7 @@ import { Icon } from 'astro-icon/components';
       </div>
     </Fragment>
     <Fragment slot="background">
-      <BlockPicture src={bg_teal} breakout={false} class="object-cover object-bottom md:object-center w-full h-full" alt="Rustic Teal background" />
+      <HeroPicture src={bg_teal} class="object-cover object-bottom md:object-center w-full h-full" alt="Rustic Teal background" />
     </Fragment>
   </Hero>
 

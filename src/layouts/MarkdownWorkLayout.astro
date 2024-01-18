@@ -5,11 +5,13 @@ import utilities from '~/data/utilities.json';
 import Link from '~/components/ui/Link.astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
+import HeroPicture from '~/components/Images/HeroPicture.astro';
 import { readableDate, htmlDateString } from '~/components/Utils/formatDate.js';
 import Skills from '~/components/Skills.astro';
 import TableOfContents from '~/components/ui/TableOfContents.astro';
+import PrevNext from '~/components/ui/PrevNext.astro';
 import BlockPicture from '~/components/Images/BlockPicture.astro';
-const { frontmatter, minutesRead, headings } = Astro.props;
+const { frontmatter, minutesRead, headings, prevPost, nextPost } = Astro.props;
 let resolvedHeadings = headings;
 
 if (frontmatter.skillset) {
@@ -23,7 +25,15 @@ if (frontmatter.skillset) {
         <div
             class="relative z-10 grid w-full grid-cols-1 shadow-xl shadow-black/10 lg:grid-cols-work conpad:grid-cols-workcontianer"
         >
-            <Image src={frontmatter.cover.url} alt={frontmatter.cover.alt} />
+            <HeroPicture
+                src={frontmatter.cover.url}
+                credit={frontmatter.title}
+                alt={frontmatter.cover.alt}
+                widths={[780, 960, 1920]}
+                sizes={'100vw, (min-width: 1024px) 50vw, (min-width: 1264px) 56.25vw'}
+                class="absolute inset-0 h-full w-full object-cover"
+                wrapper={'h-square lg:h-auto lg:min-h-screen'}
+            />
             <div
                 class:list={[
                     'rte self-end py-4 md:pb-8 lg:pb-12 conpad:pr-0',
@@ -85,6 +95,10 @@ if (frontmatter.skillset) {
                     frontmatter.splash && (
                         <BlockPicture
                             src={frontmatter.splash.url}
+                            widths={[360, 720, 1400, 2000]}
+                            sizes={
+                                '(max-width: 360px) 360px, (max-width: 768px) 720px, (max-width: 1280px) 1400px, 2000px'
+                            }
                             class="my-0"
                             alt={frontmatter.splash.alt}
                             credit={frontmatter.splash.credit}
@@ -128,6 +142,7 @@ if (frontmatter.skillset) {
                         ]}
                     />
                 </aside>
+                <PrevNext {prevPost} {nextPost} />
             </div>
         </article>
     </main>

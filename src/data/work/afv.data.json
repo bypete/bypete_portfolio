@@ -7,11 +7,12 @@
       "class": "row-span-2 col-span-2",
       "width": "1200",
       "height": "1907",
-      "caption": "First image has a caption"
+      "caption": "Homepage"
     },
     {
       "title": "Landing",
       "image": "landing.jpg",
+      "class": "row-span-2 col-span-1",
       "width": "1200",
       "height": "3664"
     },
@@ -60,7 +61,7 @@
     {
       "title": "Home",
       "image": "sm_registration.jpg",
-      "class": "row-span-3 col-span-1",
+      "class": "row-span-2 col-span-1",
       "width": "780",
       "height": "5350"
     }
