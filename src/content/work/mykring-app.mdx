@@ -45,12 +45,13 @@ import Block from '~/components/Blocks/Block.astro'
 import utilities from '~/data/utilities.json'
 
 import UL from '~/components/MDX/ul.astro'
-import Reviews from '~/components/Swipers/Reviews.astro'
+import Reviews from '~/components/Swiper/Reviews.astro'
 import Figure from '~/components/Figure.astro'
 import Gallery from '~/components/Lightbox/Gallery.astro'
 import web_autotopup from '../../assets/work/mykringapp/web-autotopup.jpg'
 import auto_topup from '../../assets/work/mykringapp/1.1.0_auto-topup.jpg'
 import auto_topup_open from '../../assets/work/mykringapp/1.1.0_auto-topup-open.jpg'
+import iphone_hand from '../../assets/work/mykringapp/iPhone__hand.png'
 import svgbg from '../../icons/contour.svg'
 
 import data from '~/data/work/mykringapp.data.json'
@@ -120,10 +121,7 @@ The Auto top-up form was also streamlined and only appears when 'Use Auto top-up
             </blockquote>
         </div>
         <div slot="mc2" class="not-prose self-end md:order-1">
-            <img
-                src="/img/work/mykringapp/iPhone__hand.png"
-                class="relative m-0 mt-8 h-[480px] w-full object-contain lg:h-[640px]"
-                alt="Hand holding an iPhone with mykring app in use" />
+            <Image src={iphone_hand} widths={[400,600,800]} sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.5), (min-width: 1264) calc(var(--container-width-max)*0.60)`} class="relative m-0 mt-8 h-[480px] w-full object-contain lg:h-[640px]" alt="Hand holding an iPhone with mykring app in use"/>
         </div>
     </Block>
 

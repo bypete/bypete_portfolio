@@ -11,7 +11,7 @@ const { grid, class: ClassName = '', legibility, ...rest } = Astro.props;
 ---
 
 <slot />
-<div class:list={['relative', ClassName, grid]}>
+<div class:list={['', ClassName, grid]}>
     <slot name="mc1" />
     <slot name="mc2" />
 </div>

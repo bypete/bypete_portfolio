@@ -1,6 +1,5 @@
 ---
 import Social from './Social.astro';
-import socialData from '../data/social.json';
 import siteInfo from '~/data/site';
 import { Icon } from 'astro-icon/components';
 ---
@@ -13,11 +12,13 @@ import { Icon } from 'astro-icon/components';
     >
         <div>
             <p>
-                <Icon
-                    name="bypete--footer"
-                    title="byPete logo in white"
-                    class="h-10 w-auto"
-                />
+                <a href="/" title="Return to home"
+                    ><Icon
+                        name="bypete--footer"
+                        title="byPete logo in white"
+                        class="h-10 w-auto"
+                    /></a
+                >
             </p>
             <ul class="-mx-2 mt-2 inline-flex">
                 <li class="border-r border-white px-2 last:border-0">©2024</li>

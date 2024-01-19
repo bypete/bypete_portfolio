@@ -12,7 +12,9 @@ const {
 } = Astro.props;
 
 const resolvedWidths = widths.length ? widths : [120, 480];
-const resolvedSizes = sizes || `(max-width: 360px) 120px, 480px`;
+const resolvedSizes =
+    sizes ||
+    `(max-width: var(--container-width-md)) calc((100vw - 2rem)*.33), (max-width: var(--container-width-lg)) calc(var(--container-width-lg)*0.25), calc(var(--container-width-xl)*0.25)`;
 
 const imageProps = {
     src,
@@ -23,7 +25,7 @@ const imageProps = {
     widths: resolvedWidths,
 };
 
-const optimizedSrc = await getImage({ src: src, format: 'webp' });
+const srcSet = await getImage({ src: src, format: 'webp' });
 ---
 
 {
@@ -32,7 +34,7 @@ const optimizedSrc = await getImage({ src: src, format: 'webp' });
             href={src.src}
             data-cropped={src.cropped || ''}
             data-lightbox
-            data-pswp-srcset={optimizedSrc.src}
+            data-pswp-srcset={srcSet.src}
             data-pswp-width={src.width}
             data-pswp-height={src.height}
             class="relative block h-full w-full overflow-hidden rounded shadow-sm hover:cursor-pointer"

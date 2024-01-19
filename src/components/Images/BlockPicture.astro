@@ -14,10 +14,8 @@ const {
     ...attrs
 } = Astro.props;
 
-const resolvedWidths = widths.length ? widths : [360, 720, 1400, src.width];
-const resolvedSizes =
-    sizes ||
-    `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${src.width}px`;
+const resolvedWidths = widths.length ? widths : [400, 768, 1920, src.width];
+const resolvedSizes = sizes || `100vw`;
 
 const imageProps = {
     src,

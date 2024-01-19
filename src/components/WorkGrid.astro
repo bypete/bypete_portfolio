@@ -19,7 +19,7 @@ const {
 <div class="holder flex rounded-tight">
     <a
         href={url}
-        class="bg-panel group relative flex w-full flex-col rounded-tight no-underline shadow-md transition-all duration-700 hover:no-underline hover:shadow-cardhover hover:duration-300 md:ring-white md:hover:ring-2"
+        class="group relative flex w-full flex-col rounded-tight bg-panel no-underline shadow-md transition-all duration-700 hover:no-underline hover:shadow-cardhover hover:duration-300 md:ring-white md:hover:ring-2"
         x-data="{ shown: false }"
         x-intersect.threshold.10="shown = true"
         x-bind:class="shown ? 'animate-appear' : 'invisible'"
@@ -32,8 +32,8 @@ const {
                 alt={cover.alt}
                 class="absolute inset-0 m-0 h-full w-full object-cover"
                 quality="high"
-                widths={[240, 540, 720, cover.url.width]}
-                sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${cover.url.width}px`}
+                widths={[400, 720]}
+                sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.33), (min-width: 1264) calc(var(--container-width-max)*0.33)`}
             />
         </div>
         <div class="grow p-6">

@@ -23,14 +23,14 @@ if (frontmatter.skillset) {
 <BaseLayout {...frontmatter}>
     <slot name="slothero">
         <div
-            class="relative z-10 grid w-full grid-cols-1 shadow-xl shadow-black/10 lg:grid-cols-work conpad:grid-cols-workcontianer"
+            class="relative z-10 grid w-full grid-cols-1 shadow-xl shadow-black/10 lg:grid-cols-2 conpad:grid-cols-workcontianer"
         >
             <HeroPicture
                 src={frontmatter.cover.url}
                 credit={frontmatter.title}
                 alt={frontmatter.cover.alt}
-                widths={[780, 960, 1920]}
-                sizes={'100vw, (min-width: 1024px) 50vw, (min-width: 1264px) 56.25vw'}
+                widths={[400, 960, frontmatter.cover.url.width]}
+                sizes={'100vw, (min-width: var(--container-width-lg)) 50vw, (min-width: 1264px) 56.25vw'}
                 class="absolute inset-0 h-full w-full object-cover"
                 wrapper={'h-square lg:h-auto lg:min-h-screen'}
             />

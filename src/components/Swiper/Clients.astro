@@ -1,0 +1,74 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import { type SwiperClient } from '~/data/clients';
+
+export interface Props {
+    clients: Partial<SwiperClient>;
+}
+
+const { clients } = Astro.props;
+---
+
+<div
+    class="swiper swiper--clients lg:rounded-lg lg:border-x-2 lg:border-gray-200 lg:py-4"
+>
+    <div class="swiper-wrapper not-prose flex items-center">
+        {
+            clients.map((client, i) => (
+                <div class="slide swiper-slide flex items-center justify-center px-4 lg:px-10">
+                    <Image
+                        src={client.src}
+                        alt={client.alt}
+                        loading="lazy"
+                        class="max-h-10 w-auto opacity-60 grayscale transition-all hover:opacity-100 hover:filter-none lg:max-h-14"
+                    />
+                </div>
+            ))
+        }
+    </div>
+</div>
+
+<script>
+    // core version + navigation, pagination modules:
+    import Swiper from 'swiper';
+    import {
+        Navigation,
+        Pagination,
+        Autoplay,
+        Scrollbar,
+    } from 'swiper/modules';
+    // import Swiper and modules styles
+    import 'swiper/css';
+    import 'swiper/css/navigation';
+    import 'swiper/css/pagination';
+
+    {
+        const swiperReviews = new Swiper('.swiper--clients', {
+            // Install modules
+            modules: [Navigation, Pagination, Autoplay, Scrollbar],
+            speed: 1500,
+            loop: true,
+            loopAddBlankSlides: false,
+            autoplay: {
+                pauseOnMouseEnter: true,
+                disableOnInteraction: false,
+                delay: 6000,
+            },
+            breakpoints: {
+                300: {
+                    slidesPerView: 3,
+                    slidesPerGroup: 3,
+                },
+                768: {
+                    slidesPerView: 4,
+                    slidesPerGroup: 4,
+                },
+                1024: {
+                    slidesPerView: 6,
+                    slidesPerGroup: 6,
+                },
+            },
+        });
+    }
+</script>

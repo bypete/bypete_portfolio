@@ -1,18 +1,20 @@
 export interface SwiperImage {
   src: string | ImageMetadata
+  widths?: Array
+  sizes?: string
   alt: string
   url: string
   wrapper?: string
   class?: string
 }
 
-import slide1 from "~/assets/homepage/profile__cutout--circle.png";
-import slide2 from "~/assets/homepage/slide__3mobile.png";
-import slide3 from "~/assets/homepage/slide__laptop.png";
-import slide4 from "~/assets/homepage/slide__2mobile.png";
-import slide5 from "~/assets/homepage/slide__ipad.png";
+import slide1 from "~/assets/home/profile__cutout--circle.png";
+import slide2 from "~/assets/home/slide__3mobile.png";
+import slide3 from "~/assets/home/slide__laptop.png";
+import slide4 from "~/assets/home/slide__2mobile.png";
+import slide5 from "~/assets/home/slide__ipad.png";
 
-export const homepageSwiper: SwiperImage[] = [
+export const heroSlides: SwiperImage[] = [
   {
     src: slide1,
     alt: "Headshot of Peter Wallace",

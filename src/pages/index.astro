@@ -1,15 +1,17 @@
 ---
 import { Image } from 'astro:assets';
-import { homepageSwiper, roles } from '~/data/homepage';
-import SwiperHomepage from '~/components/Swipers/SwiperHomepage.astro';
+import { heroSlides, roles } from '~/data/home';
+import { clientSlides } from '~/data/clients';
+import SwiperHome from '~/components/Swiper/Home.astro';
 import HomeLayout from '~/layouts/HomeLayout.astro';
 import WorkGrid from '~/components/WorkGrid.astro';
 import Hero from '~/components/Hero/Hero.astro';
 import Link from '~/components/ui/Link.astro';
 import { Icon } from 'astro-icon/components';
 import Roles from '~/components/Roles.astro';
+import SwiperClients from '~/components/Swiper/Clients.astro';
 
-const title = 'Home page';
+const title = 'Home';
 const hero = {
     mode: 'home',
     bg: 'bg-slate-900',
@@ -80,7 +82,7 @@ const formattedPosts = formatBlogPosts(allWork, {
         </Fragment>
 
         <Fragment slot="visual">
-            <SwiperHomepage slides={homepageSwiper} />
+            <SwiperHome slides={heroSlides} />
         </Fragment>
     </Hero>
     <section
@@ -146,4 +148,7 @@ const formattedPosts = formatBlogPosts(allWork, {
             </div>
         </div>
     </section>
+    <div class="relative mx-auto max-w-container py-16 md:py-24">
+        <SwiperClients clients={clientSlides} />
+    </div>
 </HomeLayout>

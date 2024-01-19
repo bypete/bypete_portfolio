@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import Slide from '~/components/Swipers/Slide.astro';
-import { type SwiperImage } from '~/data/homepage';
+import Slide from '~/components/Swiper/HomeSlide.astro';
+import { type SwiperImage } from '~/data/home';
 
 export interface Props {
     slides: Partial<SwiperImage>;
@@ -11,7 +11,7 @@ export interface Props {
 const { slides } = Astro.props;
 ---
 
-<div class="swiper swiper--homepage group h-full w-full">
+<div class="swiper swiper--home group h-full w-full">
     <div class="swiper-wrapper not-prose flex items-center">
         {
             slides.map((slide, i) => (
@@ -22,14 +22,14 @@ const { slides } = Astro.props;
         }
     </div>
     <div
-        class="swiper-button-prev swiper--homepage__prev opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        class="swiper-button-prev swiper--home__prev opacity-0 transition-opacity duration-300 group-hover:opacity-100"
     >
     </div>
     <div
-        class="swiper-button-next swiper--homepage__next opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        class="swiper-button-next swiper--home__next opacity-0 transition-opacity duration-300 group-hover:opacity-100"
     >
     </div>
-    <div class="swiper--homepage__pagination absolute z-10 mx-auto text-right">
+    <div class="swiper--home__pagination absolute z-10 mx-auto text-right">
     </div>
 </div>
 
@@ -50,8 +50,8 @@ const { slides } = Astro.props;
     import 'swiper/css/pagination';
 
     {
-        const swiperClass = '.swiper--homepage';
-        const SwiperHomepage = new Swiper(swiperClass, {
+        const swiperClass = '.swiper--home';
+        const SwiperHome = new Swiper(swiperClass, {
             // Install modules
             modules: [
                 Navigation,
@@ -93,7 +93,7 @@ const { slides } = Astro.props;
             on: {
                 init: () => {},
                 autoplayStop: () => {
-                    SwiperHomepage.autoplay.start();
+                    SwiperHome.autoplay.start();
                 },
                 autoplayResume: () => {},
             },

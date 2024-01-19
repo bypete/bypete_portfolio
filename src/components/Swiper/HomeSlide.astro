@@ -1,12 +1,17 @@
 ---
 import { Image } from 'astro:assets';
-import { type SwiperImage } from '~/data/homepage';
+import { type SwiperImage } from '~/data/home';
 
 export interface Props {
     slide: Partial<SwiperImage>;
 }
 
 const { slide } = Astro.props;
+
+const resolvedWidths = slide.widths ? slide.widths : [480, 720, 960];
+const resolvedSizes =
+    slide.sizes ||
+    `(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.50), (min-width: 1264) calc(var(--container-width-max)*0.60)`;
 
 const slideClass =
     slide.class ||
@@ -16,6 +21,8 @@ const imageProps = {
     src: slide.src,
     alt: slide.alt,
     class: slideClass,
+    sizes: resolvedSizes,
+    widths: resolvedWidths,
     quality: 'high',
 };
 ---
