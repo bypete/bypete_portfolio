@@ -1,6 +1,6 @@
 export interface SwiperClient {
   src: string | ImageMetadata
-  widths?: Array
+  widths?:  number[]
   sizes?: string
   alt: string
   url?: string

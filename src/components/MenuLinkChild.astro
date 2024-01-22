@@ -1,11 +1,16 @@
 ---
-const { title, url, pathname, currentPath } = Astro.props;
+interface Props {
+    title: string;
+    url: string;
+    pathname: string;
+}
+const { title, url, pathname } = Astro.props;
 ---
 
 <a
     href={url}
     class:list={[
-        'focus:text-dropdown-hover data-[state=active]:text-dropdown-active data-[state=active]:bg-dropdown-bg__active text-dropdown block rounded-tight px-3 py-2 text-sm font-light hover:bg-panel-contrast focus:bg-panel-contrast focus:outline-none ',
+        'block rounded-tight px-3 py-2 text-sm font-light text-dropdown hover:bg-panel-contrast focus:bg-panel-contrast focus:text-dropdown-hover focus:outline-none data-[state=active]:bg-dropdown-bg__active data-[state=active]:text-dropdown-active ',
     ]}
     data-state={pathname === url ? 'active' : ''}
 >

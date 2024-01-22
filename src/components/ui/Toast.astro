@@ -1,12 +1,13 @@
 ---
+interface Props {
+    bg?: string;
+}
 const { bg } = Astro.props;
 ---
 
 <div
     x-cloak
-    class:list={[
-        'pointer-events-none fixed left-1/2 top-screenSvh z-toast w-full -translate-x-1/2 -translate-y-full p-4 md:max-w-sm',
-    ]}
+    class="pointer-events-none fixed left-1/2 top-screenSvh z-toast w-full -translate-x-1/2 -translate-y-full p-4 md:max-w-sm"
 >
     <div
         class:list={[

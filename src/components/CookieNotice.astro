@@ -3,10 +3,9 @@ import Toast from './ui/Toast.astro';
 import Button from './ui/Button.astro';
 import Link from './ui/Link.astro';
 import { Icon } from 'astro-icon/components';
-const { bg } = Astro.props;
 ---
 
-<Toast {bg}>
+<Toast>
     <div
         class="pointer-events-auto grid items-start gap-y-2 p-2 grid-areas-toast md:p-3"
         x-data="cookie"

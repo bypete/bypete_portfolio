@@ -3,10 +3,18 @@ import { buildToc } from '~/js/utils';
 import { Icon } from 'astro-icon/components';
 import TableOfContentsHeading from './TableOfContentsHeading.astro';
 import utilities from '~/data/utilities.json';
-export type Props = {
-    headings: Array<{ depth: number; text: string; slug: string }>;
+
+export interface Heading {
+    depth: number;
+    slug: string;
+    text: string;
+    subheadings: Heading[];
+}
+
+interface Props {
+    headings: Heading;
     class?: string;
-};
+}
 
 const { headings, class: className } = Astro.props;
 const toc = buildToc(headings);
@@ -23,7 +31,7 @@ const toc = buildToc(headings);
 >
     <div
         x-data="toc()"
-        class="bg-panel border-outline relative w-full rounded border px-4 py-2 transition-all duration-300 md:w-auto"
+        class="relative w-full rounded border border-outline bg-panel px-4 py-2 transition-all duration-300 md:w-auto"
         x-bind:class="open ? 'grow' : ''"
         x-sticky="shadow-3xl shadow-black/5 rounded-t-none"
     >
@@ -38,7 +46,7 @@ const toc = buildToc(headings);
             <div
                 x-cloak
                 x-show="open"
-                class="bg-panel border-outline absolute left-0 top-0 block max-h-[calc(100vh-var(--headerheight))] w-full overflow-y-scroll rounded border px-4 py-2 transition-all duration-300"
+                class="absolute left-0 top-0 block max-h-[calc(100vh-var(--headerheight))] w-full overflow-y-scroll rounded border border-outline bg-panel px-4 py-2 transition-all duration-300"
             >
                 <ol>
                     {

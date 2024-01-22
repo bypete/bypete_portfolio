@@ -83,6 +83,8 @@ export default {
                 blockBTT: ['content', 'visual'],
                 blockLTR: ['content visual'],
                 blockRTL: ['visual content'],
+                preview: ['meta', 'visual', 'content'],
+                preview_wide: ['meta meta', 'visual content'],
                 listing_work: ['visual', 'content'],
                 listing_work_wide: ['content visual'],
                 main: ['hero aside content'],
@@ -99,6 +101,7 @@ export default {
                 block60: 'minmax(0, 3fr) minmax(0, 2fr)',
                 block66: 'minmax(0, 2fr) minmax(0, 1fr)',
                 listing: 'minmax(0, 2fr) minmax(0, 1fr)',
+                prevnext: 'repeat(auto-fit, minmax(0, 300px))',
                 listing_work: 'minmax(0, 2fr) minmax(0, 3fr)',
                 dropmenu: 'repeat(auto-fit, minmax(200px, 1fr))',
                 taglist: 'repeat(auto-fit, minmax(120px, 1fr))',
@@ -462,6 +465,13 @@ export default {
                 attention: {
                     DEFAULT: 'rgb(var(--color-attention) / <alpha-value>)',
                     shade: 'rgb(var(--color-attention-shade) / <alpha-value>)',
+                },
+                tag: {
+                    DEFAULT: 'rgb(var(--color-tag) / <alpha-value>)',
+                    bg: 'rgb(var(--color-tag__bg) / <alpha-value>)',
+                    bg__link: 'rgb(var(--color-tag__bg-link) / <alpha-value>)',
+                    bg__hover:
+                        'rgb(var(--color-tag__bg-hover) / <alpha-value>)',
                 },
                 footer: {
                     bg: 'rgb(var(--color-footer__bg) / <alpha-value>)',

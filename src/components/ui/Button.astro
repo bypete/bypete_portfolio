@@ -33,13 +33,13 @@ const {
         theme === 'primary' &&
             'bg-accent text-white hover:border-black/10 hover:bg-accent-light ',
         theme === 'secondary' &&
-            'bg-secondary hover:bg-secondary-dark text-white',
+            'bg-secondary text-white hover:bg-secondary-dark',
         theme === 'white' && 'bg-content-light text-content-dark',
         theme === 'outline' && 'bg-transparent ring-2 ring-inset ring-outline',
         theme === 'quiet' &&
-            'text-quiet bg-transparent hover:border-gray-300  hover:bg-gray-600 hover:text-white',
+            'bg-transparent text-quiet hover:border-gray-300  hover:bg-gray-600 hover:text-white',
         theme === 'disabled' &&
-            'text-disabled ring-disabled hover:border-disabled hover:text-disabled bg-transparent  ring-2 hover:bg-transparent',
+            'bg-transparent text-disabled ring-2 ring-disabled hover:border-disabled  hover:bg-transparent hover:text-disabled',
         isIcon && 'justify-between gap-x-1.5 pr-3',
         className,
     ]}

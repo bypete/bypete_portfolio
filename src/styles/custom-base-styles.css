@@ -78,9 +78,15 @@
 
         --color-focus: 56 189 248; /* sky-400 */
 
+        --color-tag: 55 65 81; /* gray-700 */
+        --color-tag__bg: 244 244 245; /* zinc-100 */
+        --color-tag__bg-link: 253 224 71; /* yellow-300 */
+        --color-tag__bg-hover: 250 204 21; /* yellow-400 */
+
         --color-content: 55 65 81; /* gray-700 */
         --color-content-invert: 255 255 255; /* white */
         --color-content-light: 250 250 250; /* zinc-50 */
+
         --color-content-dark: 55 65 81; /* gray-700 */
 
         --color-headline: 31 41 55; /* gray-800 */
@@ -101,7 +107,7 @@
         --color-secondary-dark: 2 6 23; /* slate-950 */
 
         --color-quiet-light: 209 213 219; /* gray-300 */
-        --color-quiet: 107 114 128; /* gray-500 */
+        --color-quiet: 161 161 170; /* zinc-400 */
 
         --color-disabled: 209 213 219; /* gray-300 */
     }
@@ -250,6 +256,11 @@
         --color-attention: 253 224 71; /* yellow-300 */
         --color-attention-shade: 234 179 8; /* yellow-500 */
 
+        --color-tag: 55 65 81; /* gray-700 */
+        --color-tag__bg: 24 24 27; /* zinc-900 */
+        --color-tag__bg-link: 253 224 71; /* yellow-300 */
+        --color-tag__bg-hover: 250 204 21; /* yellow-400 */
+
         --color-content: 228 228 231; /* zinc-200 */
         --color-content-invert: 55 65 81; /* gray-700 */
         --color-content-light: 250 250 250; /* zinc-50 */
@@ -267,6 +278,11 @@
         --color-accent-light: 255 0 106; /* #ff006a */
         --color-accent: 230 0 95; /* Accent Magenta / #e6005f https://www.colorhexa.com/e6005f */
         --color-accent-dark: 205 0 84; /* #cd0054 */
+
+        --color-quiet-light: 209 213 219; /* gray-300 */
+        --color-quiet: 113 113 122; /* zinc-500 */
+
+        --color-disabled: 209 213 219; /* gray-300 */
     }
 
     /* Alpine.js

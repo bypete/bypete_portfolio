@@ -1,5 +1,10 @@
 ---
 import { Icon } from 'astro-icon/components';
+interface Props {
+    class?: string;
+    isHeroDark?: boolean;
+}
+
 const { class: ClassList, isHeroDark = false } = Astro.props;
 const legibility = isHeroDark
     ? ' group-data-[banner=start]:focus:text-menudark-active group-data-[banner=start]:text-menudark'

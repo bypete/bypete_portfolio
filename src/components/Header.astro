@@ -3,16 +3,20 @@ import { Icon } from 'astro-icon/components';
 import Hamburger from './Hamburger.astro';
 import Navigation from './Navigation.astro';
 import ThemeIcon from './ThemeIcon.astro';
+
+interface Props {
+    isHeroDark: boolean;
+}
 const { isHeroDark = false } = Astro.props;
 ---
 
 <header
+    class:list={['group fixed fixed top-0 z-banner w-full py-4 duration-300']}
     x-bind:class="{'translate-y-0 duration-0' : banner == 'freeze', 'bg-banner': banner == 'start', 'bg-banner-up shadow-banner shadow-gray-950/10': banner == 'up', '-translate-y-full ': banner == 'down' }"
     x-ref="banner"
     :data-banner="banner"
     x-data="{ banner:'start', ...stickybanner()}"
     x-init="reactOnScroll()"
-    class:list={['group fixed fixed top-0 z-banner w-full py-4 duration-300']}
     @set-banner.window="banner = $event.detail"
     @freeze-banner.window="$refs.banner.classList.add('banner--freeze', $event.detail)"
     @thaw-banner.window="$refs.banner.classList.remove('banner--freeze', $event.detail)"
@@ -28,8 +32,8 @@ const { isHeroDark = false } = Astro.props;
             />
         </a>
 
-        <ThemeIcon isHeroDark={isHeroDark} />
-        <Navigation class="justify-self-end" isHeroDark={isHeroDark} />
+        <ThemeIcon {isHeroDark} />
+        <Navigation class="justify-self-end" {isHeroDark} />
     </div>
 </header>
 <Hamburger />

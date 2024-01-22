@@ -4,6 +4,21 @@ import Tags from '~/components/ui/Tags.astro';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
+interface CoverImage {
+    src: ImageMetadata;
+    alt: string;
+    credit: string;
+}
+
+interface Props {
+    title: string;
+    url: string;
+    cover: CoverImage;
+    taster: string;
+    tags: string[];
+    readTime: number;
+}
+
 const { title, url, cover, taster, tags, readTime } = Astro.props;
 ---
 
@@ -19,12 +34,12 @@ const { title, url, cover, taster, tags, readTime } = Astro.props;
                         class="relative block w-full pb-widescreen lg:pb-tv"
                     >
                         <Image
-                            src={cover.url}
+                            src={cover.src}
                             alt={cover.alt}
                             class="absolute inset-0 m-0 h-full w-full object-cover"
                             quality="high"
-                            widths={[240, 540, 720, cover.url.width]}
-                            sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${cover.url.width}px`}
+                            widths={[240, 540, 720, cover.src.width]}
+                            sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${cover.src.width}px`}
                         />
                     </a>
                 </div>

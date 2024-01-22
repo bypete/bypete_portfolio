@@ -1,5 +1,16 @@
 ---
 import { Icon } from 'astro-icon/components';
+import utilities from '~/data/utilities.json';
+
+interface Props {
+    caption: string;
+    credit: string;
+    class: string;
+    grid: string;
+    bg: string;
+    breakout: boolean;
+}
+
 const {
     caption = '',
     credit = '',
@@ -9,7 +20,6 @@ const {
     breakout,
     ...attrs
 } = Astro.props;
-import utilities from '~/data/utilities.json';
 ---
 
 <figure
@@ -36,13 +46,13 @@ import utilities from '~/data/utilities.json';
         caption && (
             <figcaption
                 class:list={[
-                    'border-outline mt-4 w-full justify-between gap-4 border-b pb-4 text-sm md:flex',
+                    'mt-4 w-full justify-between gap-4 border-b border-outline pb-4 text-sm md:flex',
                     utilities.tramline.x,
                 ]}
             >
                 <p>{caption}</p>
                 {credit && (
-                    <span class="grid-cols-icon mt-2 grid items-center gap-1.5 text-2xs/tight md:mt-0 md:items-start">
+                    <span class="mt-2 grid grid-cols-icon items-center gap-1.5 text-2xs/tight md:mt-0 md:items-start">
                         <Icon name="lucide:camera" class="h-4 w-4" />
                         <Fragment set:html={credit} />
                     </span>

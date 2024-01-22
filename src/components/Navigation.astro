@@ -1,12 +1,24 @@
 ---
 import { getCollection } from 'astro:content';
+import { formatBlogPosts } from '~/js/utils';
 import MenuLink from './MenuLink.astro';
 import MenuLinkChild from './MenuLinkChild.astro';
 import MenuDropdown from './MenuDropdown.astro';
 
 const allPosts = await getCollection('work');
+
+const formattedPosts = formatBlogPosts(allPosts, {
+    filterOutDrafts: true,
+    filterOutFuturePosts: true,
+    sortByDate: true,
+});
+
 const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.slice(1); // remove the first "/"
+
+interface Props {
+    class: string;
+    isHeroDark: boolean;
+}
 
 const { class: ClassList, isHeroDark = false } = Astro.props;
 ---
@@ -31,13 +43,12 @@ const { class: ClassList, isHeroDark = false } = Astro.props;
                                 : 'grid w-auto min-w-[200px] grid-cols-1 p-1.5',
                         ]}
                     >
-                        {allPosts.map((post) => (
+                        {formattedPosts.map((post) => (
                             <li>
                                 <MenuLinkChild
                                     url={`/${post.collection}/${post.slug}/`}
                                     title={post.data.title}
                                     {pathname}
-                                    {currentPath}
                                 />
                             </li>
                         ))}

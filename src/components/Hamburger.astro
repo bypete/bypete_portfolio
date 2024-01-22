@@ -6,8 +6,6 @@ import MenuLinkChild from './MenuLinkChild.astro';
 
 const allPosts = await getCollection('work');
 const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.slice(1); // remove the first "/"
-const { isHeroDark } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
@@ -70,7 +68,6 @@ const year = new Date().getFullYear();
                                     url={`/${post.collection}/${post.slug}/`}
                                     title={post.data.title}
                                     {pathname}
-                                    {currentPath}
                                 />
                             ))
                         }

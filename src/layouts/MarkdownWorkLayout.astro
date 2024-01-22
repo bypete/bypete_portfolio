@@ -6,11 +6,12 @@ import Link from '~/components/ui/Link.astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import HeroPicture from '~/components/Images/HeroPicture.astro';
-import { readableDate, htmlDateString } from '~/components/Utils/formatDate.js';
+import { readableDate, htmlDateString } from '~/js/utils.js';
 import Skills from '~/components/Skills.astro';
 import TableOfContents from '~/components/ui/TableOfContents.astro';
-import PrevNext from '~/components/ui/PrevNext.astro';
+import WorkPreview from '~/components/ui/WorkPreview.astro';
 import BlockPicture from '~/components/Images/BlockPicture.astro';
+
 const { frontmatter, minutesRead, headings, prevPost, nextPost } = Astro.props;
 let resolvedHeadings = headings;
 
@@ -26,10 +27,10 @@ if (frontmatter.skillset) {
             class="relative z-10 grid w-full grid-cols-1 shadow-xl shadow-black/10 lg:grid-cols-2 conpad:grid-cols-workcontianer"
         >
             <HeroPicture
-                src={frontmatter.cover.url}
+                src={frontmatter.cover.src}
                 credit={frontmatter.title}
                 alt={frontmatter.cover.alt}
-                widths={[400, 960, frontmatter.cover.url.width]}
+                widths={[400, 960, frontmatter.cover.src.width]}
                 sizes={'100vw, (min-width: var(--container-width-lg)) 50vw, (min-width: 1264px) 56.25vw'}
                 class="absolute inset-0 h-full w-full object-cover"
                 wrapper={'h-square lg:h-auto lg:min-h-screen'}
@@ -51,7 +52,7 @@ if (frontmatter.skillset) {
                 </p>
                 <Tags
                     tags={frontmatter.tags}
-                    url="true"
+                    url={true}
                     class:list={[
                         'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
                         utilities.margin.y,
@@ -94,7 +95,7 @@ if (frontmatter.skillset) {
                 {
                     frontmatter.splash && (
                         <BlockPicture
-                            src={frontmatter.splash.url}
+                            src={frontmatter.splash.src}
                             widths={[360, 720, 1400, 2000]}
                             sizes={
                                 '(max-width: 360px) 360px, (max-width: 768px) 720px, (max-width: 1280px) 1400px, 2000px'
@@ -108,42 +109,54 @@ if (frontmatter.skillset) {
 
                 {headings && <TableOfContents headings={resolvedHeadings} />}
                 <slot />
-                <aside
+            </div>
+            <aside
+                class:list={[
+                    'mx-auto w-full max-w-3xl',
+                    utilities.tramline.y,
+                    utilities.margin.t,
+                ]}
+            >
+                <p class="inline-flex items-center">
+                    <Icon
+                        name="lucide:calendar"
+                        class="inline-block h-4 w-auto"
+                    />
+                    <span class="mx-1.5">Last updated:</span>
+                    <time
+                        class="inline-block rounded bg-outline-pale px-1.5"
+                        datetime={htmlDateString(
+                            frontmatter.modDate || frontmatter.pubDate,
+                        )}
+                        >{
+                            readableDate(
+                                frontmatter.modDate || frontmatter.pubDate,
+                            )
+                        }
+                    </time>
+                </p>
+                <Tags
+                    tags={frontmatter.tags}
+                    url={true}
                     class:list={[
-                        'not-prose w-full',
-                        utilities.tramline.y,
+                        'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
                         utilities.margin.t,
                     ]}
-                >
-                    <p class="inline-flex items-center">
-                        <Icon
-                            name="lucide:calendar"
-                            class="inline-block h-4 w-auto"
-                        />
-                        <span class="mx-1.5">Last updated:</span>
-                        <time
-                            class="inline-block rounded bg-outline-pale px-1.5"
-                            datetime={htmlDateString(
-                                frontmatter.modDate || frontmatter.pubDate,
-                            )}
-                            >{
-                                readableDate(
-                                    frontmatter.modDate || frontmatter.pubDate,
-                                )
-                            }
-                        </time>
-                    </p>
-                    <Tags
-                        tags={frontmatter.tags}
-                        url="true"
-                        class:list={[
-                            'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
-                            utilities.margin.t,
-                        ]}
-                    />
-                </aside>
-                <PrevNext {prevPost} {nextPost} />
-            </div>
+                />
+            </aside>
         </article>
     </main>
+    <aside
+        class:list={[
+            'border-t border-outline bg-panel',
+            utilities.tramline.double.y,
+        ]}
+    >
+        <div
+            class="md:grid-cols-prevnext mx-auto grid max-w-3xl grid-cols-1 items-start justify-between gap-8 bg-panel px-4 md:px-0"
+        >
+            {nextPost && <WorkPreview post={nextPost} preview={'next'} />}
+            {prevPost && <WorkPreview post={prevPost} preview={'prev'} />}
+        </div>
+    </aside>
 </BaseLayout>

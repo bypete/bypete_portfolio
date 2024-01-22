@@ -2,6 +2,7 @@
 import Social from './Social.astro';
 import siteInfo from '~/data/site';
 import { Icon } from 'astro-icon/components';
+const year = new Date().getFullYear();
 ---
 
 <footer
@@ -21,7 +22,9 @@ import { Icon } from 'astro-icon/components';
                 >
             </p>
             <ul class="-mx-2 mt-2 inline-flex">
-                <li class="border-r border-white px-2 last:border-0">©2024</li>
+                <li class="border-r border-white px-2 last:border-0">
+                    ©{year}
+                </li>
                 <li class="border-r border-white px-2 last:border-0">
                     <a href="/about/legal" class="link">Legal notices</a>
                 </li>

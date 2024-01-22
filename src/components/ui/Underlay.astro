@@ -1,4 +1,8 @@
 ---
+interface Props {
+    isHeroDark?: boolean;
+    class?: string;
+}
 const { isHeroDark, class: className } = Astro.props;
 const shade = isHeroDark ? 'bg-underlay-dark/90' : 'bg-underlay-light/90';
 ---

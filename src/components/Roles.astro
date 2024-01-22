@@ -5,11 +5,10 @@ interface Role {
 }
 
 export interface Props {
-    roles?: Role[];
-    initialCount?: string;
+    roles: Role[];
 }
 
-const { roles, initialCount = 0 } = Astro.props;
+const { roles } = Astro.props;
 let stringRoles = JSON.stringify(roles);
 stringRoles = stringRoles.replace(/\"/g, "'");
 ---
@@ -22,7 +21,7 @@ stringRoles = stringRoles.replace(/\"/g, "'");
             ></span
         >
         <span
-            class="bg-panel text-content relative inline-block rounded-tight px-2 py-1 mix-blend-screen duration-150 lg:px-3 lg:py-1.5"
+            class="relative inline-block rounded-tight bg-panel px-2 py-1 text-content mix-blend-screen duration-150 lg:px-3 lg:py-1.5"
             x-cloak
         >
             <span x-text="role">Ui</span><span

@@ -1,18 +1,22 @@
 ---
-// TableOfContentsHeading.astro
+import type { Heading } from '~/components/ui/TableOfContents.astro';
+interface Props {
+    heading: Heading;
+}
+
 const { heading } = Astro.props;
 ---
 
 <li>
     <a
-        href={'#' + heading.slug}
+        href={`#${heading.slug}`}
         class="data-[state=active]:font-semibold data-[state=active]:text-brand"
         data-state=""
     >
         {heading.text}
     </a>
     {
-        heading.subheadings.length > 0 && (
+        heading.subheadings && heading.subheadings.length > 0 && (
             <ol>
                 {heading.subheadings.map((subheading) => (
                     <Astro.self heading={subheading} />

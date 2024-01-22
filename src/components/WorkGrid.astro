@@ -4,16 +4,20 @@ import Tags from '~/components/ui/Tags.astro';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
-const {
-    title,
-    url,
-    featured = false,
-    classList,
-    cover,
-    taster,
-    tags,
-    readTime,
-} = Astro.props;
+interface CoverImage {
+    src: ImageMetadata;
+    alt: string;
+}
+
+interface Props {
+    title: string;
+    url: string;
+    cover: CoverImage;
+    taster: string;
+    tags: string[];
+    readTime: number;
+}
+const { title, url, cover, taster, tags, readTime } = Astro.props;
 ---
 
 <div class="holder flex rounded-tight">
@@ -28,7 +32,7 @@ const {
             class="relative block overflow-hidden bg-gray-100 pb-photo hover:rounded-t-tight"
         >
             <Image
-                src={cover.url}
+                src={cover.src}
                 alt={cover.alt}
                 class="absolute inset-0 m-0 h-full w-full object-cover"
                 quality="high"

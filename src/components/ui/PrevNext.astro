@@ -1,6 +1,16 @@
 ---
+import { type CollectionEntry } from 'astro:content';
 import { Icon } from 'astro-icon/components';
-const { prevPost, nextPost } = Astro.props;
+import { Image } from 'astro:assets';
+
+type Props = {
+    prevPost: CollectionEntry<'work'>;
+    nextPost: CollectionEntry<'work'>;
+    class?: string;
+    prev?: boolean;
+};
+
+const { prevPost, nextPost, class: ClassName } = Astro.props;
 ---
 
 {

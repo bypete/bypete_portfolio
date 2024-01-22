@@ -1,11 +1,17 @@
 ---
+interface Props {
+    title: string;
+    url: string;
+    pathname: string;
+    class?: string;
+}
 const { title, url, pathname, class: className } = Astro.props;
 ---
 
 <a
     href={url}
     class:list={[
-        'text-menusm focus:text-menusm-hover hover:text-menusm-hover data-[state=active]:text-menusm-active block w-full py-0.5 font-headline text-4xl font-black tracking-tight',
+        'block w-full py-0.5 font-headline text-4xl font-black tracking-tight text-menusm hover:text-menusm-hover focus:text-menusm-hover data-[state=active]:text-menusm-active',
     ]}
     data-state={pathname === url ? 'active' : ''}>{title}</a
 >

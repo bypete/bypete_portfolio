@@ -1,10 +1,13 @@
 ---
-const { isHeroDark, class: className } = Astro.props;
+interface Props {
+    class?: string;
+}
+const { class: className } = Astro.props;
 ---
 
 <div
     class:list={[
-        'bg-opacity-80 fixed inset-0 h-full min-h-screen z-overlay backdrop-grayscale backdrop-blur-sm',
+        'fixed inset-0 z-overlay h-full min-h-screen bg-opacity-80 backdrop-blur-sm backdrop-grayscale',
         className,
     ]}
     x-ref="overlay"

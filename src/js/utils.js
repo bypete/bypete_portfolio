@@ -1,3 +1,17 @@
+import { DateTime } from 'luxon';
+
+export const htmlDateString = (dateObj, format, zone) => {
+    return DateTime.fromJSDate(dateObj, { zone: zone || 'utc' }).toFormat(
+        format || 'yyyy-LL-dd',
+    );
+};
+
+export const readableDate = (dateObj, format, zone) => {
+    return DateTime.fromJSDate(dateObj, { zone: zone || 'utc' }).toFormat(
+        format || 'd LLLL, yyyy',
+    );
+};
+
 export function truncate(str, limit) {
     return str.split(' ').splice(0, limit).join(' ');
 }
@@ -12,7 +26,7 @@ export function formatBlogPosts(
     } = {},
 ) {
     const filteredPosts = posts.reduce((acc, post) => {
-        const { pubDate, draft } = post.data;
+        const { pubDate, modDate, draft } = post.data;
         // filterOutDrafts if true
         if (filterOutDrafts && draft) return acc;
 
@@ -21,15 +35,17 @@ export function formatBlogPosts(
 
         // add post to acc
         acc.push(post);
-
         return acc;
     }, []);
 
     if (sortByDate) {
         filteredPosts.sort(
-            (a, b) => Date.parse(b.data.pubDate) - Date.parse(a.data.pubDate),
-        );
+            (a, b) =>
+                Date.parse(b.data.modDate || b.data.pubDate) -
+                Date.parse(a.data.modDate || a.data.pubDate),
+        ); // use modDate if present
     } else {
+        console.log('random');
         filteredPosts.sort(() => Math.random() - 0.5);
     }
 

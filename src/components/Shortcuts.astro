@@ -15,7 +15,7 @@ import { Icon } from 'astro-icon/components';
         aria-hidden="true"
         class="scroll flex h-8 w-8 items-center justify-center rounded-full bg-accent text-white transition duration-700 hover:border-black/10 hover:bg-accent-light hover:shadow-inset focus:outline-none"
     >
-        <Icon name="lucide:arrow-up-to-line" class="h-6 w-6" />
+        <Icon name="lucide:arrow-up-to-line" class="h-5 w-5" />
     </a>
 
     <Button
@@ -46,7 +46,6 @@ import { Icon } from 'astro-icon/components';
     document.addEventListener('alpine:init', () => {
         Alpine.store('cache', {
             theme: null,
-            banner: null,
         });
         Alpine.data('hamburger', () => ({
             freeze(freezeState) {

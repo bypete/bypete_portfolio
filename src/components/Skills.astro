@@ -1,19 +1,25 @@
 ---
 import utilities from '../data/utilities.json';
 import type { HTMLAttributes } from 'astro/types';
-interface SkillsetKeys {
+interface Area {
+    title: string;
+    skills: string[];
+    class?: string;
+}
+
+interface SkillsetProps {
     text?: string;
     icon?: string;
     heading?: string;
     shadow?: string;
-    areas: object;
+    areas: Area[];
 }
 
 export interface Props extends HTMLAttributes<'div'> {
     breakout?: boolean;
     bg?: string;
     class?: string;
-    skillset?: Partial<SkillsetKeys>;
+    skillset?: Partial<SkillsetProps>;
 }
 
 const {
@@ -23,7 +29,7 @@ const {
     skillset,
     ...rest
 } = Astro.props;
-const { text, icon, heading, shadow, areas } = skillset as SkillsetKeys;
+const { text, icon, heading, shadow, areas } = skillset as SkillsetProps;
 ---
 
 <div
@@ -51,7 +57,7 @@ const { text, icon, heading, shadow, areas } = skillset as SkillsetKeys;
         >
             {
                 areas.map((area) => (
-                    <li class:list={['list-none ', area.class]}>
+                    <li class:list={['list-none ', area?.class]}>
                         <h3>{area.title}</h3>
                         <ul
                             class:list={[

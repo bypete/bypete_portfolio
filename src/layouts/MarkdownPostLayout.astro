@@ -6,7 +6,7 @@ import utilities from '~/data/utilities.json';
 import { Icon } from 'astro-icon/components';
 
 import Hero, { type Props as HeroProps } from '~/components/Hero/Hero.astro';
-import { readableDate, htmlDateString } from '~/components/Utils/formatDate.js';
+import { readableDate, htmlDateString } from '~/js/utils.js';
 import BlockPicture from '~/components/Images/BlockPicture.astro';
 import TableOfContents from '~/components/ui/TableOfContents.astro';
 import PrevNext from '~/components/ui/PrevNext.astro';
@@ -43,7 +43,7 @@ const { hero: { dark: isHeroDark = false } = {} } = frontmatter || {};
                 {
                     frontmatter.splash && (
                         <BlockPicture
-                            src={frontmatter.splash.url}
+                            src={frontmatter.splash.src}
                             class="my-0"
                             alt={frontmatter.splash.alt}
                             credit={frontmatter.splash.credit}
@@ -79,7 +79,7 @@ const { hero: { dark: isHeroDark = false } = {} } = frontmatter || {};
                     </p>
                     <Tags
                         tags={frontmatter.tags}
-                        url="true"
+                        url={true}
                         class:list={[
                             'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
                             utilities.margin.t,
