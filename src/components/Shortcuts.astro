@@ -57,10 +57,10 @@ import { Icon } from 'astro-icon/components';
                 );
                 const cache =
                     this.$store.cache.theme ||
-                    themeMeta.getAttribute('content');
+                    themeMeta?.getAttribute('content');
                 this.$store.cache.theme = cache;
                 this.smNav = !this.smNav;
-                themeMeta.setAttribute(
+                themeMeta?.setAttribute(
                     'content',
                     this.smNav ? '#ffd200' : cache,
                 );

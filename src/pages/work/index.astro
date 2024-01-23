@@ -1,8 +1,8 @@
 ---
-import ListingLayout from '~/layouts/ListingLayout.astro';
-import WorkPost from '~/components/WorkPost.astro';
+import SplashLayout from '~/layouts/SplashLayout.astro';
+import WorkSlide from '~/components/Swiper/WorkSlide.astro';
 import Hero from '../../components/Hero/Hero.astro';
-
+import Work from '~/components/Swiper/Work.astro';
 import imgCover from '~/assets/blocks/inflated-half--slate--cr.webp';
 import BlockImage from '~/components/Images/BlockImage.astro';
 import HeroPicture from '~/components/Images/HeroPicture.astro';
@@ -33,9 +33,9 @@ const hero = {
 };
 ---
 
-<ListingLayout title={title} isWide={true} {hero} isHeroDark={hero.dark}>
-    <Hero slot="slothero" hero={hero}>
-        <Fragment slot="content">
+<SplashLayout title={title} isHeroDark={hero.dark}>
+    <Work>
+        <!-- <div class="slide swiper-slide">
             <h1
                 class="relative text-5xl/tight text-shadow-headline lg:text-7xl/none"
             >
@@ -61,23 +61,37 @@ const hero = {
                     }
                 </p>
             </div>
-        </Fragment>
-
-        <HeroPicture
-            slot="visual"
-            src={imgCover}
-            class="h-full w-full object-cover object-top md:object-center"
-            alt="Abstract inflated background"
-        />
-    </Hero>
-
-    <div class="grid grid-cols-1 gap-8 md:gap-32">
+        </div> -->
         {
             formattedPosts.map(async (post) => {
                 const { remarkPluginFrontmatter } = await post.render();
                 const featured = post.data.tags.includes('featured');
                 return (
-                    <WorkPost
+                    <div class="slide swiper-slide">
+                        <WorkSlide
+                            url={`/${post.collection}/${post.slug}/`}
+                            title={post.data.title}
+                            taster={post.data.taster}
+                            tags={post.data.tags}
+                            cover={post.data.cover}
+                            logo={post.data.logo}
+                            product={post.data.product}
+                            readTime={remarkPluginFrontmatter.minutesRead}
+                            featured={featured}
+                        />
+                    </div>
+                );
+            })
+        }
+    </Work>
+
+    <!-- <div class="grid grid-cols-1 gap-8 md:gap-32">
+        {
+            formattedPosts.map(async (post) => {
+                const { remarkPluginFrontmatter } = await post.render();
+                const featured = post.data.tags.includes('featured');
+                return (
+                    <WorkSlide
                         url={`/${post.collection}/${post.slug}/`}
                         title={post.data.title}
                         taster={post.data.taster}
@@ -89,5 +103,5 @@ const hero = {
                 );
             })
         }
-    </div>
-</ListingLayout>
+    </div> -->
+</SplashLayout>

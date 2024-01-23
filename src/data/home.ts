@@ -1,11 +1,11 @@
 export interface SwiperImage {
   src: string | ImageMetadata
-  widths?: Array
-  sizes?: string
-  alt: string
-  url: string
-  wrapper?: string
-  class?: string
+  widths?: number[];
+  sizes?: string;
+  alt: string;
+  url: string;
+  wrapper?: string;
+  class?: string;
 }
 
 import slide1 from "~/assets/home/profile__cutout--circle.png";

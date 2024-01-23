@@ -1,0 +1,93 @@
+---
+import utilities from '~/data/utilities.json';
+import Tags from '~/components/ui/Tags.astro';
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+
+interface CoverImage {
+    src: ImageMetadata;
+    alt: string;
+    credit?: string;
+}
+
+interface ProductImage {
+    src: ImageMetadata;
+    alt: string;
+}
+
+interface Props {
+    title: string;
+    url: string;
+    featured?: boolean;
+    logo: ImageMetadata;
+    product: ProductImage;
+    cover: CoverImage;
+    taster: string;
+    tags: string[];
+    readTime: number;
+}
+
+const {
+    title,
+    url,
+    featured = false,
+    cover,
+    logo,
+    product,
+    taster,
+    tags,
+    readTime,
+} = Astro.props;
+---
+
+<div
+    class="grid-cols-showcase grid h-full w-full auto-rows-auto items-center text-content-light"
+>
+    <div
+        class="absolute inset-0 flex h-full w-full items-center justify-center"
+    >
+        <Image
+            src={cover.src}
+            alt={cover.alt}
+            class="absolute inset-0 m-0 h-full w-full object-cover"
+            quality="high"
+            widths={[400, 960, cover.src.width]}
+            sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), (max-width: var(--container-width-lg)) calc(100vw - 4rem), calc((100vw - 4rem) *0.60), (min-width: 1264) calc(var(--container-width-max)*0.60)`}
+        />
+    </div>
+
+    <div
+        class="relative col-span-2 max-w-[40ch] justify-self-center rounded p-8 text-content-light backdrop-blur-md backdrop-brightness-95 backdrop-opacity-25"
+    >
+        <p class="flex items-center text-xs text-gray-400 md:text-sm">
+            <Icon name="lucide:timer" class="mr-1 inline-block h-4 w-auto" />{
+                readTime
+            }
+        </p>
+        <h2 class:list={['capline font-headline text-3xl md:text-3xl']}>
+            <a href={url} class="text-headline" set:html={title} />
+        </h2>
+        {taster && <p set:html={taster} />}
+        <Tags
+            {tags}
+            url={true}
+            class:list={[
+                'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
+                utilities.margin.t,
+            ]}
+        />
+    </div>
+    <div class="relative col-span-2 flex h-full">
+        <div class="absolute inset-0 h-full max-h-full w-full">
+            {
+                product && (
+                    <Image
+                        src={product.src}
+                        class="h-full max-h-full w-full max-w-full  object-contain"
+                        alt={product.alt}
+                    />
+                )
+            }
+        </div>
+    </div>
+</div>

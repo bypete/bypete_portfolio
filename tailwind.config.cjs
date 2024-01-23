@@ -100,6 +100,7 @@ export default {
                 block50: 'repeat(2, minmax(0, 1fr))',
                 block60: 'minmax(0, 3fr) minmax(0, 2fr)',
                 block66: 'minmax(0, 2fr) minmax(0, 1fr)',
+                showcase: 'repeat(4, minmax(0, 1fr))',
                 listing: 'minmax(0, 2fr) minmax(0, 1fr)',
                 prevnext: 'repeat(auto-fit, minmax(0, 300px))',
                 listing_work: 'minmax(0, 2fr) minmax(0, 3fr)',

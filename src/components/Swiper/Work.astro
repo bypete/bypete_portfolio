@@ -1,0 +1,113 @@
+---
+import { Image } from 'astro:assets';
+import utilities from '~/data/utilities.json';
+import ScrollPrompt from '../ui/ScrollPrompt.astro';
+import Slide from '~/components/Swiper/HomeSlide.astro';
+import { type SwiperImage } from '~/data/home';
+---
+
+<section class:list={[' h-screen w-full bg-zinc-800']}>
+    <div class="swiper swiper--work group h-full w-full">
+        <div class="swiper-wrapper flex items-center">
+            <slot />
+        </div>
+        <div
+            class="swiper-button-prev swiper--work__prev opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        >
+        </div>
+        <div
+            class="swiper-button-next swiper--work__next opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        >
+        </div>
+        <div
+            class="swiper--work__pagination absolute z-10 mx-auto text-right !text-content-light"
+        >
+        </div>
+        <div
+            class="pointer-events-none absolute left-1/2 top-screenSvh z-shortcuts -translate-x-1/2 -translate-y-full pb-4 text-content-light/25 md:pb-8"
+        >
+            <ScrollPrompt />
+        </div>
+    </div>
+</section>
+<script>
+    // core version + navigation, pagination modules:
+    import Swiper from 'swiper';
+    import {
+        Navigation,
+        Pagination,
+        Autoplay,
+        Scrollbar,
+        EffectFade,
+        EffectCreative,
+        EffectCoverflow,
+        Mousewheel,
+    } from 'swiper/modules';
+    // import Swiper and modules styles
+    import 'swiper/css';
+    import 'swiper/css/navigation';
+    import 'swiper/css/pagination';
+
+    {
+        const swiperClass = '.swiper--work';
+        const SwiperWork = new Swiper(swiperClass, {
+            // Install modules
+            modules: [
+                Navigation,
+                Pagination,
+                Autoplay,
+                Scrollbar,
+                EffectCoverflow,
+                EffectCreative,
+                Mousewheel,
+            ],
+            slidesPerView: 1,
+            spaceBetween: 0,
+            grabCursor: true,
+
+            // effect: 'creative',
+            // creativeEffect: {
+            //     perspective: false,
+            //     prev: {
+            //         // translate: [0, '-100%', 0],
+            //     },
+            //     next: {
+            //         // translate: [0, '100%', 0],
+            //     },
+            // },
+            keyboard: {
+                enabled: true,
+            },
+            mousewheel: {
+                thresholdDelta: 70,
+            },
+            loop: false,
+            speed: 250,
+            autoplay: {
+                pauseOnMouseEnter: true,
+                disableOnInteraction: false,
+                delay: 7500,
+            },
+            navigation: {
+                nextEl: `${swiperClass}__next`,
+                prevEl: `${swiperClass}__prev`,
+            },
+            // pagination: {
+            //     el: `${swiperClass}__pagination`,
+            //     clickable: true,
+            // },
+            pagination: {
+                el: `${swiperClass}__pagination`,
+                type: 'fraction',
+            },
+            watchOverflow: true, // disable if only single slide
+            on: {
+                init: () => {},
+                autoplayStop: () => {
+                    SwiperWork.autoplay.start();
+                },
+                autoplayResume: () => {},
+            },
+        });
+    }
+</script>

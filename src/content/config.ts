@@ -48,13 +48,18 @@ const workCollection = defineCollection({
       bg: z.string(),
       color: z.string(),
     }),
+    logo: image().optional(),
     cover: z.object({
       src: image().refine((img) => img.width >= 500, {
         message: "cover image must be at least 500 wide!",
       }),
       alt: z.string(),
-      credit: z.string().optional()
+      credit: z.string().optional(),
     }),
+    product: z.object({
+      src: image().optional(),
+      alt: z.string().optional(),
+    }).optional(),
     splash: z.object({
       src: image().refine((img) => img.width >= 500, {
         message: "splash image must be at least 500 wide!",
