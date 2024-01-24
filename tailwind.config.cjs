@@ -119,6 +119,7 @@ export default {
                 // Complex site-specific row configuration
                 // 'layout': '200px minmax(900px, 1fr) 100px',
                 wrapper: '1fr auto', // Main layout to allow sticky footer, header not counted.
+                showcase: 'auto minmax(0, 1fr)',
                 layout: 'auto 1fr auto',
                 system: '1fr auto',
                 card: 'auto 1fr auto',

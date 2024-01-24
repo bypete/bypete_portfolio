@@ -35,13 +35,20 @@ const { post, preview, class: ClassName } = Astro.props;
                 {preview === 'next' ? 'Next:' : 'Previous:'}
             </span>
 
-            <span class="relative block overflow-hidden rounded-tight pb-widescreen ">
+            <span class="relative overflow-hidden rounded-tight pb-widescreen ">
                 <Image
                     widths={[400]}
                     quality="high"
                     src={post.data.cover.src}
                     alt={post.data.title}
                     class="absolute inset-0 m-0 h-full w-full object-cover"
+                />
+                <Image
+                    widths={[100]}
+                    quality="high"
+                    src={post.data.logo}
+                    alt={post.data.title}
+                    class="absolute left-1/2 top-1/2 m-auto h-auto max-w-1/3 -translate-x-1/2 -translate-y-1/2 transition-transform group-hover:scale-125"
                 />
             </span>
             <span>

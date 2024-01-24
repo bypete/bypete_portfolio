@@ -27,7 +27,7 @@ const imageProps = {
 
 {
     wrapper || credit.length ? (
-        <div class:list={[wrapper || '', credit && 'group', 'relative']}>
+        <div class:list={[wrapper || '', credit && 'group']}>
             <Picture {...imageProps} />
             {credit && <Credit {credit} />}
         </div>

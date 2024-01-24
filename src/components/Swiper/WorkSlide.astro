@@ -3,6 +3,7 @@ import utilities from '~/data/utilities.json';
 import Tags from '~/components/ui/Tags.astro';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
+import Link from '../ui/Link.astro';
 
 interface CoverImage {
     src: ImageMetadata;
@@ -40,9 +41,7 @@ const {
 } = Astro.props;
 ---
 
-<div
-    class="grid-cols-showcase grid h-full w-full auto-rows-auto items-center text-content-light"
->
+<div class="h-full">
     <div
         class="absolute inset-0 flex h-full w-full items-center justify-center"
     >
@@ -52,42 +51,70 @@ const {
             class="absolute inset-0 m-0 h-full w-full object-cover"
             quality="high"
             widths={[400, 960, cover.src.width]}
-            sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), (max-width: var(--container-width-lg)) calc(100vw - 4rem), calc((100vw - 4rem) *0.60), (min-width: 1264) calc(var(--container-width-max)*0.60)`}
+            sizes={`100vw`}
         />
     </div>
-
     <div
-        class="relative col-span-2 max-w-[40ch] justify-self-center rounded p-8 text-content-light backdrop-blur-md backdrop-brightness-95 backdrop-opacity-25"
+        class="grid-rows-showcase mx-auto grid h-full w-full max-w-container grid-cols-1 items-center text-content-light md:auto-rows-auto md:grid-cols-block50 md:grid-rows-1 xl:grid-cols-block33"
     >
-        <p class="flex items-center text-xs text-gray-400 md:text-sm">
-            <Icon name="lucide:timer" class="mr-1 inline-block h-4 w-auto" />{
-                readTime
-            }
-        </p>
-        <h2 class:list={['capline font-headline text-3xl md:text-3xl']}>
-            <a href={url} class="text-headline" set:html={title} />
-        </h2>
-        {taster && <p set:html={taster} />}
-        <Tags
-            {tags}
-            url={true}
-            class:list={[
-                'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
-                utilities.margin.t,
-            ]}
-        />
-    </div>
-    <div class="relative col-span-2 flex h-full">
-        <div class="absolute inset-0 h-full max-h-full w-full">
+        <div class="relative flex md:order-2 md:h-full">
+            <div
+                class="inset-0 w-full pt-[var(--smheaderheight)] md:absolute md:h-full md:py-[var(--headerheight)]"
+            >
+                {
+                    product && (
+                        <Image
+                            src={product.src}
+                            class=" h-60 max-h-full w-full max-w-full origin-bottom object-contain  md:h-full"
+                            alt={product.alt}
+                        />
+                    )
+                }
+            </div>
+        </div>
+        <div
+            class="relative grid max-w-[40ch] grid-cols-1 gap-4 self-start rounded text-content-light backdrop-blur-md backdrop-brightness-95 backdrop-opacity-10 md:order-1 md:row-span-1 md:items-center md:gap-8 md:self-center md:justify-self-center"
+        >
+            <div>
+                <p
+                    class="flex items-center text-xs text-content-light/75 md:text-sm"
+                >
+                    <Icon
+                        name="lucide:timer"
+                        class="mr-1 inline-block h-4 w-auto"
+                    />{readTime}
+                </p>
+                <h2 class:list={['capline font-headline text-2xl md:text-3xl']}>
+                    <a href={url} class="text-headline" set:html={title} />
+                </h2>
+            </div>
             {
-                product && (
-                    <Image
-                        src={product.src}
-                        class="h-full max-h-full w-full max-w-full  object-contain"
-                        alt={product.alt}
+                taster && (
+                    <p
+                        set:html={taster}
+                        class=" line-clamp-5 md:line-clamp-none "
                     />
                 )
             }
+            <p>
+                <Link
+                    href={url}
+                    theme="primary"
+                    isIcon={true}
+                    class="md:inline-flex"
+                >
+                    View this project
+                    <Icon
+                        name="lucide:arrow-right-circle"
+                        class="h-6 w-6 animate-nudge-right"
+                    />
+                </Link>
+            </p>
+            <Tags
+                {tags}
+                url={true}
+                class="hidden w-full flex-wrap items-center gap-2 text-sm leading-none md:flex"
+            />
         </div>
     </div>
 </div>
