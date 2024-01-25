@@ -4,23 +4,24 @@ interface Props {
     url?: boolean;
     class?: string;
 }
-const {
-    tags,
-    url = false,
-    class: className = 'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
-} = Astro.props;
+const { tags, url = false, class: className = ' ' } = Astro.props;
 import { Icon } from 'astro-icon/components';
 ---
 
 {
     tags && (
-        <ul class:list={[className]}>
+        <ul
+            class:list={[
+                'text-fl-step--1 flex w-full flex-wrap items-center gap-2 leading-none',
+                className,
+            ]}
+        >
             {tags.map((tag) => (
                 <li>
                     {url ? (
                         <a
                             href={`/tags/${tag}`}
-                            class=" inline-flex items-center gap-x-1 whitespace-nowrap rounded-tight bg-tag-bg__link px-2 py-5px text-sm font-medium lowercase leading-none text-tag hover:bg-tag-bg__hover hover:ring-accent"
+                            class=" inline-flex items-center gap-x-1 whitespace-nowrap rounded-tight bg-tag-bg__link px-2 py-5px font-medium lowercase leading-none text-tag hover:bg-tag-bg__hover hover:ring-accent"
                         >
                             {tag === 'featured' && (
                                 <Icon
@@ -31,7 +32,7 @@ import { Icon } from 'astro-icon/components';
                             {tag}
                         </a>
                     ) : (
-                        <span class="inline-flex items-center gap-x-1 whitespace-nowrap rounded-tight bg-tag-bg px-2 py-1.5 text-sm font-medium lowercase leading-none">
+                        <span class="inline-flex items-center gap-x-1 whitespace-nowrap rounded-tight bg-tag-bg px-2 py-1.5 font-medium lowercase leading-none">
                             {tag === 'featured' && (
                                 <Icon
                                     name="mdi:star"

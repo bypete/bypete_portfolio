@@ -1,0 +1,13 @@
+---
+import { Icon } from 'astro-icon/components';
+interface Props {
+    class?: string;
+    duration: string;
+}
+const { duration = '0 min', class: className = 'text-fl-step--1 text-quiet' } =
+    Astro.props;
+---
+
+<p class:list={['flex items-center', className]}>
+    <Icon name="lucide:timer" class="mr-1 inline-block h-4 w-auto" />{duration}
+</p>

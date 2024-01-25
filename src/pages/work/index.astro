@@ -35,33 +35,6 @@ const hero = {
 
 <SplashLayout title={title} isHeroDark={hero.dark}>
     <Work>
-        <!-- <div class="slide swiper-slide">
-            <h1
-                class="relative text-5xl/tight text-shadow-headline lg:text-7xl/none"
-            >
-                <span
-                    class="inline-block -rotate-1 rounded bg-sky-400 p-[3px] text-[0.33em]/none font-semibold tracking-normal"
-                    >Portfolio</span
-                >
-                <span class="block">{title}</span>
-            </h1>
-            <div class="rte mt-4 md:mt-6">
-                <p class="text-base lg:text-xl">
-                    Explore a selection of projects I have worked on.
-                    {
-                        postCount > 1 && (
-                            <>
-                                There are currently{' '}
-                                <strong class="whitespace-nowrap">
-                                    {postCount} projects
-                                </strong>{' '}
-                                in the collection.
-                            </>
-                        )
-                    }
-                </p>
-            </div>
-        </div> -->
         {
             formattedPosts.map(async (post) => {
                 const { remarkPluginFrontmatter } = await post.render();
@@ -84,24 +57,4 @@ const hero = {
             })
         }
     </Work>
-
-    <!-- <div class="grid grid-cols-1 gap-8 md:gap-32">
-        {
-            formattedPosts.map(async (post) => {
-                const { remarkPluginFrontmatter } = await post.render();
-                const featured = post.data.tags.includes('featured');
-                return (
-                    <WorkSlide
-                        url={`/${post.collection}/${post.slug}/`}
-                        title={post.data.title}
-                        taster={post.data.taster}
-                        tags={post.data.tags}
-                        cover={post.data.cover}
-                        readTime={remarkPluginFrontmatter.minutesRead}
-                        featured={featured}
-                    />
-                );
-            })
-        }
-    </div> -->
 </SplashLayout>

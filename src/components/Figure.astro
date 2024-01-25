@@ -46,13 +46,13 @@ const {
         caption && (
             <figcaption
                 class:list={[
-                    'mt-4 w-full justify-between gap-4 border-b border-outline pb-4 text-sm md:flex',
+                    'text-fl-step--1 mt-4 w-full justify-between gap-4 border-b border-outline pb-4 md:flex',
                     utilities.tramline.x,
                 ]}
             >
                 <p>{caption}</p>
                 {credit && (
-                    <span class="mt-2 grid grid-cols-icon items-center gap-1.5 text-2xs/tight md:mt-0 md:items-start">
+                    <span class="text-fl-step--2/tight mt-2 grid grid-cols-icon items-center gap-1.5 md:mt-0 md:items-start">
                         <Icon name="lucide:camera" class="h-4 w-4" />
                         <Fragment set:html={credit} />
                     </span>

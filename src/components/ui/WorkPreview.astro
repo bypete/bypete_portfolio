@@ -20,7 +20,7 @@ const { post, preview, class: ClassName } = Astro.props;
         >
             <span
                 class:list={[
-                    'flex w-full gap-1 text-base text-quiet',
+                    'text-fl-step--1 flex w-full gap-1 text-quiet',
                     preview === 'prev' && 'flex-row-reverse',
                 ]}
             >
@@ -55,9 +55,9 @@ const { post, preview, class: ClassName } = Astro.props;
             <span>
                 <h2
                     set:html={post.data.title}
-                    class="capline font-bold text-accent group-hover:text-accent-light md:text-xl/tight"
+                    class="capline text-fl-step-1/tight font-bold text-accent group-hover:text-accent-light"
                 />
-                <p class="text-base " set:html={post.data.excerpt} />
+                <p class="text-fl-step--1 " set:html={post.data.excerpt} />
             </span>
         </a>
     )

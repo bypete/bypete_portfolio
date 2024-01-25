@@ -3,6 +3,7 @@ import utilities from '~/data/utilities.json';
 import Tags from '~/components/ui/Tags.astro';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
+import ReadTime from './ui/ReadTime.astro';
 
 interface CoverImage {
     src: ImageMetadata;
@@ -28,7 +29,7 @@ interface Props {
     product?: ProductImage;
     taster: string;
     tags: string[];
-    readTime: number;
+    readTime: string;
 }
 
 const { title, url, cover, product, logo, taster, tags, readTime } =
@@ -68,23 +69,20 @@ const { title, url, cover, product, logo, taster, tags, readTime } =
             )
         }
         <div class="gap-4 grid-in-description md:gap-8">
-            <h2 class="font-headline text-2xl">
+            <h2 class="text-fl-step-3 font-headline">
                 <a href={url} class="link">{title}</a>
             </h2>
             {taster && <p set:html={taster} />}
-            <p class="mt-2 flex items-center text-xs text-quiet md:text-sm">
-                <Icon
-                    name="lucide:timer"
-                    class="mr-1 inline-block h-4 w-auto"
-                />{readTime}
-            </p>
-            <Tags
-                {tags}
-                class:list={[
-                    'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
-                    utilities.margin.t,
-                ]}
-            />
+
+            {
+                readTime && (
+                    <ReadTime
+                        duration={readTime}
+                        class="text-fl-step--1 mt-2 text-quiet"
+                    />
+                )
+            }
+            <Tags {tags} class:list={[utilities.margin.t]} />
         </div>
     </article>
 </div>

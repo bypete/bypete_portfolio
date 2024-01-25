@@ -47,9 +47,7 @@ import '~/styles/tailwind.css';
         <!-- <ViewTransitions /> -->
     </head>
     <body
-        class:list={[
-            'relative flex min-h-screen max-w-full scroll-pt-[var(--headerheight)]  overflow-x-hidden bg-page  font-Roboto text-content antialiased',
-        ]}
+        class="text-fl-base relative flex min-h-screen max-w-full scroll-pt-[var(--headerheight)] overflow-x-hidden bg-page font-Roboto text-content antialiased"
         x-data="{ pageTop: false, smNav: false, showOverlay: false, showUnderlay: false, }"
         x-ref="body"
         id="top"

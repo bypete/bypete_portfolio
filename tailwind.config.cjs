@@ -36,7 +36,7 @@ export default {
                 sm: '640px',
                 md: '768px',
                 lg: '1024px',
-                xl: '1280px',
+                xl: '1200px',
             },
             // padding: (theme) => ({
             //   DEFAULT: 'theme(spacing[4])', // 16px
@@ -242,6 +242,17 @@ export default {
                 inherit: 'inherit', // inherit parent
             },
             fontSize: {
+                'fl-step--2': 'var(--step--2)',
+                'fl-step--1': 'var(--step--1)',
+                'fl-base': 'var(--step-0)',
+                'fl-step-0': 'var(--step-0)',
+                'fl-step-1': 'var(--step-1)',
+                'fl-step-2': 'var(--step-2)',
+                'fl-step-3': 'var(--step-3)',
+                'fl-step-4': 'var(--step-4)',
+                'fl-step-5': 'var(--step-5)',
+                'fl-step-6': 'var(--step-6)',
+                'fl-step-7': 'var(--step-7)',
                 micro: [
                     '0.375rem',
                     {
@@ -461,6 +472,7 @@ export default {
                     DEFAULT: 'rgb(var(--color-note) / <alpha-value>)',
                     shade: 'rgb(var(--color-note-shade) / <alpha-value>)',
                 },
+                gold: 'rgb(var(--color-gold) / <alpha-value>)',
                 alert: {
                     DEFAULT: 'rgb(var(--color-alert) / <alpha-value>)',
                     shade: 'rgb(var(--color-alert-shade) / <alpha-value>)',

@@ -2,6 +2,43 @@
     /* https://divmagic.com/tools/color-converter */
     /* --[type: color]- */
     :root {
+        /* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1200,18,1.25,5,2,768&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+        --step--2: clamp(0.6944rem, 0.6855rem + 0.0446vw, 0.72rem);
+        --step--1: clamp(0.8331rem, 0.8099rem + 0.1163vw, 0.9rem);
+        --step-0: clamp(1rem, 0.9565rem + 0.2174vw, 1.125rem);
+        --step-1: clamp(1.2rem, 1.1283rem + 0.3587vw, 1.4063rem);
+        --step-2: clamp(1.44rem, 1.3293rem + 0.5533vw, 1.7581rem);
+        --step-3: clamp(1.7281rem, 1.5649rem + 0.8163vw, 2.1975rem);
+        --step-4: clamp(2.0738rem, 1.8396rem + 1.1707vw, 2.7469rem);
+        --step-5: clamp(2.4881rem, 2.1594rem + 1.6435vw, 3.4331rem);
+        --step-6: clamp(2.9863rem, 2.5323rem + 2.2696vw, 4.2913rem);
+        --step-7: clamp(3.5831rem, 2.9636rem + 3.0978vw, 5.3644rem);
+
+        /* @link https://utopia.fyi/space/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
+        --space-3xs: clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem);
+        --space-2xs: clamp(0.5625rem, 0.5408rem + 0.1087vw, 0.625rem);
+        --space-xs: clamp(0.875rem, 0.8533rem + 0.1087vw, 0.9375rem);
+        --space-s: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+        --space-m: clamp(1.6875rem, 1.6223rem + 0.3261vw, 1.875rem);
+        --space-l: clamp(2.25rem, 2.163rem + 0.4348vw, 2.5rem);
+        --space-xl: clamp(3.375rem, 3.2446rem + 0.6522vw, 3.75rem);
+        --space-2xl: clamp(4.5rem, 4.3261rem + 0.8696vw, 5rem);
+        --space-3xl: clamp(6.75rem, 6.4891rem + 1.3043vw, 7.5rem);
+
+        /* One-up pairs */
+        --space-3xs-2xs: clamp(0.3125rem, 0.2038rem + 0.5435vw, 0.625rem);
+        --space-2xs-xs: clamp(0.5625rem, 0.4321rem + 0.6522vw, 0.9375rem);
+        --space-xs-s: clamp(0.875rem, 0.7446rem + 0.6522vw, 1.25rem);
+        --space-s-m: clamp(1.125rem, 0.8641rem + 1.3043vw, 1.875rem);
+        --space-m-l: clamp(1.6875rem, 1.4049rem + 1.413vw, 2.5rem);
+        --space-l-xl: clamp(2.25rem, 1.7283rem + 2.6087vw, 3.75rem);
+        --space-xl-2xl: clamp(3.375rem, 2.8098rem + 2.8261vw, 5rem);
+        --space-2xl-3xl: clamp(4.5rem, 3.4565rem + 5.2174vw, 7.5rem);
+
+        /* Custom pairs */
+        --space-s-l: clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem);
+
         --headerheight: 72px; /* 16px + 40px +16px */
         --smheaderheight: 64px; /* 16px + 32px +16px */
         --container-width-max: 1200px;
@@ -80,6 +117,8 @@
         --color-warning-light: 220 38 38; /* red-600 */
         --color-warning: 220 38 38; /* red-600 */
         --color-warning-dark: 153 27 27; /* red-800 */
+
+        --color-gold: 182 160 108; /* #b6a06c */
 
         --color-focus: 56 189 248; /* sky-400 */
 
@@ -331,24 +370,21 @@ h6 {
 }
 
 h1 {
-    @apply font-headline font-extrabold tracking-tight;
+    @apply font-extrabold;
 }
 
 /* Richtext editor content */
-.rte h1 {
-    @apply capline text-3xl lg:text-5xl;
-}
 
 .rte h2 {
-    @apply capline  text-3xl font-bold tracking-tight md:text-4xl;
+    @apply capline text-fl-step-3 font-bold tracking-tight;
 }
 
 .rte h3 {
-    @apply mb-1 text-xl font-semibold md:text-2xl;
+    @apply text-fl-step-2 mb-1 font-semibold;
 }
 
 .rte h4 {
-    @apply mb-1 text-base font-medium;
+    @apply text-fl-step-1 mb-1 font-medium;
 }
 
 .rte > p {
@@ -372,18 +408,9 @@ h1 {
     @apply mt-[1.5em];
 }
 
-.text {
-    &--hotline {
-        @apply text-lg font-bold md:text-2xl;
-    }
-    &--smallprint {
-        @apply text-xs;
-    }
-}
-
 /* Typography | Superscript */
 sup.new {
-    @apply rounded-sm bg-accent px-0.5 py-px align-top text-sm font-medium leading-none !text-white;
+    @apply text-fl-step--1 rounded-sm bg-accent px-0.5 py-px align-top font-medium leading-none !text-white;
 }
 
 /* Tables

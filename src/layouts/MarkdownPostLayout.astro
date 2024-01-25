@@ -39,7 +39,7 @@ const { hero: { dark: isHeroDark = false } = {} } = frontmatter || {};
         ]}
     >
         <article class="relative">
-            <div class="rte prose mx-auto max-w-3xl lg:prose-lg">
+            <div class="rte text-fl-step-0 prose mx-auto max-w-3xl">
                 {
                     frontmatter.splash && (
                         <BlockPicture
@@ -80,10 +80,7 @@ const { hero: { dark: isHeroDark = false } = {} } = frontmatter || {};
                     <Tags
                         tags={frontmatter.tags}
                         url={true}
-                        class:list={[
-                            'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
-                            utilities.margin.t,
-                        ]}
+                        class:list={[utilities.margin.t]}
                     />
                 </aside>
                 <PrevNext {prevPost} {nextPost} />

@@ -78,51 +78,6 @@
         @apply mt-8;
     }
 
-    /* Buttons 
-  ---------------------------------------------------------------------------------*/
-    .btn {
-        @apply inline-flex items-center rounded-full px-4 py-2 align-middle text-base font-bold transition-colors hover:shadow-inset;
-    }
-
-    /* Buttons | Themes */
-    .btn--primary {
-        @apply bg-accent text-white hover:border-black/10 hover:bg-white hover:text-gray-900;
-    }
-
-    .btn--secondary {
-        @apply bg-slate-900 text-white  hover:bg-white hover:text-gray-900;
-    }
-
-    .btn--white {
-        @apply bg-white text-slate-700 text-shadow-none hover:bg-white hover:text-gray-900;
-    }
-
-    .btn--outline {
-        @apply bg-transparent ring-2 ring-inset ring-gray-200 text-shadow-none hover:bg-white hover:text-gray-900;
-    }
-
-    .btn--quiet {
-        @apply bg-transparent text-gray-900 hover:border-gray-300  hover:bg-gray-600 hover:text-white;
-    }
-
-    .btn--disabled {
-        @apply bg-transparent text-gray-300 ring-2 ring-gray-200 hover:border-gray-300  hover:bg-transparent hover:text-gray-300;
-    }
-
-    .btn--link {
-        @apply text-gray-900  hover:bg-white;
-    }
-
-    /* Buttons | Size variants */
-    .btn--sm {
-        @apply h-7 px-2.5 py-0 text-sm !leading-7;
-    }
-
-    /* Buttons | Icon variants */
-    .btn--icon {
-        @apply justify-between gap-x-2 pr-3;
-    }
-
     /* Placeholders */
     .holder {
         @apply relative before:absolute before:inset-0 before:border-2 before:border-dashed before:border-outline;
@@ -248,19 +203,19 @@
     }
 
     .list--counter > li:before {
-        @apply absolute left-0 top-1.5 mr-4 block h-7 w-7 rounded-full bg-accent text-center text-xl font-black text-white lg:h-8 lg:w-8 lg:text-2xl;
+        @apply text-fl-step-1 absolute left-0 top-1.5 mr-4 block h-7 w-7 rounded-full bg-accent text-center font-black text-white lg:h-8 lg:w-8;
         content: counter(a);
     }
 
     /* Blockquotes
   ---------------------------------------------------------------------------------*/
     blockquote {
-        @apply relative my-12 block pl-4 text-left font-Georgia text-xl before:icon-[lucide--message-square-quote]
-before:block before:text-[1.5em] before:leading-none before:text-accent md:text-xl;
+        @apply text-fl-step-1 relative my-12 block pl-4 text-left font-Georgia before:icon-[lucide--message-square-quote]
+before:block before:text-[1.5em] before:leading-none before:text-accent;
     }
 
     blockquote .cite {
-        @apply mb-0 mt-4 text-base not-italic leading-8 text-gray-500;
+        @apply text-fl-step-0 mb-0 mt-4 not-italic leading-8 text-quiet;
     }
 
     /* labels
@@ -296,23 +251,23 @@ before:block before:text-[1.5em] before:leading-none before:text-accent md:text-
     }
 
     .pagination__page {
-        @apply relative  items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-accent hover:bg-gray-50;
+        @apply text-fl-step--1  relative items-center border border-gray-300 bg-white px-4  py-2 font-medium text-accent hover:bg-gray-50;
     }
 
     .pagination__ellipsis {
-        @apply relative items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700;
+        @apply text-fl-step--1 relative items-center border border-gray-300 bg-white px-4 py-2 font-medium text-gray-700;
     }
 
     .pagination__previous {
-        @apply relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50;
+        @apply text-fl-step--1 relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 font-medium text-gray-500 hover:bg-gray-50;
     }
 
     .pagination__next {
-        @apply relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50;
+        @apply text-fl-step--1 relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 font-medium text-gray-500 hover:bg-gray-50;
     }
 
     .pagination .active {
-        @apply relative z-10 items-center border border-gray-300 bg-white px-4 py-2 text-sm font-bold  ring-1 ring-focus;
+        @apply text-fl-step--1 relative z-10 items-center border border-gray-300 bg-white px-4 py-2 font-bold  ring-1 ring-focus;
     }
 
     /* Media
@@ -321,7 +276,7 @@ before:block before:text-[1.5em] before:leading-none before:text-accent md:text-
         @apply absolute bottom-2 left-3 z-50 grid cursor-help grid-cols-credit items-end gap-2 text-left text-white md:left-8;
     }
     .credit__icon {
-        @apply flex h-8 w-8 items-center justify-center rounded-full rounded-br-none bg-slate-900/25 text-sm;
+        @apply flex h-8 w-8 items-center justify-center rounded-full rounded-br-none bg-slate-900/25 text-fl-step--1;
     }
 
     .credit__text {
@@ -329,7 +284,7 @@ before:block before:text-[1.5em] before:leading-none before:text-accent md:text-
     } */
 
     .media figcaption {
-        @apply mt-0 border-b border-slate-200 p-3 text-sm md:px-0;
+        @apply text-fl-step--1 mt-0 border-b border-slate-200 p-3 md:px-0;
     }
 
     .media__wrap {
@@ -441,7 +396,7 @@ before:block before:text-[1.5em] before:leading-none before:text-accent md:text-
     /* Javascript | Alpine modifiers
   ---------------------------------------------------------------------------------*/
     .copytip:before {
-        @apply invisible absolute left-1/2 -translate-x-1/2 -translate-y-12 whitespace-nowrap rounded bg-slate-900 bg-opacity-95 p-2 text-sm font-normal text-white shadow-sm content-[attr(aria-label)];
+        @apply text-fl-step--1 invisible absolute left-1/2 -translate-x-1/2 -translate-y-12 whitespace-nowrap rounded bg-slate-900 bg-opacity-95 p-2 font-normal text-white shadow-sm content-[attr(aria-label)];
     }
 
     /* Javascript | Swiper
@@ -451,10 +406,4 @@ before:block before:text-[1.5em] before:leading-none before:text-accent md:text-
     }
     /* Javascript | Photoswipe
   ---------------------------------------------------------------------------------*/
-    /* [data-lightbox] {
-        @apply relative
-        z-0 before:absolute before:inset-0
-        before:z-10 before:flex before:items-center  before:justify-center before:bg-slate-900/75 before:font-awesome before:text-2xl/none before:font-black before:not-italic before:leading-inherit before:text-white before:opacity-0 before:backdrop-blur-sm
-        before:backdrop-brightness-125 before:transition before:duration-300 before:content-['\f00e'] before:hover:opacity-100;
-    } */
 }

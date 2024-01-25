@@ -131,7 +131,11 @@ import { Icon } from 'astro-icon/components';
 
                 this.validator = new JustValidate(this.form, {
                     errorFieldCssClass: ['error'],
-                    errorLabelCssClass: ['text-red-600', 'text-sm', 'mt-1'],
+                    errorLabelCssClass: [
+                        'text-red-600',
+                        'text-fl-step--1',
+                        'mt-1',
+                    ],
                     errorLabelStyle: '',
                     errorFieldStyle: '',
                     successFieldCssClass: ['valid'],

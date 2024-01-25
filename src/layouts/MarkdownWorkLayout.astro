@@ -11,6 +11,7 @@ import Skills from '~/components/Skills.astro';
 import TableOfContents from '~/components/ui/TableOfContents.astro';
 import WorkPreview from '~/components/ui/WorkPreview.astro';
 import BlockPicture from '~/components/Images/BlockPicture.astro';
+import ReadTime from '~/components/ui/ReadTime.astro';
 
 const { frontmatter, minutesRead, headings, prevPost, nextPost } = Astro.props;
 let resolvedHeadings = headings;
@@ -54,24 +55,17 @@ if (frontmatter.skillset) {
                     utilities.tramline.x,
                 ]}
             >
-                <h1 set:html={frontmatter.title} />
+                <h1
+                    class="capline text-fl-step-3/none"
+                    set:html={frontmatter.title}
+                />
                 <p>{frontmatter.taster}</p>
-                <p class="inline-flex items-center">
-                    <Icon
-                        name="lucide:timer"
-                        class="mr-1 inline-block h-4 w-auto"
-                    />
-                    {minutesRead}
-                </p>
+                <ReadTime duration={minutesRead} />
                 <Tags
                     tags={frontmatter.tags}
                     url={true}
-                    class:list={[
-                        'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
-                        utilities.margin.y,
-                    ]}
+                    class:list={[utilities.margin.y]}
                 />
-
                 <p>
                     <Link
                         theme="outline"
@@ -97,7 +91,7 @@ if (frontmatter.skillset) {
         ]}
     >
         <article id="start" class="relative">
-            <div class="rte prose mx-auto max-w-3xl lg:prose-lg">
+            <div class="rte text-fl-step-0 prose mx-auto max-w-3xl">
                 <Skills
                     skillset={frontmatter.skillset}
                     bg={frontmatter.brand.bg}
@@ -151,10 +145,7 @@ if (frontmatter.skillset) {
                 <Tags
                     tags={frontmatter.tags}
                     url={true}
-                    class:list={[
-                        'flex w-full flex-wrap items-center gap-2 text-sm leading-none',
-                        utilities.margin.t,
-                    ]}
+                    class:list={[utilities.margin.t]}
                 />
             </aside>
         </article>

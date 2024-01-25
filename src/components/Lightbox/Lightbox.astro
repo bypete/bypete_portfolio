@@ -118,7 +118,7 @@ const {
             isButton: false,
             appendTo: 'root',
             className:
-                'bg-slate-900/75 !opacity-0 duration-300 rounded text-white text-sm max-w-[calc(100%-4rem)] w-auto absolute left-1/2 -translate-x-1/2 bottom-2.5 px-2 py-1',
+                'bg-slate-900/75 !opacity-0 duration-300 rounded text-content-light text-fl-step--1 max-w-[calc(100%-4rem)] w-auto absolute left-1/2 -translate-x-1/2 bottom-2.5 px-2 py-1',
             html: 'Caption text',
             // eslint-disable-next-line no-unused-vars
             onInit: (el, pswp) => {
@@ -155,11 +155,3 @@ const {
 
     lightbox.init();
 </script>
-
-<style>
-    [data-lightbox] {
-        @apply relative text-white after:icon-[lucide--zoom-in];
-        @apply after:absolute after:left-1/2 after:top-1/2 after:z-10 after:flex after:-translate-x-1/2 after:-translate-y-1/2  after:items-center  after:justify-center after:text-2xl/none after:leading-inherit after:opacity-0 after:duration-300 after:hover:opacity-100;
-        @apply before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-full before:opacity-0  before:backdrop-blur-sm before:backdrop-brightness-125 before:transition before:duration-300 before:hover:bg-slate-900/75 before:hover:opacity-100;
-    }
-</style>

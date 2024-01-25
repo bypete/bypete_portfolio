@@ -11,9 +11,5 @@ const title = 'Tag index';
 ---
 
 <ListingLayout title={title}>
-    <Tags
-        {tags}
-        url={true}
-        class="mx-auto flex w-full flex-wrap items-center gap-3 text-sm leading-none md:gap-4"
-    />
+    <Tags {tags} url={true} class:list={[utilities.margin.y]} />
 </ListingLayout>

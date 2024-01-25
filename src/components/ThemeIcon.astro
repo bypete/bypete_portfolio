@@ -15,7 +15,7 @@ const legibility = isHeroDark
     x-data="theme"
     x-cloak
     class:list={[
-        'relative flex h-6 w-6 items-center justify-center justify-self-end overflow-hidden text-right text-base/none md:justify-self-center md:text-center',
+        'relative flex h-6 w-6 items-center justify-center justify-self-end overflow-hidden text-right leading-none md:justify-self-center md:text-center',
         legibility,
     ]}
     x-bind:class="{'' : theme === 'light'}"
