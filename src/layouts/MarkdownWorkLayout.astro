@@ -37,11 +37,16 @@ if (frontmatter.skillset) {
                     sizes={'100vw, (min-width: var(--container-width-lg)) 50vw, (min-width: 1264px) 56.25vw'}
                     class="h-full w-full object-cover"
                     wrapper={'absolute inset-0 h-full w-full '}
-                /><Image
-                    src={frontmatter.logo}
-                    alt={frontmatter.title + ' logo'}
-                    class="relative h-auto w-auto max-w-1/3"
                 />
+                {
+                    frontmatter.logo && (
+                        <Image
+                            src={frontmatter.logo.light || frontmatter.logo.src}
+                            alt={frontmatter.title + ' logo'}
+                            class="relative h-auto w-auto max-w-1/3"
+                        />
+                    )
+                }
             </div>
             <div
                 class:list={[

@@ -121,6 +121,7 @@ export default {
                 wrapper: '1fr auto', // Main layout to allow sticky footer, header not counted.
                 showcase: 'auto minmax(0, 1fr)',
                 layout: 'auto 1fr auto',
+                workcard: 'auto auto minmax(0, 1fr) auto',
                 system: '1fr auto',
                 card: 'auto 1fr auto',
                 home: 'auto minmax(0, 1fr)',

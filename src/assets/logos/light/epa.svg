@@ -3,8 +3,8 @@
 <svg version="1.1" id="a" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 300 130" style="enable-background:new 0 0 300 130;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#114B8E;}
-	.st1{fill-rule:evenodd;clip-rule:evenodd;fill:#939496;}
+	.st0{fill:#FFFFFF;}
+	.st1{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
 </style>
 <path class="st0" d="M248.8,89.7L217,121.8h-32l48-48.4C238.6,78.5,243.9,83.9,248.8,89.7 M274.8,63.6l-23.1,23.2
 	c-4.9-5.8-10.1-11.2-15.8-16.3L261,45.3h38v76.5h-25C274.4,104.3,274.5,89.2,274.8,63.6"/>

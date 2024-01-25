@@ -10,16 +10,29 @@ interface CoverImage {
     credit: string;
 }
 
+interface ProductImage {
+    src: ImageMetadata;
+    alt: string;
+}
+
+interface LogoImage {
+    src: ImageMetadata;
+    light?: ImageMetadata;
+}
+
 interface Props {
     title: string;
     url: string;
     cover: CoverImage;
+    logo?: LogoImage;
+    product?: ProductImage;
     taster: string;
     tags: string[];
     readTime: number;
 }
 
-const { title, url, cover, taster, tags, readTime } = Astro.props;
+const { title, url, cover, product, logo, taster, tags, readTime } =
+    Astro.props;
 ---
 
 <div class:list={['divide-y', utilities.margin.b]}>
@@ -41,6 +54,15 @@ const { title, url, cover, taster, tags, readTime } = Astro.props;
                             widths={[240, 540, 720, cover.src.width]}
                             sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${cover.src.width}px`}
                         />
+
+                        {logo && (
+                            <Image
+                                src={logo.light || logo.src}
+                                widths={[300]}
+                                alt={title + ' logo'}
+                                class="absolute left-1/2 top-1/2 m-auto h-auto max-w-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 group-hover:max-w-1/2 group-focus:max-w-1/2 "
+                            />
+                        )}
                     </a>
                 </div>
             )
@@ -50,7 +72,7 @@ const { title, url, cover, taster, tags, readTime } = Astro.props;
                 <a href={url} class="link">{title}</a>
             </h2>
             {taster && <p set:html={taster} />}
-            <p class="flex items-center text-xs text-gray-400 md:text-sm">
+            <p class="mt-2 flex items-center text-xs text-quiet md:text-sm">
                 <Icon
                     name="lucide:timer"
                     class="mr-1 inline-block h-4 w-auto"

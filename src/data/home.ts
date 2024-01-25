@@ -9,10 +9,10 @@ export interface SwiperImage {
 }
 
 import slide1 from "~/assets/home/profile__cutout--circle.png";
-import slide2 from "~/assets/home/slide__3mobile.png";
-import slide3 from "~/assets/home/slide__laptop.png";
-import slide4 from "~/assets/home/slide__2mobile.png";
-import slide5 from "~/assets/home/slide__ipad.png";
+import slide2 from "~/assets/work/mykringapp/product.png";
+import slide3 from "~/assets/work/onepay/product.png";
+import slide4 from "~/assets/work/mykring/product.png";
+import slide5 from "~/assets/work/twotw/product.png";
 
 export const heroSlides: SwiperImage[] = [
   {

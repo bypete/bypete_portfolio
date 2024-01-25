@@ -16,6 +16,11 @@ interface ProductImage {
     alt: string;
 }
 
+interface LogoImage {
+    src: ImageMetadata;
+    light?: ImageMetadata;
+}
+
 interface Props {
     title: string;
     url: string;
@@ -59,7 +64,7 @@ const {
     >
         <div class="relative flex md:order-2 md:h-full">
             <div
-                class="inset-0 w-full pt-[var(--smheaderheight)] md:absolute md:h-full md:py-[var(--headerheight)]"
+                class="inset-0 w-full pt-[var(--smheaderheight)] md:absolute md:h-full md:py-[calc(var(--headerheight)/2)]"
             >
                 {
                     product && (
@@ -73,7 +78,7 @@ const {
             </div>
         </div>
         <div
-            class="relative grid max-w-[40ch] grid-cols-1 gap-4 self-start rounded text-content-light backdrop-blur-md backdrop-brightness-95 backdrop-opacity-10 md:order-1 md:row-span-1 md:items-center md:gap-8 md:self-center md:justify-self-center"
+            class="relative max-w-[40ch] self-start rounded text-content-light backdrop-blur-md backdrop-brightness-95 backdrop-opacity-10 md:order-1 md:row-span-1 md:items-center md:gap-8 md:self-center md:justify-self-center"
         >
             <div>
                 <p
@@ -92,7 +97,7 @@ const {
                 taster && (
                     <p
                         set:html={taster}
-                        class=" line-clamp-5 md:line-clamp-none "
+                        class="my-4 line-clamp-5 md:my-8 md:line-clamp-none "
                     />
                 )
             }
@@ -113,7 +118,7 @@ const {
             <Tags
                 {tags}
                 url={true}
-                class="hidden w-full flex-wrap items-center gap-2 text-sm leading-none md:flex"
+                class="mt-4 hidden w-full flex-wrap items-center gap-2 text-sm leading-none md:mt-8 md:flex"
             />
         </div>
     </div>

@@ -43,13 +43,14 @@ const { post, preview, class: ClassName } = Astro.props;
                     alt={post.data.title}
                     class="absolute inset-0 m-0 h-full w-full object-cover"
                 />
-                <Image
-                    widths={[100]}
-                    quality="high"
-                    src={post.data.logo}
-                    alt={post.data.title}
-                    class="absolute left-1/2 top-1/2 m-auto h-auto max-w-1/3 -translate-x-1/2 -translate-y-1/2 transition-transform group-hover:scale-125"
-                />
+                {post.data.logo && (
+                    <Image
+                        src={post.data.logo.light || post.data.logo.src}
+                        widths={[300]}
+                        alt={post.data.title + ' logo'}
+                        class="absolute left-1/2 top-1/2 m-auto h-auto max-w-1/2 -translate-x-1/2 -translate-y-1/2 transition-transform group-hover:scale-90"
+                    />
+                )}
             </span>
             <span>
                 <h2

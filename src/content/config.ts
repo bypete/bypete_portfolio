@@ -48,7 +48,10 @@ const workCollection = defineCollection({
       bg: z.string(),
       color: z.string(),
     }),
-    logo: image().optional(),
+    logo: z.object({
+      src: image().optional(),
+      light: image().optional(),
+    }).optional(),
     cover: z.object({
       src: image().refine((img) => img.width >= 500, {
         message: "cover image must be at least 500 wide!",
