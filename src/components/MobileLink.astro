@@ -10,8 +10,6 @@ const { title, url, pathname, class: className } = Astro.props;
 
 <a
     href={url}
-    class:list={[
-        'block w-full py-0.5 font-headline text-4xl font-black tracking-tight text-menusm hover:text-menusm-hover focus:text-menusm-hover data-[state=active]:text-menusm-active',
-    ]}
+    class="block w-full py-0.5 font-headline text-fl-step-3 font-black tracking-tight text-menusm hover:text-menusm-hover focus:text-menusm-hover data-[state=active]:text-menusm-active"
     data-state={pathname === url ? 'active' : ''}>{title}</a
 >

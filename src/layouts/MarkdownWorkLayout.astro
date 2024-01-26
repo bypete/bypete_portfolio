@@ -58,18 +58,20 @@ if (frontmatter.skillset) {
                 <h1
                     class="capline text-fl-step-3/none"
                     set:html={frontmatter.title}
-                />
+                /><ReadTime duration={minutesRead} />
                 <p>{frontmatter.taster}</p>
-                <ReadTime duration={minutesRead} />
-                <Tags
-                    tags={frontmatter.tags}
-                    url={true}
-                    class:list={[utilities.margin.y]}
-                />
+                <div class="flex justify-between">
+                    <Tags
+                        tags={frontmatter.tags}
+                        url={true}
+                        class:list={[utilities.margin.y]}
+                    />
+                </div>
                 <p>
                     <Link
                         theme="outline"
                         isIcon={true}
+                        size="sm"
                         class="hidden transform duration-300 md:inline-flex"
                         href="#start"
                     >
@@ -91,7 +93,7 @@ if (frontmatter.skillset) {
         ]}
     >
         <article id="start" class="relative">
-            <div class="rte text-fl-step-0 prose mx-auto max-w-3xl">
+            <div class="rte prose mx-auto max-w-3xl text-fl-step-0">
                 <Skills
                     skillset={frontmatter.skillset}
                     bg={frontmatter.brand.bg}

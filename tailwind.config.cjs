@@ -149,10 +149,6 @@ export default {
                     '66.66vh /* fallback for Opera, IE and etc. */',
                     '66.66svh',
                 ],
-                '75Svw': [
-                    '75vw /* fallback for Opera, IE and etc. */',
-                    '75svw',
-                ],
             },
             height: {
                 screenLvh: [
@@ -235,10 +231,6 @@ export default {
                 '5pc': '5%',
             },
             lineHeight: {
-                note: '1.125rem', // 18 px
-                iconXl: '3.00rem', // 48px
-                iconMd: '2.00rem', // 32px
-                iconSm: '1.50rem', // 16px
                 inherit: 'inherit', // inherit parent
             },
             fontSize: {
@@ -253,68 +245,6 @@ export default {
                 'fl-step-5': 'var(--step-5)',
                 'fl-step-6': 'var(--step-6)',
                 'fl-step-7': 'var(--step-7)',
-                micro: [
-                    '0.375rem',
-                    {
-                        // 6px
-                        lineHeight: '1',
-                    },
-                ],
-                tiny: [
-                    '0.5rem',
-                    {
-                        // 8px
-                        lineHeight: '1',
-                    },
-                ],
-                '3xs': [
-                    '0.625rem',
-                    {
-                        // 10px
-                        lineHeight: '1',
-                    },
-                ],
-                '2xs': [
-                    '0.6875rem',
-                    {
-                        // 11px
-                        lineHeight: '1',
-                    },
-                ],
-                '2sm': [
-                    '0.8125rem',
-                    {
-                        // 13px
-                        lineHeight: '1',
-                    },
-                ],
-                iconXl: [
-                    '3.00rem',
-                    {
-                        // 48px
-                        lineHeight: '1',
-                    },
-                ],
-                iconMd: [
-                    '2.00rem',
-                    {
-                        // 32px
-                        lineHeight: '1',
-                    },
-                ],
-                iconSm: [
-                    '1.50rem',
-                    {
-                        // 16px
-                        lineHeight: '1',
-                    },
-                ],
-                decimal: [
-                    '60%',
-                    {
-                        lineHeight: '1',
-                    },
-                ],
             },
             textShadow: {
                 xs: '1px 1px 0 var(--tw-shadow-color), -1px 1px 0 var(--tw-shadow-color), 1px -1px 0 var(--tw-shadow-color), -1px -1px 0 var(--tw-shadow-color)',

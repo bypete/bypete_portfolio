@@ -60,9 +60,9 @@ const formattedPosts = formatBlogPosts(allWork, {
         <Fragment slot="content">
             <Roles roles={roles} />
             <div class="text-content-light shadow-slate-900 text-shadow-emboss">
-                <p class="text-fl-step-0 mb-4">
-                    This space has been crafted to demonstrate my abilities,
-                    methods, and expertise.
+                <p class="mb-4 text-fl-step-0">
+                    This space is a place to view some of the projects I've
+                    worked on and get an insight into my methods.
                 </p>
                 <p class="flex flex-wrap items-center gap-4 text-shadow-none">
                     <Link
@@ -71,7 +71,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                         class="md:inline-flex"
                         href="/work"
                     >
-                        View some work <Icon
+                        Show me some work <Icon
                             name="lucide:arrow-right-circle"
                             class="h-6 w-6 animate-nudge-right"
                         />
@@ -92,7 +92,7 @@ const formattedPosts = formatBlogPosts(allWork, {
     >
         <div class="relative mx-auto max-w-container">
             <h2
-                class="text-fl-step-4 mt-8 text-center font-headline font-bold tracking-tight text-content-light shadow-slate-900 text-shadow-emboss"
+                class="mt-8 text-center font-headline text-fl-step-4 font-bold tracking-tight text-content-light shadow-slate-900 text-shadow-emboss"
                 x-cloak
                 x-bind:class="section ? 'animate-fade-in-up' : 'invisible'"
             >
