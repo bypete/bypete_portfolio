@@ -1,35 +1,69 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import { Image } from 'astro:assets';
+
 import GridImage from '~/components/Hero/GridImage.astro';
 import GridHome from '~/components/Hero/GridHome.astro';
 import GridCover from '~/components/Hero/GridCover.astro';
 import { Icon } from 'astro-icon/components';
-import utilities from '~/data/utilities.json';
 import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
+import SwipePrompt from '~/components/ui/SwipePrompt.astro';
 
-interface VisualKeys {
-    url: string;
+export interface VisualKeys {
+    src: string | ImageMetadata;
+    widths?: number[];
+    sizes?: string;
     alt: string;
+    url: string;
+    wrapper?: string;
+    class?: string;
 }
-interface CoverKeys {
-    url: string;
+export interface CoverKeys {
+    src: string | ImageMetadata;
+    widths?: number[];
+    sizes?: string;
     alt: string;
-    credit: string;
+    url: string;
+    wrapper?: string;
+    class?: string;
 }
 
-interface HeroKeys {
+export interface CTA {
+    text: string;
+    theme?:
+        | 'primary'
+        | 'secondary'
+        | 'white'
+        | 'whiteline'
+        | 'outline'
+        | 'quiet'
+        | 'link'
+        | 'disabled';
+    class?: string;
+    size?: 'sm' | 'md' | 'lg';
+    icon: string;
+}
+
+interface ActionProps {
+    areas: CTA[];
+}
+
+export interface HeroKeys {
     wrapper?: string;
     dark?: boolean;
     bg?: string;
+    headline?: string;
     mode?: 'plain' | 'home' | 'image' | 'cover' | 'custom';
     class?: string;
     visual?: Partial<VisualKeys>;
+    copy?: string;
     cover?: Partial<CoverKeys>;
     legibility?: string;
     threshold?: number;
     shadow?: string;
     isContained?: boolean;
-    scrollprompt?: boolean;
+    actions?: Partial<ActionProps>;
+    prompt?: 'swipe' | 'scroll';
 }
 
 export interface Props extends HTMLAttributes<'div'> {
@@ -48,9 +82,13 @@ const {
     legibility,
     shadow,
     isContained,
-    scrollprompt,
+    prompt,
     threshold,
     visual,
+    cover,
+    headline,
+    actions,
+    copy,
 } = hero as HeroKeys;
 
 const intersect = {
@@ -59,19 +97,20 @@ const intersect = {
 };
 
 const color = legibility || (dark ? 'text-content-light' : 'text-content');
+const heroTitle = headline || title;
 let wrapperClass = '';
 
 switch (mode) {
     case 'plain':
         wrapperClass = `${
             wrapper || ''
-        } max-w-container mx-auto pt-[var(--smheaderheight)] md:pt-[var(--headerheight)]`;
+        } max-w-container mx-auto pt-[var(--headerheight)]`;
         break;
     case 'image':
         wrapperClass = wrapper || '';
         // wrapperClass = `${
         //     wrapper || ''
-        // } min-h-photo pt-[var(--smheaderheight)] md:min-h-33vw  xl:min-h-block`;
+        // } min-h-photo pt-[var(--headerheight)] md:min-h-33vw  xl:min-h-block`;
         break;
     case 'custom':
         wrapperClass = `${wrapper || ''} custom-wrapper`;
@@ -101,10 +140,7 @@ switch (mode) {
             <>
                 <h1
                     id="headline"
-                    class:list={[
-                        'heading text-fl-step-6 relative mx-auto max-w-3xl text-center',
-                        utilities.tramline.double.t,
-                    ]}
+                    class="heading relative mx-auto max-w-3xl pt-fl-space-xl text-center text-fl-step-6"
                 >
                     {title}
                 </h1>
@@ -137,10 +173,14 @@ switch (mode) {
     {
         mode === 'cover' && (
             <>
-                <GridCover>
-                    <slot slot="content" name="content" />
-                    <slot slot="visual" name="visual" />
-                </GridCover>
+                <GridCover
+                    headline={heroTitle}
+                    {visual}
+                    {cover}
+                    legibility={color}
+                    {copy}
+                    {actions}
+                />
             </>
         )
     }
@@ -153,10 +193,12 @@ switch (mode) {
     }
 
     <slot />
+
     {
-        scrollprompt && (
-            <div class="pointer-events-none absolute left-1/2 top-screenSvh z-shortcuts -translate-x-1/2 -translate-y-full pb-4 md:pb-8 ">
-                <ScrollPrompt />
+        prompt && (
+            <div class="pointer-events-none absolute bottom-fl-space-s left-1/2 z-shortcuts -translate-x-1/2  ">
+                {prompt === 'scroll' && <ScrollPrompt />}
+                {prompt === 'swipe' && <SwipePrompt />}
             </div>
         )
     }
@@ -164,6 +206,7 @@ switch (mode) {
 
 <script>
     import intersect from '@alpinejs/intersect';
+
     document.addEventListener('alpine:init', () => {
         Alpine.plugin(intersect);
     });

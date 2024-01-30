@@ -11,17 +11,17 @@ const { clients } = Astro.props;
 ---
 
 <div
-    class="swiper swiper--clients lg:rounded-lg lg:border-x-2 lg:border-gray-200 lg:py-4"
+    class="swiper swiper--clients py-fl-space-s lg:rounded-lg lg:border-x-2 lg:border-outline"
 >
     <div class="swiper-wrapper not-prose flex items-center">
         {
             clients.map((client, i) => (
-                <div class="slide swiper-slide flex items-center justify-center px-4 lg:px-10">
+                <div class="slide swiper-slide flex items-center justify-center px-fl-space-m">
                     <Image
                         src={client.src}
                         alt={client.alt}
                         loading="lazy"
-                        class="max-h-10 w-auto opacity-60 grayscale transition-all hover:opacity-100 hover:filter-none lg:max-h-14"
+                        class="max-h-fl-space-l w-auto max-w-fl-space-3xl opacity-60 grayscale transition-all hover:opacity-100 hover:filter-none "
                     />
                 </div>
             ))

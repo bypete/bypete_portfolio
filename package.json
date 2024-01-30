@@ -20,7 +20,7 @@
   "dependencies": {
     "@alpinejs/intersect": "^3.13.3",
     "@alpinejs/persist": "^3.13.3",
-    "@astrojs/alpinejs": "^0.3.2",
+    "@astrojs/alpinejs": "^0.4.0",
     "@astrojs/check": "^0.3.3",
     "@astrojs/mdx": "^2.0.1",
     "@astrojs/preact": "^3.0.1",
@@ -29,7 +29,7 @@
     "@iconify-json/ci": "^1.1.13",
     "@iconify-json/lucide": "^1.1.153",
     "@types/alpinejs": "^3.13.6",
-    "alpinejs": "^3.13.3",
+    "alpinejs": "^3.13.5",
     "astro": "^4.0.6",
     "astro-icon": "^1.0.2",
     "astro-seo": "^0.8.0",

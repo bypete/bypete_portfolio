@@ -2,7 +2,8 @@
 import { type Props as HeadProps } from '~/components/SEO/Main.astro';
 import BaseLayout from './BaseLayout.astro';
 import Hero, { type Props as HeroProps } from '~/components/Hero/Hero.astro';
-import utilities from '~/data/utilities.json';
+import TableOfContents from '~/components/ui/TableOfContents.astro';
+import Breadcrumbs from '~/components/ui/Breadcrumbs.astro';
 
 const fm = Astro.props.frontmatter || Astro.props;
 
@@ -16,28 +17,33 @@ const heroConfig: HeroProps = {
     hero: fm.hero,
 };
 
-const { isHeroDark, isWide = false } = fm;
+const { isWide = false } = fm;
+
+const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
+
+const { headings } = Astro.props;
 // console.log(`PL | ${Astro.request.url} | Props:`, head, heroObj);
 ---
 
 <BaseLayout {...head} {isHeroDark}>
     <slot name="slothero">
         <Hero {...heroConfig} />
+        <Breadcrumbs title={head.title} />
     </slot>
 
     <main
         id="main-content"
-        class:list={[
-            'relative mx-auto max-w-container ',
-            utilities.headergap,
-            utilities.tramline.double.b,
-        ]}
+        class="relative mx-auto max-w-container py-fl-space-xl"
     >
         {
             isWide ? (
-                <slot />
+                <>
+                    {headings && <TableOfContents headings={headings} />}
+                    <slot />
+                </>
             ) : (
-                <div class="rte text-fl-step-0 prose mx-auto max-w-3xl ">
+                <div class="rte prose mx-auto max-w-3xl text-fl-step-0 ">
+                    {headings && <TableOfContents headings={headings} />}
                     <slot />
                 </div>
             )

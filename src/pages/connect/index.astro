@@ -1,59 +1,40 @@
 ---
-import utilities from '~/data/utilities.json';
 import { Icon } from 'astro-icon/components';
 import ContactForm from '~/components/Forms/ContactForm.astro';
 import PageLayout from '~/layouts/PageLayout.astro';
+import Note from '~/components/ui/Note.astro';
 const title = 'Connect';
 ---
 
 <PageLayout title={title} isWide={true}>
-    <div
-        class:list={['grid grid-cols-1 md:grid-cols-2', utilities.tramline.all]}
-    >
-        <div
-            class:list={[
-                'flex items-center border border-panel/75 md:order-2',
-                utilities.tramline.all,
-            ]}
-        >
-            <div
-                class:list={[
-                    'rte mx-auto w-full max-w-sm',
-                    utilities.tramline.all,
-                ]}
-            >
-                <p>
-                    Use this form to send me a message and I'll get back to you
-                    shortly.
-                </p>
-                <p>
-                    Please read my <a href="/about">bio</a> or visit my LinkedIn
-                    profile to find out more about me.
-                </p>
-                <p class:list={[utilities.margin.b]}>
-                    <a
-                        href="https://www.linkedin.com/in/peter-wallace-a5002a7a/"
-                        class="link flex items-center justify-between gap-2 rounded border border-solid border-slate-800 bg-slate-800 px-3 py-2 text-sky-400 no-underline hover:border-sky-500 hover:bg-sky-500 hover:text-white hover:no-underline"
-                    >
-                        <Icon
-                            name="mdi:linkedin"
-                            class="h-8 w-auto fill-current"
-                        />
-                         View my profile
-                        <Icon
-                            name="lucide:arrow-right-circle"
-                            class="h-6 w-6 animate-nudge-right"
-                        />
-                    </a>
-                </p>
+    <div class="grid grid-cols-1 md:grid-cols-2">
+        <div class="p-fl-space-m md:order-2">
+            <div class="mx-auto w-full max-w-[40ch]">
+                <Note theme="info" hasIcon={true}>
+                    <p>
+                        Use this form to send me a message and I'll get back to
+                        you shortly.
+                    </p><p>
+                        For more information please read my <a
+                            href="/about"
+                            class="link">bio</a
+                        > or visit my LinkedIn profile.
+                    </p><p class="mt-fl-space-m">
+                        <a
+                            href="https://www.linkedin.com/in/peter-wallace-a5002a7a/"
+                            class="link flex items-center justify-center gap-2 rounded border border-solid border-slate-800 bg-slate-800 px-fl-space-2xs py-fl-space-3xs text-sky-400 no-underline hover:border-sky-500 hover:bg-sky-500 hover:text-white hover:no-underline"
+                        >
+                            View my profile
+                            <Icon
+                                name="mdi:linkedin"
+                                class="h-fl-space-m w-auto fill-current"
+                            />
+                        </a>
+                    </p>
+                </Note>
             </div>
         </div>
-        <div
-            class:list={[
-                'rounded bg-panel/75 md:order-1',
-                utilities.tramline.all,
-            ]}
-        >
+        <div class="rounded bg-panel p-fl-space-m md:order-1">
             <ContactForm />
         </div>
     </div>

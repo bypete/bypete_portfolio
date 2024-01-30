@@ -1,6 +1,5 @@
 ---
 import { Picture } from 'astro:assets';
-import utilities from '~/data/utilities.json';
 import Credit from '~/components/Images/Credit.astro';
 
 const {
@@ -33,7 +32,7 @@ const imageProps = {
             class:list={[
                 'group relative',
                 wrapper || '',
-                breakout ? utilities.breakout : '',
+                breakout && 'breakout',
             ]}
         >
             <Picture {...imageProps} />

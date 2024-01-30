@@ -1,7 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Tags from '~/components/ui/Tags.astro';
-import utilities from '~/data/utilities.json';
 import Link from '~/components/ui/Link.astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
@@ -50,10 +49,7 @@ if (frontmatter.skillset) {
                 }
             </div>
             <div
-                class:list={[
-                    'rte self-end py-4 md:pb-8 lg:pb-12 conpad:pr-0',
-                    utilities.tramline.x,
-                ]}
+                class="rte self-end px-fl-space-m py-4 md:pb-8 lg:pb-12 conpad:pr-0"
             >
                 <h1
                     class="capline text-fl-step-3/none"
@@ -64,7 +60,7 @@ if (frontmatter.skillset) {
                     <Tags
                         tags={frontmatter.tags}
                         url={true}
-                        class:list={[utilities.margin.y]}
+                        class="my-fl-space-m"
                     />
                 </div>
                 <p>
@@ -87,10 +83,7 @@ if (frontmatter.skillset) {
 
     <main
         id="main-content"
-        class:list={[
-            'relative mx-auto max-w-container ',
-            utilities.tramline.double.b,
-        ]}
+        class:list="relative mx-auto max-w-container pb-fl-space-xl"
     >
         <article id="start" class="relative">
             <div class="rte prose mx-auto max-w-3xl text-fl-step-0">
@@ -119,21 +112,15 @@ if (frontmatter.skillset) {
                 {headings && <TableOfContents headings={resolvedHeadings} />}
                 <slot />
             </div>
-            <aside
-                class:list={[
-                    'mx-auto w-full max-w-3xl',
-                    utilities.tramline.y,
-                    utilities.margin.t,
-                ]}
-            >
+            <aside class="mx-auto mt-fl-space-m w-full max-w-3xl py-fl-space-m">
                 <p class="inline-flex items-center">
                     <Icon
                         name="lucide:calendar"
                         class="inline-block h-4 w-auto"
                     />
-                    <span class="mx-1.5">Last updated:</span>
+                    <span class="mx-fl-space-3xs">Last updated:</span>
                     <time
-                        class="inline-block rounded bg-outline-pale px-1.5"
+                        class="inline-block rounded bg-outline-pale"
                         datetime={htmlDateString(
                             frontmatter.modDate || frontmatter.pubDate,
                         )}
@@ -147,22 +134,35 @@ if (frontmatter.skillset) {
                 <Tags
                     tags={frontmatter.tags}
                     url={true}
-                    class:list={[utilities.margin.t]}
+                    class="mt-fl-space-m"
                 />
             </aside>
         </article>
     </main>
     <aside
-        class:list={[
-            'border-t border-outline bg-panel',
-            utilities.tramline.double.y,
-        ]}
+        class="border-t border-outline bg-panel px-fl-space-s py-fl-space-2xl"
     >
         <div
-            class="mx-auto grid max-w-3xl grid-cols-1 items-start justify-between gap-8 bg-panel px-4 md:grid-cols-prevnext md:px-0"
+            class="mx-auto grid max-w-3xl grid-cols-1 justify-between gap-fl-space-l md:grid-cols-prevnext"
         >
-            {nextPost && <WorkPreview post={nextPost} preview={'next'} />}
-            {prevPost && <WorkPreview post={prevPost} preview={'prev'} />}
+            {
+                nextPost && (
+                    <WorkPreview
+                        post={nextPost}
+                        class="md:col-start-1"
+                        preview={'next'}
+                    />
+                )
+            }
+            {
+                prevPost && (
+                    <WorkPreview
+                        post={prevPost}
+                        class="md:col-start-2"
+                        preview={'prev'}
+                    />
+                )
+            }
         </div>
     </aside>
 </BaseLayout>

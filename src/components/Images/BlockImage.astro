@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import utilities from '~/data/utilities.json';
 
 const {
     src,
@@ -26,7 +25,7 @@ const imageProps = {
 
 {
     wrapper || breakout == true || credit.length ? (
-        <div class:list={[wrapper || '', breakout ? utilities.breakout : '']}>
+        <div class:list={[wrapper || '', breakout && 'breakout']}>
             <Image {...imageProps} />
             {credit && `yes there is credit`}
         </div>

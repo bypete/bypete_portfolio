@@ -1,5 +1,6 @@
 ---
-title: 'Hello'
+title: 'About'
+layout: '~/layouts/PageLayout.astro'
 taster: 'I’m a Surrey based Front-End developer with over two decades of experience in digital.'
 excerpt: 'I’m a Surrey based Front-End developer with over two decades of experience in digital.'
 description: 'Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.'
@@ -7,9 +8,26 @@ keywords: 'Surrey based Front-End developer, Bespoke website development, HTML, 
 opengraph:
     image: 'img/social/og__about.jpg'
 hero:
-    mode: 'image'
+    mode: 'cover'
+    headline: 'Hello!'
+    copy: "<p class='text-fl-step-1'>I'm a surrey based Front-End developer with over two decades of experience in digital.</p>"
+    actions: 
+      - text: 'Read my bio'
+        theme: 'secondary'
+        href: '#main-content'
+        icon: 'lucide:arrow-down-circle'
+      - text: 'Contact me'
+        theme: 'whiteline'
+        href: '/connect'
+    visual: 
+      src: 'profile__hd.png'
+      alt: 'My face'
+      widths: [300,640,800]
+    cover:
+      src: 'hero/concrete--teal.webp'
+      alt: 'Teal background with concrete detail texture'
     bg: 'bg-teal-400'
-    scrollprompt: true
+    prompt: 'scroll'
     isContained: true
     threshold: 25
     dark: true
@@ -58,63 +76,19 @@ skillset:
               - 'UX/UI'
 ---
 import Skills from '~/components/Skills.astro'
-import PageLayout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/Hero/Hero.astro';
 import Block from '~/components/Blocks/Block.astro';
 import Link from '~/components/ui/Link.astro';
-import utilities from '~/data/utilities.json';
 
-import imgProfile__hd from '~/assets/profile__hd.png';
 import listing_index from '~/assets/work/listing-index.jpg';
 import woodland from '~/assets/blocks/woodland.webp';
-import bg_teal from '~/assets/hero/concrete--teal.webp';
-import bg_teal_sm from '~/assets/hero/concrete--teal@sm.webp';
 import google_lens from '~/assets/google-lens.jpg';
 import { Image } from 'astro:assets';
-import { Picture } from 'astro:assets';
 import Figure from '~/components/Figure.astro'
-import HeroPicture from '~/components/Images/HeroPicture.astro';
 import BlockPicture from '~/components/Images/BlockPicture.astro';
 import { Icon } from 'astro-icon/components';
 
-
-<PageLayout hero={frontmatter.hero} title={frontmatter.title} description={frontmatter.description} isHeroDark={frontmatter.hero.dark}>
-  <Hero slot="slothero" hero={frontmatter.hero} >
-    <Fragment slot="content">
-        <h1 class="relative  text-shadow-headline text-fl-step-5">
-            {frontmatter.title}
-        </h1>
-        <div class="rte">
-            <p class="font-light text-fl-step-1">I'm a Surrey based Front-End developer with over two decades of experience in digital.</p>
-            <p class="flex flex-row gap-2">
-                <Link theme="secondary" class="inline-flex transform duration-300" href="#main-content">Read my bio <i class="fa-regular fa-circle-down animate-nudge-down"></i></Link>
-                <Link theme="outline" href="/connect">Connect</Link>
-            </p>
-        </div>
-    </Fragment>
-    <Fragment slot="visual">
-      <div class="relative flex justify-center " >
-        <div class="absolute aspect-1 h-full w-auto rounded-egg bg-white"></div>
-        <div class="absolute aspect-1 h-full w-auto animate-morph-delay border border-white/30"></div>
-        <div class="absolute aspect-1 h-full w-auto animate-morph border border-white/95"></div>
-        <div class="h-full w-full" x-bind:class="shown ? 'animate-stretch' : 'invisible'">
-            <Picture
-              src={imgProfile__hd}
-              widths={[300, 640, 800]}
-              sizes={'(max-width: 48em) calc(100vw - 2rem), 50vw'}
-              class="relative w-full h-full object-contain object-bottom"
-              alt="Profile headshot"
-              loading="eager"
-              />
-        </div>
-      </div>
-    </Fragment>
-    <Fragment slot="background">
-      <HeroPicture src={bg_teal} class="object-cover object-bottom md:object-center w-full h-full" alt="Rustic Teal background" />
-    </Fragment>
-  </Hero>
-
 ## The backstory
+
 
 I cut my teeth in multimedia, primarily working on e-learning, training, and press pack applications for prominent publishers such as **BBC Worldwide**, **BBC Active**, **University of Cambridge**, **Oxford University Press**, **UKTV**, and **Kellogg's** with the award winning agency - Fifth Dimension Productions.
 
@@ -146,15 +120,14 @@ This static site was built with [11ty](https://www.11ty.dev/), [Tailwind CSS](ht
 
 Moving forward, I would be keen to build on my recent experiences and explore a React based framework – probably Next.js or Gatsby.
 
-<BlockPicture src={woodland} class="my-0" alt="Woodland scene" credit="Adobe Photoshop (beta) - Generative fill" wrapper="my-4 md:my-8" />
+<BlockPicture src={woodland} class="my-0" alt="Woodland scene" credit="Adobe Photoshop (beta) - Generative fill" wrapper="my-fl-space-l" />
 
 ## Balance and wellbeing
 I love spending time exploring the great outdoors with my family; we have two adventurous young boys, and it gives me great joy to see them thrive in nature. I find that getting away from the interruptions and rhythms of daily life helps me regain a sense of balance and wellbeing.
 
 The boys are at a naturally inquisitive age and whilst I do my best to tackle their questions... we often have to resort to [Google Lens](https://lens.google/intl/en-GB/#cta-section) for the answers!
 
-<BlockPicture src={google_lens} breakout={false} class="my-0 w-full" alt="Beach scene with close up of jellyfish. Detail shows iPhone with google lens app" credit="Google Lens (App visuals)" wrapper="my-4 md:my-8 -mx-4 md:mx-0" />
+<BlockPicture src={google_lens} breakout={false} class="my-0 w-full" alt="Beach scene with close up of jellyfish. Detail shows iPhone with google lens app" credit="Google Lens (App visuals)" wrapper="my-fl-space-l" />
 
-</PageLayout>
 
 

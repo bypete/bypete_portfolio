@@ -14,33 +14,54 @@
         --step-6: clamp(2.9863rem, 2.5323rem + 2.2696vw, 4.2913rem);
         --step-7: clamp(3.5831rem, 2.9636rem + 3.0978vw, 5.3644rem);
 
-        /* @link https://utopia.fyi/space/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
-
-        --space-3xs: clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem);
-        --space-2xs: clamp(0.5625rem, 0.5408rem + 0.1087vw, 0.625rem);
-        --space-xs: clamp(0.875rem, 0.8533rem + 0.1087vw, 0.9375rem);
-        --space-s: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
-        --space-m: clamp(1.6875rem, 1.6223rem + 0.3261vw, 1.875rem);
-        --space-l: clamp(2.25rem, 2.163rem + 0.4348vw, 2.5rem);
-        --space-xl: clamp(3.375rem, 3.2446rem + 0.6522vw, 3.75rem);
-        --space-2xl: clamp(4.5rem, 4.3261rem + 0.8696vw, 5rem);
-        --space-3xl: clamp(6.75rem, 6.4891rem + 1.3043vw, 7.5rem);
+        /* @link https://utopia.fyi/space/calculator?c=320,16,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l|m-s|s-xs&g=s,l,xl,12 */
+        /* Space 3xs: 4px → 5px */
+        --space-3xs: clamp(0.25rem, 0.228rem + 0.109vw, 0.313rem);
+        /* Space 2xs: 8px → 10px */
+        --space-2xs: clamp(0.5rem, 0.457rem + 0.217vw, 0.625rem);
+        /* Space xs: 12px → 15px */
+        --space-xs: clamp(0.75rem, 0.685rem + 0.326vw, 0.938rem);
+        /* Space s: 16px → 20px */
+        --space-s: clamp(1rem, 0.913rem + 0.435vw, 1.25rem);
+        /* Space m: 24px → 30px */
+        --space-m: clamp(1.5rem, 1.37rem + 0.652vw, 1.875rem);
+        /* Space l: 32px → 40px */
+        --space-l: clamp(2rem, 1.826rem + 0.87vw, 2.5rem);
+        /* Space xl: 48px → 60px */
+        --space-xl: clamp(3rem, 2.739rem + 1.304vw, 3.75rem);
+        /* Space 2xl: 64px → 80px */
+        --space-2xl: clamp(4rem, 3.652rem + 1.739vw, 5rem);
+        /* Space 3xl: 96px → 120px */
+        --space-3xl: clamp(6rem, 5.478rem + 2.609vw, 7.5rem);
 
         /* One-up pairs */
-        --space-3xs-2xs: clamp(0.3125rem, 0.2038rem + 0.5435vw, 0.625rem);
-        --space-2xs-xs: clamp(0.5625rem, 0.4321rem + 0.6522vw, 0.9375rem);
-        --space-xs-s: clamp(0.875rem, 0.7446rem + 0.6522vw, 1.25rem);
-        --space-s-m: clamp(1.125rem, 0.8641rem + 1.3043vw, 1.875rem);
-        --space-m-l: clamp(1.6875rem, 1.4049rem + 1.413vw, 2.5rem);
-        --space-l-xl: clamp(2.25rem, 1.7283rem + 2.6087vw, 3.75rem);
-        --space-xl-2xl: clamp(3.375rem, 2.8098rem + 2.8261vw, 5rem);
-        --space-2xl-3xl: clamp(4.5rem, 3.4565rem + 5.2174vw, 7.5rem);
+        /* Space 3xs-2xs: 4px → 10px */
+        --space-3xs-2xs: clamp(0.25rem, 0.12rem + 0.652vw, 0.625rem);
+        /* Space 2xs-xs: 8px → 15px */
+        --space-2xs-xs: clamp(0.5rem, 0.348rem + 0.761vw, 0.938rem);
+        /* Space xs-s: 12px → 20px */
+        --space-xs-s: clamp(0.75rem, 0.576rem + 0.87vw, 1.25rem);
+        /* Space s-m: 16px → 30px */
+        --space-s-m: clamp(1rem, 0.696rem + 1.522vw, 1.875rem);
+        /* Space m-l: 24px → 40px */
+        --space-m-l: clamp(1.5rem, 1.152rem + 1.739vw, 2.5rem);
+        /* Space l-xl: 32px → 60px */
+        --space-l-xl: clamp(2rem, 1.391rem + 3.043vw, 3.75rem);
+        /* Space xl-2xl: 48px → 80px */
+        --space-xl-2xl: clamp(3rem, 2.304rem + 3.478vw, 5rem);
+        /* Space 2xl-3xl: 64px → 120px */
+        --space-2xl-3xl: clamp(4rem, 2.783rem + 6.087vw, 7.5rem);
 
         /* Custom pairs */
-        --space-s-l: clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem);
+        /* Space s-l: 16px → 40px */
+        --space-s-l: clamp(1rem, 0.478rem + 2.609vw, 2.5rem);
+        /* Space m-s: 24px → 20px */
+        --space-m-s: clamp(1.25rem, 1.587rem + -0.435vi, 1.5rem);
+        /* Space s-xs: 16px → 15px */
+        --space-s-xs: clamp(0.938rem, 1.022rem + -0.109vi, 1rem);
 
-        --headerheight: 72px; /* 16px + 40px +16px */
-        --smheaderheight: 64px; /* 16px + 32px +16px */
+        --headerheight: calc(var(--space-l) + (var(--space-s) * 2));
+
         --container-width-max: 1200px;
         --container-width-sm: 640px;
         --container-width-md: 768px;
@@ -50,10 +71,14 @@
         --color-page__bg: 250 250 250; /* zinc-50 */
         --color-page__bg--contrast: 250 250 250; /* putty | https://www.colorhexa.com/f5f4f0 */
 
-        --swiper-theme-color: theme('colors.accent.DEFAULT') !important;
-        /* --swiper-pagination-color: theme('colors.white'); */
-        --swiper-pagination-bullet-inactive-color: white;
-        --swiper-pagination-bullet-inactive-opacity: 1;
+        .swiper {
+            /* Add .swiper class to override defaults */
+            --swiper-theme-color: theme('colors.accent.DEFAULT') !important;
+            /* --swiper-pagination-color: theme('colors.white'); */
+            --swiper-pagination-bullet-inactive-color: white;
+            --swiper-pagination-bullet-inactive-opacity: 1;
+            --swiper-navigation-size: var(--space-m);
+        }
 
         --color-banner: transparent; /* transparent */
         --color-banner-up: 255 255 255; /* white */
@@ -153,6 +178,9 @@
         --color-quiet-light: 209 213 219; /* gray-300 */
         --color-quiet: 161 161 170; /* zinc-400 */
 
+        --color-credit: 250 250 250; /* zinc-50 */
+        --color-credit__bg: 31 41 55; /* gray-800 */
+
         --color-disabled: 209 213 219; /* gray-300 */
     }
 
@@ -202,9 +230,10 @@
             --color-outline: 63 63 70; /* zinc-700 */
             --color-outline-hard: 82 82 91; /* zinc-600 */
 
-            --color-footer-light: 39 39 42; /* zinc 800 */
-            --color-footer: 24 24 27; /* zinc 900 */
-            --color-footer-dark: 9 9 11; /* zinc 950 */
+            --color-footer: 255 255 255; /* white */
+            --color-footer__bg-light: 39 39 42; /* zinc 800 */
+            --color-footer__bg: 24 24 27; /* zinc 900 */
+            --color-footer__bg-dark: 9 9 11; /* zinc 950 */
 
             --color-info: 2 132 199; /* sky-600 */
             --color-info-shade: 7 89 133; /* sky-800 */
@@ -380,11 +409,11 @@ h1 {
 }
 
 .rte h3 {
-    @apply text-fl-step-2 mb-1 font-semibold;
+    @apply mb-1 text-fl-step-2 font-semibold;
 }
 
 .rte h4 {
-    @apply text-fl-step-1 mb-1 font-medium;
+    @apply mb-1 text-fl-step-1 font-medium;
 }
 
 .rte > p {
@@ -410,7 +439,7 @@ h1 {
 
 /* Typography | Superscript */
 sup.new {
-    @apply text-fl-step--1 rounded-sm bg-accent px-0.5 py-px align-top font-medium leading-none !text-white;
+    @apply rounded-sm bg-accent px-0.5 py-px align-top text-fl-step--1 font-medium leading-none !text-white;
 }
 
 /* Tables

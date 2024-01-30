@@ -48,7 +48,6 @@ import BlockPicture from '~/components/Images/BlockPicture.astro';
 import floating_handsets from '../../assets/work/mykringapp/floating-handsets.jpg';
 import Skills from '~/components/Skills.astro'
 import Block from '~/components/Blocks/Block.astro'
-import utilities from '~/data/utilities.json'
 
 import UL from '~/components/MDX/ul.astro'
 import Reviews from '~/components/Swiper/Reviews.astro'
@@ -110,12 +109,12 @@ The Auto top-up form was also streamlined and only appears when 'Use Auto top-up
     <Image src={svgbg} alt="background" class="object-cover w-full h-full absolute inset-0" />
         <div
             slot="mc1"
-            class:list={['self-center md:order-2', utilities.tramline.y]}
+            class="self-center md:order-2 py-fl-space-m"
         >
             <blockquote
                 class="not-prose m-0 pl-0 italic text-fl-step-1/snug "
             >
-                <p class="mb-4 text-fl-step-2/snug font-headline">
+                <p class="mb-fl-space-xs text-fl-step-2/snug font-headline">
                     <strong>So glad there's finally an app for K&nbsp;Ring!</strong>
                 </p>
                 <p>
@@ -123,11 +122,11 @@ The Auto top-up form was also streamlined and only appears when 'Use Auto top-up
                     from the website, but not just a web shell. Easy to navigate
                     and use. Notifications through the app are a plus!
                 </p>
-                <p class="cite inline-flex items-center"><span class="mr-2 text-fl-step--1 text-gold leading-none "><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span></span>James, 26 November 2021 Play store</p>
+                <p class="cite inline-flex items-center"><span class="mr-fl-space-2xs text-fl-step--1 text-gold leading-none "><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span></span>James, 26 November 2021 Play store</p>
             </blockquote>
         </div>
         <div slot="mc2" class="not-prose self-end md:order-1">
-            <Image src={iphone_hand} widths={[400,600,800]} sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.5), (min-width: 1264) calc(var(--container-width-max)*0.60)`} class="relative m-0 mt-8 h-[480px] w-full object-contain lg:h-[640px]" alt="Hand holding an iPhone with mykring app in use"/>
+            <Image src={iphone_hand} widths={[400,600,800]} sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.5), (min-width: 1264) calc(var(--container-width-max)*0.60)`} class="relative m-0 mt-fl-space-m h-[480px] w-full object-contain lg:h-[640px]" alt="Hand holding an iPhone with mykring app in use"/>
         </div>
     </Block>
 

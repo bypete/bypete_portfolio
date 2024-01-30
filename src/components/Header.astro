@@ -11,14 +11,16 @@ const { isHeroDark = false } = Astro.props;
 ---
 
 <header
-    class:list={['group fixed fixed top-0 z-banner w-full py-4 duration-300']}
+    class:list={[
+        'group fixed fixed top-0 z-banner w-full py-fl-space-s duration-300',
+    ]}
     x-bind:class="{'translate-y-0 duration-0' : banner == 'freeze', 'bg-banner': banner == 'start', 'bg-banner-up shadow-banner shadow-gray-950/10': banner == 'up', '-translate-y-full ': banner == 'down' }"
     x-ref="banner"
     :data-banner="banner"
     x-data="{ banner:'start', ...stickybanner()}"
     x-init="reactOnScroll()"
     @set-banner.window="banner = $event.detail"
-    @freeze-banner.window="$refs.banner.classList.add('banner--freeze', $event.detail)"
+    @freeze-banner.window="$refs.banner.classList.add('banner--freeze111', $event.detail)"
     @thaw-banner.window="$refs.banner.classList.remove('banner--freeze', $event.detail)"
     @scroll.window="reactOnScroll()"
 >
@@ -28,7 +30,7 @@ const { isHeroDark = false } = Astro.props;
         <a href="/" aria-label="byPete - home">
             <Icon
                 name="bypete"
-                class="banner__logo h-8 w-auto transition-all md:h-10"
+                class="banner__logo h-fl-space-l w-auto transition-all"
             />
         </a>
 
@@ -74,6 +76,7 @@ const { isHeroDark = false } = Astro.props;
                         this.$data.banner = 'unknown';
                     }
                 }
+                this.$store.banner.state = this.$data.banner;
                 this.$data.lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
             },
         }));

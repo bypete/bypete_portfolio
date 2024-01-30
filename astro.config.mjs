@@ -5,8 +5,8 @@ import preact from '@astrojs/preact';
 import mdx from '@astrojs/mdx';
 import rehypeAttrs from 'rehype-attr';
 import rehypeExternalLinks from 'rehype-external-links';
-import alpinejs from '@astrojs/alpinejs';
 import sitemap from '@astrojs/sitemap';
+import alpine from '@astrojs/alpinejs';
 const rehypeExternalLinksConfig = [
     rehypeExternalLinks,
     {
@@ -33,8 +33,8 @@ export default defineConfig({
                 lucide: ['*'],
             },
         }),
-        alpinejs(),
         sitemap(),
+        alpine({ entrypoint: '/src/entrypoint' }),
     ],
     markdown: {
         rehypePlugins: [rehypeAttrs, rehypeExternalLinksConfig],

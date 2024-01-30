@@ -1,12 +1,11 @@
 ---
 import { Image } from 'astro:assets';
-import utilities from '~/data/utilities.json';
-import ScrollPrompt from '../ui/ScrollPrompt.astro';
+import SwipePrompt from '../ui/SwipePrompt.astro';
 import Slide from '~/components/Swiper/HomeSlide.astro';
 import { type SwiperImage } from '~/data/home';
 ---
 
-<section class:list={['h-screenSvh w-full bg-zinc-800 lg:h-screen']}>
+<section class="h-screenSvh w-full bg-zinc-800 text-content-light">
     <div class="swiper swiper--work group h-full w-full">
         <div class="swiper-wrapper flex items-center">
             <slot />
@@ -20,13 +19,13 @@ import { type SwiperImage } from '~/data/home';
         >
         </div>
         <div
-            class="swiper--work__pagination absolute !bottom-8 !left-4 right-auto z-10 mx-auto w-auto text-left text-fl-step--1 font-light !text-content-light md:!left-auto md:!right-8 md:text-right"
+            class="swiper--work__pagination absolute !bottom-fl-space-s !left-fl-space-s right-auto z-10 mx-auto w-auto text-left text-fl-step--1 font-light !text-content-light md:!left-auto md:!right-fl-space-s md:text-right"
         >
         </div>
         <div
-            class="pointer-events-none absolute left-1/2 top-screenSvh z-shortcuts hidden -translate-x-1/2 -translate-y-full pb-4 text-content-light/25 md:pb-8 lg:block"
+            class="pointer-events-none absolute left-1/2 top-screenSvh z-shortcuts -translate-x-1/2 -translate-y-full pb-fl-space-s"
         >
-            <ScrollPrompt />
+            <SwipePrompt />
         </div>
     </div>
 </section>

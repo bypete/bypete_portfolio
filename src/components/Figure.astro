@@ -1,6 +1,5 @@
 ---
 import { Icon } from 'astro-icon/components';
-import utilities from '~/data/utilities.json';
 
 interface Props {
     caption: string;
@@ -25,35 +24,29 @@ const {
 <figure
     class:list={[
         'not-prose',
-        breakout ? utilities.breakout : '',
-        className
-            ? className
-            : `${utilities.margin.y} ${!breakout ? utilities.pull.x : ''}`,
+        breakout && 'breakout',
+        className ? className : 'my-fl-space-m',
     ]}
     {...attrs}
 >
     <div
         class:list={[
             bg,
-            grid
-                ? grid
-                : `grid grid-cols-1 items-center gap-4 md:gap-8 ${utilities.tramline.all} `,
+            grid ? grid : 'grid grid-cols-1 items-center gap-fl-space-m',
         ]}
     >
         <slot />
     </div>
     {
         caption && (
-            <figcaption
-                class:list={[
-                    'text-fl-step--1 mt-4 w-full justify-between gap-4 border-b border-outline pb-4 md:flex',
-                    utilities.tramline.x,
-                ]}
-            >
+            <figcaption class="w-full items-center justify-between gap-fl-space-m border-b border-outline p-fl-space-s text-fl-step--1 leading-snug md:flex">
                 <p>{caption}</p>
                 {credit && (
-                    <span class="text-fl-step--2/tight mt-2 grid grid-cols-icon items-center gap-1.5 md:mt-0 md:items-start">
-                        <Icon name="lucide:camera" class="h-4 w-4" />
+                    <span class="mt-fl-space-3xs grid grid-cols-icon gap-fl-space-3xs text-fl-step--2/fl-space-xs text-quiet  md:mt-0 ">
+                        <Icon
+                            name="lucide:camera"
+                            class="h-fl-space-xs w-auto"
+                        />
                         <Fragment set:html={credit} />
                     </span>
                 )}

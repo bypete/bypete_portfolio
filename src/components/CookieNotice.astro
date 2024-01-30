@@ -7,7 +7,7 @@ import { Icon } from 'astro-icon/components';
 
 <Toast>
     <div
-        class="pointer-events-auto grid items-start gap-y-2 p-2 grid-areas-toast md:p-3"
+        class="pointer-events-auto grid items-start gap-y-fl-space-xs p-fl-space-xs grid-areas-toast"
         x-data="cookie"
         x-show="toastCookie"
         x-transition:enter="transition ease-out duration-150"
@@ -27,9 +27,9 @@ import { Icon } from 'astro-icon/components';
             type="button"
             title="hide"
             @click="freeze(false)"
-            class="-mr-4 -mt-4 rounded-full bg-warning-light p-1 text-white shadow-floated grid-in-close hover:bg-warning-dark"
+            class="-mr-fl-space-s -mt-fl-space-s rounded-full bg-warning-light p-fl-space-3xs text-white shadow-floated grid-in-close hover:bg-warning-dark"
         >
-            <Icon name="mdi:hide" class="h-4 w-4" />
+            <Icon name="mdi:hide" class="h-4 w-auto" />
         </button>
         <p class="flex justify-between grid-in-action">
             <Link theme="link" size="sm" href="/about/legal#cookie-policy">

@@ -9,7 +9,10 @@ import { Icon } from 'astro-icon/components';
     @scroll.window="scrolled = ( window.pageYOffset > 25 ) ? true : false"
 >
     <p class="m-0 flex gap-fl-space-3xs text-fl-step--1">
-        <span>Scroll</span>
-        <Icon name="lucide:mouse" class="h-4 w-auto animate-nudge-down" />
+        <span>Swipe</span>
+        <Icon
+            name="lucide:arrow-right-left"
+            class="h-4 w-auto animate-nudge-right"
+        />
     </p>
 </div>

@@ -1,8 +1,6 @@
 ---
-import utilities from '~/data/utilities.json';
 import Tags from '~/components/ui/Tags.astro';
 import { Image } from 'astro:assets';
-import { Icon } from 'astro-icon/components';
 import ReadTime from './ui/ReadTime.astro';
 
 interface CoverImage {
@@ -36,53 +34,46 @@ const { title, url, cover, product, logo, taster, tags, readTime } =
     Astro.props;
 ---
 
-<div class:list={['divide-y', utilities.margin.b]}>
-    <article
-        class="grid grid-cols-1 gap-4 py-8 grid-areas-listing first:pt-0 last:pb-0 md:grid-cols-listing md:gap-8 md:grid-areas-listingwide"
-    >
-        {
-            cover && (
-                <div class="self-center grid-in-image">
-                    <a
-                        href={url}
-                        class="relative block w-full pb-widescreen lg:pb-tv"
-                    >
-                        <Image
-                            src={cover.src}
-                            alt={cover.alt}
-                            class="absolute inset-0 m-0 h-full w-full object-cover"
-                            quality="high"
-                            widths={[240, 540, 720, cover.src.width]}
-                            sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${cover.src.width}px`}
-                        />
+<article
+    class="gap-fl-space-s grid grid-cols-1 grid-areas-listing md:grid-cols-listing md:grid-areas-listingwide"
+>
+    {
+        cover && (
+            <div class="self-center grid-in-image">
+                <a
+                    href={url}
+                    class="relative block w-full pb-widescreen lg:pb-tv"
+                >
+                    <Image
+                        src={cover.src}
+                        alt={cover.alt}
+                        class="absolute inset-0 m-0 h-full w-full object-cover"
+                        quality="high"
+                        widths={[240, 540, 720, cover.src.width]}
+                        sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${cover.src.width}px`}
+                    />
 
-                        {logo && (
-                            <Image
-                                src={logo.light || logo.src}
-                                widths={[300]}
-                                alt={title + ' logo'}
-                                class="absolute left-1/2 top-1/2 m-auto h-auto max-w-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 group-hover:max-w-1/2 group-focus:max-w-1/2 "
-                            />
-                        )}
-                    </a>
-                </div>
-            )
-        }
-        <div class="gap-4 grid-in-description md:gap-8">
-            <h2 class="text-fl-step-3 font-headline">
-                <a href={url} class="link">{title}</a>
+                    {logo && (
+                        <Image
+                            src={logo.light || logo.src}
+                            widths={[300]}
+                            alt={title + ' logo'}
+                            class="absolute left-1/2 top-1/2 m-auto h-auto max-w-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 group-hover:max-w-1/2 group-focus:max-w-1/2 "
+                        />
+                    )}
+                </a>
+            </div>
+        )
+    }
+    <div class="gap-fl-space-xs grid grid-cols-1 grid-in-description">
+        <div>
+            <h2 class="font-headline text-fl-step-3">
+                <a href={url} class="link" set:html={title} />
             </h2>
             {taster && <p set:html={taster} />}
-
-            {
-                readTime && (
-                    <ReadTime
-                        duration={readTime}
-                        class="text-fl-step--1 mt-2 text-quiet"
-                    />
-                )
-            }
-            <Tags {tags} class:list={[utilities.margin.t]} />
         </div>
-    </article>
-</div>
+
+        {readTime && <ReadTime duration={readTime} />}
+        <Tags {tags} url={true} />
+    </div>
+</article>

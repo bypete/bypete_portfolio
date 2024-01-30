@@ -1,5 +1,4 @@
 ---
-import utilities from '../data/utilities.json';
 import type { HTMLAttributes } from 'astro/types';
 interface Area {
     title: string;
@@ -34,24 +33,24 @@ const { text, icon, heading, shadow, areas } = skillset as SkillsetProps;
 
 <div
     class:list={[
-        'not-prose relative',
-        breakout ? utilities.breakout : utilities.pull.x,
+        'not-prose relative px-fl-space-s py-fl-space-xl',
+        breakout && 'breakout',
+        className ? className : `${!breakout ? '-mx-fl-space-s' : ''}`,
         bg,
     ]}
     {...rest}
 >
     <div
         class:list={[
-            'relative mx-auto max-w-3xl px-4 md:px-8 conpad:px-0',
+            'relative mx-auto max-w-3xl',
             heading || 'permalink:text-white',
-            utilities.tramline.double.y,
         ]}
     >
         <slot />
         <ul
             class:list={[
-                'grid grid-cols-1 gap-8 lg:grid-cols-2',
-                text || 'text-white',
+                'grid grid-cols-1 gap-fl-space-m lg:grid-cols-2',
+                text || 'text-content-light',
                 shadow || 'shadow-black/25 text-shadow-emboss',
             ]}
         >
@@ -61,16 +60,12 @@ const { text, icon, heading, shadow, areas } = skillset as SkillsetProps;
                         <h3>{area.title}</h3>
                         <ul
                             class:list={[
-                                'space-y-2',
+                                'space-y-fl-space-2xs ',
                                 icon || '[&>li]:before:!text-white',
                             ]}
                         >
                             {area.skills.map((skill) => (
-                                <li
-                                    class:list={[
-                                        'relative pl-8 leading-normal before:icon-[lucide--check-circle-2] before:absolute before:left-0 before:top-tight before:w-6 before:leading-normal',
-                                    ]}
-                                >
+                                <li class="relative pl-fl-space-m leading-normal before:icon-[lucide--check-circle-2] before:absolute before:left-0 before:top-tight before:h-fl-space-s before:w-fl-space-s before:leading-normal">
                                     {skill}
                                 </li>
                             ))}

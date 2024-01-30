@@ -6,26 +6,28 @@ const year = new Date().getFullYear();
 ---
 
 <footer
-    class="relative bg-footer-bg bg-gradient-to-b from-footer-bg__light to-footer-bg__dark py-16 text-footer"
+    class="py-fl-space-2xl relative bg-footer-bg bg-gradient-to-b from-footer-bg__light to-footer-bg__dark text-footer"
 >
     <div
-        class="relative mx-auto grid max-w-container grid-cols-1 gap-8 md:grid-cols-3 2xl:grid-cols-2"
+        class="gap-fl-space-l relative mx-auto grid max-w-container grid-cols-1 md:grid-cols-3 2xl:grid-cols-2"
     >
         <div>
-            <p>
-                <a href="/" title="Return to home"
-                    ><Icon
-                        name="bypete--footer"
-                        title="byPete logo in white"
-                        class="h-10 w-auto"
-                    /></a
+            <a href="/" title="Return to home">
+                <Icon
+                    name="bypete--footer"
+                    title="byPete logo in white"
+                    class="h-fl-space-l w-auto"
+                />
+            </a>
+            <ul class="-mx-fl-space-xs mt-fl-space-l inline-flex">
+                <li
+                    class="border-text-footer px-fl-space-xs border-r last:border-0"
                 >
-            </p>
-            <ul class="-mx-2 mt-2 inline-flex">
-                <li class="border-r border-white px-2 last:border-0">
                     ©{year}
                 </li>
-                <li class="border-r border-white px-2 last:border-0">
+                <li
+                    class="border-text-footer px-fl-space-xs border-r last:border-0"
+                >
                     <a href="/about/legal" class="link">Legal notices</a>
                 </li>
             </ul>
@@ -33,7 +35,7 @@ const year = new Date().getFullYear();
 
         <div class="self-end">
             <div
-                class="-mx-2 inline-flex md:flex md:items-end md:justify-center 2xl:justify-end"
+                class="-mx-fl-space-xs inline-flex md:flex md:items-end md:justify-center 2xl:justify-end"
             >
                 {
                     siteInfo.socials.map((channel) => (

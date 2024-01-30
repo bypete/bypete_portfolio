@@ -8,7 +8,7 @@ const allPosts = await getCollection('posts');
 ---
 
 <ListingLayout title={title}>
-    <div class="grid grid-cols-1 gap-8 md:gap-32">
+    <div class="gap-y-fl-space-xl grid columns-1">
         {
             allPosts.map(async (post) => {
                 const { remarkPluginFrontmatter } = await post.render();

@@ -28,11 +28,11 @@ const { data } = Astro.props;
                             </p>
                             <Fragment set:html={review.comment} />
                             <p class="cite inline-flex items-center">
-                                <span class="mr-1">
+                                <span class="mr-fl-space-3xs">
                                     {[...Array(5)].map((_, index) => (
                                         <Icon
                                             name="mdi:star"
-                                            class={`inline-block h-6 w-6 ${
+                                            class={`inline-block h-fl-space-s w-auto ${
                                                 index < review.rating
                                                     ? 'text-gold'
                                                     : 'text-quiet'

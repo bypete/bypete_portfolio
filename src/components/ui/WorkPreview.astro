@@ -16,11 +16,11 @@ const { post, preview, class: ClassName } = Astro.props;
     post && (
         <a
             href={`/${post.collection}/${post.slug}/`}
-            class="group grid grid-cols-1 gap-2 "
+            class:list={['group grid grid-cols-1 gap-fl-space-2xs', ClassName]}
         >
             <span
                 class:list={[
-                    'text-fl-step--1 flex w-full gap-1 text-quiet',
+                    'flex w-full gap-fl-space-3xs text-fl-step--1 text-quiet',
                     preview === 'prev' && 'flex-row-reverse',
                 ]}
             >
@@ -30,12 +30,12 @@ const { post, preview, class: ClassName } = Astro.props;
                             ? 'lucide:chevron-left-square'
                             : 'lucide:chevron-right-square'
                     }
-                    class="h-6 w-6"
+                    class="h-fl-space-s w-auto"
                 />
-                {preview === 'next' ? 'Next:' : 'Previous:'}
+                {preview === 'next' ? 'Next' : 'Previous'}
             </span>
 
-            <span class="relative overflow-hidden rounded-tight pb-widescreen ">
+            <span class="relative overflow-hidden rounded-tight pb-widescreen">
                 <Image
                     widths={[400]}
                     quality="high"

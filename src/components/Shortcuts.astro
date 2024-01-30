@@ -4,7 +4,7 @@ import { Icon } from 'astro-icon/components';
 ---
 
 <div
-    class="fixed bottom-16 right-4 z-shortcuts flex flex-col items-center space-y-2 md:right-8"
+    class="fixed bottom-fl-space-2xl right-fl-space-s z-shortcuts flex flex-col items-center space-y-fl-space-2xs md:right-8"
 >
     <a
         id="pagetop"
@@ -13,13 +13,16 @@ import { Icon } from 'astro-icon/components';
         :class="pageTop ? '' : 'translate-y-12 md:translate-y-0 md:translate-x-16'"
         href="#top"
         aria-hidden="true"
-        class="scroll flex h-8 w-8 items-center justify-center rounded-full bg-accent text-white transition duration-700 hover:border-black/10 hover:bg-accent-light hover:shadow-inset focus:outline-none"
+        class="scroll flex items-center justify-center rounded-full bg-accent p-fl-space-3xs text-white transition duration-700 hover:border-black/10 hover:bg-accent-light hover:shadow-inset focus:outline-none"
     >
-        <Icon name="lucide:arrow-up-to-line" class="h-5 w-5" />
+        <Icon
+            name="lucide:arrow-up-to-line"
+            class="h-fl-space-s w-fl-space-s"
+        />
     </a>
 
     <Button
-        class="group relative h-16 w-16 flex-col justify-center shadow-floated md:hidden"
+        class="group relative h-fl-space-xl w-fl-space-xl flex-col justify-center shadow-floated md:hidden"
         name="hamburger"
         type="button"
         x-data="hamburger"

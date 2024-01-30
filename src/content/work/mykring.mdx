@@ -72,7 +72,6 @@ import block__cyclist_40 from '../../assets/work/mykring/block__cyclist_40.jpg';
 import Figure from '~/components/Figure.astro'
 import UL from '~/components/MDX/ul.astro'
 import Gallery from '~/components/Lightbox/Gallery.astro'
-import utilities from '~/data/utilities.json'
 
 import data from '~/data/work/mykring.data.json'
 export const components = {ul: UL}
@@ -120,7 +119,7 @@ I saw this project as an opportunity to use the static site generator [Eleventy]
 
 Any screen can be directly accessed by developers, partner clients, and stakeholders. This was especially useful for translators, who often need more context to create concise translations. Some screens can only be accessed under certain conditions, which can be difficult and sometimes impossible for third parties to recreate.
 
-<Figure x-data="{compare: true}" grid={['flex flex-col md:flex-row items-center gap-8', utilities.tramline.all]} caption='Unnecessary elements from the online responsive version (left) were stripped out to streamline the app layout (middle and right)' credit={frontmatter.title}>
+<Figure x-data="{compare: true}" grid="flex flex-col md:flex-row items-center gap-fl-space-m p-fl-space-m" caption='Unnecessary elements from the online responsive version (left) were stripped out to streamline the app layout (middle and right)' credit={frontmatter.title}>
   <div class="transition-all duration-300" x-bind:class="compare ? 'w-1/3' : 'w-full md:w-2/3'" x-on:click="compare = ! compare">
   <Image src={devices} alt="Devices view" class="w-full h-auto shadow-md border border-outline hover:cursor-pointer" />
   </div>

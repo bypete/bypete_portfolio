@@ -19,7 +19,7 @@ const legibility = isHeroDark
         <MenuLink
             {url}
             parent={url}
-            class="block pr-9"
+            class="block pr-fl-space-l"
             {title}
             {pathname}
             {isHeroDark}
@@ -31,14 +31,14 @@ const legibility = isHeroDark
             :aria-expanded="open"
             :aria-controls="$id('dropdown-button')"
             class:list={[
-                'absolute right-2 flex h-5 w-5 items-center justify-center rounded-full bg-panel p-0 focus:outline-none focus:ring-2',
+                'absolute right-fl-space-2xs flex h-fl-space-s w-fl-space-s items-center justify-center rounded-full bg-panel p-0 focus:outline-none focus:ring-2',
                 legibility,
             ]}
         >
             <Icon
                 name="lucide:chevron-down"
                 x-bind:class="{'rotate-180': open, 'rotate-0': !open}"
-                class="inline h-4 w-4 transform transition-transform duration-200"
+                class="inline h-fl-space-xs w-fl-space-xs transform transition-transform duration-200"
             />
         </button>
     </div>
@@ -54,7 +54,7 @@ const legibility = isHeroDark
         x-transition:leave="transition ease-in duration-75"
         x-transition:leave-start="transform opacity-100 scale-100"
         x-transition:leave-end="transform opacity-0 scale-95"
-        class="absolute right-0 mt-3 w-auto origin-top-right"
+        class="absolute right-0 mt-fl-space-2xs w-auto origin-top-right"
     >
         <div
             class="max-h-[calc(100vh-3rem-var(--headerheight))] overflow-y-scroll rounded-tight bg-panel shadow-d1 shadow-gray-900/20"

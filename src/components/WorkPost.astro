@@ -1,5 +1,4 @@
 ---
-import utilities from '~/data/utilities.json';
 import Tags from '~/components/ui/Tags.astro';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
@@ -36,10 +35,7 @@ const {
     class="grid grid-cols-1 items-start rounded-sm bg-panel grid-areas-listing_work lg:grid-cols-listing_work lg:grid-areas-listing_work_wide"
 >
     <div
-        class:list={[
-            'rte top-0 grid-in-content lg:sticky',
-            utilities.tramline.all,
-        ]}
+        class="rte top-0 p-fl-space-m grid-in-content lg:sticky"
         x-data="{ shown: false }"
         x-intersect.threshold.25="shown = true"
         :class="shown ? ' animate-appear' : 'invisible'"
@@ -51,7 +47,7 @@ const {
             <a href={url} class="link text-headline" set:html={title} />
         </h2>
         {taster && <p set:html={taster} />}
-        <Tags {tags} url={true} class:list={[utilities.margin.t]} />
+        <Tags {tags} url={true} class="mt-fl-space-0" />
     </div>
 
     <div
@@ -67,11 +63,11 @@ const {
                         <div class="relative flex justify-center">
                             <Icon
                                 name="mdi:star"
-                                class="relative mx-auto h-6 w-6 text-white"
+                                class="relative mx-auto h-fl-space-s w-fl-space-s text-white"
                             />
                             <Icon
                                 name="mdi:star"
-                                class="absolute mx-auto h-6 w-6 animate-ping text-white opacity-70"
+                                class="absolute mx-auto h-fl-space-s w-fl-space-s animate-ping text-white opacity-70"
                             />
                         </div>
                     </div>

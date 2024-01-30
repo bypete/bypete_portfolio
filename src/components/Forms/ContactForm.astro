@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import Button from '../ui/Button.astro';
 ---
 
 <!-- https://usebasin.com/f/64b35c1258c2 -->
@@ -17,7 +18,7 @@ import { Icon } from 'astro-icon/components';
         x-bind:class="{ 'hidden' : isSent }"
     >
         <div
-            class="group mt-4"
+            class="group mt-fl-space-s"
             x-data="observer()"
             x-bind:class="{ 'has-error': isError, 'has-success': isValid}"
         >
@@ -36,7 +37,7 @@ import { Icon } from 'astro-icon/components';
             <div id="InputNameError"></div>
         </div>
         <div
-            class="group mt-4"
+            class="group mt-fl-space-s"
             x-data="observer()"
             x-bind:class="{ 'has-error': isError, 'has-success': isValid}"
         >
@@ -45,29 +46,29 @@ import { Icon } from 'astro-icon/components';
                 <input
                     type="email"
                     name="email"
-                    class="form__input w-full pr-10"
+                    class="form__input w-full pr-fl-space-l"
                     id="InputEmail"
                     placeholder="you@example.com"
                     x-ref="input"
                     required
                 />
                 <div
-                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-fl-space-2xs"
                 >
                     <Icon
                         name="lucide:alert-circle"
-                        class="success-svg hidden h-5 w-5 text-red-500 group-[.has-error]:block"
+                        class="success-svg hidden h-fl-space-s w-fl-space-s text-red-500 group-[.has-error]:block"
                     />
                     <Icon
                         name="lucide:check-circle"
-                        class="success-svg hidden h-5 w-5 text-green-500 group-[.has-success]:block"
+                        class="success-svg hidden h-fl-space-s w-fl-space-s text-green-500 group-[.has-success]:block"
                     />
                 </div>
             </div>
             <div id="InputEmailError"></div>
         </div>
         <div
-            class="group mt-4"
+            class="group mt-fl-space-s"
             x-data="observer()"
             x-bind:class="{ 'has-error': isError, 'has-success': isValid}"
         >
@@ -99,8 +100,8 @@ import { Icon } from 'astro-icon/components';
                 />
             </div>
         </div>
-        <div class="mt-4">
-            <button type="submit" class="btn btn--primary">Send now</button>
+        <div class="mt-fl-space-s">
+            <Button type="submit" theme="primary">Send now</Button>
         </div>
     </form>
     <div
@@ -110,7 +111,7 @@ import { Icon } from 'astro-icon/components';
         <div class="rte w-full text-center">
             <Icon
                 name="lucide:mail-check"
-                class="mx-auto h-20 w-auto animate-fade-in-up text-green-500 duration-500"
+                class="mx-auto h-fl-space-2xl w-auto animate-fade-in-up text-green-500 duration-500"
             />
             <h3 class="text-center">Your message has been sent</h3>
             <p>Thanks for getting in touch, I'll try to respond quickly.</p>
@@ -134,7 +135,7 @@ import { Icon } from 'astro-icon/components';
                     errorLabelCssClass: [
                         'text-red-600',
                         'text-fl-step--1',
-                        'mt-1',
+                        'mt-fl-space-3xs',
                     ],
                     errorLabelStyle: '',
                     errorFieldStyle: '',

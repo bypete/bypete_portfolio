@@ -6,25 +6,27 @@ interface Role {
 
 export interface Props {
     roles: Role[];
+    class?: string;
 }
 
-const { roles } = Astro.props;
+const { roles, class: className } = Astro.props;
 let stringRoles = JSON.stringify(roles);
 stringRoles = stringRoles.replace(/\"/g, "'");
 ---
 
-<div class="lg:self-end" x-data={`roles(${stringRoles})`}>
-    <h1 class="text-fl-step-2 font-headline">
-        <span class="mb-2 block text-white shadow-black/40 text-shadow-emboss"
+<div class={className} x-data={`roles(${stringRoles})`}>
+    <h1 class="font-headline text-fl-step-2/tight">
+        <span
+            class="mb-fl-space-2xs block text-white shadow-black/40 text-shadow-emboss"
             >I like to <span x-text="preposition" class="text-brand"
-                >work on</span
+                >work in</span
             ></span
         >
         <span
-            class="relative inline-block rounded-tight bg-panel px-2 py-1 text-content mix-blend-screen duration-150 lg:px-3 lg:py-1.5"
+            class="relative inline-block rounded-tight bg-panel px-fl-space-2xs py-fl-space-3xs text-content mix-blend-screen duration-150"
             x-cloak
         >
-            <span x-text="role">Ui</span><span
+            <span x-text="role">Front-End Development</span><span
                 class="animate-blink font-normal"
                 x-text="(caret ? '|' : '')"></span>
         </span>

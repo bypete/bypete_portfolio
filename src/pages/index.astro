@@ -3,19 +3,19 @@ import { Image } from 'astro:assets';
 import { heroSlides, roles } from '~/data/home';
 import { clientSlides } from '~/data/clients';
 import SwiperHome from '~/components/Swiper/Home.astro';
-import HomeLayout from '~/layouts/HomeLayout.astro';
+import SplashLayout from '~/layouts/SplashLayout.astro';
 import WorkGrid from '~/components/WorkGrid.astro';
-import Hero from '~/components/Hero/Hero.astro';
 import Link from '~/components/ui/Link.astro';
 import { Icon } from 'astro-icon/components';
 import Roles from '~/components/Roles.astro';
 import SwiperClients from '~/components/Swiper/Clients.astro';
+import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
 
 const title = 'Home';
 const hero = {
     mode: 'home',
     bg: 'bg-slate-900',
-    scrollprompt: true,
+    ScrollPrompt: true,
     dark: true,
     threshold: 25,
     wrapper:
@@ -38,13 +38,15 @@ const formattedPosts = formatBlogPosts(allWork, {
 });
 ---
 
-<HomeLayout
+<SplashLayout
     title={title}
     isHeroDark={hero.dark}
     ogImage={{ src: '/og/astro.jpg', alt: 'Astro - Build the web you want.' }}
 >
-    <Hero slot="slothero" hero={hero}>
-        <Fragment slot="background">
+    <section
+        class="angleclip grid min-h-[calc(100svh+240px)] origin-top grid-cols-1 items-center overflow-x-hidden bg-slate-900 pb-[240px] [&+*]:-mt-[240px]"
+    >
+        <div class="absolute inset-0 h-full w-full">
             <Image
                 src={heatmap}
                 alt="Purple gradient background"
@@ -55,16 +57,25 @@ const formattedPosts = formatBlogPosts(allWork, {
                 alt="background"
                 class="fixed inset-0 h-full w-full object-cover"
             />
-        </Fragment>
+        </div>
 
-        <Fragment slot="content">
-            <Roles roles={roles} />
-            <div class="text-content-light shadow-slate-900 text-shadow-emboss">
-                <p class="mb-4 text-fl-step-0">
+        <div
+            class="relative mx-auto grid h-screenSvh w-full max-w-container grid-cols-1 grid-rows-home pt-[var(--headerheight)] lg:grid-flow-col lg:grid-cols-block40 lg:grid-rows-1"
+        >
+            <!-- content -->
+            <div
+                class="rte-content pt-fl-space-l lg:max-w-[60ch] lg:self-center"
+            >
+                <Roles roles={roles} />
+                <p
+                    class="my-fl-space-s text-fl-step-0 text-content-light shadow-slate-900 text-shadow-emboss"
+                >
                     This space is a place to view some of the projects I've
                     worked on and get an insight into my methods.
                 </p>
-                <p class="flex flex-wrap items-center gap-4 text-shadow-none">
+                <p
+                    class="flex flex-wrap items-center gap-fl-space-xs text-shadow-none"
+                >
                     <Link
                         theme="primary"
                         isIcon={true}
@@ -73,33 +84,54 @@ const formattedPosts = formatBlogPosts(allWork, {
                     >
                         Show me some work <Icon
                             name="lucide:arrow-right-circle"
-                            class="h-6 w-6 animate-nudge-right"
+                            class="h-fl-space-s w-fl-space-s animate-nudge-right"
                         />
                     </Link>
-                    <Link href="/about" theme="outline">Read my bio</Link>
+                    <Link href="/about" theme="whiteline">Read my bio</Link>
                 </p>
             </div>
-        </Fragment>
+            <!-- END content -->
 
-        <Fragment slot="visual">
-            <SwiperHome slides={heroSlides} />
-        </Fragment>
-    </Hero>
+            <!-- visual -->
+            <div
+                class="relative flex min-h-0 min-w-0 items-center justify-center"
+            >
+                <div class="absolute aspect-1 w-full scale-105">
+                    <div
+                        class="absolute h-full w-full animate-morph-delay border border-white/25"
+                    >
+                    </div>
+                    <div
+                        class="absolute h-full w-full animate-morph bg-slate-900/5"
+                    >
+                    </div>
+                </div>
+                <SwiperHome slides={heroSlides} />
+            </div>
+            <!-- END visual -->
+        </div>
+        <div
+            class="pointer-events-none absolute left-1/2 top-screenSvh z-shortcuts -translate-x-1/2 -translate-y-full pb-fl-space-s text-content-light"
+        >
+            <ScrollPrompt />
+        </div>
+    </section>
+
     <section
-        class="bg-gradient-to-b from-page-contrast pb-4 md:pb-8"
+        class="bg-gradient-to-b from-page-contrast pb-fl-space-s"
         x-data="{ section: false }"
         x-intersect.threshold.10="section = true"
     >
         <div class="relative mx-auto max-w-container">
             <h2
-                class="mt-8 text-center font-headline text-fl-step-4 font-bold tracking-tight text-content-light shadow-slate-900 text-shadow-emboss"
+                class="mt-fl-space-m text-center font-headline text-fl-step-4 font-bold tracking-tight text-content-light shadow-slate-900 text-shadow-emboss"
                 x-cloak
                 x-bind:class="section ? 'animate-fade-in-up' : 'invisible'"
             >
                 Featured work
             </h2>
             <div
-                class="my-8 grid grid-cols-1 gap-8 md:grid-cols-3 lg:my-10 lg:gap-10"
+                class="my-fl-space-m grid grid-cols-1 gap-fl-space-m md:grid-cols-3"
                 x-cloak
             >
                 {
@@ -122,10 +154,10 @@ const formattedPosts = formatBlogPosts(allWork, {
                     })
                 }
 
-                <div class="rte self-center p-6">
+                <div class="rte self-center p-fl-space-s">
                     <Icon
                         name="lucide:folder-archive"
-                        class="h-8 w-8 animate-pulse"
+                        class="h-fl-space-l w-fl-space-l animate-pulse"
                     />
                     <h2 class="font-headline">Want to see more...?</h2>
                     <p>
@@ -142,7 +174,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                         >
                             Explore the archive <Icon
                                 name="lucide:arrow-right-circle"
-                                class="h-6 w-6 animate-nudge-right"
+                                class="h-fl-space-s w-fl-space-s animate-nudge-right"
                             />
                         </Link>
                     </p>
@@ -150,7 +182,14 @@ const formattedPosts = formatBlogPosts(allWork, {
             </div>
         </div>
     </section>
-    <div class="relative mx-auto max-w-container py-16 md:py-24">
+    <div class="relative mx-auto max-w-container py-fl-space-2xl">
         <SwiperClients clients={clientSlides} />
     </div>
-</HomeLayout>
+</SplashLayout>
+<script>
+    import intersect from '@alpinejs/intersect';
+
+    document.addEventListener('alpine:init', () => {
+        Alpine.plugin(intersect);
+    });
+</script>

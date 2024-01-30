@@ -15,7 +15,7 @@ const resolvedSizes =
 
 const slideClass =
     slide.class ||
-    'absolute inset-0 h-full max-h-full w-full max-w-full object-scale-down object-center';
+    'h-full max-h-full w-full max-w-full object-contain object-center';
 
 const imageProps = {
     src: slide.src,
@@ -31,7 +31,7 @@ const imageProps = {
     (
         <a
             href={slide.url}
-            class="flex h-full w-full items-center justify-center"
+            class="flex h-full w-full items-center justify-center py-fl-space-l"
         >
             {slide.wrapper ? (
                 <div class={slide.wrapper}>

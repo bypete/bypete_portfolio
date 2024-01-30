@@ -1,5 +1,4 @@
 ---
-import utilities from '~/data/utilities.json';
 import Tags from '~/components/ui/Tags.astro';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
@@ -26,7 +25,7 @@ interface Props {
     product: ProductImage;
     taster: string;
     tags: string[];
-    readTime: number;
+    readTime: string;
 }
 const { title, url, cover, logo, product, taster, tags, readTime } =
     Astro.props;
@@ -35,7 +34,7 @@ const { title, url, cover, logo, product, taster, tags, readTime } =
 <div class="holder flex rounded-tight">
     <a
         href={url}
-        class="grid-rows-workcard group relative grid w-full rounded-tight bg-panel no-underline shadow-md transition-all duration-700 hover:no-underline hover:shadow-cardhover hover:duration-300 md:ring-white md:hover:ring-2"
+        class="group relative grid w-full grid-rows-workcard rounded-tight bg-panel no-underline shadow-md transition-all duration-700 hover:no-underline hover:shadow-cardhover hover:duration-300 md:ring-white md:hover:ring-2"
         x-data="{ shown: false }"
         x-intersect.threshold.10="shown = true"
         x-bind:class="shown ? 'animate-appear' : 'invisible'"
@@ -72,16 +71,16 @@ const { title, url, cover, logo, product, taster, tags, readTime } =
                 />
             )
         }
-        <div class="px-6">
+        <div class="px-fl-space-s">
             {readTime && <ReadTime duration={readTime} />}
             <h2
-                class="link text-fl-step-2/tight mb-2 font-headline font-extrabold"
+                class="link mb-fl-space-2xs font-headline text-fl-step-2/tight font-extrabold"
                 set:html={title}
             />
             {taster && <p set:html={taster} />}
         </div>
-        <div class="p-6">
-            <Tags {tags} class:list={[utilities.margin.t]} />
+        <div class="p-fl-space-s">
+            <Tags {tags} />
         </div>
     </a>
 </div>

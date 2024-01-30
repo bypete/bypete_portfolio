@@ -4,8 +4,6 @@ import 'photoswipe/style.css';
 import { Icon } from 'astro-icon/components';
 import LightboxImage from '~/components/Images/LightboxImage.astro';
 
-import utilities from '~/data/utilities.json';
-
 export interface Props extends HTMLAttributes<'div'> {
     id: string;
     images: ImageMetadata[];
@@ -20,7 +18,7 @@ const {
     id,
     images,
     wrapper = '',
-    bg = 'bg-underlay-light',
+    bg = 'bg-panel',
     class: className,
     breakout,
     ...rest
@@ -31,38 +29,33 @@ const {
     id={id}
     class:list={[
         'lightbox not-prose relative',
-        bg ? bg : '',
+        bg && bg,
         wrapper ? wrapper : '',
-        breakout ? utilities.breakout : '',
+        breakout && 'breakout',
         className
             ? className
-            : `${utilities.margin.y} ${utilities.tramline.all} ${
-                  !breakout ? utilities.pull.x : ''
-              }`,
+            : `my-fl-space-m p-fl-space-s ${!breakout ? '-mx-fl-space-s' : ''}`,
     ]}
     {...rest}
     x-data="{ shown: false }"
-    x-intersect.threshold.25="shown = true"
+    x-intersect.threshold.10="shown = true"
 >
     <div class="flex flex-col justify-between md:flex-row md:items-center">
         <slot name="title" />
         <p
             class="pointer-events-none transform"
-            :class="shown ? 'animate-fade-out-delay' : 'invisible'"
+            x-bind:class="shown ? 'animate-fade-out-delay' : 'invisible'"
         >
             Tap to zoom any image <Icon
                 name="lucide:zoom-in"
-                class="inline-block h-5 w-auto"
+                class="inline-block h-fl-space-s w-auto"
             />
         </p>
     </div>
     <slot />
 
     <div
-        class:list={[
-            'not-prose grid grid-flow-dense auto-rows-[100px] grid-cols-3 gap-4 bg-underlay-light md:auto-rows-[160px] md:grid-cols-4 md:gap-8',
-            utilities.margin.t,
-        ]}
+        class="grid grid-flow-dense auto-rows-[100px] grid-cols-3 gap-fl-space-m md:auto-rows-[160px] md:grid-cols-4"
     >
         {
             images.map((image, i) => (
@@ -82,6 +75,14 @@ const {
         }
     </div>
 </section>
+
+<script>
+    import intersect from '@alpinejs/intersect';
+
+    document.addEventListener('alpine:init', () => {
+        Alpine.plugin(intersect);
+    });
+</script>
 <script>
     import PhotoSwipeLightbox from 'photoswipe/lightbox';
     const smallScreenPadding = {

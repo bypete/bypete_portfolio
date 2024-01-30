@@ -1,5 +1,4 @@
 ---
-import utilities from '~/data/utilities.json';
 import Tags from '~/components/ui/Tags.astro';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
@@ -61,25 +60,10 @@ const {
         />
     </div>
     <div
-        class="grid-rows-showcase mx-auto grid h-full w-full max-w-container grid-cols-1 items-center text-content-light md:auto-rows-auto md:grid-cols-block50 md:grid-rows-1 xl:grid-cols-block33"
+        class="grid-rows-work mx-auto grid h-full w-full max-w-container grid-cols-1 items-center justify-items-center pt-[var(--headerheight)] text-content-light md:grid-rows-2 lg:grid-cols-block50 lg:grid-rows-1"
     >
-        <div class="relative flex md:order-2 md:h-full">
-            <div
-                class="inset-0 w-full pt-[var(--smheaderheight)] md:absolute md:h-full md:py-[calc(var(--headerheight)/2)]"
-            >
-                {
-                    product && (
-                        <Image
-                            src={product.src}
-                            class=" h-60 max-h-full w-full max-w-full origin-bottom object-contain  md:h-full"
-                            alt={product.alt}
-                        />
-                    )
-                }
-            </div>
-        </div>
         <div
-            class="relative max-w-[40ch] self-start rounded text-content-light backdrop-blur-md backdrop-brightness-95 backdrop-opacity-10 md:order-1 md:row-span-1 md:items-center md:gap-8 md:self-center md:justify-self-center"
+            class="relative max-w-[45ch] self-start rounded pt-fl-space-l text-content-light backdrop-blur-md backdrop-brightness-95 backdrop-opacity-10 md:order-2 md:pt-0 lg:self-center lg:py-0"
         >
             <div>
                 {
@@ -91,7 +75,7 @@ const {
                     )
                 }
 
-                <h2 class="capline text-fl-step-2 font-headline">
+                <h2 class="capline font-headline text-fl-step-2">
                     <a href={url} class="text-headline" set:html={title} />
                 </h2>
             </div>
@@ -99,7 +83,7 @@ const {
                 taster && (
                     <p
                         set:html={taster}
-                        class="my-4 line-clamp-5 md:my-8 md:line-clamp-none "
+                        class="my-fl-space-m line-clamp-4 lg:line-clamp-none "
                     />
                 )
             }
@@ -113,13 +97,27 @@ const {
                     View this project
                     <Icon
                         name="lucide:arrow-right-circle"
-                        class="h-6 w-6 animate-nudge-right"
+                        class="h-fl-space-s w-auto animate-nudge-right"
                     />
                 </Link>
             </p>
             <span class="hidden md:block">
-                <Tags {tags} url={true} class:list={[utilities.margin.t]} />
+                <Tags {tags} url={true} class="mt-fl-space-m" />
             </span>
+        </div>
+        <div
+            class="pb-fl-space- md:pb-0l relative flex w-full md:order-1 md:h-full lg:pb-0"
+        >
+            {
+                product && (
+                    <Image
+                        loading="eager"
+                        src={product.src}
+                        class=" h-full max-h-full w-full max-w-[full] self-end  object-contain object-bottom  lg:object-center"
+                        alt={product.alt}
+                    />
+                )
+            }
         </div>
     </div>
 </div>

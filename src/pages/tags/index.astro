@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import ListingLayout from '../../layouts/ListingLayout.astro';
 import Tags from '~/components/ui/Tags.astro';
-import utilities from '~/data/utilities.json';
 const allPosts = await getCollection('posts');
 const allWorks = await getCollection('work');
 const collection = [...allPosts, ...allWorks];
@@ -11,5 +10,5 @@ const title = 'Tag index';
 ---
 
 <ListingLayout title={title}>
-    <Tags {tags} url={true} class:list={[utilities.margin.y]} />
+    <Tags {tags} url={true} class="my-fl-space-m" />
 </ListingLayout>

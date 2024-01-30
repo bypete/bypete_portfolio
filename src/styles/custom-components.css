@@ -101,7 +101,7 @@
 
     .form__input,
     .form__select {
-        @apply block rounded  border border-panel-invert/50 bg-panel-contrast/50 px-3 py-2 placeholder:text-content/40 focus:border-panel-invert/50  focus:bg-panel-contrast  focus:outline-none focus:ring-2 focus:ring-focus;
+        @apply block rounded  border border-panel-invert/50 bg-panel-contrast/50 px-fl-space-2xs py-fl-space-3xs placeholder:text-content/40 focus:border-panel-invert/50  focus:bg-panel-contrast  focus:outline-none focus:ring-2 focus:ring-focus;
     }
 
     .form__input.error,
@@ -115,7 +115,7 @@
     }
 
     .form__textarea {
-        @apply block rounded  border border-gray-300 bg-white px-3 py-2 placeholder:text-quiet  focus:border-focus focus:bg-white focus:outline-none focus:ring-2 focus:ring-focus;
+        @apply block rounded  border border-gray-300 bg-white px-fl-space-2xs py-fl-space-3xs placeholder:text-quiet  focus:border-focus focus:bg-white focus:outline-none focus:ring-2 focus:ring-focus;
     }
 
     .form__checkbox {

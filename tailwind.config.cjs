@@ -102,14 +102,13 @@ export default {
                 block66: 'minmax(0, 2fr) minmax(0, 1fr)',
                 showcase: 'repeat(4, minmax(0, 1fr))',
                 listing: 'minmax(0, 2fr) minmax(0, 1fr)',
-                prevnext: 'repeat(auto-fit, minmax(0, 300px))',
+                prevnext: 'repeat(auto-fill, minmax(0, 300px))',
                 listing_work: 'minmax(0, 2fr) minmax(0, 3fr)',
                 dropmenu: 'repeat(auto-fit, minmax(200px, 1fr))',
                 taglist: 'repeat(auto-fit, minmax(120px, 1fr))',
                 logos: 'repeat(auto-fill, minmax(100px, 1fr))',
                 credit: 'auto minmax(auto, 1fr)',
                 icon: 'auto minmax(auto, 1fr)',
-                work: 'repeat(2, minmax(0, 1fr))',
                 social: 'repeat(auto-fit, minmax(0, 48px))',
                 workcontianer:
                     '56.25vw calc(43.75vw - ((100vw - 75rem) / 2)) minmax(0, 1fr)',
@@ -122,13 +121,14 @@ export default {
                 showcase: 'auto minmax(0, 1fr)',
                 layout: 'auto 1fr auto',
                 workcard: 'auto auto minmax(0, 1fr) auto',
+                work: 'auto minmax(0, 1fr)',
                 system: '1fr auto',
                 card: 'auto 1fr auto',
                 home: 'auto minmax(0, 1fr)',
                 hero: 'minmax(0, 1fr) auto', // (Breadcrumb trail absolute), content, extra content
-                mobilenav: 'minmax(auto, 1fr) auto',
+                mobilenav: 'auto minmax(0, 1fr) auto',
             },
-            spacing: {
+            spacing: (theme) => ({
                 tight: '3px',
                 50: '12.5rem', // 200px
                 120: '30rem', // 480px
@@ -149,7 +149,8 @@ export default {
                     '66.66vh /* fallback for Opera, IE and etc. */',
                     '66.66svh',
                 ],
-            },
+                ...theme('utopiaSpace'),
+            }),
             height: {
                 screenLvh: [
                     '100vh /* fallback for Opera, IE and etc. */',
@@ -230,10 +231,11 @@ export default {
                 '5/2pc': '2.5%',
                 '5pc': '5%',
             },
-            lineHeight: {
+            lineHeight: (theme) => ({
                 inherit: 'inherit', // inherit parent
-            },
-            fontSize: {
+                ...theme('utopiaSpace'),
+            }),
+            utopiaStep: {
                 'fl-step--2': 'var(--step--2)',
                 'fl-step--1': 'var(--step--1)',
                 'fl-base': 'var(--step-0)',
@@ -246,6 +248,34 @@ export default {
                 'fl-step-6': 'var(--step-6)',
                 'fl-step-7': 'var(--step-7)',
             },
+            utopiaSpace: {
+                'fl-space-3xs': 'var(--space-3xs)',
+                'fl-space-2xs': 'var(--space-2xs)',
+                'fl-space-xs': 'var(--space-xs)',
+                'fl-space-s': 'var(--space-s)',
+                'fl-space-m': 'var(--space-m)',
+                'fl-space-l': 'var(--space-l)',
+                'fl-space-xl': 'var(--space-xl)',
+                'fl-space-2xl': 'var(--space-2xl)',
+                'fl-space-3xl': 'var(--space-3xl)',
+                /* One-up pairs */
+                'fl-space-3xs-2xs': 'var(--space-3xs-2xs)',
+                'fl-space-2xs-xs': 'var(--space-2xs-xs)',
+                'fl-space-xs-s': 'var(--space-xs-s)',
+                'fl-space-s-m': 'var(--space-s-m)',
+                'fl-space-m-l': 'var(--space-m-l)',
+                'fl-space-l-xl': 'var(--space-l-xl)',
+                'fl-space-xl-2xl': 'var(--space-xl-2xl)',
+                'fl-space-2xl-3xl': 'var(--space-2xl-3xl)',
+                /* Custom pairs */
+                'fl-space-s-l': 'var(--space-s-l)',
+                'fl-space-m-s': 'var(--space-m-s)',
+                'fl-space-s-xs': 'var(--space-s-xs)',
+                'fl-space-header': 'var(--headerheight)',
+            },
+            fontSize: (theme) => ({
+                ...theme('utopiaStep'),
+            }),
             textShadow: {
                 xs: '1px 1px 0 var(--tw-shadow-color), -1px 1px 0 var(--tw-shadow-color), 1px -1px 0 var(--tw-shadow-color), -1px -1px 0 var(--tw-shadow-color)',
                 md: '1px 1px 5px var(--tw-shadow-color)',
@@ -388,6 +418,10 @@ export default {
                     shadow: 'rgb(var(--color-panel-shadow) / <alpha-value>)',
                     invert: 'rgb(var(--color-panel-invert) / <alpha-value>)',
                     DEFAULT: 'rgb(var(--color-panel) / <alpha-value>)',
+                },
+                credit: {
+                    DEFAULT: 'rgb(var(--color-credit) / <alpha-value>)',
+                    bg: 'rgb(var(--color-credit__bg) / <alpha-value>)',
                 },
                 outline: {
                     pale: 'rgb(var(--color-outline-pale) / <alpha-value>)',
@@ -810,6 +844,7 @@ export default {
         plugin(({ addVariant }) => {
             // Targets any img tag inside the element with img: class
             addVariant('img', '& img');
+            addVariant('svg', '& svg');
             addVariant('permalink', ['& h1', '& h2']);
             addVariant('permalink-first', [
                 '&:first-child h1',
@@ -828,6 +863,15 @@ export default {
                     'transform-style': 'preserve-3d',
                     transform:
                         'perspective(800px) rotateX(51deg) rotateY(0deg) rotate(43deg)',
+                },
+                '.breakout': {
+                    width: '100vw',
+                    'max-width': 'none',
+                    left: '50%',
+                    right: '50%',
+                    position: 'relative',
+                    'margin-left': '-50vw',
+                    'margin-right': '-50vw',
                 },
             });
             matchUtilities(

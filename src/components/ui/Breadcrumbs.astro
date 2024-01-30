@@ -1,0 +1,67 @@
+---
+import { Icon } from 'astro-icon/components';
+interface Props {
+    title?: string;
+}
+const { title } = Astro.props;
+
+// Remove current url path and remove trailing slash if exists
+const currentUrlPath = Astro.url.pathname.replace(/\/+$/, '');
+// Get url array from path
+// eg: /tags/tailwindcss => ['tags', 'tailwindcss']
+const breadcrumbList = currentUrlPath.split('/').slice(1);
+// if breadcrumb is Home > Posts > 1 <etc>
+// replace Posts with Posts (page number)
+breadcrumbList[0] === 'posts' &&
+    breadcrumbList.splice(0, 2, `Posts (page ${breadcrumbList[1] || 1})`);
+
+// if breadcrumb is Home > Tags > [tag] > [page] <etc>
+// replace [tag] > [page] with [tag] (page number)
+breadcrumbList[0] === 'tags' &&
+    !isNaN(Number(breadcrumbList[2])) &&
+    breadcrumbList.splice(
+        1,
+        3,
+        `${breadcrumbList[1]} ${
+            Number(breadcrumbList[2]) === 1
+                ? ''
+                : '(page ' + breadcrumbList[2] + ')'
+        }`,
+    );
+console.log(currentUrlPath, breadcrumbList);
+---
+
+<nav aria-label="breadcrumb">
+    <ul class="mx-auto flex w-full max-w-container items-center divide-x">
+        <li class="px-fl-space-2xs py-fl-space-3xs first:pl-0 last:pr-0">
+            <a href="/" class="link">
+                <Icon name="lucide:home" class="h-fl-space-xs w-auto" />
+            </a>
+        </li>
+        {
+            breadcrumbList.map((breadcrumb, index) => (
+                <li
+                    class:list={[
+                        'px-fl-space-2xs py-fl-space-3xs first:pl-0 last:pr-0',
+                        index > 0 ? 'lowercase' : 'capitalize',
+                    ]}
+                >
+                    {index + 1 === breadcrumbList.length ? (
+                        <span aria-current="page">
+                            {title || decodeURIComponent(breadcrumb)}
+                        </span>
+                    ) : (
+                        <a
+                            class="link"
+                            href={`/${breadcrumbList
+                                .slice(0, index + 1)
+                                .join('/')}/`}
+                        >
+                            {breadcrumb}
+                        </a>
+                    )}
+                </li>
+            ))
+        }
+    </ul>
+</nav>

@@ -12,7 +12,7 @@ import { Icon } from 'astro-icon/components';
     tags && (
         <ul
             class:list={[
-                'text-fl-step--1 flex w-full flex-wrap items-center gap-2 leading-none',
+                'flex w-full flex-wrap items-center gap-fl-space-2xs text-fl-step--1 leading-none',
                 className,
             ]}
         >
@@ -21,22 +21,22 @@ import { Icon } from 'astro-icon/components';
                     {url ? (
                         <a
                             href={`/tags/${tag}`}
-                            class=" inline-flex items-center gap-x-1 whitespace-nowrap rounded-tight bg-tag-bg__link px-2 py-5px font-medium lowercase leading-none text-tag hover:bg-tag-bg__hover hover:ring-accent"
+                            class=" inline-flex items-center gap-x-0.5 whitespace-nowrap rounded-tight bg-tag-bg__link px-fl-space-2xs py-fl-space-3xs font-medium lowercase leading-none text-tag hover:bg-tag-bg__hover hover:ring-accent"
                         >
                             {tag === 'featured' && (
                                 <Icon
                                     name="mdi:star"
-                                    class="-my-2 -ml-0.5 h-4 w-4 text-yellow-500"
+                                    class="-my-fl-space-3xs -ml-fl-space-3xs h-fl-space-s w-auto text-yellow-500"
                                 />
                             )}
                             {tag}
                         </a>
                     ) : (
-                        <span class="inline-flex items-center gap-x-1 whitespace-nowrap rounded-tight bg-tag-bg px-2 py-1.5 font-medium lowercase leading-none">
+                        <span class="inline-flex items-center gap-x-0.5 whitespace-nowrap rounded-tight bg-tag-bg px-fl-space-2xs py-fl-space-3xs font-medium lowercase leading-none">
                             {tag === 'featured' && (
                                 <Icon
                                     name="mdi:star"
-                                    class="-my-2 -ml-0.5 h-4 w-4 text-yellow-500"
+                                    class="h-fl-space-sw-auto -my-fl-space-3xs -ml-fl-space-3xs text-yellow-500"
                                 />
                             )}
                             {tag}

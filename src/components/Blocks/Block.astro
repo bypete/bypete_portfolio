@@ -1,7 +1,8 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 import ModePair from '~/components/Blocks/ModePair.astro';
-import utilities from '~/data/utilities.json';
+import ScrollPrompt from '../ui/ScrollPrompt.astro';
+import SwipePrompt from '../ui/SwipePrompt.astro';
 
 export interface Props extends HTMLAttributes<'div'> {
     wrapper?: string;
@@ -14,7 +15,7 @@ export interface Props extends HTMLAttributes<'div'> {
     legibility?: string;
     threshold?: number;
     isContained?: boolean;
-    scrollprompt?: boolean;
+    prompt?: 'swipe' | 'scroll';
     breakout?: boolean;
 }
 
@@ -28,12 +29,11 @@ const {
     class: ClassName = '',
     legibility,
     isContained,
-    scrollprompt,
+    prompt,
     threshold,
     breakout,
     ...rest
 } = fm as Props;
-
 
 const intersect = {
     'x-data': `{ shown: false }`,
@@ -73,7 +73,7 @@ switch (mode) {
         ClassName,
         wrapperClass,
         { 'overflow-hidden': isContained },
-        breakout ? utilities.breakout : '',
+        breakout && 'breakout',
     ]}
     {...threshold ? intersect : {}}
     {...rest}
@@ -89,14 +89,13 @@ switch (mode) {
         mode === 'pair' && (
             <>
                 <ModePair grid={grid} class="relative mx-auto">
-                    <slot slot="mc1" name="mc1"/>
+                    <slot slot="mc1" name="mc1" />
                     <slot slot="mc2" name="mc2" />
                     <slot />
                 </ModePair>
             </>
         )
     }
-    {mode === 'image' && <></>}
 
     {
         mode === 'custom' && (
@@ -107,9 +106,10 @@ switch (mode) {
     }
 
     {
-        scrollprompt && (
-            <div class="pointer-events-none absolute bottom-0 left-1/2 z-shortcuts -translate-x-1/2 pb-4 md:pb-8">
-                scrollprompt
+        prompt && (
+            <div class="pointer-events-none absolute left-1/2 top-screenSvh z-shortcuts -translate-x-1/2 -translate-y-full pb-fl-space-s ">
+                {prompt === 'scroll' && <ScrollPrompt />}
+                {prompt === 'swipe' && <SwipePrompt />}
             </div>
         )
     }
@@ -117,6 +117,7 @@ switch (mode) {
 
 <script>
     import intersect from '@alpinejs/intersect';
+
     document.addEventListener('alpine:init', () => {
         Alpine.plugin(intersect);
     });

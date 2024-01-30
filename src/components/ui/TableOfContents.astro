@@ -2,7 +2,6 @@
 import { buildToc } from '~/js/utils';
 import { Icon } from 'astro-icon/components';
 import TableOfContentsHeading from './TableOfContentsHeading.astro';
-import utilities from '~/data/utilities.json';
 
 export interface Heading {
     depth: number;
@@ -21,34 +20,39 @@ const toc = buildToc(headings);
 ---
 
 <nav
+    x-data="toc()"
     id="toc"
+    x-bind:class="$store.banner.state == 'up' ? 'translate-y-fl-space-header ' : ''"
     aria-label="Content sections"
     class:list={[
-        'sticky-root sticky -top-px z-toc flex w-full md:justify-center',
-        utilities.margin.y,
+        'sticky-root sticky -top-px z-toc my-fl-space-l flex w-full transition-all duration-300 md:justify-center',
         className ? className : '',
     ]}
 >
     <div
-        x-data="toc()"
-        class="relative w-full rounded border border-outline bg-panel px-4 py-2 transition-all duration-300 md:w-auto"
-        x-bind:class="open ? 'grow' : ''"
-        x-sticky="shadow-3xl shadow-black/5 rounded-t-none"
+        class="relative w-full max-w-2xl rounded-b transition-all duration-300 md:w-auto"
+        x-bind:class="open ? 'grow shadow-d1' : ''"
+        x-sticky="shadow-3xl shadow-black/5"
     >
         <button
             x-bind="trigger"
-            class="flex w-full items-center justify-between gap-x-2 font-semibold"
+            class="flex w-full items-center justify-between gap-x-fl-space-2xs rounded border border-outline bg-panel px-fl-space-s py-fl-space-2xs font-semibold"
+            x-sticky="!rounded-t-none"
+            x-bind:class="open ? 'rounded-none ' : ''"
         >
-            On this page <Icon name="lucide:file-text" class="h-6 w-auto" />
+            On this page <Icon
+                name="lucide:file-text"
+                class="h-fl-space-s w-auto"
+            />
         </button>
 
         <div class="relative z-10">
             <div
                 x-cloak
                 x-show="open"
-                class="absolute left-0 top-0 block max-h-[calc(100vh-var(--headerheight))] w-full overflow-y-scroll rounded border border-outline bg-panel px-4 py-2 transition-all duration-300"
+                class="absolute left-0 top-0 block max-h-[calc(100dvh-var(--headerheight))] w-full grow overflow-y-scroll rounded-b border border-t-0 border-outline bg-panel px-fl-space-s py-fl-space-2xs shadow-d1 transition-all"
             >
-                <ol>
+                <ol class="m-0">
                     {
                         toc.map((heading) => (
                             <TableOfContentsHeading heading={heading} />
@@ -60,12 +64,11 @@ const toc = buildToc(headings);
     </div>
 </nav>
 <script>
-    import Alpine from 'alpinejs';
     import sticky from 'alpinejs-sticky';
 
-    Alpine.plugin(sticky);
-
     document.addEventListener('alpine:init', () => {
+        Alpine.plugin(sticky);
+
         Alpine.data('toc', () => ({
             open: false,
             trigger: {
@@ -105,6 +108,6 @@ const toc = buildToc(headings);
         observerOption,
     );
     document
-        .querySelectorAll('article :is(h2,h3,h4)')
+        .querySelectorAll('#main-content :is(h2,h3,h4)')
         .forEach((heading) => headingObserver.observe(heading));
 </script>
