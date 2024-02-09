@@ -5,7 +5,10 @@ modDate: 2023-10-18
 excerpt: 'See how Xamarin.Forms was used to create a cross-platform app to improve the customer experience and make authentication easier.'
 taster: 'At launch, K Ring users could only manage their rings online. See how I helped create a cross-platform solution with Xamarin.Forms.'
 description: 'See how I helped to create a cross-platform app to improve the customer experience and make authentication easier.'
-author: 'Astro Learner'
+author: 'Pete Wallace'
+ogImage: 
+  src: './mykringapp/og__image.jpg'
+  alt: 'MyKRing App'
 brand: 
   bg: 'bg-[#FF0069]'
   color: 'text-[#FF0069]'
@@ -13,10 +16,10 @@ logo:
   src: '../../assets/logos/KRing.svg'
   light: '../../assets/logos/light/KRing.svg'
 product: 
-  src: '../../assets/work/mykringapp/product.png'
+  src: './mykringapp/product.png'
   alt: 'K Ring app in action'
 cover:
-  src: '../../assets/work/mykringapp/cover.jpg'
+  src: './mykringapp/cover.jpg'
   alt: 'K Ring logo'
   credit: 'K Wearables'
 skillset:
@@ -39,24 +42,31 @@ skillset:
           - 'Content population'
           - 'Asset preparation'
           - 'UX/UI'
-tags: ['featured', 'app', 'xamarin.forms', 'fintech']
+tags: 
+  - 'case study'
+  - 'featured'
+  - 'fintech'
+  - 'xamarin.forms'
+  - 'app'
 ---
 import { Image } from 'astro:assets'
 import { Icon } from 'astro-icon/components';
 
 import BlockPicture from '~/components/Images/BlockPicture.astro';
-import floating_handsets from '../../assets/work/mykringapp/floating-handsets.jpg';
+import floating_handsets from './mykringapp/floating-handsets.jpg';
 import Skills from '~/components/Skills.astro'
 import Block from '~/components/Blocks/Block.astro'
-
 import UL from '~/components/MDX/ul.astro'
+
 import Reviews from '~/components/Swiper/Reviews.astro'
 import Figure from '~/components/Figure.astro'
 import Gallery from '~/components/Lightbox/Gallery.astro'
-import web_autotopup from '../../assets/work/mykringapp/web-autotopup.jpg'
-import auto_topup from '../../assets/work/mykringapp/1.1.0_auto-topup.jpg'
-import auto_topup_open from '../../assets/work/mykringapp/1.1.0_auto-topup-open.jpg'
-import iphone_hand from '../../assets/work/mykringapp/iPhone__hand.png'
+import web_autotopup from './mykringapp/web-autotopup.jpg'
+import auto_topup from './mykringapp/1.1.0_auto-topup.jpg'
+import auto_topup_open from './mykringapp/1.1.0_auto-topup-open.jpg'
+import iphone_hand from './mykringapp/iPhone__hand.png'
+import splitscreen_auto_topup from './mykringapp/app1.1__autotopup.jpg'
+import splitscreen_manage from './mykringapp/app1.1__managecards.jpg'
 import svgbg from '../../icons/contour.svg'
 
 import data from '~/data/work/mykringapp.data.json'
@@ -64,11 +74,15 @@ import data from '~/data/work/mykringapp.data.json'
 
 export const components = {ul: UL}
 
-<p class="lead">
-    At launch, K&nbsp;Ring users could only manage their rings online. Although a responsive framework was used during the development of the website, customers still anticipated a separate app and all the benefits it provides.
-  </p>
-  With no prior app development experience, the learning curve was steep. [Xamarin.Forms](https://dotnet.microsoft.com/en-us/apps/xamarin/xamarin-forms) was chosen because it offers a cross-platform framework with a single code base. The main website already used the .NET developer platform, so extending that to the app made sense.
-  Although an initial wireframe document was provided, it was essentially an imitation of the mykring.com responsive pages. Rather than simply replicating what we had, we wanted to improve the user experience wherever possible.
+<p class="text-fl-step-1">At launch, K&nbsp;Ring users could only manage their rings online. Although a responsive framework was used during the development of the website, customers still anticipated a separate app and all the benefits it provides.</p>
+
+With no prior app development experience, the learning curve was steep. [Xamarin.Forms](https://dotnet.microsoft.com/en-us/apps/xamarin/xamarin-forms) was chosen because it offers a cross-platform framework with a single code base. The main website already used the .NET developer platform, so extending that to the app made sense.
+
+Although an initial wireframe document was provided, it was essentially an imitation of the mykring.com responsive pages. Rather than simply replicating what we had, we wanted to improve the user experience wherever possible.
+
+<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
+## Skills
+</Skills>
 
 ## My responsibilities
 
@@ -79,11 +93,42 @@ export const components = {ul: UL}
 -   I helped with the testing, creating user test scripts and reporting any bugs as issues within **Azure DevOps**
 -   After launch, I began a review process of the product website to see what updates could be applied to provide a consistent user experience across the app and site.
 
+<Block
+      mode="pair"
+      bg="bg-neutral-100"
+      grid="grid mx-auto grid-cols-1 md:grid-cols-2 md:grid-rows-1 lg:grid-cols-block60 min-h-block gap-8 max-w-container"
+      breakout={true}
+      wrapper="my-fl-space-xl"
+  >
+  <Image src={svgbg} alt="background" class="object-cover w-full h-full absolute inset-0" />
+  <div
+    slot="mc1"
+    class="self-center md:order-2 py-fl-space-m"
+  >
+    <blockquote
+        class="not-prose m-0 pl-0 italic text-fl-step-1/snug "
+    >
+        <p class="mb-fl-space-xs text-fl-step-2/snug font-headline">
+            <strong>So glad there's finally an app for K&nbsp;Ring!</strong>
+        </p>
+        <p>
+            Good user experience: same interface style you're used to
+            from the website, but not just a web shell. Easy to navigate
+            and use. Notifications through the app are a plus!
+        </p>
+        <p class="cite inline-flex items-center"><span class="mr-fl-space-2xs text-fl-step--1 text-gold leading-none "><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span></span>James, 26 November 2021 Play store</p>
+    </blockquote>
+  </div>
+  <div slot="mc2" class="not-prose self-end md:order-1">
+    <Image src={iphone_hand} widths={[400,600,800]} sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.5), (min-width: 1264) calc(var(--container-width-max)*0.60)`} class="relative m-0 mt-fl-space-m h-[480px] w-full object-contain lg:h-[640px]" alt="Hand holding an iPhone with mykring app in use"/>
+  </div>
+</Block>
+
 The '**Auto top-up**' feature is a good example of a user path that was enhanced during the app development process. It was previously a load method but is now only available as an action for validated cards (a prerequisite of the auto top-up service) in the Manage Cards section.
 Each card has its own set of available actions, which update as the user swipes through their collection. Cards that have not been validated will show a button to begin the validation process. This is followed by a 'Complete validation' state and, finally, a 'Validated' indicator. At this point the 'Auto top-up' button becomes active. Cards used for auto top-up cannot be removed until auto top-up has been turned off. As a result, the 'Remove' option is set to disabled.
 By controlling visibility, we can remove redundant options, resulting in a smoother experience.
 
-<Figure caption='Unnecessary elements from the online responsive version (left) were stripped out to streamline the app layout (middle and right) ' credit='App v1.0.1, K&nbsp;Wearables Ltd.'>
+<Figure caption='Unnecessary elements from the online responsive version (left) were stripped out to streamline the app layout (middle and right) ' credit='App v1.0.1, K&nbsp;Wearables Ltd.' grid='grid grid-cols-2 lg:grid-cols-3 items-start gap-fl-space-m'>
   <Image src={web_autotopup} alt="Homepage view" class="w-full h-auto shadow-md border border-outline" />
   <Image src={auto_topup} alt="Map showing the development plan" class="w-full h-auto shadow-md border border-outline" />
   <Image src={auto_topup_open} alt="Map showing the development plan" class="w-full h-auto shadow-md border border-outline" />
@@ -91,54 +136,24 @@ By controlling visibility, we can remove redundant options, resulting in a smoot
 
 The Auto top-up form was also streamlined and only appears when 'Use Auto top-up' is toggled to on. The input sliders were removed as they became too fiddley within the mobile viewport. The minimum and maximum values are now displayed alongside the input field.
 
+<Figure breakout="true"  caption='Users can manage Auto top-up functionality using a simple toggle.' credit='App v1.0.1, K&nbsp;Wearables Ltd.' >
+  <Image src={splitscreen_auto_topup} alt="Auto top-up close ups" class="w-full h-auto" widths={[400, 960, 2100]} sizes={`100vw`} />
+</Figure>
+ 
 <Gallery collection='gScreens' data={data} >
 <Fragment slot="title">
 ## App screens
 </Fragment>
-
 </Gallery>
 
-
-
-<Block
-        mode="pair"
-        bg="bg-neutral-100"
-        grid="grid mx-auto grid-cols-1 md:grid-cols-2 md:grid-rows-1 lg:grid-cols-block60 min-h-block gap-8 max-w-container"
-        breakout={true}
-    >
-    <Image src={svgbg} alt="background" class="object-cover w-full h-full absolute inset-0" />
-        <div
-            slot="mc1"
-            class="self-center md:order-2 py-fl-space-m"
-        >
-            <blockquote
-                class="not-prose m-0 pl-0 italic text-fl-step-1/snug "
-            >
-                <p class="mb-fl-space-xs text-fl-step-2/snug font-headline">
-                    <strong>So glad there's finally an app for K&nbsp;Ring!</strong>
-                </p>
-                <p>
-                    Good user experience: same interface style you're used to
-                    from the website, but not just a web shell. Easy to navigate
-                    and use. Notifications through the app are a plus!
-                </p>
-                <p class="cite inline-flex items-center"><span class="mr-fl-space-2xs text-fl-step--1 text-gold leading-none "><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span></span>James, 26 November 2021 Play store</p>
-            </blockquote>
-        </div>
-        <div slot="mc2" class="not-prose self-end md:order-1">
-            <Image src={iphone_hand} widths={[400,600,800]} sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.5), (min-width: 1264) calc(var(--container-width-max)*0.60)`} class="relative m-0 mt-fl-space-m h-[480px] w-full object-contain lg:h-[640px]" alt="Hand holding an iPhone with mykring app in use"/>
-        </div>
-    </Block>
 
 <Gallery collection='gUx' data={data} >
 <Fragment slot="title">
 ## UX details
 </Fragment>
-
 </Gallery>
 
 ## Ratings and Reviews
-
 <p>
   <a href="https://apps.apple.com/gb/app/mykring/id1578688520?see-all=reviews"
      class="link"

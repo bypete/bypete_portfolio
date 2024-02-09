@@ -5,7 +5,8 @@ import sticky from 'alpinejs-sticky'
 export default (Alpine: Alpine) => {
     Alpine.plugin(intersect);
     Alpine.plugin(sticky)
-    Alpine.store('banner', {
-      state: null,
+    Alpine.store('cache', {
+      banner: null,
+      theme: null,
   });
 }

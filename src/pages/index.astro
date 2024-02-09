@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import { heroSlides, roles } from '~/data/home';
 import { clientSlides } from '~/data/clients';
 import SwiperHome from '~/components/Swiper/Home.astro';
@@ -13,18 +14,20 @@ import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
 
 const title = 'Home';
 const hero = {
-    mode: 'home',
-    bg: 'bg-slate-900',
-    ScrollPrompt: true,
     dark: true,
     threshold: 25,
-    wrapper:
-        'grid grid-cols-1 items-center overflow-x-hidden pb-[240px] min-h-[calc(100svh+240px)] angleclip origin-top [&+*]:-mt-[240px]',
 };
 
-import heatmap from '~/assets/hero/heatmap--r.webp';
-import heatmap_sm from '~/assets/hero/heatmap--b@sm.webp';
+const ogImage = {
+    src: '/og/og__home.png',
+    alt: 'byPete homepage',
+};
+
+import heatmap from '~/assets/hero/heatmap__right-center.png';
 import contourHeatmap from '~/icons/contour__HeatmapMiddleRight.svg';
+import contour_topography from '~/assets/details/contour_topography.svg';
+
+import { getImage } from 'astro:assets';
 
 import { formatBlogPosts } from '~/js/utils';
 import { getCollection } from 'astro:content';
@@ -38,24 +41,18 @@ const formattedPosts = formatBlogPosts(allWork, {
 });
 ---
 
-<SplashLayout
-    title={title}
-    isHeroDark={hero.dark}
-    ogImage={{ src: '/og/astro.jpg', alt: 'Astro - Build the web you want.' }}
->
+<SplashLayout title={title} isHeroDark={hero.dark} {ogImage}>
     <section
-        class="angleclip grid min-h-[calc(100svh+240px)] origin-top grid-cols-1 items-center overflow-x-hidden bg-slate-900 pb-[240px] [&+*]:-mt-[240px]"
+        class="angleclip relative origin-top items-center overflow-x-hidden bg-slate-900 bg-cover pb-fl-space-splashoverlap [&+*]:-mt-fl-space-splashoverlap"
     >
         <div class="absolute inset-0 h-full w-full">
-            <Image
+            <Picture
                 src={heatmap}
+                quality={'max'}
+                loading={'eager'}
+                formats={['avif', 'webp']}
                 alt="Purple gradient background"
-                class="h-full w-full object-cover object-bottom md:object-center"
-            />
-            <Image
-                src={contourHeatmap}
-                alt="background"
-                class="fixed inset-0 h-full w-full object-cover"
+                class="absolute h-full w-full object-cover object-bottom md:object-center"
             />
         </div>
 
@@ -70,8 +67,8 @@ const formattedPosts = formatBlogPosts(allWork, {
                 <p
                     class="my-fl-space-s text-fl-step-0 text-content-light shadow-slate-900 text-shadow-emboss"
                 >
-                    This space is a place to view some of the projects I've
-                    worked on and get an insight into my methods.
+                    Discover the stories behind my projects, the challenges
+                    addressed, and the solutions crafted.
                 </p>
                 <p
                     class="flex flex-wrap items-center gap-fl-space-xs text-shadow-none"
@@ -82,7 +79,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                         class="md:inline-flex"
                         href="/work"
                     >
-                        Show me some work <Icon
+                        View the portfolio <Icon
                             name="lucide:arrow-right-circle"
                             class="h-fl-space-s w-fl-space-s animate-nudge-right"
                         />
@@ -96,7 +93,7 @@ const formattedPosts = formatBlogPosts(allWork, {
             <div
                 class="relative flex min-h-0 min-w-0 items-center justify-center"
             >
-                <div class="absolute aspect-1 w-full scale-105">
+                <!-- <div class="absolute aspect-1 w-full scale-105">
                     <div
                         class="absolute h-full w-full animate-morph-delay border border-white/25"
                     >
@@ -105,7 +102,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                         class="absolute h-full w-full animate-morph bg-slate-900/5"
                     >
                     </div>
-                </div>
+                </div> -->
                 <SwiperHome slides={heroSlides} />
             </div>
             <!-- END visual -->
@@ -124,14 +121,14 @@ const formattedPosts = formatBlogPosts(allWork, {
     >
         <div class="relative mx-auto max-w-container">
             <h2
-                class="mt-fl-space-m text-center font-headline text-fl-step-4 font-bold tracking-tight text-content-light shadow-slate-900 text-shadow-emboss"
+                class="m-0 text-center font-headline text-fl-step-4 font-bold tracking-tight text-content-light"
                 x-cloak
                 x-bind:class="section ? 'animate-fade-in-up' : 'invisible'"
             >
                 Featured work
             </h2>
             <div
-                class="my-fl-space-m grid grid-cols-1 gap-fl-space-m md:grid-cols-3"
+                class="my-fl-space-m grid grid-cols-1 gap-fl-space-xl md:grid-cols-2 lg:grid-cols-3"
                 x-cloak
             >
                 {
@@ -172,7 +169,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                             class="md:inline-flex"
                             href="/work"
                         >
-                            Explore the archive <Icon
+                            Explore the collection <Icon
                                 name="lucide:arrow-right-circle"
                                 class="h-fl-space-s w-fl-space-s animate-nudge-right"
                             />
@@ -183,6 +180,11 @@ const formattedPosts = formatBlogPosts(allWork, {
         </div>
     </section>
     <div class="relative mx-auto max-w-container py-fl-space-2xl">
+        <h3
+            class="mb-fl-space-s text-center text-fl-step-1 font-bold text-quiet"
+        >
+            Some of the brands I've worked with:
+        </h3>
         <SwiperClients clients={clientSlides} />
     </div>
 </SplashLayout>

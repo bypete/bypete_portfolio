@@ -1,7 +1,5 @@
 ---
 import { type Props as HeadProps } from '~/components/SEO/Main.astro';
-import Hero, { type Props as HeroProps } from '~/components/Hero/Hero.astro';
-
 import BaseLayout from './BaseLayout.astro';
 
 const fm = Astro.props.frontmatter || Astro.props;
@@ -9,17 +7,15 @@ const fm = Astro.props.frontmatter || Astro.props;
 const head: HeadProps = {
     title: fm.title,
     description: fm.description,
+    ogTitle: fm.ogTitle || fm.title,
+    ogDescription: fm?.opengraph?.description || '',
+    ogImage: fm?.ogImage ?? undefined,
 };
 
-const heroConfig: HeroProps = {
-    title: fm.title,
-    hero: fm.hero,
-};
-
-const { title, isHeroDark = false, isWide = false } = fm;
+const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
 ---
 
-<BaseLayout {...head} {isHeroDark}>
+<BaseLayout head={head} {isHeroDark}>
     <main id="main-content">
         <slot />
     </main>

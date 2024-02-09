@@ -70,12 +70,15 @@ const workCollection = defineCollection({
       alt: z.string(),
       credit: z.string().optional()
     }).optional(),
-    socialImage: z.object({
-      src: image().refine((img) => img.width >= 315, {
-          message: "social image must be at least 315 wide!",
-      }),
+    ogTitle:z.string().optional(),
+    ogImage: z.object({
+      title: z.string().optional(),
+      src: image().refine((img) => img.width >= 1200, {
+        message: "splash image must be at least 1200 wide!",
+      }).optional(),
       alt: z.string(),
     }).optional(),
+    ogDescription: z.string().optional(),
     skillset: z.object({
       text: z.string(),
       icon: z.string(),
@@ -88,7 +91,7 @@ const workCollection = defineCollection({
           })
         ),
       }),
-      tags: z.array(z.string()),
+      tags: z.array(z.string()).optional(),
       readingTime: z.string().optional(), // readingTime frontmatter
   })
 

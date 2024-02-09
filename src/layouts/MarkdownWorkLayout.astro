@@ -1,30 +1,50 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { type Props as HeadProps } from '~/components/SEO/Main.astro';
+
 import Tags from '~/components/ui/Tags.astro';
 import Link from '~/components/ui/Link.astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import HeroPicture from '~/components/Images/HeroPicture.astro';
 import { readableDate, htmlDateString } from '~/js/utils.js';
-import Skills from '~/components/Skills.astro';
 import TableOfContents from '~/components/ui/TableOfContents.astro';
 import WorkPreview from '~/components/ui/WorkPreview.astro';
 import BlockPicture from '~/components/Images/BlockPicture.astro';
 import ReadTime from '~/components/ui/ReadTime.astro';
 
-const { frontmatter, minutesRead, headings, prevPost, nextPost } = Astro.props;
+const { frontmatter, section, minutesRead, headings, prevPost, nextPost } =
+    Astro.props;
 let resolvedHeadings = headings;
 
-if (frontmatter.skillset) {
-    const skillHeading = { depth: 2, slug: 'skills', text: 'Skills' };
-    resolvedHeadings = [skillHeading, ...headings];
-}
+const fm = frontmatter || Astro.props;
+
+const head: HeadProps = {
+    title: fm.title,
+    description: fm.description,
+    ogTitle: fm.ogTitle || fm.title,
+    ogDescription: fm?.ogDescription || '',
+    ogImage: fm?.ogImage ?? undefined,
+    // Articles
+    published_time: fm.pubDate,
+    author: fm.author,
+    section: section ?? undefined,
+    tags: fm.tags,
+    pageType: 'article',
+};
+
+const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
+
+// if (frontmatter.skillset) {
+//     const skillHeading = { depth: 2, slug: 'skills', text: 'Skills' };
+//     resolvedHeadings = [skillHeading, ...headings];
+// }
 ---
 
-<BaseLayout {...frontmatter}>
+<BaseLayout head={head} {isHeroDark}>
     <slot name="slothero">
         <div
-            class="relative grid w-full grid-cols-1 shadow-xl shadow-black/10 lg:h-screenSvh lg:grid-cols-2 conpad:grid-cols-workcontianer"
+            class="relative z-10 grid w-full grid-cols-1 shadow-lg shadow-content-dark/10 lg:h-screenSvh lg:grid-cols-2 conpad:grid-cols-workcontianer"
         >
             <div
                 class="relative flex h-[75vw] items-center justify-center lg:h-full"
@@ -67,7 +87,6 @@ if (frontmatter.skillset) {
                     <Link
                         theme="outline"
                         isIcon={true}
-                        size="sm"
                         class="hidden transform duration-300 md:inline-flex"
                         href="#start"
                     >
@@ -83,24 +102,16 @@ if (frontmatter.skillset) {
 
     <main
         id="main-content"
-        class:list="relative mx-auto max-w-container pb-fl-space-xl"
+        class="relative mx-auto max-w-container pb-fl-space-xl"
     >
         <article id="start" class="relative">
             <div class="rte prose mx-auto max-w-3xl text-fl-step-0">
-                <Skills
-                    skillset={frontmatter.skillset}
-                    bg={frontmatter.brand.bg}
-                >
-                    <h2 id="skills">Skills</h2>
-                </Skills>
-
                 {
                     frontmatter.product && (
                         <BlockPicture
                             src={frontmatter.product.src}
                             widths={[400, 1200]}
                             sizes={`(max-width: var(--container-width-md)) 75%, 480px, (min-width: var(--container-width-lg)) 768px`}
-                            format="webp"
                             class="mx-auto h-auto w-3/4 md:max-w-120 lg:max-w-3xl"
                             wrapper="bg-panel-contrast"
                             alt={frontmatter.product.alt}
@@ -113,7 +124,7 @@ if (frontmatter.skillset) {
                 <slot />
             </div>
             <aside class="mx-auto mt-fl-space-m w-full max-w-3xl py-fl-space-m">
-                <p class="inline-flex items-center">
+                <p class="inline-flex items-center text-fl-step--1 text-quiet">
                     <Icon
                         name="lucide:calendar"
                         class="inline-block h-4 w-auto"
@@ -140,7 +151,7 @@ if (frontmatter.skillset) {
         </article>
     </main>
     <aside
-        class="border-t border-outline bg-panel px-fl-space-s py-fl-space-2xl"
+        class="border-t border-outline bg-panel px-fl-space-m py-fl-space-2xl"
     >
         <div
             class="mx-auto grid max-w-3xl grid-cols-1 justify-between gap-fl-space-l md:grid-cols-prevnext"

@@ -258,6 +258,7 @@ export default {
                 'fl-space-xl': 'var(--space-xl)',
                 'fl-space-2xl': 'var(--space-2xl)',
                 'fl-space-3xl': 'var(--space-3xl)',
+                'fl-space-4xl': 'var(--space-4xl)',
                 /* One-up pairs */
                 'fl-space-3xs-2xs': 'var(--space-3xs-2xs)',
                 'fl-space-2xs-xs': 'var(--space-2xs-xs)',
@@ -267,11 +268,14 @@ export default {
                 'fl-space-l-xl': 'var(--space-l-xl)',
                 'fl-space-xl-2xl': 'var(--space-xl-2xl)',
                 'fl-space-2xl-3xl': 'var(--space-2xl-3xl)',
+                'fl-space-3xl-4xl': 'var(--space-3xl-4xl)',
                 /* Custom pairs */
                 'fl-space-s-l': 'var(--space-s-l)',
                 'fl-space-m-s': 'var(--space-m-s)',
                 'fl-space-s-xs': 'var(--space-s-xs)',
                 'fl-space-header': 'var(--headerheight)',
+                /* Custom */
+                'fl-space-splashoverlap': 'var(--splash-overlap)',
             },
             fontSize: (theme) => ({
                 ...theme('utopiaStep'),
@@ -319,6 +323,8 @@ export default {
                 thumb: 'var(--tw-shadow-color) 0px 2px 5px -1px, var(--tw-shadow-color) 0px 1px 3px -1px',
                 inset: 'inset 0 2px 2px -1px rgba(35,31,32,.25)',
                 icon: 'inset 0 2px 6px -1px var(--tw-shadow-color)',
+                panel: 'inset 0 2px 6px -1px var(--tw-shadow-color)',
+                panelinset: 'inset 0 2px 6px -1px var(--tw-shadow-color)',
                 smframe:
                     '0px 0px 10px 5px var(--tw-shadow-color), 0px 0px 30px 0px var(--tw-shadow-color), 0px 0px 3px 3px var(--tw-shadow-color)',
                 frame: '0px 4px 12px 0px var(--tw-shadow-color)',
@@ -339,6 +345,9 @@ export default {
                 floatedborder:
                     '0px 0px 0px 2px white, 0px 2px 1px -1px rgba(255,255,255,0.30), inset 0px 2px 1px 1px rgba(30,41,59, 0.15), 0px 0px 10px 5px rgba(30,41,59, 0.15)',
             },
+            backgroundImage: {
+                shader: 'var(--shader)',
+            },
             aspectRatio: {
                 '4/3': '4 / 3',
             },
@@ -350,6 +359,11 @@ export default {
                     invert: 'rgb(var(--color-content-invert) / <alpha-value>)',
                     light: 'rgb(var(--color-content-light) / <alpha-value>)',
                     dark: 'rgb(var(--color-content-dark) / <alpha-value>)',
+                },
+                headline: {
+                    DEFAULT: 'rgb(var(--color-headline) / <alpha-value>)',
+                    start: 'rgb(var(--color-headline-start) / <alpha-value>)',
+                    end: 'rgb(var(--color-headline-end) / <alpha-value>)',
                 },
                 focus: 'rgb(var(--color-focus) / <alpha-value>)',
                 link: {
@@ -846,6 +860,7 @@ export default {
             addVariant('img', '& img');
             addVariant('svg', '& svg');
             addVariant('permalink', ['& h1', '& h2']);
+            addVariant('x-cloak', '&[x-cloak]');
             addVariant('permalink-first', [
                 '&:first-child h1',
                 '&:first-child h2',
@@ -881,6 +896,49 @@ export default {
                     }),
                 },
                 { values: theme('textShadow') },
+            );
+            addUtilities({
+                '.mask-repeat': {
+                    maskRepeat: 'repeat',
+                },
+                '.mask-repeat-x': {
+                    maskRepeat: 'repeat-x',
+                },
+                '.mask-repeat-y': {
+                    maskRepeat: 'repeat-y',
+                },
+                '.mask-repeat-space': {
+                    maskRepeat: 'space',
+                },
+                '.mask-repeat-round': {
+                    maskRepeat: 'round',
+                },
+                '.mask-no-repeat': {
+                    maskRepeat: 'no-repeat',
+                },
+            });
+            matchUtilities(
+                {
+                    'mask-size': (value) => ({
+                        maskSize: value,
+                    }),
+                },
+                {
+                    values: {
+                        ...theme('backgroundSize'),
+                        ...theme('utopiaSpace'),
+                    },
+                },
+            );
+            matchUtilities(
+                {
+                    mask: (value) => ({
+                        maskPosition: value,
+                    }),
+                },
+                {
+                    values: theme('backgroundPosition'),
+                },
             );
         }),
     ],

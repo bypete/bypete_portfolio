@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve">
+<filter  id="AI_GaussianBlur_4">
+	<feGaussianBlur  stdDeviation="40"></feGaussianBlur>
+</filter>
+<g id="Layer_2">
+</g>
+<g id="Layer_3">
+	<g style="opacity:8.000000e-02;filter:url(#AI_GaussianBlur_4);">
+		<polygon points="143,-244.4 752.2,844.3 1845.8,589.7 351.1,-322.4 		"/>
+	</g>
+	<polygon style="fill:#3F3F46;" points="186.4,-217.1 795.6,871.6 1889.2,617 394.5,-295.1 	"/>
+	<g style="opacity:8.000000e-02;filter:url(#AI_GaussianBlur_4);">
+		<path d="M1505.1,248.2c0,0-453.7,1144.8-449.3,1143.3s761.2,0,761.2,0l-44.8-1173.1L1505.1,248.2z"/>
+	</g>
+	<path style="fill:#3F3F46;" d="M1577.2,172.3c0,0-453.7,1144.8-449.3,1143.3c4.5-1.5,761.2,0,761.2,0l-44.8-1173.1L1577.2,172.3z"
+		/>
+	<polygon style="fill:#3F3F46;" points="-56,-27.6 -74.8,1169.8 836.1,1188.6 253.8,-46.4 	"/>
+</g>
+</svg>

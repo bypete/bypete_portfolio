@@ -5,21 +5,24 @@ modDate: 2023-07-01
 taster: 'Eastside Locks commissioned this aspirational brochure site to communicate their vision and attract prospective clients for their 650,000 square foot urban development.'
 excerpt: 'Aspirational brochure site to communicate a vision and attract prospective clients'
 description: "Discover how I helped to produce an aspirational brochure site to communicate Eastside Lock's vision and attract prospective clients for their 650,000 sq. ft urban development."
-author: 'Astro Learner'
+author: 'Pete Wallace'
+ogImage: 
+  src: './eastsidelocks/og__image.jpg'
+  alt: 'Eastside Locks'
 brand: 
   bg: 'bg-[#6ab53f]'
   color: 'text-[#6ab53f]'
 logo:
   src: '../../assets/logos/eastside_locks.svg'
 product:
-  src: '../../assets/work/eastsidelocks/product.png'
+  src: './eastsidelocks/product.png'
   alt: 'Laptop and iPhone image showing Eastside Locks website'
 cover:
-  src: '../../assets/work/eastsidelocks/cover.jpg'
+  src: './eastsidelocks/cover.jpg'
   alt: 'Eastside Locks preview'
   credit: 'Eastside Locks'
 splash:
-  src: '../../assets/work/eastsidelocks/laptop_iphone_front.jpg'
+  src: './eastsidelocks/laptop_iphone_front.jpg'
   alt: 'Laptop and iPhone image showing Eastside Locks website'
 skillset:
   text: 'text-white'
@@ -45,21 +48,30 @@ skillset:
           - 'Content population'
           - 'Asset preparation'
           - 'UX/UI'
-tags: ['fintech']
+tags: 
+  - 'case study'
+  - 'fintech'
 ---
 import { Image } from 'astro:assets';
 import UL from '~/components/MDX/ul.astro'
+import Skills from '~/components/Skills.astro'
+
 import Gallery from '~/components/Lightbox/Gallery.astro'
 import Figure from '~/components/Figure.astro'
 export const components = {ul: UL}
 
-import vision_detail from '../../assets/work/eastsidelocks/vision--detail.jpg'
-import home_detail from '../../assets/work/eastsidelocks/home--detail.jpg'
+import vision_detail from './eastsidelocks/vision--detail.jpg'
+import home_detail from './eastsidelocks/home--detail.jpg'
 import data from '~/data/work/eastsidelocks.data.json'
 
 ## Overview
 
-Eastside Locks, Birmingham was an urban development of over 650,000 sq ft of prime Grade A office space within three distinct developments at the time of its launch. An inspiring brochure site was commissioned to help deliver their vision and secure prospective clients.
+<p class="text-fl-step-1">Eastside Locks, Birmingham was an urban development of over 650,000 sq ft of prime Grade A office space within three distinct developments at the time of its launch. An inspiring brochure site was commissioned to help deliver their vision and secure prospective clients.</p>
+
+
+<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
+## Skills
+</Skills>
 
 ## My responsibilities
 
@@ -70,7 +82,7 @@ Eastside Locks, Birmingham was an urban development of over 650,000 sq ft of pri
 -   I assisted in configuring the content management system (Umbraco) and took responsibility for the initial population of all launch content. <span class="label label--info !m-0">collaboration</span>
 
 
-<Figure caption='Clear branding was required across all media formats' credit={frontmatter.title}>
+<Figure caption='Clear branding was required across all media formats' credit='Eastside Locks, Goodman'>
   <Image src={home_detail} alt="Homepage view" class="w-full h-auto shadow-md border border-outline" />
   <Image src={vision_detail} alt="Map showing the development plan" class="w-full h-auto shadow-md border border-outline" />
 </Figure>

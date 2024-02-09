@@ -3,7 +3,9 @@ import smartypants from 'smartypants';
 import siteInfo from '~/data/site';
 import pjson from '~/../package.json';
 import Favicon from '../Favicon.astro';
+
 import { SEO } from 'astro-seo';
+import { getImage } from 'astro:assets';
 
 export type Props = {
     title?: string;
@@ -18,27 +20,50 @@ export type Props = {
     pageType?: 'website' | 'article';
     includeSiteTitle?: boolean;
     isHeroDark?: boolean;
+
+    // Article
+    published_time?: string;
+    author?: string[];
+    section?: string;
+    tags?: string[];
 };
 
 const {
     title,
     description = siteInfo.description,
-    ogTitle = siteInfo.og.title,
+    ogTitle = title || siteInfo.og.title,
     ogImage = siteInfo.og.image,
     ogDescription = siteInfo.og.description,
     canonicalURL = new URL(Astro.request.url, Astro.site),
     pageType = 'website',
     includeSiteTitle = true,
     isHeroDark = false,
+    // Articles
+    published_time,
+    author,
+    section,
+    tags,
 } = Astro.props;
 
-// const title = [Astro.props.title, siteInfo.name].filter(Boolean).join(' | ');
+let article = {}; // Initialize as an empty object
+
+if (pageType === 'article') {
+    article = {
+        publishedTime: published_time,
+        authors: [`${author}`],
+        tags: tags,
+        section: section,
+    };
+}
 
 const resolvedTitle = includeSiteTitle ? `${title} - ${siteInfo.title}` : title;
+
 const resolvedImage = {
-    src: new URL(ogImage.src, Astro.site).toString(),
+    src: new URL(ogImage.src.src || ogImage.src, Astro.site).toString(),
     alt: ogImage.alt,
 };
+
+const resolvedOgTitle = smartypants(ogTitle, 1);
 ---
 
 <!-- High Priority Global Metadata -->
@@ -81,17 +106,23 @@ const resolvedImage = {
     canonical={canonicalURL}
     openGraph={{
         basic: {
-            title: ogTitle,
+            title: resolvedOgTitle,
             type: pageType,
             image: resolvedImage.src,
+            url: canonicalURL,
         },
         optional: {
             siteName: siteInfo.name,
             description: ogDescription,
         },
         image: {
-            alt: resolvedImage.alt,
+            alt: ogImage.alt,
         },
+
+        ...(pageType === 'article' &&
+            article && {
+                article,
+            }),
     }}
     extend={{
         // extending the default meta tags

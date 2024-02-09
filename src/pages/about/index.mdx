@@ -5,8 +5,10 @@ taster: 'I’m a Surrey based Front-End developer with over two decades of exper
 excerpt: 'I’m a Surrey based Front-End developer with over two decades of experience in digital.'
 description: 'Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.'
 keywords: 'Surrey based Front-End developer, Bespoke website development, HTML, CSS, Creative development, The Great Outdoors, Balance and wellbeing'
-opengraph:
-    image: 'img/social/og__about.jpg'
+ogImage: 
+  src: '/og/og__about.png'
+  alt: 'Portfolio Site'
+ogDescription: 'Pete Wallace is an experienced Front-End developer based in Surrey, UK.'
 hero:
     mode: 'cover'
     headline: 'Hello!'
@@ -39,9 +41,9 @@ skillset:
     areas:
         - title: 'Front-End Development'
           skills:
-              - 'Tailwind CSS, SCSS, Foundation'
-              - '11ty (SSG), Nunjucks, Panini, Handlebars'
-              - 'Alpine.js, ES6, jQuery, JSON'
+              - 'Tailwind CSS, SCSS, Foundation CSS'
+              - 'Astro, Eleventy(11ty), Nunjucks, Panini, Handlebars'
+              - 'Typescript, Alpine.js, ES6, jQuery, JSON'
               - 'Gulp, npm, Webpack'
               - 'Xamarin.Forms'
         - title: 'Email Development'
@@ -75,20 +77,25 @@ skillset:
               - 'Asset generation'
               - 'UX/UI'
 ---
+
 import Skills from '~/components/Skills.astro'
 import Block from '~/components/Blocks/Block.astro';
 import Link from '~/components/ui/Link.astro';
+import portfolio from '~/data/work';
+import RandomLink from '~/components/ui/RandomLink.astro';
 
-import listing_index from '~/assets/work/listing-index.jpg';
+import listing_index from '~/assets/listing-index.jpg';
 import woodland from '~/assets/blocks/woodland.webp';
-import google_lens from '~/assets/google-lens.jpg';
+import google_lens from '~/assets/google-lens.png';
 import { Image } from 'astro:assets';
 import Figure from '~/components/Figure.astro'
 import BlockPicture from '~/components/Images/BlockPicture.astro';
 import { Icon } from 'astro-icon/components';
 
-## The backstory
+import iphones from '~/content/work/mykringapp/product.png'
+import svgbg from '~/assets/contours/contour__16--ffffff--br.svg'
 
+## The backstory
 
 I cut my teeth in multimedia, primarily working on e-learning, training, and press pack applications for prominent publishers such as **BBC Worldwide**, **BBC Active**, **University of Cambridge**, **Oxford University Press**, **UKTV**, and **Kellogg's** with the award winning agency - Fifth Dimension Productions.
 
@@ -96,9 +103,31 @@ As distribution shifted from physical (PC/Mac CD-ROMs) to online, I transferred 
 
 In 2009, the agency refocused its efforts and established itself as **the** marketing agency for Europe's emerging payments sector. Since then, I've concentrated solely on Front-End development, mostly within the fintech landscape.
 
-<Skills skillset={frontmatter.skillset} bg='bg-page' >
+<Skills skillset={frontmatter.skillset} bg='bg-panel' >
 ## Skills
 </Skills>
+
+<Block
+  mode="pair"
+  bg="bg-brand"
+  grid="grid mx-auto grid-cols-1 md:grid-cols-2 md:grid-rows-1 lg:grid-cols-block60 min-h-block gap-8 max-w-container"
+  breakout={true}
+  >
+  <Image src={svgbg} alt="background" class="object-cover w-full h-full absolute inset-0  opacity-20" />
+  <div slot="mc1" class="self-center md:order-2 py-fl-space-m"
+  >
+    ## Show and tell
+    Curious to see my work in action? Discover the stories behind my projects, the challenges addressed, and the solutions crafted.
+    <p class="not-prose flex flex-row gap-fl-space-3xs">
+    <Link theme="secondary" href="/work"  >Explore the portfolio</Link>
+
+    <RandomLink theme="disco" href="/work" isIcon={true}  choices={portfolio.collection} >Random pick <Icon name="lucide:shuffle" class="h-fl-space-xs w-auto animate-pulse"  /></RandomLink>
+    </p>
+  </div>
+  <div slot="mc2" class="not-prose self-center md:order-1">
+    <Image src={iphones} widths={[400,600,800]} sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.5), (min-width: 1264) calc(var(--container-width-max)*0.60)`} class="relative m-0  h-full w-full object-contain " alt="iPhones with mykring app in use"/>
+  </div>
+</Block>
 
 ## Workflow
 
@@ -115,10 +144,7 @@ Context is essential for a concise translation on multilingual websites. Third-p
 </Figure>
 
 ## What comes next? 
-
-This static site was built with [11ty](https://www.11ty.dev/), [Tailwind CSS](https://tailwindcss.com/), [Alpine.js](https://alpinejs.dev/), and [Webpack](https://webpack.js.org/). Having no prior experience with any, it was a real labour of love, but I learned a great deal in the process.
-
-Moving forward, I would be keen to build on my recent experiences and explore a React based framework – probably Next.js or Gatsby.
+This static site was built with [Astro](https://astro.build/) and integrates [Tailwind CSS](https://tailwindcss.com/) with [Alpine.js](https://alpinejs.dev/). It replaces the previous version that was authored using [11ty](https://www.11ty.dev/) and [Webpack](https://webpack.js.org/). I've enjoyed learning Astro and will look for opportunities to apply it into other personal projects. 
 
 <BlockPicture src={woodland} class="my-0" alt="Woodland scene" credit="Adobe Photoshop (beta) - Generative fill" wrapper="my-fl-space-l" />
 

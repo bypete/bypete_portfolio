@@ -17,8 +17,8 @@ const {
     class: className,
 } = Astro.props;
 const legibility = isHeroDark
-    ? ' group-data-[banner=start]:hover:text-menudark-active group-data-[banner=start]:focus:text-menudark-active group-data-[banner=start]:text-menudark'
-    : '';
+    ? 'text-menudark hover:text-menudark-active focus:text-menudark-active  group-data-[banner=up]:hover:text-menu-active group-data-[banner=up]:focus:text-menu-active group-data-[banner=up]:text-menu'
+    : ' text-menu hover:text-menu-active focus:text-menu-active ';
 const activeState = isHeroDark
     ? ' data-[state=active]:ring-menudark-marker data-[state=active]:hover:text-menudark-active '
     : ' data-[state=active]:ring-menu-marker data-[state=active]:hover:text-menu-active';
@@ -29,7 +29,7 @@ const isCurrentChild = parent !== undefined && pathname.includes(parent);
 <a
     href={url}
     class:list={[
-        'flex h-full items-center rounded-full px-fl-space-2xs py-fl-space-3xs text-fl-base/none font-semibold leading-snug text-menu ring-2 ring-transparent transition duration-150 hover:bg-panel hover:text-menu-active focus:bg-panel focus:text-menu-active focus:outline-none',
+        'flex h-full items-center rounded-full px-fl-space-2xs py-fl-space-3xs text-fl-base/none font-semibold leading-snug ring-2 ring-transparent transition duration-150 hover:bg-panel  focus:bg-panel focus:outline-none',
         className,
         legibility,
         activeState,

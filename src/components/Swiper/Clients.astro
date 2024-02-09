@@ -11,7 +11,7 @@ const { clients } = Astro.props;
 ---
 
 <div
-    class="swiper swiper--clients py-fl-space-s lg:rounded-lg lg:border-x-2 lg:border-outline"
+    class="swiper swiper--clients bg-panel py-fl-space-s lg:rounded-lg lg:border-x-2 lg:border-outline"
 >
     <div class="swiper-wrapper not-prose flex items-center">
         {
@@ -20,7 +20,7 @@ const { clients } = Astro.props;
                     <Image
                         src={client.src}
                         alt={client.alt}
-                        loading="lazy"
+                        loading="eager"
                         class="max-h-fl-space-l w-auto max-w-fl-space-3xl opacity-60 grayscale transition-all hover:opacity-100 hover:filter-none "
                     />
                 </div>

@@ -1,6 +1,5 @@
 ---
 import { buildToc } from '~/js/utils';
-import { Icon } from 'astro-icon/components';
 import TableOfContentsHeading from './TableOfContentsHeading.astro';
 
 export interface Heading {
@@ -20,36 +19,50 @@ const toc = buildToc(headings);
 ---
 
 <nav
-    x-data="toc()"
     id="toc"
-    x-bind:class="$store.banner.state == 'up' ? 'translate-y-fl-space-header ' : ''"
+    x-cloak
+    x-data="toc()"
+    @focusin.window="! $refs.toc.contains($event.target) && close()"
+    x-ref="toc"
+    x-id="['panel-toc']"
     aria-label="Content sections"
     class:list={[
-        'sticky-root sticky -top-px z-toc my-fl-space-l flex w-full transition-all duration-300 md:justify-center',
+        'sticky-root sticky -top-px z-toc my-fl-space-l flex w-full transition-all duration-500 md:justify-center',
         className ? className : '',
     ]}
 >
     <div
-        class="relative w-full max-w-2xl rounded-b transition-all duration-300 md:w-auto"
-        x-bind:class="open ? 'grow shadow-d1' : ''"
-        x-sticky="shadow-3xl shadow-black/5"
+        class="relative w-full max-w-2xl rounded-b transition-all duration-500 md:w-auto"
+        x-bind:class="[($store.cache.banner == 'up' ? 'translate-y-fl-space-header ' : 'translate-y-0'),(open ? 'grow shadow-d1' : '') ]"
+        x-sticky.sticky-root="shadow-3xl shadow-black/5"
+        x-sticky-inactive="!translate-y-0 !duration-250"
     >
         <button
-            x-bind="trigger"
-            class="flex w-full items-center justify-between gap-x-fl-space-2xs rounded border border-outline bg-panel px-fl-space-s py-fl-space-2xs font-semibold"
-            x-sticky="!rounded-t-none"
+            @click="toggle()"
+            x-ref="tocbutton"
+            :aria-expanded="open"
+            :aria-controls="$id('panel-toc')"
+            class="group flex w-full items-center justify-between gap-x-fl-space-2xs rounded border border-outline bg-panel px-fl-space-s py-fl-space-2xs font-semibold"
+            x-sticky.sticky-root="rounded-t-none"
             x-bind:class="open ? 'rounded-none ' : ''"
         >
-            On this page <Icon
-                name="lucide:file-text"
-                class="h-fl-space-s w-auto"
-            />
+            On this page <span
+                class="block h-5 w-5 group-focus:ring-2"
+                x-bind:class="open ? 'icon-[lucide--x-circle]': 'icon-[lucide--file-text]'"
+            ></span>
         </button>
 
         <div class="relative z-10">
             <div
                 x-cloak
+                :id="$id('panel-toc')"
                 x-show="open"
+                x-transition:enter="transition ease-out duration-150 delay-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-0"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
                 class="absolute left-0 top-0 block max-h-[calc(100dvh-var(--headerheight))] w-full grow overflow-y-scroll rounded-b border border-t-0 border-outline bg-panel px-fl-space-s py-fl-space-2xs shadow-d1 transition-all"
             >
                 <ol class="m-0">
@@ -71,15 +84,19 @@ const toc = buildToc(headings);
 
         Alpine.data('toc', () => ({
             open: false,
-            trigger: {
-                '@click': function () {
-                    this.open = !this.open;
-                },
-                '@click.outside': function () {
-                    setTimeout(() => {
-                        this.open = false;
-                    }, 750);
-                },
+            toggle() {
+                this.open = !this.open;
+                if (this.open) {
+                    this.$refs.tocbutton.focus();
+                }
+            },
+            close(focusAfter) {
+                if (focusAfter) {
+                    focusAfter.focus();
+                }
+                setTimeout(() => {
+                    this.open = false;
+                }, 750);
             },
         }));
     });

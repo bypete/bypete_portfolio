@@ -1,6 +1,6 @@
 ---
-import { type Props as HeadProps } from '~/components/SEO/Main.astro';
 import BaseLayout from './BaseLayout.astro';
+import { type Props as HeadProps } from '~/components/SEO/Main.astro';
 import Hero, { type Props as HeroProps } from '~/components/Hero/Hero.astro';
 import TableOfContents from '~/components/ui/TableOfContents.astro';
 import Breadcrumbs from '~/components/ui/Breadcrumbs.astro';
@@ -10,6 +10,9 @@ const fm = Astro.props.frontmatter || Astro.props;
 const head: HeadProps = {
     title: fm.title,
     description: fm.description,
+    ogTitle: fm.ogTitle || fm.title,
+    ogDescription: fm?.ogDescription || '',
+    ogImage: fm?.ogImage ?? undefined,
 };
 
 const heroConfig: HeroProps = {
@@ -17,15 +20,11 @@ const heroConfig: HeroProps = {
     hero: fm.hero,
 };
 
-const { isWide = false } = fm;
-
 const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
-
-const { headings } = Astro.props;
-// console.log(`PL | ${Astro.request.url} | Props:`, head, heroObj);
+const { headings, isWide = false, prose = true } = Astro.props;
 ---
 
-<BaseLayout {...head} {isHeroDark}>
+<BaseLayout head={head} {isHeroDark}>
     <slot name="slothero">
         <Hero {...heroConfig} />
         <Breadcrumbs title={head.title} />
@@ -36,13 +35,14 @@ const { headings } = Astro.props;
         class="relative mx-auto max-w-container py-fl-space-xl"
     >
         {
-            isWide ? (
-                <>
-                    {headings && <TableOfContents headings={headings} />}
-                    <slot />
-                </>
-            ) : (
-                <div class="rte prose mx-auto max-w-3xl text-fl-step-0 ">
+            (
+                <div
+                    class:list={[
+                        'text-fl-step-0',
+                        prose && 'rte prose ',
+                        isWide ? 'w-full' : 'mx-auto  max-w-3xl',
+                    ]}
+                >
                     {headings && <TableOfContents headings={headings} />}
                     <slot />
                 </div>

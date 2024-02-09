@@ -46,10 +46,10 @@ const siteInfo: SiteInfo = {
   root: "https://bypete.uk/",
   og: {
     image: {
-      src: "/og/og__home.jpg",
+      src: "/og/og__default.png",
       alt: "Portfolio Site",
     },
-    title: "A more engaging title",
+    title: "Portfolio Site",
     description: "Something to entice",
   },
   icon: "/favicon.ico",

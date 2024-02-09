@@ -5,21 +5,24 @@ modDate: 2023-07-01
 taster: 'A fun website lovingly curated by gaming enthusiasts that quickly became a huge retro hit. Every genre of game was meticulously documented to help fans relive those sweet nostalgic childhood memories.'
 excerpt: 'A fun website lovingly curated by gaming enthusiasts that quickly became a huge retro hit.'
 description: 'Discover how I helped launch an immensely fun website lovingly curated by gaming enthusiasts - and see how it quickly became a huge retro hit. Learn how each genre was meticulously documented in order to help fans relive those sweet nostalgic childhood memories.'
-author: 'Astro Learner'
+author: 'Pete Wallace'
+ogImage: 
+  src: './gyl/og__image.jpg'
+  alt: 'GamesYouLoved'
 brand: 
   bg: 'bg-[#24a7be]'
   color: 'text-[#24a7be]'
 logo:
   src: '../../assets/logos/gyl.png'
 product:
-  src: '../../assets/work/gyl/product.png'
+  src: './gyl/product.png'
   alt: 'Laptop and iPhone image showing GamesYouLoved website'
 cover:
-  src: '../../assets/work/gyl/cover.jpg'
+  src: './gyl/cover.jpg'
   alt: 'GamesYouLoved logo'
   credit: 'GamesYouLoved'
 splash:
-  src: '../../assets/work/gyl/laptop_iphone_front.jpg'
+  src: './gyl/laptop_iphone_front.jpg'
   alt: 'Laptop and iPhone image showing GamesYouLoved website'
   credit: 'GamesYouLoved'
 skillset:
@@ -43,55 +46,70 @@ skillset:
           - 'Content population'
           - 'Asset preparation'
           - 'UX/UI'
-tags: ['Entertainment']
+tags: 
+  - 'case study'
+  - 'entertainment'
+  - 'social'
 ---
 import {Image} from 'astro:assets'
 import { Icon } from 'astro-icon/components';
 
 import BlockPicture from '~/components/Images/BlockPicture.astro';
+
 import Skills from '~/components/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
+
 import Gallery from '~/components/Lightbox/Gallery.astro'
 import Figure from '~/components/Figure.astro'
 import Block from '~/components/Blocks/Block.astro'
 export const components = {ul: UL}
 import Note from '~/components/ui/Note.astro'
 
-import laptop_iphone_front from '../../assets/work/gyl/laptop_iphone_front.jpg';
-import svgbg from '../../icons/contour.svg'
-import block__sw_40 from '../../assets/work/gyl/block__sw_40.jpg';
+import gyl_logo from './gyl/gyl_logo_tv.png';
+import svgbg from '~/assets/details/heap__plus.svg';
+import block__sw_40 from './gyl/block__sw_40.jpg';
 
 import data from '~/data/work/gyl.data.json'
 
-## Overview
 
-Gamesyouloved.com began as a fun website lovingly curated by gaming enthusiasts and quickly became a huge retro hit. Every genre of game was meticulously documented to help fans relive those sweet nostalgic childhood memories.
+
+## Overview
+<p class="text-fl-step-1">Gamesyouloved.com began as a fun website lovingly curated by gaming enthusiasts and quickly became a huge retro hit. Every genre of game was meticulously documented to help fans relive those sweet nostalgic childhood memories.</p>
 
 The site encouraged the community to submit their own game reviews, effectively crowdsourcing content and giving the fanbase a genuine sense of ownership. An article submission form kept editorial content consistent and streamlined the publishing/moderation process. This was the impetus behind the site's rapid expansion, which until recently, included twelve game genres and several hundred entries.
 
 GYL has a substantial social media presence across multiple platforms and the site served as a central hub for these platforms, allowing for deeper engagement through rich editorial content.
 
 
+
 <Block
         mode="plain"
-        bg="bg-neutral-100"
-        grid="grid grid-cols-2 md:grid-cols-4 py-16 md:py-32 xl:py-48 gap-8 content-center max-w-container mx-auto"
+        bg="bg-sky-400"
+       wrapper="my-fl-space-2xl"
         breakout={true}
     >
-<Image src={svgbg} alt="background" class="object-cover w-full h-full absolute inset-0" />
 
-<div class="relative grid grid-cols-2 md:grid-cols-4 py-16 md:py-32 xl:py-48 gap-8 content-center max-w-container mx-auto">
-  <p class="text-center leading-snug"><span class="block text-fl-step-6 text-[#24a7be] font-black"><Icon name="fa6-brands:youtube" class="w-12 h-12 mx-auto block" alt="youtube" />6.44K</span> Youtube subscribers</p>
-  <p class="text-center leading-snug"><span class="block text-fl-step-6 text-[#24a7be] font-black"><Icon name="fa6-brands:instagram" class="w-12 h-12 mx-auto block" alt="instagram" />61.3K</span> Instagram followers</p>
-  <p class="text-center leading-snug"><span class="block text-fl-step-6 text-[#24a7be] font-black"><Icon name="fa6-brands:x-twitter" class="w-12 h-12 mx-auto block" alt="x-twitter" />99.7K</span> X Followers</p>
-  <p class="text-center leading-snug"><span class="block text-fl-step-6 text-[#24a7be] font-black"><Icon name="fa6-brands:facebook" class="w-12 h-12 mx-auto block" alt="facebook" />52K</span> Facebook Followers</p>
+<div class="absolute w-full h-full inset-0 bg-bottom bg-cover opacity-[12%]" style={`background-image: url(${svgbg.src});`}></div>
+
+<div class="relative grid text-center leading-snug grid-cols-2 md:grid-cols-4 py-fl-space-3xl gap-fl-space-m text-content-light content-center max-w-container mx-auto">
+  <p><span class="block text-fl-step-6 font-black"><Icon name="fa6-brands:youtube" class="w-fl-space-xl-2xl h-auto mx-auto block" title="youtube" />6.44K</span> Youtube subscribers</p>
+  <p><span class="block text-fl-step-6 font-black"><Icon name="fa6-brands:instagram" class="w-fl-space-xl-2xl h-auto mx-auto block" title="instagram" />61.3K</span> Instagram followers</p>
+  <p><span class="block text-fl-step-6 font-black"><Icon name="fa6-brands:x-twitter" class="w-fl-space-xl-2xl h-auto mx-auto block" title="x-twitter" />99.7K</span> X Followers</p>
+  <p><span class="block text-fl-step-6 font-black"><Icon name="fa6-brands:facebook" class="w-fl-space-xl-2xl h-auto mx-auto block" title="facebook" />52K</span> Facebook Followers</p>
 </div>
 </Block>
+
+
+<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
+## Skills
+</Skills>
 
 
 ## My responsibilities
 
 - My first task was to design the brand logo. An analogue TV brandmark was then introduced to connect with the retro audience and provide a consistent identity across all social channels. This provided a clear visual framework from which to design the site.
+<BlockPicture src={gyl_logo} alt="GamesYouLoved Logo" breakout={false} credit={frontmatter.title} class="w-full h-auto max-w-1/2 mx-auto my-fl-space-m" widths={[400, 720]} />
+
 - The designs and static templates were hosted in a secure listing to keep stakeholders informed throughout the development process. <span class="label label--info !m-0">Project management</span>
 - Working closely with the client's direction, I created a few key screens for visual approval. The website needed to strike a balance between being distinctively recognisable and also evoking vintage styling from the past.
 - I created all of the Front-End HTML templates – working to a mobile-first mindset. These were then handed over to a team of back-end developers, complete with detailed annotations, listing indexes, and support documentation.

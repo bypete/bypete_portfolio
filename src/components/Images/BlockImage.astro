@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 
 const {
     src,
+    alt,
     widths = [],
     sizes,
     breakout = true,
@@ -16,6 +17,7 @@ const resolvedSizes = sizes || `100vw`;
 
 const imageProps = {
     src,
+    alt,
     ...attrs,
     quality: 'high',
     sizes: resolvedSizes,
@@ -27,7 +29,7 @@ const imageProps = {
     wrapper || breakout == true || credit.length ? (
         <div class:list={[wrapper || '', breakout && 'breakout']}>
             <Image {...imageProps} />
-            {credit && `yes there is credit`}
+            {credit && ``}
         </div>
     ) : (
         <Image {...imageProps} />

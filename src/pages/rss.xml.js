@@ -5,7 +5,8 @@ import { getCollection } from 'astro:content';
 export async function GET(context) {
     const allPosts = await getCollection('posts');
     const allWorks = await getCollection('work');
-    const collection = [...allWorks, ...allPosts];
+    // const collection = [...allWorks, ...allPosts]; // Switch to this when blog is ready
+    const collection = allWorks;
     return rss({
         title: siteInfo.name,
         description: siteInfo.feed.subtitle,

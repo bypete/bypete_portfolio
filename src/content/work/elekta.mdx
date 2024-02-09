@@ -5,7 +5,10 @@ modDate: 2023-07-01
 taster: 'The company intranet required a significant upgrade to improve the user experience of over 3,000 employees. The brief specified that the site be adaptable, have low operational costs, be quick to publish, and provide quick search results.'
 excerpt: 'See how this enterprise intranet was upgraded to improve the user experience of 3,000+ employees.'
 description: 'How did I help to turn a slow intranet into a quick and flexible resource for over 3,000 employees? See the visuals I created, as well as the Front-End templates I developed to optimise the site.'
-author: 'Astro Learner'
+author: 'Pete Wallace'
+ogImage: 
+  src: './elekta/og__image.jpg'
+  alt: 'Elekta'
 brand: 
   bg: 'bg-[#747474]'
   color: 'text-[#747474]'
@@ -13,14 +16,14 @@ logo:
   src: '../../assets/logos/elekta.svg'
   light: '../../assets/logos/light/elekta.svg'
 product:
-  src: '../../assets/work/elekta/product.png'
+  src: './elekta/product.png'
   alt: 'iPad image showing Elekta website'
 cover:
-  src: '../../assets/work/elekta/cover.jpg'
+  src: './elekta/cover.jpg'
   alt: 'Elekta logo'
   credit: 'Elekta'
 splash:
-  src: '../../assets/work/elekta/tablet.jpg'
+  src: './elekta/tablet.jpg'
   alt: 'iPad image showing Elekta website'
   credit: 'Elekta'
 skillset:
@@ -40,22 +43,30 @@ skillset:
           - 'Content population'
           - 'Asset preparation'
           - 'UX/UI'
-tags: ['Intranet']
+tags: 
+  - 'case study'
+  - 'intranet'
 ---
 import BlockPicture from '~/components/Images/BlockPicture.astro';
 import Skills from '~/components/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
+
 import Gallery from '~/components/Lightbox/Gallery.astro'
 export const components = {ul: UL}
 import Note from '~/components/ui/Note.astro'
 
 import data from '~/data/work/elekta.data.json'
-import tablet from '../../assets/work/elekta/tablet.jpg';
+import tablet from './elekta/tablet.jpg';
 
 ## Overview
 
-Elekta is a forward-thinking Swedish healthcare company that provides precision radiation therapy solutions. They asked Fifth Dimension to improve their current intranet solution, Elekta.biz. The previous solution relied on obsolete technology, which hampered editorial efficiency. The upgrade would need to significantly improve the user experience and site speeds for over 3,000 employees.
+<p class="text-fl-step-1">Elekta is a forward-thinking Swedish healthcare company that provides precision radiation therapy solutions. They asked Fifth Dimension to improve their current intranet solution, Elekta.biz.</p>
+The previous solution relied on obsolete technology, which hampered editorial efficiency. The upgrade would need to significantly improve the user experience and site speeds for over 3,000 employees.
 Our solution needed to be more flexible, reduce operational costs, reduce publishing delays, and provide faster search results.
+
+<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
+## Skills
+</Skills>
 
 ## My responsibilities
 

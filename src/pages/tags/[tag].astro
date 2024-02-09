@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import ListingLayout from '../../layouts/ListingLayout.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
 import BlogPost from '../../components/BlogPost.astro';
 import Link from '~/components/ui/Link.astro';
 import { formatBlogPosts } from '~/js/utils';
@@ -32,9 +32,11 @@ const formattedPosts = formatBlogPosts(posts, {
 });
 ---
 
-<ListingLayout title={tag} isWide={false}>
+<PageLayout title={tag} isWide={false} prose={false}>
     <p class="mb-fl-space-m">
-        Displaying posts tagged with <strong>{tag}</strong>
+        Displaying {formattedPosts.length} post{
+            formattedPosts.length > 1 && 's'
+        } tagged with <strong>{tag}</strong>
     </p>
     <div class="grid columns-1 gap-y-fl-space-xl">
         {
@@ -59,4 +61,4 @@ const formattedPosts = formatBlogPosts(posts, {
     <p class="mt-fl-space-xl">
         View <a href="/tags" class="link">all tags</a>
     </p>
-</ListingLayout>
+</PageLayout>

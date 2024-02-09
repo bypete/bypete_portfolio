@@ -5,21 +5,25 @@ modDate: 2023-07-01
 readtime: 2-3
 taster: 'Armed Forces & Veterans is a veterans-led organisation that assists serving and retired members of the British Armed Forces with financial and housing needs. See how they launched their branded prepaid MasterCard'
 description: 'Read on to learn about my role in the launch of the Armed Forces & Veterans prepaid MasterCard, an exclusive cashback programme available to serving and retired members of the British Armed Forces and their immediate families.'
-author: 'Astro Learner'
+author: 'Pete Wallace'
+ogImage: 
+  src: './afv/og__image.jpg'
+  alt: 'AFV Estates Limited logo'
+ogDescription: 'Read on to learn about my role in the launch of the Armed Forces & Veterans prepaid MasterCard, an exclusive cashback programme available to serving and retired members of the British Armed Forces and their immediate families.'
 brand: 
   bg: 'bg-[#384c55]'
   color: 'text-[#384c55]'
 logo:
-  src: '../../assets/logos/afv.webp'
+  src: '~/assets/logos/afv.webp'
 product:
-  src: '../../assets/work/afv/product.png'
+  src: './afv/product.png'
   alt: 'Laptop and iPhone image showing AFV Estates Limited website'
 cover:
-  src: '../../assets/work/afv/cover.jpg'
+  src: './afv/cover.jpg'
   alt: 'AFV Estates logo'
   credit: 'AFV Estates Limited'
 splash:
-  src: '../../assets/work/afv/laptop_iphone_front.jpg'
+  src: './afv/laptop_iphone_front.jpg'
   alt: 'Laptop and mobile'
   credit: 'AFV Estates Limited'
 skillset:
@@ -43,9 +47,14 @@ skillset:
         - 'Content population'
         - 'Asset preparation'
         - 'UX/UI'
-tags: ['featured', 'fintech']
+tags:
+  - 'case study'
+  - 'featured'
+  - 'fintech'
 ---
 import UL from '~/components/MDX/ul.astro'
+import Skills from '~/components/Skills.astro'
+
 import Gallery from '~/components/Lightbox/Gallery.astro'
 import data from '~/data/work/afv.data.json'
 export const components = {ul: UL}
@@ -53,9 +62,14 @@ export const components = {ul: UL}
 
 ## Overview
 
-Armed Forces & Veterans is a veterans-led organisation that provides financial and housing assistance to serving and retired members of the British Armed Forces.
+<p class="text-fl-step-1">Armed Forces & Veterans is a veterans-led organisation that provides financial and housing assistance to serving and retired members of the British Armed Forces.</p>
+
 Fifth Dimension was tasked with launching their branded prepaid MasterCard as well as ensuring the success of the AF&V Privilege Card, which was critical given that the program's proceeds go towards other initiatives such as the Homes for Heroes programme.
 The website needed to emphasise the benefits of their prepaid AF&V Privilege Card while also promoting the exclusive cashback available at leading retailers.
+
+<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
+## Skills
+</Skills>
 
 ## My responsibilities
 

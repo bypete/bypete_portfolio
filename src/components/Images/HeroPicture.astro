@@ -4,6 +4,7 @@ import Credit from '~/components/Images/Credit.astro';
 
 const {
     src,
+    alt,
     widths = [],
     sizes,
     formats = ['avif', 'webp'],
@@ -17,6 +18,7 @@ const resolvedSizes = sizes || `100vw`;
 
 const imageProps = {
     src,
+    alt,
     ...attrs,
     quality: 'high',
     sizes: resolvedSizes,

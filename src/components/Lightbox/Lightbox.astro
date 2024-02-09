@@ -28,19 +28,23 @@ const {
 <section
     id={id}
     class:list={[
-        'lightbox not-prose relative',
+        'lightbox not-prose relative rounded-tight shadow-panelinset shadow-panel-shadow/20',
         bg && bg,
         wrapper ? wrapper : '',
         breakout && 'breakout',
         className
             ? className
-            : `my-fl-space-m p-fl-space-s ${!breakout ? '-mx-fl-space-s' : ''}`,
+            : ` p-fl-space-m ${
+                  !breakout ? '-mx-fl-space-m my-fl-space-xl' : ''
+              }`,
     ]}
     {...rest}
     x-data="{ shown: false }"
     x-intersect.threshold.10="shown = true"
 >
-    <div class="flex flex-col justify-between md:flex-row md:items-center">
+    <div
+        class="flex flex-col justify-between leading-none md:flex-row md:items-center"
+    >
         <slot name="title" />
         <p
             class="pointer-events-none transform"

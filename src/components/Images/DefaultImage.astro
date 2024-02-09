@@ -1,18 +1,21 @@
 ---
 import { Image } from 'astro:assets';
 
-const { src, widths = [], sizes, ...attrs } = Astro.props;
+const { src, alt, widths = [], sizes, ...attrs } = Astro.props;
 const resolvedWidths = widths.length ? widths : [240, 540, 720, src.width];
 
 const resolvedSizes =
     sizes ||
     `(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${src.width}px`;
+
+const imageProps = {
+    src,
+    alt,
+    ...attrs,
+    quality: 'high',
+    sizes: resolvedSizes,
+    widths: resolvedWidths,
+};
 ---
 
-<Image
-    src={src}
-    {...attrs}
-    quality={'high'}
-    sizes={resolvedSizes}
-    widths={resolvedWidths}
-/>
+<Image {...imageProps} />

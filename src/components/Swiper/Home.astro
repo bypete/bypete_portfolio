@@ -22,14 +22,16 @@ const { slides } = Astro.props;
         }
     </div>
     <div
-        class="swiper-button-prev swiper--home__prev opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        class="swiper-button-prev swiper--home__prev hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:block"
     >
     </div>
     <div
-        class="swiper-button-next swiper--home__next opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        class="swiper-button-next swiper--home__next hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:block"
     >
     </div>
-    <div class="swiper--home__pagination absolute z-10 mx-auto text-right">
+    <div
+        class="swiper--home__pagination absolute !bottom-fl-space-s z-10 mx-auto text-right"
+    >
     </div>
 </div>
 

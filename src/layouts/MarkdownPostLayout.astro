@@ -11,21 +11,26 @@ import TableOfContents from '~/components/ui/TableOfContents.astro';
 import PostPreview from '~/components/ui/PostPreview.astro';
 
 const { frontmatter, minutesRead, headings, prevPost, nextPost } = Astro.props;
+
+const fm = frontmatter || Astro.props;
+
 const head: HeadProps = {
-    title: frontmatter.title,
-    description: frontmatter.description,
+    title: fm.title,
+    description: fm.description,
+    ogTitle: fm.ogTitle || fm.title,
+    ogDescription: fm?.ogDescription || '',
+    ogImage: fm?.ogImage ?? undefined,
 };
 
 const heroConfig: HeroProps = {
-    title: frontmatter.title,
-    hero: frontmatter.hero,
+    title: fm.title,
+    hero: fm.hero,
 };
 
-// Check if frontmatter.hero is defined before destructuring
-const { hero: { dark: isHeroDark = false } = {} } = frontmatter || {};
+const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
 ---
 
-<BaseLayout {...head} {isHeroDark}>
+<BaseLayout head={head} {isHeroDark}>
     <slot name="slothero">
         <Hero {...heroConfig} />
     </slot>

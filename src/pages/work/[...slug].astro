@@ -31,11 +31,11 @@ type Props = {
 
 const { entry, prevPost, nextPost } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await entry.render();
-// console.log(prevPost.id, nextPost.id);
 ---
 
 <MarkdownWorkLayout
     frontmatter={entry.data}
+    section={entry.collection}
     minutesRead={remarkPluginFrontmatter.minutesRead}
     {headings}
     {prevPost}

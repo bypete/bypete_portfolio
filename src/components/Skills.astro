@@ -22,7 +22,7 @@ export interface Props extends HTMLAttributes<'div'> {
 }
 
 const {
-    breakout = true,
+    breakout = false,
     class: className,
     bg = 'bg-slate-900',
     skillset,
@@ -33,9 +33,13 @@ const { text, icon, heading, shadow, areas } = skillset as SkillsetProps;
 
 <div
     class:list={[
-        'not-prose relative px-fl-space-s py-fl-space-xl',
+        'not-prose relative p-fl-space-m',
         breakout && 'breakout',
-        className ? className : `${!breakout ? '-mx-fl-space-s' : ''}`,
+        className
+            ? className
+            : ` rounded-tight shadow-panelinset shadow-panel-shadow/25  ${
+                  !breakout ? '-mx-fl-space-m my-fl-space-xl' : ''
+              }`,
         bg,
     ]}
     {...rest}

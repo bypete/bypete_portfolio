@@ -1,11 +1,9 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { Image } from 'astro:assets';
 
 import GridImage from '~/components/Hero/GridImage.astro';
 import GridHome from '~/components/Hero/GridHome.astro';
 import GridCover from '~/components/Hero/GridCover.astro';
-import { Icon } from 'astro-icon/components';
 import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
 import SwipePrompt from '~/components/ui/SwipePrompt.astro';
 
@@ -71,8 +69,7 @@ export interface Props extends HTMLAttributes<'div'> {
     hero?: Partial<HeroKeys>;
 }
 
-const fm = Astro.props.frontmatter || Astro.props;
-const { title, hero = {}, ...rest } = fm;
+const { title, hero = {}, ...rest } = Astro.props;
 const {
     dark = false,
     wrapper = '',
@@ -108,16 +105,11 @@ switch (mode) {
         break;
     case 'image':
         wrapperClass = wrapper || '';
-        // wrapperClass = `${
-        //     wrapper || ''
-        // } min-h-photo pt-[var(--headerheight)] md:min-h-33vw  xl:min-h-block`;
         break;
     case 'custom':
         wrapperClass = `${wrapper || ''} custom-wrapper`;
         break;
-    // Add more cases as needed
     default:
-        // Handle default case, if necessary
         wrapperClass = wrapper || '';
 }
 ---
@@ -140,7 +132,7 @@ switch (mode) {
             <>
                 <h1
                     id="headline"
-                    class="heading relative mx-auto max-w-3xl pt-fl-space-xl text-center text-fl-step-6"
+                    class="heading from-headline-start to-headline-end relative mx-auto max-w-3xl bg-gradient-to-b bg-clip-text pt-fl-space-xl text-center text-fl-step-6 text-transparent "
                 >
                     {title}
                 </h1>

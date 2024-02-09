@@ -5,7 +5,10 @@ modDate: 2023-10-01
 taster: "Onepay gives workers a fast, easy and efficient way to get wage payments when they're in the UK."
 excerpt: 'A quick, easy, and efficient way to pay and receive wage payments'
 description: 'Discover how I contributed to the creation of a website that gives businesses and their employees a quick, easy, and efficient way to pay and receive wage payments.'
-author: 'Astro Learner'
+author: 'Pete Wallace'
+ogImage: 
+  src: './onepay/og__image.jpg'
+  alt: 'OnePay'
 brand: 
   bg: 'bg-[#00a3e2]'
   color: 'text-[#00a3e2]'
@@ -13,14 +16,14 @@ logo:
   src: '../../assets/logos/onepay.svg'
   light: '../../assets/logos/light/onepay.svg'
 product:
-  src: '../../assets/work/onepay/product.png'
+  src: './onepay/product.png'
   alt: 'Laptop and iPhone image showing Onepay website'
 cover:
-  src: '../../assets/work/onepay/cover.jpg'
+  src: './onepay/cover.jpg'
   alt: 'OnePay logo'
   credit: 'OnePay'
 splash:
-  src: '../../assets/work/onepay/laptop_iphone_front.jpg'
+  src: './onepay/laptop_iphone_front.jpg'
   alt: 'Laptop and iPhone image showing Onepay website'
   credit: 'OnePay'
 skillset:
@@ -49,11 +52,17 @@ skillset:
           - 'Wireframes'
           - 'Asset preparation'
           - 'UX/UI'
-tags: ['featured', 'responsive', 'fintech']
+tags: 
+  - 'case study'
+  - 'featured'
+  - 'responsive'
+  - 'fintech'
+  - 'email'
 ---
 import BlockPicture from '~/components/Images/BlockPicture.astro';
 import Skills from '~/components/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
+
 import Gallery from '~/components/Lightbox/Gallery.astro'
 export const components = {ul: UL}
 
@@ -62,8 +71,14 @@ import data from '~/data/work/onepay.data.json'
 
 ## Overview
 
-OnePay are one of the UK’s leading providers of alternative payment solutions for temporary employees who can’t open a UK bank account. Their service provides businesses and their workers a fast, easy, and efficient way to pay and receive wage payments.
+<p class="text-fl-step-1">OnePay are one of the UK’s leading providers of alternative payment solutions for temporary employees who can’t open a UK bank account. Their service provides businesses and their workers a fast, easy, and efficient way to pay and receive wage payments.</p>
+
 Applicants are issued a Visa prepaid card, access to an online account and use of an automated telephone service so they can manage their money at any time.
+
+<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
+## Skills
+</Skills>
+
 
 ## My responsibilities
 

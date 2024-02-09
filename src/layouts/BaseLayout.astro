@@ -1,6 +1,5 @@
 ---
 import MainSEO, { type Props as HeadProps } from '~/components/SEO/Main.astro';
-import Hero, { type Props as HeroProps } from '~/components/Hero/Hero.astro';
 import { ViewTransitions } from 'astro:transitions';
 // import Loader from "../components/Loader.astro";
 import Header from '../components/Header.astro';
@@ -11,27 +10,14 @@ import Shortcuts from '../components/Shortcuts.astro';
 import Accessibility from '../components/Accessibility.astro';
 import Overlay from '../components/ui/Overlay.astro';
 
-export type hdProps = HeadProps;
-export type hoProps = HeroProps;
-
 // fm represents frontmatter
 const fm = Astro.props.frontmatter || Astro.props;
 
-const head: HeadProps = {
-    title: fm.title,
-    description: fm.description,
-};
+const { head = {}, isHeroDark = false } = fm;
 
-const hero: HeroProps = {
-    title: fm.title,
-    ...fm.hero, // Spread the hero properties
-};
+// console.log(head);
+// console.log(isHeroDark);
 
-const isHeroDark = fm.isHeroDark ?? false;
-
-// console.log('BL | isHeroDark:', isHeroDark);
-// console.log(`BL | head | ${Astro.request.url}:`, head);
-// console.log(`BL | hero| ${Astro.request.url}:`, hero);
 import '~/styles/tailwind.css';
 ---
 
@@ -59,7 +45,9 @@ import '~/styles/tailwind.css';
             class="grid w-full grid-cols-1 grid-rows-[auto,1fr,auto]"
         >
             <Header {isHeroDark} />
-            <div class="bg-page outline-none">
+            <div class="relative bg-page outline-none">
+                <div class="shader absolute inset-0 h-full w-full opacity-[5%]">
+                </div>
                 <slot />
             </div>
             <Footer />
@@ -69,12 +57,11 @@ import '~/styles/tailwind.css';
         <CookieNotice />
         <Shortcuts />
         <Overlay class="bg-overlay-dark" />
-
-        <style>
+        <style is:inline>
             /* Alpine.js
 ---------------------------------------------------------------------------------*/
             [x-cloak] {
-                display: none !important;
+                /* display: none !important; */
                 visibility: hidden;
                 opacity: 0;
             }

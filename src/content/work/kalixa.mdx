@@ -5,7 +5,10 @@ modDate: 2023-07-01
 taster: 'See how the award winning Kalixa Pay used highly targeted landing pages to convert prospects into cardholders. The site had to accommodate over 150,000 card holders and a global affiliate network that was driving traffic towards it from the UK, Austria, Germany and Italy.'
 excerpt: 'Highly targeted, affiliate focused landing pages to convert prospects into cardholders'
 description: 'Discover how I helped to create highly targeted landing pages that converted prospects into Kalixa Pay cardholders. The site had to accommodate over 150,000 card holders as well as a global affiliate network.'
-author: 'Astro Learner'
+author: 'Pete Wallace'
+ogImage: 
+  src: './kalixa/og__image.jpg'
+  alt: 'Kalixa'
 brand: 
   bg: 'bg-[#2b93dd]'
   color: 'text-[#2b93dd]'
@@ -13,14 +16,14 @@ logo:
   src: '../../assets/logos/kalixa.svg'
   light: '../../assets/logos/light/kalixa.svg'
 product:
-  src: '../../assets/work/kalixa/product.png'
+  src: './kalixa/product.png'
   alt: 'Laptop and iPhone image showing Kalixa website'
 cover:
-  src: '../../assets/work/kalixa/cover.jpg'
+  src: './kalixa/cover.jpg'
   alt: 'Kalixa logo'
   credit: 'Kalixa'
 splash:
-  src: '../../assets/work/kalixa/laptop_iphone_front.jpg'
+  src: './kalixa/laptop_iphone_front.jpg'
   alt: 'Laptop and iPhone image showing Kalixa website'
   credit: 'Kalixa'
 skillset:
@@ -46,23 +49,32 @@ skillset:
           - 'Content population'
           - 'Asset preparation'
           - 'UX/UI'
-tags: ['featured', 'fintech']
+tags: 
+  - 'case study'
+  - 'featured'
+  - 'fintech'
 ---
+
 import BlockPicture from '~/components/Images/BlockPicture.astro';
-import laptop_iphone_front from '../../assets/work/kalixa/laptop_iphone_front.jpg';
+import laptop_iphone_front from './kalixa/laptop_iphone_front.jpg';
 import Skills from '~/components/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
+
 import Gallery from '~/components/Lightbox/Gallery.astro'
 import data from '~/data/work/kalixa.data.json'
 export const components = {ul: UL}
 
 ## Overview
 
-Kalixa Pay was marketed as a cost-effective contactless prepaid Mastercard with exclusive travel benefits. The site had to sell the product to potential customers, deliver relevant content to existing customers, and give access to accounts in a secure PCI environment.
+<p class="text-fl-step-1">Kalixa Pay was marketed as a cost-effective contactless prepaid Mastercard with exclusive travel benefits. The site had to sell the product to potential customers, deliver relevant content to existing customers, and give access to accounts in a secure PCI environment.</p>
 
 Highly targeted landing pages were used to convert prospects into cardholders. The site had to accommodate a global affiliate network that was driving traffic towards it from the UK, Germany and Italy.
 
 The landing pages had to be consistent, quick and easy to implement, and responsive on smaller devices.
+
+<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
+## Skills
+</Skills>
 
 ## My responsibilities
 

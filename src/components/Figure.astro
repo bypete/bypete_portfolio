@@ -15,7 +15,7 @@ const {
     credit = '',
     class: className,
     grid,
-    bg = 'bg-underlay-light',
+    bg = 'bg-panel',
     breakout,
     ...attrs
 } = Astro.props;
@@ -23,29 +23,31 @@ const {
 
 <figure
     class:list={[
-        'not-prose',
-        breakout && 'breakout',
-        className ? className : 'my-fl-space-m',
+        'not-prose relative  ',
+        className ? className : 'my-fl-space-xl',
     ]}
     {...attrs}
 >
     <div
         class:list={[
             bg,
-            grid ? grid : 'grid grid-cols-1 items-center gap-fl-space-m',
+            breakout
+                ? 'breakout'
+                : '-mx-fl-space-s-m rounded-tight p-fl-space-s-m',
+            grid ? grid : 'grid grid-cols-1 items-center gap-fl-space-m ',
         ]}
     >
         <slot />
     </div>
     {
         caption && (
-            <figcaption class="w-full items-center justify-between gap-fl-space-m border-b border-outline p-fl-space-s text-fl-step--1 leading-snug md:flex">
+            <figcaption class="mt-fl-space-xs w-full items-center justify-between gap-fl-space-m text-fl-step--1 leading-snug md:flex">
                 <p>{caption}</p>
                 {credit && (
                     <span class="mt-fl-space-3xs grid grid-cols-icon gap-fl-space-3xs text-fl-step--2/fl-space-xs text-quiet  md:mt-0 ">
                         <Icon
                             name="lucide:camera"
-                            class="h-fl-space-xs w-auto"
+                            class="h-fl-space-xs w-fl-space-xs"
                         />
                         <Fragment set:html={credit} />
                     </span>

@@ -28,10 +28,9 @@ breadcrumbList[0] === 'tags' &&
                 : '(page ' + breadcrumbList[2] + ')'
         }`,
     );
-console.log(currentUrlPath, breadcrumbList);
 ---
 
-<nav aria-label="breadcrumb">
+<nav aria-label="breadcrumb" class="relative">
     <ul class="mx-auto flex w-full max-w-container items-center divide-x">
         <li class="px-fl-space-2xs py-fl-space-3xs first:pl-0 last:pr-0">
             <a href="/" class="link">

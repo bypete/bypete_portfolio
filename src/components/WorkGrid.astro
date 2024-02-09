@@ -47,6 +47,7 @@ const { title, url, cover, logo, product, taster, tags, readTime } =
                 alt={cover.alt}
                 class="absolute inset-0 m-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-150 group-focus:scale-150"
                 quality="high"
+                loading="eager"
                 widths={[400, 720]}
                 sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.33), (min-width: 1264) calc(var(--container-width-max)*0.33)`}
             />
@@ -67,17 +68,17 @@ const { title, url, cover, logo, product, taster, tags, readTime } =
                     src={product.src}
                     widths={[300]}
                     alt={product.alt + ' logo'}
-                    class="z-10 -mt-[75px] h-[150px] w-full object-contain transition-transform duration-700"
+                    class="h-fl-space-4xl z-10 -mt-fl-space-2xl w-full object-contain transition-transform duration-700"
                 />
             )
         }
         <div class="px-fl-space-s">
             {readTime && <ReadTime duration={readTime} />}
             <h2
-                class="link mb-fl-space-2xs font-headline text-fl-step-2/tight font-extrabold"
+                class="link mb-fl-space-2xs font-headline text-fl-step-1/tight font-extrabold"
                 set:html={title}
             />
-            {taster && <p set:html={taster} />}
+            {taster && <p class="text-base/snug" set:html={taster} />}
         </div>
         <div class="p-fl-space-s">
             <Tags {tags} />

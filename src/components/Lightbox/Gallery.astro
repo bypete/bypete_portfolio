@@ -84,7 +84,8 @@ const getImageSrcs = (
 };
 
 const imageFiles = import.meta.glob<ImageMetadata>(
-    '../../assets/work/**/*.{png,webp,jpg,jpeg}',
+    // '../../assets/work/**/*.{png,webp,jpg,jpeg}',
+    '../../{assets,content}/**/*.{png,webp,jpg,jpeg}',
     {
         import: 'default',
         eager: true,

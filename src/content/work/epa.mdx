@@ -5,7 +5,10 @@ modDate: 2023-07-01
 taster: 'The EPA needed a public resource for industry news and events, as well as members-only access to projects, whitepapers, and resources across a network of over 3,700 businesses.'
 excerpt: 'A public resource for industry news and events, as well as secure members-only access to projects, whitepapers, resources'
 description: 'Discover how I helped launch this public resource for industry news and events, whitepapers, and resources - all within a network of over 3,700 businesses.'
-author: 'Astro Learner'
+author: 'Pete Wallace'
+ogImage: 
+  src: './epa/og__image.jpg'
+  alt: 'Emerging Payments Association'
 brand: 
   bg: 'bg-[#651731]'
   color: 'text-[#651731]'
@@ -13,14 +16,14 @@ logo:
   src: '../../assets/logos/epa.svg'
   light: '../../assets/logos/light/epa.svg'
 product:
-  src: '../../assets/work/epa/product.png'
+  src: './epa/product.png'
   alt: 'Laptop and iPhone image showing Emerging Payments Association website'
 cover:
-  src: '../../assets/work/epa/cover.jpg'
+  src: './epa/cover.jpg'
   alt: 'EPA logo'
   credit: 'Emerging Payments Association'
 splash:
-  src: '../../assets/work/epa/laptop_iphone_front.jpg'
+  src: './epa/laptop_iphone_front.jpg'
   alt: 'Laptop and iPhone image showing Emerging Payments Association website'
   credit: 'Emerging Payments Association'
 skillset:
@@ -49,29 +52,36 @@ skillset:
           - 'Wireframes'
           - 'Asset preparation'
           - 'UX/UI'
-tags: ['fintech']
+tags: 
+  - 'case study'
+  - 'fintech'
 ---
 import BlockPicture from '~/components/Images/BlockPicture.astro';
 import { Image } from 'astro:assets';
 
 import Skills from '~/components/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
+
 import Gallery from '~/components/Lightbox/Gallery.astro'
 import Figure from '~/components/Figure.astro'
 
 
 export const components = {ul: UL}
 
-import listing_1 from '../../assets/work/epa/listing-01.jpg';
-import listing_2 from '../../assets/work/epa/listing-02.jpg';
-import listing_3 from '../../assets/work/epa/listing-03.jpg';
+import listing_1 from './epa/listing-01.jpg';
+import listing_2 from './epa/listing-02.jpg';
+import listing_3 from './epa/listing-03.jpg';
 import data from '~/data/work/epa.data.json'
 
 ## Overview
 
-The Emerging Payments Association was founded with the goal of making the United Kingdom a global leader in payments innovation. Membership in the EPA provided access to resources to promote innovation, growth, and advocacy.
+<p class="text-fl-step-1">The Emerging Payments Association was founded with the goal of making the United Kingdom a global leader in payments innovation. Membership in the EPA provided access to resources to promote innovation, growth, and advocacy.</p>
 
 The client required a public resource for industry news and events, as well as secure members-only access to projects, whitepapers, resources, and an EPA network of over 3,700 companies. The high quality of the public content would funnel prospects to sign up for memberships.
+
+<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
+## Skills
+</Skills>
 
 ## My responsibilities
 
@@ -84,7 +94,7 @@ The client required a public resource for industry news and events, as well as s
 
 As new sections became available for review, the index listings were updated to keep the client informed. This reactive approach allowed me to hand over the initial templates to developers without having to wait for the entire set. It also prevented any client surprises because they were viewing a realistic 'working' version of the site.
 
-<Figure caption='Clear branding was required across all media formats' credit={frontmatter.title}>
+<Figure caption='Example of the index listing and template pages ' credit={frontmatter.title}>
   <Image src={listing_1} alt="Listing page" class="w-full h-auto shadow-md border border-outline" />
   <Image src={listing_2} alt="Homepage" class="w-full h-auto shadow-md border border-outline" />
   <Image src={listing_3} alt="Article" class="w-full h-auto shadow-md border border-outline" />
