@@ -1,17 +1,19 @@
 ---
-import { Image } from 'astro:assets';
 import Slide from '~/components/Swiper/HomeSlide.astro';
 import { type SwiperImage } from '~/data/home';
 
 export interface Props {
-    slides: Partial<SwiperImage>;
+    slides: SwiperImage[];
     class?: string | ImageMetadata;
 }
 
 const { slides } = Astro.props;
 ---
 
-<div class="swiper swiper--home group h-full w-full">
+<div
+    class="swiper swiper--home group h-full w-full transition-opacity duration-300 x-cloak:opacity-0"
+    x-cloak
+>
     <div class="swiper-wrapper not-prose flex items-center">
         {
             slides.map((slide, i) => (
@@ -92,7 +94,12 @@ const { slides } = Astro.props;
             },
             watchOverflow: true, // disable if only single slide
             on: {
-                init: () => {},
+                afterInit: () => {
+                    const element = document.querySelector(swiperClass);
+                    if (element) {
+                        element.removeAttribute('x-cloak');
+                    }
+                },
                 autoplayStop: () => {
                     SwiperHome.autoplay.start();
                 },

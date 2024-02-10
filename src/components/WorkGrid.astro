@@ -19,6 +19,7 @@ interface LogoImage {
 
 interface Props {
     title: string;
+    featured: boolean;
     url: string;
     cover: CoverImage;
     logo: LogoImage;
@@ -27,7 +28,7 @@ interface Props {
     tags: string[];
     readTime: string;
 }
-const { title, url, cover, logo, product, taster, tags, readTime } =
+const { title, featured, url, cover, logo, product, taster, tags, readTime } =
     Astro.props;
 ---
 
@@ -68,7 +69,7 @@ const { title, url, cover, logo, product, taster, tags, readTime } =
                     src={product.src}
                     widths={[300]}
                     alt={product.alt + ' logo'}
-                    class="h-fl-space-4xl z-10 -mt-fl-space-2xl w-full object-contain transition-transform duration-700"
+                    class="z-10 -mt-fl-space-2xl h-fl-space-4xl w-full object-contain transition-transform duration-700"
                 />
             )
         }

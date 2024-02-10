@@ -23,7 +23,7 @@
 }
 
 .swiper-pagination-bullet-active {
-    @apply w-4 border-accent;
+    @apply w-fl-space-xs border-accent;
 }
 
 /* Prism | New diff- syntax

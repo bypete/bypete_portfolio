@@ -3,10 +3,10 @@
     /* Dividers
 ---------------------------------------------------------------------------------*/
     .divider {
-        @apply -mx-4 mt-8 flex items-center justify-between before:mr-1
-  before:w-3 before:border-b after:ml-1 
+        @apply -mx-fl-space-s mt-fl-space-m flex items-center justify-between before:mr-1
+  before:w-fl-space-xs before:border-b after:ml-fl-space-3xs 
   after:grow after:border-b first:mt-0 first-of-type:before:border-0 first-of-type:after:border-0
-  md:-mx-8 before:md:mr-2 before:md:w-6 after:md:ml-2;
+  md:-mx-fl-space-m before:md:mr-fl-space-2xs before:md:w-fl-space-m after:md:ml-fl-space-2xs;
     }
 
     .divider--center {
@@ -19,45 +19,6 @@
         filter: drop-shadow(0px 0px 16px rgb(0 0 0 / 0.75));
     }
 
-    /* Home 
----------------------------------------------------------------------------------*/
-    .fun-hover {
-        background-image: linear-gradient(to right, #25b0a9 50%, #fee603 50%);
-        background-position: 0;
-        background-size: 200%;
-        transition: all 0.4s;
-        &:hover {
-            background-position: -100%;
-        }
-    }
-    /*
-  .highlight > span {
-    display: inline;
-    background: #ee4035;
-     padding: 0.5rem 0;
-    box-decoration-break: clone;
-    box-shadow: 0.5rem 0 0 #ee4035, -0.5rem 0 0 #ee4035;
-  }
-*/
-
-    .goo {
-        display: inline;
-        box-decoration-break: clone;
-        padding: 0 1rem;
-        filter: url('#goo');
-    }
-    .highlight > span {
-        padding: 0 1rem;
-        box-decoration-break: clone;
-        background: black;
-    }
-
-    @keyframes animatedBackground {
-        to {
-            background-size: 100% 100%;
-        }
-    }
-
     /* Panels 
 ---------------------------------------------------------------------------------*/
     .panel {
@@ -65,17 +26,7 @@
     }
 
     .panel + * {
-        @apply mt-4;
-    }
-
-    /* Callouts
----------------------------------------------------------------------------------*/
-    .callout {
-        @apply rounded border border-gray-100 bg-white p-4 shadow;
-    }
-
-    .callout + * {
-        @apply mt-8;
+        @apply mt-fl-space-xs;
     }
 
     /* Placeholders */
@@ -128,11 +79,11 @@
     }
 
     .form__divider {
-        @apply -mx-4 my-8 border-outline lg:mx-0 lg:w-full;
+        @apply -mx-fl-space-xs my-fl-space-m border-outline lg:mx-0 lg:w-full;
     }
 
     .form__divider--panel {
-        @apply -mx-4 w-auto lg:-mx-8;
+        @apply -mx-fl-space-xs w-auto lg:-mx-fl-space-m;
     }
 
     /* Forms | Switch */
@@ -158,15 +109,8 @@
         @apply bg-accent;
     }
 
-    /* Notifications
----------------------------------------------------------------------------------*/
-    .notification {
-        @apply rounded bg-slate-900 p-2 text-white;
-    }
-
     /* Lists
 ---------------------------------------------------------------------------------*/
-
     .list {
         @apply space-y-2 !pl-0;
     }
@@ -183,7 +127,7 @@
 
     .list--bullet li,
     .list--checklist li {
-        @apply list-none pl-8 before:absolute before:left-0 before:top-0 before:w-6 before:leading-normal;
+        @apply list-none pl-fl-space-m before:absolute before:left-0 before:top-0 before:w-6 before:leading-normal;
     }
 
     .list--bullet li {
@@ -203,25 +147,25 @@
     }
 
     .list--counter > li:before {
-        @apply absolute left-0 top-1.5 mr-4 block h-7 w-7 rounded-full bg-accent text-center text-fl-step-1 font-black text-white lg:h-8 lg:w-8;
+        @apply absolute left-0 top-fl-space-3xs mr-fl-space-xs block h-fl-space-m w-fl-space-m rounded-full bg-accent text-center text-fl-step-1 font-black text-white;
         content: counter(a);
     }
 
     /* Blockquotes
   ---------------------------------------------------------------------------------*/
     blockquote {
-        @apply relative my-12 block pl-4 text-left font-Georgia text-fl-step-1 before:icon-[lucide--message-square-quote]
+        @apply relative my-fl-space-l block pl-fl-space-xs text-left font-Georgia text-fl-step-1 before:icon-[lucide--message-square-quote]
 before:block before:text-[1.5em] before:leading-none before:text-accent;
     }
 
     blockquote .cite {
-        @apply mb-0 mt-4 text-fl-step-0 not-italic leading-8 text-quiet;
+        @apply mb-0 mt-fl-space-xs text-fl-step-0 not-italic leading-fl-space-m text-quiet;
     }
 
     /* labels
   ---------------------------------------------------------------------------------*/
     .label {
-        @apply inline-block rounded px-1 py-1 align-text-bottom text-fl-step--2 uppercase leading-none;
+        @apply inline-block rounded px-fl-space-3xs py-fl-space-3xs align-text-bottom text-fl-step--2 uppercase leading-none;
     }
 
     .label-pin {
@@ -251,23 +195,23 @@ before:block before:text-[1.5em] before:leading-none before:text-accent;
     }
 
     .pagination__page {
-        @apply relative  items-center border border-gray-300 bg-white px-4 py-2  text-fl-step--1 font-medium text-accent hover:bg-gray-50;
+        @apply relative  items-center border border-gray-300 bg-white px-fl-space-xs py-fl-space-2xs  text-fl-step--1 font-medium text-accent hover:bg-gray-50;
     }
 
     .pagination__ellipsis {
-        @apply relative items-center border border-gray-300 bg-white px-4 py-2 text-fl-step--1 font-medium text-gray-700;
+        @apply relative items-center border border-gray-300 bg-white px-fl-space-xs py-fl-space-2xs text-fl-step--1 font-medium text-gray-700;
     }
 
     .pagination__previous {
-        @apply relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-fl-step--1 font-medium text-gray-500 hover:bg-gray-50;
+        @apply relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-fl-space-xs py-fl-space-xs text-fl-step--1 font-medium text-gray-500 hover:bg-gray-50;
     }
 
     .pagination__next {
-        @apply relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-fl-step--1 font-medium text-gray-500 hover:bg-gray-50;
+        @apply relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-fl-space-xs py-fl-space-xs text-fl-step--1 font-medium text-gray-500 hover:bg-gray-50;
     }
 
     .pagination .active {
-        @apply relative z-10 items-center border border-gray-300 bg-white px-4 py-2 text-fl-step--1 font-bold  ring-1 ring-focus;
+        @apply relative z-10 items-center border border-gray-300 bg-white px-fl-space-xs py-fl-space-xs text-fl-step--1 font-bold  ring-1 ring-focus;
     }
 
     /* Modals
@@ -283,41 +227,6 @@ before:block before:text-[1.5em] before:leading-none before:text-accent;
             50% calc(100% - 8px),
             0% 100%
         );
-    }
-
-    .curve {
-        clip-path: ellipse(150% 100% at 50% 0%);
-    }
-
-    .curve--r {
-        clip-path: ellipse(100% 180% at 0% 50%);
-    }
-
-    .clip-divide {
-        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 50px), 0 100%);
-    }
-
-    .clip-divide + * {
-        clip-path: polygon(0 50px, 100% 0, 100% 100%, 0 100%);
-        margin-top: -50px;
-    }
-
-    .clipshape {
-        @apply z-10
-    before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:block before:h-full before:w-full
-    before:translate-x-5 before:rotate-2 before:bg-accent before:opacity-75
-    after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:block after:h-full after:w-full
-    after:translate-x-0 after:-rotate-3 after:scale-x-125 after:scale-y-150 after:bg-accent after:opacity-75;
-    }
-
-    .clipshape * {
-        position: relative;
-    }
-
-    .clipshape--xl {
-        @apply before:translate-x-0 before:-rotate-3 before:scale-x-125 before:scale-y-150
-    before:rounded-clipshapeXL
-    after:-translate-x-20 after:-rotate-3 after:skew-x-12 after:bg-brand after:opacity-80;
     }
 
     .angleclip {
@@ -339,14 +248,6 @@ before:block before:text-[1.5em] before:leading-none before:text-accent;
         }*/
     }
 
-    .thumbclip {
-        /* clip-path: polygon(0 0, 100.5% 0, 100.5% 100%, calc(100% - 16px) 100%, 0 calc(100% - 24px));*/
-        clip-path: polygon(0 0, 100.5% 0, 100.5% 100%, 0 calc(100% - 24px));
-    }
-    .headerclip {
-        clip-path: polygon(0 0, 100.5% 0, 100.5% 100%, 0 0);
-    }
-
     .tabclip:before,
     .tabclip:after {
         /*clip-path: path('M0,0C.55,0,1,.45,1,1V0H0Z'); */
@@ -357,9 +258,6 @@ before:block before:text-[1.5em] before:leading-none before:text-accent;
     .tabclip:after {
         @apply -right-2 left-auto -scale-x-100;
     }
-
-    /* Hero | Splash
----------------------------------------------------------------------------------*/
 
     /* Javascript | Alpine modifiers
   ---------------------------------------------------------------------------------*/
@@ -372,6 +270,4 @@ before:block before:text-[1.5em] before:leading-none before:text-accent;
     .swiper-pagination {
         @apply !left-1/2 !w-auto -translate-x-1/2;
     }
-    /* Javascript | Photoswipe
-  ---------------------------------------------------------------------------------*/
 }

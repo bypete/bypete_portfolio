@@ -68,20 +68,14 @@ const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
                     )
                 }
             </div>
-            <div
-                class="rte self-end px-fl-space-m py-4 md:pb-8 lg:pb-12 conpad:pr-0"
-            >
+            <div class="rte self-end px-fl-space-m py-fl-space-xs conpad:pr-0">
                 <h1
                     class="capline text-fl-step-3/none"
                     set:html={frontmatter.title}
                 /><ReadTime duration={minutesRead} />
                 <p>{frontmatter.taster}</p>
-                <div class="flex justify-between">
-                    <Tags
-                        tags={frontmatter.tags}
-                        url={true}
-                        class="my-fl-space-m"
-                    />
+                <div class="my-fl-space-m flex justify-between">
+                    <Tags tags={frontmatter.tags} url={true} />
                 </div>
                 <p>
                     <Link

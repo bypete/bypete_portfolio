@@ -10,7 +10,7 @@ import { Icon } from 'astro-icon/components';
         id="pagetop"
         x-ref="pagetop"
         x-cloak
-        :class="pageTop ? '' : 'translate-y-12 md:translate-y-0 md:translate-x-16'"
+        :class="pageTop ? '' : 'translate-y-fl-space-xl md:translate-y-0 md:translate-x-fl-space-xl'"
         href="#top"
         aria-hidden="true"
         class="scroll flex items-center justify-center rounded-full bg-accent p-fl-space-3xs text-white transition duration-700 hover:border-black/10 hover:bg-accent-light hover:shadow-inset focus:outline-none"
@@ -30,7 +30,7 @@ import { Icon } from 'astro-icon/components';
         @click="toggle()"
     >
         <span
-            :class="smNav ? 'rotate-45 translate-y-2' : ''"
+            :class="smNav ? 'rotate-45 translate-y-fl-space-2xs' : ''"
             class="ease my-0.5 h-1 w-6 transform rounded-full bg-white transition duration-300"
         ></span>
         <span
@@ -38,7 +38,7 @@ import { Icon } from 'astro-icon/components';
             class="ease my-0.5 h-1 w-6 transform rounded-full bg-white transition duration-300"
         ></span>
         <span
-            :class="smNav ? '-rotate-45 -translate-y-2' : ''"
+            :class="smNav ? '-rotate-45 -translate-y-fl-space-2xs' : ''"
             class="ease my-0.5 h-1 w-6 transform rounded-full bg-white transition duration-300"
         ></span>
     </Button>

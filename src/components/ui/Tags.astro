@@ -6,6 +6,10 @@ interface Props {
 }
 const { tags, url = false, class: className = ' ' } = Astro.props;
 import { Icon } from 'astro-icon/components';
+// Move 'featured' to the beginning of the array, if it exists
+if (tags.includes('featured')) {
+    tags.unshift(tags.splice(tags.indexOf('featured'), 1)[0]);
+}
 ---
 
 {

@@ -2,13 +2,26 @@
 import Toast from './ui/Toast.astro';
 import Button from './ui/Button.astro';
 import Link from './ui/Link.astro';
+import siteInfo from '~/data/site';
 import { Icon } from 'astro-icon/components';
+
+const build = import.meta.env.MODE;
+let domain: string;
+
+if (build === 'production') {
+    domain = siteInfo.domain.live;
+} else if (build === 'staging') {
+    domain = siteInfo.domain.staging;
+} else {
+    domain = 'localhost';
+}
+const isSecure = ['production', 'staging'].includes(build);
 ---
 
 <Toast>
     <div
         class="pointer-events-auto grid items-start gap-y-fl-space-xs p-fl-space-xs grid-areas-toast"
-        x-data="cookie"
+        x-data={`cookie({ domain: '${domain}', isSecure: '${isSecure}'})`}
         x-show="toastCookie"
         x-transition:enter="transition ease-out duration-150"
         x-transition:enter-start="opacity-0 "
@@ -52,14 +65,12 @@ import { Icon } from 'astro-icon/components';
     import Cookies from 'js-cookie';
 
     document.addEventListener('alpine:init', () => {
-        const isProduction = import.meta.env.MODE === 'production';
-        const domain = isProduction ? import.meta.env.SITE : 'localhost';
-        const isSecure = isProduction; // Set to true for production, false for localhost
-
-        Alpine.data('cookie', () => ({
+        Alpine.data('cookie', (build = {}) => ({
             cookie: '',
+            name: 'cnotice',
+            domain: build.domain,
+            isSecure: build.isSecure || false,
             toastCookie: false,
-            cookie_name: 'cnotice',
             freeze(freezeState) {
                 this.toastCookie = freezeState;
                 document.body.classList.toggle('overflow-hidden', freezeState);
@@ -67,7 +78,7 @@ import { Icon } from 'astro-icon/components';
             },
             init() {
                 setTimeout(() => {
-                    this.cookie = Cookies.get(this.cookie_name);
+                    this.cookie = Cookies.get(this.name);
                     if (!this.cookie) {
                         this.freeze(true);
                     }
@@ -75,13 +86,18 @@ import { Icon } from 'astro-icon/components';
             },
             accept() {
                 this.freeze(false);
-                Cookies.set(this.cookie_name, 'true', {
+                const config = {
                     expires: 365,
                     path: '/',
-                    secure: isSecure,
+                    secure: this.isSecure,
                     sameSite: 'strict',
-                    ...(isProduction && { domain }), // Include domain only for production
-                });
+                };
+
+                if (this.isSecure && this.domain) {
+                    config.domain = this.domain; // Include domain only for production or staging
+                }
+
+                Cookies.set(this.name, 'true', config);
             },
         }));
     });

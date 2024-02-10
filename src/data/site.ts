@@ -10,6 +10,10 @@ export type SiteInfo = {
   title: string;
   description: string;
   url: string;
+  domain: {
+    live: string;
+    staging: string;
+  };
   root: string;
   og: {
     image: {
@@ -44,13 +48,17 @@ const siteInfo: SiteInfo = {
   description: "Pete Wallace is an experienced Front-End developer based in Surrey, UK.",
   url: "https://bypete.uk",
   root: "https://bypete.uk/",
+  domain: {
+    live: "bypete.uk",
+    staging: "staging.bypete.uk",
+  },
   og: {
     image: {
       src: "/og/og__default.png",
       alt: "Portfolio Site",
     },
     title: "Portfolio Site",
-    description: "Something to entice",
+    description: "Pete Wallace is an experienced Front-End developer based in Surrey, UK.",
   },
   icon: "/favicon.ico",
   socials: [

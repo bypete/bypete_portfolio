@@ -165,8 +165,8 @@
         --color-content-dark: 55 65 81; /* gray-700 */
 
         --color-headline: 31 41 55; /* gray-800 */
-        --color-headline-start: 15 23 42; /* slate-900 */
-        --color-headline-end: 12 74 110; /* sky-900 */
+        --color-headline-start: 2 132 199; /* sky-600 */
+        --color-headline-end: 15 23 42; /* slate-900 */
         --color-blockquote: 31 41 55; /* gray-800 */
 
         --color-brand-lightest: 255 224 77; /* #ffe04d */
@@ -367,15 +367,15 @@ h1 {
 }
 
 .rte h3 {
-    @apply mb-1 text-fl-step-1 font-bold;
+    @apply mb-fl-space-3xs text-fl-step-1 font-bold;
 }
 
 .rte h4 {
-    @apply mb-1 text-fl-step-1 font-medium;
+    @apply mb-fl-space-3xs text-fl-step-1 font-medium;
 }
 
 .rte > p {
-    @apply mb-4;
+    @apply mb-fl-space-xs;
 }
 
 .rte > :last-child {
@@ -407,7 +407,7 @@ sup.new {
 }
 
 .table th {
-    @apply border-b pb-2 pt-0;
+    @apply border-b pb-fl-space-2xs pt-0;
 }
 
 .table th,
@@ -421,11 +421,11 @@ sup.new {
 
 .table--padded th,
 .table--padded tbody td {
-    @apply py-2 pl-2 lg:pl-4;
+    @apply py-fl-space-2xs pl-fl-space-2xs lg:pl-fl-space-xs;
 }
 .table--padded tr th,
 .table--padded tr td {
-    @apply last:pr-2 last:lg:pr-4;
+    @apply last:pr-fl-space-2xs last:lg:pr-fl-space-xs;
 }
 
 .table--noindent tr td,

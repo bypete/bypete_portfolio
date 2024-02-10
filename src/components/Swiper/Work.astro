@@ -5,8 +5,11 @@ import Slide from '~/components/Swiper/HomeSlide.astro';
 import { type SwiperImage } from '~/data/home';
 ---
 
-<section class="h-screenSvh w-full bg-zinc-800 text-content-light">
-    <div class="swiper swiper--work group h-full w-full">
+<section class="h-screenSvh w-full bg-slate-900 text-content-light">
+    <div
+        class="swiper swiper--work group h-full w-full transition-opacity duration-300 x-cloak:opacity-0"
+        x-cloak
+    >
         <div class="swiper-wrapper flex items-center">
             <slot />
         </div>
