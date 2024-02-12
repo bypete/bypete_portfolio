@@ -8,5 +8,6 @@ export default (Alpine: Alpine) => {
     Alpine.store('cache', {
       banner: null,
       theme: null,
+      pageTop: false,
   });
 }

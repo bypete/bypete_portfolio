@@ -1,36 +1,26 @@
 ---
 import { Icon } from 'astro-icon/components';
-interface Props {
-    class?: string;
-    isHeroDark?: boolean;
-}
-
-const { class: ClassName, isHeroDark = false } = Astro.props;
-// const legibility = isHeroDark
-//     ? ' group-data-[banner=start]:focus:text-menudark-active group-data-[banner=start]:text-menudark'
-//     : '';
 ---
 
 <span
     x-data="theme"
     x-cloak
     class:list={[
-        'grid-col-1 grid-row-1 relative grid justify-center justify-self-end overflow-hidden rounded-full bg-panel p-fl-space-3xs text-center leading-none   text-content shadow-icon shadow-panel-shadow/25 md:justify-self-center',
+        'grid-col-1 grid-row-1 transform-all relative grid justify-center justify-self-end overflow-hidden rounded-full bg-panel p-fl-space-3xs text-center leading-none text-content shadow-icon  shadow-panel-shadow/25 delay-300 duration-200 md:justify-self-center',
     ]}
-    x-bind:class="{'' : theme === 'light'}"
 >
     <button
         type="button"
         @click="theme = 'light'"
-        class="col-start-1 row-start-1 rotate-0 transform delay-200 duration-500"
-        x-bind:class="{'translate-y-fl-space-l -rotate-180  ' : theme === 'light'}"
+        class="col-start-1 row-start-1 rotate-0 transform duration-500"
+        x-bind:class="{'translate-y-fl-space-l -rotate-180' : theme === 'light'}"
         ><Icon name="lucide:sun" class="h-fl-space-m-s w-fl-space-m-s" />
     </button>
     <button
         type="button"
         @click="theme = 'dark'"
-        class="col-start-1 row-start-1 rotate-0 transform delay-200 duration-500"
-        x-bind:class="{'-translate-y-fl-space-l -rotate-180 ' : theme === 'dark'}"
+        class="col-start-1 row-start-1 rotate-0 transform duration-500"
+        x-bind:class="{'-translate-y-fl-space-l -rotate-180' : theme === 'dark'}"
         ><Icon name="lucide:sun-moon" class="h-fl-space-m-s w-fl-space-m-s" />
     </button>
 </span>
@@ -41,35 +31,29 @@ const { class: ClassName, isHeroDark = false } = Astro.props;
         Alpine.data('theme', () => ({
             theme: '',
             getTheme() {
-                if (
-                    typeof localStorage !== 'undefined' &&
-                    localStorage.getItem('theme')
-                ) {
+                if (localStorage?.getItem('theme')) {
                     return localStorage.getItem('theme');
                 }
-                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    return 'dark';
-                }
-                return 'light';
+                return window.matchMedia('(prefers-color-scheme: dark)').matches
+                    ? 'dark'
+                    : 'light';
             },
 
-            setMetaTheme(value) {
+            setTheme(value) {
+                localStorage.setItem('theme', value);
+                const html = document.documentElement;
                 const meta = document.querySelector('meta[name="theme-color"]');
-                if (value === 'dark') {
-                    meta?.setAttribute('content', '#09090b');
-                }
-                if (value === 'light') {
-                    meta?.setAttribute('content', '#ffffff');
-                }
+
+                html?.setAttribute('data-theme', value);
+                meta?.setAttribute(
+                    'content',
+                    value === 'dark' ? '#09090b' : '#ffffff',
+                );
             },
 
             init() {
-                this.$watch('theme', (value, oldValue) => {
-                    localStorage.setItem('theme', value);
-                    document
-                        .querySelector('html')
-                        ?.setAttribute('data-theme', this.theme);
-                    this.setMetaTheme(value);
+                this.$watch('theme', (value) => {
+                    this.setTheme(value);
                 });
 
                 this.theme = this.getTheme();

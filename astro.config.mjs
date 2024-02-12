@@ -7,6 +7,7 @@ import rehypeAttrs from 'rehype-attr';
 import rehypeExternalLinks from 'rehype-external-links';
 import sitemap from '@astrojs/sitemap';
 import alpine from '@astrojs/alpinejs';
+import partytown from '@astrojs/partytown';
 const rehypeExternalLinksConfig = [
     rehypeExternalLinks,
     {
@@ -34,7 +35,14 @@ export default defineConfig({
             },
         }),
         sitemap(),
-        alpine({ entrypoint: '/src/entrypoint' }),
+        alpine({
+            entrypoint: '/src/entrypoint',
+        }),
+        partytown({
+            config: {
+                forward: ['dataLayer.push'],
+            },
+        }),
     ],
     markdown: {
         rehypePlugins: [rehypeAttrs, rehypeExternalLinksConfig],

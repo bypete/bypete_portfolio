@@ -460,7 +460,10 @@ export default {
                 },
                 tag: {
                     DEFAULT: 'rgb(var(--color-tag) / <alpha-value>)',
+                    featured: 'rgb(var(--color-tag-featured) / <alpha-value>)',
                     bg: 'rgb(var(--color-tag__bg) / <alpha-value>)',
+                    'bg-featured':
+                        'rgb(var(--color-tag__bg-featured) / <alpha-value>)',
                     bg__link: 'rgb(var(--color-tag__bg-link) / <alpha-value>)',
                     bg__hover:
                         'rgb(var(--color-tag__bg-hover) / <alpha-value>)',

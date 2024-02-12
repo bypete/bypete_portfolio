@@ -155,9 +155,11 @@
         --color-focus: 56 189 248; /* sky-400 */
 
         --color-tag: 55 65 81; /* gray-700 */
+        --color-tag-featured: 55 65 81; /* gray-700 */
         --color-tag__bg: 244 244 245; /* zinc-100 */
         --color-tag__bg-link: 253 224 71; /* yellow-300 */
         --color-tag__bg-hover: 250 204 21; /* yellow-400 */
+        --color-tag__bg-featured: 253 224 71; /* yellow-300 */
 
         --color-content: 55 65 81; /* gray-700 */
         --color-content-invert: 255 255 255; /* white */

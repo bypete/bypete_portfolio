@@ -1,7 +1,6 @@
 ---
 import Tags from '~/components/ui/Tags.astro';
 import { Image } from 'astro:assets';
-import { Icon } from 'astro-icon/components';
 import ReadTime from './ui/ReadTime.astro';
 
 interface CoverImage {
@@ -32,57 +31,55 @@ const { title, featured, url, cover, logo, product, taster, tags, readTime } =
     Astro.props;
 ---
 
-<div class="holder flex rounded-tight">
-    <a
-        href={url}
-        class="group relative grid w-full grid-rows-workcard rounded-tight bg-panel no-underline shadow-md transition-all duration-700 hover:no-underline hover:shadow-cardhover hover:duration-300 md:ring-white md:hover:ring-2"
-        x-data="{ shown: false }"
-        x-intersect.threshold.10="shown = true"
-        x-bind:class="shown ? 'animate-appear' : 'invisible'"
+<a
+    href={url}
+    class="group relative grid w-full grid-rows-workcard rounded-tight bg-panel no-underline opacity-0 shadow-md transition-all duration-700 hover:no-underline hover:shadow-cardhover hover:duration-300 md:ring-white md:hover:ring-2"
+    x-data="{ shown: false }"
+    x-intersect.threshold.10="shown = true"
+    x-bind:class="shown ? 'animate-fade-in-zoom' : ''"
+>
+    <div
+        class="relative block overflow-hidden bg-quiet pb-photo hover:rounded-t-tight"
     >
-        <div
-            class="relative block overflow-hidden bg-quiet pb-photo hover:rounded-t-tight"
-        >
-            <Image
-                src={cover.src}
-                alt={cover.alt}
-                class="absolute inset-0 m-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-150 group-focus:scale-150"
-                quality="high"
-                loading="eager"
-                widths={[400, 720]}
-                sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.33), (min-width: 1264) calc(var(--container-width-max)*0.33)`}
-            />
-            {
-                logo && (
-                    <Image
-                        src={logo.light || logo.src}
-                        widths={[300]}
-                        alt={title + ' logo'}
-                        class="absolute left-1/2 top-1/2 m-auto h-auto max-w-1/3 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 group-hover:max-w-1/2 group-focus:max-w-1/2 "
-                    />
-                )
-            }
-        </div>
+        <Image
+            src={cover.src}
+            alt={cover.alt}
+            class="absolute inset-0 m-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-125 group-focus:scale-125"
+            quality="high"
+            loading="eager"
+            widths={[400, 720]}
+            sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.33), (min-width: 1264) calc(var(--container-width-max)*0.33)`}
+        />
         {
-            product && (
+            logo && (
                 <Image
-                    src={product.src}
+                    src={logo.light || logo.src}
                     widths={[300]}
-                    alt={product.alt + ' logo'}
-                    class="z-10 -mt-fl-space-2xl h-fl-space-4xl w-full object-contain transition-transform duration-700"
+                    alt={title + ' logo'}
+                    class="absolute left-1/2 top-1/2 m-auto h-auto max-w-1/3 -translate-x-1/2 -translate-y-1/2 transition-all duration-200  group-focus:max-w-1/2 "
                 />
             )
         }
-        <div class="px-fl-space-s">
-            {readTime && <ReadTime duration={readTime} />}
-            <h2
-                class="link mb-fl-space-2xs font-headline text-fl-step-1/tight font-extrabold"
-                set:html={title}
+    </div>
+    {
+        product && (
+            <Image
+                src={product.src}
+                widths={[300]}
+                alt={product.alt + ' logo'}
+                class="z-10 -mt-fl-space-2xl h-fl-space-4xl w-full object-contain transition-transform duration-700 group-hover:scale-125 group-focus:scale-125"
             />
-            {taster && <p class="text-base/snug" set:html={taster} />}
-        </div>
-        <div class="p-fl-space-s">
-            <Tags {tags} />
-        </div>
-    </a>
-</div>
+        )
+    }
+    <div class="px-fl-space-s">
+        {readTime && <ReadTime duration={readTime} />}
+        <h2
+            class="link mb-fl-space-2xs font-headline text-fl-step-1/tight font-extrabold"
+            set:html={title}
+        />
+        {taster && <p class="text-base/snug" set:html={taster} />}
+    </div>
+    <div class="p-fl-space-s">
+        <Tags {tags} />
+    </div>
+</a>

@@ -4,13 +4,12 @@ import { Icon } from 'astro-icon/components';
 ---
 
 <div
-    class="fixed bottom-fl-space-2xl right-fl-space-s z-shortcuts flex flex-col items-center space-y-fl-space-2xs md:right-8"
+    class="fixed bottom-fl-space-2xl right-fl-space-s z-shortcuts flex flex-col items-center space-y-fl-space-2xs"
 >
     <a
-        id="pagetop"
-        x-ref="pagetop"
+        x-data
         x-cloak
-        :class="pageTop ? '' : 'translate-y-fl-space-xl md:translate-y-0 md:translate-x-fl-space-xl'"
+        :class="$store.cache.pageTop ? '' : 'translate-y-fl-space-xl md:translate-y-0 md:translate-x-fl-space-xl'"
         href="#top"
         aria-hidden="true"
         class="scroll flex items-center justify-center rounded-full bg-accent p-fl-space-3xs text-white transition duration-700 hover:border-black/10 hover:bg-accent-light hover:shadow-inset focus:outline-none"

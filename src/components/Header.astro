@@ -17,11 +17,8 @@ const { isHeroDark = false } = Astro.props;
     x-ref="banner"
     data-banner="start"
     :data-banner="banner"
-    x-data="{ banner:'start', ...stickybanner()}"
+    x-data="stickybanner()"
     x-init="reactOnScroll()"
-    @set-banner.window="banner = $event.detail"
-    @freeze-banner.window="$refs.banner.classList.add('banner--freeze', $event.detail)"
-    @thaw-banner.window="$refs.banner.classList.remove('banner--freeze', $event.detail)"
     @scroll.window="reactOnScroll()"
 >
     <div
@@ -37,34 +34,31 @@ const { isHeroDark = false } = Astro.props;
                 isHeroDark ? (
                     <>
                         <span
-                            class=" col-start-1 "
+                            class="col-start-1 "
                             x-bind:class="banner === 'up' ? 'opacity-0' : 'opacity-100'"
                         >
                             <Icon
                                 name="bypete__white"
-                                class="banner__logo h-fl-space-l w-auto"
+                                class="h-fl-space-l w-auto"
                             />
                         </span>
                         <span
-                            class=" col-start-1 transition-opacity duration-300"
+                            class="col-start-1 transition-opacity duration-300"
                             x-bind:class="banner === 'up' ? 'opacity-100' : 'opacity-0'"
                         >
                             <Icon
                                 name="bypete__brand"
-                                class="banner__logo h-fl-space-l w-auto"
+                                class="h-fl-space-l w-auto"
                             />
                         </span>
                     </>
                 ) : (
-                    <Icon
-                        name="bypete"
-                        class="banner__logo h-fl-space-l w-auto"
-                    />
+                    <Icon name="bypete" class="h-fl-space-l w-auto" />
                 )
             }
         </a>
 
-        <ThemeIcon {isHeroDark} />
+        <ThemeIcon />
         <Navigation class="justify-self-end" {isHeroDark} />
     </div>
 </header>
@@ -75,46 +69,25 @@ const { isHeroDark = false } = Astro.props;
     document.addEventListener('alpine:init', () => {
         Alpine.data('stickybanner', () => ({
             lastScrollTop: 0,
+            banner: 'start',
             reactOnScroll() {
-                const ba = this.$refs.banner.clientHeight;
-                const sh = Math.max(
-                    document.body.scrollHeight,
-                    document.body.offsetHeight,
-                    document.documentElement.clientHeight,
-                    document.documentElement.scrollHeight,
-                    document.documentElement.offsetHeight,
-                );
                 const st =
                     window.pageYOffset || document.documentElement.scrollTop;
                 const ch =
                     window.innerHeight || document.documentElement.clientHeight;
 
-                if (st > ch * 0.5) {
-                    this.pageTop = true;
-                }
-
-                // if (st === 0 || st <= ba) {
-                //     this.$data.banner = 'start';
-                //     this.pageTop = false;
-                // } else if (st > this.$data.lastScrollTop && st >= ba) {
-                //     this.$data.banner = 'down';
-                // } else if (st < this.$data.lastScrollTop) {
-                //     this.$data.banner = 'up';
-                // } else {
-                //     this.$data.banner = 'unknown';
-                // }
+                this.$store.cache.pageTop = st > ch;
 
                 if (st === 0) {
-                    this.$data.banner = 'start';
-                    this.pageTop = false;
+                    this.banner = 'start';
                 } else if (st > this.$data.lastScrollTop) {
-                    this.$data.banner = 'down';
+                    this.banner = 'down';
                 } else if (st < this.$data.lastScrollTop) {
-                    this.$data.banner = 'up';
+                    this.banner = 'up';
                 } else {
-                    this.$data.banner = 'unknown';
+                    this.banner = 'unknown';
                 }
-                this.$store.cache.banner = this.$data.banner;
+                this.$store.cache.banner = this.banner;
                 this.$data.lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
             },
         }));
