@@ -1,0 +1,16 @@
+---
+const isProduction = import.meta.env.MODE === 'production';
+---
+
+{
+    isProduction && (
+        <noscript>
+            <iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-TNS273XC"
+                height="0"
+                width="0"
+                style="display:none;visibility:hidden"
+            />
+        </noscript>
+    )
+}

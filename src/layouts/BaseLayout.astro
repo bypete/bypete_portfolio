@@ -1,5 +1,7 @@
 ---
 import MainSEO, { type Props as HeadProps } from '~/components/SEO/Main.astro';
+import GoogleTagNoScript from '~/components/SEO/GoogleTagNoScript.astro';
+import GoogleTag from '~/components/SEO/GoogleTag.astro';
 import { ViewTransitions } from 'astro:transitions';
 // import Loader from "../components/Loader.astro";
 import Header from '../components/Header.astro';
@@ -15,8 +17,7 @@ const fm = Astro.props.frontmatter || Astro.props;
 
 const { head = {}, isHeroDark = false } = fm;
 
-// console.log(head);
-// console.log(isHeroDark);
+const isProduction = process.env.NODE_ENV === 'production';
 
 import '~/styles/tailwind.css';
 ---
@@ -29,7 +30,8 @@ import '~/styles/tailwind.css';
     class="relative h-full max-w-full scroll-smooth"
 >
     <head>
-        <MainSEO {...head} {isHeroDark} />
+        <MainSEO {...head} {isHeroDark} {isProduction} />
+        <GoogleTag />
         <!-- <ViewTransitions /> -->
     </head>
     <body
@@ -38,6 +40,7 @@ import '~/styles/tailwind.css';
         x-ref="body"
         id="top"
     >
+        <GoogleTagNoScript />
         <Accessibility />
         <!-- <Loader /> -->
         <div
