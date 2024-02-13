@@ -54,7 +54,7 @@ const siteInfo: SiteInfo = {
   },
   og: {
     image: {
-      src: "/og/og__default.png",
+      src: "/og/og__default.jpg",
       alt: "Portfolio Site",
     },
     title: "Portfolio Site",
