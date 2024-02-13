@@ -22,31 +22,29 @@ const heroConfig: HeroProps = {
 
 const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
 const { headings, isWide = false, prose = true } = Astro.props;
+const { hideToc = false, hideBreadcrumbs = false } = fm;
 ---
 
 <BaseLayout head={head} {isHeroDark}>
     <slot name="slothero">
         <Hero {...heroConfig} />
-        <Breadcrumbs title={head.title} />
+        {!hideBreadcrumbs && <Breadcrumbs title={head.title} />}
     </slot>
 
     <main
         id="main-content"
         class="relative mx-auto max-w-container py-fl-space-xl"
     >
-        {
-            (
-                <div
-                    class:list={[
-                        'text-fl-step-0',
-                        prose && 'rte prose ',
-                        isWide ? 'w-full' : 'mx-auto  max-w-3xl',
-                    ]}
-                >
-                    {headings && <TableOfContents headings={headings} />}
-                    <slot />
-                </div>
-            )
-        }
+        <div
+            class:list={[
+                'text-fl-step-0',
+                prose && 'rte prose ',
+                isWide ? 'w-full' : 'mx-auto  max-w-3xl',
+            ]}
+        >
+            {headings && !hideToc && <TableOfContents headings={headings} />}
+            <slot />
+        </div>
     </main>
+    <slot name="slotbanner" />
 </BaseLayout>

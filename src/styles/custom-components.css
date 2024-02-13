@@ -224,7 +224,7 @@ before:block before:text-[1.5em] before:leading-none before:text-accent;
             0% 0%,
             100% 0%,
             100% 100%,
-            50% calc(100% - 8px),
+            50% calc(100% - 10%),
             0% 100%
         );
     }

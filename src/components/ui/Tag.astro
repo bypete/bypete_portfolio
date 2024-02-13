@@ -1,0 +1,68 @@
+---
+import { Icon } from 'astro-icon/components';
+interface Props {
+    featured?: boolean;
+    href?: string;
+    isLink?: boolean;
+}
+const { featured = false, href, isLink = false } = Astro.props;
+const common =
+    'inline-flex items-center gap-x-fl-space-3xs whitespace-nowrap rounded-tight font-medium leading-none px-fl-space-3xs py-fl-space-3xs';
+---
+
+{
+    isLink ? (
+        <a
+            href={href}
+            class:list={[
+                common,
+                'border text-tag hover:bg-tag-bg__hover',
+                featured
+                    ? 'border-tag-bg-featured bg-tag-bg-featured text-tag-featured'
+                    : 'border-tag-bg__link bg-tag-bg__link',
+            ]}
+        >
+            {featured && (
+                <div class="before:bookmarkclip pointer-events-none relative z-10 -my-fl-space-s  block pb-fl-space-2xs pt-fl-space-3xs text-center drop-shadow-sm before:absolute before:inset-0 before:h-full before:w-full before:bg-brand">
+                    <div class="relative flex justify-center">
+                        <Icon
+                            name="mdi:star"
+                            class="relative mx-auto h-fl-space-s w-fl-space-s text-white"
+                        />
+                        <Icon
+                            name="mdi:star"
+                            class="absolute mx-auto h-fl-space-s w-fl-space-s animate-ping text-white opacity-40"
+                        />
+                    </div>
+                </div>
+            )}
+            <slot />
+        </a>
+    ) : (
+        <span
+            class:list={[
+                common,
+                'border',
+                featured
+                    ? 'border-tag-bg-featured bg-tag-bg-featured text-tag-featured '
+                    : 'border border-outline-pale',
+            ]}
+        >
+            {featured && (
+                <div class="before:bookmarkclip pointer-events-none relative z-10 -my-fl-space-s block pb-fl-space-2xs pt-fl-space-3xs text-center drop-shadow-sm before:absolute before:inset-0 before:h-full before:w-full before:bg-brand">
+                    <div class="relative flex justify-center">
+                        <Icon
+                            name="mdi:star"
+                            class="relative mx-auto h-fl-space-s w-fl-space-s text-white"
+                        />
+                        <Icon
+                            name="mdi:star"
+                            class="absolute mx-auto h-fl-space-s w-fl-space-s animate-ping text-white opacity-40"
+                        />
+                    </div>
+                </div>
+            )}
+            <slot />
+        </span>
+    )
+}

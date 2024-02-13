@@ -1,0 +1,68 @@
+---
+import Block from '~/components/Blocks/Block.astro';
+import { Image } from 'astro:assets';
+import Link from '~/components/ui/Link.astro';
+import RandomLink from '~/components/ui/RandomLink.astro';
+import svgbg from '~/assets/details/heap__plus.svg';
+import product from '~/content/work/mykringapp/product.png';
+
+import portfolio from '~/data/work';
+
+import { Icon } from 'astro-icon/components';
+interface Props {
+    wrapper: string;
+    gridHeight: string;
+}
+const { wrapper, gridHeight } = Astro.props;
+---
+
+<Block
+    mode="pair"
+    bg="bg-brand"
+    {wrapper}
+    grid={`grid mx-auto grid-cols-1 md:grid-cols-2 md:grid-rows-1 gap-fl-space-m max-w-container ${gridHeight}`}
+    breakout={true}
+>
+    <Image
+        src={svgbg}
+        alt="background"
+        class="absolute inset-0 h-full w-full object-cover opacity-20"
+    />
+    <div slot="mc1" class="not-prose self-center py-fl-space-m md:order-2">
+        <h2
+            class="font-headline text-fl-step-3 font-bold leading-tight tracking-tight"
+        >
+            Show and tell
+        </h2>
+        <p class="mb-fl-space-m">
+            Curious to see my work in action? Discover the stories behind my
+            projects, the challenges addressed, and the solutions crafted.
+        </p>
+        <p class="flex flex-row gap-fl-space-3xs">
+            <Link theme="secondary" href="/work">Explore the portfolio</Link>
+
+            <RandomLink
+                theme="disco"
+                href="/work"
+                isIcon={true}
+                choices={portfolio.collection}
+                >Random pick <Icon
+                    name="lucide:shuffle"
+                    class="h-fl-space-xs w-auto animate-pulse"
+                /></RandomLink
+            >
+        </p>
+    </div>
+    <div
+        slot="mc2"
+        class="not-prose h-full self-center md:order-1 md:-mt-fl-space-3xl"
+    >
+        <Image
+            src={product}
+            widths={[400, 600, 800]}
+            sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.5), (min-width: 1264) calc(var(--container-width-max)*0.60)`}
+            class="relative m-0 h-full w-full object-contain"
+            alt="iPhones with mykring app in use"
+        />
+    </div>
+</Block>

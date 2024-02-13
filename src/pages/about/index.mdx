@@ -79,10 +79,7 @@ skillset:
 ---
 
 import Skills from '~/components/Skills.astro'
-import Block from '~/components/Blocks/Block.astro';
-import Link from '~/components/ui/Link.astro';
-import portfolio from '~/data/work';
-import RandomLink from '~/components/ui/RandomLink.astro';
+import Banner from '~/components/Banners/Portfolio.astro';
 
 import listing_index from '~/assets/listing-index.jpg';
 import woodland from '~/assets/blocks/woodland.webp';
@@ -90,10 +87,7 @@ import google_lens from '~/assets/google-lens.png';
 import { Image } from 'astro:assets';
 import Figure from '~/components/Figure.astro'
 import BlockPicture from '~/components/Images/BlockPicture.astro';
-import { Icon } from 'astro-icon/components';
 
-import iphones from '~/content/work/mykringapp/product.png'
-import svgbg from '~/assets/contours/contour__16--ffffff--br.svg'
 
 ## The backstory
 
@@ -107,27 +101,7 @@ In 2009, the agency refocused its efforts and established itself as **the** mark
 ## Skills
 </Skills>
 
-<Block
-  mode="pair"
-  bg="bg-brand"
-  grid="grid mx-auto grid-cols-1 md:grid-cols-2 md:grid-rows-1 lg:grid-cols-block60 min-h-block gap-fl-space-m max-w-container"
-  breakout={true}
-  >
-  <Image src={svgbg} alt="background" class="object-cover w-full h-full absolute inset-0  opacity-20" />
-  <div slot="mc1" class="self-center md:order-2 py-fl-space-m"
-  >
-    ## Show and tell
-    Curious to see my work in action? Discover the stories behind my projects, the challenges addressed, and the solutions crafted.
-    <p class="not-prose flex flex-row gap-fl-space-3xs">
-    <Link theme="secondary" href="/work"  >Explore the portfolio</Link>
-
-    <RandomLink theme="disco" href="/work" isIcon={true}  choices={portfolio.collection} >Random pick <Icon name="lucide:shuffle" class="h-fl-space-xs w-auto animate-pulse"  /></RandomLink>
-    </p>
-  </div>
-  <div slot="mc2" class="not-prose self-center md:order-1">
-    <Image src={iphones} widths={[400,600,800]} sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.5), (min-width: 1264) calc(var(--container-width-max)*0.60)`} class="relative m-0  h-full w-full object-contain " alt="iPhones with mykring app in use"/>
-  </div>
-</Block>
+<Banner gridHeight="min-h-block" />
 
 ## Workflow
 

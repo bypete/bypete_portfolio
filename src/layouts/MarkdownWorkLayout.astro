@@ -102,15 +102,18 @@ const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
             <div class="rte prose mx-auto max-w-3xl text-fl-step-0">
                 {
                     frontmatter.product && (
-                        <BlockPicture
-                            src={frontmatter.product.src}
-                            widths={[400, 1200]}
-                            sizes={`(max-width: var(--container-width-md)) 75%, 480px, (min-width: var(--container-width-lg)) 768px`}
-                            class="mx-auto h-auto w-3/4 md:max-w-120 lg:max-w-3xl"
-                            wrapper="bg-panel-contrast"
-                            alt={frontmatter.product.alt}
-                            credit={frontmatter.title}
-                        />
+                        <div class="flex h-photo items-center  justify-center bg-panel-contrast breakout md:h-block">
+                            <BlockPicture
+                                src={frontmatter.product.src}
+                                widths={[480, 1200]}
+                                sizes={`100%, (min-width: 1200px) 75rem`}
+                                class="h-full w-full object-contain"
+                                breakout={false}
+                                wrapper="w-full h-full max-w-[75rem]"
+                                alt={frontmatter.product.alt}
+                                credit={frontmatter.title}
+                            />
+                        </div>
                     )
                 }
 
@@ -125,7 +128,6 @@ const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
                     />
                     <span class="mx-fl-space-3xs">Last updated:</span>
                     <time
-                        class="inline-block rounded bg-outline-pale"
                         datetime={htmlDateString(
                             frontmatter.modDate || frontmatter.pubDate,
                         )}

@@ -125,7 +125,7 @@
         --color-panel-shadow: 31 41 55; /* gray-800 */
         --color-panel-invert: 31 41 55; /* gray-800 */
 
-        --color-outline-pale: 250 250 250; /* zinc-50 */
+        --color-outline-pale: 244 244 245; /* zinc-100 */
         --color-outline: 228 228 231; /* zinc-200 */
         --color-outline-hard: 212 212 216; /* zinc-300 */
 
@@ -154,8 +154,8 @@
 
         --color-focus: 56 189 248; /* sky-400 */
 
-        --color-tag: 55 65 81; /* gray-700 */
-        --color-tag-featured: 55 65 81; /* gray-700 */
+        --color-tag: 63 63 70; /* zinc-700 */
+        --color-tag-featured: 63 63 70; /* zinc-700 */
         --color-tag__bg: 244 244 245; /* zinc-100 */
         --color-tag__bg-link: 253 224 71; /* yellow-300 */
         --color-tag__bg-hover: 250 204 21; /* yellow-400 */

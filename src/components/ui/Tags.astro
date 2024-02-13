@@ -1,11 +1,12 @@
 ---
+import { Icon } from 'astro-icon/components';
+import Tag from '~/components/ui/Tag.astro';
 interface Props {
     tags: string[];
     url?: boolean;
     class?: string;
 }
 const { tags, url = false, class: className = ' ' } = Astro.props;
-import { Icon } from 'astro-icon/components';
 // Move 'featured' to the beginning of the array, if it exists
 if (tags.includes('featured')) {
     tags.unshift(tags.splice(tags.indexOf('featured'), 1)[0]);
@@ -22,37 +23,13 @@ if (tags.includes('featured')) {
         >
             {tags.map((tag) => (
                 <li>
-                    {url ? (
-                        <a
-                            href={`/tags/${tag}`}
-                            class=" inline-flex items-center gap-x-0.5 whitespace-nowrap rounded-tight bg-tag-bg__link px-fl-space-2xs py-fl-space-3xs font-medium lowercase leading-none text-tag hover:bg-tag-bg__hover"
-                        >
-                            {tag === 'featured' && (
-                                <Icon
-                                    name="mdi:star"
-                                    class="-my-fl-space-3xs -ml-fl-space-3xs h-fl-space-s w-auto text-yellow-500"
-                                />
-                            )}
-                            {tag}
-                        </a>
-                    ) : (
-                        <span
-                            class:list={[
-                                'inline-flex items-center gap-x-0.5 whitespace-nowrap rounded-tight border px-fl-space-2xs py-fl-space-3xs font-medium lowercase leading-none',
-                                tag === 'featured'
-                                    ? 'bg-tag-bg-featured text-tag-featured border-tag-bg-featured shadow-inset shadow-black/10'
-                                    : 'border-dashed border-outline',
-                            ]}
-                        >
-                            {tag === 'featured' && (
-                                <Icon
-                                    name="mdi:star"
-                                    class="-my-fl-space-3xs -ml-fl-space-3xs h-fl-space-s w-auto text-yellow-500"
-                                />
-                            )}
-                            {tag}
-                        </span>
-                    )}
+                    <Tag
+                        href={`/tags/${tag}`}
+                        isLink={url}
+                        featured={tag.toLowerCase() === 'featured'}
+                    >
+                        {tag}
+                    </Tag>
                 </li>
             ))}
         </ul>
