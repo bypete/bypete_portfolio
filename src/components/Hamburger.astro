@@ -21,7 +21,7 @@ const year = new Date().getFullYear();
     x-transition:leave-end="transform opacity-0 "
 >
     <div
-        class="mr-fl-space-2xl grid h-full w-full grid-cols-1 grid-rows-mobilenav py-fl-space-s pl-fl-space-s"
+        class="mr-fl-space-2xl grid h-full w-full grid-cols-1 grid-rows-mobilenav py-fl-space-s pl-fl-space-m"
     >
         <a href="/" aria-label="byPete - home">
             <Icon
@@ -32,12 +32,12 @@ const year = new Date().getFullYear();
         </a>
         <ul id="mobilenavigation" class="w-full self-center">
             <li class="relative">
-                <MobileLink url={`/about`} title="About" {pathname} />
+                <MobileLink url={`/about/`} title="About" {pathname} />
             </li>
 
             <li x-data="{ open: false }">
                 <div class="relative flex items-center justify-between">
-                    <MobileLink url={`/work`} title="Work" {pathname} />
+                    <MobileLink url={`/work/`} title="Work" {pathname} />
                     <button
                         @click="open = !open"
                         class="flex h-fl-space-l items-center justify-center rounded-full p-0 text-menusm transition-transform duration-700 focus:outline-none"
@@ -62,7 +62,7 @@ const year = new Date().getFullYear();
                         {
                             allPosts.map((post) => (
                                 <MenuLinkChild
-                                    url={`/${post.collection}/${post.slug}`}
+                                    url={`/${post.collection}/${post.slug}/`}
                                     title={post.data.title}
                                     {pathname}
                                 />
@@ -72,7 +72,7 @@ const year = new Date().getFullYear();
                 </div>
             </li>
             <li class="relative">
-                <MobileLink url={`/connect`} title="Connect" {pathname} />
+                <MobileLink url={`/connect/`} title="Connect" {pathname} />
             </li>
         </ul>
         <ul class="-mx-fl-space-2xs inline-flex text-menusm">
@@ -80,7 +80,7 @@ const year = new Date().getFullYear();
                 ©{year}
             </li>
             <li class="border-r border-white px-fl-space-2xs last:border-0">
-                <a href="/about/legal" class="link">Legal notices</a>
+                <a href="/about/legal/" class="link">Legal notices</a>
             </li>
         </ul>
     </div>

@@ -73,14 +73,14 @@ const formattedPosts = formatBlogPosts(allWork, {
                         theme="primary"
                         isIcon={true}
                         class="md:inline-flex"
-                        href="/work"
+                        href="/work/"
                     >
                         View the portfolio <Icon
                             name="lucide:arrow-right-circle"
                             class="h-fl-space-s w-fl-space-s animate-nudge-right"
                         />
                     </Link>
-                    <Link href="/about" theme="whiteline">Read my bio</Link>
+                    <Link href="/about/" theme="whiteline">Read my bio</Link>
                 </p>
             </div>
             <!-- END content -->
@@ -104,7 +104,7 @@ const formattedPosts = formatBlogPosts(allWork, {
             <!-- END visual -->
         </div>
         <div
-            class="pointer-events-none absolute left-1/2 top-screenSvh z-shortcuts -translate-x-1/2 -translate-y-full pb-fl-space-s text-content-light"
+            class="pointer-events-none absolute left-1/2 top-screenSvh z-100 -translate-x-1/2 -translate-y-full pb-fl-space-s text-content-light"
         >
             <ScrollPrompt />
         </div>
@@ -133,7 +133,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                         const featured = post.data.tags.includes('featured');
                         return (
                             <WorkGrid
-                                url={`/${post.collection}/${post.slug}`}
+                                url={`/${post.collection}/${post.slug}/`}
                                 title={post.data.title}
                                 taster={post.data.taster}
                                 tags={post.data.tags}
@@ -163,7 +163,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                             theme="primary"
                             isIcon={true}
                             class="md:inline-flex"
-                            href="/work"
+                            href="/work/"
                         >
                             Explore the collection <Icon
                                 name="lucide:arrow-right-circle"

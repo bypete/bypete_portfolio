@@ -23,7 +23,7 @@ const rehypeExternalLinksConfig = [
 // https://astro.build/config
 export default defineConfig({
     site: 'https://bypete.uk',
-    trailingSlash: 'never',
+    trailingSlash: 'always',
     // build: {
     //     format: 'file',
     // },

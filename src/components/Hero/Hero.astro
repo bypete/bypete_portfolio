@@ -132,7 +132,7 @@ switch (mode) {
             <>
                 <h1
                     id="headline"
-                    class="heading from-headline-start to-headline-end relative mx-auto max-w-3xl bg-gradient-to-b bg-clip-text pt-fl-space-xl text-center text-fl-step-6 text-transparent "
+                    class="heading relative mx-auto max-w-3xl bg-gradient-to-b from-headline-start to-headline-end bg-clip-text pt-fl-space-xl text-center text-fl-step-6 text-transparent "
                 >
                     {title}
                 </h1>
@@ -188,7 +188,7 @@ switch (mode) {
 
     {
         prompt && (
-            <div class="pointer-events-none absolute bottom-fl-space-s left-1/2 z-shortcuts -translate-x-1/2  ">
+            <div class="pointer-events-none absolute bottom-fl-space-s left-1/2 z-100 -translate-x-1/2  ">
                 {prompt === 'scroll' && <ScrollPrompt />}
                 {prompt === 'swipe' && <SwipePrompt />}
             </div>

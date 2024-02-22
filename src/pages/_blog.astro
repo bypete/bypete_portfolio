@@ -14,7 +14,7 @@ const allPosts = await getCollection('posts');
                 const { remarkPluginFrontmatter } = await post.render();
                 return (
                     <BlogPost
-                        url={`/${post.collection}/${post.slug}`}
+                        url={`/${post.collection}/${post.slug}/`}
                         title={post.data.title}
                         taster={post.data.taster}
                         tags={post.data.tags}

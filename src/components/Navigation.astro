@@ -33,9 +33,9 @@ const { class: ClassName, isHeroDark = false } = Astro.props;
 >
     <ul class="hidden space-x-fl-space-2xs md:flex" x-ref="menu">
         <li>
-            <MenuLink url={`/about`} title="About" {pathname} {isHeroDark} />
+            <MenuLink url={`/about/`} title="About" {pathname} {isHeroDark} />
         </li>
-        <MenuDropdown url={`/work`} title="Work" {pathname} {isHeroDark}>
+        <MenuDropdown url={`/work/`} title="Work" {pathname} {isHeroDark}>
             {
                 (
                     <ul
@@ -49,7 +49,7 @@ const { class: ClassName, isHeroDark = false } = Astro.props;
                         {formattedPosts.map((post) => (
                             <li>
                                 <MenuLinkChild
-                                    url={`/${post.collection}/${post.slug}`}
+                                    url={`/${post.collection}/${post.slug}/`}
                                     title={post.data.title}
                                     {pathname}
                                 />
@@ -61,7 +61,7 @@ const { class: ClassName, isHeroDark = false } = Astro.props;
         </MenuDropdown>
         <li>
             <MenuLink
-                url={`/connect`}
+                url={`/connect/`}
                 title="Connect"
                 {pathname}
                 {isHeroDark}

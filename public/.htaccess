@@ -1,10 +1,15 @@
 CheckSpelling Off
+
+# Turn on Rewrite Engine
 RewriteEngine On
+
+# REMOVE WWW & FORCE HTTPS
 RewriteCond %{SERVER_PORT} !=443
 RewriteRule ^(.*)$ https://bypete.uk/$1 [R=301,L]
 
-# RewriteRule to remove trailing slash
-RewriteRule ^/?(.+)/$ /$1 [R=301,L]
+# REMOVE TRAILING SLASH
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^(.*)/$ /$1 [L,R=301] 
 
 ErrorDocument 404 /404.html
 ErrorDocument 401 /errors/401.html
