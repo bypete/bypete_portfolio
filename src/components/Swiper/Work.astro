@@ -1,8 +1,13 @@
 ---
 import { Image } from 'astro:assets';
+import Next from '~/components/Swiper/Next.astro';
+import Prev from '~/components/Swiper/Prev.astro';
+import { Icon } from 'astro-icon/components';
 import SwipePrompt from '../ui/SwipePrompt.astro';
 import Slide from '~/components/Swiper/HomeSlide.astro';
 import { type SwiperImage } from '~/data/home';
+import 'swiper/css';
+import 'swiper/css/pagination';
 ---
 
 <section class="h-screenSvh w-full bg-slate-900 text-content-light">
@@ -13,14 +18,14 @@ import { type SwiperImage } from '~/data/home';
         <div class="swiper-wrapper flex items-center">
             <slot />
         </div>
-        <div
-            class="swiper-button-prev swiper--work__prev opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        >
-        </div>
-        <div
-            class="swiper-button-next swiper--work__next opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        >
-        </div>
+        <Prev
+            swiper="swiper--work"
+            class="left-fl-space-s hidden text-content-light md:block"
+        />
+        <Next
+            swiper="swiper--work"
+            class="right-fl-space-s hidden text-content-light md:block"
+        />
         <div
             class="swiper--work__pagination absolute !bottom-fl-space-s !left-fl-space-s right-auto z-10 mx-auto w-auto text-left text-fl-step--1 font-light !text-content-light md:!left-auto md:!right-fl-space-s md:text-right"
         >
@@ -33,7 +38,6 @@ import { type SwiperImage } from '~/data/home';
     </div>
 </section>
 <script>
-    // core version + navigation, pagination modules:
     import Swiper from 'swiper';
     import {
         Navigation,
@@ -45,10 +49,6 @@ import { type SwiperImage } from '~/data/home';
         Mousewheel,
         Keyboard,
     } from 'swiper/modules';
-    // import Swiper and modules styles
-    import 'swiper/css';
-    import 'swiper/css/navigation';
-    import 'swiper/css/pagination';
 
     {
         const swiperClass = '.swiper--work';
@@ -67,17 +67,6 @@ import { type SwiperImage } from '~/data/home';
             slidesPerView: 1,
             spaceBetween: 0,
             grabCursor: true,
-
-            // effect: 'creative',
-            // creativeEffect: {
-            //     perspective: false,
-            //     prev: {
-            //         // translate: [0, '-100%', 0],
-            //     },
-            //     next: {
-            //         // translate: [0, '100%', 0],
-            //     },
-            // },
             keyboard: {
                 enabled: true,
             },
@@ -95,10 +84,7 @@ import { type SwiperImage } from '~/data/home';
                 nextEl: `${swiperClass}__next`,
                 prevEl: `${swiperClass}__prev`,
             },
-            // pagination: {
-            //     el: `${swiperClass}__pagination`,
-            //     clickable: true,
-            // },
+
             pagination: {
                 el: `${swiperClass}__pagination`,
                 type: 'fraction',

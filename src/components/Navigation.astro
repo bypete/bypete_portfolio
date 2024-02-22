@@ -13,12 +13,14 @@ const formattedPosts = formatBlogPosts(allPosts, {
     sortByDate: true,
 });
 
-const pathname = new URL(Astro.request.url).pathname;
-
 interface Props {
     class: string;
     isHeroDark: boolean;
 }
+
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath =
+    pathname.slice(-1) === '/' ? pathname.slice(0, -1) : pathname;
 
 const { class: ClassName, isHeroDark = false } = Astro.props;
 ---
@@ -47,7 +49,7 @@ const { class: ClassName, isHeroDark = false } = Astro.props;
                         {formattedPosts.map((post) => (
                             <li>
                                 <MenuLinkChild
-                                    url={`/${post.collection}/${post.slug}/`}
+                                    url={`/${post.collection}/${post.slug}`}
                                     title={post.data.title}
                                     {pathname}
                                 />

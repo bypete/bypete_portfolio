@@ -133,7 +133,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                         const featured = post.data.tags.includes('featured');
                         return (
                             <WorkGrid
-                                url={`/${post.collection}/${post.slug}/`}
+                                url={`/${post.collection}/${post.slug}`}
                                 title={post.data.title}
                                 taster={post.data.taster}
                                 tags={post.data.tags}

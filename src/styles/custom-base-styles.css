@@ -2,6 +2,7 @@
     /* https://divmagic.com/tools/color-converter */
     /* --[type: color]- */
     :root {
+        --container-max: 75rem;
         /* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1200,18,1.25,5,2,768&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
         --step--2: clamp(0.6944rem, 0.6855rem + 0.0446vw, 0.72rem);
         --step--1: clamp(0.8331rem, 0.8099rem + 0.1163vw, 0.9rem);
@@ -14,57 +15,59 @@
         --step-6: clamp(2.9863rem, 2.5323rem + 2.2696vw, 4.2913rem);
         --step-7: clamp(3.5831rem, 2.9636rem + 3.0978vw, 5.3644rem);
 
-        /* @link https://utopia.fyi/space/calculator?c=320,16,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6|8,s-l|m-s|s-xs&g=s,l,xl,12 */
+        /* @link https://utopia.fyi/space/calculator?c=320,16,1.2,1200,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6|8,s-l|m-s|s-xs&g=s,l,xl,12 */
 
         /* Space 3xs: 4px → 5px */
-        --space-3xs: clamp(0.25rem, 0.2283rem + 0.1087vi, 0.3125rem);
+        --space-3xs: clamp(0.25rem, 0.2273rem + 0.1136vi, 0.3125rem);
         /* Space 2xs: 8px → 10px */
-        --space-2xs: clamp(0.5rem, 0.4565rem + 0.2174vi, 0.625rem);
+        --space-2xs: clamp(0.5rem, 0.4545rem + 0.2273vi, 0.625rem);
         /* Space xs: 12px → 15px */
-        --space-xs: clamp(0.75rem, 0.6848rem + 0.3261vi, 0.9375rem);
+        --space-xs: clamp(0.75rem, 0.6818rem + 0.3409vi, 0.9375rem);
         /* Space s: 16px → 20px */
-        --space-s: clamp(1rem, 0.913rem + 0.4348vi, 1.25rem);
+        --space-s: clamp(1rem, 0.9091rem + 0.4545vi, 1.25rem);
         /* Space m: 24px → 30px */
-        --space-m: clamp(1.5rem, 1.3696rem + 0.6522vi, 1.875rem);
+        --space-m: clamp(1.5rem, 1.3636rem + 0.6818vi, 1.875rem);
         /* Space l: 32px → 40px */
-        --space-l: clamp(2rem, 1.8261rem + 0.8696vi, 2.5rem);
+        --space-l: clamp(2rem, 1.8182rem + 0.9091vi, 2.5rem);
         /* Space xl: 48px → 60px */
-        --space-xl: clamp(3rem, 2.7391rem + 1.3043vi, 3.75rem);
+        --space-xl: clamp(3rem, 2.7273rem + 1.3636vi, 3.75rem);
         /* Space 2xl: 64px → 80px */
-        --space-2xl: clamp(4rem, 3.6522rem + 1.7391vi, 5rem);
+        --space-2xl: clamp(4rem, 3.6364rem + 1.8182vi, 5rem);
         /* Space 3xl: 96px → 120px */
-        --space-3xl: clamp(6rem, 5.4783rem + 2.6087vi, 7.5rem);
+        --space-3xl: clamp(6rem, 5.4545rem + 2.7273vi, 7.5rem);
         /* Space 4xl: 128px → 160px */
-        --space-4xl: clamp(8rem, 7.3043rem + 3.4783vi, 10rem);
+        --space-4xl: clamp(8rem, 7.2727rem + 3.6364vi, 10rem);
 
         /* One-up pairs */
         /* Space 3xs-2xs: 4px → 10px */
-        --space-3xs-2xs: clamp(0.25rem, 0.1196rem + 0.6522vi, 0.625rem);
+        --space-3xs-2xs: clamp(0.25rem, 0.1136rem + 0.6818vi, 0.625rem);
         /* Space 2xs-xs: 8px → 15px */
-        --space-2xs-xs: clamp(0.5rem, 0.3478rem + 0.7609vi, 0.9375rem);
+        --space-2xs-xs: clamp(0.5rem, 0.3409rem + 0.7955vi, 0.9375rem);
         /* Space xs-s: 12px → 20px */
-        --space-xs-s: clamp(0.75rem, 0.5761rem + 0.8696vi, 1.25rem);
+        --space-xs-s: clamp(0.75rem, 0.5682rem + 0.9091vi, 1.25rem);
         /* Space s-m: 16px → 30px */
-        --space-s-m: clamp(1rem, 0.6957rem + 1.5217vi, 1.875rem);
+        --space-s-m: clamp(1rem, 0.6818rem + 1.5909vi, 1.875rem);
         /* Space m-l: 24px → 40px */
-        --space-m-l: clamp(1.5rem, 1.1522rem + 1.7391vi, 2.5rem);
+        --space-m-l: clamp(1.5rem, 1.1364rem + 1.8182vi, 2.5rem);
         /* Space l-xl: 32px → 60px */
-        --space-l-xl: clamp(2rem, 1.3913rem + 3.0435vi, 3.75rem);
+        --space-l-xl: clamp(2rem, 1.3636rem + 3.1818vi, 3.75rem);
         /* Space xl-2xl: 48px → 80px */
-        --space-xl-2xl: clamp(3rem, 2.3043rem + 3.4783vi, 5rem);
+        --space-xl-2xl: clamp(3rem, 2.2727rem + 3.6364vi, 5rem);
         /* Space 2xl-3xl: 64px → 120px */
-        --space-2xl-3xl: clamp(4rem, 2.7826rem + 6.087vi, 7.5rem);
+        --space-2xl-3xl: clamp(4rem, 2.7273rem + 6.3636vi, 7.5rem);
         /* Space 3xl-4xl: 96px → 160px */
-        --space-3xl-4xl: clamp(6rem, 4.6087rem + 6.9565vi, 10rem);
+        --space-3xl-4xl: clamp(6rem, 4.5455rem + 7.2727vi, 10rem);
 
         /* Custom pairs */
         /* Space s-l: 16px → 40px */
-        --space-s-l: clamp(1rem, 0.4783rem + 2.6087vi, 2.5rem);
+        --space-s-l: clamp(1rem, 0.4545rem + 2.7273vi, 2.5rem);
         /* Space m-s: 24px → 20px */
-        --space-m-s: clamp(1.25rem, 1.587rem + -0.4348vi, 1.5rem);
+        --space-m-s: clamp(1.25rem, 1.5909rem + -0.4545vi, 1.5rem);
         /* Space s-xs: 16px → 15px */
-        --space-s-xs: clamp(0.9375rem, 1.0217rem + -0.1087vi, 1rem);
+        --space-s-xs: clamp(0.9375rem, 1.0227rem + -0.1136vi, 1rem);
 
+        /* Space 30px up to 1200px then reduce down to 0px by 1260px */
+        --container-padding: clamp(0rem, 39.375rem + -50vi, 1.875rem);
         --headerheight: calc(var(--space-l) + (var(--space-s) * 2));
         --splash-overlap: calc(var(--space-3xl) * 2);
         --container-width-max: 1200px;
@@ -149,6 +152,8 @@
         --color-warning-light: 220 38 38; /* red-600 */
         --color-warning: 220 38 38; /* red-600 */
         --color-warning-dark: 153 27 27; /* red-800 */
+
+        --color-hilite: 253 224 71; /* yellow-300 */
 
         --color-gold: 182 160 108; /* #b6a06c */
 
@@ -294,143 +299,146 @@
 
         --color-disabled: 209 213 219; /* gray-300 */
     }
+
     /* Containers
 ---------------------------------------------------------------------------------*/
     .max-w-container {
-        @apply px-fl-space-m conpad:px-0; /* max width plus 32px + 32px */
+        @apply mincon:px-fl-space-containerpadding px-fl-space-m;
     }
-}
-/* SVGs
+
+    /* SVGs
 ---------------------------------------------------------------------------------*/
-/* Uses SVGs in this folder: src/assets/svg */
-.svg--plus__base-repeat {
-    mask: svg-load('plus__base-repeat.svg');
-}
-.mask--plus__base_repeat {
-    mask: svg-load('plus__base_repeat.svg');
-}
-.mask--morph__base_repeat {
-    mask: svg-load('morph__base_repeat.svg');
-}
-.mask--square__base_repeat {
-    mask: svg-load('square__base_repeat.svg');
-}
+    svg {
+        stroke-width: 2;
+    }
 
-.mask--connections__starfield {
-    mask: svg-load('connections__starfield.svg');
-}
+    path,
+    circle,
+    ellipse,
+    line,
+    polygon,
+    polyline,
+    rect {
+        stroke-width: inherit;
+    }
 
-.mask--neural__network {
-    mask: svg-load('neural__network.svg');
-}
+    /* Uses SVGs in this folder: src/assets/svg */
+    .mask--plus__base_repeat {
+        mask: svg-load('plus__base_repeat.svg');
+    }
 
-.shader {
-    background-image: svg-load('arcs__shadow.svg');
-    background-repeat: repeat-y;
-    background-size: 100%;
-    background-position: center top;
-}
+    .shader {
+        background-image: svg-load('arcs__shadow.svg');
+        background-repeat: repeat-y;
+        background-size: 100%;
+        background-position: center top;
+    }
 
-/* Editorial
+    /* Editorial
 ---------------------------------------------------------------------------------*/
-.link {
-    @apply font-medium text-accent decoration-solid decoration-2 hover:underline;
-}
+    .link {
+        @apply font-medium text-accent decoration-solid decoration-2 hover:underline;
+    }
 
-.external {
-    @apply after:ml-1 after:inline-block after:font-awesome after:font-black after:not-italic after:content-['\f35d'];
-}
+    .hilite {
+        @apply rounded-tight bg-hilite p-fl-space-3xs font-medium text-content-dark;
+    }
 
-.font-headline a {
-    @apply font-extrabold;
-}
+    .external {
+        @apply after:ml-1 after:inline-block after:font-awesome after:font-black after:not-italic after:content-['\f35d'];
+    }
 
-.capline {
-    @apply relative mb-[1em] before:absolute before:-bottom-[0.5em] before:left-0 before:w-[1.25em] before:border-b-3 before:border-b-teal-400;
-}
+    .font-headline a {
+        @apply font-extrabold;
+    }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    @apply font-headline tracking-tight;
-}
+    .capline {
+        @apply relative mb-[1em] before:absolute before:-bottom-[0.5em] before:left-0 before:w-[1.25em] before:border-b-3 before:border-b-teal-400;
+    }
 
-h1 {
-    @apply font-extrabold;
-}
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-headline tracking-tight;
+    }
 
-/* Richtext editor content */
+    h1 {
+        @apply font-extrabold;
+    }
 
-.rte h2 {
-    @apply capline text-fl-step-3 font-bold tracking-tight;
-}
+    /* Richtext editor content */
 
-.rte h3 {
-    @apply mb-fl-space-3xs text-fl-step-1 font-bold;
-}
+    .rte h2 {
+        @apply capline text-fl-step-3 font-bold tracking-tight;
+    }
 
-.rte h4 {
-    @apply mb-fl-space-3xs text-fl-step-1 font-medium;
-}
+    .rte h3 {
+        @apply mb-fl-space-3xs text-fl-step-1 font-bold;
+    }
 
-.rte > p {
-    @apply mb-fl-space-xs;
-}
+    .rte h4 {
+        @apply mb-fl-space-3xs text-fl-step-1 font-medium;
+    }
 
-.rte > :last-child {
-    @apply mb-0;
-}
+    .rte > p {
+        @apply mb-fl-space-xs;
+    }
 
-.rte strong {
-    @apply font-bold;
-}
+    .rte > :last-child {
+        @apply mb-0;
+    }
 
-/*.rte .heading {
+    .rte strong {
+        @apply font-bold;
+    }
+
+    /*.rte .heading {
   @apply mb-[1em];
 } */
 
-/* subsequent-sibling combinator */
-.rte .heading ~ .heading {
-    @apply mt-[1.5em];
-}
+    /* subsequent-sibling combinator */
+    .rte .heading ~ .heading {
+        @apply mt-[1.5em];
+    }
 
-/* Typography | Superscript */
-sup.new {
-    @apply rounded-sm bg-accent px-0.5 py-px align-top text-fl-step--1 font-medium leading-none !text-white;
-}
+    /* Typography | Superscript */
+    sup.new {
+        @apply rounded-sm bg-accent px-0.5 py-px align-top text-fl-step--1 font-medium leading-none !text-white;
+    }
 
-/* Tables
+    /* Tables
 ---------------------------------------------------------------------------------*/
-.table thead {
-    @apply text-left font-bold;
-}
+    .table thead {
+        @apply text-left font-bold;
+    }
 
-.table th {
-    @apply border-b pb-fl-space-2xs pt-0;
-}
+    .table th {
+        @apply border-b pb-fl-space-2xs pt-0;
+    }
 
-.table th,
-.table tbody td {
-    @apply py-1;
-}
+    .table th,
+    .table tbody td {
+        @apply py-1;
+    }
 
-.table--rows tr {
-    @apply border-b border-gray-300 last:border-0;
-}
+    .table--rows tr {
+        @apply border-b border-gray-300 last:border-0;
+    }
 
-.table--padded th,
-.table--padded tbody td {
-    @apply py-fl-space-2xs pl-fl-space-2xs lg:pl-fl-space-xs;
-}
-.table--padded tr th,
-.table--padded tr td {
-    @apply last:pr-fl-space-2xs last:lg:pr-fl-space-xs;
-}
+    .table--padded th,
+    .table--padded tbody td {
+        @apply py-fl-space-2xs pl-fl-space-2xs lg:pl-fl-space-xs;
+    }
+    .table--padded tr th,
+    .table--padded tr td {
+        @apply last:pr-fl-space-2xs last:lg:pr-fl-space-xs;
+    }
 
-.table--noindent tr td,
-.table--noindent thead th {
-    @apply first:pl-0 last:pr-0;
+    .table--noindent tr td,
+    .table--noindent thead th {
+        @apply first:pl-0 last:pr-0;
+    }
 }

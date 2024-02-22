@@ -2,6 +2,9 @@
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import { type SwiperClient } from '~/data/clients';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export interface Props {
     clients: Partial<SwiperClient>;
@@ -32,21 +35,12 @@ const { clients } = Astro.props;
 <script>
     // core version + navigation, pagination modules:
     import Swiper from 'swiper';
-    import {
-        Navigation,
-        Pagination,
-        Autoplay,
-        Scrollbar,
-    } from 'swiper/modules';
-    // import Swiper and modules styles
-    import 'swiper/css';
-    import 'swiper/css/navigation';
-    import 'swiper/css/pagination';
+    import { Autoplay, Scrollbar } from 'swiper/modules';
 
     {
-        const swiperReviews = new Swiper('.swiper--clients', {
+        const swiperClients = new Swiper('.swiper--clients', {
             // Install modules
-            modules: [Navigation, Pagination, Autoplay, Scrollbar],
+            modules: [Autoplay, Scrollbar],
             speed: 1500,
             loop: true,
             loopAddBlankSlides: false,

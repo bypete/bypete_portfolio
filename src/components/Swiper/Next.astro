@@ -1,0 +1,18 @@
+---
+import { Icon } from 'astro-icon/components';
+interface Props {
+    swiper?: string;
+    class?: string;
+}
+const { swiper, class: className } = Astro.props;
+---
+
+<div
+    class:list={[
+        swiper && `${swiper}__next`,
+        'absolute left-auto top-1/2 z-10 flex -translate-y-1/2 cursor-pointer items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100',
+        className ? className : 'right-fl-space-m text-accent',
+    ]}
+>
+    <Icon name="lucide:chevron-right" class="h-fl-space-l w-auto" />
+</div>

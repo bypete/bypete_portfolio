@@ -1,35 +1,7 @@
 /* Add styles here to allow components to override them */
 @layer components {
-    /* Dividers
+    /* Placeholders 
 ---------------------------------------------------------------------------------*/
-    .divider {
-        @apply -mx-fl-space-s mt-fl-space-m flex items-center justify-between before:mr-1
-  before:w-fl-space-xs before:border-b after:ml-fl-space-3xs 
-  after:grow after:border-b first:mt-0 first-of-type:before:border-0 first-of-type:after:border-0
-  md:-mx-fl-space-m before:md:mr-fl-space-2xs before:md:w-fl-space-m after:md:ml-fl-space-2xs;
-    }
-
-    .divider--center {
-        @apply w-auto text-center before:grow;
-    }
-
-    /* Misc 
----------------------------------------------------------------------------------*/
-    .svg--shadow {
-        filter: drop-shadow(0px 0px 16px rgb(0 0 0 / 0.75));
-    }
-
-    /* Panels 
----------------------------------------------------------------------------------*/
-    .panel {
-        @apply w-full overflow-hidden rounded-lg bg-white shadow-lg lg:min-h-40;
-    }
-
-    .panel + * {
-        @apply mt-fl-space-xs;
-    }
-
-    /* Placeholders */
     .holder {
         @apply relative before:absolute before:inset-0 before:border-2 before:border-dashed before:border-outline;
     }
@@ -117,13 +89,6 @@
     .list li {
         @apply relative  leading-normal;
     }
-    .list--compact li {
-        @apply my-0.5;
-    }
-
-    .list--underlined li {
-        @apply border-b border-gray-300  last:border-0;
-    }
 
     .list--bullet li,
     .list--checklist li {
@@ -142,7 +107,7 @@
     }
 
     .list--counter > li {
-        @apply relative list-none pl-12;
+        @apply relative list-none pl-fl-space-l;
         counter-increment: a;
     }
 
@@ -173,7 +138,7 @@ before:block before:text-[1.5em] before:leading-none before:text-accent;
     }
 
     .label-pin__icon {
-        @apply h-6 w-auto;
+        @apply h-fl-space-m w-auto;
     }
 
     .label--info {
@@ -187,35 +152,6 @@ before:block before:text-[1.5em] before:leading-none before:text-accent;
     .label--alert {
         @apply border-red-600 bg-warning text-content-light;
     }
-
-    /* Pagination
----------------------------------------------------------------------------------*/
-    .pagination {
-        @apply relative z-0 flex justify-between -space-x-px rounded shadow-sm;
-    }
-
-    .pagination__page {
-        @apply relative  items-center border border-gray-300 bg-white px-fl-space-xs py-fl-space-2xs  text-fl-step--1 font-medium text-accent hover:bg-gray-50;
-    }
-
-    .pagination__ellipsis {
-        @apply relative items-center border border-gray-300 bg-white px-fl-space-xs py-fl-space-2xs text-fl-step--1 font-medium text-gray-700;
-    }
-
-    .pagination__previous {
-        @apply relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-fl-space-xs py-fl-space-xs text-fl-step--1 font-medium text-gray-500 hover:bg-gray-50;
-    }
-
-    .pagination__next {
-        @apply relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-fl-space-xs py-fl-space-xs text-fl-step--1 font-medium text-gray-500 hover:bg-gray-50;
-    }
-
-    .pagination .active {
-        @apply relative z-10 items-center border border-gray-300 bg-white px-fl-space-xs py-fl-space-xs text-fl-step--1 font-bold  ring-1 ring-focus;
-    }
-
-    /* Modals
----------------------------------------------------------------------------------*/
 
     /* Shapes/Masks
 ---------------------------------------------------------------------------------*/
@@ -231,43 +167,11 @@ before:block before:text-[1.5em] before:leading-none before:text-accent;
 
     .angleclip {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0% calc(100% - 80px));
-        /*padding-bottom: 240px;*/
     }
-    /*.post-angleclip {
-        margin-top: -240px;
-    }*/
 
     @media screen(md) {
         .angleclip {
             clip-path: polygon(0 0, 100% 0, 100% 100%, 0% calc(100% - 100px));
-            /*padding-bottom: 300px;*/
         }
-
-        /*.post-angleclip {
-            margin-top: -300px;
-        }*/
-    }
-
-    .tabclip:before,
-    .tabclip:after {
-        /*clip-path: path('M0,0C.55,0,1,.45,1,1V0H0Z'); */
-        clip-path: url(#tabclip);
-        @apply absolute -left-2 top-0 h-2 w-2;
-    }
-
-    .tabclip:after {
-        @apply -right-2 left-auto -scale-x-100;
-    }
-
-    /* Javascript | Alpine modifiers
-  ---------------------------------------------------------------------------------*/
-    .copytip:before {
-        @apply invisible absolute left-1/2 -translate-x-1/2 -translate-y-12 whitespace-nowrap rounded bg-slate-900 bg-opacity-95 p-2 text-fl-step--1 font-normal text-white shadow-sm content-[attr(aria-label)];
-    }
-
-    /* Javascript | Swiper
-  ---------------------------------------------------------------------------------*/
-    .swiper-pagination {
-        @apply !left-1/2 !w-auto -translate-x-1/2;
     }
 }

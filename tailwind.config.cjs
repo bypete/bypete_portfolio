@@ -47,7 +47,8 @@ export default {
         },
         extend: {
             screens: {
-                conpad: '1264px', // 32px + container + 32px
+                mincon: '75rem', // 1.875rem + 75rem + 1.875rem
+                conpad: 'calc(78.75rem)', // 1.875rem + 75rem + 1.875rem
                 short: { raw: '(max-height: 640px)' },
             },
             zIndex: {
@@ -275,9 +276,11 @@ export default {
                 'fl-space-header': 'var(--headerheight)',
                 /* Custom */
                 'fl-space-splashoverlap': 'var(--splash-overlap)',
+                'fl-space-containerpadding': 'var(--container-padding)',
             },
             fontSize: (theme) => ({
                 ...theme('utopiaStep'),
+                ...theme('utopiaSpace'),
             }),
             textShadow: {
                 xs: '1px 1px 0 var(--tw-shadow-color), -1px 1px 0 var(--tw-shadow-color), 1px -1px 0 var(--tw-shadow-color), -1px -1px 0 var(--tw-shadow-color)',
@@ -292,12 +295,7 @@ export default {
                 none: 'none',
             },
             dropShadow: {
-                // logo: [
-                //   '2px 0px 0px var(--tw-shadow-color)',
-                //   '0 2px 0px var(--tw-shadow-color)',
-                //   '-2px 0px 0px var(--tw-shadow-color)',
-                //   '0 -2px 0px var(--tw-shadow-color)',
-                // ],
+                svg: ['0px 0px 16px var(--tw-shadow-color)'],
                 logo: ['1px 1px 5px var(--tw-shadow-color)'],
                 circle: [
                     '0 20px 10px var(--tw-shadow-color)',
@@ -457,6 +455,9 @@ export default {
                 attention: {
                     DEFAULT: 'rgb(var(--color-attention) / <alpha-value>)',
                     shade: 'rgb(var(--color-attention-shade) / <alpha-value>)',
+                },
+                hilite: {
+                    DEFAULT: 'rgb(var(--color-hilite) / <alpha-value>)',
                 },
                 tag: {
                     DEFAULT: 'rgb(var(--color-tag) / <alpha-value>)',

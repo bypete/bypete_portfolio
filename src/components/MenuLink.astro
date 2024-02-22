@@ -24,6 +24,8 @@ const activeState = isHeroDark
     : ' data-[state=active]:ring-menu-marker data-[state=active]:hover:text-menu-active';
 
 const isCurrentChild = parent !== undefined && pathname.includes(parent);
+const isActive = isCurrentChild || pathname === url;
+console.log(url, pathname);
 ---
 
 <a
@@ -34,5 +36,5 @@ const isCurrentChild = parent !== undefined && pathname.includes(parent);
         legibility,
         activeState,
     ]}
-    data-state={pathname === url || isCurrentChild ? 'active' : ''}>{title}</a
+    data-state={isActive ? 'active' : ''}>{title}</a
 >

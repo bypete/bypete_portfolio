@@ -1,6 +1,10 @@
 ---
 import Slide from '~/components/Swiper/HomeSlide.astro';
+import Next from '~/components/Swiper/Next.astro';
+import Prev from '~/components/Swiper/Prev.astro';
 import { type SwiperImage } from '~/data/home';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 export interface Props {
     slides: SwiperImage[];
@@ -23,14 +27,14 @@ const { slides } = Astro.props;
             ))
         }
     </div>
-    <div
-        class="swiper-button-prev swiper--home__prev hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:block"
-    >
-    </div>
-    <div
-        class="swiper-button-next swiper--home__next hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:block"
-    >
-    </div>
+    <Prev
+        swiper="swiper--home"
+        class="left-0 hidden text-content-light md:block"
+    />
+    <Next
+        swiper="swiper--home"
+        class="right-0 hidden text-content-light md:block"
+    />
     <div
         class="swiper--home__pagination absolute !bottom-fl-space-s z-10 mx-auto text-right"
     >
@@ -38,7 +42,6 @@ const { slides } = Astro.props;
 </div>
 
 <script>
-    // core version + navigation, pagination modules:
     import Swiper from 'swiper';
     import {
         Navigation,
@@ -47,11 +50,6 @@ const { slides } = Astro.props;
         Scrollbar,
         EffectCreative,
     } from 'swiper/modules';
-    // import Swiper and modules styles
-    import 'swiper/css';
-    import 'swiper/css/navigation';
-    import 'swiper/css/pagination';
-
     {
         const swiperClass = '.swiper--home';
         const SwiperHome = new Swiper(swiperClass, {
@@ -91,6 +89,10 @@ const { slides } = Astro.props;
             pagination: {
                 el: `${swiperClass}__pagination`,
                 clickable: true,
+                bulletClass:
+                    'cursor-pointer mx-fl-space-3xs transition-all duration-300 inline-block w-fl-space-2xs h-fl-space-2xs border border-content-light/50 rounded-full',
+                bulletActiveClass:
+                    '!w-fl-space-s shadow-floated !bg-content-light !border-content-light',
             },
             watchOverflow: true, // disable if only single slide
             on: {

@@ -15,12 +15,12 @@ const { post, preview, class: ClassName } = Astro.props;
 {
     post && (
         <a
-            href={`/${post.collection}/${post.slug}/`}
-            class:list={['gap-fl-space-2xs group grid grid-cols-1', ClassName]}
+            href={`/${post.collection}/${post.slug}`}
+            class:list={['group grid grid-cols-1 gap-fl-space-2xs', ClassName]}
         >
             <span
                 class:list={[
-                    'gap-fl-space-3xs flex w-full text-fl-step--1 text-quiet',
+                    'flex w-full gap-fl-space-3xs text-fl-step--1 text-quiet',
                     preview === 'prev' && 'flex-row-reverse',
                 ]}
             >

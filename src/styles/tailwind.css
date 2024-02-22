@@ -18,14 +18,6 @@
     --pswp-bg: theme('colors.slate.950');
 }
 
-.swiper-pagination-bullet {
-    @apply rounded-full border border-solid border-black/10 shadow-floated transition-all duration-300;
-}
-
-.swiper-pagination-bullet-active {
-    @apply w-fl-space-xs border-accent;
-}
-
 /* Prism | New diff- syntax
 ---------------------------------------------------------------------------------*/
 pre[class*='language-diff-'] {
