@@ -7,6 +7,7 @@ export interface Props {
 }
 
 const { slide } = Astro.props;
+const { caption }: { caption?: SwiperImage['caption'] } = slide || {};
 
 const resolvedWidths = slide.widths ? slide.widths : [480, 720, 960];
 const resolvedSizes =
@@ -38,7 +39,28 @@ const imageProps = {
                     <Image {...imageProps} />
                 </div>
             ) : (
-                <Image {...imageProps} />
+                <>
+                    {caption && (
+                        <span
+                            class:list={[
+                                'absolute flex max-w-fl-space-4xl flex-col items-start  text-content-light',
+                                caption.label && caption.label,
+                            ]}
+                        >
+                            {caption.title && (
+                                <h2 class="relative z-10 -mb-fl-space-3xs inline-block -rotate-1 rounded-tight bg-accent p-fl-space-3xs font-headline text-fl-step-0 font-semibold leading-none tracking-tight shadow-sm shadow-accent-dark ">
+                                    {caption.title}{' '}
+                                </h2>
+                            )}
+                            {caption.copy && (
+                                <p class="relative inline-block translate-x-px translate-y-0.5 rounded-tight bg-black/15 p-fl-space-3xs text-fl-step--2 leading-snug ">
+                                    {caption.copy}
+                                </p>
+                            )}
+                        </span>
+                    )}
+                    <Image {...imageProps} />
+                </>
             )}
         </a>
     )
