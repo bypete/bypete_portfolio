@@ -16,7 +16,6 @@ const fm = Astro.props.frontmatter || Astro.props;
 const { head = {}, isHeroDark = false } = fm;
 
 const isProduction = process.env.NODE_ENV === 'production';
-
 import '~/styles/tailwind.css';
 ---
 
@@ -27,8 +26,8 @@ import '~/styles/tailwind.css';
     class="relative h-full max-w-full scroll-smooth"
 >
     <head>
-        <MainSEO {...head} {isHeroDark} {isProduction} />
-        <GoogleTag />
+        <MainSEO {...head} {isHeroDark} />
+        {isProduction && <GoogleTag />}
         <!-- <ViewTransitions /> -->
     </head>
     <body
@@ -37,7 +36,7 @@ import '~/styles/tailwind.css';
         x-ref="body"
         id="top"
     >
-        <GoogleTagNoScript />
+        {isProduction && <GoogleTagNoScript />}
         <Accessibility />
         <div
             id="wrapper"
