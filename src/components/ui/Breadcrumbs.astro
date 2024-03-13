@@ -31,7 +31,9 @@ breadcrumbList[0] === 'tags' &&
 ---
 
 <nav aria-label="breadcrumb" class="relative">
-    <ul class="mx-auto flex w-full max-w-container items-center divide-x">
+    <ul
+        class="mx-auto flex w-full max-w-container items-center divide-x divide-line leading-none"
+    >
         <li class="px-fl-space-2xs py-fl-space-3xs first:pl-0 last:pr-0">
             <a href="/" class="link">
                 <Icon name="lucide:home" class="h-fl-space-xs w-auto" />
@@ -41,7 +43,7 @@ breadcrumbList[0] === 'tags' &&
             breadcrumbList.map((breadcrumb, index) => (
                 <li
                     class:list={[
-                        'px-fl-space-2xs py-fl-space-3xs first:pl-0 last:pr-0',
+                        'px-fl-space-2xs py-fl-space-3xs  first:pl-0 last:pr-0',
                         index > 0 ? 'lowercase' : 'capitalize',
                     ]}
                 >

@@ -7,12 +7,12 @@ const { bg } = Astro.props;
 
 <div
     x-cloak
-    class="p-fl-space-xs pointer-events-none fixed left-1/2 top-screenSvh z-toast w-full -translate-x-1/2 -translate-y-full md:max-w-sm"
+    class="pointer-events-none fixed left-1/2 top-screenSvh z-toast w-full -translate-x-1/2 -translate-y-full p-fl-space-xs md:max-w-sm"
 >
     <div
         class:list={[
-            'rounded-tight shadow shadow-slate-900/75',
-            bg || 'bg-gradient-to-b from-panel to-panel-contrast',
+            'shadow-overlay rounded-tight',
+            bg || 'from-surface-overlay to-surface bg-gradient-to-b',
         ]}
     >
         <slot />

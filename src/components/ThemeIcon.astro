@@ -6,11 +6,12 @@ import { Icon } from 'astro-icon/components';
     x-data="theme"
     x-cloak
     class:list={[
-        'grid-col-1 grid-row-1 transform-all relative grid justify-center justify-self-end overflow-hidden rounded-full bg-panel p-fl-space-3xs text-center leading-none text-content shadow-icon  shadow-panel-shadow/25 delay-300 duration-200 md:justify-self-center',
+        'grid-col-1 grid-row-1 transform-all relative grid justify-center justify-self-end overflow-hidden rounded-full bg-surface-overlay p-fl-space-3xs text-center leading-none text-content shadow-inset delay-300 duration-200 md:justify-self-center',
     ]}
 >
     <button
         type="button"
+        aria-label="set light theme"
         @click="theme = 'light'"
         class="col-start-1 row-start-1 rotate-0 transform duration-500"
         x-bind:class="{'translate-y-fl-space-l -rotate-180' : theme === 'light'}"
@@ -18,6 +19,7 @@ import { Icon } from 'astro-icon/components';
     </button>
     <button
         type="button"
+        aria-label="set dark theme"
         @click="theme = 'dark'"
         class="col-start-1 row-start-1 rotate-0 transform duration-500"
         x-bind:class="{'-translate-y-fl-space-l -rotate-180' : theme === 'dark'}"
@@ -25,23 +27,34 @@ import { Icon } from 'astro-icon/components';
     </button>
 </span>
 
+<script is:inline>
+    const getTheme = () => {
+        return (
+            localStorage.getItem('theme') ??
+            (window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light')
+        );
+    };
+
+    const setTheme = (theme) => {
+        document.querySelector('html')?.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    };
+
+    let theme = getTheme();
+    setTheme(theme);
+</script>
+
 <script>
     import Alpine from 'alpinejs';
     document.addEventListener('alpine:init', () => {
         Alpine.data('theme', () => ({
-            theme: '',
-            getTheme() {
-                if (localStorage?.getItem('theme')) {
-                    return localStorage.getItem('theme');
-                }
-                return window.matchMedia('(prefers-color-scheme: dark)').matches
-                    ? 'dark'
-                    : 'light';
-            },
+            theme: localStorage.getItem('theme'),
 
             setTheme(value) {
                 localStorage.setItem('theme', value);
-                const html = document.documentElement;
+                const html = document.querySelector('html');
                 const meta = document.querySelector('meta[name="theme-color"]');
 
                 html?.setAttribute('data-theme', value);
@@ -55,8 +68,6 @@ import { Icon } from 'astro-icon/components';
                 this.$watch('theme', (value) => {
                     this.setTheme(value);
                 });
-
-                this.theme = this.getTheme();
             },
         }));
     });

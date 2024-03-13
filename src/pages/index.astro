@@ -5,7 +5,7 @@ import { heroSlides, roles } from '~/data/home';
 import { clientSlides } from '~/data/clients';
 import SwiperHome from '~/components/Swiper/Home.astro';
 import SplashLayout from '~/layouts/SplashLayout.astro';
-import WorkGrid from '~/components/WorkGrid.astro';
+import WorkCard from '~/components/WorkCard.astro';
 import Link from '~/components/ui/Link.astro';
 import { Icon } from 'astro-icon/components';
 import Roles from '~/components/Roles.astro';
@@ -39,7 +39,7 @@ const formattedPosts = formatBlogPosts(allWork, {
 
 <SplashLayout title={title} isHeroDark={hero.dark} {ogImage}>
     <section
-        class="angleclip relative origin-top items-center overflow-x-hidden bg-slate-900 bg-cover pb-fl-space-splashoverlap [&+*]:-mt-fl-space-splashoverlap"
+        class="angleclip lg:angleclip-lg relative origin-top items-center overflow-x-hidden bg-slate-900 bg-cover pb-fl-space-splashoverlap [&+*]:-mt-fl-space-splashoverlap"
     >
         <div class="absolute inset-0 h-full w-full">
             <Picture
@@ -111,7 +111,7 @@ const formattedPosts = formatBlogPosts(allWork, {
     </section>
 
     <section
-        class="bg-gradient-to-b from-page-contrast pb-fl-space-s"
+        class="from-page-contrast bg-gradient-to-b pb-fl-space-s"
         x-data="{ section: false }"
         x-intersect.threshold.10="section = true"
     >
@@ -132,7 +132,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                         const { remarkPluginFrontmatter } = await post.render();
                         const featured = post.data.tags.includes('featured');
                         return (
-                            <WorkGrid
+                            <WorkCard
                                 url={`/${post.collection}/${post.slug}/`}
                                 title={post.data.title}
                                 taster={post.data.taster}
@@ -177,7 +177,7 @@ const formattedPosts = formatBlogPosts(allWork, {
     </section>
     <div class="relative mx-auto max-w-container py-fl-space-2xl">
         <h3
-            class="mb-fl-space-s text-center text-fl-step-1 font-bold text-quiet"
+            class="mb-fl-space-s text-center text-fl-step-1 font-bold text-content-quiet"
         >
             Some of the brands I've worked with:
         </h3>

@@ -4,24 +4,22 @@ import { Image } from 'astro:assets';
 const {
     src,
     alt,
-    widths = [],
-    sizes,
+    densities = [1.5, 2],
     breakout = true,
+    format = 'webp',
     wrapper = '',
     credit = '',
+    width = '768',
     ...attrs
 } = Astro.props;
-
-const resolvedWidths = widths.length ? widths : [400, 768, src.width];
-const resolvedSizes = sizes || `100vw`;
 
 const imageProps = {
     src,
     alt,
     ...attrs,
     quality: 'high',
-    sizes: resolvedSizes,
-    widths: resolvedWidths,
+    densities,
+    width,
 };
 ---
 

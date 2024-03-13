@@ -5,7 +5,7 @@ import Link from './ui/Link.astro';
 import siteInfo from '~/data/site';
 import { Icon } from 'astro-icon/components';
 
-const build = import.meta.env.MODE;
+const build: string = import.meta.env.MODE;
 let domain: string;
 
 if (build === 'production') {
@@ -15,7 +15,7 @@ if (build === 'production') {
 } else {
     domain = 'localhost';
 }
-const isSecure = ['production', 'staging'].includes(build);
+const isSecure: boolean = ['production', 'staging'].includes(build);
 ---
 
 <Toast>
@@ -38,9 +38,9 @@ const isSecure = ['production', 'staging'].includes(build);
         </div>
         <button
             type="button"
-            title="hide"
+            aria-label="hide notice"
             @click="freeze(false)"
-            class="-mr-fl-space-s -mt-fl-space-s rounded-full bg-warning-light p-fl-space-3xs text-white shadow-floated grid-in-close hover:bg-warning-dark"
+            class="-mr-fl-space-s -mt-fl-space-s rounded-full bg-warning p-fl-space-3xs text-white shadow-floated grid-in-close hover:bg-warning-shade"
         >
             <Icon name="mdi:hide" class="h-4 w-auto" />
         </button>
@@ -52,7 +52,7 @@ const isSecure = ['production', 'staging'].includes(build);
                 type="button"
                 size="sm"
                 @click="accept()"
-                aria-label="Dismiss"
+                aria-label="Accept"
             >
                 OK, continue
             </Button>
@@ -63,9 +63,13 @@ const isSecure = ['production', 'staging'].includes(build);
 <script>
     import Alpine from 'alpinejs';
     import Cookies from 'js-cookie';
+    interface Build {
+        domain?: string;
+        isSecure?: boolean;
+    }
 
     document.addEventListener('alpine:init', () => {
-        Alpine.data('cookie', (build = {}) => ({
+        Alpine.data('cookie', (build: Build = {}) => ({
             cookie: '',
             name: 'cnotice',
             domain: build.domain,
@@ -86,7 +90,7 @@ const isSecure = ['production', 'staging'].includes(build);
             },
             accept() {
                 this.freeze(false);
-                const config = {
+                const config: Cookies.CookieAttributes = {
                     expires: 365,
                     path: '/',
                     secure: this.isSecure,

@@ -10,6 +10,8 @@ import SwipePrompt from '~/components/ui/SwipePrompt.astro';
 export interface VisualKeys {
     src: string | ImageMetadata;
     widths?: number[];
+    densities?: number[];
+    width?: number;
     sizes?: string;
     alt: string;
     url: string;
@@ -132,7 +134,7 @@ switch (mode) {
             <>
                 <h1
                     id="headline"
-                    class="heading relative mx-auto max-w-3xl bg-gradient-to-b from-headline-start to-headline-end bg-clip-text pt-fl-space-xl text-center text-fl-step-6 text-transparent "
+                    class="heading relative mx-auto my-fl-space-xl max-w-3xl bg-gradient-to-b from-headline-start to-headline-end bg-clip-text text-center text-fl-step-6 text-transparent "
                 >
                     {title}
                 </h1>

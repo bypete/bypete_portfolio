@@ -1,8 +1,83 @@
 @layer base {
     /* https://divmagic.com/tools/color-converter */
-    /* --[type: color]- */
     :root {
+        --white: 255 255 255; /* absolute white */
+        --offwhite: 249 250 251; /* gray-50  */
+
+        --black: 0 0 0; /* absolute black */
+        --offblack: 24 24 27; /* zinc-800 */
+
+        --banner: transparent;
+        --banner-up: 255 255 255; /* absolute white */
+
+        --surface--10: 243 243 242; /* #f3f3f2 Shade -1 */
+        --surface: 252 252 252; /* #fcfcfc https://www.colorhexa.com/fcfcfc */
+        --surface-10: 255 255 255; /* #FFFFFF Shade +1 */
+
+        --shadow-highlight: 255 255 255; /* absolute white */
+
+        --footer-start: 30 41 59; /* slate 800 */
+        --footer: 15 23 42; /* slate 900 */
+        --footer-end: 2 6 23; /* slate 950 */
+
+        --line-whisper: 251 251 252; /* #fbfbfc Shade + 2 */
+        --line-quiet: 240 241 244; /* #f0f1f4 Shade + 1 */
+        --line: 228 228 231; /* zinc-200 #e5e7eb Shade + 0 */
+        --line-loud: 207 211 218; /* #cfd3da Shade - 2 */
+        --line-shout: 185 190 201; /* #b9bec9 Shade - 4 */
+
+        --copy-light: 250 250 250; /* zinc-50 */
+        --copy: 55 65 81; /* gray-700 */
+        --copy-dark: 31 41 55; /* gray-800 */
+        --copy-darkest: 17 24 39; /* gray-900 */
+        --copy-invert: 249 250 251; /* gray-50  */
+        --copy-footer: 249 250 251; /* gray-50  */
+        --copy-tag: 63 63 70; /* zinc-700 */
+        --copy-featured: 63 63 70; /* zinc-700 */
+
+        --copy-whisper: 209 213 219; /* gray-300 */
+        --copy-quiet: 107 114 128; /* gray-500 */
+        --copy-loud: 17 24 39; /* gray-900 */
+        --copy-shout: 3 7 18; /* gray-950 */
+
+        --accent-light: 240 25 101; /* #f01965 */
+        --accent: 230 15 91; /* #E60F5B */
+        --accent-dark: 212 14 84; /* #d40e54 */
+
+        --brand-light: 255 213 20; /* #ffd514  */
+        --brand: 255 210 0; /* #ffd200  */
+        --brand-dark: 235 194 0; /* #ebc200 */
+
+        --secondary-light: 51 65 85; /* slate-700 */
+        --secondary: 30 41 59; /* slate-800 */
+        --secondary-dark: 2 6 23; /* slate-950 */
+
+        --tag: 244 244 245; /* zinc-100 */
+        --tag-link: 253 224 71; /* yellow-300 */
+        --tag-hover: 250 204 21; /* yellow-400 */
+        --tag-featured: 253 224 71; /* yellow-300 */
+
+        --note: 254 240 138; /* yellow-200 */
+        --note-shade: 250 204 21; /* yellow-400 */
+
+        --info: 56 189 248; /* sky-400 */
+        --info-shade: 14 165 233; /* sky-500 */
+
+        --attention: 253 224 71; /* yellow-300 */
+        --attention-shade: 234 179 8; /* yellow-500 */
+
+        --warning: 220 38 38; /* red-600 */
+        --warning-shade: 185 28 28; /* red-700 */
+
+        --hilite: 253 224 71; /* yellow-300 */
+        --gold: 182 160 108; /* #b6a06c */
+
+        --focus: 56 189 248; /* sky-400 */
+
+        --shader: svg-load('stack__papercuts.svg');
+
         --container-max: 75rem;
+
         /* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1200,18,1.25,5,2,768&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
         --step--2: clamp(0.6944rem, 0.6855rem + 0.0446vw, 0.72rem);
         --step--1: clamp(0.8331rem, 0.8099rem + 0.1163vw, 0.9rem);
@@ -67,7 +142,7 @@
         --space-s-xs: clamp(0.9375rem, 1.0227rem + -0.1136vi, 1rem);
 
         /* Space 30px up to 1200px then reduce down to 0px by 1260px */
-        --container-padding: clamp(0rem, 39.375rem + -50vi, 1.875rem);
+        --container-tramline: clamp(0rem, 39.375rem + -50vi, 1.875rem);
         --headerheight: calc(var(--space-l) + (var(--space-s) * 2));
         --splash-overlap: calc(var(--space-3xl) * 2);
         --container-width-max: 1200px;
@@ -76,234 +151,198 @@
         --container-width-lg: 1024px;
         --container-width-xl: 1280px;
 
-        --color-page__bg: 250 250 250; /* zinc-50 */
-        --color-page__bg--contrast: 250 250 250; /* putty | https://www.colorhexa.com/f5f4f0 */
+        /* Tailwind variables */
+        --color-banner: var(--banner);
+        --color-banner-up: var(--banner-up);
 
-        .swiper {
-            /* Add .swiper class to override defaults */
-            --swiper-theme-color: theme('colors.accent.DEFAULT') !important;
-            /* --swiper-pagination-color: theme('colors.white'); */
-            --swiper-pagination-bullet-inactive-color: white;
-            --swiper-pagination-bullet-inactive-opacity: 1;
-            --swiper-navigation-size: var(--space-m);
-        }
+        --color-menu: var(--accent);
+        --color-menu-active: var(--copy);
+        --color-menu__bg-hover: var(--surface-10);
+        --color-menu__bg-active: var(--brand);
+        --color-menu__marker: var(--brand);
 
-        --shader: svg-load('stack__papercuts.svg');
+        --color-menudark: var(--copy-light);
+        --color-menudark-active: var(--copy);
+        --color-menudark__bg-hover: var(--copy-light);
+        --color-menudark__bg-active: var(--brand);
+        --color-menudark__marker: var(--brand);
 
-        --color-banner: transparent; /* transparent */
-        --color-banner-up: 255 255 255; /* white */
+        --color-dropdown: var(--copy);
+        --color-dropdown-hover: var(--copy);
+        --color-dropdown-active: var(--copy);
+        --color-dropdown-highlight: var(--copy);
+        --color-dropdown__bg-hover: var(--line);
+        --color-dropdown__bg-active: var(--brand);
+        --color-dropdown__bg-highlight: var(--brand);
 
-        --color-menu: 230 0 95; /* Accent Magenta / #e6005f */
-        --color-menu-active: 55 65 81; /* gray-700 */
-        --color-menu__bg-hover: 255 255 255; /* white */
-        --color-menu__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
-        --color-menu__marker: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-menusm: var(--copy);
+        --color-menusm-hover: var(--white);
+        --color-menusm-active: var(--white);
 
-        --color-menudark: 255 255 255; /* White */
-        --color-menudark-active: 55 65 81; /* gray-700 */
-        --color-menudark__bg-hover: 255 255 255; /* white */
-        --color-menudark__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
-        --color-menudark__marker: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-underlay-light: var(--offwhite);
+        --color-underlay-dark: var(--offblack);
 
-        --color-dropdown: 55 65 81; /* gray-700 */
-        --color-dropdown-hover: 228 228 231; /* zinc-200 */
-        --color-dropdown-active: 55 65 81; /* gray-700 */
-        --color-dropdown-highlight: 255 210 0; /* Brand yellow / #ffd200 */
-        --color-dropdown__bg-hover: 228 228 231; /* zinc-200 */
-        --color-dropdown__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
-        --color-dropdown__bg-highlight: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-overlay-light: var(--offwhite);
+        --color-overlay-dark: var(--offblack);
 
-        --color-menusm: 55 65 81; /* gray-700 */
-        --color-menusm-hover: 255 255 255; /* white */
-        --color-menusm-active: 255 255 255; /* white */
+        --color-surface-sunken: var(--surface--10);
+        --color-surface-default: var(--surface);
+        --color-surface-raised: var(--surface-10);
+        --color-surface-overlay: var(--surface-10);
 
-        --color-underlay-light: 249 250 251; /* gray-50  */
-        --color-underlay-dark: 24 24 27; /* zinc-800  */
+        --color-shadow-raised: var(--black);
+        --color-shadow-overlay: var(--black);
+        --color-shadow-inset: var(--black);
+        --color-shadow-highlight: var(--shadow-highlight);
 
-        --color-overlay-light: 249 250 251; /* gray-50  */
-        --color-overlay-dark: 24 24 27; /* zinc-800 */
+        --color-line-whisper: var(--line-whisper);
+        --color-line-quiet: var(--line-quiet);
+        --color-line: var(--line);
+        --color-line-loud: var(--line-loud);
+        --color-line-shout: var(--line-shout);
 
-        --color-panel-contrast: 244 244 245; /* zinc-100 */
-        --color-panel: 255 255 255; /* white */
-        --color-panel-shadow: 31 41 55; /* gray-800 */
-        --color-panel-invert: 31 41 55; /* gray-800 */
+        --color-footer-start: var(--footer-start);
+        --color-footer: var(--footer);
+        --color-footer-end: var(--footer-end);
 
-        --color-outline-pale: 244 244 245; /* zinc-100 */
-        --color-outline: 228 228 231; /* zinc-200 */
-        --color-outline-hard: 212 212 216; /* zinc-300 */
+        --color-tag: var(--tag);
+        --color-tag-link: var(--tag-link);
+        --color-tag-hover: var(--tag-hover);
+        --color-tag-featured: var(--tag-featured);
 
-        --color-footer: 255 255 255; /* white */
-        --color-footer__bg-light: 30 41 59; /* slate 800 */
-        --color-footer__bg: 15 23 42; /* slate 900 */
-        --color-footer__bg-dark: 2 6 23; /* slate 950 */
+        --color-note: var(--note);
+        --color-note-shade: var(--note-shade);
 
-        --color-note: 254 240 138; /* yellow-200 */
-        --color-note-shade: 250 204 21; /* yellow-400 */
+        --color-info: var(--info);
+        --color-info-shade: var(--info-shade);
 
-        --color-info: 56 189 248; /* sky-400 */
-        --color-info-shade: 2 132 199; /* sky-600 */
+        --color-alert: var(--note);
+        --color-alert-shade: var(--info-shade);
 
-        --color-alert: 220 38 38; /* red-600 */
-        --color-alert-shade: 153 27 27; /* red-800 */
+        --color-attention: var(--attention);
+        --color-attention-shade: var(--attention-shade);
 
-        --color-attention: 253 224 71; /* yellow-300 */
-        --color-attention-shade: 234 179 8; /* yellow-500 */
+        --color-warning: var(--warning);
+        --color-warning-shade: var(--warning-shade);
 
-        --color-warning-light: 220 38 38; /* red-600 */
-        --color-warning: 220 38 38; /* red-600 */
-        --color-warning-dark: 153 27 27; /* red-800 */
+        --color-hilite: var(--hilite);
 
-        --color-hilite: 253 224 71; /* yellow-300 */
+        --color-gold: var(--gold);
 
-        --color-gold: 182 160 108; /* #b6a06c */
+        --color-focus: var(--focus);
 
-        --color-focus: 56 189 248; /* sky-400 */
+        --color-content-light: var(--copy-light);
+        --color-content: var(--copy);
+        --color-content-dark: var(--copy-dark);
+        --color-content-footer: var(--copy-footer);
+        --color-content-tag: var(--copy-tag);
+        --color-content-featured: var(--copy-featured);
 
-        --color-tag: 63 63 70; /* zinc-700 */
-        --color-tag-featured: 63 63 70; /* zinc-700 */
-        --color-tag__bg: 244 244 245; /* zinc-100 */
-        --color-tag__bg-link: 253 224 71; /* yellow-300 */
-        --color-tag__bg-hover: 250 204 21; /* yellow-400 */
-        --color-tag__bg-featured: 253 224 71; /* yellow-300 */
+        --color-content-whisper: var(--copy-whisper);
+        --color-content-quiet: var(--copy-quiet);
+        --color-content-loud: var(--copy-loud);
+        --color-content-shout: var(--copy-shout);
 
-        --color-content: 55 65 81; /* gray-700 */
-        --color-content-invert: 255 255 255; /* white */
-        --color-content-light: 250 250 250; /* zinc-50 */
-        --color-content-dark: 55 65 81; /* gray-700 */
-
-        --color-headline: 31 41 55; /* gray-800 */
+        --color-headline: var(--copy-dark);
         --color-headline-start: 2 132 199; /* sky-600 */
-        --color-headline-end: 15 23 42; /* slate-900 */
-        --color-blockquote: 31 41 55; /* gray-800 */
+        --color-headline-end: var(--copy-darkest);
+        --color-blockquote: var(--copy-dark);
 
-        --color-brand-lightest: 255 224 77; /* #ffe04d */
-        --color-brand-light: 255 215 26; /* #ffd71a */
-        --color-brand: 255 210 0; /* Brand yellow / #ffd200 https://www.colorhexa.com/ffd200 */
-        --color-brand-dark: 230 189 0; /* #e6bd00 */
-        --color-brand-darkest: 179 147 0; /* #b39300 */
+        --color-brand-light: var(--brand-light);
+        --color-brand: var(--brand);
+        --color-brand-dark: var(--brand-dark);
 
-        --color-accent-light: 255 0 106; /* #ff006a */
-        --color-accent: 230 0 95; /* Accent Magenta / #e6005f https://www.colorhexa.com/e6005f */
-        --color-accent-dark: 205 0 84; /* #cd0054 */
+        --color-accent-light: var(--accent-light);
+        --color-accent: var(--accent);
+        --color-accent-dark: var(--accent-dark);
 
-        --color-secondary-light: 51 65 85; /* slate-700 */
-        --color-secondary: 30 41 59; /* slate-800 */
-        --color-secondary-dark: 2 6 23; /* slate-950 */
+        --color-secondary-light: var(--secondary-light);
+        --color-secondary: var(--secondary);
+        --color-secondary-dark: var(--secondary-dark);
 
-        --color-quiet-light: 209 213 219; /* gray-300 */
-        --color-quiet: 161 161 170; /* zinc-400 */
-
-        --color-credit: 250 250 250; /* zinc-50 */
-        --color-credit__bg: 31 41 55; /* gray-800 */
-
-        --color-disabled: 209 213 219; /* gray-300 */
+        --color-disabled: var(--line-quiet);
     }
 
-    @media (prefers-color-scheme: dark) {
-        :root {
-        }
-    }
-
+    /* Alpine will set data-theme value based on (prefers-color-scheme: dark)  */
     :root[data-theme='dark'] {
+        --banner: transparent;
+        --banner-up: 11 11 15; /* #0A0A0D */
+
+        --surface--10: 22 22 29; /* #16161d -1 Shade */
+        --surface: 31 31 40; /* #1f1f28 */
+        --surface-10: 42 42 54; /* #2a2a36 +1 Shade */
+
+        --shadow-highlight: 54 54 70; /* #363646 */
+
+        --footer-start: 22 22 29; /* #16161d */
+        --footer: 14 14 18; /* #0e0e12 */
+        --footer-end: 14 14 18; /* #0e0e12 */
+
+        --line-whisper: 37 37 48; /* #252530 Shade + 2 */
+        --line-quiet: 54 54 70; /* #363646 Shade + 4 */
+        --line: 71 71 93; /* #363646 Shade + 6 */
+        --line-loud: 88 88 115; /* #585873 Shade + 8 */
+        --line-shout: 105 105 137; /* #696989 Shade + 10 */
+
+        --copy-light: 249 250 251; /* gray-50  */
+        --copy: 229 231 235; /* gray-200 */
+        --copy-dark: 31 41 55; /* gray-800 */
+        --copy-invert: 31 41 55; /* gray-800 */
+        --copy-footer: 229 231 235; /* gray-200 */
+        --copy-tag: 63 63 70; /* zinc-700 */
+        --copy-featured: 31 41 55; /* gray-800 */
+
+        --copy-whisper: 55 65 81; /* gray-700 */
+        --copy-quiet: 107 114 128; /* gray-500 */
+        --copy-loud: 243 244 246; /* gray-100 */
+        --copy-shout: 249 250 251; /* gray-50 */
+
+        --focus: 3 105 161; /* sky-700 */
+
         --shader: svg-load('shade__dark.svg');
 
-        --color-underlay-light: 39 39 42; /* zinc-800  */
-        --color-underlay-dark: 9 9 11; /* zinc 950  */
+        --color-menu: var(--white);
+        --color-menu-active: var(--copy);
+        --color-menu__bg-hover: var(--surface-10);
+        --color-menu__bg-active: var(--brand);
+        --color-menu__marker: var(--brand);
 
-        --color-page__bg: 39 39 42; /* zinc-800 */
-        --color-page__bg--contrast: 63 63 70; /* zinc 700 */
+        --color-menudark: var(--copy-light);
+        --color-menudark-active: var(--copy);
+        --color-menudark__bg-hover: var(--copy-light);
+        --color-menudark__bg-active: var(--brand);
+        --color-menudark__marker: var(--brand);
 
-        --color-banner: transparent; /* transparent */
-        --color-banner-up: 9 9 11; /* zinc 950 */
+        --color-dropdown: var(--copy);
+        --color-dropdown-hover: var(--copy);
+        --color-dropdown-active: var(--copy-dark);
+        --color-dropdown-highlight: var(--copy-dark);
+        --color-dropdown__bg-hover: var(--line);
+        --color-dropdown__bg-active: var(--brand);
+        --color-dropdown__bg-highlight: var(--brand);
 
-        --color-menu: 228 228 231; /* zinc-200 */
-        --color-menu-active: 255 255 255; /* White */
-        --color-menu__bg-hover: 255 255 255; /* white */
-        --color-menu__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
-        --color-menu__marker: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-menusm: var(--copy-dark);
+        --color-menusm-hover: var(--copy-light);
+        --color-menusm-active: var(--copy-light);
+        --color-blockquote: var(--copy-light);
 
-        --color-menudark: 255 255 255; /* White */
-        --color-menudark-active: 255 255 255; /* White */
-        --color-menudark__bg-hover: 255 255 255; /* white */
-        --color-menudark__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
-        --color-menudark__marker: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-underlay-light: var(--surface);
+        --color-underlay-dark: var(--surface--10);
 
-        --color-dropdown: 228 228 231; /* zinc-200 */
-        --color-dropdown-hover: 228 228 231; /* zinc-200 */
-        --color-dropdown-active: 55 65 81; /* gray-700 */
-        --color-dropdown-highlight: 255 210 0; /* Brand yellow / #ffd200 */
-        --color-dropdown__bg-hover: 228 228 231; /* zinc-200 */
-        --color-dropdown__bg-active: 255 210 0; /* Brand yellow / #ffd200 */
-        --color-dropdown__bg-highlight: 255 210 0; /* Brand yellow / #ffd200 */
+        --color-overlay-light: var(--surface);
+        --color-overlay-dark: var(--surface--10);
 
-        --color-overlay-light: 39 39 42; /* zinc-800  */
-        --color-overlay-dark: 9 9 11; /* zinc 950  */
+        --color-headline: var(--copy);
+        --color-headline-start: var(--copy-light);
+        --color-headline-end: var(--copy);
 
-        --color-warning-light: 220 38 38; /* red-600 */
-        --color-warning: 220 38 38; /* red-600 */
-        --color-warning-dark: 153 27 27; /* red-800 */
-
-        --color-panel-invert: 82 82 91; /* zinc-600 */
-        --color-panel: 39 39 42; /* zinc 800 */
-        --color-panel-contrast: 24 24 27; /* zinc-900 */
-
-        --color-outline-pale: 39 39 42; /* zinc-800 */
-        --color-outline: 63 63 70; /* zinc-700 */
-        --color-outline-hard: 82 82 91; /* zinc-600 */
-
-        --color-footer: 255 255 255; /* white */
-        --color-footer__bg-light: 39 39 42; /* zinc 800 */
-        --color-footer__bg: 24 24 27; /* zinc 900 */
-        --color-footer__bg-dark: 9 9 11; /* zinc 950 */
-
-        --color-info: 2 132 199; /* sky-600 */
-        --color-info-shade: 7 89 133; /* sky-800 */
-
-        --color-note: 253 224 71; /* yellow-300 */
-        --color-note-shade: 234 179 8; /* yellow-500 */
-
-        --color-alert: 220 38 38; /* red-600 */
-        --color-alert-shade: 153 27 27; /* red-800 */
-
-        --color-attention: 253 224 71; /* yellow-300 */
-        --color-attention-shade: 234 179 8; /* yellow-500 */
-
-        --color-tag: 55 65 81; /* gray-700 */
-        --color-tag__bg: 24 24 27; /* zinc-900 */
-        --color-tag__bg-link: 253 224 71; /* yellow-300 */
-        --color-tag__bg-hover: 250 204 21; /* yellow-400 */
-
-        --color-content: 228 228 231; /* zinc-200 */
-        --color-content-invert: 55 65 81; /* gray-700 */
-        --color-content-light: 250 250 250; /* zinc-50 */
-        --color-content-dark: 55 65 81; /* gray-700 */
-
-        --color-headline: 228 228 231; /* zinc-200 */
-        --color-headline-start: 228 228 231; /* zinc-200 */
-        --color-headline-end: 250 250 250; /* zinc-50 */
-
-        --color-blockquote: 250 250 250; /* zinc-50 */
-
-        --color-accent-lightest: 255 224 77; /* #ffe04d */
-        --color-accent-light: 255 215 26; /* #ffd71a */
-        --color-brand: 255 210 0; /* Brand yellow / #ffd200 https://www.colorhexa.com/ffd200 */
-        --color-accent-dark: 230 189 0; /* #e6bd00 */
-        --color-accent-darkest: 179 147 0; /* #b39300 */
-
-        --color-accent-light: 255 0 106; /* #ff006a */
-        --color-accent: 230 0 95; /* Accent Magenta / #e6005f https://www.colorhexa.com/e6005f */
-        --color-accent-dark: 205 0 84; /* #cd0054 */
-
-        --color-quiet-light: 209 213 219; /* gray-300 */
-        --color-quiet: 113 113 122; /* zinc-500 */
-
-        --color-disabled: 209 213 219; /* gray-300 */
+        --color-blockquote: var(--copy-light);
     }
 
     /* Containers
 ---------------------------------------------------------------------------------*/
     .max-w-container {
-        @apply mincon:px-fl-space-containerpadding px-fl-space-m;
+        @apply px-fl-space-m mincon:px-fl-space-containertramline;
     }
 
     /* SVGs
@@ -341,7 +380,7 @@
     }
 
     .hilite {
-        @apply rounded-tight bg-hilite p-fl-space-3xs font-medium text-content-dark;
+        @apply rounded-tight bg-hilite px-fl-space-2xs py-fl-space-3xs font-medium text-content-dark;
     }
 
     .external {

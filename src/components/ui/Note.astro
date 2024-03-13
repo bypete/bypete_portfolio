@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'astro/types';
 import { Icon } from 'astro-icon/components';
 
 interface Props extends HTMLAttributes<'div'> {
-    theme?: 'info' | 'note' | 'alert' | 'attention';
+    theme?: 'info' | 'note' | 'attention';
     class?: string;
     display?: 'inline-block' | 'block';
     type?: 'button' | 'submit' | 'reset';
@@ -40,13 +40,6 @@ const themeSet = {
         inset: 'shadow-info-shade',
         stroke: 'text-content-light',
     },
-    alert: {
-        icon: 'lucide:alert-triangle',
-        bg: 'bg-alert',
-        border: 'border-alert',
-        inset: 'shadow-alert-shade',
-        stroke: 'text-content-light',
-    },
     attention: {
         icon: 'lucide:alert-circle',
         bg: 'bg-attention',
@@ -63,7 +56,7 @@ const themeSet = {
         display,
         className
             ? className
-            : 'items-center justify-center rounded-tight bg-panel text-content shadow-d1 shadow-panel-shadow/10',
+            : 'items-center justify-center rounded-tight bg-surface-raised text-content shadow-raised',
     ]}
     {...rest}
 >

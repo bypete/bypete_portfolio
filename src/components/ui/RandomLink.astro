@@ -37,9 +37,9 @@ stringChoices = stringChoices.replace(/\"/g, "'");
         theme === 'white' && 'bg-content-light text-content-dark',
         theme === 'whiteline' &&
             'bg-transparent text-content-light ring-2 ring-inset ring-content-light hover:bg-content-light hover:text-content-dark',
-        theme === 'outline' && 'bg-transparent ring-2 ring-inset ring-outline',
+        theme === 'outline' && 'ring-line bg-transparent ring-2 ring-inset',
         theme === 'quiet' &&
-            'bg-transparent text-quiet hover:border-gray-300  hover:bg-gray-600 hover:text-white',
+            'text-content-quiet hover:border-line bg-transparent  hover:bg-gray-600 hover:text-white',
         theme === 'disabled' &&
             'bg-transparent text-disabled ring-2 ring-disabled hover:border-disabled  hover:bg-transparent hover:text-disabled',
         isIcon && 'justify-between gap-x-fl-space-3xs',

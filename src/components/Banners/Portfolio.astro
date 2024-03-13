@@ -59,8 +59,10 @@ const { wrapper, gridHeight } = Astro.props;
     >
         <Image
             src={product}
-            widths={[400, 600, 800]}
-            sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.5), (min-width: 1264) calc(var(--container-width-max)*0.60)`}
+            quality="high"
+            loading="eager"
+            densities={[1.5, 2]}
+            width={600}
             class="relative m-0 h-full w-full object-contain"
             alt="iPhones with mykring app in use"
         />

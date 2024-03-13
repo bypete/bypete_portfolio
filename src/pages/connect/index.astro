@@ -7,9 +7,9 @@ const title = 'Connect';
 ---
 
 <PageLayout title={title} isWide={true} prose={false}>
-    <div class="grid grid-cols-1 md:grid-cols-2">
-        <div class="p-fl-space-m md:order-2">
-            <div class="mx-auto w-full max-w-[40ch]">
+    <div class="grid grid-cols-1 gap-fl-space-m md:grid-cols-2">
+        <div class="md:order-2 md:mt-fl-space-m">
+            <div class="mr-auto w-full max-w-[40ch]">
                 <Note theme="info" hasIcon={true}>
                     <p>
                         Use this form to send me a message and I'll get back to
@@ -34,7 +34,9 @@ const title = 'Connect';
                 </Note>
             </div>
         </div>
-        <div class="rounded bg-panel p-fl-space-m md:order-1">
+        <div
+            class="bg-surface-raised shadow-raised rounded p-fl-space-m md:order-1"
+        >
             <ContactForm />
         </div>
     </div>

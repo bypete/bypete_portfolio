@@ -24,22 +24,20 @@ interface Props {
     url: string;
     cover: CoverImage;
     logo?: LogoImage;
-    product?: ProductImage;
     taster: string;
     tags: string[];
     readTime: string;
 }
 
-const { title, url, cover, product, logo, taster, tags, readTime } =
-    Astro.props;
+const { title, url, cover, logo, taster, tags, readTime } = Astro.props;
 ---
 
 <article
-    class="gap-fl-space-s grid grid-cols-1 grid-areas-listing md:grid-cols-listing md:grid-areas-listingwide"
+    class="grid grid-cols-1 gap-fl-space-m grid-areas-listing md:grid-cols-listing md:grid-areas-listingwide"
 >
     {
         cover && (
-            <div class="self-center grid-in-image">
+            <div class="grid-in-image">
                 <a
                     href={url}
                     class="relative block w-full pb-widescreen lg:pb-tv"
@@ -49,14 +47,16 @@ const { title, url, cover, product, logo, taster, tags, readTime } =
                         alt={cover.alt}
                         class="absolute inset-0 m-0 h-full w-full object-cover"
                         quality="high"
-                        widths={[240, 540, 720, cover.src.width]}
-                        sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${cover.src.width}px`}
+                        loading="eager"
+                        densities={[1.5, 2]}
+                        width={300}
                     />
 
                     {logo && (
                         <Image
                             src={logo.light || logo.src}
-                            widths={[300]}
+                            densities={[1.5, 2]}
+                            width={300}
                             alt={title + ' logo'}
                             class="absolute left-1/2 top-1/2 m-auto h-auto max-w-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 group-hover:max-w-1/2 group-focus:max-w-1/2 "
                         />
@@ -65,9 +65,9 @@ const { title, url, cover, product, logo, taster, tags, readTime } =
             </div>
         )
     }
-    <div class="gap-fl-space-xs grid grid-cols-1 grid-in-description">
+    <div class="grid grid-cols-1 gap-fl-space-xs grid-in-description">
         <div>
-            <h2 class="font-headline text-fl-step-3">
+            <h2 class="font-headline text-fl-step-3 leading-tight">
                 <a href={url} class="link" set:html={title} />
             </h2>
             {taster && <p set:html={taster} />}

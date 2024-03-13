@@ -38,7 +38,7 @@ const { data } = Astro.props;
                                         class={`inline-block h-fl-space-s w-auto ${
                                             index < review.rating
                                                 ? 'text-gold'
-                                                : 'text-quiet'
+                                                : 'text-content-quiet'
                                         }`}
                                     />
                                 ))}
@@ -96,7 +96,7 @@ const { data } = Astro.props;
                 el: `${swiperClass}__pagination`,
                 clickable: true,
                 bulletClass:
-                    'cursor-pointer mx-fl-space-3xs transition-all duration-300 inline-block w-fl-space-2xs h-fl-space-2xs border border-outline rounded-full ',
+                    'cursor-pointer mx-fl-space-3xs transition-all duration-300 inline-block w-fl-space-2xs h-fl-space-2xs border border-line rounded-full ',
                 bulletActiveClass:
                     '!w-fl-space-s bg-accent !border-transparent',
             },

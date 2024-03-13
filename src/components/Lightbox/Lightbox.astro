@@ -13,29 +13,29 @@ export interface Props extends HTMLAttributes<'div'> {
     breakout?: boolean;
 }
 
-const fm = Astro.props.frontmatter || Astro.props;
 const {
     id,
     images,
     wrapper = '',
-    bg = 'bg-panel',
+    bg = 'bg-surface-sunken',
     class: className,
     breakout,
     ...rest
-} = fm as Props;
+} = Astro.props;
 ---
 
 <section
     id={id}
     class:list={[
-        'lightbox not-prose relative rounded-tight shadow-panelinset shadow-panel-shadow/20',
+        'lightbox not-prose group relative  shadow-inset ',
         bg && bg,
         wrapper ? wrapper : '',
-        breakout && 'breakout',
         className
             ? className
-            : ` p-fl-space-m ${
-                  !breakout ? '-mx-fl-space-m my-fl-space-xl' : ''
+            : ` p-fl-space-s-m ${
+                  !breakout
+                      ? '-mx-fl-space-s-m my-fl-space-xl rounded-tight'
+                      : 'breakout'
               }`,
     ]}
     {...rest}
@@ -43,23 +43,22 @@ const {
     x-intersect.threshold.10="shown = true"
 >
     <div
-        class="flex flex-col justify-between leading-none md:flex-row md:items-center"
+        class="mb-fl-space-m flex flex-col items-start justify-between leading-snug md:flex-row"
     >
         <slot name="title" />
         <p
-            class="pointer-events-none transform"
-            x-bind:class="shown ? 'animate-fade-out-delay' : 'invisible'"
+            class="pointer-events-none flex transform gap-fl-space-2xs text-fl-step--1 text-content-whisper duration-500 group-focus-within:text-content-quiet group-hover:text-content-quiet md:w-1/3"
         >
-            Tap to zoom any image <Icon
+            <Icon
                 name="lucide:zoom-in"
-                class="inline-block h-fl-space-s w-auto"
-            />
+                class="inline-block h-auto w-fl-space-m"
+            /> Tap any image to view in more detail. Use mouse scroll to zoom in.
         </p>
     </div>
     <slot />
 
     <div
-        class="grid grid-flow-dense auto-rows-[100px] grid-cols-3 gap-fl-space-m md:auto-rows-[160px] md:grid-cols-4"
+        class="mt-fl-space-m grid grid-flow-dense auto-rows-[100px] grid-cols-3 gap-fl-space-m md:auto-rows-[160px] md:grid-cols-4"
     >
         {
             images.map((image, i) => (
@@ -69,6 +68,7 @@ const {
                             src={image}
                             alt={image.title}
                             width={480}
+                            densities={[1.5, 2]}
                             format="webp"
                             height={(image.height * 480) / image.width}
                             class="absolute inset-0 h-full w-full object-cover object-top"

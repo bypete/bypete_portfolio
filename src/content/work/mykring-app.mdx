@@ -80,7 +80,7 @@ With no prior app development experience, the learning curve was steep. [Xamarin
 Although an initial wireframe document was provided, it was essentially an imitation of the mykring.com responsive pages. Rather than simply replicating what we had, we wanted to improve the user experience wherever possible.
 
 <Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
-## Skills
+## My Skills and Contributions
 </Skills>
 
 ## My responsibilities
@@ -115,7 +115,7 @@ Although an initial wireframe document was provided, it was essentially an imita
     </blockquote>
   </div>
   <div slot="mc2" class="not-prose self-end md:order-1">
-    <Image src={iphone_hand} widths={[400,600,800]} sizes={`(max-width: var(--container-width-md)) calc(100vw - 2rem), calc((100vw - 4rem) *0.5), (min-width: 1264) calc(var(--container-width-max)*0.60)`} class="relative m-0 mt-fl-space-m h-[480px] w-full object-contain lg:h-[640px]" alt="Hand holding an iPhone with mykring app in use"/>
+    <Image src={iphone_hand} width={720} densities={[1.5, 2]} class="relative m-0 mt-fl-space-m h-[480px] w-full object-contain lg:h-[640px]" alt="Hand holding an iPhone with mykring app in use"/>
   </div>
 </Block>
 
@@ -124,9 +124,9 @@ Each card has its own set of available actions, which update as the user swipes 
 By controlling visibility, we can remove redundant options, resulting in a smoother experience.
 
 <Figure caption='Unnecessary elements from the online responsive version (left) were stripped out to streamline the app layout (middle and right) ' credit='App v1.0.1, K&nbsp;Wearables Ltd.' grid='grid grid-cols-2 lg:grid-cols-3 items-start gap-fl-space-m'>
-  <Image src={web_autotopup} alt="Homepage view" class="w-full h-auto shadow-md border border-outline" />
-  <Image src={auto_topup} alt="Map showing the development plan" class="w-full h-auto shadow-md border border-outline" />
-  <Image src={auto_topup_open} alt="Map showing the development plan" class="w-full h-auto shadow-md border border-outline" />
+  <Image src={web_autotopup} alt="Homepage view" class="w-full h-auto shadow-md border border-line" />
+  <Image src={auto_topup} alt="Map showing the development plan" class="w-full h-auto shadow-md border border-line" />
+  <Image src={auto_topup_open} alt="Map showing the development plan" class="w-full h-auto shadow-md border border-line" />
 </Figure>
 
 The Auto top-up form was also streamlined and only appears when 'Use Auto top-up' is toggled to on. The input sliders were removed as they became too fiddley within the mobile viewport. The minimum and maximum values are now displayed alongside the input field.
@@ -152,7 +152,7 @@ The Auto top-up form was also streamlined and only appears when 'Use Auto top-up
 
 <a href="https://apps.apple.com/gb/app/mykring/id1578688520?see-all=reviews" class="link" target="_blank"><span class="text-fl-step-3 font-black">4.6</span></a> out of 5 <span class="text-fl-step--1">(Sept &rsquo;22)</span>
 
-<div class="breakout bg-panel">
+<div class="breakout bg-surface-raised">
 <Reviews data={data.reviews}/></div>
 
 

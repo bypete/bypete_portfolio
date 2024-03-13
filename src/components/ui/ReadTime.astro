@@ -4,8 +4,10 @@ interface Props {
     class?: string;
     duration: string;
 }
-const { duration = '0 min', class: className = 'text-fl-step--1 text-quiet' } =
-    Astro.props;
+const {
+    duration = '0 min',
+    class: className = 'text-fl-step--1 text-content-quiet',
+} = Astro.props;
 ---
 
 <p class:list={['flex items-center', className]}>

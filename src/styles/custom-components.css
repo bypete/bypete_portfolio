@@ -3,7 +3,7 @@
     /* Placeholders 
 ---------------------------------------------------------------------------------*/
     .holder {
-        @apply relative before:absolute before:inset-0 before:border-2 before:border-dashed before:border-outline;
+        @apply relative before:absolute before:inset-0 before:border-2 before:border-dashed before:border-line;
     }
 
     /* Forms 
@@ -18,13 +18,10 @@
     input[type='number'] {
         -moz-appearance: textfield;
     }
-    .form--panel {
-        @apply w-full overflow-hidden rounded-lg bg-white shadow-lg lg:min-h-40;
-    }
 
     .form__input,
     .form__select {
-        @apply block rounded  border border-panel-invert/50 bg-panel-contrast/50 px-fl-space-2xs py-fl-space-3xs placeholder:text-content/40 focus:border-panel-invert/50  focus:bg-panel-contrast  focus:outline-none focus:ring-2 focus:ring-focus;
+        @apply block rounded border border-line bg-surface-sunken/15 px-fl-space-2xs py-fl-space-3xs placeholder:text-content/40 focus:border-surface focus:bg-surface  focus:outline-none focus:ring-2 focus:ring-focus;
     }
 
     .form__input.error,
@@ -38,7 +35,7 @@
     }
 
     .form__textarea {
-        @apply block rounded  border border-gray-300 bg-white px-fl-space-2xs py-fl-space-3xs placeholder:text-quiet  focus:border-focus focus:bg-white focus:outline-none focus:ring-2 focus:ring-focus;
+        @apply block rounded  border border-gray-300 bg-white px-fl-space-2xs py-fl-space-3xs placeholder:text-content-quiet  focus:border-focus focus:bg-white focus:outline-none focus:ring-2 focus:ring-focus;
     }
 
     .form__checkbox {
@@ -51,7 +48,7 @@
     }
 
     .form__divider {
-        @apply -mx-fl-space-xs my-fl-space-m border-outline lg:mx-0 lg:w-full;
+        @apply -mx-fl-space-xs my-fl-space-m border-line lg:mx-0 lg:w-full;
     }
 
     .form__divider--panel {
@@ -103,9 +100,6 @@
         @apply before:icon-[lucide--check-circle-2] before:text-teal-500;
     }
 
-    .list--counter {
-    }
-
     .list--counter > li {
         @apply relative list-none pl-fl-space-l;
         counter-increment: a;
@@ -124,7 +118,7 @@ before:block before:text-[1.5em] before:leading-none before:text-accent;
     }
 
     blockquote .cite {
-        @apply mb-0 mt-fl-space-xs text-fl-step-0 not-italic leading-fl-space-m text-quiet;
+        @apply mb-0 mt-fl-space-xs text-fl-step-0 not-italic leading-fl-space-m text-content-quiet;
     }
 
     /* labels
@@ -151,27 +145,5 @@ before:block before:text-[1.5em] before:leading-none before:text-accent;
 
     .label--alert {
         @apply border-red-600 bg-warning text-content-light;
-    }
-
-    /* Shapes/Masks
----------------------------------------------------------------------------------*/
-    .bookmarkclip {
-        clip-path: polygon(
-            0% 0%,
-            100% 0%,
-            100% 100%,
-            50% calc(100% - 10%),
-            0% 100%
-        );
-    }
-
-    .angleclip {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% calc(100% - 80px));
-    }
-
-    @media screen(md) {
-        .angleclip {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% calc(100% - 100px));
-        }
     }
 }

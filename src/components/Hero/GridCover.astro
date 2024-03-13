@@ -90,11 +90,8 @@ const coverSrc = (await coverImage()).default;
             <div class:list={[visual.wrapper ? visual.wrapper : 'relative']}>
                 <Picture
                     src={featureSrc}
-                    widths={visual.widths ?? [300, 640, 800]}
-                    sizes={
-                        visual.sizes ??
-                        '(max-width: 48em) calc(100vw - 2rem), 50vw'
-                    }
+                    densities={visual.densities ?? [1.5, 2]}
+                    width={visual.width ?? 600}
                     class:list={[
                         visual.class
                             ? visual.class

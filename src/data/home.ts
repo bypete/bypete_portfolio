@@ -15,16 +15,16 @@ export interface SwiperImage {
   caption?: Caption;
 }
 
-import slide1 from "~/assets/home/profile__cutout--circle.png";
-import slide2 from "~/content/work/mykringapp/product.png";
-import slide3 from "~/content/work/onepay/product.png";
-import slide4 from "~/content/work/mykring/product.png";
-import slide5 from "~/content/work/twotw/product.png";
+import profile from "~/assets/home/profile__cutout--circle.png";
+import mykringapp from "~/content/work/mykringapp/product.png";
+import onepay from "~/content/work/onepay/product.png";
+import mykring from "~/content/work/mykring/product.png";
+import twotw from "~/content/work/twotw/product.png";
 
 export const heroSlides: SwiperImage[] = [
 
   {
-    src: slide2,
+    src: mykringapp,
     alt: "3 phones showing the myKRing app in use",
     url: '/work/mykring-app/',
     caption: {
@@ -34,7 +34,7 @@ export const heroSlides: SwiperImage[] = [
     },
   },
   {
-    src: slide3,
+    src: onepay,
     alt: "laptop and mobile",
     url: '/work/onepay/',
     caption: {
@@ -44,7 +44,7 @@ export const heroSlides: SwiperImage[] = [
     },
   },
   {
-    src: slide4,
+    src: mykring,
     alt: "Two floating phones showing responsive websites",
     url: '/work/mykring/',
     caption: {
@@ -54,7 +54,7 @@ export const heroSlides: SwiperImage[] = [
     },
   },
   {
-    src: slide5,
+    src: twotw,
     alt: "iPad mockup of twotw website",
     url: '/work/twotw/',
     caption: {

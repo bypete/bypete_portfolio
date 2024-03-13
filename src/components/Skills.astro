@@ -34,11 +34,12 @@ const { text, icon, heading, shadow, areas } = skillset as SkillsetProps;
 <div
     class:list={[
         'not-prose relative p-fl-space-m',
-        breakout && 'breakout',
         className
             ? className
-            : ` rounded-tight shadow-panelinset shadow-panel-shadow/25  ${
-                  !breakout ? '-mx-fl-space-m my-fl-space-xl' : ''
+            : `shadow-inset   ${
+                  !breakout
+                      ? 'con3xlpad:rounded-tight -mx-fl-space-m my-fl-space-xl'
+                      : 'breakout'
               }`,
         bg,
     ]}

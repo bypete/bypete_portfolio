@@ -19,11 +19,15 @@ const rehypeExternalLinksConfig = [
         },
     },
 ];
+let svgoPrefixIdsCount = 0;
 
 // https://astro.build/config
 export default defineConfig({
     site: 'https://bypete.uk',
     trailingSlash: 'always',
+    redirects: {
+        '/bio/': '/about',
+    },
     // build: {
     //     format: 'file',
     // },
@@ -36,6 +40,35 @@ export default defineConfig({
             include: {
                 mdi: ['*'],
                 lucide: ['*'],
+            },
+            svgoOptions: {
+                multipass: true,
+                plugins: [
+                    {
+                        name: 'preset-default',
+                        params: {
+                            overrides: {
+                                // customize default plugin options
+                                inlineStyles: {
+                                    onlyMatchedOnce: false,
+                                },
+                                cleanupIds: {
+                                    minify: true,
+                                },
+
+                                // or disable plugins
+                                removeDoctype: false,
+                            },
+                        },
+                    },
+                    {
+                        name: 'prefixIds',
+                        params: {
+                            delim: '',
+                            prefix: () => `bp__${svgoPrefixIdsCount++}`,
+                        },
+                    },
+                ],
             },
         }),
         sitemap(),

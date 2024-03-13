@@ -31,7 +31,7 @@ import '~/styles/tailwind.css';
         <!-- <ViewTransitions /> -->
     </head>
     <body
-        class="relative flex min-h-screen max-w-full overflow-x-hidden bg-page font-Roboto text-fl-base text-content antialiased"
+        class="bg-surface relative flex min-h-screen max-w-full overflow-x-hidden font-Roboto text-fl-base text-content antialiased"
         x-data="{ smNav: false, showOverlay: false, showUnderlay: false, }"
         x-ref="body"
         id="top"
@@ -43,7 +43,7 @@ import '~/styles/tailwind.css';
             class="grid w-full grid-cols-1 grid-rows-[auto,1fr,auto]"
         >
             <Header {isHeroDark} />
-            <div class="relative bg-page outline-none">
+            <div class="bg-surface relative outline-none">
                 <div class="shader absolute inset-0 h-full w-full opacity-[2%]">
                 </div>
                 <slot />

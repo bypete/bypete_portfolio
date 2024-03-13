@@ -25,7 +25,7 @@ const year = new Date().getFullYear();
     >
         <a href="/" aria-label="byPete - home">
             <Icon
-                name="bypete--white"
+                name="bypete__white"
                 title="byPete logo in white"
                 class="h-fl-space-l w-auto !shadow-brand-dark transition-all"
             />
@@ -39,6 +39,7 @@ const year = new Date().getFullYear();
                 <div class="relative flex items-center justify-between">
                     <MobileLink url={`/work/`} title="Work" {pathname} />
                     <button
+                        aria-label="open menu"
                         @click="open = !open"
                         class="flex h-fl-space-l items-center justify-center rounded-full p-0 text-menusm transition-transform duration-700 focus:outline-none"
                         :class="{'rotate-45': open, 'rotate-0': !open}"
@@ -57,7 +58,7 @@ const year = new Date().getFullYear();
                     :style="open ? {height: `${$refs.children.scrollHeight}px`} : {height: `0px`}"
                 >
                     <div
-                        class="max-h-[33vh] overflow-y-scroll rounded-tight bg-panel p-fl-space-2xs shadow-inner shadow-panel-contrast"
+                        class="max-h-[33vh] overflow-y-scroll rounded-tight bg-surface p-fl-space-2xs shadow-inset"
                     >
                         {
                             allPosts.map((post) => (

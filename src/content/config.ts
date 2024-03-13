@@ -41,7 +41,7 @@ const workCollection = defineCollection({
     pubDate: z.date(),
     modDate: z.date().optional(),
     taster: z.string(),
-    excerpt: z.string().optional(),
+    excerpt: z.string(),
     description: z.string(),
     author: z.string(),
     brand: z.object({

@@ -47,8 +47,11 @@ export default {
         },
         extend: {
             screens: {
-                mincon: '75rem', // 1.875rem + 75rem + 1.875rem
-                conpad: 'calc(78.75rem)', // 1.875rem + 75rem + 1.875rem
+                mincon: '75rem', // 1200px
+                // con3xlpad: '51.75rem', // 1.875rem + 48rem + 1.875rem
+                con3xlpad:
+                    'calc(48rem + clamp(0rem, 39.375rem + -50vw, 1.875rem) * 2)', // 48rem + --container-padding
+                conpad: '78.75rem', // 1.875rem + 75rem + 1.875rem
                 short: { raw: '(max-height: 640px)' },
             },
             zIndex: {
@@ -123,6 +126,7 @@ export default {
                 layout: 'auto 1fr auto',
                 workcard: 'auto auto minmax(0, 1fr) auto',
                 work: 'auto minmax(0, 1fr)',
+                toc: 'auto minmax(0, 1fr)',
                 system: '1fr auto',
                 card: 'auto 1fr auto',
                 home: 'auto minmax(0, 1fr)',
@@ -276,7 +280,7 @@ export default {
                 'fl-space-header': 'var(--headerheight)',
                 /* Custom */
                 'fl-space-splashoverlap': 'var(--splash-overlap)',
-                'fl-space-containerpadding': 'var(--container-padding)',
+                'fl-space-containertramline': 'var(--container-tramline)',
             },
             fontSize: (theme) => ({
                 ...theme('utopiaStep'),
@@ -308,7 +312,6 @@ export default {
                 ],
             },
             boxShadow: {
-                // Slate 800: rgba(30,41,59, 0.25)
                 cardhover: '0 0 75px -25px rgba(0,0,0,.75)',
                 '3xl': '0 0 75px 50px var(--tw-shadow-color)',
                 '4xl': '0 0 50px 50px rgba(0,0,0,.60)',
@@ -316,31 +319,28 @@ export default {
                 '2xlx': '0 0 10px 5px rgba(35,31,32,.10)',
                 '3xlx': '0 0 0px 6px rgba(35,31,32,0.10)',
                 '3xlr': '0 0 75px 50px rgba(35,31,32,.25)',
-                cookie: '0px 2px 5px -1px var(--tw-shadow-color) ,  0px 0px 100px 25px var(--tw-shadow-color)',
                 thumb: 'var(--tw-shadow-color) 0px 2px 5px -1px, var(--tw-shadow-color) 0px 1px 3px -1px',
-                inset: 'inset 0 2px 2px -1px rgba(35,31,32,.25)',
                 icon: 'inset 0 2px 6px -1px var(--tw-shadow-color)',
-                panel: 'inset 0 2px 6px -1px var(--tw-shadow-color)',
-                panelinset: 'inset 0 2px 6px -1px var(--tw-shadow-color)',
-                smframe:
-                    '0px 0px 10px 5px var(--tw-shadow-color), 0px 0px 30px 0px var(--tw-shadow-color), 0px 0px 3px 3px var(--tw-shadow-color)',
-                frame: '0px 4px 12px 0px var(--tw-shadow-color)',
+                raised: [
+                    '0px 2px 6px -1px rgb(var( --color-shadow-raised) / 0.12)',
+                    '0px 0px 3px -1px rgb(var( --color-shadow-raised) / 0.08)',
+                ],
+                overlay: [
+                    '0px 2px 10px -1px rgb(var( --color-shadow-overlay) / 0.24)',
+                    '0px 0px 5px -1px rgb(var( --color-shadow-overlay) / 1)',
+                ],
+                inset: [
+                    'inset 0 2px 6px -1px rgb(var( --color-shadow-inset) / 0.16)',
+                    '0px 0px 1px 1px rgb(var( --color-shadow-highlight) / 0.25)',
+                ],
+                highlight: [
+                    '0px -1px 0px 0px rgb(var( --color-shadow-highlight) / 0.25)',
+                ],
                 placeholder: 'inset 0 0px 1px 1px rgba(0,0,0,.10)',
-                bannerlink: 'inset 0 3px 3px -1px rgba(0,0,0,.12)',
-                tab: '0 0 5px -1px rgba(35,31,32,0.15)',
-                insetbase: 'inset 0px -5px 5px -5px rgba(35,31,32,.12)',
-                splash: 'inset 0 -16px 60px 0px rgba(35,31,32,.12)',
-                hero: 'inset 0 80px 80px -80px rgba(35,31,32,.45)',
-                heroimage: 'inset 0 0px 75px 50px rgba(35,31,32,.15)',
-                heroimageMedium: 'inset 0 0px 150px 96px rgba(35,31,32,.25)',
-                heroimageLarge: 'inset 0 0px 150px 96px rgba(35,31,32,.25)',
                 banner: '0px -2px 6px 4px var(--tw-shadow-color)',
                 dropdown: '0px 5px 15px var(--tw-shadow-color)',
-                d1: '0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color)',
                 floated:
                     '0px 2px 1px -1px rgba(255,255,255,0.30), inset 0px 2px 1px 1px rgba(30,41,59, 0.15), 0px 0px 10px 5px rgba(30,41,59, 0.15)',
-                floatedborder:
-                    '0px 0px 0px 2px white, 0px 2px 1px -1px rgba(255,255,255,0.30), inset 0px 2px 1px 1px rgba(30,41,59, 0.15), 0px 0px 10px 5px rgba(30,41,59, 0.15)',
             },
             backgroundImage: {
                 shader: 'var(--shader)',
@@ -352,10 +352,18 @@ export default {
                 transparent: 'transparent',
                 current: 'currentColor',
                 content: {
-                    DEFAULT: 'rgb(var(--color-content) / <alpha-value>)',
-                    invert: 'rgb(var(--color-content-invert) / <alpha-value>)',
                     light: 'rgb(var(--color-content-light) / <alpha-value>)',
+                    DEFAULT: 'rgb(var(--color-content) / <alpha-value>)',
                     dark: 'rgb(var(--color-content-dark) / <alpha-value>)',
+                    whisper:
+                        'rgb(var(--color-content-whisper) / <alpha-value>)',
+                    quiet: 'rgb(var(--color-content-quiet) / <alpha-value>)',
+                    loud: 'rgb(var(--color-content-loud) / <alpha-value>)',
+                    shout: 'rgb(var(--color-content-shout) / <alpha-value>)',
+                    footer: 'rgb(var(--color-content-footer) / <alpha-value>)',
+                    tag: 'rgb(var(--color-content-tag) / <alpha-value>)',
+                    featured:
+                        'rgb(var(--color-content-featured) / <alpha-value>)',
                 },
                 headline: {
                     DEFAULT: 'rgb(var(--color-headline) / <alpha-value>)',
@@ -365,11 +373,6 @@ export default {
                 focus: 'rgb(var(--color-focus) / <alpha-value>)',
                 link: {
                     DEFAULT: 'rgb(var(--color-link) / <alpha-value>)',
-                },
-                page: {
-                    DEFAULT: 'rgb(var(--color-page__bg) / <alpha-value>)',
-                    contrast:
-                        'rgb(var(--color-page__bg--contrast) / <alpha-value>)',
                 },
                 banner: {
                     DEFAULT: 'transparent',
@@ -383,7 +386,7 @@ export default {
                     bg__active:
                         'rgb(var(--color-menu__bg-active) / <alpha-value>)',
                     bg__hover:
-                        'rgb(var(--color-menu__bg-active) / <alpha-value>)',
+                        'rgb(var(--color-menu__bg-hover) / <alpha-value>)',
                     marker: 'rgb(var(--color-menu__marker) / <alpha-value>)',
                 },
                 menudark: {
@@ -394,7 +397,7 @@ export default {
                     bg__active:
                         'rgb(var(--color-menudark__bg-active) / <alpha-value>)',
                     bg__hover:
-                        'rgb(var(--color-menudark__bg-active) / <alpha-value>)',
+                        'rgb(var(--color-menudark__bg-hover) / <alpha-value>)',
                     marker: 'rgb(var(--color-menudark__marker) / <alpha-value>)',
                 },
                 menusm: {
@@ -423,21 +426,28 @@ export default {
                     light: 'rgb(var(--color-overlay-light) / <alpha-value>)',
                     dark: 'rgb(var(--color-overlay-dark) / <alpha-value>)',
                 },
-                panel: {
-                    contrast:
-                        'rgb(var(--color-panel-contrast) / <alpha-value>)',
-                    shadow: 'rgb(var(--color-panel-shadow) / <alpha-value>)',
-                    invert: 'rgb(var(--color-panel-invert) / <alpha-value>)',
-                    DEFAULT: 'rgb(var(--color-panel) / <alpha-value>)',
+                surface: {
+                    sunken: 'rgb(var(--color-surface-sunken) / <alpha-value>)',
+                    DEFAULT:
+                        'rgb(var(--color-surface-default) / <alpha-value>)',
+                    raised: 'rgb(var(--color-surface-raised) / <alpha-value>)',
+                    overlay:
+                        'rgb(var(--color-surface-overlay) / <alpha-value>)',
                 },
-                credit: {
-                    DEFAULT: 'rgb(var(--color-credit) / <alpha-value>)',
-                    bg: 'rgb(var(--color-credit__bg) / <alpha-value>)',
+                line: {
+                    whisper: 'rgb(var(--color-line-whisper) / <alpha-value>)',
+                    quiet: 'rgb(var(--color-line-quiet) / <alpha-value>)',
+                    DEFAULT: 'rgb(var(--color-line) / <alpha-value>)',
+                    loud: 'rgb(var(--color-line-loud) / <alpha-value>)',
+                    shout: 'rgb(var(--color-line-shout) / <alpha-value>)',
                 },
                 outline: {
-                    pale: 'rgb(var(--color-outline-pale) / <alpha-value>)',
+                    whisper:
+                        'rgb(var(--color-outline-whisper) / <alpha-value>)',
+                    quiet: 'rgb(var(--color-outline-quiet) / <alpha-value>)',
                     DEFAULT: 'rgb(var(--color-outline) / <alpha-value>)',
-                    hard: 'rgb(var(--color-outline-hard) / <alpha-value>)',
+                    loud: 'rgb(var(--color-outline-loud) / <alpha-value>)',
+                    shout: 'rgb(var(--color-outline-shout) / <alpha-value>)',
                 },
                 info: {
                     DEFAULT: 'rgb(var(--color-info) / <alpha-value>)',
@@ -461,26 +471,18 @@ export default {
                 },
                 tag: {
                     DEFAULT: 'rgb(var(--color-tag) / <alpha-value>)',
+                    link: 'rgb(var(--color-tag-link) / <alpha-value>)',
+                    hover: 'rgb(var(--color-tag-hover) / <alpha-value>)',
                     featured: 'rgb(var(--color-tag-featured) / <alpha-value>)',
-                    bg: 'rgb(var(--color-tag__bg) / <alpha-value>)',
-                    'bg-featured':
-                        'rgb(var(--color-tag__bg-featured) / <alpha-value>)',
-                    bg__link: 'rgb(var(--color-tag__bg-link) / <alpha-value>)',
-                    bg__hover:
-                        'rgb(var(--color-tag__bg-hover) / <alpha-value>)',
                 },
                 footer: {
-                    bg: 'rgb(var(--color-footer__bg) / <alpha-value>)',
-                    bg__light:
-                        'rgb(var(--color-footer__bg-light) / <alpha-value>)',
+                    start: 'rgb(var(--color-footer-start) / <alpha-value>)',
                     DEFAULT: 'rgb(var(--color-footer) / <alpha-value>)',
-                    bg__dark:
-                        'rgb(var(--color-footer__bg-dark) / <alpha-value>)',
+                    end: 'rgb(var(--color-footer-end) / <alpha-value>)',
                 },
                 warning: {
-                    light: 'rgb(var(--color-warning-light) / <alpha-value>)',
                     DEFAULT: 'rgb(var(--color-warning) / <alpha-value>)',
-                    dark: 'rgb(var(--color-warning-dark) / <alpha-value>)',
+                    shade: 'rgb(var(--color-warning-shade) / <alpha-value>)',
                 },
                 brand: {
                     lightest:
@@ -500,9 +502,6 @@ export default {
                     DEFAULT: 'rgb(var(--color-secondary) / <alpha-value>)',
                     dark: 'rgb(var(--color-secondary-dark) / <alpha-value>)',
                 },
-                quiet: {
-                    DEFAULT: 'rgb(var(--color-quiet) / <alpha-value>)',
-                },
                 disabled: {
                     DEFAULT: 'rgb(var(--color-disabled) / <alpha-value>)',
                 },
@@ -520,7 +519,7 @@ export default {
                             background: 'rgb(var(--color-outline))',
                             padding: [theme('spacing.[1.5]')],
                             'border-radius': [theme('spacing.tight')],
-                            border: '1px solid rgb(var(--color-outline-hard))',
+                            border: '1px solid rgb(var(--color-outline-loud))',
                         },
                         a: {
                             color: 'rgb(var(--color-accent))',
@@ -890,6 +889,18 @@ export default {
                     position: 'relative',
                     'margin-left': '-50vw',
                     'margin-right': '-50vw',
+                },
+                '.bookmarkclip': {
+                    'clip-path':
+                        'polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 10%), 0 100%)',
+                },
+                '.angleclip': {
+                    'clip-path':
+                        'polygon(0 0, 100% 0, 100% 100%, 0% calc(100% - 80px))',
+                },
+                '.angleclip-lg': {
+                    'clip-path':
+                        'polygon(0 0, 100% 0, 100% 100%, 0% calc(100% - 120px))',
                 },
             });
             matchUtilities(

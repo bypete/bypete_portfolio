@@ -16,10 +16,10 @@ const common =
             href={href}
             class:list={[
                 common,
-                'border text-tag hover:bg-tag-bg__hover',
+                'hover:bg-tag-bg__hover border',
                 featured
-                    ? 'border-tag-bg-featured bg-tag-bg-featured text-tag-featured'
-                    : 'border-tag-bg__link bg-tag-bg__link',
+                    ? 'border-tag-featured bg-tag-featured text-content-featured'
+                    : 'border-tag-link bg-tag-link text-content-tag ',
             ]}
         >
             {featured && (
@@ -44,8 +44,8 @@ const common =
                 common,
                 'border',
                 featured
-                    ? 'border-tag-bg-featured bg-tag-bg-featured text-tag-featured '
-                    : 'border border-outline-pale',
+                    ? 'border-tag-featured bg-tag-featured text-content-featured '
+                    : 'border border-line',
             ]}
         >
             {featured && (

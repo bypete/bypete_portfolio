@@ -23,8 +23,9 @@ hero:
         href: '/connect/'
     visual: 
       src: 'profile__hd.png'
-      alt: 'My face'
-      widths: [300,640,800]
+      alt: 'Profile picture of Pete Wallace'
+      densities: [1.5, 2]
+      width: 720
     cover:
       src: 'hero/concrete--teal.webp'
       alt: 'Teal background with concrete detail texture'
@@ -37,7 +38,7 @@ skillset:
     text: 'text-content'
     icon: '[&>li]:before:!text-accent'
     heading: 'permalink:text-heading permalink:before:text-[#00a3e2]'
-    shadow: 'text-shadow-emboss shadow-panel/20'
+    shadow: 'text-shadow-emboss shadow-surface-sunken/20'
     areas:
         - title: 'Front-End Development'
           skills:
@@ -89,6 +90,7 @@ import google_lens from '~/assets/google-lens.png';
 import { Image } from 'astro:assets';
 import Figure from '~/components/Figure.astro'
 import BlockPicture from '~/components/Images/BlockPicture.astro';
+import BlockImage from '~/components/Images/BlockImage.astro';
 
 import { getCollection } from 'astro:content';
 export const allWork = await getCollection('work');
@@ -102,8 +104,8 @@ As the industry shifted from physical (PC/Mac CD-ROMs) to online platforms, I tr
 ## Focus on Fintech
 In 2009, the agency refocused its efforts and established itself as **the** marketing agency for Europe's emerging payments sector. Since then, I've concentrated solely on Front-End development, primarily within the fintech landscape.
 
-<Skills skillset={frontmatter.skillset} bg='bg-panel' >
-## Skills and Tools
+<Skills skillset={frontmatter.skillset} bg='bg-surface-sunken' >
+## My Skills and Contributions
 </Skills>
 
 <Banner gridHeight="min-h-block" />
@@ -114,7 +116,7 @@ My workflow revolves around static site generators. Initially, I used [Panini](h
 Using a <abbr title="Static Site Generator">SSG</abbr>  for prototyping enables me to promptly address client requests and provide reassurance to the development team regarding proposed changes. Maintaining a well-organised set of static templates bridges the communication gap between clients and developers, ensuring alignment and reducing the risk of project scope creep.
 
 <Figure caption='Snapshot of a typical listing index. Clients, developers, and third-party agencies have access to the most recent version of any page.'>
-  <Image src={listing_index} alt="Devices view" class="w-full h-auto shadow-md border border-outline hover:cursor-pointer" />
+  <Image src={listing_index} alt="Devices view" class="w-full h-auto shadow-md border border-line hover:cursor-pointer" />
 </Figure>
 
 ## Supporting Multilingual Websites
@@ -123,12 +125,12 @@ Recognising the importance of context in translations, I introduced a template i
 ## What comes next? 
 This static site was crafted using [Astro](https://astro.build/), integrating [Tailwind CSS](https://tailwindcss.com/) alongside [Alpine.js](https://alpinejs.dev/). It replaces the previous version, which was developed using [11ty](https://www.11ty.dev/) and [Webpack](https://webpack.js.org/). I've enjoyed learning Astro and am eager to explore its potential in upcoming projects.
 
-<BlockPicture src={woodland} class="w-full h-full object-cover inset-0 absolute" alt="Woodland scene" credit="Adobe Photoshop (beta) - Generative fill" wrapper="my-fl-space-2xl h-photo md:h-block" />
+<BlockPicture widths={[400,768,1920]} src={woodland} class="w-full h-full object-cover inset-0 absolute" alt="Woodland scene" credit="Adobe Photoshop (beta) - Generative fill" wrapper="my-fl-space-2xl h-photo md:h-block" />
 
 ## Achieving Balance and Wellbeing
 Beyond work, I enjoy spending time outdoors with my family, especially my two young and adventurous boys. Exploring nature helps me maintain a sense of balance and wellbeing, although tackling their curiosities often leads us to rely on technology like [Google Lens](https://lens.google/intl/en-GB/#cta-section) for assistance!
 
-<BlockPicture src={google_lens} breakout={false} class="my-0 w-full" alt="Beach scene with close up of jellyfish. Detail shows iPhone with google lens app" credit="Google Lens (App visuals)" wrapper="my-fl-space-l" />
+<BlockImage src={google_lens} width={768} breakout={false} class="my-0 w-full" alt="Beach scene with close up of jellyfish. Detail shows iPhone with google lens app" credit="Google Lens (App visuals)" wrapper="my-fl-space-l" />
 
 ## Availability
 Thanks for exploring my bio! I'm <span class="hilite whitespace-nowrap">currently available</span> for new roles in Front-End development. If you believe I could be a good addition to your team, please don't hesitate to [connect](/connect/) and send me a message - or reach out via [LinkedIn](https://www.linkedin.com/in/peter-wallace-a5002a7a/). I'm genuinely looking forward to potential collaborations.

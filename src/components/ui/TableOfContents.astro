@@ -33,16 +33,17 @@ const toc = buildToc(headings);
 >
     <div
         class="relative w-full max-w-2xl rounded-b transition-all duration-500 md:w-auto"
-        x-bind:class="[($store.cache.banner == 'up' ? 'translate-y-fl-space-header ' : 'translate-y-0'),(open ? 'grow shadow-d1' : '') ]"
+        x-bind:class="[($store.cache.banner == 'up' ? 'translate-y-fl-space-header ' : 'translate-y-0'),(open ? 'grow shadow-raised' : '') ]"
         x-sticky.sticky-root="shadow-3xl shadow-black/5"
         x-sticky-inactive="!translate-y-0 !duration-250"
     >
         <button
             @click="toggle()"
             x-ref="tocbutton"
+            aria-label="Toggle page links"
             :aria-expanded="open"
             :aria-controls="$id('panel-toc')"
-            class="group flex w-full items-center justify-between gap-x-fl-space-2xs rounded border border-outline bg-panel px-fl-space-s py-fl-space-2xs font-semibold"
+            class="group flex w-full items-center justify-between gap-x-fl-space-2xs rounded border border-line bg-surface-raised px-fl-space-s py-fl-space-2xs font-semibold"
             x-sticky.sticky-root="rounded-t-none"
             x-bind:class="open ? 'rounded-none ' : ''"
         >
@@ -63,7 +64,7 @@ const toc = buildToc(headings);
                 x-transition:leave="transition ease-in duration-0"
                 x-transition:leave-start="opacity-100"
                 x-transition:leave-end="opacity-0"
-                class="absolute left-0 top-0 block max-h-[calc(100dvh-var(--headerheight))] w-full grow overflow-y-scroll rounded-b border border-t-0 border-outline bg-panel px-fl-space-s py-fl-space-2xs shadow-d1 transition-all"
+                class="absolute left-0 top-0 block max-h-[calc(100dvh-var(--headerheight))] w-full grow overflow-y-scroll rounded-b border border-t-0 border-line bg-surface-overlay px-fl-space-s py-fl-space-2xs shadow-raised transition-all"
             >
                 <ol class="m-0">
                     {

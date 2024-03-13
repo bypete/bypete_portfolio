@@ -5,17 +5,11 @@ import { getImage } from 'astro:assets';
 const {
     src,
     alt,
-    widths = [],
-    sizes,
+    densities = [1.5, 2],
     breakout = true,
     format = 'webp',
     ...attrs
 } = Astro.props;
-
-const resolvedWidths = widths.length ? widths : [120, 480];
-const resolvedSizes =
-    sizes ||
-    `(max-width: var(--container-width-md)) calc((100vw - 2rem)*.33), (max-width: var(--container-width-lg)) calc(var(--container-width-lg)*0.25), calc(var(--container-width-xl)*0.25)`;
 
 const imageProps = {
     src,
@@ -23,8 +17,7 @@ const imageProps = {
     ...attrs,
     format: format,
     quality: 'high',
-    sizes: resolvedSizes,
-    widths: resolvedWidths,
+    densities,
 };
 
 const srcSet = await getImage({ src: src, format: 'webp' });
