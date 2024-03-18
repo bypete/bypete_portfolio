@@ -2,28 +2,28 @@
 import { Icon } from 'astro-icon/components';
 
 interface Props {
-    caption: string;
-    credit: string;
-    class: string;
-    grid: string;
-    bg: string;
-    breakout: boolean;
+    bg?: string;
+    breakout?: boolean;
+    caption?: string;
+    class?: string;
+    credit?: string;
+    grid?: string;
 }
 
 const {
-    caption = '',
-    credit = '',
-    class: className,
-    grid,
     bg = 'bg-surface-raised',
-    breakout,
+    breakout = false,
+    caption,
+    class: className,
+    credit,
+    grid = 'grid grid-cols-1 items-center gap-fl-space-m',
     ...attrs
 } = Astro.props;
 ---
 
 <figure
     class:list={[
-        'not-prose relative  ',
+        'not-prose relative',
         className ? className : 'my-fl-space-xl',
     ]}
     {...attrs}
@@ -34,17 +34,17 @@ const {
             breakout
                 ? 'breakout'
                 : '-mx-fl-space-s-m rounded-tight p-fl-space-s-m',
-            grid ? grid : 'grid grid-cols-1 items-center gap-fl-space-m ',
+            grid,
         ]}
     >
         <slot />
     </div>
     {
         caption && (
-            <figcaption class="mt-fl-space-xs w-full items-center justify-between gap-fl-space-m text-fl-step--1 leading-snug md:flex">
+            <figcaption class="mt-fl-space-xs flex w-full flex-col justify-between gap-fl-space-xs text-fl-step--1 leading-snug md:flex-row">
                 <p>{caption}</p>
                 {credit && (
-                    <span class="text-content-quiet mt-fl-space-3xs grid grid-cols-icon gap-fl-space-3xs text-fl-step--2/fl-space-xs  md:mt-0 ">
+                    <span class="grid grid-cols-icon gap-fl-space-3xs text-fl-step--2/fl-space-xs text-content-quiet">
                         <Icon
                             name="lucide:camera"
                             class="h-fl-space-xs w-fl-space-xs"

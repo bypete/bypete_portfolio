@@ -1,9 +1,11 @@
 ---
-import Toast from './ui/Toast.astro';
+import { Icon } from 'astro-icon/components';
 import Button from './ui/Button.astro';
 import Link from './ui/Link.astro';
 import siteInfo from '~/data/site';
-import { Icon } from 'astro-icon/components';
+import Toast from './ui/Toast.astro';
+
+type Props = Record<string, never>;
 
 const build: string = import.meta.env.MODE;
 let domain: string;

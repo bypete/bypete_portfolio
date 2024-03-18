@@ -3,6 +3,8 @@ import { Icon } from 'astro-icon/components';
 import ContactForm from '~/components/Forms/ContactForm.astro';
 import PageLayout from '~/layouts/PageLayout.astro';
 import Note from '~/components/ui/Note.astro';
+import siteInfo from '~/data/site';
+const available = siteInfo.available;
 const title = 'Connect';
 ---
 
@@ -11,10 +13,22 @@ const title = 'Connect';
         <div class="md:order-2 md:mt-fl-space-m">
             <div class="mr-auto w-full max-w-[40ch]">
                 <Note theme="info" hasIcon={true}>
-                    <p>
+                    <p class="text-fl-step-0 font-semibold">
                         Use this form to send me a message and I'll get back to
                         you shortly.
-                    </p><p>
+                    </p>{
+                        available && (
+                            <p>
+                                I'm
+                                <span class="hilite inline-block whitespace-nowrap px-fl-space-3xs py-px">
+                                    currently available
+                                </span>
+                                for new roles in Front-End development. Get in
+                                touch if you think I could be a good fit for
+                                your team.
+                            </p>
+                        )
+                    }<p>
                         For more information please read my <a
                             href="/about/"
                             class="link">bio</a
@@ -35,7 +49,7 @@ const title = 'Connect';
             </div>
         </div>
         <div
-            class="bg-surface-raised shadow-raised rounded p-fl-space-m md:order-1"
+            class="rounded bg-surface-raised p-fl-space-m shadow-raised md:order-1"
         >
             <ContactForm />
         </div>

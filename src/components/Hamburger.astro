@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import MobileLink from './MobileLink.astro';
 import MenuLinkChild from './MenuLinkChild.astro';
+type Props = Record<string, never>;
 
 const allPosts = await getCollection('work');
 const pathname = new URL(Astro.request.url).pathname;

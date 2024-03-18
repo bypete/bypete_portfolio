@@ -94,6 +94,8 @@ export default {
                 main: ['hero aside content'],
                 mainwide: ['aside content'],
                 toast: ['message close', 'action action'],
+                footer: ['logo', 'legal', 'social', 'availability'],
+                footerwide: ['logo logo logo', 'legal social availability'],
             },
             gridTemplateColumns: {
                 header: '1fr, auto, 1fr',
@@ -115,7 +117,7 @@ export default {
                 icon: 'auto minmax(auto, 1fr)',
                 social: 'repeat(auto-fit, minmax(0, 48px))',
                 workcontianer:
-                    '56.25vw calc(43.75vw - ((100vw - 75rem) / 2)) minmax(0, 1fr)',
+                    '56.25vw calc(43.75vw - ((100vw - 78.75rem) / 2)) minmax(0, 1fr)',
                 // work: '56.25vw minmax(0, 1fr)',
             },
             gridTemplateRows: {
@@ -191,7 +193,7 @@ export default {
             maxWidth: (theme) => ({
                 ...theme('spacing'),
                 ...theme('width'),
-                container: '75rem', // 1200px
+                container: '78.75rem', // 1260px
             }),
             minHeight: (theme) => ({
                 ...theme('spacing'),

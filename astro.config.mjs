@@ -28,6 +28,7 @@ export default defineConfig({
     redirects: {
         '/bio/': '/about',
     },
+    compressHTML: true,
     // build: {
     //     format: 'file',
     // },

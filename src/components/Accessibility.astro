@@ -1,30 +1,25 @@
 ---
 interface Link {
     anchor: string;
-    link: string;
+    label: string;
 }
 
-const a11yLinks: Link[] = [
-    {
-        anchor: '#main-content',
-        link: 'content',
-    },
-    {
-        anchor: '#navigation',
-        link: 'navigation',
-    },
-];
+interface Props {
+    a11yLinks: Link[];
+}
+
+const { a11yLinks } = Astro.props;
 ---
 
 <h2 class="sr-only">Accessibility links</h2>
 
 {
-    a11yLinks.map((jump) => (
+    a11yLinks.map((link) => (
         <a
             class="absolute left-1/2 -translate-x-1/2 -translate-y-full bg-attention p-fl-space-2xs text-black transition focus:z-[10000] focus:translate-y-0"
-            href={jump.anchor}
+            href={link.anchor}
         >
-            Skip to {jump.link}
+            Skip to {link.label}
         </a>
     ))
 }

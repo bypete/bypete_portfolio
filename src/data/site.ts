@@ -15,6 +15,7 @@ export type SiteInfo = {
     staging: string;
   };
   root: string;
+  available: boolean;
   og: {
     image: {
       src: string
@@ -52,6 +53,7 @@ const siteInfo: SiteInfo = {
     live: "bypete.uk",
     staging: "staging.bypete.uk",
   },
+  available: true,
   og: {
     image: {
       src: "/og/og__default.jpg",

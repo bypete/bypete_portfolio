@@ -1,35 +1,30 @@
 ---
-import Tags from '~/components/ui/Tags.astro';
 import { Image } from 'astro:assets';
 import ReadTime from './ui/ReadTime.astro';
+import Tags from '~/components/ui/Tags.astro';
 
 interface CoverImage {
-    src: ImageMetadata;
     alt: string;
     credit: string;
-}
-
-interface ProductImage {
     src: ImageMetadata;
-    alt: string;
 }
 
 interface LogoImage {
-    src: ImageMetadata;
     light?: ImageMetadata;
+    src: ImageMetadata;
 }
 
 interface Props {
-    title: string;
-    url: string;
     cover: CoverImage;
     logo?: LogoImage;
-    taster: string;
-    tags: string[];
     readTime: string;
+    tags: string[];
+    taster: string;
+    title: string;
+    url: string;
 }
 
-const { title, url, cover, logo, taster, tags, readTime } = Astro.props;
+const { cover, logo, readTime, tags, taster, title, url } = Astro.props;
 ---
 
 <article

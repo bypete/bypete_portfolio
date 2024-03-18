@@ -11,7 +11,7 @@ const { isHeroDark = false } = Astro.props;
 ---
 
 <header
-    class="group fixed top-0 z-banner w-full py-fl-space-s transition duration-500 x-cloak:!absolute x-cloak:opacity-0"
+    class="fixed top-0 z-banner w-full py-fl-space-s transition duration-500 x-cloak:!absolute x-cloak:opacity-0"
     x-cloak
     x-bind:class="{ 'bg-banner-up/0': banner ==='start',' bg-banner-up shadow-banner shadow-gray-950/10': banner === 'up', 'bg-banner-up -translate-y-full shadow-banner shadow-gray-950/10': banner === 'down' }"
     x-ref="banner"
@@ -28,7 +28,7 @@ const { isHeroDark = false } = Astro.props;
             href="/"
             x-cloak
             aria-label="byPete - home"
-            class="grid h-fl-space-l w-auto grid-cols-1 grid-rows-1 justify-self-start"
+            class="grid h-fl-space-l w-auto grid-cols-1 grid-rows-1"
         >
             {
                 isHeroDark ? (

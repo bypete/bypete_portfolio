@@ -342,7 +342,7 @@
     /* Containers
 ---------------------------------------------------------------------------------*/
     .max-w-container {
-        @apply px-fl-space-m mincon:px-fl-space-containertramline;
+        @apply /* mincon:px-fl-space-containertramline*/ px-fl-space-m;
     }
 
     /* SVGs
