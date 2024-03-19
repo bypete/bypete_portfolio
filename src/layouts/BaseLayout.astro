@@ -10,6 +10,7 @@ import CookieNotice from '../components/CookieNotice.astro';
 import Shortcuts from '../components/Shortcuts.astro';
 import Accessibility from '../components/Accessibility.astro';
 import Overlay from '../components/ui/Overlay.astro';
+import MobileNavigation from '~/components/MobileNavigation.astro';
 
 const fm = Astro.props.frontmatter || Astro.props;
 
@@ -31,9 +32,10 @@ import '~/styles/tailwind.css';
         <!-- <ViewTransitions /> -->
     </head>
     <body
-        class="relative flex min-h-screen max-w-full overflow-x-hidden bg-surface font-Roboto text-fl-base text-content antialiased"
-        x-data="{ smNav: false, showOverlay: false, showUnderlay: false, }"
+        class="relative flex min-h-screen max-w-full flex-col overflow-x-hidden bg-surface-offscreen font-Roboto text-fl-base text-content antialiased"
+        x-data="{ isMobileNavOpen: false, showOverlay: false, showUnderlay: false, }"
         x-ref="body"
+        :class="{ '!overflow-hidden': isMobileNavOpen }"
         id="top"
     >
         {isProduction && <GoogleTagNoScript />}
@@ -43,9 +45,12 @@ import '~/styles/tailwind.css';
                 { anchor: '#navigation', label: 'navigation' },
             ]}
         />
+        <MobileNavigation class="" {isHeroDark} />
+
         <div
             id="wrapper"
-            class="grid w-full grid-cols-1 grid-rows-[auto,1fr,auto]"
+            class="relative grid w-full grid-cols-1 grid-rows-[auto,1fr,auto] bg-surface transition duration-1000"
+            :class="isMobileNavOpen ? '-translate-x-[85vw] ' : ''"
         >
             <Header {isHeroDark} />
             <div class="relative bg-surface outline-none">
@@ -55,7 +60,6 @@ import '~/styles/tailwind.css';
             </div>
             <Footer />
         </div>
-
         <Underlay {isHeroDark} />
         <CookieNotice />
         <Shortcuts />

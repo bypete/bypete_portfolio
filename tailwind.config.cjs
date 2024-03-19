@@ -94,8 +94,8 @@ export default {
                 main: ['hero aside content'],
                 mainwide: ['aside content'],
                 toast: ['message close', 'action action'],
-                footer: ['logo', 'legal', 'social', 'availability'],
-                footerwide: ['logo logo logo', 'legal social availability'],
+                footer: ['logo', 'availability', 'legal', 'social'],
+                footerwide: ['logo logo logo', 'legal availability social'],
             },
             gridTemplateColumns: {
                 header: '1fr, auto, 1fr',
@@ -429,6 +429,9 @@ export default {
                     dark: 'rgb(var(--color-overlay-dark) / <alpha-value>)',
                 },
                 surface: {
+                    offscreen:
+                        'rgb(var(--color-surface-offscreen)/ <alpha-value>)',
+                    sunk: 'rgb(var(--color-surface-sunk) / <alpha-value>)',
                     sunken: 'rgb(var(--color-surface-sunken) / <alpha-value>)',
                     DEFAULT:
                         'rgb(var(--color-surface-default) / <alpha-value>)',
@@ -542,9 +545,6 @@ export default {
                     },
                 },
             }),
-            transitionDuration: {
-                2000: '2000ms',
-            },
             keyframes: {
                 blink: {
                     '0%, 100%': { opacity: '1' },

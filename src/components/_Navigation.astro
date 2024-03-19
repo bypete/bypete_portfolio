@@ -1,0 +1,106 @@
+---
+import { getCollection } from 'astro:content';
+import { formatBlogPosts } from '~/js/utils';
+import { Icon } from 'astro-icon/components';
+import MobileLink from './MobileLink.astro';
+
+import MenuLinkChild from './MenuLinkChild.astro';
+import MenuDropdown from './MenuDropdown.astro';
+import ThemeIcon from './ThemeIcon.astro';
+
+const allPosts = await getCollection('work');
+
+const formattedPosts = formatBlogPosts(allPosts, {
+    filterOutDrafts: true,
+    filterOutFuturePosts: true,
+    sortByDate: true,
+});
+
+interface Props {
+    class?: string;
+    isHeroDark: boolean;
+}
+
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath =
+    pathname.slice(-1) === '/' ? pathname.slice(0, -1) : pathname;
+
+const { class: ClassName, isHeroDark = false } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<nav
+    id="navigation"
+    aria-label="Main"
+    x-cloak
+    class:list={[
+        'fixed right-0 top-0 z-10 flex h-screenDvh transition duration-500',
+        ClassName ? ClassName : '',
+    ]}
+    :class="showNav ? 'translate-x-0 opacity-100' : 'translate-x-[30%] opacity-0'"
+>
+    <div
+        class="grid w-[75vw] grid-cols-1 grid-rows-[auto_1fr_auto] overflow-y-scroll px-fl-space-m py-fl-space-s md:w-[30vw]"
+    >
+        <div class="flex justify-between">
+            <a href="/" aria-label="byPete - home">
+                <Icon
+                    name="bypete__white"
+                    title="byPete logo in white"
+                    class="h-fl-space-l w-auto !shadow-brand-dark"
+                />
+            </a>
+            <ThemeIcon />
+        </div>
+        <ul x-ref="menu" class="my-fl-space-m self-center">
+            <li>
+                <MobileLink url={`/about/`} title="About" {pathname} />
+            </li>
+            <li x-data="{ isOpen: false}" :aria-expanded="isOpen">
+                <div class="flex items-center justify-between">
+                    <MobileLink url={`/work/`} title="Work" {pathname} />
+                    <button
+                        class="text-content-light"
+                        aria-label="Expand menu"
+                        :aria-expanded="isOpen"
+                        :aria-controls="$id('dropdown-list')"
+                        @click="isOpen = !isOpen"
+                    >
+                        <Icon
+                            name="lucide:chevron-down"
+                            x-bind:class="{'rotate-180': isOpen, 'rotate-0': !isOpen}"
+                            class="h-fl-space-m w-fl-space-m transition-transform duration-500"
+                        />
+                    </button>
+                </div>
+                <ul id="work-list" :id="$id('dropdown-list')" :hidden="!isOpen">
+                    {
+                        formattedPosts.map((post) => (
+                            <li>
+                                <MenuLinkChild
+                                    url={`/${post.collection}/${post.slug}/`}
+                                    title={post.data.title}
+                                    {pathname}
+                                />
+                            </li>
+                        ))
+                    }
+                </ul>
+            </li>
+
+            <li>
+                <MobileLink url={`/connect/`} title="Connect" {pathname} />
+            </li>
+        </ul>
+        <ul
+            class="grid grid-cols-[auto_1fr] grid-rows-1 justify-start divide-x divide-content-light/50 text-content-light"
+        >
+            <li class="px-fl-space-2xs first:pl-0 last:border-0 last:pr-0">
+                ©{year}
+            </li>
+            <li class="px-fl-space-2xs first:pl-0 last:border-0 last:pr-0">
+                <a href="/about/legal/" class="link">Legal notices</a>
+            </li>
+        </ul>
+    </div>
+</nav>

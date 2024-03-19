@@ -6,16 +6,26 @@ interface Props {
     platform: string;
     wrap?: string;
     css?: string;
+    class?: string;
 }
 const {
     platform,
     url,
     name,
-    wrap = 'text-content-light hover:text-brand mx-fl-space-2xs',
+    wrap = 'mx-fl-space-2xs',
     css = 'w-fl-space-m h-fl-space-m fill-current',
+    class: ClassName,
 } = Astro.props;
 ---
 
-<a href={`${url}`} rel="nofollow" class={wrap} title={platform}>
+<a
+    href={`${url}`}
+    rel="nofollow"
+    class:list={[
+        ClassName ? ClassName : 'text-content-light hover:text-brand',
+        wrap && wrap,
+    ]}
+    title={platform}
+>
     <Icon {name} class={css} />
 </a>

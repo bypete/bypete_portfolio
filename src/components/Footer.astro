@@ -10,10 +10,10 @@ const year = new Date().getFullYear();
 ---
 
 <footer
-    class="relative bg-footer bg-gradient-to-b from-footer-start to-footer-end py-fl-space-2xl text-content-footer shadow-inset"
+    class="relative hidden bg-footer bg-gradient-to-b from-footer-start to-footer-end py-fl-space-2xl text-content-footer shadow-inset lg:block"
 >
     <div
-        class="relative mx-auto grid max-w-container grid-cols-1 items-end gap-fl-space-s leading-none grid-areas-footer md:grid-cols-3 md:grid-areas-footerwide"
+        class="relative mx-auto grid max-w-container grid-cols-1 items-end gap-fl-space-m pr-fl-space-xl leading-none grid-areas-footer md:grid-cols-3 md:grid-areas-footerwide"
     >
         <a
             href="/"
@@ -31,16 +31,16 @@ const year = new Date().getFullYear();
             <li
                 class="border-text-footer border-r px-fl-space-xs last:border-0"
             >
-                ©{year}
+                <a href="/about/legal/" class="link">Legal notices</a>
             </li>
             <li
                 class="border-text-footer border-r px-fl-space-xs last:border-0"
             >
-                <a href="/about/legal/" class="link">Legal notices</a>
+                ©{year}
             </li>
         </ul>
         <div
-            class="-mx-fl-space-2xs flex justify-start grid-in-social md:justify-center"
+            class="-mx-fl-space-2xs flex justify-start grid-in-social md:justify-self-end"
         >
             {
                 siteInfo.socials.map((channel) => (
@@ -53,7 +53,7 @@ const year = new Date().getFullYear();
             }
         </div>
         <p
-            class="grid-in-availability text-fl-step--1/relaxed md:justify-self-end"
+            class="text-fl-step--1/relaxed grid-in-availability md:justify-self-center"
         >
             I'm <Availability url={`/connect/`} /> for new roles.
         </p>

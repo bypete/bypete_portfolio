@@ -9,5 +9,6 @@ export default (Alpine: Alpine) => {
       banner: null,
       theme: null,
       pageTop: false,
+      scrollHeight: 0,
   });
 }

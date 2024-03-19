@@ -10,6 +10,8 @@
         --banner: transparent;
         --banner-up: 255 255 255; /* absolute white */
 
+        --surface-offscreen: 20 20 26; /* 14141a */
+        --surface--20: 234 234 232; /* #f3f3f2 Shade -2 */
         --surface--10: 243 243 242; /* #f3f3f2 Shade -1 */
         --surface: 252 252 252; /* #fcfcfc https://www.colorhexa.com/fcfcfc */
         --surface-10: 255 255 255; /* #FFFFFF Shade +1 */
@@ -175,9 +177,9 @@
         --color-dropdown__bg-active: var(--brand);
         --color-dropdown__bg-highlight: var(--brand);
 
-        --color-menusm: var(--copy);
-        --color-menusm-hover: var(--white);
-        --color-menusm-active: var(--white);
+        --color-menusm: var(--copy-light);
+        --color-menusm-hover: var(--brand);
+        --color-menusm-active: var(--brand);
 
         --color-underlay-light: var(--offwhite);
         --color-underlay-dark: var(--offblack);
@@ -185,6 +187,8 @@
         --color-overlay-light: var(--offwhite);
         --color-overlay-dark: var(--offblack);
 
+        --color-surface-offscreen: var(--surface-offscreen);
+        --color-surface-sunk: var(--surface--20);
         --color-surface-sunken: var(--surface--10);
         --color-surface-default: var(--surface);
         --color-surface-raised: var(--surface-10);
@@ -268,6 +272,7 @@
         --banner: transparent;
         --banner-up: 11 11 15; /* #0A0A0D */
 
+        --surface--20: 14 14 18; /* #0e0e12 -2 Shade */
         --surface--10: 22 22 29; /* #16161d -1 Shade */
         --surface: 31 31 40; /* #1f1f28 */
         --surface-10: 42 42 54; /* #2a2a36 +1 Shade */
@@ -321,9 +326,9 @@
         --color-dropdown__bg-active: var(--brand);
         --color-dropdown__bg-highlight: var(--brand);
 
-        --color-menusm: var(--copy-dark);
-        --color-menusm-hover: var(--copy-light);
-        --color-menusm-active: var(--copy-light);
+        --color-menusm: var(--copy-content);
+        --color-menusm-hover: var(--brand);
+        --color-menusm-active: var(--brand);
         --color-blockquote: var(--copy-light);
 
         --color-underlay-light: var(--surface);

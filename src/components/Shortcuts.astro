@@ -9,7 +9,7 @@ import Button from './ui/Button.astro';
     <a
         x-data
         x-cloak
-        :class="$store.cache.pageTop ? '' : 'translate-y-fl-space-xl md:translate-y-0 md:translate-x-fl-space-xl'"
+        :class="$store.cache.pageTop ? '' : 'translate-y-fl-space-xl md:translate-y-0 md:translate-x-fl-space-2xl'"
         href="#top"
         aria-hidden="true"
         class="scroll flex items-center justify-center rounded-full bg-accent p-fl-space-3xs text-white transition duration-700 hover:border-black/10 hover:bg-accent-light hover:shadow-inset focus:outline-none"
@@ -20,37 +20,41 @@ import Button from './ui/Button.astro';
         />
     </a>
 
-    <Button
-        class="group relative h-fl-space-xl w-fl-space-xl flex-col justify-center shadow-floated md:hidden"
+    <button
+        class="group relative flex h-fl-space-xl w-fl-space-xl items-center justify-center rounded-full bg-accent p-0 shadow-floated hover:bg-accent-light focus:bg-accent-light lg:hidden"
         name="hamburger"
         type="button"
-        aria-label="toggle navigation menu"
+        aria-label="Mobile menu"
+        :aria-label="isMobileNavOpen ? 'Close main menu' : 'Mobile menu'"
+        :aria-expanded="isMobileNavOpen"
         x-data="hamburger"
         x-ref="button"
-        @click="toggle()"
+        x-on:click.prevent="toggle()"
     >
-        <span
-            :class="smNav ? 'rotate-45 translate-y-fl-space-2xs' : ''"
-            class="ease my-0.5 h-1 w-6 transform rounded-full bg-white transition duration-300"
-        ></span>
-        <span
-            :class="smNav ? 'opacity-0' : ''"
-            class="ease my-0.5 h-1 w-6 transform rounded-full bg-white transition duration-300"
-        ></span>
-        <span
-            :class="smNav ? '-rotate-45 -translate-y-fl-space-2xs' : ''"
-            class="ease my-0.5 h-1 w-6 transform rounded-full bg-white transition duration-300"
-        ></span>
-    </Button>
+        <div class="grid justify-items-center gap-1">
+            <span
+                :class="isMobileNavOpen ? '-rotate-45 translate-y-2' : ''"
+                class="h-1 w-5 rounded-full bg-white transition duration-1000"
+            ></span>
+            <span
+                :class="isMobileNavOpen ? 'opacity-0' : ''"
+                class="h-1 w-6 rounded-full bg-white transition duration-1000"
+            ></span>
+            <span
+                :class="isMobileNavOpen ? 'rotate-45 -translate-y-2 ' : ''"
+                class="h-1 w-5 rounded-full bg-white transition duration-1000"
+            ></span>
+        </div>
+    </button>
 </div>
 
 <script>
     import Alpine from 'alpinejs';
     document.addEventListener('alpine:init', () => {
         Alpine.data('hamburger', () => ({
-            freeze(freezeState) {
-                document.body.classList.toggle('overflow-hidden', freezeState);
-            },
+            // freeze(freezeState) {
+            //     document.body.classList.toggle('overflow-hidden', freezeState);
+            // },
             toggle() {
                 const themeMeta = document.querySelector(
                     'meta[name="theme-color"]',
@@ -59,12 +63,14 @@ import Button from './ui/Button.astro';
                     this.$store.cache.theme ||
                     themeMeta?.getAttribute('content');
                 this.$store.cache.theme = cache;
-                this.smNav = !this.smNav;
+
+                this.isMobileNavOpen = !this.isMobileNavOpen;
+
                 themeMeta?.setAttribute(
                     'content',
                     this.smNav ? '#ffd200' : cache,
                 );
-                this.freeze(this.smNav);
+                // this.freeze(this.isMobileNavOpen);
             },
         }));
     });

@@ -1,6 +1,5 @@
 ---
 import { Icon } from 'astro-icon/components';
-import Hamburger from './Hamburger.astro';
 import Navigation from './Navigation.astro';
 import ThemeIcon from './ThemeIcon.astro';
 
@@ -11,9 +10,9 @@ const { isHeroDark = false } = Astro.props;
 ---
 
 <header
-    class="fixed top-0 z-banner w-full py-fl-space-s transition duration-500 x-cloak:!absolute x-cloak:opacity-0"
+    class="group fixed top-0 z-banner w-full py-fl-space-s transition duration-500 x-cloak:!absolute x-cloak:opacity-0"
     x-cloak
-    x-bind:class="{ 'bg-banner-up/0': banner ==='start',' bg-banner-up shadow-banner shadow-gray-950/10': banner === 'up', 'bg-banner-up -translate-y-full shadow-banner shadow-gray-950/10': banner === 'down' }"
+    x-bind:class="{ 'bg-banner-up/0': banner ==='start','bg-banner-up shadow-banner shadow-gray-950/10': banner === 'up', 'bg-banner-up -translate-y-full shadow-banner shadow-gray-950/10': banner === 'down' }"
     x-ref="banner"
     data-banner="start"
     :data-banner="banner"
@@ -22,7 +21,7 @@ const { isHeroDark = false } = Astro.props;
     @scroll.window="reactOnScroll()"
 >
     <div
-        class="mx-auto grid max-w-container grid-cols-2 items-center md:grid-cols-header"
+        class="mx-auto grid max-w-container grid-cols-2 items-center justify-between gap-x-fl-space-m lg:grid-cols-3"
     >
         <a
             href="/"
@@ -58,11 +57,10 @@ const { isHeroDark = false } = Astro.props;
             }
         </a>
 
-        <ThemeIcon />
-        <Navigation class="justify-self-end" {isHeroDark} />
+        <div class="justify-self-end lg:justify-self-center"><ThemeIcon /></div>
+        <Navigation class="hidden justify-self-end lg:block" {isHeroDark} />
     </div>
 </header>
-<Hamburger />
 
 <script>
     import Alpine from 'alpinejs';
