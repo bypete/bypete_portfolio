@@ -7,21 +7,19 @@ import Button from './ui/Button.astro';
     class="fixed bottom-fl-space-m right-fl-space-m z-shortcuts flex flex-col items-center space-y-fl-space-2xs"
 >
     <a
-        x-data
-        x-cloak
-        :class="$store.cache.pageTop ? '' : 'translate-y-fl-space-xl md:translate-y-0 md:translate-x-fl-space-2xl'"
+        id="pageTop"
         href="#top"
         aria-hidden="true"
-        class="scroll flex items-center justify-center rounded-full bg-accent p-fl-space-3xs text-white transition duration-700 hover:border-black/10 hover:bg-accent-light hover:shadow-inset focus:outline-none"
+        class="scroll flex translate-x-fl-space-3xl items-center justify-center rounded-full bg-accent p-fl-space-2xs text-white hover:border-black/10 hover:bg-accent-light hover:shadow-inset focus:outline-none"
     >
         <Icon
             name="lucide:arrow-up-to-line"
-            class="h-fl-space-s w-fl-space-s"
+            class="h-fl-space-m w-fl-space-m"
         />
     </a>
 
     <button
-        class="group relative flex h-fl-space-xl w-fl-space-xl items-center justify-center rounded-full bg-accent p-0 shadow-floated hover:bg-accent-light focus:bg-accent-light lg:hidden"
+        class="group relative flex h-fl-space-2xl w-fl-space-2xl items-center justify-center rounded-full bg-accent p-0 shadow-floated hover:bg-accent-light focus:bg-accent-light lg:hidden"
         name="hamburger"
         type="button"
         aria-label="Mobile menu"
@@ -50,12 +48,198 @@ import Button from './ui/Button.astro';
 
 <script>
     import Alpine from 'alpinejs';
+    import {
+        animate,
+        scroll,
+        timeline,
+        ScrollOffset,
+        stagger,
+        inView,
+    } from 'motion';
+
+    const body = document.body;
+    const wrapper = document.getElementById('wrapper');
+    const wrapperContent = document.getElementById('wrapperContent');
+    const mobileNavigation = document.getElementById('mobileNavigation');
+
+    // Get viewport height
+    const vh = window.innerHeight;
+
+    // Get page height
+    const bh = Math.max(
+        document.body.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.clientHeight,
+        document.documentElement.scrollHeight,
+        document.documentElement.offsetHeight,
+    );
+
+    console.log(bh, vh);
+    const pageTop = document.getElementById('pageTop');
+
+    scroll(
+        animate('#pageTop', {
+            transform: `translateX(0)`,
+            opacity: [0, 1],
+        }),
+        {
+            offset: ['100vh', 'start end'],
+        },
+    );
+
+    // const ptEnter = animate(
+    //     pageTop,
+    //     {
+    //         scale: 2,
+    //     },
+    //     {
+    //         duration: 0.5,
+    //         easing: [0.22, 0.03, 0.26, 1],
+    //     },
+    // );
+
+    // ptEnter.pause();
+
+    // const ptExit = animate(
+    //     pageTop,
+    //     {
+    //         scale: [0, 0],
+    //     },
+    //     {
+    //         duration: 0.5,
+    //         easing: [0.22, 0.03, 0.26, 1],
+    //     },
+    // );
+
+    // ptExit.pause();
+
+    // scroll(
+    //     ({ y }) => {
+    //         animate(
+    //             pageTop,
+    //             {
+    //                 scale: 1.25,
+    //             },
+    //             {
+    //                 duration: 0.5,
+    //                 easing: [0.22, 0.03, 0.26, 1],
+    //             },
+    //         );
+    //     },
+    //     { offset: [...ScrollOffset.Enter, ...ScrollOffset.Exit] },
+    // );
+
+    if (pageTop && bh > vh) {
+        scroll(({ y }) => {
+            y.progress > vh / bh ? console.log('yes') : console.log('no');
+        });
+
+        // scroll(({ y }) => {
+        //     y.progress > 0.25
+        //         ? animate(
+        //               pageTop,
+        //               {
+        //                   transform: ['translateX(0)'],
+        //               },
+        //               {
+        //                   duration: 0.5,
+        //                   easing: [0.22, 0.03, 0.26, 1],
+        //               },
+        //           )
+        //         : animate(
+        //               pageTop,
+        //               {
+        //                   transform: 'translateX(var(--space-2xl))',
+        //               },
+        //               {
+        //                   duration: 0.5,
+        //                   easing: [0.22, 0.03, 0.26, 1],
+        //               },
+        //           );
+        // });
+    }
+
+    const hello = (scrollCache, viewHeight, viewWidth) => {
+        document.documentElement.style.overflow = `hidden`;
+        body.style.overflow = `hidden`;
+        wrapper.style.cssText = `overflow: hidden; height: ${viewHeight}px;`;
+        wrapperContent.style.top = `-${scrollCache}px`;
+        wrapperContent.style.postion = `relative`;
+
+        const sequence = [
+            [
+                wrapper,
+                {
+                    transform: `${viewWidth <= 768 ? 'translateX(-85vw)' : 'translateX(-60vw)'}`,
+                    height: `${viewHeight}px`,
+                },
+                {},
+            ],
+            [
+                mobileNavigation,
+                {
+                    opacity: 1,
+                    transform: [
+                        'translateX(calc(-1 * var(--space-3xl))) scale(.75)',
+                        'translateX(0px) scale(1)',
+                    ],
+                },
+                {
+                    at: '<',
+                },
+            ],
+            // [
+            //     wrapperContent,
+            //     {
+            //         top: `-${scrollCache}px`,
+            //     },
+            //     { at: '<' },
+            // ],
+        ];
+        timeline(sequence, { duration: 0.5, easing: [0.22, 0.03, 0.26, 1] });
+    };
+
+    const goodbye = async (scrollCache) => {
+        const sequence = [
+            [mobileNavigation, { opacity: 0 }, { duration: 0.25 }],
+            [
+                wrapper,
+                {
+                    transform: 'translateX(0px)',
+                },
+                {},
+            ],
+            // [
+            //     wrapperContent,
+            //     {
+            //         top: '0px',
+            //     },
+            //     { at: '<' },
+            // ],
+        ];
+
+        await timeline(sequence, {
+            duration: 1,
+            easing: [0.22, 0.03, 0.26, 1],
+        }).finished;
+
+        wrapperContent.style.top = '0px';
+        wrapper.style.cssText = `transform: none; height: 100%;`;
+        document.documentElement.scrollTop = scrollCache;
+        document.documentElement.style.cssText = '';
+        body.style.cssText = '';
+    };
+
     document.addEventListener('alpine:init', () => {
         Alpine.data('hamburger', () => ({
-            // freeze(freezeState) {
-            //     document.body.classList.toggle('overflow-hidden', freezeState);
-            // },
+            freeze(freezeState) {
+                document.body.classList.toggle('overflow-hidden', freezeState);
+            },
+            scrollPos: undefined,
+            viewHeight: undefined,
             toggle() {
+                this.isMobileNavOpen = !this.isMobileNavOpen;
+
                 const themeMeta = document.querySelector(
                     'meta[name="theme-color"]',
                 );
@@ -64,13 +248,38 @@ import Button from './ui/Button.astro';
                     themeMeta?.getAttribute('content');
                 this.$store.cache.theme = cache;
 
-                this.isMobileNavOpen = !this.isMobileNavOpen;
-
                 themeMeta?.setAttribute(
                     'content',
                     this.smNav ? '#ffd200' : cache,
                 );
-                // this.freeze(this.isMobileNavOpen);
+            },
+
+            init() {
+                this.$watch('isMobileNavOpen', (value, oldValue) => {
+                    if (oldValue != true) {
+                        this.viewHeight =
+                            window.innerHeight ||
+                            document.documentElement.clientHeight;
+                        this.viewWidth =
+                            window.innerWidth ||
+                            document.documentElement.clientWidth;
+                        this.scrollPos = document.documentElement.scrollTop;
+                        this.$store.cache.scrollHeight = this.scrollPos;
+                        alert(this.scrollPos + ' ' + this.viewHeight);
+                        hello(this.scrollPos, this.viewHeight, this.viewWidth);
+                    } else {
+                        alert(
+                            this.$store.cache.scrollHeight +
+                                ' ' +
+                                this.scrollPos +
+                                ' ' +
+                                this.viewHeight,
+                        );
+
+                        goodbye(this.$store.cache.scrollHeight);
+                        // this.isMobileNavOpen = false;
+                    }
+                });
             },
         }));
     });

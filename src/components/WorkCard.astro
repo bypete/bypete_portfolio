@@ -33,10 +33,8 @@ const { title, featured, url, cover, logo, product, taster, tags, readTime } =
 
 <a
     href={url}
-    class="group relative grid w-full grid-rows-workcard rounded-tight bg-surface-raised no-underline opacity-0 shadow-raised transition-all duration-700 hover:no-underline hover:shadow-lg hover:duration-300"
-    x-data="{ shown: false }"
-    x-intersect.threshold.10="shown = true"
-    x-bind:class="shown ? 'animate-fade-in-zoom' : ''"
+    animate-card
+    class="group relative grid w-full grid-rows-workcard rounded-tight bg-surface-raised no-underline opacity-0 shadow-raised hover:no-underline hover:shadow-lg hover:duration-300"
 >
     <div
         class="relative block overflow-hidden bg-line-quiet pb-photo hover:rounded-t-tight"
