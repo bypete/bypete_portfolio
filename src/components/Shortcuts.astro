@@ -10,7 +10,7 @@ import Button from './ui/Button.astro';
         id="pageTop"
         href="#top"
         aria-hidden="true"
-        class="scroll flex translate-x-fl-space-3xl items-center justify-center rounded-full bg-accent p-fl-space-2xs text-white hover:border-black/10 hover:bg-accent-light hover:shadow-inset focus:outline-none"
+        class="scroll translate-y-fl-space-2xl items-center justify-center rounded-full bg-accent p-fl-space-2xs text-white shadow-floated hover:border-black/10 hover:bg-accent-light focus:outline-none"
     >
         <Icon
             name="lucide:arrow-up-to-line"
@@ -56,7 +56,16 @@ import Button from './ui/Button.astro';
         stagger,
         inView,
     } from 'motion';
+    import Lenis from '@studio-freight/lenis';
+    const lenis = new Lenis();
 
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+    const page = document.documentElement;
     const body = document.body;
     const wrapper = document.getElementById('wrapper');
     const wrapperContent = document.getElementById('wrapperContent');
@@ -74,90 +83,73 @@ import Button from './ui/Button.astro';
         document.documentElement.offsetHeight,
     );
 
-    console.log(bh, vh);
     const pageTop = document.getElementById('pageTop');
 
-    scroll(
-        animate('#pageTop', {
-            transform: `translateX(0)`,
-            opacity: [0, 1],
-        }),
-        {
-            offset: ['100vh', 'start end'],
-        },
-    );
-
-    // const ptEnter = animate(
-    //     pageTop,
-    //     {
-    //         scale: 2,
-    //     },
-    //     {
-    //         duration: 0.5,
-    //         easing: [0.22, 0.03, 0.26, 1],
-    //     },
-    // );
-
-    // ptEnter.pause();
-
-    // const ptExit = animate(
-    //     pageTop,
-    //     {
-    //         scale: [0, 0],
-    //     },
-    //     {
-    //         duration: 0.5,
-    //         easing: [0.22, 0.03, 0.26, 1],
-    //     },
-    // );
-
-    // ptExit.pause();
-
-    // scroll(
-    //     ({ y }) => {
-    //         animate(
-    //             pageTop,
-    //             {
-    //                 scale: 1.25,
-    //             },
-    //             {
-    //                 duration: 0.5,
-    //                 easing: [0.22, 0.03, 0.26, 1],
-    //             },
-    //         );
-    //     },
-    //     { offset: [...ScrollOffset.Enter, ...ScrollOffset.Exit] },
-    // );
-
-    if (pageTop && bh > vh) {
-        scroll(({ y }) => {
-            y.progress > vh / bh ? console.log('yes') : console.log('no');
+    pageTop &&
+        pageTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            history.pushState(
+                '',
+                document.title,
+                window.location.pathname + window.location.search,
+            );
+            lenis.scrollTo('#top');
         });
 
-        // scroll(({ y }) => {
-        //     y.progress > 0.25
-        //         ? animate(
-        //               pageTop,
-        //               {
-        //                   transform: ['translateX(0)'],
-        //               },
-        //               {
-        //                   duration: 0.5,
-        //                   easing: [0.22, 0.03, 0.26, 1],
-        //               },
-        //           )
-        //         : animate(
-        //               pageTop,
-        //               {
-        //                   transform: 'translateX(var(--space-2xl))',
-        //               },
-        //               {
-        //                   duration: 0.5,
-        //                   easing: [0.22, 0.03, 0.26, 1],
-        //               },
-        //           );
-        // });
-    }
+    let animationInProgress = false;
+    let visible = false;
+    let throttleTimer = null;
+    const throttleInterval = 300;
+
+    const handlePageTop = () => {
+        if (!throttleTimer) {
+            throttleTimer = setTimeout(() => {
+                throttleTimer = null;
+                if (animationInProgress) {
+                    return;
+                }
+                if (page.scrollTop > vh && !visible) {
+                    showPageTop();
+                }
+                if (page.scrollTop <= vh && visible) {
+                    hidePageTop();
+                }
+            }, throttleInterval);
+        }
+    };
+
+    const hidePageTop = () => {
+        animationInProgress = true;
+        visible = false;
+        animate(
+            pageTop,
+            {
+                opacity: 1,
+                transform: ['translateY(var(--space-2xl)) scale(0.25)'],
+            },
+            { easing: 'ease-in', duration: 0.25 },
+        ).finished.then(() => {
+            animationInProgress = false;
+        });
+    };
+
+    const showPageTop = () => {
+        animationInProgress = true;
+        visible = true;
+        animate(
+            pageTop,
+            {
+                opacity: 1,
+                transform: ['translateX(0)'],
+            },
+            { easing: 'ease-in', duration: 0.25 },
+        ).finished.then(() => {
+            animationInProgress = false;
+        });
+    };
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handlePageTop);
 
     const hello = (scrollCache, viewHeight, viewWidth) => {
         document.documentElement.style.overflow = `hidden`;
@@ -188,13 +180,6 @@ import Button from './ui/Button.astro';
                     at: '<',
                 },
             ],
-            // [
-            //     wrapperContent,
-            //     {
-            //         top: `-${scrollCache}px`,
-            //     },
-            //     { at: '<' },
-            // ],
         ];
         timeline(sequence, { duration: 0.5, easing: [0.22, 0.03, 0.26, 1] });
     };
@@ -209,13 +194,6 @@ import Button from './ui/Button.astro';
                 },
                 {},
             ],
-            // [
-            //     wrapperContent,
-            //     {
-            //         top: '0px',
-            //     },
-            //     { at: '<' },
-            // ],
         ];
 
         await timeline(sequence, {
@@ -265,17 +243,8 @@ import Button from './ui/Button.astro';
                             document.documentElement.clientWidth;
                         this.scrollPos = document.documentElement.scrollTop;
                         this.$store.cache.scrollHeight = this.scrollPos;
-                        alert(this.scrollPos + ' ' + this.viewHeight);
                         hello(this.scrollPos, this.viewHeight, this.viewWidth);
                     } else {
-                        alert(
-                            this.$store.cache.scrollHeight +
-                                ' ' +
-                                this.scrollPos +
-                                ' ' +
-                                this.viewHeight,
-                        );
-
                         goodbye(this.$store.cache.scrollHeight);
                         // this.isMobileNavOpen = false;
                     }
