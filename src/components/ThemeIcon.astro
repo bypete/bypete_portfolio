@@ -6,23 +6,23 @@ import { Icon } from 'astro-icon/components';
     x-data="theme"
     x-cloak
     class:list={[
-        'grid-col-1 grid-row-1 transform-all relative grid h-fl-space-l w-fl-space-l justify-center  overflow-hidden rounded-full bg-surface-overlay p-fl-space-3xs text-center leading-none text-content shadow-inset delay-300 duration-200 ',
+        'grid-col-1 grid-row-1  duration-[750ms] relative grid size-fl-space-l justify-center overflow-hidden rounded-full bg-surface-overlay text-center leading-none text-content shadow-inset transition-colors ',
     ]}
 >
     <button
+        id="setThemeLight"
         type="button"
         aria-label="set light theme"
         @click="theme = 'light'"
-        class="col-start-1 row-start-1 rotate-0 transform duration-500"
-        x-bind:class="{'translate-y-fl-space-l -rotate-180' : theme === 'light'}"
+        class="col-start-1 row-start-1 flex size-fl-space-l items-center justify-center rounded-full"
         ><Icon name="lucide:sun" class="h-fl-space-m-s w-fl-space-m-s" />
     </button>
     <button
+        id="setThemeDark"
         type="button"
         aria-label="set dark theme"
         @click="theme = 'dark'"
-        class="col-start-1 row-start-1 rotate-0 transform duration-500"
-        x-bind:class="{'-translate-y-fl-space-l -rotate-180' : theme === 'dark'}"
+        class="col-start-1 row-start-1 flex size-fl-space-l items-center justify-center rounded-full"
         ><Icon name="lucide:sun-moon" class="h-fl-space-m-s w-fl-space-m-s" />
     </button>
 </span>
@@ -48,23 +48,109 @@ import { Icon } from 'astro-icon/components';
 
 <script>
     import Alpine from 'alpinejs';
+    import { timeline } from 'motion';
+
+    import Lenis from '@studio-freight/lenis';
+    const lenis = new Lenis();
+
+    const raf = (time) => {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+
+    const setThemeLight = document.getElementById('setThemeLight');
+    const setThemeDark = document.getElementById('setThemeDark');
+
+    // Easings | easeOutBounce | https://easings.net
+    function easeOutBounce(x: number): number {
+        const n1 = 7.5625;
+        const d1 = 2.75;
+
+        if (x < 1 / d1) {
+            return n1 * x * x;
+        } else if (x < 2 / d1) {
+            return n1 * (x -= 1.5 / d1) * x + 0.75;
+        } else if (x < 2.5 / d1) {
+            return n1 * (x -= 2.25 / d1) * x + 0.9375;
+        } else {
+            return n1 * (x -= 2.625 / d1) * x + 0.984375;
+        }
+    }
+
+    const animateTheme = (theme) => {
+        const sequenceLight = [
+            [
+                setThemeLight,
+                {
+                    x: ['0%', '100%'],
+                    y: ['0%', '15%'],
+                    rotate: ['0deg', '30deg'],
+                },
+            ],
+            [
+                setThemeDark,
+                {
+                    x: ['-100%', '0%'],
+                    y: ['15%', '0%'],
+                    rotate: ['-30deg', '0deg'],
+                },
+                { at: '<' },
+            ],
+        ];
+
+        const sequenceDark = [
+            [
+                setThemeDark,
+                {
+                    x: ['0%', '100%'],
+                    y: ['0%', '15%'],
+                    rotate: ['0deg', '30deg'],
+                },
+            ],
+            [
+                setThemeLight,
+                {
+                    x: ['-100%', '0%'],
+                    y: ['15%', '0%'],
+                    rotate: ['-30deg', '0deg'],
+                },
+                { at: '<' },
+            ],
+        ];
+        if (theme === 'light') {
+            timeline(sequenceLight, {
+                easing: easeOutBounce,
+                duration: 0.75,
+            });
+        } else {
+            timeline(sequenceDark, {
+                easing: easeOutBounce,
+                duration: 0.75,
+            });
+        }
+    };
+
     document.addEventListener('alpine:init', () => {
         Alpine.data('theme', () => ({
-            theme: localStorage.getItem('theme'),
+            theme: localStorage.getItem('theme') || 'light',
 
             setTheme(value) {
+                console.log(value);
                 localStorage.setItem('theme', value);
+                animateTheme(value);
                 const html = document.querySelector('html');
                 const meta = document.querySelector('meta[name="theme-color"]');
 
                 html?.setAttribute('data-theme', value);
                 meta?.setAttribute(
                     'content',
-                    value === 'dark' ? '#09090b' : '#ffffff',
+                    value === 'dark' ? '#1f1f28' : '#ffffff',
                 );
             },
 
             init() {
+                this.setTheme(this.theme);
                 this.$watch('theme', (value) => {
                     this.setTheme(value);
                 });

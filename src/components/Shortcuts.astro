@@ -56,17 +56,17 @@ import Button from './ui/Button.astro';
         stagger,
         inView,
     } from 'motion';
+
     import Lenis from '@studio-freight/lenis';
     const lenis = new Lenis();
 
-    function raf(time) {
+    const raf = (time) => {
         lenis.raf(time);
         requestAnimationFrame(raf);
-    }
-
+    };
     requestAnimationFrame(raf);
+
     const page = document.documentElement;
-    const body = document.body;
     const wrapper = document.getElementById('wrapper');
     const wrapperContent = document.getElementById('wrapperContent');
     const mobileNavigation = document.getElementById('mobileNavigation');
@@ -78,9 +78,9 @@ import Button from './ui/Button.astro';
     const bh = Math.max(
         document.body.scrollHeight,
         document.body.offsetHeight,
-        document.documentElement.clientHeight,
-        document.documentElement.scrollHeight,
-        document.documentElement.offsetHeight,
+        page.clientHeight,
+        page.scrollHeight,
+        page.offsetHeight,
     );
 
     const pageTop = document.getElementById('pageTop');
@@ -151,14 +151,8 @@ import Button from './ui/Button.astro';
     // Add scroll event listener
     window.addEventListener('scroll', handlePageTop);
 
-    const hello = (scrollCache, viewHeight, viewWidth) => {
-        document.documentElement.style.overflow = `hidden`;
-        body.style.overflow = `hidden`;
-        wrapper.style.cssText = `overflow: hidden; height: ${viewHeight}px;`;
-        wrapperContent.style.top = `-${scrollCache}px`;
-        wrapperContent.style.postion = `relative`;
-
-        const sequence = [
+    const sidenav = (visible, scrollCache, viewHeight, viewWidth) => {
+        const sequenceShow = [
             [
                 wrapper,
                 {
@@ -181,39 +175,42 @@ import Button from './ui/Button.astro';
                 },
             ],
         ];
-        timeline(sequence, { duration: 0.5, easing: [0.22, 0.03, 0.26, 1] });
-    };
-
-    const goodbye = async (scrollCache) => {
-        const sequence = [
+        const sequenceHide = [
             [mobileNavigation, { opacity: 0 }, { duration: 0.25 }],
             [
                 wrapper,
                 {
                     transform: 'translateX(0px)',
                 },
-                {},
             ],
         ];
 
-        await timeline(sequence, {
-            duration: 1,
-            easing: [0.22, 0.03, 0.26, 1],
-        }).finished;
-
-        wrapperContent.style.top = '0px';
-        wrapper.style.cssText = `transform: none; height: 100%;`;
-        document.documentElement.scrollTop = scrollCache;
-        document.documentElement.style.cssText = '';
-        body.style.cssText = '';
+        if (visible) {
+            wrapper.style.cssText = `overflow: hidden; height: ${viewHeight}px;`;
+            wrapperContent.style.top = `-${scrollCache}px`;
+            wrapperContent.style.postion = `relative`;
+            timeline(sequenceShow, {
+                easing: 'ease-in-out',
+                duration: 0.5,
+            }).finished.then(() => {});
+        } else {
+            timeline(sequenceHide, {
+                easing: 'ease-in-out',
+                duration: 0.75,
+            }).finished.then(() => {
+                wrapper.style.cssText = '';
+                wrapperContent.style.top = '0';
+                page.scrollTop = scrollCache;
+            });
+        }
     };
 
     document.addEventListener('alpine:init', () => {
         Alpine.data('hamburger', () => ({
             freeze(freezeState) {
-                document.body.classList.toggle('overflow-hidden', freezeState);
+                freezeState ? lenis.stop() : lenis.start();
             },
-            scrollPos: undefined,
+            scrollPos: 0,
             viewHeight: undefined,
             toggle() {
                 this.isMobileNavOpen = !this.isMobileNavOpen;
@@ -234,20 +231,27 @@ import Button from './ui/Button.astro';
 
             init() {
                 this.$watch('isMobileNavOpen', (value, oldValue) => {
-                    if (oldValue != true) {
-                        this.viewHeight =
-                            window.innerHeight ||
-                            document.documentElement.clientHeight;
-                        this.viewWidth =
-                            window.innerWidth ||
-                            document.documentElement.clientWidth;
-                        this.scrollPos = document.documentElement.scrollTop;
-                        this.$store.cache.scrollHeight = this.scrollPos;
-                        hello(this.scrollPos, this.viewHeight, this.viewWidth);
+                    this.viewHeight = window.innerHeight || page.clientHeight;
+                    this.viewWidth = window.innerWidth || page.clientWidth;
+
+                    if (oldValue) {
+                        // true = was previously open
+                        this.scrollPos = this.$store.cache.scrollHeight;
                     } else {
-                        goodbye(this.$store.cache.scrollHeight);
-                        // this.isMobileNavOpen = false;
+                        // false = was previously closed
+                        this.scrollPos = page.scrollTop;
+                        this.$store.cache.scrollHeight = this.scrollPos;
                     }
+
+                    this.$store.cache.scrollHeight = this.scrollPos;
+
+                    this.freeze(value);
+                    sidenav(
+                        value,
+                        this.scrollPos,
+                        this.viewHeight,
+                        this.viewWidth,
+                    );
                 });
             },
         }));

@@ -1,20 +1,20 @@
 ---
 interface Props {
     bg?: string;
+    id?: string;
+    hidden?: boolean;
 }
-const { bg } = Astro.props;
+const { id, bg, hidden = true } = Astro.props;
 ---
 
 <div
+    id={id}
     x-cloak
-    class="pointer-events-none fixed left-1/2 top-screenSvh z-toast w-full -translate-x-1/2 -translate-y-full p-fl-space-xs md:max-w-sm"
+    class:list={[
+        'pointer-events-auto rounded-tight shadow-overlay',
+        bg || 'bg-gradient-to-b from-surface-overlay to-surface',
+        hidden && 'hidden',
+    ]}
 >
-    <div
-        class:list={[
-            'shadow-overlay rounded-tight',
-            bg || 'from-surface-overlay to-surface bg-gradient-to-b',
-        ]}
-    >
-        <slot />
-    </div>
+    <slot />
 </div>

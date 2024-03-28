@@ -69,6 +69,11 @@ export default {
                 underlay: '990',
                 toc: '900',
             },
+            data: {
+                up: 'banner=up',
+                down: 'banner=down',
+                start: 'banner=start',
+            },
             backgroundImage: {
                 heroBrand:
                     'radial-gradient(145% 100% at 50% 0, #ff0069 0, #ff0069 45%, #b10049 88%)',
@@ -856,7 +861,6 @@ export default {
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
         require('@savvywombat/tailwindcss-grid-areas'),
-        require('tailwindcss-animate'),
         addDynamicIconSelectors(),
         // https://laravel-code.tips/you-can-add-this-tailwind-plugin-to-generate-child-selector-variants/
         plugin(({ addVariant }) => {

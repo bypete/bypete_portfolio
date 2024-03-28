@@ -17,7 +17,7 @@ const {
     class: className,
 } = Astro.props;
 const legibility = isHeroDark
-    ? 'text-menudark hover:text-menudark-active focus:text-menudark-active  group-data-[banner=up]:hover:text-menu-active group-data-[banner=up]:focus:text-menu-active group-data-[banner=up]:!text-menu'
+    ? 'text-menudark hover:text-menudark-active focus:text-menudark-active  group-data-up/page:hover:text-menu-active group-data-up/page:focus:text-menu-active group-data-up/page:!text-menu'
     : ' text-menu hover:text-menu-active focus:text-menu-active ';
 const activeState = isHeroDark
     ? ' data-[state=active]:ring-menudark-marker data-[state=active]:hover:text-menudark-active '

@@ -1,4 +1,8 @@
 @layer base {
+    .durationpete {
+        @apply duration-[400ms];
+    }
+
     /* https://divmagic.com/tools/color-converter */
     :root {
         --white: 255 255 255; /* absolute white */

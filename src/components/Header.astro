@@ -10,15 +10,9 @@ const { isHeroDark = false } = Astro.props;
 ---
 
 <header
-    class="group fixed top-0 z-banner w-full py-fl-space-s transition duration-500 x-cloak:!absolute x-cloak:opacity-0"
+    id="banner"
+    class="group-data-start/page:shadow-none group fixed top-0 z-banner w-full py-fl-space-s opacity-0 shadow-banner shadow-gray-950/20"
     x-cloak
-    x-bind:class="{ 'bg-banner-up/0': banner ==='start','bg-banner-up shadow-banner shadow-gray-950/10': banner === 'up', 'bg-banner-up -translate-y-full shadow-banner shadow-gray-950/10': banner === 'down' }"
-    x-ref="banner"
-    data-banner="start"
-    :data-banner="banner"
-    x-data="stickybanner()"
-    x-init="reactOnScroll()"
-    @scroll.window="reactOnScroll()"
 >
     <div
         class="mx-auto grid max-w-container grid-cols-2 items-center justify-between gap-x-fl-space-m lg:grid-cols-3"
@@ -32,19 +26,13 @@ const { isHeroDark = false } = Astro.props;
             {
                 isHeroDark ? (
                     <>
-                        <span
-                            class="col-start-1 "
-                            x-bind:class="banner === 'up' ? 'opacity-0' : 'opacity-100'"
-                        >
+                        <span class="group-data-up/page:opacity-0  col-start-1">
                             <Icon
                                 name="bypete__white"
                                 class="h-fl-space-l w-auto"
                             />
                         </span>
-                        <span
-                            class="col-start-1 transition-opacity duration-300"
-                            x-bind:class="banner === 'up' ? 'opacity-100' : 'opacity-0'"
-                        >
+                        <span class="group-data-up/page:opacity-100 col-start-1 opacity-0 ">
                             <Icon
                                 name="bypete__brand"
                                 class="h-fl-space-l w-auto"
@@ -63,31 +51,143 @@ const { isHeroDark = false } = Astro.props;
 </header>
 
 <script>
-    import Alpine from 'alpinejs';
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('stickybanner', () => ({
-            lastScrollTop: 0,
-            banner: 'start',
-            reactOnScroll() {
-                const st =
-                    window.pageYOffset || document.documentElement.scrollTop;
-                const ch =
-                    window.innerHeight || document.documentElement.clientHeight;
+    import {
+        animate,
+        scroll,
+        timeline,
+        ScrollOffset,
+        stagger,
+        inView,
+    } from 'motion';
 
-                this.$store.cache.pageTop = st > ch;
+    const page = document.documentElement;
+    const banner = document.getElementById('banner');
+    const toc = document.getElementById('tocWrapper');
+    const body = document.body;
 
-                if (st === 0) {
-                    this.banner = 'start';
-                } else if (st > this.$data.lastScrollTop) {
-                    this.banner = 'down';
-                } else if (st < this.$data.lastScrollTop) {
-                    this.banner = 'up';
-                } else {
-                    this.banner = 'unknown';
-                }
-                this.$store.cache.banner = this.banner;
-                this.$data.lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+    const vh = window.innerHeight;
+
+    let animationInProgress = false;
+    let visible = true;
+    let throttleTimer = null;
+    const throttleInterval = 150;
+    let scrollCache = 0;
+
+    const handleBanner = () => {
+        if (throttleTimer) {
+            return;
+        }
+        throttleTimer = setTimeout(() => {
+            throttleTimer = null;
+            if (animationInProgress) {
+                return;
+            }
+            const st = window.pageYOffset || page.scrollTop;
+            if (st === 0) {
+                setBannerState('start');
+                startBanner();
+            } else if (st > scrollCache && visible) {
+                hideBanner();
+            } else if (st < scrollCache && st > vh * 0.5 && !visible) {
+                setBannerState('up');
+                showBanner();
+            }
+
+            scrollCache = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+        }, throttleInterval);
+    };
+
+    const setBannerState = (state) => page?.setAttribute('data-banner', state);
+
+    const startBanner = () => {
+        animationInProgress = true;
+        visible = true;
+        animate(
+            banner,
+            {
+                opacity: 1,
+                transform: ['translateY(0)'],
+                background: 'none',
             },
-        }));
-    });
+            { easing: 'ease-in-out', duration: 0.25 }, //easeInOutQuart
+        ).finished.then(() => {
+            animationInProgress = false;
+        });
+    };
+
+    const hideBanner = () => {
+        animationInProgress = true;
+        visible = false;
+
+        const sequence = [
+            [
+                banner,
+                {
+                    transform: ['translateY(-100%)'],
+                    background: 'rgb(var(--banner-up)/0)',
+                },
+                {},
+            ],
+        ];
+
+        if (toc && toc.scrollTop === 0) {
+            sequence.push([
+                toc,
+                {
+                    transform: ['translateY(0%)'],
+                },
+                {
+                    at: '<',
+                },
+            ]);
+        }
+
+        timeline(sequence, {
+            duration: 0.5,
+            easing: 'linear',
+        }).finished.then(() => {
+            animationInProgress = false;
+            setBannerState('down');
+        });
+    };
+
+    const showBanner = () => {
+        animationInProgress = true;
+        visible = true;
+        banner.style.opacity = `1`;
+        banner.style.background = `rgb(var(--banner-up)/1)`;
+
+        const sequence = [
+            [
+                banner,
+                {
+                    transform: ['translateY(0)'],
+                    background: 'rgb(var(--banner-up)/1)',
+                },
+                {},
+            ],
+        ];
+
+        if (toc && toc.scrollTop === 0) {
+            sequence.push([
+                toc,
+                {
+                    transform: ['translateY(var(--headerheight))'],
+                },
+                {
+                    at: '<',
+                },
+            ]);
+        }
+
+        timeline(sequence, {
+            duration: 0.5,
+            easing: 'linear',
+        }).finished.then(() => {
+            animationInProgress = false;
+        });
+    };
+
+    handleBanner();
+    window.addEventListener('scroll', handleBanner);
 </script>

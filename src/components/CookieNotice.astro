@@ -20,17 +20,10 @@ if (build === 'production') {
 const isSecure: boolean = ['production', 'staging'].includes(build);
 ---
 
-<Toast>
+<Toast id="toastCookie" hidden={true}>
     <div
-        class="pointer-events-auto grid items-start gap-y-fl-space-xs p-fl-space-xs grid-areas-toast"
+        class="grid items-start gap-y-fl-space-xs p-fl-space-xs grid-areas-toast"
         x-data={`cookie({ domain: '${domain}', isSecure: '${isSecure}'})`}
-        x-show="toastCookie"
-        x-transition:enter="transition ease-out duration-150"
-        x-transition:enter-start="opacity-0 "
-        x-transition:enter-end="opacity-100 "
-        x-transition:leave="transition ease-in duration-300"
-        x-transition:leave-start="opacity-100 "
-        x-transition:leave-end="opacity-0 "
     >
         <div class="text-fl-step--1 grid-in-message">
             <p>
@@ -70,6 +63,72 @@ const isSecure: boolean = ['production', 'staging'].includes(build);
         isSecure?: boolean;
     }
 
+    import { timeline } from 'motion';
+
+    import Lenis from '@studio-freight/lenis';
+    const lenis = new Lenis();
+
+    const raf = (time) => {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+    const page = document.documentElement;
+    const body = document.body;
+    const cookie = document.getElementById('toastCookie');
+    const overlay = document.getElementById('overlay');
+
+    const toast = (visible) => {
+        const show = [
+            [
+                cookie,
+                {
+                    opacity: [0, 1],
+                    scale: [0.75, 1],
+                },
+            ],
+            [
+                overlay,
+                {
+                    opacity: 1,
+                },
+                { at: '<' },
+            ],
+        ];
+        const hide = [
+            [
+                cookie,
+                {
+                    opacity: 0,
+                },
+                {},
+            ],
+            [
+                overlay,
+                {
+                    opacity: 0,
+                },
+                { at: '<' },
+            ],
+        ];
+
+        overlay.classList.toggle('hidden', !visible);
+        cookie.classList.toggle('hidden', !visible);
+        body.classList.toggle('!h-screenSvh', visible);
+        if (visible) {
+            timeline(show, {
+                easing: 'ease-in',
+                duration: 0.25,
+            }).finished.then(() => {});
+        } else {
+            body.style.height = '';
+            timeline(hide, {
+                easing: 'ease-in',
+                duration: 0.25,
+            }).finished.then(() => {});
+        }
+    };
+
     document.addEventListener('alpine:init', () => {
         Alpine.data('cookie', (build: Build = {}) => ({
             cookie: '',
@@ -79,16 +138,19 @@ const isSecure: boolean = ['production', 'staging'].includes(build);
             toastCookie: false,
             freeze(freezeState) {
                 this.toastCookie = freezeState;
-                document.body.classList.toggle('overflow-hidden', freezeState);
-                this.$dispatch('show-overlay', { visible: freezeState });
+                freezeState ? lenis.stop() : lenis.start();
+
+                toast(freezeState);
             },
+
             init() {
                 setTimeout(() => {
                     this.cookie = Cookies.get(this.name);
+                    console.log(this.cookie);
                     if (!this.cookie) {
                         this.freeze(true);
                     }
-                }, 6000);
+                }, 2500);
             },
             accept() {
                 this.freeze(false);

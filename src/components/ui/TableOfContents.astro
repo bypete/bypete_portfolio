@@ -32,10 +32,10 @@ const toc = buildToc(headings);
     ]}
 >
     <div
-        class="relative w-full max-w-2xl rounded-b transition-all duration-500 md:w-auto"
-        x-bind:class="[($store.cache.banner == 'up' ? 'translate-y-fl-space-header ' : 'translate-y-0'),(open ? 'grow shadow-raised' : '') ]"
-        x-sticky.sticky-root="shadow-3xl shadow-black/5"
-        x-sticky-inactive="!translate-y-0 !duration-250"
+        id="tocWrapper"
+        class="relative w-full max-w-2xl rounded-b shadow-raised transition-shadow md:w-auto"
+        x-bind:class="open ? 'grow ' : ''"
+        x-sticky-inactive="!translate-y-0"
     >
         <button
             @click="toggle()"
