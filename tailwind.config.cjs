@@ -344,8 +344,11 @@ export default {
                     '0px -1px 0px 0px rgb(var( --color-shadow-highlight) / 0.25)',
                 ],
                 placeholder: 'inset 0 0px 1px 1px rgba(0,0,0,.10)',
-                banner: '0px -2px 6px 4px var(--tw-shadow-color)',
+                banner: '-4px 0px 8px 4px var(--tw-shadow-color)',
                 dropdown: '0px 5px 15px var(--tw-shadow-color)',
+                offcanvas: [
+                    'inset 0px 0px 25px 15px rgb(var(--color-shadow-offcanvas) / 0.75)',
+                ],
                 floated:
                     '0px 2px 1px -1px rgba(255,255,255,0.30), inset 0px 2px 1px 1px rgba(30,41,59, 0.15), 0px 0px 10px 5px rgba(30,41,59, 0.15)',
             },
@@ -495,12 +498,10 @@ export default {
                     shade: 'rgb(var(--color-warning-shade) / <alpha-value>)',
                 },
                 brand: {
-                    lightest:
-                        'rgb(var(--color-brand-lightest) / <alpha-value>)',
                     light: 'rgb(var(--color-brand-light) / <alpha-value>)',
                     DEFAULT: 'rgb(var(--color-brand) / <alpha-value>)',
                     dark: 'rgb(var(--color-brand-dark) / <alpha-value>)',
-                    darkest: 'rgb(var(--color-brand-darkest) / <alpha-value>)',
+                    shade: 'rgb(var(--color-brand-shade) / <alpha-value>)',
                 },
                 accent: {
                     light: 'rgb(var(--color-accent-light) / <alpha-value>)',

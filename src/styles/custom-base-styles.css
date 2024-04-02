@@ -53,6 +53,7 @@
         --brand-light: 255 213 20; /* #ffd514  */
         --brand: 255 210 0; /* #ffd200  */
         --brand-dark: 235 194 0; /* #ebc200 */
+        --brand-shade: 255 189 0; /* #ffbd00 */
 
         --secondary-light: 51 65 85; /* slate-700 */
         --secondary: 30 41 59; /* slate-800 */
@@ -181,9 +182,9 @@
         --color-dropdown__bg-active: var(--brand);
         --color-dropdown__bg-highlight: var(--brand);
 
-        --color-menusm: var(--copy-light);
-        --color-menusm-hover: var(--brand);
-        --color-menusm-active: var(--brand);
+        --color-menusm: var(--copy);
+        --color-menusm-hover: var(--copy-light);
+        --color-menusm-active: var(--copy-light);
 
         --color-underlay-light: var(--offwhite);
         --color-underlay-dark: var(--offblack);
@@ -202,6 +203,8 @@
         --color-shadow-overlay: var(--black);
         --color-shadow-inset: var(--black);
         --color-shadow-highlight: var(--shadow-highlight);
+        --color-shadow-brand: var(--brand-shade);
+        --color-shadow-offcanvas: var(--brand-shade);
 
         --color-line-whisper: var(--line-whisper);
         --color-line-quiet: var(--line-quiet);
@@ -259,6 +262,7 @@
         --color-brand-light: var(--brand-light);
         --color-brand: var(--brand);
         --color-brand-dark: var(--brand-dark);
+        --color-brand-shade: var(--brand-shade);
 
         --color-accent-light: var(--accent-light);
         --color-accent: var(--accent);
@@ -330,9 +334,9 @@
         --color-dropdown__bg-active: var(--brand);
         --color-dropdown__bg-highlight: var(--brand);
 
-        --color-menusm: var(--copy-content);
-        --color-menusm-hover: var(--brand);
-        --color-menusm-active: var(--brand);
+        --color-menusm: var(--copy-dark);
+        --color-menusm-hover: var(--copy-light);
+        --color-menusm-active: var(--copy-light);
         --color-blockquote: var(--copy-light);
 
         --color-underlay-light: var(--surface);

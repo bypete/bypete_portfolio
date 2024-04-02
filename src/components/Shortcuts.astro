@@ -48,14 +48,7 @@ import Button from './ui/Button.astro';
 
 <script>
     import Alpine from 'alpinejs';
-    import {
-        animate,
-        scroll,
-        timeline,
-        ScrollOffset,
-        stagger,
-        inView,
-    } from 'motion';
+    import { animate, timeline } from 'motion';
 
     import Lenis from '@studio-freight/lenis';
     const lenis = new Lenis();
@@ -66,24 +59,46 @@ import Button from './ui/Button.astro';
     };
     requestAnimationFrame(raf);
 
-    const page = document.documentElement;
-    const wrapper = document.getElementById('wrapper');
+    const { body, documentElement: page } = document;
+    const banner = document.getElementById('banner');
+    const wrapperCanvas = document.getElementById('wrapperCanvas');
+    const wrapperOffCanvasRight = document.getElementById(
+        'wrapperOffCanvasRight',
+    );
     const wrapperContent = document.getElementById('wrapperContent');
     const mobileNavigation = document.getElementById('mobileNavigation');
+    const stickies = document.querySelectorAll('[data-off-canvas-sticky]');
+    const pageTop = document.getElementById('pageTop');
 
     // Get viewport height
     const vh = window.innerHeight;
 
     // Get page height
     const bh = Math.max(
-        document.body.scrollHeight,
-        document.body.offsetHeight,
+        body.scrollHeight,
+        body.offsetHeight,
         page.clientHeight,
         page.scrollHeight,
         page.offsetHeight,
     );
 
-    const pageTop = document.getElementById('pageTop');
+    let animationInProgress = false;
+    let isPageTopVisible = false;
+
+    // Universal throttle function
+    const throttle = (func, delay) => {
+        let throttleTimer;
+
+        return function (...args) {
+            // If throttle timer is not active, execute the function after the specified delay
+            if (!throttleTimer) {
+                throttleTimer = setTimeout(() => {
+                    func.apply(this, args);
+                    throttleTimer = null;
+                }, delay);
+            }
+        };
+    };
 
     pageTop &&
         pageTop.addEventListener('click', (e) => {
@@ -96,110 +111,112 @@ import Button from './ui/Button.astro';
             lenis.scrollTo('#top');
         });
 
-    let animationInProgress = false;
-    let visible = false;
-    let throttleTimer = null;
-    const throttleInterval = 300;
-
+    // Function to handle page scrolling and toggle page top visibility
     const handlePageTop = () => {
-        if (!throttleTimer) {
-            throttleTimer = setTimeout(() => {
-                throttleTimer = null;
-                if (animationInProgress) {
-                    return;
-                }
-                if (page.scrollTop > vh && !visible) {
-                    showPageTop();
-                }
-                if (page.scrollTop <= vh && visible) {
-                    hidePageTop();
-                }
-            }, throttleInterval);
+        // Check if animation is already in progress, if so, return
+        if (animationInProgress) {
+            return;
+        }
+        // If page is scrolled beyond vh and page top is not visible, show it
+        if (page.scrollTop > vh && !isPageTopVisible) {
+            togglePageTopVisibility(true); // show
+        }
+        // If page is scrolled back within vh and page top is visible, hide it
+        if (page.scrollTop <= vh && isPageTopVisible) {
+            togglePageTopVisibility(false); // hide
         }
     };
 
-    const hidePageTop = () => {
+    const togglePageTopVisibility = (visible) => {
         animationInProgress = true;
-        visible = false;
-        animate(
-            pageTop,
-            {
-                opacity: 1,
-                transform: ['translateY(var(--space-2xl)) scale(0.25)'],
-            },
-            { easing: 'ease-in', duration: 0.25 },
-        ).finished.then(() => {
+        const animationProperties = visible
+            ? { opacity: 1, transform: ['translateX(0)'] }
+            : {
+                  opacity: 1,
+                  transform: ['translateY(var(--space-2xl)) scale(0.25)'],
+              };
+        animate(pageTop, animationProperties, {
+            easing: 'ease-in',
+            duration: 0.25,
+        }).finished.then(() => {
             animationInProgress = false;
+            isPageTopVisible = visible;
         });
     };
 
-    const showPageTop = () => {
-        animationInProgress = true;
-        visible = true;
-        animate(
-            pageTop,
-            {
-                opacity: 1,
-                transform: ['translateX(0)'],
-            },
-            { easing: 'ease-in', duration: 0.25 },
-        ).finished.then(() => {
-            animationInProgress = false;
-        });
-    };
+    // Throttle the handlePageTop function to improve performance
+    const throttledHandlePageTop = throttle(handlePageTop, 300);
 
-    // Add scroll event listener
-    window.addEventListener('scroll', handlePageTop);
+    // Add event listener to handle scroll events
+    window.addEventListener('scroll', throttledHandlePageTop);
 
-    const sidenav = (visible, scrollCache, viewHeight, viewWidth) => {
-        const sequenceShow = [
+    // Offscreen Menu for smaller screens
+    const sidenav = (visible, scrollCache, viewWidth) => {
+        const sequenceShowOffscreen = [
             [
-                wrapper,
+                wrapperContent,
                 {
                     transform: `${viewWidth <= 768 ? 'translateX(-85vw)' : 'translateX(-60vw)'}`,
-                    height: `${viewHeight}px`,
                 },
-                {},
+                {
+                    duration: 0.5,
+                },
             ],
             [
                 mobileNavigation,
                 {
-                    opacity: 1,
+                    opacity: [0, 1],
                     transform: [
                         'translateX(calc(-1 * var(--space-3xl))) scale(.75)',
-                        'translateX(0px) scale(1)',
+                        'scale(1)',
                     ],
                 },
-                {
-                    at: '<',
-                },
+                { at: '<', duration: 0.25, delay: 0.25 },
             ],
         ];
-        const sequenceHide = [
+        const sequenceHideOffscreen = [
             [mobileNavigation, { opacity: 0 }, { duration: 0.25 }],
             [
-                wrapper,
+                wrapperContent,
                 {
-                    transform: 'translateX(0px)',
+                    transform: 'translateX(0)',
                 },
+                { at: '<', duration: 0.5, delay: 0.25 },
             ],
         ];
 
+        const manageStickies = (offscreen, scrollCache) => {
+            body.style.overflow = offscreen ? 'hidden' : '';
+            stickies.forEach((sticky) => {
+                if (offscreen) {
+                    const top =
+                        window
+                            .getComputedStyle(sticky)
+                            .getPropertyValue('top') || '0';
+                    const parsedTopValue = parseInt(top);
+
+                    sticky.style.transition = 'none';
+                    sticky.style.top = `${parsedTopValue + scrollCache}px`;
+                } else {
+                    sticky.style.top = '';
+                }
+            });
+            wrapperOffCanvasRight?.classList.toggle('invisible', !offscreen);
+        };
+
         if (visible) {
-            wrapper.style.cssText = `overflow: hidden; height: ${viewHeight}px;`;
-            wrapperContent.style.top = `-${scrollCache}px`;
-            wrapperContent.style.postion = `relative`;
-            timeline(sequenceShow, {
+            manageStickies(visible, scrollCache);
+            timeline(sequenceShowOffscreen, {
                 easing: 'ease-in-out',
-                duration: 0.5,
             }).finished.then(() => {});
         } else {
-            timeline(sequenceHide, {
+            timeline(sequenceHideOffscreen, {
                 easing: 'ease-in-out',
-                duration: 0.75,
             }).finished.then(() => {
-                wrapper.style.cssText = '';
-                wrapperContent.style.top = '0';
+                manageStickies(visible, scrollCache);
+                if (wrapperContent && wrapperContent.style) {
+                    wrapperContent.style.transform = '';
+                }
                 page.scrollTop = scrollCache;
             });
         }
@@ -233,7 +250,6 @@ import Button from './ui/Button.astro';
                 this.$watch('isMobileNavOpen', (value, oldValue) => {
                     this.viewHeight = window.innerHeight || page.clientHeight;
                     this.viewWidth = window.innerWidth || page.clientWidth;
-
                     if (oldValue) {
                         // true = was previously open
                         this.scrollPos = this.$store.cache.scrollHeight;
@@ -246,12 +262,7 @@ import Button from './ui/Button.astro';
                     this.$store.cache.scrollHeight = this.scrollPos;
 
                     this.freeze(value);
-                    sidenav(
-                        value,
-                        this.scrollPos,
-                        this.viewHeight,
-                        this.viewWidth,
-                    );
+                    sidenav(value, this.scrollPos, this.viewWidth);
                 });
             },
         }));

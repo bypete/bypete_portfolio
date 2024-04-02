@@ -11,8 +11,9 @@ const { isHeroDark = false } = Astro.props;
 
 <header
     id="banner"
-    class="group-data-start/page:shadow-none group fixed top-0 z-banner w-full py-fl-space-s opacity-0 shadow-banner shadow-gray-950/20"
+    class="group fixed top-0 z-banner w-full py-fl-space-s opacity-0 shadow-banner shadow-gray-950/10 group-data-start/page:shadow-none"
     x-cloak
+    data-off-canvas-sticky
 >
     <div
         class="mx-auto grid max-w-container grid-cols-2 items-center justify-between gap-x-fl-space-m lg:grid-cols-3"
@@ -26,13 +27,13 @@ const { isHeroDark = false } = Astro.props;
             {
                 isHeroDark ? (
                     <>
-                        <span class="group-data-up/page:opacity-0  col-start-1">
+                        <span class="col-start-1  group-data-up/page:opacity-0">
                             <Icon
                                 name="bypete__white"
                                 class="h-fl-space-l w-auto"
                             />
                         </span>
-                        <span class="group-data-up/page:opacity-100 col-start-1 opacity-0 ">
+                        <span class="col-start-1 opacity-0 group-data-up/page:opacity-100 ">
                             <Icon
                                 name="bypete__brand"
                                 class="h-fl-space-l w-auto"

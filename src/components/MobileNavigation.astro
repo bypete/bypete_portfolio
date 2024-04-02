@@ -21,44 +21,38 @@ const formattedPosts = formatBlogPosts(allPosts, {
 interface Props {
     class?: string;
     isHeroDark: boolean;
+    id?: string;
 }
 
 const pathname = new URL(Astro.request.url).pathname;
 const currentPath =
     pathname.slice(-1) === '/' ? pathname.slice(0, -1) : pathname;
 
-const { class: ClassName, isHeroDark = false } = Astro.props;
+const { id, class: ClassName, isHeroDark = false } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
 <div
-    class="fixed right-0 top-0 z-10 flex h-full w-full max-w-[85vw] transform-none overflow-hidden overflow-y-scroll px-fl-space-m md:max-w-[60vw] xl:hidden"
+    id={id}
+    class="invisible fixed right-0 top-0 h-full w-[85vw] overflow-y-scroll bg-brand px-fl-space-m shadow-offcanvas md:w-[60vw] xl:hidden"
     x-cloak
 >
     <div
         id="mobileNavigation"
         class="flex h-screenDvh w-full flex-col justify-between py-fl-space-2xl"
     >
-        <div class="flex justify-between">
-            <a href="/" aria-label="byPete - home">
-                <Icon
-                    name="bypete__brand"
-                    title="byPete logo"
-                    class="h-fl-space-l w-auto !shadow-brand-dark"
-                />
-            </a>
-            <!-- <button
-                @click.prevent="isMobileNavOpen = !isMobileNavOpen"
-                class="flex h-fl-space-l w-fl-space-l items-center rounded-sm text-content-light transition duration-200 ease-in-out hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-                x-bind:aria-label="'Close main menu'"
-                type="button"
-                aria-label="Main menu"
-                x-bind:aria-expanded="isMobileNavOpen"
-                ><Icon name="lucide:x" class="h-full w-full" />
-            </button> -->
-        </div>
+        <a href="/" aria-label="byPete - home">
+            <Icon
+                name="bypete__white"
+                title="byPete logo"
+                class="h-fl-space-l w-auto shadow-brand-shade drop-shadow-sm"
+            />
+        </a>
         <nav>
-            <ul x-ref="menu" class="my-fl-space-m self-center">
+            <ul
+                x-ref="menu"
+                class="my-fl-space-m self-center shadow-brand-shade/50 text-shadow-emboss"
+            >
                 <li>
                     <MobileLink url={`/about/`} title="About" {pathname} />
                 </li>
@@ -67,10 +61,12 @@ const year = new Date().getFullYear();
                     x-id="['accordion-header-id', 'accordion-panel-id']"
                     :aria-expanded="isOpen"
                 >
-                    <div class="flex items-center justify-between">
+                    <div
+                        class="flex items-center justify-between gap-x-fl-space-s"
+                    >
                         <MobileLink url={`/work/`} title="Work" {pathname} />
                         <button
-                            class="text-content-light"
+                            class="text-content-dark"
                             aria-label="Expand menu"
                             :id="$id('accordion-header-id')"
                             :aria-label="isOpen ? 'Close list' : 'Open list'"
@@ -82,14 +78,14 @@ const year = new Date().getFullYear();
                                 name="lucide:x"
                                 title="close icon"
                                 x-bind:class="{'0': isOpen, '-rotate-45': !isOpen}"
-                                class="h-fl-space-m w-fl-space-m text-content-light transition-transform duration-500"
+                                class="h-fl-space-m w-fl-space-m text-content-dark transition-transform duration-500"
                             />
                         </button>
                     </div>
                     <ul
                         x-cloak
                         x-ref="children"
-                        class="h-0 max-h-[33vh] w-full origin-top overflow-y-scroll transition-all duration-700"
+                        class="h-0 w-full origin-top overflow-y-scroll transition-all duration-700"
                         :id="$id('accordion-panel-id')"
                         :class="isOpen ? 'overflow-auto ' : 'overflow-hidden pointer-events-none' "
                         :style="isOpen ? {height: `${$refs.children.scrollHeight}px`} : {height: `0px`}"
@@ -120,14 +116,14 @@ const year = new Date().getFullYear();
                         <Social
                             platform={channel.platform}
                             url={channel.url}
-                            class="text-content-light hover:text-brand"
+                            class="text-content-dark hover:text-brand"
                             name={channel.icon}
                         />
                     ))
                 }
             </div>
             <ul
-                class="divide-content-outline grid grid-cols-[auto_1fr] grid-rows-1 justify-start divide-x text-content-light"
+                class="divide-content-outline grid grid-cols-[auto_1fr] grid-rows-1 justify-start divide-x text-content-dark"
             >
                 <li class="px-fl-space-2xs first:pl-0 last:border-0 last:pr-0">
                     ©{year}
