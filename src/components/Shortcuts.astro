@@ -179,14 +179,16 @@ import Button from './ui/Button.astro';
             [
                 wrapperContent,
                 {
-                    transform: 'translateX(0)',
+                    transform: 'none',
                 },
                 { at: '<', duration: 0.5, delay: 0.25 },
             ],
         ];
 
         const manageStickies = (offscreen, scrollCache) => {
-            body.style.overflow = offscreen ? 'hidden' : '';
+            offscreen ? lenis.stop() : lenis.start();
+            body.classList.toggle('overflow-hidden', offscreen);
+            wrapperOffCanvasRight?.classList.toggle('invisible', !offscreen);
             stickies.forEach((sticky) => {
                 if (offscreen) {
                     const top =
@@ -195,13 +197,11 @@ import Button from './ui/Button.astro';
                             .getPropertyValue('top') || '0';
                     const parsedTopValue = parseInt(top);
 
-                    sticky.style.transition = 'none';
                     sticky.style.top = `${parsedTopValue + scrollCache}px`;
                 } else {
                     sticky.style.top = '';
                 }
             });
-            wrapperOffCanvasRight?.classList.toggle('invisible', !offscreen);
         };
 
         if (visible) {
@@ -214,9 +214,6 @@ import Button from './ui/Button.astro';
                 easing: 'ease-in-out',
             }).finished.then(() => {
                 manageStickies(visible, scrollCache);
-                if (wrapperContent && wrapperContent.style) {
-                    wrapperContent.style.transform = '';
-                }
                 page.scrollTop = scrollCache;
             });
         }
@@ -224,9 +221,6 @@ import Button from './ui/Button.astro';
 
     document.addEventListener('alpine:init', () => {
         Alpine.data('hamburger', () => ({
-            freeze(freezeState) {
-                freezeState ? lenis.stop() : lenis.start();
-            },
             scrollPos: 0,
             viewHeight: undefined,
             toggle() {
@@ -250,18 +244,16 @@ import Button from './ui/Button.astro';
                 this.$watch('isMobileNavOpen', (value, oldValue) => {
                     this.viewHeight = window.innerHeight || page.clientHeight;
                     this.viewWidth = window.innerWidth || page.clientWidth;
-                    if (oldValue) {
-                        // true = was previously open
-                        this.scrollPos = this.$store.cache.scrollHeight;
-                    } else {
-                        // false = was previously closed
+
+                    if (value === true) {
+                        console.log('was closed');
                         this.scrollPos = page.scrollTop;
                         this.$store.cache.scrollHeight = this.scrollPos;
+                    } else {
+                        console.log('was already open');
+                        this.scrollPos = this.$store.cache.scrollHeight;
                     }
 
-                    this.$store.cache.scrollHeight = this.scrollPos;
-
-                    this.freeze(value);
                     sidenav(value, this.scrollPos, this.viewWidth);
                 });
             },

@@ -24,7 +24,7 @@ import '~/styles/tailwind.css';
     lang="en"
     data-theme="light"
     data-hero={isHeroDark ? 'dark' : 'light'}
-    class="group/page h-full max-w-full"
+    class="group/page h-full max-w-full scroll-smooth"
 >
     <head>
         <MainSEO {...head} {isHeroDark} />
@@ -45,7 +45,7 @@ import '~/styles/tailwind.css';
             ]}
         />
 
-        <div id="wrapperCanvas" class="relative overflow-clip">
+        <div id="wrapperCanvas" class="relative">
             <MobileNavigation id="wrapperOffCanvasRight" {isHeroDark} />
 
             <Overlay class="bg-overlay-dark" />
@@ -83,15 +83,5 @@ import '~/styles/tailwind.css';
                 opacity: 0;
             }
         </style>
-        <script>
-            import Lenis from '@studio-freight/lenis';
-            const lenis = new Lenis();
-
-            const raf = (time) => {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
-            };
-            requestAnimationFrame(raf);
-        </script>
     </body>
 </html>

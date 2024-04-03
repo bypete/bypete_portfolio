@@ -65,14 +65,6 @@ const isSecure: boolean = ['production', 'staging'].includes(build);
 
     import { timeline } from 'motion';
 
-    import Lenis from '@studio-freight/lenis';
-    const lenis = new Lenis();
-
-    const raf = (time) => {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-    };
-    requestAnimationFrame(raf);
     const page = document.documentElement;
     const body = document.body;
     const cookie = document.getElementById('toastCookie');
@@ -138,7 +130,7 @@ const isSecure: boolean = ['production', 'staging'].includes(build);
             toastCookie: false,
             freeze(freezeState) {
                 this.toastCookie = freezeState;
-                freezeState ? lenis.stop() : lenis.start();
+                // freezeState ? lenis.stop() : lenis.start();
 
                 toast(freezeState);
             },

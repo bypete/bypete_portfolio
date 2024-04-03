@@ -6,7 +6,7 @@ import { Icon } from 'astro-icon/components';
     x-data="theme"
     x-cloak
     class:list={[
-        'grid-col-1 grid-row-1  duration-[750ms] relative grid size-fl-space-l justify-center overflow-hidden rounded-full bg-surface-overlay text-center leading-none text-content shadow-inset transition-colors ',
+        'grid-col-1 grid-row-1  relative grid size-fl-space-l justify-center overflow-hidden rounded-full bg-surface-overlay text-center leading-none text-content shadow-inset transition-colors duration-[750ms] ',
     ]}
 >
     <button
@@ -50,33 +50,24 @@ import { Icon } from 'astro-icon/components';
     import Alpine from 'alpinejs';
     import { timeline } from 'motion';
 
-    import Lenis from '@studio-freight/lenis';
-    const lenis = new Lenis();
-
-    const raf = (time) => {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-    };
-    requestAnimationFrame(raf);
-
     const setThemeLight = document.getElementById('setThemeLight');
     const setThemeDark = document.getElementById('setThemeDark');
 
     // Easings | easeOutBounce | https://easings.net
-    function easeOutBounce(x: number): number {
-        const n1 = 7.5625;
-        const d1 = 2.75;
+    // function easeOutBounce(x: number): number {
+    //     const n1 = 7.5625;
+    //     const d1 = 2.75;
 
-        if (x < 1 / d1) {
-            return n1 * x * x;
-        } else if (x < 2 / d1) {
-            return n1 * (x -= 1.5 / d1) * x + 0.75;
-        } else if (x < 2.5 / d1) {
-            return n1 * (x -= 2.25 / d1) * x + 0.9375;
-        } else {
-            return n1 * (x -= 2.625 / d1) * x + 0.984375;
-        }
-    }
+    //     if (x < 1 / d1) {
+    //         return n1 * x * x;
+    //     } else if (x < 2 / d1) {
+    //         return n1 * (x -= 1.5 / d1) * x + 0.75;
+    //     } else if (x < 2.5 / d1) {
+    //         return n1 * (x -= 2.25 / d1) * x + 0.9375;
+    //     } else {
+    //         return n1 * (x -= 2.625 / d1) * x + 0.984375;
+    //     }
+    // }
 
     const animateTheme = (theme) => {
         const sequenceLight = [
@@ -120,12 +111,12 @@ import { Icon } from 'astro-icon/components';
         ];
         if (theme === 'light') {
             timeline(sequenceLight, {
-                easing: easeOutBounce,
+                easing: 'ease',
                 duration: 0.75,
             });
         } else {
             timeline(sequenceDark, {
-                easing: easeOutBounce,
+                easing: 'ease',
                 duration: 0.75,
             });
         }
