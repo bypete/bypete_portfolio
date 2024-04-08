@@ -1,6 +1,5 @@
 ---
 import { Icon } from 'astro-icon/components';
-import Button from './ui/Button.astro';
 ---
 
 <div
@@ -60,8 +59,6 @@ import Button from './ui/Button.astro';
     requestAnimationFrame(raf);
 
     const { body, documentElement: page } = document;
-    const banner = document.getElementById('banner');
-    const wrapperCanvas = document.getElementById('wrapperCanvas');
     const wrapperOffCanvasRight = document.getElementById(
         'wrapperOffCanvasRight',
     );
@@ -70,17 +67,15 @@ import Button from './ui/Button.astro';
     const stickies = document.querySelectorAll('[data-off-canvas-sticky]');
     const pageTop = document.getElementById('pageTop');
 
-    // Get viewport height
-    const vh = window.innerHeight;
+    const vh = window.innerHeight; // Get viewport height
 
-    // Get page height
     const bh = Math.max(
         body.scrollHeight,
         body.offsetHeight,
         page.clientHeight,
         page.scrollHeight,
         page.offsetHeight,
-    );
+    ); // Get page height
 
     let animationInProgress = false;
     let isPageTopVisible = false;
@@ -241,16 +236,14 @@ import Button from './ui/Button.astro';
             },
 
             init() {
-                this.$watch('isMobileNavOpen', (value, oldValue) => {
+                this.$watch('isMobileNavOpen', (value) => {
                     this.viewHeight = window.innerHeight || page.clientHeight;
                     this.viewWidth = window.innerWidth || page.clientWidth;
 
                     if (value === true) {
-                        console.log('was closed');
                         this.scrollPos = page.scrollTop;
                         this.$store.cache.scrollHeight = this.scrollPos;
                     } else {
-                        console.log('was already open');
                         this.scrollPos = this.$store.cache.scrollHeight;
                     }
 

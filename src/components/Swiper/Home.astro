@@ -50,9 +50,13 @@ const { slides } = Astro.props;
         Scrollbar,
         EffectCreative,
     } from 'swiper/modules';
-    {
-        const swiperClass = '.swiper--home';
-        const SwiperHome = new Swiper(swiperClass, {
+    import { timeline } from 'motion';
+
+    const swiperClass = '.swiper--home';
+    const swiperDom = document.querySelector(swiperClass);
+
+    if (swiperDom !== null) {
+        let swiperHome = new Swiper(swiperClass, {
             // Install modules
             modules: [
                 Navigation,
@@ -61,20 +65,20 @@ const { slides } = Astro.props;
                 Scrollbar,
                 EffectCreative,
             ],
+            loop: true,
             effect: 'creative',
             creativeEffect: {
                 perspective: false,
                 prev: {
-                    scale: 0.95,
                     opacity: 0,
+                    scale: 0.4,
                 },
                 next: {
-                    scale: 0.95,
                     opacity: 0,
+                    scale: 0.75,
                 },
             },
             speed: 250,
-            loop: true,
             autoplay: {
                 pauseOnMouseEnter: true,
                 disableOnInteraction: false,
@@ -95,16 +99,58 @@ const { slides } = Astro.props;
             watchOverflow: true, // disable if only single slide
             on: {
                 afterInit: () => {
-                    const element = document.querySelector(swiperClass);
-                    if (element) {
-                        element.removeAttribute('x-cloak');
-                    }
+                    swiperDom.removeAttribute('x-cloak');
                 },
                 autoplayStop: () => {
-                    SwiperHome.autoplay.start();
+                    swiperHome.autoplay.start();
                 },
                 autoplayResume: () => {},
             },
+        });
+
+        swiperHome = swiperDom.swiper;
+        let animationInProgress = false;
+
+        const mountSlide = (swiperInstance) => {
+            animationInProgress = true;
+            const allSlides = swiperDom.querySelectorAll('.swiper-slide');
+            const currentSlide =
+                swiperInstance.slides[swiperInstance.activeIndex];
+            const caption = currentSlide.querySelector('[data-caption]');
+            const visual = currentSlide.querySelector('[data-visual]');
+
+            const sequenceIn = [
+                [
+                    visual,
+                    {
+                        opacity: [0, 1],
+                    },
+                    {
+                        duration: 0.25,
+                        easing: [0.17, 0.55, 0.55, 1],
+                    },
+                ],
+                [
+                    caption,
+                    { opacity: [0.85, 1], scale: [0, 1.1, 1] },
+                    { duration: 0.25 },
+                ],
+            ];
+
+            timeline(sequenceIn, {
+                easing: 'ease-in-out',
+            }).finished.then(() => {
+                animationInProgress = false;
+            });
+        };
+
+        if (swiperHome && !swiperHome.destroyed) {
+            mountSlide(swiperHome);
+        }
+
+        swiperHome.on('slideChangeTransitionStart', () => {
+            animationInProgress = true;
+            mountSlide(swiperHome);
         });
     }
 </script>

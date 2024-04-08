@@ -50,6 +50,11 @@ const formattedPosts = formatBlogPosts(allWork, {
                 alt="Purple gradient background"
                 class="absolute h-full w-full object-cover object-bottom md:object-center"
             />
+            <div
+                id="particleField"
+                class="absolute inset-0 h-full w-full overflow-hidden"
+            >
+            </div>
         </div>
 
         <div
@@ -178,7 +183,7 @@ const formattedPosts = formatBlogPosts(allWork, {
     </div>
 </SplashLayout>
 <script>
-    import { inView, animate, stagger } from 'motion';
+    import { inView, animate, timeline, stagger } from 'motion';
 
     inView('[animate-card]', ({ target }) => {
         animate(
@@ -191,4 +196,122 @@ const formattedPosts = formatBlogPosts(allWork, {
             },
         );
     });
+    const { body, documentElement: page } = document;
+    const viewWidth = window.innerWidth || page.clientWidth;
+
+    // Function to create particles
+    const createParticles = () => {
+        const particlesContainer = document.getElementById('particleField');
+
+        const amount = viewWidth <= 768 ? 80 : 240;
+        const range = viewWidth <= 768 ? 4 : 5;
+
+        for (let i = 0; i < amount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle absolute bg-white rounded-full ';
+
+            // Set initial position within the visible area
+            const initialX = Math.random() * window.innerWidth;
+            const initialY = Math.random() * window.innerHeight;
+            const opacity = (Math.random() * 0.2).toFixed(2);
+            // Set initial size with some variability
+            const size = Math.floor(Math.random() * range) + 1; // Random size between 1 and {range} pixels
+            particle.style.opacity = `${opacity}`;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+
+            particle.style.left = `${initialX}px`;
+            particle.style.top = `${initialY}px`;
+
+            particlesContainer.appendChild(particle);
+        }
+    };
+
+    let animationInProgress = false;
+    let shootTimer = null;
+
+    const handleParticles = (interval) => {
+        if (shootTimer) {
+            return;
+        }
+        shootTimer = setInterval(() => {
+            shootTimer = null;
+            if (animationInProgress) {
+                return;
+            }
+
+            shootParticle();
+        }, interval);
+    };
+
+    const shootParticle = () => {
+        animationInProgress = true;
+        const particles = document.querySelectorAll('.particle');
+        const randomIndex = Math.floor(Math.random() * particles.length);
+        const randomParticle = particles[randomIndex];
+
+        const vectorA =
+            Math.random() *
+            0.5 *
+            Math.max(window.innerWidth, window.innerHeight);
+        const vectorB =
+            Math.random() *
+            0.5 *
+            Math.min(window.innerWidth, window.innerHeight);
+        const directionX = Math.random() > 0.5 ? 1 : -1; // Randomly choose left or right direction
+        const directionY = Math.random() > 0.5 ? 1 : -1; // Randomly choose up or down direction
+
+        const shoot = [
+            [
+                randomParticle,
+                {
+                    x: [0, `${vectorA * directionX}px`],
+                    y: [0, `${vectorB * directionY}px`],
+                    scale: [1, 1.5, 1],
+                    opacity: [1, 0.25, 0],
+                },
+                { duration: 2.75 },
+            ],
+            [randomParticle, { x: 0, y: 0 }],
+            [
+                randomParticle,
+                {
+                    opacity: [0, Math.random() * 0.25],
+                },
+                { duration: 0.25, delay: 2 },
+            ],
+        ];
+        timeline(shoot, {}).finished.then(() => {
+            animationInProgress = false;
+        });
+    };
+
+    // Function to restart animation on screen size change
+    const restartAnimationOnResize = () => {
+        const particlesContainer = document.getElementById('particleField');
+        particlesContainer.innerHTML = ''; // Clear existing particles
+        createParticles();
+        handleParticles(1200); // Interval in seconds
+    };
+
+    // Initialize particle animation
+    const initParticleAnimation = () => {
+        createParticles();
+        handleParticles(1200); // Interval in seconds
+
+        let previousWidth = window.innerWidth;
+
+        window.addEventListener('resize', () => {
+            const currentWidth = window.innerWidth;
+            if (currentWidth !== previousWidth) {
+                // Width has changed, trigger your resize logic here
+                restartAnimationOnResize();
+                // Update the previous width
+                previousWidth = currentWidth;
+            }
+        });
+    };
+
+    // Run the animation
+    initParticleAnimation();
 </script>

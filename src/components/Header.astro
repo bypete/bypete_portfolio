@@ -52,24 +52,19 @@ const { isHeroDark = false } = Astro.props;
 </header>
 
 <script>
-    import {
-        animate,
-        scroll,
-        timeline,
-        ScrollOffset,
-        stagger,
-        inView,
-    } from 'motion';
+    import { animate, timeline } from 'motion';
 
     const page = document.documentElement;
     const banner = document.getElementById('banner');
-    const toc = document.getElementById('tocWrapper');
-    const body = document.body;
+    const toc = document.getElementById('toc');
+    const tocWrapper = document.getElementById('tocWrapper');
 
     const vh = window.innerHeight;
 
     let animationInProgress = false;
     let visible = true;
+    let tocShift = false;
+
     let throttleTimer = null;
     const throttleInterval = 150;
     let scrollCache = 0;
@@ -84,6 +79,14 @@ const { isHeroDark = false } = Astro.props;
                 return;
             }
             const st = window.pageYOffset || page.scrollTop;
+            let tocRect;
+            let isTocSticky;
+            if (toc !== undefined && toc !== null) {
+                tocRect = toc.getBoundingClientRect();
+                isTocSticky = tocRect.top <= 0;
+            }
+
+            !isTocSticky && tocShift && unstickToc();
             if (st === 0) {
                 setBannerState('start');
                 startBanner();
@@ -91,7 +94,7 @@ const { isHeroDark = false } = Astro.props;
                 hideBanner();
             } else if (st < scrollCache && st > vh * 0.5 && !visible) {
                 setBannerState('up');
-                showBanner();
+                showBanner(isTocSticky);
             }
 
             scrollCache = st <= 0 ? 0 : st; // For Mobile or negative scrolling
@@ -116,32 +119,35 @@ const { isHeroDark = false } = Astro.props;
         });
     };
 
+    const unstickToc = () => {
+        animationInProgress = true;
+
+        animate(
+            tocWrapper,
+            { transform: ['translateY(0%)'] },
+            { duration: 0.5 },
+        ).finished.then(() => {
+            tocShift = false;
+            animationInProgress = false;
+        });
+    };
+
     const hideBanner = () => {
         animationInProgress = true;
         visible = false;
+        tocShift = false;
 
         const sequence = [
             [
                 banner,
                 {
                     transform: ['translateY(-100%)'],
-                    background: 'rgb(var(--banner-up)/0)',
                 },
-                {},
             ],
-        ];
 
-        if (toc && toc.scrollTop === 0) {
-            sequence.push([
-                toc,
-                {
-                    transform: ['translateY(0%)'],
-                },
-                {
-                    at: '<',
-                },
-            ]);
-        }
+            [tocWrapper, { transform: ['translateY(0%)'] }, { at: '<' }],
+            [banner, { background: 'none' }, {}],
+        ];
 
         timeline(sequence, {
             duration: 0.5,
@@ -152,11 +158,19 @@ const { isHeroDark = false } = Astro.props;
         });
     };
 
-    const showBanner = () => {
+    const showBanner = (isTocSticky) => {
         animationInProgress = true;
         visible = true;
+        tocShift = isTocSticky;
+
         banner.style.opacity = `1`;
         banner.style.background = `rgb(var(--banner-up)/1)`;
+
+        const animationProperties = isTocSticky
+            ? { transform: ['translateY(var(--headerheight))'] }
+            : {
+                  transform: ['translateY(0%)'],
+              };
 
         const sequence = [
             [
@@ -167,19 +181,8 @@ const { isHeroDark = false } = Astro.props;
                 },
                 {},
             ],
+            [tocWrapper, animationProperties, { at: '<' }],
         ];
-
-        if (toc && toc.scrollTop === 0) {
-            sequence.push([
-                toc,
-                {
-                    transform: ['translateY(var(--headerheight))'],
-                },
-                {
-                    at: '<',
-                },
-            ]);
-        }
 
         timeline(sequence, {
             duration: 0.5,

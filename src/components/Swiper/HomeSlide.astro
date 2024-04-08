@@ -35,14 +35,16 @@ const imageProps = {
         >
             {slide.wrapper ? (
                 <div class={slide.wrapper}>
-                    <Image {...imageProps} />
+                    <Image {...imageProps} data-visual />
                 </div>
             ) : (
                 <>
+                    <Image {...imageProps} data-visual class="opacity-0" />
                     {caption && (
                         <span
+                            data-caption
                             class:list={[
-                                'absolute flex max-w-fl-space-4xl flex-col items-start  text-content-light',
+                                'absolute flex max-w-fl-space-4xl flex-col items-start text-content-light  opacity-0',
                                 caption.label && caption.label,
                             ]}
                         >
@@ -58,7 +60,6 @@ const imageProps = {
                             )}
                         </span>
                     )}
-                    <Image {...imageProps} />
                 </>
             )}
         </a>

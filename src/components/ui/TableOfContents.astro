@@ -27,16 +27,12 @@ const toc = buildToc(headings);
     x-id="['panel-toc']"
     aria-label="Content sections"
     data-off-canvas-sticky
-    class:list={[
-        'sticky-root sticky -top-px z-toc my-fl-space-l flex w-full  md:justify-center',
-        className ? className : '',
-    ]}
+    class="sticky-root sticky -top-px z-toc my-fl-space-l flex w-full flex-row items-center justify-center"
 >
     <div
         id="tocWrapper"
-        class="relative w-full max-w-2xl rounded-b shadow-raised transition-shadow md:w-auto"
-        x-bind:class="open ? 'grow ' : ''"
-        x-sticky-inactive="!translate-y-0"
+        class="relative mx-auto w-auto rounded-b shadow-raised"
+        x-sticky.sticky-root="isStuck"
     >
         <button
             @click="toggle()"
@@ -44,7 +40,7 @@ const toc = buildToc(headings);
             aria-label="Toggle page links"
             :aria-expanded="open"
             :aria-controls="$id('panel-toc')"
-            class="group flex w-full items-center justify-between gap-x-fl-space-2xs rounded border border-line bg-surface-raised px-fl-space-s py-fl-space-2xs font-semibold"
+            class="group flex w-full items-center justify-between gap-x-fl-space-2xs whitespace-nowrap rounded border border-line bg-surface-raised px-fl-space-s py-fl-space-2xs font-semibold"
             x-sticky.sticky-root="rounded-t-none"
             x-bind:class="open ? 'rounded-none ' : ''"
         >
@@ -57,15 +53,9 @@ const toc = buildToc(headings);
         <div class="relative z-10">
             <div
                 x-cloak
+                x-ref="panel"
                 :id="$id('panel-toc')"
-                x-show="open"
-                x-transition:enter="transition ease-out duration-150 delay-300"
-                x-transition:enter-start="opacity-0"
-                x-transition:enter-end="opacity-100"
-                x-transition:leave="transition ease-in duration-0"
-                x-transition:leave-start="opacity-100"
-                x-transition:leave-end="opacity-0"
-                class="absolute left-0 top-0 block max-h-[calc(100dvh-var(--headerheight))] w-full grow overflow-y-scroll rounded-b border border-t-0 border-line bg-surface-overlay px-fl-space-s py-fl-space-2xs shadow-raised transition-all"
+                class="absolute left-0 top-0 block max-h-[calc(100dvh-var(--headerheight))] w-full grow overflow-y-scroll rounded-b border border-t-0 border-line bg-surface-overlay px-fl-space-s py-fl-space-2xs opacity-0 shadow-raised"
             >
                 <ol class="m-0">
                     {
@@ -80,6 +70,45 @@ const toc = buildToc(headings);
 </nav>
 <script>
     import sticky from 'alpinejs-sticky';
+    import { timeline } from 'motion';
+
+    const tocWrapper = document.getElementById('tocWrapper');
+    let tocWrapperWidth;
+
+    const toggleTocVisibility = (isOpen, target, width) => {
+        const sequenceShowToc = [
+            [tocWrapper, { width: '100%' }],
+            [
+                target,
+                {
+                    opacity: 1,
+                    height: ['0px', 'auto'],
+                },
+                { duration: 0.75 },
+            ],
+        ];
+
+        const sequenceHideToc = [
+            [
+                target,
+                {
+                    opacity: 0,
+                },
+                { duration: 0.25 },
+            ],
+            [tocWrapper, { width: `${tocWrapperWidth}px` }, { duration: 0.5 }],
+        ];
+
+        if (isOpen) {
+            timeline(sequenceShowToc, {
+                easing: 'ease-in-out',
+            }).finished.then(() => {});
+        } else {
+            timeline(sequenceHideToc, {
+                easing: 'ease-in-out',
+            }).finished.then(() => {});
+        }
+    };
 
     document.addEventListener('alpine:init', () => {
         Alpine.plugin(sticky);
@@ -88,6 +117,7 @@ const toc = buildToc(headings);
             open: false,
             toggle() {
                 this.open = !this.open;
+
                 if (this.open) {
                     this.$refs.tocbutton.focus();
                 }
@@ -99,6 +129,32 @@ const toc = buildToc(headings);
                 setTimeout(() => {
                     this.open = false;
                 }, 750);
+            },
+            init() {
+                this.$watch('open', (value) => {
+                    if (value) {
+                        tocWrapperWidth = tocWrapper?.clientWidth;
+
+                        if (
+                            typeof tocWrapperWidth === 'number' &&
+                            !isNaN(tocWrapperWidth)
+                        ) {
+                            tocWrapperWidth = Math.ceil(tocWrapperWidth);
+                        }
+
+                        toggleTocVisibility(
+                            value,
+                            this.$refs.panel,
+                            tocWrapperWidth,
+                        );
+                    } else {
+                        toggleTocVisibility(
+                            value,
+                            this.$refs.panel,
+                            tocWrapperWidth,
+                        );
+                    }
+                });
             },
         }));
     });
