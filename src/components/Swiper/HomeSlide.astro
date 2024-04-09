@@ -35,11 +35,19 @@ const imageProps = {
         >
             {slide.wrapper ? (
                 <div class={slide.wrapper}>
-                    <Image {...imageProps} data-visual />
+                    <Image
+                        {...imageProps}
+                        class="h-full w-full object-contain opacity-0"
+                        data-visual
+                    />
                 </div>
             ) : (
                 <>
-                    <Image {...imageProps} data-visual class="opacity-0" />
+                    <Image
+                        {...imageProps}
+                        data-visual
+                        class="h-full w-full object-contain opacity-0"
+                    />
                     {caption && (
                         <span
                             data-caption
