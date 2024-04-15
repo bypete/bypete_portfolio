@@ -72,6 +72,7 @@ const coverSrc = (await coverImage()).default;
                                 class={cta.class}
                                 href={cta.href}
                                 isIcon={cta.icon && cta.icon.length > 0}
+                                {...(cta.jump && { 'data-jump': '' })}
                             >
                                 {cta.text}
                                 {cta.icon && (

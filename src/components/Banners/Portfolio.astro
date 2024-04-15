@@ -10,8 +10,8 @@ import portfolio from '~/data/work';
 
 import { Icon } from 'astro-icon/components';
 interface Props {
-    wrapper: string;
-    gridHeight: string;
+    wrapper?: string;
+    gridHeight?: string;
 }
 const { wrapper, gridHeight } = Astro.props;
 ---
@@ -19,31 +19,35 @@ const { wrapper, gridHeight } = Astro.props;
 <Block
     mode="pair"
     bg="bg-brand"
-    {wrapper}
-    grid={`grid mx-auto grid-cols-1 md:grid-cols-2 md:grid-rows-1 gap-fl-space-m max-w-container ${gridHeight}`}
+    data-inview="portfolio"
+    wrapper={wrapper ? wrapper : ''}
+    grid={`grid mx-auto grid-cols-1 md:grid-cols-2 md:grid-rows-1 gap-fl-space-m max-w-container ${gridHeight ? gridHeight : ''}`}
     breakout={true}
 >
-    <Image
-        src={svgbg}
-        alt="background"
-        class="absolute inset-0 h-full w-full object-cover opacity-20"
-    />
-    <div slot="mc1" class="not-prose self-center py-fl-space-m md:order-2">
+    <div class="plusheap absolute inset-0 h-full w-full opacity-20"></div>
+    <div
+        slot="mc1"
+        class="not-prose self-center py-fl-space-m text-content-loud md:order-2"
+    >
         <h2
             class="font-headline text-fl-step-3 font-bold leading-tight tracking-tight"
+            data-animate="fadeInDown"
         >
             Show and tell
         </h2>
-        <p class="mb-fl-space-m">
+        <p class="mb-fl-space-m" data-animate="fadeInDown">
             Curious to see my work in action? Discover the stories behind my
             projects, the challenges addressed, and the solutions crafted.
         </p>
         <p class="flex flex-row gap-fl-space-3xs">
-            <Link theme="secondary" href="/work/">Explore the portfolio</Link>
+            <Link data-animate="scaleIn" theme="secondary" href="/work/"
+                >Explore the portfolio</Link
+            >
 
             <RandomLink
                 theme="disco"
                 href="/work/"
+                data-animate="scaleIn"
                 isIcon={true}
                 choices={portfolio.collection}
                 >Random pick <Icon
@@ -55,7 +59,8 @@ const { wrapper, gridHeight } = Astro.props;
     </div>
     <div
         slot="mc2"
-        class="not-prose h-full self-center md:order-1 md:-mt-fl-space-3xl"
+        class="not-prose h-full self-center md:order-1"
+        data-animate="scaleIn"
     >
         <Image
             src={product}
@@ -68,3 +73,44 @@ const { wrapper, gridHeight } = Astro.props;
         />
     </div>
 </Block>
+
+<script>
+    import { inView, timeline, type TimelineDefinition, stagger } from 'motion';
+
+    const focus = document.querySelectorAll('[data-inview="portfolio"]');
+    inView(
+        focus,
+        (info) => {
+            const queryElementsByAnimation = (animation) => {
+                return info.target.querySelectorAll(
+                    `[data-animate="${animation}"]`,
+                );
+            };
+            const scaleIn = queryElementsByAnimation('scaleIn');
+            const fadeInDown = queryElementsByAnimation('fadeInDown');
+
+            const sequence: TimelineDefinition = [
+                [
+                    fadeInDown,
+                    {
+                        opacity: [0, 1],
+                        transform: ['translateY(-25%)', 'translateY(0%)'],
+                    },
+                    { duration: 0.25, delay: stagger(0.1) },
+                ],
+                [
+                    scaleIn,
+                    {
+                        opacity: [0, 1],
+                        scale: [0.85, 1],
+                    },
+                    { duration: 0.25, delay: stagger(0.25) },
+                ],
+            ];
+            const animation = timeline(sequence, {});
+
+            return (leaveInfo) => animation.reverse();
+        },
+        { amount: 0.25 },
+    );
+</script>

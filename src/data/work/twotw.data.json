@@ -3,127 +3,91 @@
   "gOld": [
     {
       "title": "Homepage",
-      "image": "old_home.jpg",
-      "width": "1200",
-      "height": "1393"
+      "image": "old_home.jpg"
     },
     {
       "title": "Homepage detail",
       "image": "old_home--detail.jpg",
-      "class": "hidden",
-      "width": "1200",
-      "height": "750"
+      "class": "hidden"
     },
     {
       "title": "News",
-      "image": "old_news.jpg",
-      "width": "1200",
-      "height": "1633"
+      "image": "old_news.jpg"
     },
     {
       "title": "News detail",
       "image": "old_news--detail.jpg",
-      "class": "hidden",
-      "width": "1200",
-      "height": "750"
+      "class": "hidden"
     },
     {
       "title": "News",
-      "image": "old_news__listing.jpg",
-      "width": "1200",
-      "height": "2141"
+      "image": "old_news__listing.jpg"
     },
     {
       "title": "News detail",
       "image": "old_news__listing--detail.jpg",
-      "class": "hidden",
-      "width": "1200",
-      "height": "750"
+      "class": "hidden"
     }
   ],
   "gScreens": [
     {
       "title": "Homepage",
       "image": "home.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "2880",
-      "height": "3924"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Homepage detail",
       "image": "home--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     },
     {
       "title": "Media",
       "image": "media.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "2880",
-      "height": "4544"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Media detail",
       "image": "media--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     },
     {
       "title": "News listing",
       "image": "news__listing.jpg",
-      "class": "row-span-1 col-span-2",
-      "width": "1200",
-      "height": "2548"
+      "class": "row-span-1 col-span-2"
     },
     {
       "title": "News listing detail",
       "image": "news__listing--detail.jpg",
-      "class": "hidden",
-      "width": "1200",
-      "height": "750"
+      "class": "hidden"
     },
     {
       "title": "Tour",
       "image": "tour.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "2880",
-      "height": "3848"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "Tour detail",
-      "image": "tour--detail.jpg",
-      "width": "2880",
-      "height": "1800"
+      "image": "tour--detail.jpg"
     },
     {
       "title": "Alternative",
       "image": "alt.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "2880",
-      "height": "4618"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Alternative detail",
       "image": "alt--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     },
     {
       "title": "Alternative 2",
       "image": "alt2.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "2880",
-      "height": "3848"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Alternative 2 detail",
       "image": "alt2--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     }
   ]
 }

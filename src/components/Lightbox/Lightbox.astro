@@ -1,12 +1,13 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import type { LightboxMetadata } from './Gallery.astro';
 import 'photoswipe/style.css';
 import { Icon } from 'astro-icon/components';
 import LightboxImage from '~/components/Images/LightboxImage.astro';
 
 export interface Props extends HTMLAttributes<'div'> {
     id: string;
-    images: ImageMetadata[];
+    images: LightboxMetadata[];
     wrapper?: string;
     class?: string;
     bg?: string;
@@ -26,8 +27,9 @@ const {
 
 <section
     id={id}
+    data-inview="lightbox"
     class:list={[
-        'lightbox not-prose group relative  shadow-inset ',
+        'lightbox not-prose  relative  shadow-inset ',
         bg && bg,
         wrapper ? wrapper : '',
         className
@@ -39,21 +41,25 @@ const {
               }`,
     ]}
     {...rest}
-    x-data="{ shown: false }"
-    x-intersect.threshold.10="shown = true"
 >
     <div
         class="mb-fl-space-m flex flex-col items-start justify-between leading-snug md:flex-row"
     >
         <slot name="title" />
-        <p
-            class="pointer-events-none flex transform gap-fl-space-2xs text-fl-step--1 text-content-whisper duration-500 group-focus-within:text-content-quiet group-hover:text-content-quiet md:w-1/3"
+        <div
+            data-animate="fadeIn"
+            class="pointer-events-none flex gap-fl-space-2xs text-fl-step--1 text-content-quiet md:w-1/3"
         >
             <Icon
                 name="lucide:zoom-in"
                 class="inline-block h-auto w-fl-space-m"
-            /> Tap any image to view in more detail. Use mouse scroll to zoom in.
-        </p>
+            />
+            <p>
+                Tap any image to view in more detail.
+                <span class="2xl:hidden">Pinch</span>
+                <span class="hidden 2xl:inline">Mouse scroll</span> to zoom in.
+            </p>
+        </div>
     </div>
     <slot />
 
@@ -81,14 +87,31 @@ const {
 </section>
 
 <script>
-    import intersect from '@alpinejs/intersect';
-
-    document.addEventListener('alpine:init', () => {
-        Alpine.plugin(intersect);
-    });
-</script>
-<script>
+    import { inView, animate } from 'motion';
     import PhotoSwipeLightbox from 'photoswipe/lightbox';
+    const focus = document.querySelectorAll('[data-inview="lightbox"]');
+
+    inView(
+        focus,
+        (info) => {
+            const queryElementsByAnimation = (animation) => {
+                return info.target.querySelectorAll(
+                    `[data-animate="${animation}"]`,
+                );
+            };
+            const fadeIn = queryElementsByAnimation('fadeIn');
+            const animation = animate(
+                fadeIn,
+                {
+                    opacity: [0, 1],
+                },
+                { duration: 0.5, delay: 0.5 },
+            );
+            return (leaveInfo) => animation.reverse();
+        },
+        { amount: 0.25 },
+    );
+
     const smallScreenPadding = {
         top: 0,
         bottom: 0,
@@ -115,9 +138,11 @@ const {
         bgOpacity: 0.85,
         pswpModule: () => import('photoswipe'),
     });
-
     lightbox.on('uiRegister', () => {
-        lightbox.pswp.ui.registerElement({
+        const ui = lightbox.pswp?.ui;
+        if (!ui) return;
+
+        ui.registerElement({
             name: 'custom-caption',
             order: 9,
             isButton: false,
@@ -127,32 +152,20 @@ const {
             html: 'Caption text',
             // eslint-disable-next-line no-unused-vars
             onInit: (el, pswp) => {
-                const captionDom = el;
-                lightbox.pswp.on('change', () => {
-                    if (!captionDom.classList.contains('!opacity-0')) {
-                        captionDom.classList.add('!opacity-0');
-                    }
+                lightbox.pswp?.on('change', () => {
+                    el.classList.add('!opacity-0');
                     const currSlideElement =
-                        lightbox.pswp.currSlide.data.element;
-                    let captionHTML = '';
-                    if (currSlideElement) {
-                        const hiddenCaption =
-                            currSlideElement.querySelector('[data-caption]');
-                        if (hiddenCaption) {
-                            // get caption from element with class hidden-caption-content
-                            captionHTML = hiddenCaption.innerHTML;
-                            captionDom.classList.remove('!opacity-0');
-                        } else {
-                            // get caption from alt attribute
-                            if (!captionDom.classList.contains('!opacity-0')) {
-                                el.classList.add('!opacity-0');
-                            }
-                            captionHTML = currSlideElement
-                                .querySelector('img')
-                                .getAttribute('alt');
-                        }
-                    }
-                    captionDom.innerHTML = captionHTML || '';
+                        lightbox.pswp?.currSlide?.data.element;
+                    const hiddenCaption =
+                        currSlideElement?.querySelector('[data-caption]');
+                    const imgElement = currSlideElement?.querySelector('img');
+
+                    let captionHTML =
+                        hiddenCaption?.innerHTML ||
+                        imgElement?.getAttribute('alt') ||
+                        '';
+                    el.classList.toggle('!opacity-0', !hiddenCaption);
+                    el.innerHTML = captionHTML;
                 });
             },
         });

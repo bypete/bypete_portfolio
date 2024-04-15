@@ -4,226 +4,166 @@
     {
       "title": "Home",
       "image": "home--detail.jpg",
-      "width": "2880",
-      "height": "1800",
       "cropped": "false"
     },
     {
       "title": "Mobile Home",
       "image": "sm_home--detail.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "780",
-      "height": "1688"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Blog",
       "caption": "",
       "image": "blog.jpg",
-      "class": "row-span-3 col-span-2",
-      "width": "2880",
-      "height": "11798"
+      "class": "row-span-3 col-span-2"
     },
     {
       "title": "Blog detail",
       "caption": "Close up detail",
       "image": "blog--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     },
     {
       "title": "Event",
       "caption": "",
-      "image": "event.jpg",
-      "width": "2880",
-      "height": "7686"
+      "image": "event.jpg"
     },
     {
       "title": "Help FAQs detail",
       "caption": "",
-      "image": "help__faq--detail.jpg",
-      "width": "2880",
-      "height": "1800"
+      "image": "help__faq--detail.jpg"
     },
     {
       "title": "Help FAQs",
       "caption": "",
       "image": "help__faq.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "3674"
+      "class": "hidden"
     },
     {
       "title": "Mobile Help FAQs detail",
       "caption": "",
       "image": "sm_help__faq--detail.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "780",
-      "height": "1688"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Mobile Help FAQs detail",
       "caption": "",
       "image": "sm_help__faq-expanded--detail.jpg",
-      "class": "hidden",
-      "width": "780",
-      "height": "1688"
+      "class": "hidden"
     },
     {
       "title": "How to",
       "caption": "",
-      "image": "howto.jpg",
-      "width": "2880",
-      "height": "4422"
+      "image": "howto.jpg"
     },
     {
       "title": "Mobile How to detail",
       "caption": "",
       "image": "sm_howto--detail.jpg",
-      "class": "hidden",
-      "width": "780",
-      "height": "1688"
+      "class": "hidden"
     },
     {
       "title": "Mobile How to",
       "caption": "",
-      "image": "sm_howto.jpg",
-      "width": "780",
-      "height": "5834"
+      "image": "sm_howto.jpg"
     }
   ],
   "gAccount": [
     {
       "title": "Signup",
       "caption": "",
-      "image": "signup.jpg",
-      "width": "2880",
-      "height": "1976"
+      "image": "signup.jpg"
     },
     {
       "title": "Mobile Signup",
       "caption": "",
-      "image": "sm_signup.jpg",
-      "width": "780",
-      "height": "2090"
+      "image": "sm_signup.jpg"
     },
     {
       "title": "Registration",
       "caption": "",
-      "image": "registration.jpg",
-      "width": "2880",
-      "height": "5560"
+      "image": "registration.jpg"
     },
     {
       "title": "Mobile Registration",
       "caption": "",
-      "image": "sm_registration--detail.jpg",
-      "width": "780",
-      "height": "1688"
+      "image": "sm_registration--detail.jpg"
     },
     {
       "title": "Mobile Registration",
       "caption": "",
       "class": "hidden",
-      "image": "sm_registration.jpg",
-      "width": "780",
-      "height": "5350"
+      "image": "sm_registration.jpg"
     },
     {
       "title": "Know your customer",
       "caption": "Know your customer",
-      "image": "kyc.jpg",
-      "width": "2880",
-      "height": "3902"
+      "image": "kyc.jpg"
     },
     {
       "title": "Mobile Know your customer",
       "caption": "",
-      "image": "sm_kyc--detail.jpg",
-      "width": "780",
-      "height": "1688"
+      "image": "sm_kyc--detail.jpg"
     },
     {
       "title": "Mobile Know your customer",
       "caption": "",
       "class": "hidden",
-      "image": "sm_kyc.jpg",
-      "width": "780",
-      "height": "3886"
+      "image": "sm_kyc.jpg"
     },
     {
       "title": "Welcome",
       "caption": "",
       "image": "user__welcome.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "2880",
-      "height": "1828"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "Mobile Welcome",
       "caption": "",
       "image": "sm_user__welcome-001--detail.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "780",
-      "height": "1688"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Mobile Welcome",
       "caption": "",
       "class": "hidden",
-      "image": "sm_user__welcome-002--detail.jpg",
-      "width": "780",
-      "height": "1688"
+      "image": "sm_user__welcome-002--detail.jpg"
     },
     {
       "title": "Mobile Welcome",
       "caption": "",
       "class": "hidden",
-      "image": "sm_user__welcome-001.jpg",
-      "width": "780",
-      "height": "3626"
+      "image": "sm_user__welcome-001.jpg"
     },
     {
       "title": "Devices",
       "caption": "",
-      "image": "devices.jpg",
-      "width": "2880",
-      "height": "2502"
+      "image": "devices.jpg"
     },
     {
       "title": "Devices",
       "caption": "",
-      "image": "devices-002.jpg",
-      "width": "2880",
-      "height": "2502"
+      "image": "devices-002.jpg"
     },
     {
       "title": "Profile",
       "caption": "",
-      "image": "user__profile.jpg",
-      "width": "2880",
-      "height": "2496"
+      "image": "user__profile.jpg"
     },
     {
       "title": "Profile",
       "caption": "",
-      "image": "sm_user__profile--detail.jpg",
-      "width": "780",
-      "height": "1688"
+      "image": "sm_user__profile--detail.jpg"
     },
     {
       "title": "Statement",
       "caption": "",
-      "image": "statement.jpg",
-      "width": "2880",
-      "height": "3682"
+      "image": "statement.jpg"
     },
     {
       "title": "Mobile Statement",
       "caption": "",
-      "image": "sm_statement--detail.jpg",
-      "width": "780",
-      "height": "1688"
+      "image": "sm_statement--detail.jpg"
     }
   ],
   "gUx": [
@@ -231,106 +171,78 @@
       "title": "Login",
       "caption": "",
       "image": "login.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "2880",
-      "height": "1916"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "Login validation",
       "caption": "Log in with validation feedback",
-      "image": "login-validation.jpg",
-      "width": "2880",
-      "height": "1916"
+      "image": "login-validation.jpg"
     },
     {
       "title": "Manage cards",
       "caption": "",
-      "image": "manage-cards.jpg",
-      "width": "2880",
-      "height": "2310"
+      "image": "manage-cards.jpg"
     },
     {
       "title": "Manage cards popup",
       "caption": "",
-      "image": "manage-cards__popup.jpg",
-      "width": "2880",
-      "height": "1800"
+      "image": "manage-cards__popup.jpg"
     },
     {
       "title": "Authentication",
       "caption": "",
-      "image": "authentication.jpg",
-      "width": "2880",
-      "height": "1800"
+      "image": "authentication.jpg"
     },
     {
       "title": "Authentication access",
       "caption": "",
-      "image": "authentication__access.jpg",
-      "width": "2880",
-      "height": "1974"
+      "image": "authentication__access.jpg"
     },
     {
       "title": "Authentication error",
       "caption": "",
-      "image": "authentication__error.jpg",
-      "width": "2880",
-      "height": "1800"
+      "image": "authentication__error.jpg"
     },
     {
       "title": "Authentication",
       "caption": "",
-      "image": "authentication__timeout.jpg",
-      "width": "2880",
-      "height": "2224"
+      "image": "authentication__timeout.jpg"
     },
     {
       "title": "Devices",
       "caption": "",
-      "image": "devices.jpg",
-      "width": "2880",
-      "height": "2502"
+      "image": "devices.jpg"
     },
     {
       "title": "Link a device",
       "caption": "",
       "image": "devices__link.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "2048"
+      "class": "hidden"
     },
     {
       "title": "Lost Device popup",
       "caption": "",
       "image": "devices__popup-lost.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     },
     {
       "title": "Device pin",
       "caption": "",
       "image": "devices__popup-pin.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     }
   ],
   "gCs": [
     {
       "title": "Customer Services - User view",
       "caption": "",
-      "image": "cs__user.jpg",
-      "width": "2880",
-      "height": "3708"
+      "image": "cs__user.jpg"
     },
     {
       "title": "Customer Services - User detail",
       "caption": "",
       "image": "cs__user--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     }
   ],
   "gEmail": [
@@ -338,41 +250,31 @@
       "title": "Marketing",
       "caption": "",
       "image": "email__marketing.jpg",
-      "class": "row-span-4 col-span-1",
-      "width": "800",
-      "height": "4085"
+      "class": "row-span-4 col-span-1"
     },
     {
       "title": "Password",
       "caption": "",
       "image": "email__password.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "800",
-      "height": "1360"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Authentication",
       "caption": "",
       "image": "email__authentication.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "800",
-      "height": "1622"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Store",
       "caption": "",
       "image": "email__store.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "800",
-      "height": "2293"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Balance",
       "caption": "",
       "image": "email__balance.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "800",
-      "height": "2128"
+      "class": "row-span-2 col-span-1"
     }
   ]
 }

@@ -82,6 +82,7 @@
         --focus: 56 189 248; /* sky-400 */
 
         --shader: svg-load('stack__papercuts.svg');
+        --plus: svg-load('heap__plus.svg');
 
         --container-max: 75rem;
 
@@ -200,6 +201,7 @@
         --color-surface-overlay: var(--surface-10);
 
         --color-shadow-raised: var(--black);
+        --color-shadow-floated: var(--black);
         --color-shadow-overlay: var(--black);
         --color-shadow-inset: var(--black);
         --color-shadow-highlight: var(--shadow-highlight);
@@ -386,6 +388,13 @@
         background-position: center top;
     }
 
+    .plusheap {
+        background-image: var(--plus);
+        background-repeat: repeat-x;
+        background-size: 100%;
+        background-position: center bottom;
+    }
+
     /* Editorial
 ---------------------------------------------------------------------------------*/
     .link {
@@ -396,16 +405,12 @@
         @apply rounded-tight bg-hilite px-fl-space-2xs py-fl-space-3xs font-medium text-content-dark;
     }
 
-    .external {
-        @apply after:ml-1 after:inline-block after:font-awesome after:font-black after:not-italic after:content-['\f35d'];
-    }
-
     .font-headline a {
         @apply font-extrabold;
     }
 
     .capline {
-        @apply relative mb-[1em] before:absolute before:-bottom-[0.5em] before:left-0 before:w-[1.25em] before:border-b-3 before:border-b-teal-400;
+        @apply relative mb-[1em] before:absolute before:-bottom-[0.5em] before:left-0 before:w-[1.25em] before:border-b-tight before:border-b-teal-400;
     }
 
     h1,

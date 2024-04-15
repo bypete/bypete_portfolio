@@ -1,6 +1,13 @@
 ---
 import Lightbox from './Lightbox.astro';
 
+export interface LightboxMetadata extends ImageMetadata {
+    title: string;
+    class?: string;
+    caption?: string;
+    cropped?: boolean;
+}
+
 interface LightboxSet {
     title: string;
     image: string;
@@ -17,9 +24,6 @@ interface DataKeys {
 export interface Props {
     data: Partial<DataKeys>;
     collection: string;
-    title: string;
-    caption?: string;
-    class?: string;
 }
 
 const { data, collection } = Astro.props;
@@ -46,9 +50,10 @@ const getFolderFiles = (
 
     return Object.keys(imageFiles).filter((image) => {
         // Check if the 'image' property exists in the collection array
+        const collectionData = data?.[collection] as LightboxSet[] | undefined; // Type assertion
         const isInCollection =
-            Array.isArray(data?.[collection]) &&
-            data[collection]!.some(
+            Array.isArray(collectionData) &&
+            collectionData.some(
                 (asset) => `../../${data.folder}/${asset.image}` === image,
             );
 
@@ -62,11 +67,15 @@ const getImageSrcs = (
     collection: Props['collection'],
     folderFiles: string[],
     imageFiles: Record<string, ImageMetadata>,
-): Array<ImageMetadata & Asset> => {
+): LightboxMetadata[] => {
     return folderFiles.map((image) => {
-        const asset = data[collection]?.find(
-            (asset) => `../../${data.folder}/${asset.image}` === image,
-        );
+        const collectionData = data?.[collection] as LightboxSet[] | undefined;
+
+        const asset =
+            Array.isArray(collectionData) &&
+            collectionData.find(
+                (asset) => `../../${data.folder}/${asset.image}` === image,
+            );
 
         if (asset) {
             // Include additional properties from collection in the imageFiles object
@@ -79,7 +88,13 @@ const getImageSrcs = (
             };
         }
 
-        return imageFiles[image];
+        return {
+            ...imageFiles[image], // ImageMetadata properties
+            title: '',
+            class: undefined,
+            caption: undefined,
+            cropped: undefined,
+        };
     });
 };
 

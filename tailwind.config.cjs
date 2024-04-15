@@ -8,7 +8,6 @@ export default {
             Roboto: ['"Roboto"', 'sans-serif'],
             headline: ['"Montserrat"', 'sans-serif'],
             Georgia: ['Georgia', 'Times New Roman', 'Times,serif'],
-            awesome: '"Font Awesome 6 Free"',
         },
         aspectRatio: {
             auto: 'auto',
@@ -52,7 +51,6 @@ export default {
                 con3xlpad:
                     'calc(48rem + clamp(0rem, 39.375rem + -50vw, 1.875rem) * 2)', // 48rem + --container-padding
                 conpad: '78.75rem', // 1.875rem + 75rem + 1.875rem
-                short: { raw: '(max-height: 640px)' },
             },
             zIndex: {
                 60: '60',
@@ -74,16 +72,8 @@ export default {
                 down: 'banner=down',
                 start: 'banner=start',
             },
-            backgroundImage: {
-                heroBrand:
-                    'radial-gradient(145% 100% at 50% 0, #ff0069 0, #ff0069 45%, #b10049 88%)',
-                heroCS: 'radial-gradient(145.05% 100% at 50% 0,#1d2b41 0,#020509 57.38%,#0f1a29 88.16%)',
-            },
             gridTemplateAreas: {
                 // uses grid-areas plugin
-                flyout: ['account  close', 'nav  nav', 'footer footer'],
-                outline: ['nav', 'main'],
-                outlinewide: ['nav main'],
                 listing: ['image ', 'description'],
                 listingwide: ['description image'],
                 blog: ['main', 'footer', 'aside'],
@@ -96,8 +86,6 @@ export default {
                 preview_wide: ['meta meta', 'visual content'],
                 listing_work: ['visual', 'content'],
                 listing_work_wide: ['content visual'],
-                main: ['hero aside content'],
-                mainwide: ['aside content'],
                 toast: ['message close', 'action action'],
                 footer: ['logo', 'availability', 'legal', 'social'],
                 footerwide: ['logo logo logo', 'legal availability social'],
@@ -105,7 +93,6 @@ export default {
             gridTemplateColumns: {
                 header: '1fr, auto, 1fr',
                 featuredcard: '2fr 1fr',
-                // listing: '48px 1fr',
                 block33: 'minmax(0, 1fr) minmax(0, 2fr)',
                 block40: 'minmax(0, 2fr) minmax(0, 3fr)',
                 block50: 'repeat(2, minmax(0, 1fr))',
@@ -126,19 +113,9 @@ export default {
                 // work: '56.25vw minmax(0, 1fr)',
             },
             gridTemplateRows: {
-                // Complex site-specific row configuration
-                // 'layout': '200px minmax(900px, 1fr) 100px',
-                wrapper: '1fr auto', // Main layout to allow sticky footer, header not counted.
-                showcase: 'auto minmax(0, 1fr)',
-                layout: 'auto 1fr auto',
                 workcard: 'auto auto minmax(0, 1fr) auto',
                 work: 'auto minmax(0, 1fr)',
-                toc: 'auto minmax(0, 1fr)',
-                system: '1fr auto',
-                card: 'auto 1fr auto',
                 home: 'auto minmax(0, 1fr)',
-                hero: 'minmax(0, 1fr) auto', // (Breadcrumb trail absolute), content, extra content
-                mobilenav: 'auto minmax(0, 1fr) auto',
             },
             spacing: (theme) => ({
                 tight: '3px',
@@ -156,11 +133,6 @@ export default {
                 '5/2pc': '2.5%',
                 '5pc': '5%',
                 '5px': '0.3125rem', // 5px
-
-                '66Svh': [
-                    '66.66vh /* fallback for Opera, IE and etc. */',
-                    '66.66svh',
-                ],
                 ...theme('utopiaSpace'),
             }),
             height: {
@@ -219,16 +191,11 @@ export default {
             opacity: {
                 99: '0.99',
             },
-            borderWidth: {
-                3: '3px',
-                bookmark: '50%',
-            },
             borderRadius: {
-                // abstract: '6% 16% 48% 11% / 57% 100% 100% 100%',
                 abstract: '80% 90% 65% 40% / 50% 100% 100% 100%',
-                egg: '100% 100% 100% 35% / 100% 100% 100% 100%',
-                tab: '0% 0% 100% 100% / 0% 0% 10% 10% ',
-                highlight: '10% 20% 2% 0% / 10% 5% 10% 0%',
+                tight: '3px',
+            },
+            borderWidth: {
                 tight: '3px',
             },
             padding: {
@@ -333,8 +300,8 @@ export default {
                     '0px 0px 3px -1px rgb(var( --color-shadow-raised) / 0.08)',
                 ],
                 overlay: [
-                    '0px 2px 10px -1px rgb(var( --color-shadow-overlay) / 0.24)',
-                    '0px 0px 5px -1px rgb(var( --color-shadow-overlay) / 1)',
+                    '0px 2px 10px -1px rgb(var( --color-shadow-overlay) / 0.10)',
+                    '0px 0px 5px -1px rgb(var( --color-shadow-overlay) / 0.45)',
                 ],
                 inset: [
                     'inset 0 2px 6px -1px rgb(var( --color-shadow-inset) / 0.16)',
@@ -350,7 +317,7 @@ export default {
                     'inset 0px 0px 25px 15px rgb(var(--color-shadow-offcanvas) / 0.75)',
                 ],
                 floated:
-                    '0px 2px 1px -1px rgba(255,255,255,0.30), inset 0px 2px 1px 1px rgba(30,41,59, 0.15), 0px 0px 10px 5px rgba(30,41,59, 0.15)',
+                    '0px 2px 1px -1px rgb(var(--shadow-highlight) / 0.75), inset 0px 2px 1px 1px rgb(var(--color-shadow-floated) / 0.15), 0px 0px 10px 5px rgb(var(--color-shadow-floated) / 0.15)',
             },
             backgroundImage: {
                 shader: 'var(--shader)',
@@ -572,18 +539,7 @@ export default {
                         opacity: '0',
                     },
                 },
-                'scale-in-bottom': {
-                    '0%': {
-                        transform: 'scale(0)',
-                        'transform-origin': '50% 100%',
-                        opacity: '1',
-                    },
-                    '100%': {
-                        transform: 'scale(1)',
-                        'transform-origin': '50% 100%',
-                        opacity: '1',
-                    },
-                },
+
                 'fade-in': {
                     '0%': {
                         opacity: '0',
@@ -620,30 +576,7 @@ export default {
                         'animation-timing-function': 'cubic-bezier(0,0,0.2,1)',
                     },
                 },
-                zoom: {
-                    '0%': {
-                        transform: 'scale(0.85)',
-                    },
-                    '100%': {
-                        transform: 'scale(1)',
-                    },
-                },
-                'zoom-in': {
-                    '0%': {
-                        transform: 'scale(0.85)',
-                    },
-                    '100%': {
-                        transform: 'scale(1)',
-                    },
-                },
-                'zoom-out': {
-                    '0%': {
-                        transform: 'scale(1.125)',
-                    },
-                    '100%': {
-                        transform: 'scale(1)',
-                    },
-                },
+
                 'fade-in-zoom': {
                     '0%': {
                         opacity: '0',
@@ -688,46 +621,6 @@ export default {
                         transform: 'translateY(0)',
                     },
                 },
-                'fade-out-up': {
-                    '0%': {
-                        opacity: '1',
-                        transform: 'translateY(0)',
-                    },
-                    '100%': {
-                        opacity: '0',
-                        transform: 'translateY(-50%)',
-                    },
-                },
-                'fade-in-right': {
-                    '0%': {
-                        opacity: '0',
-                        transform: 'translateX(300%)',
-                    },
-                    '100%': {
-                        opacity: '1',
-                        transform: 'translateX(0)',
-                    },
-                },
-                'fade-in-left': {
-                    '0%': {
-                        opacity: '0',
-                        transform: 'translateX(-300%)',
-                    },
-                    '100%': {
-                        opacity: '1',
-                        transform: 'translateX(0)',
-                    },
-                },
-                marker: {
-                    '0%': {
-                        opacity: '0',
-                        width: '0',
-                    },
-                    '100%': {
-                        opacity: '1',
-                        width: '100%',
-                    },
-                },
                 stretch: {
                     '0%': {
                         opacity: '1',
@@ -740,61 +633,7 @@ export default {
                         'transform-origin': '50% 100%',
                     },
                 },
-                role: {
-                    '0%': {
-                        opacity: '0',
-                        transform: 'translateY(50%) scale(1)',
-                    },
-                    '5%': {
-                        opacity: '1',
-                        transform: 'translateY(0) scale(1)',
-                    },
-                    '95%': {
-                        opacity: '1',
-                        transform: 'translateY(0) scale(1)',
-                    },
-                    '100%': {
-                        opacity: '0',
-                        transform: 'translateY(-50%) scale(0.5)',
-                        'transform-origin': '50% 100%',
-                    },
-                },
-                'appear-left': {
-                    '0%': {
-                        transform: 'translateX(-300%)',
-                    },
-                    '100%': {
-                        transform: 'translateX(0)',
-                    },
-                },
-                'appear-right': {
-                    '0%': {
-                        transform: 'translateX(300%)',
-                    },
-                    '100%': {
-                        transform: 'translateX(0)',
-                    },
-                },
-                'appear-above': {
-                    '0%': {
-                        opacity: '1',
-                        transform: 'translateY(-100%)',
-                    },
-                    '100%': {
-                        opacity: '1',
-                        transform: 'translateY(0)',
-                    },
-                },
-                'appear-below': {
-                    '0%': {
-                        opacity: '1',
-                        transform: 'translateY(100%)',
-                    },
-                    '100%': {
-                        opacity: '1',
-                        transform: 'translateY(0)',
-                    },
-                },
+
                 morph: {
                     '0%': {
                         'border-radius': '40% 60% 60% 40% / 70% 30% 70% 30%',
@@ -824,36 +663,19 @@ export default {
                 // @keyframes name | duration | timing-function | delay | direction | iteration-count | fill-mode | play-state
                 blink: 'blink 1s infinite',
                 appear: 'wait 100ms, fade-in 750ms ease-out 100ms forwards',
-                'scale-in-bottom':
-                    'scale-in-bottom 500ms cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
-                zoom: 'zoom 500ms ease-in-out forwards',
-                'zoom-in': 'zoom-in 500ms ease-in-out forwards',
-                'zoom-out': 'zoom-out 500ms ease-in-out forwards',
                 'fade-in': 'wait 250ms, fade-in 1s ease-out 250ms',
-                'fade-in-zoom':
-                    'wait 250ms, fade-in-zoom 500ms ease-out 250ms forwards',
                 'fade-in-down':
                     'wait 100ms, fade-in-down 500ms ease-in-out 100ms',
                 'fade-out-down': 'fade-out-down 500ms ease-out forwards',
                 'fade-in-up': 'fade-in-up 250ms ease-out forwards',
-                'fade-out-up': 'fade-out-up 750ms ease-out forwards',
-                'fade-in-left': 'fade-in-left 1s ease-out',
-                'fade-in-right': 'fade-in-right 1s ease-out',
+
                 'nudge-down': 'nudge-down 1s infinite',
                 'nudge-right': 'nudge-right 1s 2',
-                role: 'role 4s ease-in forwards',
                 stretch: 'stretch 500ms ease-in forwards',
-                marker: 'marker 500ms ease-out forwards',
-                'appear-left': 'appear-left 500ms ease-out forwards',
-                'appear-right':
-                    'wait 250ms, appear-right 1s ease-out 250ms forwards',
                 morph: 'morph 10s linear infinite alternate, spin 25s linear infinite 2500ms reverse',
                 morphmask: 'morphmask 120s linear infinite alternate',
                 'morph-delay':
                     'morph 60s linear infinite alternate, spin 60s linear infinite  8s reverse',
-                staticmorph: 'morph 60s linear infinite alternate',
-                'fade-out-delay':
-                    'hold 2.5s, fade-out 1.5s ease-out forwards 2.5s',
             },
         },
     },
@@ -880,14 +702,6 @@ export default {
         }),
         plugin(({ addUtilities, matchUtilities, theme }) => {
             addUtilities({
-                '.perspective': {
-                    perspective: '800px',
-                },
-                '.isometric': {
-                    'transform-style': 'preserve-3d',
-                    transform:
-                        'perspective(800px) rotateX(51deg) rotateY(0deg) rotate(43deg)',
-                },
                 '.breakout': {
                     width: '100vw',
                     'max-width': 'none',

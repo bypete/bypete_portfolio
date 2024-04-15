@@ -1,5 +1,12 @@
 /* Add styles here to allow components to override them */
 @layer components {
+    /* Animations 
+---------------------------------------------------------------------------------*/
+
+    [data-animate] {
+        @apply opacity-0;
+    }
+
     /* Placeholders 
 ---------------------------------------------------------------------------------*/
     .holder {

@@ -55,7 +55,7 @@ const toc = buildToc(headings);
                 x-cloak
                 x-ref="panel"
                 :id="$id('panel-toc')"
-                class="absolute left-0 top-0 block max-h-[calc(100dvh-var(--headerheight))] w-full grow overflow-y-scroll rounded-b border border-t-0 border-line bg-surface-overlay px-fl-space-s py-fl-space-2xs opacity-0 shadow-raised"
+                class="absolute left-0 top-0 hidden max-h-[calc(100dvh-var(--headerheight))] w-full grow overflow-y-scroll rounded-b border border-t-0 border-line bg-surface-overlay px-fl-space-s py-fl-space-2xs opacity-0 shadow-raised"
             >
                 <ol class="m-0">
                     {
@@ -69,50 +69,48 @@ const toc = buildToc(headings);
     </div>
 </nav>
 <script>
-    import sticky from 'alpinejs-sticky';
-    import { timeline } from 'motion';
+    import { timeline, type TimelineDefinition } from 'motion';
+    import Alpine from 'alpinejs';
 
     const tocWrapper = document.getElementById('tocWrapper');
     let tocWrapperWidth;
 
     const toggleTocVisibility = (isOpen, target, width) => {
-        const sequenceShowToc = [
-            [tocWrapper, { width: '100%' }],
-            [
-                target,
-                {
-                    opacity: 1,
-                    height: ['0px', 'auto'],
-                },
-                { duration: 0.75 },
-            ],
-        ];
+        if (tocWrapper) {
+            const sequenceShowToc: TimelineDefinition = [
+                [tocWrapper, { width: '100%' }, { duration: 0.5 }],
+                [
+                    target,
+                    {
+                        opacity: 1,
+                        height: ['0px', 'auto'],
+                    },
+                    { duration: 0.5 },
+                ],
+            ];
 
-        const sequenceHideToc = [
-            [
-                target,
-                {
-                    opacity: 0,
-                },
-                { duration: 0.25 },
-            ],
-            [tocWrapper, { width: `${tocWrapperWidth}px` }, { duration: 0.5 }],
-        ];
+            const sequenceHideToc: TimelineDefinition = [
+                [
+                    target,
+                    {
+                        opacity: 0,
+                    },
+                    { duration: 0.5 },
+                ],
+                [tocWrapper, { width: `${width}px` }, { duration: 0.5 }],
+            ];
 
-        if (isOpen) {
-            timeline(sequenceShowToc, {
-                easing: 'ease-in-out',
-            }).finished.then(() => {});
-        } else {
-            timeline(sequenceHideToc, {
-                easing: 'ease-in-out',
-            }).finished.then(() => {});
+            if (isOpen) {
+                target.classList.toggle('hidden', !isOpen);
+                timeline(sequenceShowToc).finished.then(() => {});
+            } else {
+                timeline(sequenceHideToc).finished.then(() => {
+                    target.classList.toggle('hidden', !isOpen);
+                });
+            }
         }
     };
-
     document.addEventListener('alpine:init', () => {
-        Alpine.plugin(sticky);
-
         Alpine.data('toc', () => ({
             open: false,
             toggle() {

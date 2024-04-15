@@ -4,107 +4,77 @@
     {
       "title": "Homepage",
       "image": "homepage.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "2880",
-      "height": "3482"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "Homepage detail",
       "image": "homepage--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     },
     {
       "title": "Mobile Homepage detail",
       "image": "sm_home--detail.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "780",
-      "height": "1688"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Mobile Homepage",
       "image": "sm_home.jpg",
-      "class": "hidden",
-      "width": "780",
-      "height": "3594"
+      "class": "hidden"
     },
     {
       "title": "Listing",
       "image": "listing.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "2880",
-      "height": "4238"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Listing detail",
       "image": "listing--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     },
     {
       "title": "Mobile Listing",
       "image": "sm_newslisting--detail.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "780",
-      "height": "1688"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "Mobile Game",
       "image": "sm_game.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "780",
-      "height": "1688"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Mobile Game detail",
       "image": "sm_game--detail.jpg",
-      "class": "hidden",
-      "width": "780",
-      "height": "1688"
+      "class": "hidden"
     },
     {
       "title": "Game",
       "image": "game.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "2880",
-      "height": "5380"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "Game detail",
       "image": "game--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     },
     {
       "title": "News",
       "image": "news.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "2880",
-      "height": "5134"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "News detail",
       "image": "news--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     },
     {
       "title": "Mobile News detail",
       "image": "sm_news--detail.jpg",
-      "class": "hidden",
-      "width": "780",
-      "height": "1688"
+      "class": "hidden"
     },
     {
       "title": "Sitemap detail",
       "image": "sitemap--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     }
   ]
 }

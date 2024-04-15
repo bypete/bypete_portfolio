@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
 import BlogPost from '../../components/BlogPost.astro';
-import Link from '~/components/ui/Link.astro';
 import { formatBlogPosts } from '~/js/utils';
 export async function getStaticPaths() {
     const allPosts = await getCollection('posts');
@@ -13,10 +12,10 @@ export async function getStaticPaths() {
     ];
     return uniqueTags.map((tag) => {
         const filteredPosts = collection.filter((post) =>
-            post.data.tags.includes(tag),
+            post.data?.tags?.includes(tag as string),
         );
         return {
-            params: { tag },
+            params: { tag: tag as string },
             props: { posts: filteredPosts },
         };
     });
@@ -29,6 +28,7 @@ const formattedPosts = formatBlogPosts(posts, {
     filterOutDrafts: true,
     filterOutFuturePosts: true,
     sortByDate: true,
+    limit: undefined,
 });
 ---
 
@@ -50,7 +50,6 @@ const formattedPosts = formatBlogPosts(posts, {
                         taster={post.data.taster}
                         tags={post.data.tags}
                         cover={post.data.cover}
-                        product={post.data.product}
                         logo={post.data.logo}
                         readTime={remarkPluginFrontmatter.minutesRead}
                     />

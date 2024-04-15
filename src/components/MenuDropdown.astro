@@ -38,24 +38,16 @@ const legibility = isHeroDark
         >
             <Icon
                 name="lucide:chevron-down"
-                x-bind:class="{'rotate-180': open, 'rotate-0': !open}"
-                class="inline h-fl-space-xs w-fl-space-xs transform transition-transform duration-200"
+                class="inline h-fl-space-xs w-fl-space-xs"
             />
         </button>
     </div>
     <div
         x-ref="panel"
-        x-show="open"
-        @click.outside="close($refs.button)"
+        @click.outside="open && !$refs.button.contains($event.target) && close($refs.button)"
         :id="$id('dropdown-button')"
         x-cloak
-        x-transition:enter="transition ease-out duration-500"
-        x-transition:enter-start="transform opacity-0 scale-95"
-        x-transition:enter-end="transform opacity-100 scale-100"
-        x-transition:leave="transition ease-in duration-75"
-        x-transition:leave-start="transform opacity-100 scale-100"
-        x-transition:leave-end="transform opacity-0 scale-95"
-        class="absolute right-0 mt-fl-space-2xs w-auto origin-top-right"
+        class="absolute right-0 mt-fl-space-2xs hidden w-auto origin-top-right opacity-0"
     >
         <div
             class="max-h-[calc(100vh-3rem-var(--headerheight))] overflow-y-scroll rounded-tight bg-surface-overlay shadow-overlay"
@@ -66,17 +58,63 @@ const legibility = isHeroDark
 </li>
 
 <script>
+    import { timeline, type TimelineDefinition } from 'motion';
     import Alpine from 'alpinejs';
+
+    import Lenis from '@studio-freight/lenis';
+    const lenis = new Lenis();
+
+    const raf = (time) => {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+
+    const { body, documentElement: page } = document;
+    const toggleDropdownVisibility = (isOpen, panel, button) => {
+        const sequenceShowDropdown: TimelineDefinition = [
+            [button, { rotate: '540deg' }, { duration: 0.25 }],
+            [
+                panel,
+                {
+                    opacity: [0, 1],
+                    transform: [
+                        'translateY(calc(-1 * var(--space-s))',
+                        'translateY(0px)',
+                    ],
+                    height: ['0px', 'auto'],
+                },
+                { at: '<', duration: 0.25 },
+            ],
+        ];
+
+        const sequenceHideDropdown: TimelineDefinition = [
+            [button, { rotate: '0' }, { duration: 0.25 }],
+            [
+                panel,
+                {
+                    opacity: 0,
+                },
+                { at: '<', duration: 0.25 },
+            ],
+        ];
+
+        const sequence = isOpen ? sequenceShowDropdown : sequenceHideDropdown;
+        timeline(sequence).finished.then(() => {});
+    };
+
     document.addEventListener('alpine:init', () => {
         Alpine.data('menu', () => ({
             open: false,
-
+            banner: document.getElementById('banner'),
             freeze(freezeState) {
-                document.body.classList.toggle('overflow-hidden', freezeState);
+                freezeState ? lenis.stop() : lenis.start();
+                body.classList.toggle('overflow-hidden', freezeState);
                 this.$dispatch('show-underlay', { visible: freezeState });
+                this.$refs.panel.classList.toggle('hidden', !freezeState);
             },
             checkAriaExpanded() {
-                const buttons = this.$refs.banner.querySelectorAll('button');
+                const buttons = this.banner?.querySelectorAll('button');
                 const expandedButtonFound = [...buttons].some(
                     (button) => button.getAttribute('aria-expanded') === 'true',
                 );
@@ -84,21 +122,24 @@ const legibility = isHeroDark
             },
             toggle() {
                 this.open = !this.open;
-                if (this.open) {
-                    this.$refs.button.focus();
-                }
-                this.checkAriaExpanded();
+                this.open && this.$refs.button.focus();
             },
             close(focusAfter) {
-                this.open = false;
-                this.checkAriaExpanded();
+                this.open = false; // Close the panel
+
                 if (focusAfter) {
                     focusAfter.focus();
                 }
             },
             init() {
-                this.$watch('open', (value, oldValue) => {
+                this.$watch('open', (value) => {
                     this.checkAriaExpanded();
+
+                    toggleDropdownVisibility(
+                        value,
+                        this.$refs.panel,
+                        this.$refs.button,
+                    );
                 });
             },
         }));

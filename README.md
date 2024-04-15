@@ -1,7 +1,7 @@
 # bypete
 
 A portfolio site for Pete Wallace, Front-End Developer
-[Site: bypete.uk](https://bypete.uk)
+[bypete.uk](https://bypete.uk)
 
 ## 🧰 Commands
 

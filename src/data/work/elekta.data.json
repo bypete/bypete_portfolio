@@ -4,105 +4,75 @@
     {
       "title": "Homepage",
       "image": "homepage.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "1200",
-      "height": "1586"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "Homepage detail",
       "image": "homepage--detail.jpg",
-      "class": "hidden",
-      "width": "1200",
-      "height": "750"
+      "class": "hidden"
     },
     {
       "title": "Library",
-      "image": "library.jpg",
-      "width": "1200",
-      "height": "1237"
+      "image": "library.jpg"
     },
     {
       "title": "Result",
-      "image": "result.jpg",
-      "width": "1200",
-      "height": "2512"
+      "image": "result.jpg"
     },
     {
       "title": "Result detail",
       "image": "result--detail.jpg",
-      "class": "hidden",
-      "width": "1200",
-      "height": "750"
+      "class": "hidden"
     },
     {
       "title": "Document",
       "image": "document.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "1200",
-      "height": "1820"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "Document detail",
       "image": "document--detail.jpg",
-      "class": "hidden",
-      "width": "1200",
-      "height": "750"
+      "class": "hidden"
     },
     {
       "title": "Basket",
       "image": "basket.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "1200",
-      "height": "2049"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "Registration",
-      "image": "registration.jpg",
-      "width": "1200",
-      "height": "3098"
+      "image": "registration.jpg"
     },
     {
       "title": "Profile",
-      "image": "profile.jpg",
-      "width": "1200",
-      "height": "1918"
+      "image": "profile.jpg"
     }
   ],
   "gService": [
     {
       "title": "Oncology",
       "image": "oncology.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "1200",
-      "height": "1522"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "Listing",
       "image": "listing.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "1200",
-      "height": "2129"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Catalog",
       "image": "catalog.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "1200",
-      "height": "1996"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "Catalog detail",
       "image": "catalog--detail.jpg",
-      "class": "hidden",
-      "width": "1200",
-      "height": "750"
+      "class": "hidden"
     },
     {
       "title": "BAOS",
       "image": "baos.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "1200",
-      "height": "1922"
+      "class": "row-span-2 col-span-1"
     }
   ]
 }

@@ -32,7 +32,7 @@ import '~/styles/tailwind.css';
         <!-- <ViewTransitions /> -->
     </head>
     <body
-        class="relative m-0 bg-surface font-Roboto text-fl-base text-content antialiased"
+        class="relative m-0 overflow-x-hidden bg-surface font-Roboto text-fl-base text-content antialiased"
         x-data="{ isMobileNavOpen: false, showOverlay: false, showUnderlay: false, }"
         x-ref="body"
         id="top"
@@ -70,7 +70,7 @@ import '~/styles/tailwind.css';
         <div
             class="pointer-events-none fixed left-1/2 top-screenSvh z-toast w-full -translate-x-1/2 -translate-y-full p-fl-space-xs md:max-w-sm"
         >
-            <!-- <CookieNotice /> -->
+            <CookieNotice />
         </div>
 
         <Shortcuts />
@@ -83,5 +83,34 @@ import '~/styles/tailwind.css';
                 opacity: 0;
             }
         </style>
+        <script>
+            import Lenis from '@studio-freight/lenis';
+            const lenis = new Lenis();
+
+            const raf = (time) => {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            };
+            requestAnimationFrame(raf);
+
+            const jumps = document.querySelectorAll('[data-jump]');
+
+            jumps &&
+                jumps.forEach((jump) => {
+                    jump.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const href = jump.getAttribute('href'); // Get the href attribute value
+                        history.pushState(
+                            '',
+                            document.title,
+                            window.location.pathname + window.location.search,
+                        );
+
+                        if (href && href.startsWith('#')) {
+                            lenis.scrollTo(`${href}`);
+                        }
+                    });
+                });
+        </script>
     </body>
 </html>

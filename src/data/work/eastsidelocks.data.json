@@ -4,102 +4,72 @@
     {
       "title": "Home",
       "image": "home--detail.jpg",
-      "class": "row-span-1 col-span-2",
-      "width": "1200",
-      "height": "750"
+      "class": "row-span-1 col-span-2"
     },
     {
       "title": "Home",
       "image": "home.jpg",
-      "class": "hidden",
-      "width": "1200",
-      "height": "5968"
+      "class": "hidden"
     },
     {
       "title": "Responsive Home",
       "image": "sm_home--detail.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "780",
-      "height": "1688"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Home",
       "image": "sm_home.jpg",
-      "class": "hidden",
-      "width": "780",
-      "height": "12852"
+      "class": "hidden"
     },
     {
       "title": "Vision",
       "image": "vision.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "1200",
-      "height": "4421"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "News",
-      "image": "news.jpg",
-      "width": "1200",
-      "height": "2594"
+      "image": "news.jpg"
     },
     {
       "title": "News detail",
       "image": "news--detail.jpg",
-      "class": "hidden",
-      "width": "1200",
-      "height": "750"
+      "class": "hidden"
     },
     {
       "title": "Gallery",
       "image": "gallery.jpg",
-      "class": "row-span-3 col-span-2",
-      "width": "1200",
-      "height": "3065"
+      "class": "row-span-3 col-span-2"
     },
     {
       "title": "Timeline",
       "image": "sm_timeline.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "780",
-      "height": "7640"
+      "class": "row-span-2 col-span-1"
     }
   ],
   "gUi": [
     {
       "title": "Gallery detail",
-      "image": "gallery__pop--detail.jpg",
-      "width": "1200",
-      "height": "750"
+      "image": "gallery__pop--detail.jpg"
     },
     {
       "title": "Timeline detail",
-      "image": "sm_timeline--detail.jpg",
-      "width": "780",
-      "height": "1688"
+      "image": "sm_timeline--detail.jpg"
     },
     {
       "title": "Timeline popup",
-      "image": "sm_timeline__pop--detail.jpg",
-      "width": "780",
-      "height": "1688"
+      "image": "sm_timeline__pop--detail.jpg"
     },
     {
       "title": "Gallery popup detail",
-      "image": "gallery--detail.jpg",
-      "width": "1200",
-      "height": "750"
+      "image": "gallery--detail.jpg"
     },
     {
       "title": "Vision detail",
-      "image": "vision--detail.jpg",
-      "width": "1200",
-      "height": "750"
+      "image": "vision--detail.jpg"
     },
     {
       "title": "Vision popup detail",
-      "image": "vision__pop--detail.jpg",
-      "width": "1200",
-      "height": "750"
+      "image": "vision__pop--detail.jpg"
     }
   ]
 }

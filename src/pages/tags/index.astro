@@ -2,13 +2,17 @@
 import { getCollection } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
 import Tags from '~/components/ui/Tags.astro';
+
 const allPosts = await getCollection('posts');
 const allWorks = await getCollection('work');
 const collection = [...allPosts, ...allWorks];
-let tags = [...new Set(collection.map((post) => post.data.tags).flat())];
+
+let tags = [
+    ...new Set(collection.map((post) => post.data.tags).flat()),
+] as string[];
 const title = 'Tags';
 ---
 
 <PageLayout title={title} prose={false}>
-    <Tags {tags} url={true} class="my-fl-space-m" />
+    {tags && <Tags tags={tags} url={true} class="my-fl-space-m" />}
 </PageLayout>

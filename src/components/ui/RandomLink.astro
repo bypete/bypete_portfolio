@@ -24,7 +24,7 @@ stringChoices = stringChoices.replace(/\"/g, "'");
     x-data={`{caseArray:${stringChoices}, ...randomcase()}`}
     @click.prevent="open()"
     class:list={[
-        'inline-flex items-center rounded-full align-middle font-bold no-underline transition-all duration-1000 text-shadow-none hover:shadow-inset',
+        'inline-flex items-center rounded-full align-middle font-bold no-underline text-shadow-none hover:shadow-inset',
         size === 'sm'
             ? 'h-fl-space-m px-fl-space-2xs py-0 text-fl-step--1 !leading-fl-space-m'
             : 'px-fl-space-xs py-fl-space-2xs text-fl-base/none',
@@ -37,9 +37,9 @@ stringChoices = stringChoices.replace(/\"/g, "'");
         theme === 'white' && 'bg-content-light text-content-dark',
         theme === 'whiteline' &&
             'bg-transparent text-content-light ring-2 ring-inset ring-content-light hover:bg-content-light hover:text-content-dark',
-        theme === 'outline' && 'ring-line bg-transparent ring-2 ring-inset',
+        theme === 'outline' && 'bg-transparent ring-2 ring-inset ring-line',
         theme === 'quiet' &&
-            'text-content-quiet hover:border-line bg-transparent  hover:bg-gray-600 hover:text-white',
+            'bg-transparent text-content-quiet hover:border-line  hover:bg-gray-600 hover:text-white',
         theme === 'disabled' &&
             'bg-transparent text-disabled ring-2 ring-disabled hover:border-disabled  hover:bg-transparent hover:text-disabled',
         isIcon && 'justify-between gap-x-fl-space-3xs',

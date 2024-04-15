@@ -8,6 +8,7 @@ import { Icon } from 'astro-icon/components';
     <a
         id="pageTop"
         href="#top"
+        data-jump
         aria-hidden="true"
         class="scroll translate-y-fl-space-2xl items-center justify-center rounded-full bg-accent p-fl-space-2xs text-white shadow-floated hover:border-black/10 hover:bg-accent-light focus:outline-none"
     >
@@ -47,7 +48,7 @@ import { Icon } from 'astro-icon/components';
 
 <script>
     import Alpine from 'alpinejs';
-    import { animate, timeline } from 'motion';
+    import { animate, timeline, type TimelineDefinition } from 'motion';
 
     import Lenis from '@studio-freight/lenis';
     const lenis = new Lenis();
@@ -95,17 +96,6 @@ import { Icon } from 'astro-icon/components';
         };
     };
 
-    pageTop &&
-        pageTop.addEventListener('click', (e) => {
-            e.preventDefault();
-            history.pushState(
-                '',
-                document.title,
-                window.location.pathname + window.location.search,
-            );
-            lenis.scrollTo('#top');
-        });
-
     // Function to handle page scrolling and toggle page top visibility
     const handlePageTop = () => {
         // Check if animation is already in progress, if so, return
@@ -130,13 +120,15 @@ import { Icon } from 'astro-icon/components';
                   opacity: 1,
                   transform: ['translateY(var(--space-2xl)) scale(0.25)'],
               };
-        animate(pageTop, animationProperties, {
-            easing: 'ease-in',
-            duration: 0.25,
-        }).finished.then(() => {
-            animationInProgress = false;
-            isPageTopVisible = visible;
-        });
+        if (pageTop) {
+            animate(pageTop, animationProperties, {
+                easing: 'ease-in',
+                duration: 0.25,
+            }).finished.then(() => {
+                animationInProgress = false;
+                isPageTopVisible = visible;
+            });
+        }
     };
 
     // Throttle the handlePageTop function to improve performance
@@ -147,70 +139,74 @@ import { Icon } from 'astro-icon/components';
 
     // Offscreen Menu for smaller screens
     const sidenav = (visible, scrollCache, viewWidth) => {
-        const sequenceShowOffscreen = [
-            [
-                wrapperContent,
-                {
-                    transform: `${viewWidth <= 768 ? 'translateX(-85vw)' : 'translateX(-60vw)'}`,
-                },
-                {
-                    duration: 0.5,
-                },
-            ],
-            [
-                mobileNavigation,
-                {
-                    opacity: [0, 1],
-                    transform: [
-                        'translateX(calc(-1 * var(--space-3xl))) scale(.75)',
-                        'scale(1)',
-                    ],
-                },
-                { at: '<', duration: 0.25, delay: 0.25 },
-            ],
-        ];
-        const sequenceHideOffscreen = [
-            [mobileNavigation, { opacity: 0 }, { duration: 0.25 }],
-            [
-                wrapperContent,
-                {
-                    transform: 'none',
-                },
-                { at: '<', duration: 0.5, delay: 0.25 },
-            ],
-        ];
+        if (wrapperContent && mobileNavigation) {
+            const sequenceShowOffscreen: TimelineDefinition = [
+                [
+                    wrapperContent,
+                    {
+                        transform: `${viewWidth <= 768 ? 'translateX(-85vw)' : 'translateX(-60vw)'}`,
+                    },
+                    {
+                        duration: 0.5,
+                    },
+                ],
+                [
+                    mobileNavigation,
+                    {
+                        opacity: [0, 1],
+                        transform: [
+                            'translateX(calc(-1 * var(--space-3xl))) scale(.75)',
+                            'scale(1)',
+                        ],
+                    },
+                    { at: '<', duration: 0.25, delay: 0.25 },
+                ],
+            ];
+            const sequenceHideOffscreen: TimelineDefinition = [
+                [mobileNavigation, { opacity: 0 }, { duration: 0.25 }],
+                [
+                    wrapperContent,
+                    {
+                        transform: 'none',
+                    },
+                    { at: '<', duration: 0.5, delay: 0.25 },
+                ],
+            ];
 
-        const manageStickies = (offscreen, scrollCache) => {
-            offscreen ? lenis.stop() : lenis.start();
-            body.classList.toggle('overflow-hidden', offscreen);
-            wrapperOffCanvasRight?.classList.toggle('invisible', !offscreen);
-            stickies.forEach((sticky) => {
-                if (offscreen) {
-                    const top =
-                        window
-                            .getComputedStyle(sticky)
-                            .getPropertyValue('top') || '0';
-                    const parsedTopValue = parseInt(top);
+            const manageStickies = (
+                offscreen: boolean,
+                scrollCache: number,
+            ) => {
+                offscreen ? lenis.stop() : lenis.start();
+                body.classList.toggle('overflow-hidden', offscreen);
+                wrapperOffCanvasRight?.classList.toggle(
+                    'invisible',
+                    !offscreen,
+                );
+                stickies.forEach((sticky: HTMLElement) => {
+                    if (offscreen) {
+                        const top =
+                            window
+                                .getComputedStyle(sticky)
+                                .getPropertyValue('top') || '0';
+                        const parsedTopValue = parseInt(top);
 
-                    sticky.style.top = `${parsedTopValue + scrollCache}px`;
-                } else {
-                    sticky.style.top = '';
-                }
-            });
-        };
+                        sticky.style.top = `${parsedTopValue + scrollCache}px`;
+                    } else {
+                        sticky.style.top = '';
+                    }
+                });
+            };
 
-        if (visible) {
-            manageStickies(visible, scrollCache);
-            timeline(sequenceShowOffscreen, {
-                easing: 'ease-in-out',
-            }).finished.then(() => {});
-        } else {
-            timeline(sequenceHideOffscreen, {
-                easing: 'ease-in-out',
-            }).finished.then(() => {
+            if (visible) {
                 manageStickies(visible, scrollCache);
-                page.scrollTop = scrollCache;
-            });
+                timeline(sequenceShowOffscreen, {}).finished.then(() => {});
+            } else {
+                timeline(sequenceHideOffscreen, {}).finished.then(() => {
+                    manageStickies(visible, scrollCache);
+                    page.scrollTop = scrollCache;
+                });
+            }
         }
     };
 
@@ -236,7 +232,7 @@ import { Icon } from 'astro-icon/components';
             },
 
             init() {
-                this.$watch('isMobileNavOpen', (value) => {
+                this.$watch('isMobileNavOpen', (value: boolean) => {
                     this.viewHeight = window.innerHeight || page.clientHeight;
                     this.viewWidth = window.innerWidth || page.clientWidth;
 

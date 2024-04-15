@@ -10,7 +10,7 @@ import { Icon } from 'astro-icon/components';
 </div>
 
 <script>
-    import { animate, timeline, inView } from 'motion';
+    import { animate, timeline, type TimelineDefinition, inView } from 'motion';
 
     import Lenis from '@studio-freight/lenis';
     const lenis = new Lenis();
@@ -27,7 +27,7 @@ import { Icon } from 'astro-icon/components';
         scrollers,
         (el) => {
             const nudge = el.target.querySelector('.nudge');
-            const sequence = [
+            const sequence: TimelineDefinition = [
                 [
                     el.target,
                     {
@@ -40,7 +40,6 @@ import { Icon } from 'astro-icon/components';
             timeline(sequence, {
                 duration: 0.75,
                 delay: 1.5,
-                easing: 'ease-in-out',
             }).finished.then(() => {
                 animate(
                     nudge,
@@ -48,12 +47,6 @@ import { Icon } from 'astro-icon/components';
                         y: ['0%', '25%', '10%', '0%'],
                         skewY: ['0deg', '10deg', '0deg'],
                         rotate: ['0deg', '-5deg', '0deg'],
-                        // filter: [
-                        //     'blur(0)',
-                        //     'blur(0)',
-                        //     'blur(0.5px)',
-                        //     'blur(0)',
-                        // ],
                     },
                     {
                         duration: [0.25],

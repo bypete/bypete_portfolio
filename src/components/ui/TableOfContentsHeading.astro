@@ -12,6 +12,7 @@ const { heading } = Astro.props;
         href={`#${heading.slug}`}
         class="data-[state=active]:font-semibold data-[state=active]:text-content data-[state=active]:no-underline"
         data-state=""
+        data-jump
         @click="close()"
     >
         {heading.text}

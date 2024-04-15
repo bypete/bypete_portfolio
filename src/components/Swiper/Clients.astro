@@ -1,13 +1,12 @@
 ---
-import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import { type SwiperClient } from '~/data/clients';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-export interface Props {
-    clients: Partial<SwiperClient>;
+interface Props {
+    clients: SwiperClient[];
 }
 
 const { clients } = Astro.props;
@@ -34,7 +33,6 @@ const { clients } = Astro.props;
 </div>
 
 <script>
-    // core version + navigation, pagination modules:
     import Swiper from 'swiper';
     import { Autoplay, Scrollbar } from 'swiper/modules';
 

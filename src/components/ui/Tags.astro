@@ -1,5 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components';
 import Tag from '~/components/ui/Tag.astro';
 interface Props {
     tags: string[];
@@ -16,13 +15,14 @@ if (tags.includes('featured')) {
 {
     tags && (
         <ul
+            data-inview="tags"
             class:list={[
                 'flex w-full flex-wrap items-center gap-fl-space-2xs text-fl-step--1 leading-none',
                 className,
             ]}
         >
             {tags.map((tag) => (
-                <li>
+                <li data-animate="tag">
                     <Tag
                         href={`/tags/${tag}/`}
                         isLink={url}
@@ -35,3 +35,31 @@ if (tags.includes('featured')) {
         </ul>
     )
 }
+<script>
+    import { inView, animate, stagger } from 'motion';
+    const focus = document.querySelectorAll('[data-inview="tags"]');
+    inView(
+        focus,
+        (info) => {
+            const queryElementsByAnimation = (animation) => {
+                return info.target.querySelectorAll(
+                    `[data-animate="${animation}"]`,
+                );
+            };
+            const tag = queryElementsByAnimation('tag');
+
+            if (tag.length > 0) {
+                const animation = animate(
+                    tag,
+                    {
+                        opacity: [0, 1],
+                        transform: ['translateX(10px)', 'translateX(0px)'],
+                    },
+                    { duration: 0.2, delay: stagger(0.1) },
+                );
+                return (leaveInfo) => animation.reverse();
+            }
+        },
+        { amount: 0.25 },
+    );
+</script>

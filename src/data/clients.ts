@@ -1,9 +1,7 @@
 export interface SwiperClient {
-  src: string | ImageMetadata
-  widths?:  number[]
-  sizes?: string
+  src: ImageMetadata
   alt: string
-  url?: string
+  width?: number
 }
 
 import afv from "~/assets/logos/afv.webp"

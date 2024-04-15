@@ -48,75 +48,55 @@ import { Icon } from 'astro-icon/components';
 
 <script>
     import Alpine from 'alpinejs';
-    import { timeline } from 'motion';
+    import { timeline, type TimelineDefinition } from 'motion';
 
     const setThemeLight = document.getElementById('setThemeLight');
     const setThemeDark = document.getElementById('setThemeDark');
 
-    // Easings | easeOutBounce | https://easings.net
-    // function easeOutBounce(x: number): number {
-    //     const n1 = 7.5625;
-    //     const d1 = 2.75;
-
-    //     if (x < 1 / d1) {
-    //         return n1 * x * x;
-    //     } else if (x < 2 / d1) {
-    //         return n1 * (x -= 1.5 / d1) * x + 0.75;
-    //     } else if (x < 2.5 / d1) {
-    //         return n1 * (x -= 2.25 / d1) * x + 0.9375;
-    //     } else {
-    //         return n1 * (x -= 2.625 / d1) * x + 0.984375;
-    //     }
-    // }
-
     const animateTheme = (theme) => {
-        const sequenceLight = [
-            [
-                setThemeLight,
-                {
-                    x: ['0%', '100%'],
-                    y: ['0%', '15%'],
-                    rotate: ['0deg', '30deg'],
-                },
-            ],
-            [
-                setThemeDark,
-                {
-                    x: ['-100%', '0%'],
-                    y: ['15%', '0%'],
-                    rotate: ['-30deg', '0deg'],
-                },
-                { at: '<' },
-            ],
-        ];
+        if (setThemeLight && setThemeDark) {
+            const sequenceLight: TimelineDefinition = [
+                [
+                    setThemeLight,
+                    {
+                        x: ['0%', '100%'],
+                        y: ['0%', '15%'],
+                        rotate: ['0deg', '30deg'],
+                    },
+                ],
+                [
+                    setThemeDark,
+                    {
+                        x: ['-100%', '0%'],
+                        y: ['15%', '0%'],
+                        rotate: ['-30deg', '0deg'],
+                    },
+                    { at: '<' },
+                ],
+            ];
 
-        const sequenceDark = [
-            [
-                setThemeDark,
-                {
-                    x: ['0%', '100%'],
-                    y: ['0%', '15%'],
-                    rotate: ['0deg', '30deg'],
-                },
-            ],
-            [
-                setThemeLight,
-                {
-                    x: ['-100%', '0%'],
-                    y: ['15%', '0%'],
-                    rotate: ['-30deg', '0deg'],
-                },
-                { at: '<' },
-            ],
-        ];
-        if (theme === 'light') {
-            timeline(sequenceLight, {
-                easing: 'ease',
-                duration: 0.75,
-            });
-        } else {
-            timeline(sequenceDark, {
-                easing: 'ease',
+            const sequenceDark: TimelineDefinition = [
+                [
+                    setThemeDark,
+                    {
+                        x: ['0%', '100%'],
+                        y: ['0%', '15%'],
+                        rotate: ['0deg', '30deg'],
+                    },
+                ],
+                [
+                    setThemeLight,
+                    {
+                        x: ['-100%', '0%'],
+                        y: ['15%', '0%'],
+                        rotate: ['-30deg', '0deg'],
+                    },
+                    { at: '<' },
+                ],
+            ];
+
+            const sequence = theme === 'light' ? sequenceLight : sequenceDark;
+            timeline(sequence, {
                 duration: 0.75,
             });
         }
@@ -127,7 +107,6 @@ import { Icon } from 'astro-icon/components';
             theme: localStorage.getItem('theme') || 'light',
 
             setTheme(value) {
-                console.log(value);
                 localStorage.setItem('theme', value);
                 animateTheme(value);
                 const html = document.querySelector('html');

@@ -63,59 +63,54 @@ const isSecure: boolean = ['production', 'staging'].includes(build);
         isSecure?: boolean;
     }
 
-    import { timeline } from 'motion';
+    import { timeline, type TimelineDefinition } from 'motion';
 
-    const page = document.documentElement;
     const body = document.body;
     const cookie = document.getElementById('toastCookie');
     const overlay = document.getElementById('overlay');
 
     const toast = (visible) => {
-        const show = [
-            [
-                cookie,
-                {
-                    opacity: [0, 1],
-                    scale: [0.75, 1],
-                },
-            ],
-            [
-                overlay,
-                {
-                    opacity: 1,
-                },
-                { at: '<' },
-            ],
-        ];
-        const hide = [
-            [
-                cookie,
-                {
-                    opacity: 0,
-                },
-                {},
-            ],
-            [
-                overlay,
-                {
-                    opacity: 0,
-                },
-                { at: '<' },
-            ],
-        ];
+        if (cookie && overlay) {
+            const show: TimelineDefinition = [
+                [
+                    cookie,
+                    {
+                        opacity: [0, 1],
+                        scale: [0.75, 1],
+                    },
+                ],
+                [
+                    overlay,
+                    {
+                        opacity: 1,
+                    },
+                    { at: '<' },
+                ],
+            ];
+            const hide: TimelineDefinition = [
+                [
+                    cookie,
+                    {
+                        opacity: 0,
+                    },
+                    {},
+                ],
+                [
+                    overlay,
+                    {
+                        opacity: 0,
+                    },
+                    { at: '<' },
+                ],
+            ];
 
-        overlay.classList.toggle('hidden', !visible);
-        cookie.classList.toggle('hidden', !visible);
-        body.classList.toggle('!h-screenSvh', visible);
-        if (visible) {
-            timeline(show, {
-                easing: 'ease-in',
-                duration: 0.25,
-            }).finished.then(() => {});
-        } else {
-            body.style.height = '';
-            timeline(hide, {
-                easing: 'ease-in',
+            overlay.classList.toggle('hidden', !visible);
+            cookie.classList.toggle('hidden', !visible);
+            body.classList.toggle('!h-screenSvh', visible);
+
+            const sequence = visible ? show : hide;
+
+            timeline(sequence, {
                 duration: 0.25,
             }).finished.then(() => {});
         }
@@ -138,7 +133,6 @@ const isSecure: boolean = ['production', 'staging'].includes(build);
             init() {
                 setTimeout(() => {
                     this.cookie = Cookies.get(this.name);
-                    console.log(this.cookie);
                     if (!this.cookie) {
                         this.freeze(true);
                     }

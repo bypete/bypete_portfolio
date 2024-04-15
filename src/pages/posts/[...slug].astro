@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 import MarkdownPostLayout from '~/layouts/MarkdownPostLayout.astro';
 import { formatBlogPosts } from '~/js/utils';
 
@@ -11,6 +11,7 @@ export async function getStaticPaths() {
         filterOutDrafts: true,
         filterOutFuturePosts: true,
         sortByDate: true,
+        limit: undefined,
     });
 
     return formattedPosts.map((entry, i) => ({
@@ -28,6 +29,12 @@ export async function getStaticPaths() {
         },
     }));
 }
+
+type Props = {
+    entry: CollectionEntry<'posts'>;
+    prevPost: CollectionEntry<'posts'>;
+    nextPost: CollectionEntry<'posts'>;
+};
 
 const { entry, prevPost, nextPost } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await entry.render();

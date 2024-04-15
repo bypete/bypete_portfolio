@@ -4,153 +4,109 @@
     {
       "title": "Money supermarket",
       "image": "msm.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "2880",
-      "height": "4692"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "Money supermarket detail",
       "image": "msm--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     },
     {
       "title": "Money supermarket German translation",
       "image": "msm__de.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "2880",
-      "height": "4890"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "Money supermarket German translation detail",
       "image": "msm.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     },
     {
       "title": "Mobile Money supermarket",
       "image": "sm_msm--detail.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "780",
-      "height": "1688"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Mobile Money supermarket",
       "image": "sm_msm.jpg",
-      "class": "hidden",
-      "width": "780",
-      "height": "8254"
+      "class": "hidden"
     },
     {
       "title": "Pro",
       "image": "pro.jpg",
-      "class": "row-span-2 col-span-3",
-      "width": "2880",
-      "height": "6036"
+      "class": "row-span-2 col-span-3"
     },
     {
       "title": "Pro detail",
       "image": "pro--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     },
     {
       "title": "Landing",
       "image": "landing.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "2880",
-      "height": "4554"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Landing detail",
       "image": "landing--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     }
   ],
   "gVariations": [
     {
       "title": "Celtic",
-      "image": "celtic.jpg",
-      "width": "2880",
-      "height": "4446"
+      "image": "celtic.jpg"
     },
     {
       "title": "Celtic detail",
       "image": "celtic--detail.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "1800"
+      "class": "hidden"
     },
     {
       "title": "Brit awards",
-      "image": "brits.jpg",
-      "width": "2880",
-      "height": "1982"
+      "image": "brits.jpg"
     },
     {
       "title": "Brit terms detail",
-      "image": "brits__terms--detail.jpg",
-      "width": "2880",
-      "height": "1800"
+      "image": "brits__terms--detail.jpg"
     },
     {
       "title": "Brit terms",
       "image": "brits__terms.jpg",
-      "class": "hidden",
-      "width": "2880",
-      "height": "7034"
+      "class": "hidden"
     },
     {
       "title": "Win a million",
-      "image": "wam.jpg",
-      "width": "2880",
-      "height": "1802"
+      "image": "wam.jpg"
     },
     {
       "title": "Mobile Win a million",
-      "image": "sm_wam.jpg",
-      "width": "780",
-      "height": "2818"
+      "image": "sm_wam.jpg"
     },
     {
       "title": "Mobile Win a million detail",
       "image": "sm_wam--detail.jpg",
-      "class": "hidden",
-      "width": "780",
-      "height": "1688"
+      "class": "hidden"
     },
     {
       "title": "Mobile Win a million - about",
       "image": "sm_wam__about--detail.jpg",
-      "class": "hidden",
-      "width": "780",
-      "height": "1688"
+      "class": "hidden"
     }
   ],
   "gEmail": [
     {
       "title": "Email Student",
-      "image": "email__student--detail.jpg",
-      "width": "800",
-      "height": "750"
+      "image": "email__student--detail.jpg"
     },
     {
       "title": "Email newsletter",
-      "image": "email__student.jpg",
-      "width": "800",
-      "height": "3355"
+      "image": "email__student.jpg"
     },
     {
       "title": "Email Student",
       "image": "email__student-002--detail.jpg",
-      "class": "hidden",
-      "width": "800",
-      "height": "750"
+      "class": "hidden"
     }
   ]
 }

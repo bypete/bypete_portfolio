@@ -5,65 +5,47 @@
       "title": "Home",
       "image": "home.jpg",
       "class": "row-span-2 col-span-2",
-      "width": "1200",
-      "height": "1907",
       "caption": "Homepage"
     },
     {
       "title": "Landing",
       "image": "landing.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "1200",
-      "height": "3664"
+      "class": "row-span-2 col-span-1"
     },
     {
       "title": "Landing",
       "image": "landing--detail.jpg",
-      "class": "hidden",
-      "width": "1200",
-      "height": "750"
+      "class": "hidden"
     },
     {
       "title": "Landing",
       "image": "landing__002--detail.jpg",
-      "class": "hidden",
-      "width": "1200",
-      "height": "750"
+      "class": "hidden"
     },
     {
       "title": "Landing",
       "image": "landing__003--detail.jpg",
-      "class": "hidden",
-      "width": "1200",
-      "height": "750"
+      "class": "hidden"
     },
     {
       "title": "Registration",
       "image": "registration.jpg",
-      "class": "row-span-2 col-span-2",
-      "width": "1200",
-      "height": "2083"
+      "class": "row-span-2 col-span-2"
     },
     {
       "title": "Registration detail",
       "image": "registration--detail.jpg",
-      "class": "hidden",
-      "width": "1200",
-      "height": "750"
+      "class": "hidden"
     },
     {
       "title": "Mobile registration",
       "image": "sm_registration--detail.jpg",
-      "class": "hidden",
-      "width": "780",
-      "height": "1688"
+      "class": "hidden"
     },
     {
       "title": "Home",
       "image": "sm_registration.jpg",
-      "class": "row-span-2 col-span-1",
-      "width": "780",
-      "height": "5350"
+      "class": "row-span-2 col-span-1"
     }
   ]
 }
