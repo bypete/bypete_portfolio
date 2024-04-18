@@ -49,6 +49,8 @@ stringChoices = stringChoices.replace(/\"/g, "'");
 >
 
 <script>
+    import Alpine from 'alpinejs';
+
     document.addEventListener('alpine:init', () => {
         Alpine.data('randomcase', () => ({
             open() {

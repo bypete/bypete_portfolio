@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import Credit from '~/components/Images/Credit.astro';
 
 const {
     src,
@@ -25,9 +26,15 @@ const imageProps = {
 
 {
     wrapper || breakout == true || credit.length ? (
-        <div class:list={[wrapper || '', breakout && 'breakout']}>
+        <div
+            class:list={[
+                'group relative',
+                wrapper || '',
+                breakout && 'breakout',
+            ]}
+        >
             <Image {...imageProps} />
-            {credit && ``}
+            {credit && <Credit {credit} />}
         </div>
     ) : (
         <Image {...imageProps} />

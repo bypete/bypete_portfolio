@@ -13,13 +13,11 @@ export interface Props extends HTMLAttributes<'div'> {
     mode?: 'plain' | 'pair' | 'image' | 'custom';
     class?: string;
     legibility?: string;
-    threshold?: number;
     isContained?: boolean;
     prompt?: 'swipe' | 'scroll';
     breakout?: boolean;
 }
 
-const fm = Astro.props.frontmatter || Astro.props;
 const {
     dark = false,
     wrapper = '',
@@ -30,15 +28,9 @@ const {
     legibility,
     isContained,
     prompt,
-    threshold,
     breakout,
     ...rest
-} = fm as Props;
-
-const intersect = {
-    'x-data': `{ shown: false }`,
-    [`x-intersect.threshold.${threshold}`]: `shown = true`,
-};
+} = Astro.props;
 
 const color = legibility || (dark ? 'text-white' : 'text-slate-800');
 let wrapperClass = '';
@@ -74,7 +66,6 @@ switch (mode) {
         { 'overflow-hidden': isContained },
         breakout && 'breakout',
     ]}
-    {...threshold ? intersect : {}}
     {...rest}
 >
     {
@@ -113,11 +104,3 @@ switch (mode) {
         )
     }
 </div>
-
-<script>
-    import intersect from '@alpinejs/intersect';
-
-    document.addEventListener('alpine:init', () => {
-        Alpine.plugin(intersect);
-    });
-</script>

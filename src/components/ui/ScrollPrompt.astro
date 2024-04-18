@@ -22,49 +22,58 @@ import { Icon } from 'astro-icon/components';
     requestAnimationFrame(raf);
 
     const scrollers = document.querySelectorAll('.scrollPrompt');
+    if (scrollers != null) {
+        inView(
+            scrollers,
+            (el) => {
+                const nudge = el.target.querySelector('.nudge');
+                const sequence: TimelineDefinition = [
+                    [
+                        el.target,
+                        {
+                            opacity: [0, 0.5, 1],
+                            y: ['50%', '25%', '0%'],
+                        },
+                        {
+                            duration: 0.75,
+                            delay: 1.5,
+                        },
+                    ],
+                ];
 
-    inView(
-        scrollers,
-        (el) => {
-            const nudge = el.target.querySelector('.nudge');
-            const sequence: TimelineDefinition = [
-                [
-                    el.target,
-                    {
-                        opacity: [0, 0.5, 1],
-                        y: ['50%', '25%', '0%'],
-                    },
-                ],
-            ];
+                timeline(sequence, {}).finished.then(() => {
+                    if (nudge) {
+                        // animate to allow repeat attribute
+                        animate(
+                            nudge,
+                            {
+                                y: ['0%', '25%', '10%', '0%'],
+                                skewY: ['0deg', '10deg', '0deg'],
+                                rotate: ['0deg', '-5deg', '0deg'],
+                            },
+                            {
+                                duration: 0.25,
+                                delay: 2.5,
+                                repeat: 1,
+                                easing: 'ease-in',
+                            },
+                        );
+                    }
+                });
 
-            timeline(sequence, {
-                duration: 0.75,
-                delay: 1.5,
-            }).finished.then(() => {
-                animate(
-                    nudge,
-                    {
-                        y: ['0%', '25%', '10%', '0%'],
-                        skewY: ['0deg', '10deg', '0deg'],
-                        rotate: ['0deg', '-5deg', '0deg'],
-                    },
-                    {
-                        duration: [0.25],
-                        delay: 2.5,
-                        repeat: 1,
-                        easing: 'ease-in',
-                    },
-                );
-            });
-
-            return (leave) => {
-                if (leave) {
-                    animate(el.target, { opacity: [0] }, { duration: 0.25 });
-                }
-            };
-        },
-        {
-            margin: '-50% 0px 0px 0px',
-        },
-    );
+                return (leave) => {
+                    if (leave) {
+                        animate(
+                            el.target,
+                            { opacity: [0] },
+                            { duration: 0.25 },
+                        );
+                    }
+                };
+            },
+            {
+                margin: '-50% 0px 0px 0px',
+            },
+        );
+    }
 </script>

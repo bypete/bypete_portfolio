@@ -1,9 +1,7 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
 import type { HeroKeys } from '~/components/Hero/Hero.astro';
 import type { ImageMetadata } from 'astro';
 import Link from '~/components/ui/Link.astro';
-import { Image } from 'astro:assets';
 import { Picture } from 'astro:assets';
 import HeroPicture from '../Images/HeroPicture.astro';
 import { Icon } from 'astro-icon/components';
@@ -51,13 +49,10 @@ const coverSrc = (await coverImage()).default;
 <div
     class="relative mx-auto grid max-w-container grid-cols-1 grid-rows-1 gap-fl-space-s pt-[var(--headerheight)] md:min-h-widescreen md:grid-cols-block50 lg:h-block lg:min-h-block 2xl:grid-cols-block33"
 >
-    <div
-        class="w-full self-center"
-        x-cloak
-        :class="shown ? 'animate-fade-in-down' : 'invisible'"
-    >
+    <div class="w-full self-center" x-cloak>
         <h1
             class="relative text-fl-step-6 shadow-black/10 text-shadow-headline"
+            data-animate="fadeInDown"
         >
             {headline}
         </h1>
@@ -65,32 +60,40 @@ const coverSrc = (await coverImage()).default;
             <Fragment set:html={copy} />
             {
                 actions && (
-                    <p class="flex flex-row gap-2">
-                        {actions.map((cta) => (
-                            <Link
-                                theme={cta.theme}
-                                class={cta.class}
-                                href={cta.href}
-                                isIcon={cta.icon && cta.icon.length > 0}
-                                {...(cta.jump && { 'data-jump': '' })}
-                            >
-                                {cta.text}
-                                {cta.icon && (
-                                    <Icon
-                                        name={cta.icon}
-                                        class="h-fl-space-s w-fl-space-s"
-                                    />
-                                )}
-                            </Link>
-                        ))}
-                    </p>
+                    <>
+                        <p
+                            class="flex flex-row gap-2"
+                            data-animate="fadeInDown"
+                        >
+                            {actions.map((action) => (
+                                <Link
+                                    theme={action.theme}
+                                    class={action.class}
+                                    href={action.href}
+                                    isIcon={!!action.icon}
+                                    {...(action.jump && { 'data-jump': '' })}
+                                >
+                                    {action.text}
+                                    {action.icon && (
+                                        <Icon
+                                            name={action.icon}
+                                            class="h-fl-space-s w-fl-space-s"
+                                        />
+                                    )}
+                                </Link>
+                            ))}
+                        </p>
+                    </>
                 )
             }
         </div>
     </div>
     {
         visual && (
-            <div class:list={[visual.wrapper ? visual.wrapper : 'relative']}>
+            <div
+                class:list={[visual.wrapper ? visual.wrapper : 'relative']}
+                data-animate="slideInRight"
+            >
                 <Picture
                     src={featureSrc}
                     densities={visual.densities ?? [1.5, 2]}
@@ -100,10 +103,51 @@ const coverSrc = (await coverImage()).default;
                             ? visual.class
                             : 'h-full w-full object-contain object-bottom',
                     ]}
-                    alt={visual.alt}
+                    alt={visual.alt ?? 'feature image'}
                     loading="eager"
                 />
             </div>
         )
     }
 </div>
+
+<script>
+    import { inView, timeline, type TimelineDefinition, stagger } from 'motion';
+
+    const focus = document.querySelectorAll('[data-inview="cover"]');
+    inView(
+        focus,
+        (info) => {
+            const queryElementsByAnimation = (animation) => {
+                return info.target.querySelectorAll(
+                    `[data-animate="${animation}"]`,
+                );
+            };
+            const slideInRight = queryElementsByAnimation('slideInRight');
+            const fadeInDown = queryElementsByAnimation('fadeInDown');
+
+            const sequence: TimelineDefinition = [
+                [
+                    slideInRight,
+                    {
+                        opacity: [0, 1],
+                        transform: ['translateX(5%)', 'translateX(0%)'],
+                    },
+                    { duration: 0.75, delay: stagger(0.25) },
+                ],
+                [
+                    fadeInDown,
+                    {
+                        opacity: [0, 1],
+                        transform: ['translateY(-25%)', 'translateY(0%)'],
+                    },
+                    { duration: 0.25, delay: stagger(0.15) },
+                ],
+            ];
+            const animation = timeline(sequence, {});
+
+            return (leaveInfo) => animation.reverse();
+        },
+        { amount: 0.25 },
+    );
+</script>

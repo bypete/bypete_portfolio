@@ -2,17 +2,66 @@
 import { Icon } from 'astro-icon/components';
 ---
 
-<div
-    x-data="{ scrolled: false }"
-    x-cloak
-    x-bind:class="scrolled ? 'opacity-0 transition delay-300 duration-300' : 'opacity-100'"
-    @scroll.window="scrolled = ( window.pageYOffset > 25 ) ? true : false"
->
-    <p class="m-0 flex gap-fl-space-3xs text-fl-step--1">
-        <span>Swipe</span>
-        <Icon
-            name="lucide:arrow-right-left"
-            class="h-4 w-auto animate-nudge-right"
-        />
-    </p>
+<div class="swipePrompt flex gap-fl-space-3xs text-fl-step--1 opacity-0">
+    <span>Swipe</span>
+    <Icon name="lucide:arrow-right-left" class="nudge size-fl-space-s" />
 </div>
+<script>
+    import { animate, timeline, type TimelineDefinition, inView } from 'motion';
+
+    const swipePrompts = document.querySelectorAll('.swipePrompt');
+    if (swipePrompts != null) {
+        inView(
+            swipePrompts,
+            (el) => {
+                const nudge = el.target.querySelector('.nudge');
+                const sequence: TimelineDefinition = [
+                    [
+                        el.target,
+                        {
+                            opacity: [0, 0.5, 1],
+                            y: ['50%', '25%', '0%'],
+                        },
+                        {
+                            duration: 0.75,
+                            delay: 1.5,
+                        },
+                    ],
+                ];
+
+                timeline(sequence, {}).finished.then(() => {
+                    if (nudge) {
+                        // animate to allow repeat attribute
+                        animate(
+                            nudge,
+                            {
+                                x: ['0%', '25%', '10%', '0%'],
+                                skewY: ['0deg', '10deg', '0deg'],
+                                rotate: ['0deg', '-5deg', '0deg'],
+                            },
+                            {
+                                duration: 0.25,
+                                delay: 2.5,
+                                repeat: 1,
+                                easing: 'ease-in',
+                            },
+                        );
+                    }
+                });
+
+                return (leave) => {
+                    if (leave) {
+                        animate(
+                            el.target,
+                            { opacity: [0] },
+                            { duration: 0.25 },
+                        );
+                    }
+                };
+            },
+            {
+                margin: '-50% 0px 0px 0px',
+            },
+        );
+    }
+</script>

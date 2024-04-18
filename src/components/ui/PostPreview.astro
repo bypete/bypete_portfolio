@@ -1,7 +1,6 @@
 ---
 import { type CollectionEntry } from 'astro:content';
 import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
 
 type Props = {
     post: CollectionEntry<'work'>;
@@ -20,7 +19,7 @@ const { post, preview, class: ClassName } = Astro.props;
         >
             <span
                 class:list={[
-                    'text-content-quiet flex w-full gap-fl-space-3xs text-fl-step--1',
+                    'flex w-full gap-fl-space-3xs text-fl-step--1 text-content-quiet',
                     preview === 'prev' && 'flex-row-reverse',
                 ]}
             >

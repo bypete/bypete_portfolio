@@ -1,25 +1,11 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-import BlockImage from '~/components/Images/BlockImage.astro';
+import type { HeroKeys } from '~/components/Hero/Hero.astro';
+
 import { Image } from 'astro:assets';
 
-interface VisualKeys {
-    url: string;
-    alt: string;
-}
-interface CoverKeys {
-    url: string;
-    alt: string;
-    credit: string;
-}
+interface Props extends HeroKeys {}
 
-interface Props extends HTMLAttributes<'div'> {
-    cover?: Partial<CoverKeys>;
-    visual?: Partial<VisualKeys>;
-    legibility?: string;
-}
-
-const { cover, visual, legibility, ...rest } = Astro.props;
+const { cover, visual, legibility } = Astro.props;
 let picture;
 if (visual) {
     picture = await import(/* @vite-ignore */ `../../assets/${visual?.url}`); // this is async
@@ -33,11 +19,7 @@ if (visual) {
 <div
     class="relative mx-auto grid max-w-container grid-cols-1 grid-rows-1 gap-fl-space-s pt-[var(--headerheight)] md:min-h-widescreen md:grid-cols-block50 lg:h-block lg:min-h-block 2xl:grid-cols-block33"
 >
-    <div
-        class="w-full self-center"
-        x-cloak
-        :class="shown ? 'animate-fade-in-down' : 'invisible'"
-    >
+    <div class="w-full self-center" x-cloak>
         <!-- content -->
         <slot name="content" />
         <!-- END content -->
@@ -48,10 +30,7 @@ if (visual) {
     {
         visual ? (
             <div class="relative flex justify-center">
-                <div
-                    class="h-full w-full"
-                    x-bind:class="shown ? 'animate-stretch' : 'invisible'"
-                >
+                <div class="h-full w-full">
                     <Image src={picture.default} alt="alt" />
                 </div>
             </div>
