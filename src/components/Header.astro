@@ -15,39 +15,42 @@ const { isHeroDark = false } = Astro.props;
     x-cloak
     data-off-canvas-sticky
 >
-    <div
-        class="mx-auto grid max-w-container grid-cols-2 items-center justify-between gap-x-fl-space-m lg:grid-cols-3"
-    >
-        <a
-            href="/"
-            x-cloak
-            aria-label="byPete - home"
-            class="grid h-fl-space-l w-auto grid-cols-1 grid-rows-1"
-        >
-            {
-                isHeroDark ? (
-                    <>
-                        <span class="col-start-1  group-data-up/page:opacity-0">
-                            <Icon
-                                name="bypete__white"
-                                class="h-fl-space-l w-auto"
-                            />
-                        </span>
-                        <span class="col-start-1 opacity-0 group-data-up/page:opacity-100 ">
-                            <Icon
-                                name="bypete__brand"
-                                class="h-fl-space-l w-auto"
-                            />
-                        </span>
-                    </>
-                ) : (
-                    <Icon name="bypete__brand" class="h-fl-space-l w-auto" />
-                )
-            }
-        </a>
+    <div class="mx-auto flex max-w-container items-center gap-x-fl-space-m">
+        <div class="logo flex-1">
+            <a
+                href="/"
+                x-cloak
+                aria-label="byPete - home"
+                class="grid h-fl-space-l w-auto grid-cols-1 grid-rows-1"
+            >
+                {
+                    isHeroDark ? (
+                        <>
+                            <span class="col-start-1  group-data-up/page:opacity-0">
+                                <Icon
+                                    name="bypete__white"
+                                    class="h-fl-space-l w-auto"
+                                />
+                            </span>
+                            <span class="col-start-1 opacity-0 group-data-up/page:opacity-100 ">
+                                <Icon
+                                    name="bypete__brand"
+                                    class="h-fl-space-l w-auto"
+                                />
+                            </span>
+                        </>
+                    ) : (
+                        <Icon
+                            name="bypete__brand"
+                            class="h-fl-space-l w-auto"
+                        />
+                    )
+                }
+            </a>
+        </div>
 
-        <div class="justify-self-end lg:justify-self-center"><ThemeIcon /></div>
-        <Navigation class="hidden justify-self-end lg:block" {isHeroDark} />
+        <ThemeIcon />
+        <Navigation class="hidden flex-1 lg:block" {isHeroDark} />
     </div>
 </header>
 

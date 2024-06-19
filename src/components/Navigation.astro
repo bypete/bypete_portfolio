@@ -32,7 +32,7 @@ const { class: ClassName, isHeroDark = false } = Astro.props;
     x-cloak
     class:list={[ClassName ? ClassName : '', 'transform-all']}
 >
-    <ul class="hidden space-x-fl-space-2xs md:flex" x-ref="menu">
+    <ul class="flex justify-end space-x-fl-space-2xs" x-ref="menu">
         <li>
             <MenuLink url={`/about/`} title="About" {pathname} {isHeroDark} />
         </li>
