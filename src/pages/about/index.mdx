@@ -28,8 +28,13 @@ hero:
       densities: [1.5, 2]
       width: 720
     cover:
-      src: 'hero/concrete--teal.webp'
+      src: 'hero/concrete--teal.jpg'
       alt: 'Teal background with concrete detail texture'
+      artDirectives: 
+        - src: 'hero/concrete--teal@sm.jpg'
+          media: '(max-width: 799px)'
+        - src: 'hero/concrete--teal.jpg'
+          media: '(min-width: 800px)'
     bg: 'bg-teal-400'
     prompt: 'scroll'
     isContained: true

@@ -1,0 +1,84 @@
+---
+import type { ImageMetadata, GetImageResult } from 'astro';
+import type { ArtKeys } from '~/components/Hero/Hero.astro';
+import { getImage } from 'astro:assets';
+
+interface Props {
+    src: string | ImageMetadata;
+    alt: string;
+    loading: 'eager' | 'lazy' | null | undefined;
+    artDirectives?: ArtKeys[];
+}
+
+const { artDirectives, src, alt, loading, ...attrs } = Astro.props;
+
+const imageFiles = import.meta.glob<{ default: ImageMetadata }>(
+    '../../assets/**/*.{png,webp,jpg,jpeg}',
+);
+
+// Define a function to load images
+const loadImage = async (
+    src: string | ImageMetadata,
+    convert = true,
+): Promise<ImageMetadata | GetImageResult> => {
+    // Check if src is a string
+    if (typeof src === 'string') {
+        try {
+            // Load image from path
+            const imagePromise = imageFiles[`../../assets/${src}`];
+            const imageData = await imagePromise();
+            // Handle conversion if needed
+            if (convert === true) {
+                const convertedImage = await getImage({
+                    src: imageData.default,
+                    format: 'webp',
+                });
+                return convertedImage;
+            }
+            return imageData.default;
+        } catch (error) {
+            console.error(`Error loading image: ${src}`, error);
+            throw error;
+        }
+    } else {
+        // src is already an ImageMetadata object, no need to load
+        return src;
+    }
+};
+
+const desktopSrc = (await loadImage(src, false)) as ImageMetadata;
+
+// Create an array to hold the loaded images
+const artDirectiveSrcs: GetImageResult[] = [];
+
+// Iterate over the artDirectives array to load and store images dynamically
+if (artDirectives) {
+    for (const { src } of artDirectives) {
+        const dynamicImage = (await loadImage(src, true)) as GetImageResult; // Await the result of loadImage
+        artDirectiveSrcs.push(dynamicImage);
+    }
+}
+---
+
+{
+    artDirectives && (
+        <>
+            <picture>
+                {artDirectives.map((direction, index) => (
+                    <source
+                        media={direction.media}
+                        srcset={artDirectiveSrcs[index].src}
+                    />
+                ))}
+                <img
+                    src={desktopSrc.src}
+                    alt={alt}
+                    height={desktopSrc.height}
+                    width={desktopSrc.width}
+                    loading={loading}
+                    {...attrs}
+                />
+            </picture>
+        </>
+    )
+}

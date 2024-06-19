@@ -17,8 +17,15 @@ export interface VisualKeys {
     wrapper?: string;
     class?: string;
 }
+
+export interface ArtKeys {
+    src: string | ImageMetadata;
+    media: string;
+}
+
 export interface CoverKeys {
     src: string | ImageMetadata;
+    artDirectives?: ArtKeys[];
     widths?: number[];
     sizes?: string;
     alt: string;

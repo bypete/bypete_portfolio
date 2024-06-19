@@ -52,20 +52,20 @@ const { isHeroDark = false } = Astro.props;
 </header>
 
 <script>
-    import { animate, timeline } from 'motion';
+    import { animate, timeline, type TimelineDefinition } from 'motion';
 
     const page = document.documentElement;
-    const banner = document.getElementById('banner');
-    const toc = document.getElementById('toc');
-    const tocWrapper = document.getElementById('tocWrapper');
+    const banner = document.querySelector('#banner');
+    const toc = document.querySelector('#toc');
+    const tocWrapper = document.querySelector('#tocWrapper');
 
     const vh = window.innerHeight;
 
     let animationInProgress = false;
     let visible = true;
     let tocShift = false;
+    let throttleTimer: ReturnType<typeof setTimeout> | null = null;
 
-    let throttleTimer = null;
     const throttleInterval = 150;
     let scrollCache = 0;
 
@@ -85,16 +85,14 @@ const { isHeroDark = false } = Astro.props;
                 tocRect = toc.getBoundingClientRect();
                 isTocSticky = tocRect.top <= 0;
             }
-
             !isTocSticky && tocShift && unstickToc();
             if (st === 0) {
                 setBannerState('start');
                 startBanner();
             } else if (st > scrollCache && visible) {
-                hideBanner();
+                toggleBanner(false, isTocSticky);
             } else if (st < scrollCache && st > vh * 0.5 && !visible) {
-                setBannerState('up');
-                showBanner(isTocSticky);
+                toggleBanner(true, isTocSticky);
             }
 
             scrollCache = st <= 0 ? 0 : st; // For Mobile or negative scrolling
@@ -102,94 +100,113 @@ const { isHeroDark = false } = Astro.props;
     };
 
     const setBannerState = (state) => page?.setAttribute('data-banner', state);
+    const unstickToc = () => {
+        animationInProgress = true;
+
+        if (tocWrapper) {
+            animate(
+                tocWrapper,
+                { transform: ['translateY(0%)'] },
+                { duration: 0.5 },
+            ).finished.then(() => {
+                tocShift = false;
+                animationInProgress = false;
+            });
+        }
+    };
 
     const startBanner = () => {
         animationInProgress = true;
         visible = true;
-        animate(
-            banner,
-            {
-                opacity: 1,
-                transform: ['translateY(0)'],
-                background: 'none',
-            },
-            { easing: 'ease-in-out', duration: 0.25 }, //easeInOutQuart
-        ).finished.then(() => {
-            animationInProgress = false;
-        });
-    };
-
-    const unstickToc = () => {
-        animationInProgress = true;
-
-        animate(
-            tocWrapper,
-            { transform: ['translateY(0%)'] },
-            { duration: 0.5 },
-        ).finished.then(() => {
-            tocShift = false;
-            animationInProgress = false;
-        });
-    };
-
-    const hideBanner = () => {
-        animationInProgress = true;
-        visible = false;
-        tocShift = false;
-
-        const sequence = [
-            [
+        if (banner) {
+            animate(
                 banner,
                 {
-                    transform: ['translateY(-100%)'],
-                },
-            ],
-
-            [tocWrapper, { transform: ['translateY(0%)'] }, { at: '<' }],
-            [banner, { background: 'none' }, {}],
-        ];
-
-        timeline(sequence, {
-            duration: 0.5,
-            easing: 'linear',
-        }).finished.then(() => {
-            animationInProgress = false;
-            setBannerState('down');
-        });
-    };
-
-    const showBanner = (isTocSticky) => {
-        animationInProgress = true;
-        visible = true;
-        tocShift = isTocSticky;
-
-        banner.style.opacity = `1`;
-        banner.style.background = `rgb(var(--banner-up)/1)`;
-
-        const animationProperties = isTocSticky
-            ? { transform: ['translateY(var(--headerheight))'] }
-            : {
-                  transform: ['translateY(0%)'],
-              };
-
-        const sequence = [
-            [
-                banner,
-                {
+                    opacity: 1,
                     transform: ['translateY(0)'],
-                    background: 'rgb(var(--banner-up)/1)',
+                    background: 'none',
                 },
-                {},
-            ],
-            [tocWrapper, animationProperties, { at: '<' }],
-        ];
+                { easing: 'ease-in-out', duration: 0.25 },
+            ).finished.then(() => {
+                animationInProgress = false;
+            });
+        }
+    };
 
-        timeline(sequence, {
-            duration: 0.5,
-            easing: 'linear',
-        }).finished.then(() => {
-            animationInProgress = false;
-        });
+    const toggleBanner = (isVisible, isTocSticky) => {
+        animationInProgress = true;
+        const tocWrapperAnimation = isTocSticky
+            ? { transform: ['translateY(var(--headerheight))'] }
+            : { transform: ['translateY(0%)'] };
+
+        if (banner) {
+            const sequenceShowBanner: TimelineDefinition = [
+                [
+                    banner,
+                    {
+                        opacity: 1,
+                        background: 'rgb(var(--banner-up)/1)',
+                    },
+                    { duration: 0 },
+                ],
+                [
+                    banner,
+                    {
+                        transform: ['translateY(0)'],
+                        background: 'rgb(var(--banner-up)/1)',
+                    },
+                ],
+            ];
+            if (tocWrapper) {
+                sequenceShowBanner.push([
+                    tocWrapper,
+                    tocWrapperAnimation,
+                    { at: '<' },
+                ]);
+            }
+
+            const sequenceHideBanner: TimelineDefinition = [
+                [
+                    banner,
+                    {
+                        transform: ['translateY(-100%)'],
+                    },
+                ],
+                [
+                    banner,
+                    {
+                        background: 'none',
+                    },
+                ],
+            ];
+            if (tocWrapper) {
+                sequenceHideBanner.splice(sequenceHideBanner.length - 1, 0, [
+                    tocWrapper,
+                    { transform: ['translateY(0%)'] },
+                    { at: '<' },
+                ]); //insert before banner background: none
+            }
+
+            if (isVisible) {
+                setBannerState('up');
+                timeline(sequenceShowBanner, {
+                    duration: 0.5,
+                }).finished.then(() => {
+                    animationInProgress = false;
+                    visible = true;
+                    tocShift = isTocSticky && visible;
+                });
+            } else {
+                timeline(sequenceHideBanner, {
+                    duration: 0.5,
+                }).finished.then(() => {
+                    animationInProgress = false;
+                    visible = false;
+                    tocShift = isTocSticky && visible;
+                    setBannerState('down');
+                });
+            }
+        }
     };
 
     handleBanner();

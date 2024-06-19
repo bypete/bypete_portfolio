@@ -23,7 +23,7 @@ stringRoles = stringRoles.replace(/\"/g, "'");
             ></span
         >
         <span
-            class="bg-surface-raised relative inline-block rounded-tight px-fl-space-2xs py-fl-space-3xs text-content mix-blend-screen duration-150"
+            class="relative inline-block rounded-tight bg-surface-raised px-fl-space-2xs py-fl-space-3xs text-content mix-blend-screen duration-150"
             x-cloak
         >
             <span x-text="role">Front-End Development</span><span
@@ -42,7 +42,6 @@ stringRoles = stringRoles.replace(/\"/g, "'");
             role: '',
             preposition: '',
             caret: true,
-            typingTimer: null,
             doneTypingInterval: 6000,
 
             init() {
@@ -50,36 +49,57 @@ stringRoles = stringRoles.replace(/\"/g, "'");
                 this.startTyping();
             },
 
-            startTyping() {
+            wait(ms = 0) {
+                return new Promise((resolve) => setTimeout(resolve, ms));
+            },
+
+            getRandomBetween(
+                min = 20,
+                max = 150,
+                randomNumber = Math.random(),
+            ) {
+                return Math.floor(randomNumber * (max - min) + min);
+            },
+
+            async draw(role) {
                 this.role = '';
-                this.preposition = this.roleArray[this.roleIndex].preposition;
-                this.typingTimer = setInterval(() => {
-                    if (
-                        this.role.length <
-                        this.roleArray[this.roleIndex].role.length
-                    ) {
-                        this.role +=
-                            this.roleArray[this.roleIndex].role[
-                                this.role.length
-                            ];
+                let index = 0;
+
+                const drawLetter = async () => {
+                    this.role = role.slice(0, index);
+                    index += 1;
+                    const amountOfTimeToWait = this.getRandomBetween();
+
+                    await this.wait(amountOfTimeToWait);
+
+                    if (index <= role.length) {
+                        drawLetter();
                     } else {
-                        clearInterval(this.typingTimer);
-                        setTimeout(() => {
-                            this.typingTimer = setInterval(() => {
-                                if (this.role.length > 0) {
-                                    this.role = this.role.slice(0, -1);
-                                } else {
-                                    clearInterval(this.typingTimer);
-                                    this.preposition = '';
-                                    this.roleIndex =
-                                        (this.roleIndex + 1) %
-                                        this.roleArray.length;
-                                    this.startTyping();
-                                }
-                            }, 25);
-                        }, this.doneTypingInterval);
+                        await this.wait(this.doneTypingInterval);
+                        deleteLetter();
                     }
-                }, 75);
+                };
+
+                const deleteLetter = async () => {
+                    this.role = this.role.slice(0, -1);
+                    await this.wait(10);
+                    if (this.role.length > 0) {
+                        deleteLetter();
+                    } else {
+                        await this.wait(250);
+                        this.roleIndex =
+                            (this.roleIndex + 1) % this.roleArray.length;
+                        this.startTyping();
+                    }
+                };
+
+                drawLetter();
+            },
+
+            async startTyping() {
+                const current = this.roleArray[this.roleIndex];
+                this.preposition = current.preposition;
+                await this.draw(current.role);
             },
         }));
     });
