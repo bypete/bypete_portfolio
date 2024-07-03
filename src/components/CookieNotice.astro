@@ -118,25 +118,25 @@ const isSecure: boolean = ['production', 'staging'].includes(build);
 
     document.addEventListener('alpine:init', () => {
         Alpine.data('cookie', (build: Build = {}) => ({
-            cookie: '',
             name: 'cnotice',
             domain: build.domain,
             isSecure: build.isSecure || false,
             toastCookie: false,
-            freeze(freezeState) {
-                this.toastCookie = freezeState;
-                // freezeState ? lenis.stop() : lenis.start();
-
-                toast(freezeState);
+            freeze(visible) {
+                this.toastCookie = visible;
+                toast(visible);
             },
-
+            wait(ms = 0) {
+                return new Promise((resolve) => setTimeout(resolve, ms));
+            },
             init() {
-                setTimeout(() => {
-                    this.cookie = Cookies.get(this.name);
-                    if (!this.cookie) {
-                        this.freeze(true);
-                    }
-                }, 2500);
+                this.checkCookie();
+            },
+            async checkCookie() {
+                if (!Cookies.get(this.name)) {
+                    await this.wait(2500);
+                    this.freeze(true);
+                }
             },
             accept() {
                 this.freeze(false);
@@ -146,11 +146,9 @@ const isSecure: boolean = ['production', 'staging'].includes(build);
                     secure: this.isSecure,
                     sameSite: 'strict',
                 };
-
                 if (this.isSecure && this.domain) {
                     config.domain = this.domain; // Include domain only for production or staging
                 }
-
                 Cookies.set(this.name, 'true', config);
             },
         }));
