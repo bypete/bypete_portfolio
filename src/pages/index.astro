@@ -14,7 +14,6 @@ import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
 const title = 'Home';
 const hero = {
     dark: true,
-    threshold: 25,
 };
 
 const ogImage = {
@@ -93,16 +92,6 @@ const formattedPosts = formatBlogPosts(allWork, {
             <div
                 class="relative flex min-h-0 min-w-0 items-center justify-center"
             >
-                <!-- <div class="absolute aspect-1 w-full scale-105">
-                    <div
-                        class="absolute h-full w-full animate-morph-delay border border-white/25"
-                    >
-                    </div>
-                    <div
-                        class="absolute h-full w-full animate-morph bg-slate-900/5"
-                    >
-                    </div>
-                </div> -->
                 <SwiperHome slides={heroSlides} />
             </div>
             <!-- END visual -->
@@ -195,7 +184,9 @@ const formattedPosts = formatBlogPosts(allWork, {
 
     const { body, documentElement: page } = document;
     const viewWidth = window.innerWidth || page.clientWidth;
+    const viewHeight = window.innerHeight || page.clientHeight;
     const featured = document.getElementById('featured');
+    const particleField = document.querySelector('#particleField');
 
     if (featured != null) {
         viewWidth <= 768
@@ -225,21 +216,19 @@ const formattedPosts = formatBlogPosts(allWork, {
 
     // Function to create particles
     const createParticles = () => {
-        const particlesContainer = document.getElementById('particleField');
-
         const amount = viewWidth <= 768 ? 80 : 240;
         const range = viewWidth <= 768 ? 4 : 5;
 
-        if (particlesContainer) {
-            for (let i = 0; i < amount; i++) {
+        if (particleField) {
+            for (let i = 0; i < amount; i += 1) {
                 const particle = document.createElement('div');
                 particle.className = 'particle absolute bg-white rounded-full ';
 
                 // Set initial position within the visible area
-                const initialX = Math.random() * window.innerWidth;
-                const initialY = Math.random() * window.innerHeight;
-                const opacity = (Math.random() * 0.2).toFixed(2);
-                // Set initial size with some variability
+                const initialX = Math.random() * viewWidth;
+                const initialY = Math.random() * viewHeight;
+                const opacity = (Math.random() * 0.25).toFixed(2);
+                // Set initial size with some variation
                 const size = Math.floor(Math.random() * range) + 1; // Random size between 1 and {range} pixels
                 particle.style.opacity = `${opacity}`;
                 particle.style.width = `${size}px`;
@@ -248,26 +237,30 @@ const formattedPosts = formatBlogPosts(allWork, {
                 particle.style.left = `${initialX}px`;
                 particle.style.top = `${initialY}px`;
 
-                particlesContainer.appendChild(particle);
+                particleField.appendChild(particle);
             }
         }
     };
 
     let animationInProgress = false;
-    let shootTimer: ReturnType<typeof setTimeout> | null = null;
+    let shootTimer: boolean | null = null;
 
-    const handleParticles = (interval: number) => {
+    const wait = (ms = 0) => {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    };
+
+    const handleParticles = async (interval: number) => {
         if (shootTimer) {
             return;
         }
-        shootTimer = setInterval(() => {
-            shootTimer = null;
-            if (animationInProgress) {
-                return;
-            }
 
-            shootParticle();
-        }, interval);
+        shootTimer = true;
+        while (shootTimer) {
+            if (!animationInProgress) {
+                shootParticle();
+            }
+            await wait(interval);
+        }
     };
 
     const shootParticle = () => {
@@ -276,14 +269,9 @@ const formattedPosts = formatBlogPosts(allWork, {
         const randomIndex = Math.floor(Math.random() * particles.length);
         const randomParticle = particles[randomIndex];
 
-        const vectorA =
-            Math.random() *
-            0.5 *
-            Math.max(window.innerWidth, window.innerHeight);
+        const vectorA = Math.random() * 0.5 * Math.max(viewWidth, viewHeight);
         const vectorB =
-            Math.random() *
-            0.5 *
-            Math.min(window.innerWidth, window.innerHeight);
+            Math.random() * 0.5 * Math.min(window.innerWidth, viewHeight);
         const directionX = Math.random() > 0.5 ? 1 : -1; // Randomly choose left or right direction
         const directionY = Math.random() > 0.5 ? 1 : -1; // Randomly choose up or down direction
 
@@ -314,9 +302,8 @@ const formattedPosts = formatBlogPosts(allWork, {
 
     // Function to restart animation on screen size change
     const restartAnimationOnResize = () => {
-        const particlesContainer = document.getElementById('particleField');
-        if (particlesContainer) {
-            particlesContainer.innerHTML = ''; // Clear existing particles
+        if (particleField) {
+            particleField.innerHTML = ''; // Clear existing particles
         }
         createParticles();
         handleParticles(1200); // Interval in seconds
@@ -325,9 +312,9 @@ const formattedPosts = formatBlogPosts(allWork, {
     // Initialize particle animation
     const initParticleAnimation = () => {
         createParticles();
-        handleParticles(1200); // Interval in seconds
+        handleParticles(1200); // Interval in milliseconds
 
-        let previousWidth = window.innerWidth;
+        let previousWidth = viewWidth;
 
         window.addEventListener('resize', () => {
             const currentWidth = window.innerWidth;
