@@ -349,51 +349,13 @@ export default {
                 },
                 focus: 'rgb(var(--color-focus) / <alpha-value>)',
                 link: {
-                    DEFAULT: 'rgb(var(--color-link) / <alpha-value>)',
+                  light: 'rgb(var(--color-link-light) / <alpha-value>)',
+                  DEFAULT: 'rgb(var(--color-link) / <alpha-value>)',
+                  dark: 'rgb(var(--color-link-dark) / <alpha-value>)',
                 },
                 banner: {
                     DEFAULT: 'transparent',
                     up: 'rgb(var(--color-banner-up) / <alpha-value>)',
-                },
-                menu: {
-                    DEFAULT: 'rgb(var(--color-menu) / <alpha-value>)',
-                    active: 'rgb(var(--color-menu-active) / <alpha-value>)',
-                    highlight:
-                        'rgb(var(--color-menu-highlight) / <alpha-value>)',
-                    bg__active:
-                        'rgb(var(--color-menu__bg-active) / <alpha-value>)',
-                    bg__hover:
-                        'rgb(var(--color-menu__bg-hover) / <alpha-value>)',
-                    marker: 'rgb(var(--color-menu__marker) / <alpha-value>)',
-                },
-                menudark: {
-                    DEFAULT: 'rgb(var(--color-menudark) / <alpha-value>)',
-                    active: 'rgb(var(--color-menudark-active) / <alpha-value>)',
-                    highlight:
-                        'rgb(var(--color-menudark-highlight) / <alpha-value>)',
-                    bg__active:
-                        'rgb(var(--color-menudark__bg-active) / <alpha-value>)',
-                    bg__hover:
-                        'rgb(var(--color-menudark__bg-hover) / <alpha-value>)',
-                    marker: 'rgb(var(--color-menudark__marker) / <alpha-value>)',
-                },
-                menusm: {
-                    DEFAULT: 'rgb(var(--color-menusm) / <alpha-value>)',
-                    hover: 'rgb(var(--color-menusm-hover) / <alpha-value>)',
-                    active: 'rgb(var(--color-menusm-active) / <alpha-value>)',
-                    highlight:
-                        'rgb(var(--color-menusm-highlight) / <alpha-value>)',
-                },
-                dropdown: {
-                    DEFAULT: 'rgb(var(--color-dropdown) / <alpha-value>)',
-                    hover: 'rgb(var(--color-dropdown-hover) / <alpha-value>)',
-                    active: 'rgb(var(--color-dropdown-active) / <alpha-value>)',
-                    bg__hover:
-                        'rgb(var(--color-dropdown__bg-hover) / <alpha-value>)',
-                    bg__active:
-                        'rgb(var(--color-dropdown__bg-active) / <alpha-value>)',
-                    bg__highlight:
-                        'rgb(var(--color-dropdown__bg-highlight) / <alpha-value>)',
                 },
                 underlay: {
                     light: 'rgb(var(--color-underlay-light) / <alpha-value>)',
@@ -404,15 +366,15 @@ export default {
                     dark: 'rgb(var(--color-overlay-dark) / <alpha-value>)',
                 },
                 surface: {
-                    offscreen:
-                        'rgb(var(--color-surface-offscreen)/ <alpha-value>)',
-                    sunk: 'rgb(var(--color-surface-sunk) / <alpha-value>)',
-                    sunken: 'rgb(var(--color-surface-sunken) / <alpha-value>)',
-                    DEFAULT:
-                        'rgb(var(--color-surface-default) / <alpha-value>)',
-                    raised: 'rgb(var(--color-surface-raised) / <alpha-value>)',
-                    overlay:
-                        'rgb(var(--color-surface-overlay) / <alpha-value>)',
+                  raised: 'rgb(var(--color-surface-raised) / <alpha-value>)',
+                  DEFAULT:
+                  'rgb(var(--color-surface-default) / <alpha-value>)',
+                  sunken: 'rgb(var(--color-surface-sunken) / <alpha-value>)',
+                  sunk: 'rgb(var(--color-surface-sunk) / <alpha-value>)',
+                  bedrock:
+                    'rgb(var(--color-surface-bedrock)/ <alpha-value>)',
+                   overlay:
+                    'rgb(var(--color-surface-overlay) / <alpha-value>)',
                 },
                 line: {
                     whisper: 'rgb(var(--color-line-whisper) / <alpha-value>)',

@@ -8,6 +8,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 import sitemap from '@astrojs/sitemap';
 import alpine from '@astrojs/alpinejs';
 import partytown from '@astrojs/partytown';
+
 const rehypeExternalLinksConfig = [
     rehypeExternalLinks,
     {
@@ -43,34 +44,47 @@ export default defineConfig({
                 lucide: ['*'],
             },
             svgoOptions: {
-                multipass: true,
-                plugins: [
-                    {
-                        name: 'preset-default',
-                        params: {
-                            overrides: {
-                                // customize default plugin options
-                                inlineStyles: {
-                                    onlyMatchedOnce: false,
-                                },
-                                cleanupIds: {
-                                    minify: true,
-                                },
-
-                                // or disable plugins
-                                removeDoctype: false,
-                            },
-                        },
-                    },
-                    {
-                        name: 'prefixIds',
-                        params: {
-                            delim: '',
-                            prefix: () => `bp__${svgoPrefixIdsCount++}`,
-                        },
-                    },
-                ],
-            },
+              multipass: true,
+              plugins: [
+                  {
+                      name: 'preset-default',
+                      params: {
+                          overrides: {
+                              // customize default plugin options
+                              inlineStyles: {
+                                  onlyMatchedOnce: false,
+                              },
+                              cleanupIds: {
+                                  minify: true,
+                              },
+                              // or disable plugins
+                              // removeUnknownsAndDefaults: {
+                              //   defaultAttrs: false,  // Prevents removing common attributes like `preserveAspectRatio`
+                              //   keepDataAttrs: true,  // Keep any `data-*` attributes
+                              // },
+                              removeDoctype: false,   // Keep DOCTYPE if present
+                              cleanupIds: {
+                                  minify: true,  // Minify IDs but don't remove them
+                              },
+                              removeViewBox: false,   // Ensure the viewBox attribute is not removed
+                          },
+                      },
+                  },
+                  {
+                      name: 'prefixIds',
+                      params: {
+                          delim: '',
+                          prefix: () => `bp__${svgoPrefixIdsCount++}`,
+                      },
+                  },
+                  {
+                           name: 'removeUnknownsAndDefaults',
+                           params: {
+                                defaultAttrs: false, // Ensures `enable-background`, `preserveAspectRatio`, etc. are preserved
+                              },
+                  },
+              ],
+          },
         }),
         sitemap(),
         alpine({
@@ -78,7 +92,7 @@ export default defineConfig({
         }),
         partytown({
             config: {
-                forward: ['dataLayer.push'],
+              forward: ['dataLayer.push', 'gtag'],
             },
         }),
     ],

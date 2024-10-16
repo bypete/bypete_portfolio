@@ -1,7 +1,7 @@
 ---
-import Block from '~/components/Blocks/Block.astro';
+import Block from '~/components/blocks/Block.astro';
 import { Image } from 'astro:assets';
-import Link from '~/components/ui/Link.astro';
+import Button from '~/components/ui/Button.astro';
 import RandomLink from '~/components/ui/RandomLink.astro';
 import product from '~/content/work/mykringapp/product.png';
 
@@ -39,8 +39,8 @@ const { wrapper, gridHeight } = Astro.props;
             projects, the challenges addressed, and the solutions crafted.
         </p>
         <p class="flex flex-row gap-fl-space-3xs">
-            <Link data-animate="scaleIn" theme="secondary" href="/work/"
-                >Explore the portfolio</Link
+            <Button data-animate="scaleIn" theme="secondary" href="/work/"
+                >Explore the portfolio</Button
             >
 
             <RandomLink

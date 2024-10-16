@@ -6,9 +6,12 @@ taster: 'The EPA needed a public resource for industry news and events, as well 
 excerpt: 'A public resource for industry news and events, as well as secure members-only access to projects, whitepapers, resources'
 description: 'Discover how I helped launch this public resource for industry news and events, whitepapers, and resources - all within a network of over 3,700 businesses.'
 author: 'Pete Wallace'
-ogImage: 
-  src: './epa/og__image.jpg'
-  alt: 'Emerging Payments Association'
+og:
+  title: 'Emerging Payments Association'
+  description: 'Discover how I helped launch this public resource for industry news and events, whitepapers, and resources - all within a network of over 3,700 businesses.'
+  image: 
+    src: '../../assets/work/epa/og__image.jpg'
+    alt: 'Emerging Payments Association'
 brand: 
   bg: 'bg-[#651731]'
   color: 'text-[#651731]'
@@ -56,14 +59,15 @@ tags:
   - 'case study'
   - 'fintech'
 ---
-import BlockPicture from '~/components/Images/BlockPicture.astro';
+import BlockPicture from '~/components/images/BlockPicture.astro';
 import { Image } from 'astro:assets';
 
-import Skills from '~/components/Skills.astro'
+import Skills from '~/components/ui/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
 
-import Gallery from '~/components/Lightbox/Gallery.astro'
-import Figure from '~/components/Figure.astro'
+
+import InlineBento from '~/components/lightbox/InlineBento.astro'
+import Figure from '~/components/images/Figure.astro'
 
 
 export const components = {ul: UL}
@@ -104,26 +108,23 @@ As new sections became available for review, the index listings were updated to 
 I collaborated closely with the developers to ensure that the site stayed true to the visuals approved by the client.
 Umbraco was used to create the development website. I was able to populate the site with real content from the first instance and continued to do so until the live site was launched.
 
-<Gallery collection='gScreens' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="epa" >
+<Fragment slot='title'>
 ## Layouts
 </Fragment>
+</InlineBento>
 
-</Gallery>
-
-<Gallery collection='gEmail' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="epa.email" >
+<Fragment slot='title'>
 ## Email newslettter
 </Fragment>
+</InlineBento>
 
-</Gallery>
-
-<Gallery collection='gAwards' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="epa.awards" >
+<Fragment slot='title'>
 ## EPA Awards
 </Fragment>
-
-</Gallery>
+</InlineBento>
 
 ## Final comments
 

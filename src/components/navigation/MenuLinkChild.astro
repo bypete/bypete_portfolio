@@ -1,0 +1,18 @@
+---
+interface Props {
+    title: string;
+    url: string;
+    isActive: boolean;
+}
+const { title, url, isActive } = Astro.props;
+---
+
+<a
+    href={url}
+    class:list={[
+        'block px-fl-space-2xs py-fl-space-3xs text-base text-content outline-none transition-all duration-300 hover:bg-line hover:text-content-shout focus:bg-line',
+        isActive && 'border-l-tight border-l-brand text-content-shout',
+    ]}
+>
+    <span class="line-clamp-2" set:html={title} />
+</a>

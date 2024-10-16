@@ -6,9 +6,12 @@ taster: 'The company intranet required a significant upgrade to improve the user
 excerpt: 'See how this enterprise intranet was upgraded to improve the user experience of 3,000+ employees.'
 description: 'How did I help to turn a slow intranet into a quick and flexible resource for over 3,000 employees? See the visuals I created, as well as the Front-End templates I developed to optimise the site.'
 author: 'Pete Wallace'
-ogImage: 
-  src: './elekta/og__image.jpg'
-  alt: 'Elekta'
+og:
+  title: 'Eastside Locks'
+  description: 'How did I help to turn a slow intranet into a quick and flexible resource for over 3,000 employees? See the visuals I created, as well as the Front-End templates I developed to optimise the site.'
+  image: 
+    src: '../../assets/work/elekta/og__image.jpg'
+    alt: 'Elekta'
 brand: 
   bg: 'bg-[#747474]'
   color: 'text-[#747474]'
@@ -47,11 +50,12 @@ tags:
   - 'case study'
   - 'intranet'
 ---
-import BlockPicture from '~/components/Images/BlockPicture.astro';
-import Skills from '~/components/Skills.astro'
+import BlockPicture from '~/components/images/BlockPicture.astro';
+import Skills from '~/components/ui/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
 
-import Gallery from '~/components/Lightbox/Gallery.astro'
+
+import InlineBento from '~/components/lightbox/InlineBento.astro'
 export const components = {ul: UL}
 import Note from '~/components/ui/Note.astro'
 
@@ -75,20 +79,18 @@ Our solution needed to be more flexible, reduce operational costs, reduce publis
 -   I created all of the Front-End HTML templates. These were then handed over to a team of back-end developers, complete with detailed annotations, listing indexes, and support documentation.
 -   I assisted in configuring the content management system (EPiServer) and oversaw the testing of the transferred site content throughout the development process. <span class="label label--info !m-0">collaboration</span>
 
-
-<Gallery collection='gSales' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="elekta" >
+<Fragment slot='title'>
 ## Site visuals | Sales
 </Fragment>
+</InlineBento>
 
-</Gallery>
-
-<Gallery collection='gService' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="elekta.service" >
+<Fragment slot='title'>
 ## Site visuals | Service
 </Fragment>
+</InlineBento>
 
-</Gallery>
 
 ## Final comments
 

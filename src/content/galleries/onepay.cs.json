@@ -1,0 +1,41 @@
+{
+  "path": "work/onepay",
+  "images": [
+    {
+      "title": "CS Profile",
+      "src": "../../assets/work/onepay/lightbox/cs__profile.jpg"
+    },
+    {
+      "title": "CS Profile - detail",
+      "src": "../../assets/work/onepay/lightbox/cs__profile--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "CS Users",
+      "src": "../../assets/work/onepay/lightbox/cs__users.jpg"
+    },
+    {
+      "title": "CS Users - detail",
+      "src": "../../assets/work/onepay/lightbox/cs__users--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "CS Profile",
+      "src": "../../assets/work/onepay/lightbox/cs__profile.jpg"
+    },
+    {
+      "title": "CS Profile - detail",
+      "src": "../../assets/work/onepay/lightbox/cs__profile--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "CS Fees",
+      "src": "../../assets/work/onepay/lightbox/cs__fees.jpg"
+    },
+    {
+      "title": "CS Fees - detail",
+      "src": "../../assets/work/onepay/lightbox/cs__fees--detail.jpg",
+      "class": "hidden"
+    }
+  ]
+}

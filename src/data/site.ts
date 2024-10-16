@@ -18,8 +18,8 @@ export type SiteInfo = {
   available: boolean;
   og: {
     image: {
-      src: string
-      alt: string
+      src: ImageMetadata;
+      alt: string;
     };
     title: string
     description: string
@@ -43,6 +43,8 @@ export type SiteInfo = {
   };
 };
 
+import ogDefaultImage from '../assets/og/og__default.jpg';
+
 const siteInfo: SiteInfo = {
   name: "byPete",
   title: "byPete | Portfolio Site",
@@ -55,12 +57,12 @@ const siteInfo: SiteInfo = {
   },
   available: true,
   og: {
-    image: {
-      src: "/og/og__default.jpg",
-      alt: "Portfolio Site",
-    },
     title: "Portfolio Site",
     description: "Pete Wallace is an experienced Front-End developer based in Surrey, UK.",
+    image: {
+      src: ogDefaultImage,
+      alt: "Portfolio Site",
+    },
   },
   icon: "/favicon.ico",
   socials: [

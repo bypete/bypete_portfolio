@@ -1,0 +1,80 @@
+{
+  "path": "work/gyl",
+  "images": [
+    {
+      "title": "Homepage",
+      "src": "../../assets/work/gyl/lightbox/homepage.jpg",
+      "class": "row-span-2 col-span-2"
+    },
+    {
+      "title": "Homepage detail",
+      "src": "../../assets/work/gyl/lightbox/homepage--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Mobile Homepage detail",
+      "src": "../../assets/work/gyl/lightbox/sm_home--detail.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "Mobile Homepage",
+      "src": "../../assets/work/gyl/lightbox/sm_home.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Listing",
+      "src": "../../assets/work/gyl/lightbox/listing.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "Listing detail",
+      "src": "../../assets/work/gyl/lightbox/listing--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Mobile Listing",
+      "src": "../../assets/work/gyl/lightbox/sm_newslisting--detail.jpg",
+      "class": "row-span-2 col-span-2"
+    },
+    {
+      "title": "Mobile Game",
+      "src": "../../assets/work/gyl/lightbox/sm_game.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "Mobile Game detail",
+      "src": "../../assets/work/gyl/lightbox/sm_game--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Game",
+      "src": "../../assets/work/gyl/lightbox/game.jpg",
+      "class": "row-span-2 col-span-2"
+    },
+    {
+      "title": "Game detail",
+      "src": "../../assets/work/gyl/lightbox/game--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "News",
+      "src": "../../assets/work/gyl/lightbox/news.jpg",
+      "class": "row-span-2 col-span-2"
+    },
+    {
+      "title": "News detail",
+      "src": "../../assets/work/gyl/lightbox/news--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Mobile News detail",
+      "src": "../../assets/work/gyl/lightbox/sm_news--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Sitemap detail",
+      "src": "../../assets/work/gyl/lightbox/sitemap--detail.jpg",
+      "class": "hidden"
+    }
+  ]
+}

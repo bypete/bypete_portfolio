@@ -2,8 +2,8 @@
 import Tags from '~/components/ui/Tags.astro';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
-import Link from '../ui/Link.astro';
-import ReadTime from '../ui/ReadTime.astro';
+import Button from '~/components/ui/Button.astro';
+import ReadTime from '~/components/ui/ReadTime.astro';
 
 interface CoverImage {
     src: ImageMetadata;
@@ -90,7 +90,7 @@ const {
                 )
             }
             <p>
-                <Link
+                <Button
                     href={url}
                     theme="primary"
                     isIcon={true}
@@ -101,7 +101,7 @@ const {
                         name="lucide:arrow-right-circle"
                         class="h-fl-space-s w-auto animate-nudge-right"
                     />
-                </Link>
+                </Button>
             </p>
             <span class="hidden md:block">
                 <Tags {tags} url={true} class="mt-fl-space-m" />

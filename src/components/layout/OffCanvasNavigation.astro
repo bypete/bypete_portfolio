@@ -1,0 +1,88 @@
+---
+import { navigation, footerNavigation } from '~/data/navigation';
+import NavSmallScreen from '~/components/navigation/NavSmallScreen.astro';
+
+import { Icon } from 'astro-icon/components';
+import Availability from '~/components/ui/Availability.astro';
+import siteInfo from '~/data/site';
+import Social from '~/components/ui/Social.astro';
+
+interface Props {
+    class?: string;
+    isHeroDark: boolean;
+    id?: string;
+}
+
+const { id, class: ClassName, isHeroDark = false } = Astro.props;
+const year = new Date().getFullYear();
+
+const currentPath = new URL(Astro.request.url).pathname;
+---
+
+<div
+    id={id}
+    class="bg-surface-bedrock shadow-inside invisible fixed bottom-0 right-0 top-0 h-full w-[85vw] overflow-y-scroll px-fl-space-m shadow-black md:w-[60vw]"
+    data-lenis-prevent
+    x-cloak
+>
+    <div
+        id="mobileNavigation"
+        class="flex h-screenDvh w-full flex-col gap-fl-space-m py-fl-space-l text-content-light"
+    >
+        <a href="/" aria-label="byPete - home">
+            <Icon
+                name="bypete__white"
+                title="byPete logo"
+                class="h-fl-space-xl w-auto shadow-brand-shade drop-shadow-sm"
+            />
+        </a>
+
+        <nav class="mb-auto" x-cloak>
+            <NavSmallScreen items={navigation} {currentPath} {isHeroDark} />
+        </nav>
+
+        <div>
+            <p class="text-fl-step--1/relaxed">
+                I'm <Availability url={`/connect/`} /> for new roles.
+            </p>
+        </div>
+        <div>
+            {
+                footerNavigation && (
+                    <ul class="mb-fl-space-m grid grid-flow-row gap-fl-space-2xs">
+                        {footerNavigation.map((item) => (
+                            <li>
+                                <a
+                                    href={item.url}
+                                    class="link"
+                                    title={item.label}
+                                >
+                                    {item.label}
+                                </a>
+                            </li>
+                        ))}
+                        <li>©{year}</li>
+                    </ul>
+                )
+            }
+            <div class="grid grid-flow-col justify-start gap-fl-space-2xs">
+                {
+                    siteInfo.socials.map((channel) => (
+                        <Social
+                            platform={channel.platform}
+                            url={channel.url}
+                            class="text-content-light hover:text-brand"
+                            css="w-fl-space-l h-fl-space-l fill-current"
+                            name={channel.icon}
+                        />
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<button
+    class="fixed right-[85vw] top-0 z-1000 h-full w-[15vw] opacity-0 md:right-[60vw] md:w-[40vw]"
+    @click="isMobileNavOpen = false"
+    x-show="isMobileNavOpen"></button>

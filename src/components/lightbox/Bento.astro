@@ -1,0 +1,137 @@
+---
+import 'photoswipe/style.css';
+import { type CollectionEntry } from 'astro:content';
+import { getImage, Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    gallery: CollectionEntry<'galleries'>;
+}
+
+const { gallery } = Astro.props;
+const { images } = gallery.data;
+
+// Pre-fetch the optimized images before rendering
+const optimizedImages = await Promise.all(
+    images.map(async (item) => {
+        const optimizedImage = await getImage({
+            src: item.src, // assuming item.image contains the image path
+            format: 'webp',
+        });
+        return { ...item, optimizedSrc: optimizedImage.src };
+    }),
+);
+---
+
+<section data-inview="lightbox" class:list={['lightbox not-prose relative']}>
+    <slot />
+    <div
+        class="relative mt-fl-space-m grid grid-flow-dense auto-rows-[100px] grid-cols-3 gap-fl-space-s md:auto-rows-[160px] md:grid-cols-4"
+    >
+        {
+            optimizedImages.map((item, i) => {
+                return (
+                    <div class:list={[item.class || '']}>
+                        <a
+                            href={item.src.src}
+                            data-cropped={item.cropped || ''}
+                            data-lightbox
+                            data-pswp-srcset={item.optimizedSrc}
+                            data-pswp-width={item.src.width}
+                            data-pswp-height={item.src.height}
+                            class="relative block h-full w-full overflow-hidden rounded shadow-sm hover:cursor-pointer"
+                        >
+                            <Image
+                                src={item.src}
+                                width={480}
+                                height={
+                                    (item.src.height * 480) / item.src.width
+                                }
+                                densities={[2, 3]}
+                                format="webp"
+                                alt={item.title}
+                                class="absolute inset-0 h-full w-full object-cover object-top"
+                            />
+                            {item.caption && (
+                                <span
+                                    data-caption=""
+                                    class="hidden"
+                                    set:html={item.caption}
+                                />
+                            )}
+                            <span class="z-1 absolute h-full w-full opacity-0 backdrop-blur-sm backdrop-brightness-125 transition duration-300 hover:bg-slate-900/75 hover:opacity-100">
+                                <span class="icon-[lucide--zoom-in] absolute left-1/2 top-1/2 z-10 h-10 w-10 -translate-x-1/2 -translate-y-1/2 text-content-light" />
+                            </span>
+                        </a>
+                    </div>
+                );
+            })
+        }
+    </div>
+</section>
+
+<script>
+    import PhotoSwipeLightbox from 'photoswipe/lightbox';
+    const focus = document.querySelectorAll('[data-inview="lightbox"]');
+
+    const smallScreenPadding = {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+    };
+    const largeScreenPadding = {
+        top: 48,
+        bottom: 48,
+        left: 32,
+        right: 32,
+    };
+
+    const lightbox = new PhotoSwipeLightbox({
+        gallery: '#lightbox, .lightbox',
+        children: 'a[data-lightbox]',
+        // optionaly adjust viewport
+        paddingFn: (viewportSize) => {
+            return viewportSize.x < 700
+                ? smallScreenPadding
+                : largeScreenPadding;
+        },
+        wheelToZoom: true,
+        bgOpacity: 0.85,
+        pswpModule: () => import('photoswipe'),
+    });
+    lightbox.on('uiRegister', () => {
+        const ui = lightbox.pswp?.ui;
+        if (!ui) return;
+
+        ui.registerElement({
+            name: 'custom-caption',
+            order: 9,
+            isButton: false,
+            appendTo: 'root',
+            className:
+                'bg-slate-900/75 !opacity-0 duration-300 rounded text-content-light text-fl-step--1 max-w-[calc(100%-4rem)] w-auto absolute left-1/2 -translate-x-1/2 bottom-2.5 px-2 py-1',
+            html: 'Caption text',
+            // eslint-disable-next-line no-unused-vars
+            onInit: (el, pswp) => {
+                lightbox.pswp?.on('change', () => {
+                    el.classList.add('!opacity-0');
+                    const currSlideElement =
+                        lightbox.pswp?.currSlide?.data.element;
+                    const hiddenCaption =
+                        currSlideElement?.querySelector('[data-caption]');
+                    const imgElement = currSlideElement?.querySelector('img');
+
+                    let captionHTML =
+                        hiddenCaption?.innerHTML ||
+                        imgElement?.getAttribute('alt') ||
+                        '';
+                    el.classList.toggle('!opacity-0', !hiddenCaption);
+                    el.innerHTML = captionHTML;
+                });
+            },
+        });
+    });
+
+    lightbox.init();
+</script>

@@ -1,0 +1,49 @@
+{
+  "path": "work/eastsidelocks",
+  "images": [
+    {
+      "title": "Home",
+      "src": "../../assets/work/eastsidelocks/lightbox/home--detail.jpg",
+      "class": "row-span-1 col-span-2"
+    },
+    {
+      "title": "Home",
+      "src": "../../assets/work/eastsidelocks/lightbox/home.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Responsive Home",
+      "src": "../../assets/work/eastsidelocks/lightbox/sm_home--detail.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "Home",
+      "src": "../../assets/work/eastsidelocks/lightbox/sm_home.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Vision",
+      "src": "../../assets/work/eastsidelocks/lightbox/vision.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "News",
+      "src": "../../assets/work/eastsidelocks/lightbox/news.jpg"
+    },
+    {
+      "title": "News detail",
+      "src": "../../assets/work/eastsidelocks/lightbox/news--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Gallery",
+      "src": "../../assets/work/eastsidelocks/lightbox/gallery.jpg",
+      "class": "row-span-3 col-span-2"
+    },
+    {
+      "title": "Timeline",
+      "src": "../../assets/work/eastsidelocks/lightbox/sm_timeline.jpg",
+      "class": "row-span-2 col-span-1"
+    }
+  ]
+}

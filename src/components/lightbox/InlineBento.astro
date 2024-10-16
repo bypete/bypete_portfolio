@@ -1,0 +1,46 @@
+---
+import { getEntry } from 'astro:content';
+import Bento from '~/components/lightbox/Bento.astro';
+import { Icon } from 'astro-icon/components';
+
+const { gallerySlug, breakout = false } = Astro.props;
+
+const gallery = await getEntry('galleries', gallerySlug);
+---
+
+{
+    gallery && (
+        <div
+            class:list={[
+                'bg-surface-sunken p-fl-space-s-m shadow-inset',
+                !breakout
+                    ? '-mx-fl-space-s-m my-fl-space-xl rounded-tight'
+                    : 'breakout',
+            ]}
+        >
+            <Bento gallery={gallery}>
+                <div class="mb-fl-space-m flex flex-col items-start justify-between leading-snug md:flex-row">
+                    <slot name="title" slot="title" />
+                    <div
+                        data-animate="fadeIn"
+                        class="pointer-events-none flex gap-fl-space-2xs text-fl-step--1 text-content-quiet md:w-1/3"
+                    >
+                        <Icon
+                            name="lucide:zoom-in"
+                            class="inline-block h-auto w-fl-space-m"
+                        />
+                        <p>
+                            Tap any image to view in more detail.
+                            <span class="2xl:hidden">Pinch</span>
+                            <span class="hidden 2xl:inline">
+                                Mouse scroll
+                            </span>{' '}
+                            to zoom in.
+                        </p>
+                    </div>
+                </div>
+                <slot />
+            </Bento>
+        </div>
+    )
+}

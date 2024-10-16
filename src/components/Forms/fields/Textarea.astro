@@ -1,0 +1,53 @@
+---
+interface Props {
+    class?: string;
+    placeholder?: string;
+    id: string;
+    label: string;
+    required?: boolean;
+    name: string;
+    rows?: number;
+    cols?: number;
+}
+const {
+    id,
+    name,
+    label,
+    class: ClassName,
+    placeholder = '',
+    required = false,
+    rows = 6,
+    cols = 50,
+} = Astro.props;
+
+const attrs = {
+    id,
+    name,
+    class: 'form__textarea peer w-full placeholder-transparent',
+    rows,
+    cols,
+    ...(placeholder && { placeholder }),
+    ...(required && { required: true }),
+};
+---
+
+<div class:list={['group', ClassName && ClassName]} data-form-group>
+    <div
+        class="relative grid grid-cols-1 grid-rows-1 items-center *:col-start-1 *:row-start-1"
+    >
+        <textarea {...attrs}></textarea>
+        <label
+            class="pointer-events-none ml-fl-space-3xs -translate-y-1/2 self-start justify-self-start bg-surface-raised px-fl-space-2xs text-fl-step--1 font-medium leading-none text-content-quiet shadow-surface-raised transition-all text-shadow-xs peer-placeholder-shown:translate-y-fl-space-2xs peer-placeholder-shown:self-start peer-placeholder-shown:text-fl-step-0 peer-focus:-translate-y-1/2 peer-focus:self-start peer-focus:text-fl-step--1"
+            for={id}>{label}</label
+        >
+        {
+            !required && (
+                <span class="-translate-y-full self-start justify-self-end text-fl-step--2/loose text-content-quiet">
+                    Optional
+                </span>
+            )
+        }
+    </div>
+    <slot name="help" />
+    <div id={`${id}_error`} class="error-message"></div>
+</div>

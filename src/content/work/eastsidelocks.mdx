@@ -6,9 +6,12 @@ taster: 'Eastside Locks commissioned this aspirational brochure site to communic
 excerpt: 'Aspirational brochure site to communicate a vision and attract prospective clients'
 description: "Discover how I helped to produce an aspirational brochure site to communicate Eastside Lock's vision and attract prospective clients for their 650,000 sq. ft urban development."
 author: 'Pete Wallace'
-ogImage: 
-  src: './eastsidelocks/og__image.jpg'
-  alt: 'Eastside Locks'
+og:
+  title: 'Eastside Locks'
+  description: "Discover how I helped to produce an aspirational brochure site to communicate Eastside Lock's vision and attract prospective clients for their 650,000 sq. ft urban development."
+  image: 
+    src: '../../assets/work/eastsidelocks/og__image.jpg'
+    alt: 'Eastside Locks'
 brand: 
   bg: 'bg-[#6ab53f]'
   color: 'text-[#6ab53f]'
@@ -54,10 +57,11 @@ tags:
 ---
 import { Image } from 'astro:assets';
 import UL from '~/components/MDX/ul.astro'
-import Skills from '~/components/Skills.astro'
+import Skills from '~/components/ui/Skills.astro'
 
-import Gallery from '~/components/Lightbox/Gallery.astro'
-import Figure from '~/components/Figure.astro'
+
+import InlineBento from '~/components/lightbox/InlineBento.astro'
+import Figure from '~/components/images/Figure.astro'
 export const components = {ul: UL}
 
 import vision_detail from './eastsidelocks/vision--detail.jpg'
@@ -87,21 +91,17 @@ import data from '~/data/work/eastsidelocks.data.json'
   <Image src={vision_detail} alt="Map showing the development plan" class="w-full h-auto shadow-md border border-line" />
 </Figure>
 
-
-<Gallery collection='gScreens' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="eastsidelocks" >
+<Fragment slot='title'>
 ## Site visuals
 </Fragment>
+</InlineBento>
 
-</Gallery>
-
-<Gallery collection='gUi' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="eastsidelocks.ui" >
+<Fragment slot='title'>
 ## UI/UX
 </Fragment>
-
-</Gallery>
-
+</InlineBento>
 
 ## Learning points
 

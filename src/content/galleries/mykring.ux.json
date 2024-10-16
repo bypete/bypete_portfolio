@@ -1,0 +1,69 @@
+{
+  "path": "work/mykring",
+  "images": [
+    {
+      "title": "Login",
+      "caption": "",
+      "src": "../../assets/work/mykring/lightbox/login.jpg",
+      "class": "row-span-2 col-span-2"
+    },
+    {
+      "title": "Login validation",
+      "caption": "Log in with validation feedback",
+      "src": "../../assets/work/mykring/lightbox/login-validation.jpg"
+    },
+    {
+      "title": "Manage cards",
+      "caption": "",
+      "src": "../../assets/work/mykring/lightbox/manage-cards.jpg"
+    },
+    {
+      "title": "Manage cards popup",
+      "caption": "",
+      "src": "../../assets/work/mykring/lightbox/manage-cards__popup.jpg"
+    },
+    {
+      "title": "Authentication",
+      "caption": "",
+      "src": "../../assets/work/mykring/lightbox/authentication.jpg"
+    },
+    {
+      "title": "Authentication access",
+      "caption": "",
+      "src": "../../assets/work/mykring/lightbox/authentication__access.jpg"
+    },
+    {
+      "title": "Authentication error",
+      "caption": "",
+      "src": "../../assets/work/mykring/lightbox/authentication__error.jpg"
+    },
+    {
+      "title": "Authentication",
+      "caption": "",
+      "src": "../../assets/work/mykring/lightbox/authentication__timeout.jpg"
+    },
+    {
+      "title": "Devices",
+      "caption": "",
+      "src": "../../assets/work/mykring/lightbox/devices.jpg"
+    },
+    {
+      "title": "Link a device",
+      "caption": "",
+      "src": "../../assets/work/mykring/lightbox/devices__link.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Lost Device popup",
+      "caption": "",
+      "src": "../../assets/work/mykring/lightbox/devices__popup-lost.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Device pin",
+      "caption": "",
+      "src": "../../assets/work/mykring/lightbox/devices__popup-pin.jpg",
+      "class": "hidden"
+    }
+  ]
+}

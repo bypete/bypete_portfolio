@@ -2,25 +2,27 @@
 import smartypants from 'smartypants';
 import siteInfo from '~/data/site';
 import pjson from '~/../package.json';
-import Favicon from '../Favicon.astro';
+import Favicon from '~/components/SEO/Favicon.astro';
 
 import { SEO } from 'astro-seo';
-import { getImage } from 'astro:assets';
 
-export type Props = {
+interface OpengraphProps {
     title?: string;
     description?: string;
-    ogTitle?: string;
-    ogImage?: {
-        src: string;
-        alt: string;
+    image?: {
+        src?: ImageMetadata;
+        alt?: string;
     };
-    ogDescription?: string;
+}
+
+export type Props = {
+    title: string;
+    description?: string;
+    og?: OpengraphProps;
     canonicalURL?: URL;
     pageType?: 'website' | 'article';
     includeSiteTitle?: boolean;
     isHeroDark?: boolean;
-
     // Article
     published_time?: string;
     author?: string[];
@@ -31,9 +33,14 @@ export type Props = {
 const {
     title,
     description = siteInfo.description,
-    ogTitle = title || siteInfo.og.title,
-    ogImage = siteInfo.og.image,
-    ogDescription = siteInfo.og.description,
+    og: {
+        title: ogTitle = title || siteInfo.og.title,
+        description: ogDescription = siteInfo.og.description,
+        image: {
+            src: ogImage = siteInfo.og.image.src,
+            alt: ogAlt = siteInfo.og.image.alt,
+        } = {}, // Default `image` object
+    } = {},
     canonicalURL = new URL(Astro.request.url, Astro.site),
     pageType = 'website',
     includeSiteTitle = true,
@@ -58,13 +65,8 @@ if (pageType === 'article') {
 
 const resolvedTitle = includeSiteTitle ? `${title} - ${siteInfo.title}` : title;
 
-const resolvedImage = {
-    src: new URL(ogImage.src.src || ogImage.src, Astro.site).toString(),
-    alt: ogImage.alt,
-};
-
+const resolvedOgImage = new URL(ogImage.src, Astro.site).toString();
 const resolvedOgTitle = smartypants(ogTitle, 1);
-
 ---
 
 <!-- High Priority Global Metadata -->
@@ -102,7 +104,6 @@ const resolvedOgTitle = smartypants(ogTitle, 1);
     rel="stylesheet"
 />
 
-
 <SEO
     description={description}
     canonical={canonicalURL}
@@ -110,7 +111,7 @@ const resolvedOgTitle = smartypants(ogTitle, 1);
         basic: {
             title: resolvedOgTitle,
             type: pageType,
-            image: resolvedImage.src,
+            image: resolvedOgImage,
             url: canonicalURL,
         },
         optional: {
@@ -118,7 +119,7 @@ const resolvedOgTitle = smartypants(ogTitle, 1);
             description: ogDescription,
         },
         image: {
-            alt: ogImage.alt,
+            alt: ogAlt,
         },
 
         ...(pageType === 'article' &&

@@ -1,0 +1,41 @@
+{
+  "path": "work/onepay",
+  "images": [
+    {
+      "title": "For You | Apply",
+      "src": "../../assets/work/onepay/lightbox/email__fy_apply.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "For You | Contact",
+      "src": "../../assets/work/onepay/lightbox/email__fy_contact.jpg"
+    },
+    {
+      "title": "For You | Newsletter",
+      "src": "../../assets/work/onepay/lightbox/email__fy_newsletter.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "For You | Password",
+      "src": "../../assets/work/onepay/lightbox/email__fy_password.jpg"
+    },
+    {
+      "title": "For Business | Newsletter",
+      "src": "../../assets/work/onepay/lightbox/email__fb_newsletter.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "For Business | Password",
+      "src": "../../assets/work/onepay/lightbox/email__fb_password.jpg"
+    },
+    {
+      "title": "For Business | Upload",
+      "src": "../../assets/work/onepay/lightbox/email__fb_upload.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "For Business | Contact",
+      "src": "../../assets/work/onepay/lightbox/email__fb_contact.jpg"
+    }
+  ]
+}

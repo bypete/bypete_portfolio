@@ -1,0 +1,58 @@
+{
+  "path": "work/epa",
+  "images": [
+    {
+      "title": "Home",
+      "src": "../../assets/work/epa/lightbox/home--detail.jpg",
+      "class": "row-span-1 col-span-2"
+    },
+    {
+      "title": "Home",
+      "src": "../../assets/work/epa/lightbox/home.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Event",
+      "src": "../../assets/work/epa/lightbox/event.jpg",
+      "class": "row-span-3 col-span-1"
+    },
+    {
+      "title": "Event detail",
+      "src": "../../assets/work/epa/lightbox/event--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Member",
+      "src": "../../assets/work/epa/lightbox/member.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "Member detail",
+      "src": "../../assets/work/epa/lightbox/member--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Mobile Member detail",
+      "src": "../../assets/work/epa/lightbox/sm_member--detail.jpg"
+    },
+    {
+      "title": "News",
+      "src": "../../assets/work/epa/lightbox/news.jpg"
+    },
+    {
+      "title": "News detail",
+      "src": "../../assets/work/epa/lightbox/news--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Sign up",
+      "src": "../../assets/work/epa/lightbox/signup.jpg",
+      "class": "row-span-2 col-span-3"
+    },
+    {
+      "title": "Sign detail",
+      "src": "../../assets/work/epa/lightbox/sm_signup--detail.jpg",
+      "class": "hidden"
+    }
+  ]
+}

@@ -7,9 +7,12 @@ excerpt: 'See how Xamarin.Forms was used to create a cross-platform app to impro
 taster: 'At launch, K Ring users could only manage their rings online. See how I helped create a cross-platform solution with Xamarin.Forms.'
 description: 'See how I helped to create a cross-platform app to improve the customer experience and make authentication easier.'
 author: 'Pete Wallace'
-ogImage: 
-  src: './mykringapp/og__image.jpg'
-  alt: 'MyKRing App'
+og:
+  title: 'MyKRing App'
+  description: 'See how I helped to create a cross-platform app to improve the customer experience and make authentication easier.'
+  image: 
+    src: '../../assets/work/mykringapp/og__image.jpg'
+    alt: 'MyKRing App'
 brand: 
   bg: 'bg-[#FF0069]'
   color: 'text-[#FF0069]'
@@ -52,15 +55,16 @@ tags:
 ---
 import { Image } from 'astro:assets'
 
-import BlockPicture from '~/components/Images/BlockPicture.astro';
+import BlockPicture from '~/components/images/BlockPicture.astro';
 import floating_handsets from './mykringapp/floating-handsets.jpg';
-import Skills from '~/components/Skills.astro'
-import Block from '~/components/Blocks/Block.astro'
+import Skills from '~/components/ui/Skills.astro'
+import Block from '~/components/blocks/Block.astro'
 import UL from '~/components/MDX/ul.astro'
 
 import Reviews from '~/components/Swiper/Reviews.astro'
-import Figure from '~/components/Figure.astro'
-import Gallery from '~/components/Lightbox/Gallery.astro'
+import Figure from '~/components/images/Figure.astro'
+
+import InlineBento from '~/components/lightbox/InlineBento.astro'
 import web_autotopup from './mykringapp/web-autotopup.jpg'
 import auto_topup from './mykringapp/1.1.0_auto-topup.jpg'
 import auto_topup_open from './mykringapp/1.1.0_auto-topup-open.jpg'
@@ -68,10 +72,39 @@ import iphone_hand from './mykringapp/iPhone__hand.png'
 import splitscreen_auto_topup from './mykringapp/app1.1__autotopup.jpg'
 import svgbg from '../../icons/contour.svg'
 
-import data from '~/data/work/mykringapp.data.json'
-
-
 export const components = {ul: UL}
+export const reviews = [
+    {
+      "headline": "Awesome product, great app",
+      "comment": "<p>I have loved my K Ring for several years. Never take it off. Always there. My primary payment. Could not imagine life without the flexibility of contactless payments from a ring! The app now completes the journey. Easy access. Everything in one place. Everything at hand. Brilliant job guys!</p>",
+      "cite": "Andrew1975.1975, 02/04/2022",
+      "rating": 5
+    },
+    {
+      "headline": "Intuitive and easy to use",
+      "comment": "<p>So good to finally be able to manage my payment ring on my phone</p>",
+      "cite": "Noodl05, 27/10/2021",
+      "rating": 5
+    },
+    {
+      "headline": "Excellent User Interface",
+      "comment": "<p>The MyKRing App is simple to navigate with all key features accessible from the Home Page. The Auto Top-Up function is fantastic...</p>",
+      "cite": "ScottPrez, 31/10/2021",
+      "rating": 5
+    },
+    {
+      "headline": "Fantastic addition to the KW tech",
+      "comment": "<p>Nice to see all the feature there and easy to use bank load features. Really easy to use!</p>",
+      "cite": "SimonSpeirs, 29/10/2021",
+      "rating": 5
+    },
+    {
+      "headline": "Great App at last!",
+      "comment": "<p>Works well and quick, great contact with Dev team if needed. Well done guys.</p>",
+      "cite": "Matt ardin, 29 December 2021 (Play store)",
+      "rating": 5
+    }
+]
 
 <p class="text-fl-step-1">At launch, K&nbsp;Ring users could only manage their rings online. Although a responsive framework was used during the development of the website, customers still anticipated a separate app and all the benefits it provides.</p>
 
@@ -135,25 +168,26 @@ The Auto top-up form was also streamlined and only appears when 'Use Auto top-up
   <Image src={splitscreen_auto_topup} alt="Auto top-up close ups" class="w-full h-auto" widths={[400, 960, 2100]} sizes={`100vw`} />
 </Figure>
  
-<Gallery collection='gScreens' data={data} >
-<Fragment slot="title">
+
+<InlineBento gallerySlug="mykringapp" >
+<Fragment slot='title'>
 ## App screens
 </Fragment>
-</Gallery>
+</InlineBento>
 
-
-<Gallery collection='gUx' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="mykringapp.ux" >
+<Fragment slot='title'>
 ## UX details
 </Fragment>
-</Gallery>
+</InlineBento>
+
 
 ## Ratings and Reviews
 
 <a href="https://apps.apple.com/gb/app/mykring/id1578688520?see-all=reviews" class="link" target="_blank"><span class="text-fl-step-3 font-black">4.6</span></a> out of 5 <span class="text-fl-step--1">(Sept &rsquo;22)</span>
 
 <div class="breakout bg-surface-raised">
-<Reviews data={data.reviews}/></div>
+<Reviews data={reviews}/></div>
 
 
 <BlockPicture src={floating_handsets} class="mb-fl-space-2xl" alt="Laptop and iPhone image showing K Ring website" credit={frontmatter.title} wrapper={true} />

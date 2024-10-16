@@ -3,16 +3,15 @@ import { type Props as HeadProps } from '~/components/SEO/Main.astro';
 import BaseLayout from './BaseLayout.astro';
 
 const fm = Astro.props.frontmatter || Astro.props;
-
 const head: HeadProps = {
-    title: fm.title,
-    description: fm.description,
-    ogTitle: fm.ogTitle || fm.title,
-    ogDescription: fm?.opengraph?.description || '',
-    ogImage: fm?.ogImage ?? undefined,
+    ...fm.head, // Spread any existing values in `fm.head`
+    title: fm.title || fm.head?.title,
+    description: fm.description || fm.head?.description,
+    og: fm.og || fm.head?.og,
 };
 
-const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
+const isHeroDark =
+    (fm.isHeroDark || (fm.heroConfig && fm.heroConfig.dark)) ?? false;
 ---
 
 <BaseLayout head={head} {isHeroDark}>

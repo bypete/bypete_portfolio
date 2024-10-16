@@ -6,9 +6,12 @@ taster: "Onepay gives workers a fast, easy and efficient way to get wage payment
 excerpt: 'A quick, easy, and efficient way to pay and receive wage payments'
 description: 'Discover how I contributed to the creation of a website that gives businesses and their employees a quick, easy, and efficient way to pay and receive wage payments.'
 author: 'Pete Wallace'
-ogImage: 
-  src: './onepay/og__image.jpg'
-  alt: 'OnePay'
+og:
+  title: 'OnePay'
+  description: 'Discover how I contributed to the creation of a website that gives businesses and their employees a quick, easy, and efficient way to pay and receive wage payments.'
+  image: 
+    src: '../../assets/work/onepay/og__image.jpg'
+    alt: 'OnePay'
 brand: 
   bg: 'bg-[#00a3e2]'
   color: 'text-[#00a3e2]'
@@ -59,11 +62,11 @@ tags:
   - 'fintech'
   - 'email'
 ---
-import BlockPicture from '~/components/Images/BlockPicture.astro';
-import Skills from '~/components/Skills.astro'
+import BlockPicture from '~/components/images/BlockPicture.astro';
+import Skills from '~/components/ui/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
 
-import Gallery from '~/components/Lightbox/Gallery.astro'
+import InlineBento from '~/components/lightbox/InlineBento.astro'
 export const components = {ul: UL}
 
 import data from '~/data/work/onepay.data.json'
@@ -88,36 +91,36 @@ Applicants are issued a Visa prepaid card, access to an online account and use o
 -   Working closely with the client, and drawing on my experience within the prepaid sector, I was able to accommodate their ideas and introduce some key revisions to improve the customer experience. The static templates were then handed over to a team of back-end developers, complete with detailed annotations, listing indexes, and support documentation.
 -   I assisted in configuring the content management system (Umbraco) and took responsibility for the initial population of all launch content. <span class="label label--info !m-0">collaboration</span>
 
-<Gallery collection='gScreens' data={data} >
-<Fragment slot="title">
+
+<InlineBento gallerySlug="onepay" >
+<Fragment slot='title'>
 ## Customer views
 </Fragment>
-</Gallery>
+</InlineBento>
 
-<Gallery collection='gAgency' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="onepay.agency" >
+<Fragment slot='title'>
 ## Agency views
 </Fragment>
-</Gallery>
+</InlineBento>
 
-<Gallery collection='gCs' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="onepay.cs" >
+<Fragment slot='title'>
 ## Customer Services views
 </Fragment>
-</Gallery>
+</InlineBento>
 
 ## Multilanguage
 
 The site was available in six languages and adopted the ‘One to One’ method – requiring only one instance of a page. **Vorto**, a property editor wrapper, converted each property editor into a multilingual property - allowing multiple languages per editable field.
 I was responsible for collating the translated content and entering it into the site as it became available, often with multiple revisions to manage. This included cross referencing all the dictionary elements within the .Net templates.
 
-<Gallery collection='gEmail' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="onepay.email" >
+<Fragment slot='title'>
 ## Email templates
 </Fragment>
 For the system emails, I used the Sass version of Foundation for emails. The language content was dynamically populated by injecting Umbraco’s dictionary at the point of sending. As with the website, two branded themes as well as unique URLs and image assets were required.
-</Gallery>
-
+</InlineBento>
 
 ## Learning points
 

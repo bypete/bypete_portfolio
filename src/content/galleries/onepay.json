@@ -1,0 +1,91 @@
+{
+  "path": "work/onepay",
+  "images": [
+    {
+      "title": "Homepage",
+      "src": "../../assets/work/onepay/lightbox/you.jpg",
+      "class": "row-span-2 col-span-2",
+      "cropped": false
+    },
+    {
+      "title": "Homepage",
+      "src": "../../assets/work/onepay/lightbox/you--detail.jpg",
+      "class": "hidden",
+      "cropped": false
+    },
+    {
+      "title": "Homepage",
+      "src": "../../assets/work/onepay/lightbox/sm_you.jpg",
+      "class": "row-span-2"
+    },
+    {
+      "title": "Business Homepage",
+      "src": "../../assets/work/onepay/lightbox/business.jpg",
+      "class": "row-span-2 col-span-2"
+    },
+    {
+      "title": "Business Homepage",
+      "src": "../../assets/work/onepay/lightbox/sm_business.jpg",
+      "class": "row-span-2"
+    },
+    {
+      "title": "Business Homepage detail",
+      "src": "../../assets/work/onepay/lightbox/sm_business--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Business landing",
+      "src": "../../assets/work/onepay/lightbox/business__landing.jpg"
+    },
+    {
+      "title": "Homepage",
+      "src": "../../assets/work/onepay/lightbox/business__landing--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Log in",
+      "src": "../../assets/work/onepay/lightbox/login.jpg"
+    },
+    {
+      "title": "Dashboard",
+      "src": "../../assets/work/onepay/lightbox/you__dashboard.jpg"
+    },
+    {
+      "title": "Mobile Dashboard",
+      "src": "../../assets/work/onepay/lightbox/sm_you__dashboard.jpg"
+    },
+    {
+      "title": "Statement",
+      "src": "../../assets/work/onepay/lightbox/you__statement.jpg",
+      "class": "row-span-2 col-span-2"
+    },
+    {
+      "title": "Mobile Statement",
+      "src": "../../assets/work/onepay/lightbox/sm_you__statement.jpg",
+      "cropped": false
+    },
+    {
+      "title": "Mobile Statement",
+      "src": "../../assets/work/onepay/lightbox/sm_you__statement--detail.jpg",
+      "class": "hidden",
+      "cropped": false
+    },
+    {
+      "title": "Load",
+      "src": "../../assets/work/onepay/lightbox/you__load.jpg"
+    },
+    {
+      "title": "Profile",
+      "src": "../../assets/work/onepay/lightbox/you__profile.jpg"
+    },
+    {
+      "title": "Profile detail",
+      "src": "../../assets/work/onepay/lightbox/you__profile--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Help",
+      "src": "../../assets/work/onepay/lightbox/you__help.jpg"
+    }
+  ]
+}

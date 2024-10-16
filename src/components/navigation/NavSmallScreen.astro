@@ -1,0 +1,208 @@
+---
+import type { NavItem } from '~/data/navigation';
+import MobileLink from '~/components/navigation/MobileLink.astro';
+import MobileLinkChild from '~/components/navigation/MobileLinkChild.astro';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    items: NavItem[];
+    class?: string;
+    level?: number;
+    currentPath?: string;
+    isHeroDark?: boolean;
+}
+
+const {
+    items,
+    class: className,
+    currentPath = Astro.url.pathname,
+    isHeroDark = false,
+} = Astro.props;
+---
+
+<ul x-ref="menu" class:list={['self-start', className]}>
+    {
+        items.map((item) => {
+            const isActive =
+                currentPath === item.url || currentPath.includes(item.url);
+            return item.children?.length ? (
+                <li
+                    class="has-children relative"
+                    x-data="{ isOpen: false}"
+                    x-id="['accordion-header-id', 'accordion-panel-id']"
+                    x-bind:aria-expanded="isOpen"
+                >
+                    <div class="flex items-center justify-between gap-x-fl-space-s">
+                        <MobileLink
+                            {isActive}
+                            url={item.url}
+                            title={item.label}
+                            {isHeroDark}
+                        />
+
+                        <button
+                            class="text-content-light"
+                            aria-label="Expand menu"
+                            x-bind:id="$id('accordion-header-id')"
+                            x-bind:aria-label="isOpen ? 'Close list' : 'Open list'"
+                            x-bind:aria-expanded="isOpen"
+                            x-bind:aria-controls="$id('accordion-panel-id')"
+                            x-on:click="isOpen = !isOpen"
+                        >
+                            <Icon
+                                name="hugeicons:plus-sign-circle"
+                                title="close icon"
+                                x-bind:class="{'rotate-45': isOpen, 'rotate-0': !isOpen}"
+                                class="h-fl-space-m w-fl-space-m transition-transform duration-500"
+                            />
+                        </button>
+                    </div>
+                    <ul
+                        x-cloak
+                        x-ref="children"
+                        class="h-0 w-full origin-top overflow-y-scroll transition-all duration-700"
+                        x-bind:id="$id('dropdown-button')"
+                        x-bind:id="$id('accordion-panel-id')"
+                        x-bind:class="isOpen ? 'overflow-auto ' : 'overflow-hidden pointer-events-none' "
+                        x-bind:style="isOpen ? {height: `${$refs.children.scrollHeight}px`} : {height: `0px`}"
+                    >
+                        {item.children.map((child) => {
+                            const isActive = currentPath === child.url;
+                            return (
+                                <>
+                                    <li>
+                                        <MobileLinkChild
+                                            title={child.label}
+                                            url={child.url}
+                                            {isActive}
+                                        />
+                                    </li>
+                                </>
+                            );
+                        })}
+                    </ul>
+                </li>
+            ) : (
+                <li>
+                    <MobileLink
+                        {isActive}
+                        url={item.url}
+                        title={item.label}
+                        {isHeroDark}
+                    />
+                </li>
+            );
+        })
+    }
+</ul>
+
+<script>
+    import { timeline, type TimelineDefinition } from 'motion';
+    import Alpine from 'alpinejs';
+
+    import Lenis from '@studio-freight/lenis';
+    const lenis = new Lenis();
+
+    const raf = (time) => {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+
+    const { body, documentElement: page } = document;
+    const underlay = document.getElementById('underlay');
+    const toggleDropdownVisibility = (isOpen, children, button) => {
+        if (underlay) {
+            const sequenceShowDropdown: TimelineDefinition = [
+                [button, { rotate: '180deg' }, { duration: 0.25 }],
+                [
+                    children,
+                    {
+                        opacity: [0, 1],
+                        transform: [
+                            'translateY(calc(-1 * var(--space-s))',
+                            'translateY(0px)',
+                        ],
+                        height: ['0px', 'auto'],
+                    },
+                    { at: '<', duration: 0.25 },
+                ],
+                [
+                    underlay,
+                    {
+                        opacity: 1,
+                    },
+                    { at: '<' },
+                ],
+            ];
+
+            const sequenceHideDropdown: TimelineDefinition = [
+                [button, { rotate: '0' }, { duration: 0.25 }],
+                [
+                    children,
+                    {
+                        opacity: 0,
+                    },
+                    { at: '<', duration: 0.25 },
+                ],
+                [
+                    underlay,
+                    {
+                        opacity: 0,
+                    },
+                    { at: '<' },
+                ],
+            ];
+
+            if (isOpen) {
+                underlay.classList.toggle('hidden', !isOpen);
+                timeline(sequenceShowDropdown, {}).finished.then(() => {});
+            } else {
+                timeline(sequenceHideDropdown, {}).finished.then(() => {
+                    underlay.classList.toggle('hidden', !isOpen);
+                });
+            }
+        }
+    };
+
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('menu', () => ({
+            open: false,
+            banner: document.getElementById('banner'),
+            freeze(freezeState) {
+                freezeState ? lenis.stop() : lenis.start();
+                body.classList.toggle('overflow-hidden', freezeState);
+                this.$refs.children.classList.toggle('hidden', !freezeState);
+            },
+            checkAriaExpanded() {
+                const buttons = this.banner?.querySelectorAll('button');
+                const expandedButtonFound = [...buttons].some(
+                    (button) => button.getAttribute('aria-expanded') === 'true',
+                );
+                this.freeze(expandedButtonFound);
+            },
+            toggle() {
+                this.open = !this.open;
+                this.open && this.$refs.button.focus();
+            },
+            close(focusAfter) {
+                this.open = false; // Close the children
+
+                if (focusAfter) {
+                    focusAfter.focus();
+                }
+            },
+            init() {
+                this.$watch('open', (value) => {
+                    this.checkAriaExpanded();
+
+                    toggleDropdownVisibility(
+                        value,
+                        this.$refs.children,
+                        this.$refs.button,
+                    );
+                });
+            },
+        }));
+    });
+</script>

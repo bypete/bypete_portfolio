@@ -1,0 +1,59 @@
+---
+interface Props {
+    title: string;
+    url: string;
+    isHeroDark: boolean;
+    isActive?: boolean;
+    class?: string;
+}
+
+const { title, url, isHeroDark, isActive, class: className } = Astro.props;
+
+const heroThemes = {
+    dark: {
+        text: [
+            'text-content-light',
+            'hover:text-link',
+            'focus:text-link',
+            'ring-transparent',
+            // Scroll up banner state:
+            'group-data-up/page:hover:text-link',
+            'group-data-up/page:focus:text-link',
+            'group-data-up/page:text-content-shout',
+        ],
+        active: [
+            'text-content-light',
+            'ring-brand',
+            'hover:text-content-shout',
+            'group-data-up/page:hover:text-link',
+            'group-data-up/page:focus:text-link',
+            'group-data-up/page:text-content-shout',
+        ],
+    },
+    default: {
+        text: [
+            'text-content-shout',
+            'ring-transparent',
+            'hover:text-link',
+            'focus:text-link',
+        ],
+        active: [
+            'text-content-shout',
+            'ring-brand',
+            'hover:text-content-shout',
+        ],
+    },
+};
+
+const currentTheme = isHeroDark ? heroThemes.dark : heroThemes.default;
+---
+
+<a
+    href={url}
+    class:list={[
+        'block flex h-full items-center rounded-full px-fl-space-2xs py-fl-space-3xs text-fl-base/fl-space-m font-semibold ring-2 transition duration-150 hover:bg-surface-raised focus:bg-surface-raised focus:outline-none',
+        isActive ? currentTheme.active : currentTheme.text,
+        className,
+    ]}
+    {...isActive && { 'data-state': 'active' }}>{title}</a
+>

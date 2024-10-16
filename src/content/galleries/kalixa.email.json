@@ -1,0 +1,18 @@
+{
+  "path": "content/work/kalixa/lightbox",
+  "images": [
+    {
+      "title": "Email Student",
+      "src": "../../assets/work/kalixa/lightbox/email__student--detail.jpg"
+    },
+    {
+      "title": "Email newsletter",
+      "src": "../../assets/work/kalixa/lightbox/email__student.jpg"
+    },
+    {
+      "title": "Email Student",
+      "src": "../../assets/work/kalixa/lightbox/email__student-002--detail.jpg",
+      "class": "hidden"
+    }
+  ]
+}

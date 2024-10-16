@@ -4,35 +4,31 @@ import BaseLayout from './BaseLayout.astro';
 import Tags from '~/components/ui/Tags.astro';
 import { Icon } from 'astro-icon/components';
 
-import Hero, { type Props as HeroProps } from '~/components/Hero/Hero.astro';
+import Hero, { type Props as HeroProps } from '~/components/hero/Hero.astro';
 import { readableDate, htmlDateString } from '~/js/utils.js';
-import BlockPicture from '~/components/Images/BlockPicture.astro';
+import BlockPicture from '~/components/images/BlockPicture.astro';
 import TableOfContents from '~/components/ui/TableOfContents.astro';
 import PostPreview from '~/components/ui/PostPreview.astro';
 
 const { frontmatter, minutesRead, headings, prevPost, nextPost } = Astro.props;
 
 const fm = frontmatter || Astro.props;
-
 const head: HeadProps = {
-    title: fm.title,
-    description: fm.description,
-    ogTitle: fm.ogTitle || fm.title,
-    ogDescription: fm?.ogDescription || '',
-    ogImage: fm?.ogImage ?? undefined,
+    ...fm.head, // Spread any existing values in `fm.head`
+    title: fm.title || fm.head?.title,
+    description: fm.description || fm.head?.description,
+    og: fm.og || fm.head?.og,
 };
 
-const heroConfig: HeroProps = {
-    title: fm.title,
-    hero: fm.hero,
-};
+const { hideToc = false, hideBreadcrumbs = false } = fm;
 
-const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
+const isHeroDark =
+    (fm.isHeroDark || (fm.heroConfig && fm.heroConfig.dark)) ?? false;
 ---
 
 <BaseLayout head={head} {isHeroDark}>
-    <slot name="slothero">
-        <Hero {...heroConfig} />
+    <slot name="hero">
+        <Hero heroConfig={fm.heroConfig} title={head.title} />
     </slot>
 
     <main
@@ -51,7 +47,11 @@ const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
                         />
                     )
                 }
-                {headings && <TableOfContents headings={headings} />}
+                {
+                    headings && headings.length > 2 && !hideToc && (
+                        <TableOfContents headings={headings} />
+                    )
+                }
                 <slot />
                 <aside class="not-prose mt-fl-space-m w-full py-fl-space-m">
                     <p class="inline-flex items-center">
@@ -81,7 +81,7 @@ const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
         </article>
     </main>
     <aside
-        class="bg-surface-sunken border-line border-t px-fl-space-s py-fl-space-2xl"
+        class="border-t border-line bg-surface-sunken px-fl-space-s py-fl-space-2xl"
     >
         <div
             class="mx-auto grid max-w-3xl grid-cols-1 justify-between gap-fl-space-l md:grid-cols-prevnext"

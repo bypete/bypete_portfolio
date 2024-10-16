@@ -6,9 +6,12 @@ taster: 'See how the award winning Kalixa Pay used highly targeted landing pages
 excerpt: 'Highly targeted, affiliate focused landing pages to convert prospects into cardholders'
 description: 'Discover how I helped to create highly targeted landing pages that converted prospects into Kalixa Pay cardholders. The site had to accommodate over 150,000 card holders as well as a global affiliate network.'
 author: 'Pete Wallace'
-ogImage: 
-  src: './kalixa/og__image.jpg'
-  alt: 'Kalixa'
+og:
+  title: 'Kalixa'
+  description: 'Discover how I helped to create highly targeted landing pages that converted prospects into Kalixa Pay cardholders. The site had to accommodate over 150,000 card holders as well as a global affiliate network.'
+  image: 
+    src: '../../assets/work/kalixa/og__image.jpg'
+    alt: 'Kalixa'
 brand: 
   bg: 'bg-[#2b93dd]'
   color: 'text-[#2b93dd]'
@@ -54,12 +57,13 @@ tags:
   - 'fintech'
 ---
 
-import BlockPicture from '~/components/Images/BlockPicture.astro';
+import BlockPicture from '~/components/images/BlockPicture.astro';
 import laptop_iphone_front from './kalixa/laptop_iphone_front.jpg';
-import Skills from '~/components/Skills.astro'
+import Skills from '~/components/ui/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
 
-import Gallery from '~/components/Lightbox/Gallery.astro'
+
+import InlineBento from '~/components/lightbox/InlineBento.astro'
 import data from '~/data/work/kalixa.data.json'
 export const components = {ul: UL}
 
@@ -86,26 +90,21 @@ The landing pages had to be consistent, quick and easy to implement, and respons
 
 The website was the central hub of all Kalixa’s marketing activity. The content needed to be updated rapidly but also accurately in accordance with any regulatory requirements.
 
-
-
-
-<Gallery collection='gScreens' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="kalixa" >
+<Fragment slot='title'>
 ## Layouts
 </Fragment>
+</InlineBento>
 
-</Gallery>
-
-<Gallery collection='gVariations' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="kalixa.variations" >
+<Fragment slot='title'>
 ## Campaign variations
 </Fragment>
+</InlineBento>
 
-</Gallery>
-
-<Gallery collection='gEmail' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="kalixa.email" >
+<Fragment slot='title'>
 ## Email campaigns
 </Fragment>
+</InlineBento>
 
-</Gallery>

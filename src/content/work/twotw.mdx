@@ -6,9 +6,12 @@ taster: 'The site quickly became the hub that connected everything together, ser
 excerpt: 'A hub that connected everything together, serving both longtime fans and inspiring a new generation'
 description: 'Discover how I contributed to the creation of this online hub that linked everything together, serving both longtime fans and inspiring a new generation.'
 author: 'Pete Wallace'
-ogImage: 
-  src: './twotw/og__image.jpg'
-  alt: 'Jeff Waynes Musical version of The War of the Worlds'
+og:
+  title: 'Jeff Waynes Musical version of The War of the Worlds'
+  description: 'Discover how I contributed to the creation of this online hub that linked everything together, serving both longtime fans and inspiring a new generation.'
+  image: 
+    src: '../../assets/work/twotw/og__image.jpg'
+    alt: 'Jeff Waynes Musical version of The War of the Worlds'
 brand: 
   bg: 'bg-[#709168]'
   color: 'text-[#709168]'
@@ -51,11 +54,12 @@ tags:
 import {Image} from 'astro:assets'
 import { Icon } from 'astro-icon/components';
 import UL from '~/components/MDX/ul.astro'
-import Skills from '~/components/Skills.astro'
+import Skills from '~/components/ui/Skills.astro'
 
-import Gallery from '~/components/Lightbox/Gallery.astro'
+
+import InlineBento from '~/components/lightbox/InlineBento.astro'
 export const components = {ul: UL}
-import Block from '~/components/Blocks/Block.astro'
+import Block from '~/components/blocks/Block.astro'
 
 import data from '~/data/work/twotw.data.json'
 import svgbg from '~/assets/details/heap__plus.svg';
@@ -101,17 +105,16 @@ The site promoted and then documented **8 Arena tours**, culminating in the _40<
 -   The client could write newsletters and some news items, but I was in charge of populating the majority of the content. Each tour or album release was usually preceded by a minor site rebranding.
 
 
-
-<Gallery collection='gOld' data={data} >
-<Fragment slot="title">
-## Previous site
+<InlineBento gallerySlug="twotw.old" >
+<Fragment slot='title'>
+## Original site
 </Fragment>
+</InlineBento>
 
-</Gallery>
-
-<Gallery collection='gScreens' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="twotw" >
+<Fragment slot='title'>
 ## Reworked visuals
 </Fragment>
 The images below were created for a site refresh in preparation for an Arena tour in the United Kingdom and Europe.
-</Gallery>
+</InlineBento>
+

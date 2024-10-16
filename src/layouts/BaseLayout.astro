@@ -3,14 +3,14 @@ import MainSEO, { type Props as HeadProps } from '~/components/SEO/Main.astro';
 import GoogleTagNoScript from '~/components/SEO/GoogleTagNoScript.astro';
 import GoogleTag from '~/components/SEO/GoogleTag.astro';
 import { ViewTransitions } from 'astro:transitions';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import Underlay from '../components/ui/Underlay.astro';
-import CookieNotice from '../components/CookieNotice.astro';
-import Shortcuts from '../components/Shortcuts.astro';
-import Accessibility from '../components/Accessibility.astro';
-import Overlay from '../components/ui/Overlay.astro';
-import MobileNavigation from '~/components/MobileNavigation.astro';
+import Header from '~/components/layout/Header.astro';
+import Footer from '~/components/layout/Footer.astro';
+import Underlay from '~/components/ui/Underlay.astro';
+import CookieNotice from '~/components/ui/CookieNotice.astro';
+import Shortcuts from '~/components/ui/Shortcuts.astro';
+import Accessibility from '~/components/ui/Accessibility.astro';
+import Overlay from '~/components/ui/Overlay.astro';
+import OffCanvasNavigation from '~/components/layout/OffCanvasNavigation.astro';
 
 const fm = Astro.props.frontmatter || Astro.props;
 
@@ -28,7 +28,8 @@ import '~/styles/tailwind.css';
 >
     <head>
         <MainSEO {...head} {isHeroDark} />
-        {isProduction && <GoogleTag />}
+        <!-- {isProduction && <GoogleTag />} -->
+        <GoogleTag />
         <!-- <ViewTransitions /> -->
     </head>
     <body
@@ -46,7 +47,7 @@ import '~/styles/tailwind.css';
         />
 
         <div id="wrapperCanvas" class="relative">
-            <MobileNavigation id="wrapperOffCanvasRight" {isHeroDark} />
+            <OffCanvasNavigation id="wrapperOffCanvasRight" {isHeroDark} />
 
             <Overlay class="bg-overlay-dark" />
 
@@ -58,7 +59,7 @@ import '~/styles/tailwind.css';
                 <Underlay {isHeroDark} />
                 <div class="bg-surface outline-none">
                     <div
-                        class="shader absolute inset-0 h-full w-full opacity-[2%]"
+                        class="shader pointer-events-none absolute inset-0 h-full w-full opacity-[2%]"
                     >
                     </div>
                     <slot />

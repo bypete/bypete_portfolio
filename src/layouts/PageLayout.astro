@@ -1,48 +1,41 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import { type Props as HeadProps } from '~/components/SEO/Main.astro';
-import Hero, { type Props as HeroProps } from '~/components/Hero/Hero.astro';
+import Hero, { type Props as HeroProps } from '~/components/hero/Hero.astro';
 import TableOfContents from '~/components/ui/TableOfContents.astro';
-import Breadcrumbs from '~/components/ui/Breadcrumbs.astro';
 
 const fm = Astro.props.frontmatter || Astro.props;
-
+const { heroConfig = {}, class: className } = fm;
 const head: HeadProps = {
-    title: fm.title,
-    description: fm.description,
-    ogTitle: fm.ogTitle || fm.title,
-    ogDescription: fm?.ogDescription || '',
-    ogImage: fm?.ogImage ?? undefined,
+    ...fm.head, // Spread any existing values in `fm.head`
+    title: fm.title || fm.head?.title,
+    description: fm.description || fm.head?.description,
+    og: fm.og || fm.head?.og,
 };
 
-const heroConfig: HeroProps = {
-    title: fm.title,
-    hero: fm.hero,
-};
-
-const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
+const isHeroDark = (fm.isHeroDark || (fm.heroConfig && fm.heroConfig.dark)) ?? false;
 const { headings, isWide = false, prose = true } = Astro.props;
 const { hideToc = false, hideBreadcrumbs = false } = fm;
 ---
 
-<BaseLayout head={head} {isHeroDark}>
-    <slot name="slothero">
-        <Hero {...heroConfig} />
-        {!hideBreadcrumbs && <Breadcrumbs title={head.title} />}
-    </slot>
-
+<BaseLayout {head} {isHeroDark}>
     <main
-        id="main-content"
-        class="relative mx-auto max-w-container py-fl-space-xl"
-    >
+        id="main-content" class:list={[className && className]}>
+        <slot name="slothero" >
+          <Hero heroConfig={heroConfig} title={head.title} />
+        </slot>
         <div
-            class:list={[
-                'text-fl-step-0',
-                prose && 'rte prose ',
-                isWide ? 'w-full' : 'mx-auto  max-w-3xl',
-            ]}
+        class:list={[
+          'mx-auto w-full pb-fl-space-2xl text-fl-step-0',
+          prose && 'rte prose',
+          isWide ? 'max-w-container' : 'max-w-3xl px-fl-space-m',
+      ]}
         >
-            {headings && !hideToc && <TableOfContents headings={headings} />}
+        {
+          headings && headings.length > 2 && !hideToc && (
+              <TableOfContents headings={headings} />
+          )
+      }
             <slot />
         </div>
     </main>

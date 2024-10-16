@@ -4,15 +4,15 @@ import { heroSlides, roles } from '~/data/home';
 import { clientSlides } from '~/data/clients';
 import SwiperHome from '~/components/Swiper/Home.astro';
 import SplashLayout from '~/layouts/SplashLayout.astro';
-import WorkCard from '~/components/WorkCard.astro';
-import Link from '~/components/ui/Link.astro';
+import WorkCard from '~/components/work/WorkCard.astro';
+import Button from '~/components/ui/Button.astro';
 import { Icon } from 'astro-icon/components';
 import Roles from '~/components/Roles.astro';
 import SwiperClients from '~/components/Swiper/Clients.astro';
 import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
 
 const title = 'Home';
-const hero = {
+const heroConfig = {
     dark: true,
 };
 
@@ -35,7 +35,7 @@ const formattedPosts = formatBlogPosts(allWork, {
 });
 ---
 
-<SplashLayout title={title} isHeroDark={hero.dark} {ogImage}>
+<SplashLayout title={title} isHeroDark={heroConfig.dark} {ogImage}>
     <section
         class="relative origin-top items-center overflow-x-hidden bg-slate-900 bg-cover pb-fl-space-splashoverlap angleclip lg:angleclip-lg [&+*]:-mt-fl-space-splashoverlap"
     >
@@ -72,7 +72,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                 <p
                     class="flex flex-wrap items-center gap-fl-space-xs text-shadow-none"
                 >
-                    <Link
+                    <Button
                         theme="primary"
                         isIcon={true}
                         class="md:inline-flex"
@@ -82,8 +82,8 @@ const formattedPosts = formatBlogPosts(allWork, {
                             name="lucide:arrow-right-circle"
                             class="h-fl-space-s w-fl-space-s animate-nudge-right"
                         />
-                    </Link>
-                    <Link href="/about/" theme="whiteline">Read my bio</Link>
+                    </Button>
+                    <Button href="/about/" theme="whiteline">Read my bio</Button>
                 </p>
             </div>
             <!-- END content -->
@@ -148,7 +148,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                         > section.
                     </p>
                     <p>
-                        <Link
+                        <Button
                             theme="primary"
                             isIcon={true}
                             class="md:inline-flex"
@@ -158,7 +158,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                                 name="lucide:arrow-right-circle"
                                 class="h-fl-space-s w-fl-space-s animate-nudge-right"
                             />
-                        </Link>
+                        </Button>
                     </p>
                 </div>
             </div>

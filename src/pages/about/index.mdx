@@ -1,44 +1,12 @@
 ---
 title: 'About'
-layout: '~/layouts/PageLayout.astro'
 taster: 'I’m a Surrey based Front-End developer with over two decades of experience in digital.'
 excerpt: 'I’m a Surrey based Front-End developer with over two decades of experience in digital.'
 description: 'Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.'
 keywords: 'Surrey based Front-End developer, Bespoke website development, HTML, CSS, Creative development, The Great Outdoors, Balance and wellbeing'
-ogImage: 
-  src: '/og/og__about.jpg'
-  alt: 'Portfolio Site'
-ogDescription: 'Pete Wallace is an experienced Front-End developer based in Surrey, UK.'
-hero:
-    mode: 'cover'
+heroConfig: 
     headline: 'Hello!'
-    copy: "<p class='text-fl-step-1' data-animate='fadeInDown'>I'm Pete Wallace, a surrey based Front-End developer with over two decades of experience in digital.</p>"
-    actions: 
-      - text: 'Read my bio'
-        theme: 'secondary'
-        jump: true
-        href: '#main-content'
-        icon: 'lucide:arrow-down-circle'
-      - text: 'Contact me'
-        theme: 'whiteline'
-        href: '/connect/'
-    visual: 
-      src: 'profile__hd.png'
-      alt: 'Profile picture of Pete Wallace'
-      densities: [1.5, 2]
-      width: 720
-    cover:
-      src: 'hero/concrete--teal.jpg'
-      alt: 'Teal background with concrete detail texture'
-      artDirectives: 
-        - src: 'hero/concrete--teal@sm.jpg'
-          media: '(max-width: 799px)'
-        - src: 'hero/concrete--teal.jpg'
-          media: '(min-width: 800px)'
     bg: 'bg-teal-400'
-    prompt: 'scroll'
-    isContained: true
-    threshold: 25
     dark: true
 skillset:
     text: 'text-content'
@@ -86,23 +54,84 @@ skillset:
           skills:
               - 'Creativity and problem solving'
 ---
-
-import Skills from '~/components/Skills.astro'
+import PageLayout from '~/layouts/PageLayout.astro';
+import Skills from '~/components/ui/Skills.astro'
 import Availability from '~/components/ui/Availability.astro'
-import Banner from '~/components/Banners/Portfolio.astro';
+import Banner from '~/components/banners/Portfolio.astro';
 
+import Hero from '~/components/hero/Hero.astro';
 
 import listing_index from '~/assets/listing-index.jpg';
 import woodland from '~/assets/blocks/woodland.webp';
 import google_lens from '~/assets/google-lens.png';
 import { Image } from 'astro:assets';
-import Figure from '~/components/Figure.astro'
-import BlockPicture from '~/components/Images/BlockPicture.astro';
-import BlockImage from '~/components/Images/BlockImage.astro';
+import Figure from '~/components/images/Figure.astro'
+import BlockPicture from '~/components/images/BlockPicture.astro';
+import BlockImage from '~/components/images/BlockImage.astro';
 
 import { getCollection } from 'astro:content';
 export const allWork = await getCollection('work');
 export const postCount = allWork.length;
+
+import profile from '~/assets/profile__hd.png';
+import heroLG from '~/assets/hero/concrete--teal.jpg';
+import heroSM from '~/assets/hero/concrete--teal@sm.jpg';
+
+import ogImage from '~/assets/og/og__about.jpg';
+
+<PageLayout {...frontmatter} og={{
+    ...frontmatter.og,
+    title: 'About Pete Wallace',
+    description: 'Pete Wallace is an experienced Front-End developer based in Surrey, UK. Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.',
+    image: {
+      src: ogImage,
+      alt: "About Pete Wallace"
+    }
+  }} >
+  <Hero
+      slot="slothero"
+      title="Helloooooooo"
+      heroConfig={{
+          ...frontmatter.heroConfig,
+          mode: 'cover',
+          copy: "<p class='text-fl-step-1' data-animate='fadeInDown'>I'm Pete Wallace, a surrey based Front-End developer with over two decades of experience in digital.</p>",
+          actions: [
+              {
+                  text: 'Read my bio',
+                  theme: 'secondary',
+                  jump: true,
+                  href: '#main-content',
+                  icon: 'lucide:arrow-down-circle',
+              },
+              {
+                  text: 'Contact me',
+                  theme: 'whiteline',
+                  href: '/connect/',
+              },
+          ],
+          visual: {
+              src: profile,
+              alt: 'Profile picture of Pete Wallace',
+              densities: [1.5, 2],
+              width: 720,
+          },
+          cover: {
+              src: heroLG,
+              alt: 'Teal background with concrete detail texture',
+              artDirectives: [
+                  {
+                      src: heroSM,
+                      media: '(max-width: 799px)',
+                  },
+              ],
+          },
+          prompt: 'scroll',
+          overflow: true,
+          threshold: 25,
+      }}
+  />
+
+
 
 ## The backstory
 I began my career in multimedia, primarily working on e-learning, training, and press pack applications for prominent publishers such as **BBC Worldwide**, **BBC Active**, **University of Cambridge**, **Oxford University Press**, **UKTV**, and **Kellogg's** with the award winning agency - Fifth Dimension Productions.
@@ -144,3 +173,5 @@ Beyond work, I enjoy spending time outdoors with my family, especially my two yo
 Thanks for exploring my bio! I'm currently <Availability url={`/connect/`} /> for new roles in Front-End development. If you believe I could be a good addition to your team, please don't hesitate to [connect](/connect/) and send me a message - or reach out via [LinkedIn](https://www.linkedin.com/in/peter-wallace-a5002a7a/). I'm genuinely looking forward to potential collaborations.
 
 For a closer look at my portfolio, head over to the [work](/work/) section. There are currently **{postCount} case studies** to explore.
+
+</PageLayout>

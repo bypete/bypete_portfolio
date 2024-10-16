@@ -6,10 +6,12 @@ taster: 'Armed Forces & Veterans is a veterans-led organisation that assists ser
 excerpt: 'See how I helped this veterans-led organisation launch their branded prepaid MasterCard'
 description: 'Read on to learn about my role in the launch of the Armed Forces & Veterans prepaid MasterCard, an exclusive cashback programme available to serving and retired members of the British Armed Forces and their immediate families.'
 author: 'Pete Wallace'
-ogImage: 
-  src: './afv/og__image.jpg'
-  alt: 'AFV Estates Limited logo'
-ogDescription: 'Read on to learn about my role in the launch of the Armed Forces & Veterans prepaid MasterCard, an exclusive cashback programme available to serving and retired members of the British Armed Forces and their immediate families.'
+og:
+  title: 'AF&V Privilege MasterCard'
+  description: 'Read on to learn about my role in the launch of the Armed Forces & Veterans prepaid MasterCard, an exclusive cashback programme available to serving and retired members of the British Armed Forces and their immediate families.'
+  image: 
+    src: '../../assets/work/afv/og__image.jpg'
+    alt: 'AFV Estates Limited logo'
 brand: 
   bg: 'bg-[#384c55]'
   color: 'text-[#384c55]'
@@ -52,9 +54,13 @@ tags:
   - 'fintech'
 ---
 import UL from '~/components/MDX/ul.astro'
-import Skills from '~/components/Skills.astro'
+import Skills from '~/components/ui/Skills.astro'
 
-import Gallery from '~/components/Lightbox/Gallery.astro'
+
+
+
+import InlineBento from '~/components/lightbox/InlineBento.astro'
+import exhibition from '~/content/galleries/afv.json';
 import data from '~/data/work/afv.data.json'
 export const components = {ul: UL}
 
@@ -79,9 +85,8 @@ The website needed to emphasise the benefits of their prepaid AF&V Privilege Car
 -   I assisted in configuring the content management system (Umbraco) and took responsibility for the initial population of all launch content. <span class="label label--info !m-0">collaboration</span>
 
 
-<Gallery collection='gScreens' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="afv" >
+<Fragment slot='title'>
 ## Images
 </Fragment>
-
-</Gallery>
+</InlineBento>

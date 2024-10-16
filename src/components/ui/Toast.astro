@@ -1,10 +1,28 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 interface Props {
     bg?: string;
     id?: string;
     hidden?: boolean;
+    theme?: 'plain' | 'settings' | 'info';
 }
-const { id, bg, hidden = true } = Astro.props;
+const { id, bg, theme = 'plain', hidden = true } = Astro.props;
+
+const themeSet = {
+    settings: {
+        icon: 'hugeicons:configuration-01',
+        bg: 'bg-surface-bedrock',
+        border: 'border-black/5',
+        stroke: 'text-content-light',
+    },
+    info: {
+        icon: 'lucide:info',
+        bg: 'bg-info',
+        border: 'border-note',
+        stroke: 'text-content-light',
+    },
+};
 ---
 
 <div
@@ -16,5 +34,26 @@ const { id, bg, hidden = true } = Astro.props;
         hidden && 'hidden',
     ]}
 >
-    <slot />
+    {
+        theme === 'plain' ? (
+            <slot />
+        ) : (
+            <div class="grid grid-cols-[auto,1fr] ">
+                <div
+                    class:list={[
+                        themeSet[theme].bg,
+                        themeSet[theme].stroke,
+                        themeSet[theme].border,
+                        'overflow-hidden rounded-bl-tight rounded-tl-tight border-r',
+                    ]}
+                >
+                    <Icon
+                        name={themeSet[theme].icon}
+                        class="m-fl-space-2xs-xs h-auto w-fl-space-s-m"
+                    />
+                </div>
+                <slot />
+            </div>
+        )
+    }
 </div>

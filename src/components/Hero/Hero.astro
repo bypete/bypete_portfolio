@@ -1,10 +1,17 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-
-import GridImage from '~/components/Hero/GridImage.astro';
-import GridCover from '~/components/Hero/GridCover.astro';
+import Breadcrumbs from '~/components/ui/Breadcrumbs.astro';
+import type { Props as CTALinks } from '~/components/ui/Button.astro';
+import ModePlain from '~/components/hero/ModePlain.astro';
+import ModeCover from '~/components/hero/ModeCover.astro';
 import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
 import SwipePrompt from '~/components/ui/SwipePrompt.astro';
+
+type HeroTheme = {
+    wrapper?: string[];
+    hero?: string[];
+    mandatory?: string[];
+};
 
 export interface VisualKeys {
     src: string | ImageMetadata;
@@ -34,154 +41,129 @@ export interface CoverKeys {
     class?: string;
 }
 
-export interface CTA {
+interface CTA extends CTALinks {
     text: string;
     jump: boolean;
-    theme?:
-        | 'primary'
-        | 'secondary'
-        | 'white'
-        | 'whiteline'
-        | 'outline'
-        | 'quiet'
-        | 'link'
-        | 'disabled';
-    class?: string;
-    size?: 'sm' | 'md' | 'lg';
-    icon: string;
     href: string;
+    icon: string;
 }
 
 export interface HeroKeys {
-    wrapper?: string;
+    wrapperClass?: string;
+    breadcrumbs?: boolean;
     dark?: boolean;
     bg?: string;
     headline?: string;
-    mode?: 'plain' | 'image' | 'cover' | 'custom';
+    mode?: 'plain' | 'cover' | 'custom';
     class?: string;
     visual?: Partial<VisualKeys>;
     copy?: string;
     cover?: Partial<CoverKeys>;
     legibility?: string;
-    isContained?: boolean;
+    overflow?: boolean;
     actions?: CTA[];
     prompt?: 'swipe' | 'scroll';
 }
 
 export interface Props extends HTMLAttributes<'div'> {
-    title?: string;
-    hero?: Partial<HeroKeys>;
+    title: string;
+    heroConfig?: Partial<HeroKeys>;
 }
 
-const { title, hero = {}, ...rest } = Astro.props;
+const { title, heroConfig = {}, ...rest } = Astro.props;
 const {
     dark = false,
-    wrapper = '',
+    wrapperClass = '',
+    breadcrumbs = false,
     bg = '',
     mode = 'plain',
     class: ClassName = '',
     legibility,
-    isContained,
+    overflow,
     prompt,
     visual,
     cover,
     headline,
     actions,
     copy,
-} = hero as HeroKeys;
+} = heroConfig as HeroKeys;
 
 const color = legibility || (dark ? 'text-content-light' : 'text-content');
 const heroTitle = headline || title;
-let wrapperClass = '';
+
 let inView = {
     'data-inview': `${mode}`,
 };
 
-switch (mode) {
-    case 'plain':
-        wrapperClass = `${
-            wrapper || ''
-        } max-w-container mx-auto pt-[var(--headerheight)]`;
+const heroThemes: Record<string, HeroTheme> = {
+    plain: {
+        wrapper: ['mb-fl-space-xl'],
+        hero: [
+            'bg-surface-sunken',
+            'curveclip',
+            'shadow-hero',
+            'shadow-surface-sunk',
+            'pt-[var(--headerheight)]',
+        ],
+    },
+    image: {
+        hero: [''],
+    },
+    cover: {
+        hero: ['bg-primary', 'shadow-primary-shade'],
+        mandatory: ['shadow-hero', 'curveclip'],
+    },
+};
 
-        break;
-    case 'image':
-        wrapperClass = wrapper || '';
-        break;
-    case 'custom':
-        wrapperClass = `${wrapper || ''} custom-wrapper`;
-        break;
-    default:
-        wrapperClass = wrapper || '';
-}
+const currentHero = heroThemes[mode as keyof typeof heroThemes];
+const heroResult = [
+    ...(ClassName ? ClassName.split(' ') : currentHero.hero ?? []),
+    ...(currentHero.mandatory ?? []),
+    overflow && 'overflow-hidden',
+    color,
+].filter(Boolean); // Filter out any falsey values (e.g., undefined, false)
 ---
 
 <div
     id="hero"
-    class:list={[
-        'relative w-full outline-none ',
-        bg ? bg : '',
-        color ? color : '',
-        ClassName,
-        wrapperClass,
-        { 'overflow-hidden': isContained },
-    ]}
-    {...inView}
-    {...rest}
+    class:list={[wrapperClass ? wrapperClass : currentHero.wrapper]}
+    {...mode && { 'data-mode': `${mode}` }}
 >
-    {
-        mode === 'plain' && (
-            <>
-                <h1
-                    id="headline"
-                    class="heading relative mx-auto my-fl-space-xl max-w-3xl bg-gradient-to-b from-headline-start to-headline-end bg-clip-text text-center text-fl-step-6 text-transparent "
-                >
-                    {title}
-                </h1>
-            </>
-        )
-    }
-    {
-        mode === 'image' && (
-            <>
-                <GridImage {visual}>
-                    <slot slot="background" name="background" />
-                    <slot slot="content" name="content" />
-                    <slot slot="visual" name="visual" />
-                </GridImage>
-            </>
-        )
-    }
+    <div
+        class:list={[
+            'relative flow-root w-full border-b border-transparent outline-none',
+            heroResult,
+        ]}
+        {...inView}
+        {...rest}
+    >
+        {mode === 'plain' && <ModePlain headline={heroTitle} />}
 
-    {
-        mode === 'cover' && (
-            <>
-                <GridCover
-                    headline={heroTitle}
-                    {visual}
-                    {cover}
-                    legibility={color}
-                    {copy}
-                    {actions}
-                />
-            </>
-        )
-    }
-    {
-        mode === 'custom' && (
-            <>
-                <slot />
-            </>
-        )
-    }
+        {
+            mode === 'cover' && (
+                <>
+                    <ModeCover
+                        headline={heroTitle}
+                        {visual}
+                        {cover}
+                        legibility={color}
+                        {copy}
+                        {actions}
+                    />
+                </>
+            )
+        }
 
-    <slot />
+        <slot />
 
-    {
-        prompt && (
-            <div class="pointer-events-none absolute bottom-fl-space-s left-1/2 z-100 -translate-x-1/2  ">
-                {prompt === 'scroll' && <ScrollPrompt />}
-                {prompt === 'swipe' && <SwipePrompt />}
-            </div>
-        )
-    }
+        {
+            prompt && (
+                <div class="pointer-events-none absolute bottom-fl-space-s left-1/2 z-100 -translate-x-1/2">
+                    {prompt === 'scroll' && <ScrollPrompt />}
+                    {prompt === 'swipe' && <SwipePrompt />}
+                </div>
+            )
+        }
+    </div>
+    {breadcrumbs && <Breadcrumbs title={title} />}
 </div>

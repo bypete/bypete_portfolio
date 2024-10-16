@@ -6,9 +6,12 @@ taster: 'A fun website lovingly curated by gaming enthusiasts that quickly becam
 excerpt: 'A fun website lovingly curated by gaming enthusiasts that quickly became a huge retro hit.'
 description: 'Discover how I helped launch an immensely fun website lovingly curated by gaming enthusiasts - and see how it quickly became a huge retro hit. Learn how each genre was meticulously documented in order to help fans relive those sweet nostalgic childhood memories.'
 author: 'Pete Wallace'
-ogImage: 
-  src: './gyl/og__image.jpg'
-  alt: 'GamesYouLoved'
+og:
+  title: 'GamesYouLoved'
+  description: 'Discover how I helped launch an immensely fun website lovingly curated by gaming enthusiasts - and see how it quickly became a huge retro hit. Learn how each genre was meticulously documented in order to help fans relive those sweet nostalgic childhood memories.'
+  image: 
+    src: '../../assets/work/gyl/og__image.jpg'
+    alt: 'GamesYouLoved'
 brand: 
   bg: 'bg-[#24a7be]'
   color: 'text-[#24a7be]'
@@ -54,14 +57,15 @@ tags:
 import {Image} from 'astro:assets'
 import { Icon } from 'astro-icon/components';
 
-import BlockPicture from '~/components/Images/BlockPicture.astro';
+import BlockPicture from '~/components/images/BlockPicture.astro';
 
-import Skills from '~/components/Skills.astro'
+import Skills from '~/components/ui/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
 
-import Gallery from '~/components/Lightbox/Gallery.astro'
-import Figure from '~/components/Figure.astro'
-import Block from '~/components/Blocks/Block.astro'
+
+import InlineBento from '~/components/lightbox/InlineBento.astro'
+import Figure from '~/components/images/Figure.astro'
+import Block from '~/components/blocks/Block.astro'
 export const components = {ul: UL}
 import Note from '~/components/ui/Note.astro'
 
@@ -121,15 +125,13 @@ GYL has a substantial social media presence across multiple platforms and the si
 > ...They evolved a simple idea of our love for everything retrogaming into an exciting and fun digital experience.
 ><cite class="text-fl-base ">GamesYouLoved.com</cite>
 
-<Gallery collection='gScreens' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="gyl" >
+<Fragment slot='title'>
 ## Site visuals
 </Fragment>
-
-</Gallery>
+</InlineBento>
 
 <BlockPicture src={block__sw_40} class="my-fl-space-2xl" alt="Exhibition event" credit='GamesYouLoved' wrapper={true} />
-
 
 ## Final comments
 

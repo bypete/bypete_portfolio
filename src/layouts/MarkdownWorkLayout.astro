@@ -3,28 +3,33 @@ import BaseLayout from './BaseLayout.astro';
 import { type Props as HeadProps } from '~/components/SEO/Main.astro';
 
 import Tags from '~/components/ui/Tags.astro';
-import Link from '~/components/ui/Link.astro';
+import Button from '~/components/ui/Button.astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
-import HeroPicture from '~/components/Images/HeroPicture.astro';
+import HeroPicture from '~/components/images/HeroPicture.astro';
 import { readableDate, htmlDateString } from '~/js/utils.js';
 import TableOfContents from '~/components/ui/TableOfContents.astro';
 import WorkPreview from '~/components/ui/WorkPreview.astro';
-import BlockPicture from '~/components/Images/BlockPicture.astro';
+import BlockPicture from '~/components/images/BlockPicture.astro';
 import ReadTime from '~/components/ui/ReadTime.astro';
 
-const { frontmatter, section, minutesRead, headings, prevPost, nextPost } =
-    Astro.props;
-let resolvedHeadings = headings;
+const {
+    frontmatter,
+    section,
+    minutesRead,
+    headings,
+    prevPost,
+    nextPost,
+    gallery,
+} = Astro.props;
 
 const fm = frontmatter || Astro.props;
+const { hideToc = false, hideBreadcrumbs = false } = fm;
 
 const head: HeadProps = {
     title: fm.title,
     description: fm.description,
-    ogTitle: fm.ogTitle || fm.title,
-    ogDescription: fm?.ogDescription || '',
-    ogImage: fm?.ogImage ?? undefined,
+    og: fm.og,
     // Articles
     published_time: fm.pubDate,
     author: fm.author,
@@ -33,16 +38,12 @@ const head: HeadProps = {
     pageType: 'article',
 };
 
-const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
-
-// if (frontmatter.skillset) {
-//     const skillHeading = { depth: 2, slug: 'skills', text: 'Skills' };
-//     resolvedHeadings = [skillHeading, ...headings];
-// }
+const isHeroDark =
+    (fm.isHeroDark || (fm.heroConfig && fm.heroConfig.dark)) ?? false;
 ---
 
 <BaseLayout head={head} {isHeroDark}>
-    <slot name="slothero">
+    <slot name="hero">
         <div
             class="relative z-10 grid w-full grid-cols-1 shadow-lg shadow-content-dark/10 lg:h-screenSvh lg:grid-cols-2 conpad:grid-cols-workcontianer"
         >
@@ -78,7 +79,7 @@ const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
                     <Tags tags={frontmatter.tags} url={true} />
                 </div>
                 <p class="mt-fl-space-m hidden md:block">
-                    <Link
+                    <Button
                         theme="outline"
                         isIcon={true}
                         class="inline-flex transform duration-300"
@@ -89,7 +90,7 @@ const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
                             name="lucide:mouse"
                             class="h-4 w-4 animate-nudge-down"
                         />
-                    </Link>
+                    </Button>
                 </p>
             </div>
         </div>
@@ -103,7 +104,7 @@ const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
             <div class="rte prose mx-auto max-w-3xl text-fl-step-0">
                 {
                     frontmatter.product && (
-                        <div class="flex h-photo items-center  justify-center bg-surface-sunken breakout md:h-block">
+                        <div class="flex h-photo items-center justify-center bg-surface-sunken breakout md:h-block">
                             <BlockPicture
                                 src={frontmatter.product.src}
                                 widths={[480, 1200]}
@@ -118,7 +119,11 @@ const isHeroDark = (fm.isHeroDark || (fm.hero && fm.hero.dark)) ?? false;
                     )
                 }
 
-                {headings && <TableOfContents headings={resolvedHeadings} />}
+                {
+                    headings && headings.length > 2 && !hideToc && (
+                        <TableOfContents headings={headings} />
+                    )
+                }
                 <slot />
             </div>
             <aside class="mx-auto mt-fl-space-m w-full max-w-3xl py-fl-space-m">

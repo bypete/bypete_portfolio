@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-import Link from './Link.astro';
+import Button from '~/components/ui/Button.astro';
 import siteInfo from '~/data/site';
 const available = siteInfo.available;
 interface Props {
@@ -12,7 +12,7 @@ const { url } = Astro.props;
 {
     available ? (
         <>
-            <Link
+            <Button
                 theme="primary"
                 size="sm"
                 href={url}
@@ -24,7 +24,7 @@ const { url } = Astro.props;
                     class="inline h-fl-space-s w-fl-space-s"
                 />
                 available
-            </Link>
+            </Button>
         </>
     ) : (
         <span class="inline-block whitespace-nowrap px-1.5 py-1 align-middle leading-tight">

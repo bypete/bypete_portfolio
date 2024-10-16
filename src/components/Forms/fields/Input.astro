@@ -1,0 +1,67 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    class?: string;
+    placeholder?: string;
+    id: string;
+    label: string;
+    type: 'text' | 'number' | 'date' | 'email' | 'time';
+    required?: boolean;
+    name: string;
+}
+const {
+    id,
+    name,
+    label,
+    type = 'text',
+    class: ClassName,
+    placeholder = '',
+    required = false,
+} = Astro.props;
+
+const attrs = {
+    id,
+    name,
+    type,
+    class: 'form__input peer w-full placeholder-transparent',
+    ...(required && { required: true }),
+    ...(placeholder && { placeholder }),
+};
+---
+
+<div class:list={['group', ClassName && ClassName]} data-form-group>
+    <div
+        class="relative grid grid-cols-1 grid-rows-1 items-center *:col-start-1 *:row-start-1"
+    >
+        <input {...attrs} />
+
+        <label
+            class="pointer-events-none ml-fl-space-3xs -translate-y-1/2 self-start justify-self-start bg-surface-raised px-fl-space-2xs text-fl-step--1 font-medium leading-none text-content-quiet shadow-surface-raised transition-all text-shadow-xs peer-placeholder-shown:translate-y-0 peer-placeholder-shown:self-center peer-placeholder-shown:text-fl-step-0 peer-focus:-translate-y-1/2 peer-focus:self-start peer-focus:text-fl-step--1"
+            for={id}>{label}</label
+        >
+        {
+            type === 'email' && (
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-fl-space-2xs">
+                    <Icon
+                        name="lucide:alert-circle"
+                        class="hidden h-fl-space-s w-fl-space-s text-red-500 group-[.has-error]:block"
+                    />
+                    <Icon
+                        name="lucide:check-circle"
+                        class="hidden h-fl-space-s w-fl-space-s text-green-500 group-[.has-success]:block"
+                    />
+                </div>
+            )
+        }
+        {
+            !required && (
+                <span class="-translate-y-full self-start justify-self-end text-fl-step--2/relaxed text-content-quiet">
+                    Optional
+                </span>
+            )
+        }
+    </div>
+    <slot name="help" />
+    <div id={`${id}_error`} class="error-message"></div>
+</div>

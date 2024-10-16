@@ -1,0 +1,30 @@
+{
+  "path": "work/elekta",
+  "images": [
+    {
+      "title": "Oncology",
+      "src": "../../assets/work/elekta/lightbox/oncology.jpg",
+      "class": "row-span-2 col-span-2"
+    },
+    {
+      "title": "Listing",
+      "src": "../../assets/work/elekta/lightbox/listing.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "Catalog",
+      "src": "../../assets/work/elekta/lightbox/catalog.jpg",
+      "class": "row-span-2 col-span-2"
+    },
+    {
+      "title": "Catalog detail",
+      "src": "../../assets/work/elekta/lightbox/catalog--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "BAOS",
+      "src": "../../assets/work/elekta/lightbox/baos.jpg",
+      "class": "row-span-2 col-span-1"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import { formatBlogPosts } from '~/js/utils';
+import type { ContentEntryMap } from 'astro:content';
+
+interface Props {
+    collection: keyof ContentEntryMap;
+    sort?: 'title' | 'date' | 'order';
+}
+
+const { collection, sort = 'default' } = Astro.props;
+
+const children = await getCollection(collection);
+
+const sortOptions = {
+    filterOutDrafts: true,
+    filterOutFuturePosts: true,
+    sortByTitle: sort === 'title',
+    sortByDate: sort === 'date',
+    sortByOrder: sort === 'order',
+    limit: undefined,
+};
+const formattedChildren = formatBlogPosts(children, sortOptions);
+const currentPath = Astro.url.pathname;
+---
+
+<ul class="relative">
+    {
+        formattedChildren && (
+            <>
+                {formattedChildren.map((post) => {
+                    const postPath = `/${post.collection}/${post.slug}/`;
+                    const isActive = currentPath === postPath;
+                    return (
+                        <>
+                            <li class="m-0 p-0">
+                                <a
+                                    href={postPath}
+                                    title={post.data.title}
+                                    class:list={[
+                                        'block border-l-tight px-fl-space-2xs py-fl-space-3xs text-fl-base focus:outline-none lg:border-l-0 lg:border-r-tight',
+                                        isActive
+                                            ? 'border-brand bg-surface font-medium text-content-loud'
+                                            : 'border-transparent hover:bg-surface',
+                                    ]}
+                                    {...(isActive && {
+                                        'data-state': 'active',
+                                    })}
+                                >
+                                    {post.data.title}
+                                </a>
+                            </li>
+                        </>
+                    );
+                })}
+            </>
+        )
+    }
+</ul>

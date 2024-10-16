@@ -6,10 +6,12 @@ excerpt: 'Learn how myKRing.com evolved into a multilanguage hub for the K Ring 
 taster: 'First launched as a crowdfunding support site, myKRing.com has evolved to a multilanguage hub for the K Ring product'
 description: 'Learn about my involvement in the launch of a crowdfunding support site and how I continued to contribute as it evolved into a multilingual hub for the K Ring product.'
 author: 'Pete Wallace'
-ogTitle: 'K&nbsp;Ring case study'
-ogImage: 
-  src: './mykring/og__image.jpg'
-  alt: 'K Ring'
+og:
+  title: 'K Ring'
+  description: 'Learn about my involvement in the launch of a crowdfunding support site and how I continued to contribute as it evolved into a multilingual hub for the K Ring product.'
+  image: 
+    src: '../../assets/work/mykring/og__image.jpg'
+    alt: 'K Ring'
 brand: 
   bg: 'bg-[#FF0069]'
   color: 'text-[#FF0069]'
@@ -72,17 +74,18 @@ tags:
   - 'fintech'
   - 'email'
 ---
-import BlockPicture from '~/components/Images/BlockPicture.astro';
+import BlockPicture from '~/components/images/BlockPicture.astro';
 import { Image } from 'astro:assets';
 import Note from '~/components/ui/Note.astro'
 import devices from './mykring/devices.png';
 import devices_reworked from './mykring/devices_reworked.jpg';
 import block__cyclist_40 from './mykring/block__cyclist_40.jpg';
-import Figure from '~/components/Figure.astro'
+import Figure from '~/components/images/Figure.astro'
 import UL from '~/components/MDX/ul.astro'
-import Skills from '~/components/Skills.astro'
+import Skills from '~/components/ui/Skills.astro'
 
-import Gallery from '~/components/Lightbox/Gallery.astro'
+
+import InlineBento from '~/components/lightbox/InlineBento.astro'
 
 import data from '~/data/work/mykring.data.json'
 export const components = {ul: UL}
@@ -152,39 +155,37 @@ Any screen can be directly accessed by developers, partner clients, and stakehol
 -   I created a complete set of email HTML templates that would work with Umbraco's dictionary to handle the multilanguage requirements.
 -   I assisted in the configuration of the content management system (Umbraco) and was in charge of the initial populating of all launch content. <span class="label label--info !m-0">collaboration</span>
 
-<Gallery collection='gPublic' data={data} >
-<Fragment slot="title">
+
+<InlineBento gallerySlug="mykring" >
+<Fragment slot='title'>
 ## Public access
 </Fragment>
-</Gallery>
+</InlineBento>
 
-<Gallery collection='gAccount' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="mykring.account" >
+<Fragment slot='title'>
 ## Account access
 </Fragment>
-</Gallery>
+</InlineBento>
 
-<Gallery collection='gEmail' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="mykring.email" >
+<Fragment slot='title'>
 ## Email templates
 </Fragment>
 Each template has multilingual content. Repeated items are stored as dictionary terms in the CMS and referenced using **[#Email.Content...#]**. System data is referenced using **[[Firstname]]**'
-</Gallery>
+</InlineBento>
 
-
-
-<Gallery collection='gUx' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="mykring.ux" >
+<Fragment slot='title'>
 ## UX
 </Fragment>
-</Gallery>
+</InlineBento>
 
-
-<Gallery collection='gCs' data={data} >
-<Fragment slot="title">
+<InlineBento gallerySlug="mykring.cs" >
+<Fragment slot='title'>
 ## Customer services
 </Fragment>
-</Gallery>
+</InlineBento>
 
 ## Learning points
 

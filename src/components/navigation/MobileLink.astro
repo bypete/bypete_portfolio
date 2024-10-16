@@ -1,0 +1,18 @@
+---
+interface Props {
+    title: string;
+    url: string;
+    isHeroDark: boolean;
+    isActive?: boolean;
+    class?: string;
+}
+const { title, url, isHeroDark, isActive, class: className } = Astro.props;
+---
+
+<a
+    href={url}
+    class:list={[
+        'block w-full py-fl-space-2xs font-display text-fl-step-3 font-black leading-tight tracking-tight hover:text-accent focus:text-accent',
+        isActive ? 'text-accent' : 'text-content-light',
+    ]}>{title}</a
+>

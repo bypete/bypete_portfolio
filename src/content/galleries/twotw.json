@@ -1,0 +1,64 @@
+{
+  "path": "work/twotw",
+  "images": [
+    {
+      "title": "Homepage",
+      "src": "../../assets/work/twotw/lightbox/home.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "Homepage detail",
+      "src": "../../assets/work/twotw/lightbox/home--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Media",
+      "src": "../../assets/work/twotw/lightbox/media.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "Media detail",
+      "src": "../../assets/work/twotw/lightbox/media--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "News listing",
+      "src": "../../assets/work/twotw/lightbox/news__listing.jpg",
+      "class": "row-span-1 col-span-2"
+    },
+    {
+      "title": "News listing detail",
+      "src": "../../assets/work/twotw/lightbox/news__listing--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Tour",
+      "src": "../../assets/work/twotw/lightbox/tour.jpg",
+      "class": "row-span-2 col-span-2"
+    },
+    {
+      "title": "Tour detail",
+      "src": "../../assets/work/twotw/lightbox/tour--detail.jpg"
+    },
+    {
+      "title": "Alternative",
+      "src": "../../assets/work/twotw/lightbox/alt.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "Alternative detail",
+      "src": "../../assets/work/twotw/lightbox/alt--detail.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Alternative 2",
+      "src": "../../assets/work/twotw/lightbox/alt2.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "Alternative 2 detail",
+      "src": "../../assets/work/twotw/lightbox/alt2--detail.jpg",
+      "class": "hidden"
+    }
+  ]
+}

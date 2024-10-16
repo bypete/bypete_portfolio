@@ -1,9 +1,58 @@
 ---
-// <script type="text/partytown" >
-// <script is:inline >
+export interface ConsentMode {
+    ad_storage: 'granted' | 'denied';
+    analytics_storage: 'granted' | 'denied';
+    functionality_storage: 'granted' | 'denied';
+    personalization_storage: 'granted' | 'denied';
+    security_storage: 'granted' | 'denied';
+}
+
+export interface GtagCommand {
+    (
+        command: 'consent',
+        update: 'update' | 'default',
+        consentMode: ConsentMode,
+    ): void;
+    (...args: any[]): void;
+}
+
+declare global {
+    interface Window {
+        dataLayer: any[];
+        gtag: GtagCommand;
+    }
+}
 ---
 
-<script type="text/partytown">
+<!-- Google Tag Manager -->
+<script is:inline type="text/partytown">
+    // Initialize dataLayer
+    window.dataLayer = window.dataLayer || [];
+    // Define gtag
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    window.gtag = gtag;
+    // Set default consent
+    if (localStorage.getItem('ConsentMode') === null) {
+        gtag('consent', 'default', {
+            ad_storage: 'denied',
+            analytics_storage: 'denied',
+            functionality_storage: 'denied',
+            personalization_storage: 'denied',
+            security_storage: 'denied',
+        });
+    } else {
+        gtag(
+            'consent',
+            'default',
+            JSON.parse(localStorage.getItem('consentMode')),
+        );
+    }
+    gtag('js', new Date());
+    gtag('config', 'GTM-TNS273XC');
+</script>
+<script is:inline type="text/partytown">
     (function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
@@ -15,3 +64,4 @@
         f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-TNS273XC');
 </script>
+<!-- End Google Tag Manager -->

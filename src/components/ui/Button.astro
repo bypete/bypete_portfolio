@@ -1,7 +1,9 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-interface Props extends HTMLAttributes<'button'> {
+type ButtonOrAnchorAttributes = HTMLAttributes<'button'> & HTMLAttributes<'a'>;
+
+export interface Props extends HTMLAttributes<'button'> {
     theme?:
         | 'primary'
         | 'secondary'
@@ -9,44 +11,95 @@ interface Props extends HTMLAttributes<'button'> {
         | 'white'
         | 'outline'
         | 'quiet'
+        | 'link'
         | 'disabled';
     class?: string;
     size?: 'sm' | 'md' | 'lg';
-    type?: 'button' | 'submit' | 'reset';
+    href?: string;
     isIcon?: boolean;
 }
 
 const {
     theme = 'primary',
     class: className,
-    size,
-    type = 'button',
+    size = 'md',
     isIcon = false,
+    href,
     ...rest
 } = Astro.props;
+
+const baseClasses = [
+    'inline-flex',
+    'items-center',
+    'rounded-full',
+    'align-middle',
+    'font-bold',
+    'transition-colors',
+    'text-shadow-none',
+    'hover:shadow-inset',
+];
+
+// Size variants
+const sizeClasses = {
+    sm: [
+        'h-fl-space-m',
+        'px-fl-space-2xs',
+        'py-0',
+        'text-fl-step--1',
+        '!leading-fl-space-m',
+    ],
+    md: ['px-fl-space-xs', 'py-fl-space-3xs', 'text-fl-base'],
+    lg: ['px-fl-space-sm', 'py-fl-space-2xs', 'text-fl-step-1'],
+};
+
+// Theme variants
+const themeClasses = {
+    link: [],
+    primary: [
+        'bg-accent',
+        'text-white',
+        'hover:border-black/10',
+        'hover:bg-accent-light',
+    ],
+    secondary: ['bg-secondary', 'text-white', 'hover:bg-secondary-dark'],
+    white: ['bg-content-light', 'text-content-dark'],
+    whiteline: ['bg-transparent', 'text-white', 'ring-2', 'ring-inset', 'ring-content-light'],
+    outline: ['bg-transparent', 'ring-2', 'ring-inset', 'ring-line'],
+    quiet: [
+        'bg-transparent',
+        'text-content-quiet',
+        'hover:border-line',
+        'hover:bg-gray-600',
+        'hover:text-white',
+    ],
+    disabled: [
+        'bg-transparent',
+        'text-disabled',
+        'ring-2',
+        'ring-disabled',
+        'hover:border-disabled',
+        'hover:bg-transparent',
+        'hover:text-disabled',
+    ],
+};
+
+const classResult = [
+    ...baseClasses,
+    ...sizeClasses[size],
+    ...themeClasses[theme],
+    isIcon && 'justify-between gap-x-fl-space-3xs',
+    className,
+];
 ---
 
-<button
-    type={type}
-    class:list={[
-        'inline-flex items-center rounded-full align-middle font-bold transition-colors text-shadow-none hover:shadow-inset',
-        size === 'sm'
-            ? 'h-fl-space-m px-fl-space-2xs py-0 text-fl-step--1 !leading-fl-space-m'
-            : 'px-fl-space-xs py-fl-space-3xs text-fl-base',
-        theme === 'primary' &&
-            'bg-accent text-white hover:border-black/10 hover:bg-accent-light ',
-        theme === 'secondary' &&
-            'bg-secondary text-white hover:bg-secondary-dark',
-        theme === 'white' && 'bg-content-light text-content-dark',
-        theme === 'whiteline' &&
-            'bg-transparent ring-2 ring-inset ring-content-light',
-        theme === 'outline' && 'ring-line bg-transparent ring-2 ring-inset',
-        theme === 'quiet' &&
-            'text-content-quiet hover:border-line bg-transparent  hover:bg-gray-600 hover:text-white',
-        theme === 'disabled' &&
-            'bg-transparent text-disabled ring-2 ring-disabled hover:border-disabled  hover:bg-transparent hover:text-disabled',
-        isIcon && 'justify-between gap-x-fl-space-3xs',
-        className,
-    ]}
-    {...rest}><slot /></button
->
+{
+    href ? (
+        <a href={href} class:list={['no-underline', ...classResult]} {...rest}>
+            <slot />
+        </a>
+    ) : (
+        <button class:list={classResult} {...rest}>
+            <slot />
+        </button>
+    )
+}

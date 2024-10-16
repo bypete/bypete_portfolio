@@ -2,9 +2,8 @@
     /* https://divmagic.com/tools/color-converter */
     :root {
         --white: 255 255 255; /* absolute white */
-        --offwhite: 249 250 251; /* gray-50  */
-
         --black: 0 0 0; /* absolute black */
+        --offwhite: 249 250 251; /* gray-50  */
         --offblack: 24 24 27; /* zinc-800 */
 
         --banner: transparent;
@@ -15,6 +14,7 @@
         --surface--10: 243 243 242; /* #f3f3f2 Shade -1 */
         --surface: 252 252 252; /* #fcfcfc https://www.colorhexa.com/fcfcfc */
         --surface-10: 255 255 255; /* #FFFFFF Shade +1 */
+        --surface--100: 20 20 26; /* 14141a Footer and offscreen */
 
         --shadow-highlight: 255 255 255; /* absolute white */
 
@@ -155,54 +155,29 @@
         --container-width-lg: 1024px;
         --container-width-xl: 1280px;
 
-        /* Tailwind variables */
+        /* Semantic Tailwind variables */
         --color-banner: var(--banner);
         --color-banner-up: var(--banner-up);
 
-        --color-menu: var(--accent);
-        --color-menu-active: var(--copy);
-        --color-menu__bg-hover: var(--surface-10);
-        --color-menu__bg-active: var(--brand);
-        --color-menu__marker: var(--brand);
+        --color-overlay-light: var(--surface);
+        --color-overlay-dark: var(--surface--100);
 
-        --color-menudark: var(--copy-light);
-        --color-menudark-active: var(--copy);
-        --color-menudark__bg-hover: var(--copy-light);
-        --color-menudark__bg-active: var(--brand);
-        --color-menudark__marker: var(--brand);
-
-        --color-dropdown: var(--copy);
-        --color-dropdown-hover: var(--copy);
-        --color-dropdown-active: var(--copy);
-        --color-dropdown-highlight: var(--copy);
-        --color-dropdown__bg-hover: var(--line);
-        --color-dropdown__bg-active: var(--brand);
-        --color-dropdown__bg-highlight: var(--brand);
-
-        --color-menusm: var(--copy);
-        --color-menusm-hover: var(--copy-light);
-        --color-menusm-active: var(--copy-light);
-
-        --color-underlay-light: var(--offwhite);
-        --color-underlay-dark: var(--offblack);
-
-        --color-overlay-light: var(--offwhite);
-        --color-overlay-dark: var(--offblack);
-
-        --color-surface-offscreen: var(--surface-offscreen);
-        --color-surface-sunk: var(--surface--20);
-        --color-surface-sunken: var(--surface--10);
-        --color-surface-default: var(--surface);
         --color-surface-raised: var(--surface-10);
+        --color-surface: var(--surface);
+        --color-surface-sunken: var(--surface--10);
+        --color-surface-sunk: var(--surface--20);
+        --color-surface-bedrock: var(--surface--100);
+
+        --color-underlay-light: var(--surface);
+        --color-underlay-dark: var(--surface--100);
         --color-surface-overlay: var(--surface-10);
 
-        --color-shadow-raised: var(--black);
-        --color-shadow-floated: var(--black);
-        --color-shadow-overlay: var(--black);
-        --color-shadow-inset: var(--black);
+        --color-shadow-raised: var(--shadow-dark);
+        --color-shadow-sunk: var(--shadow-dark);
+        --color-shadow-floated: var(--shadow-dark);
+        --color-shadow-overlay: var(--shadow-dark);
+        --color-shadow-inset: var(--shadow-dark);
         --color-shadow-highlight: var(--shadow-highlight);
-        --color-shadow-brand: var(--brand-shade);
-        --color-shadow-offcanvas: var(--brand-shade);
 
         --color-line-whisper: var(--line-whisper);
         --color-line-quiet: var(--line-quiet);
@@ -241,16 +216,18 @@
         --color-focus: var(--focus);
 
         --color-content-light: var(--copy-light);
-        --color-content: var(--copy);
         --color-content-dark: var(--copy-dark);
-        --color-content-footer: var(--copy-footer);
+
         --color-content-tag: var(--copy-tag);
         --color-content-featured: var(--copy-featured);
 
         --color-content-whisper: var(--copy-whisper);
         --color-content-quiet: var(--copy-quiet);
+        --color-content: var(--copy);
         --color-content-loud: var(--copy-loud);
         --color-content-shout: var(--copy-shout);
+
+        --color-content-footer: var(--copy-light);
 
         --color-headline: var(--copy-dark);
         --color-headline-start: 2 132 199; /* sky-600 */
