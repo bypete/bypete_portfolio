@@ -368,7 +368,7 @@ export default {
                 surface: {
                   raised: 'rgb(var(--color-surface-raised) / <alpha-value>)',
                   DEFAULT:
-                  'rgb(var(--color-surface-default) / <alpha-value>)',
+                  'rgb(var(--color-surface) / <alpha-value>)',
                   sunken: 'rgb(var(--color-surface-sunken) / <alpha-value>)',
                   sunk: 'rgb(var(--color-surface-sunk) / <alpha-value>)',
                   bedrock:
@@ -417,11 +417,6 @@ export default {
                     hover: 'rgb(var(--color-tag-hover) / <alpha-value>)',
                     featured: 'rgb(var(--color-tag-featured) / <alpha-value>)',
                 },
-                footer: {
-                    start: 'rgb(var(--color-footer-start) / <alpha-value>)',
-                    DEFAULT: 'rgb(var(--color-footer) / <alpha-value>)',
-                    end: 'rgb(var(--color-footer-end) / <alpha-value>)',
-                },
                 warning: {
                     DEFAULT: 'rgb(var(--color-warning) / <alpha-value>)',
                     shade: 'rgb(var(--color-warning-shade) / <alpha-value>)',
@@ -435,12 +430,26 @@ export default {
                 accent: {
                     light: 'rgb(var(--color-accent-light) / <alpha-value>)',
                     DEFAULT: 'rgb(var(--color-accent) / <alpha-value>)',
-                    dark: 'rgb(var(--color-accent-dark) / <alpha-value>)',
+                    dark: 'rgb(var(--color-secondary-dark) / <alpha-value>)',
+                    shade: 'rgb(var(--color-accent-shade) / <alpha-value>)',
+                },
+                primary: {
+                    light: 'rgb(var(--color-primary-light) / <alpha-value>)',
+                    DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
+                    dark: 'rgb(var(--color-primary-dark) / <alpha-value>)',
+                    shade: 'rgb(var(--color-primary-shade) / <alpha-value>)',
                 },
                 secondary: {
                     light: 'rgb(var(--color-secondary-light) / <alpha-value>)',
                     DEFAULT: 'rgb(var(--color-secondary) / <alpha-value>)',
                     dark: 'rgb(var(--color-secondary-dark) / <alpha-value>)',
+                    shade: 'rgb(var(--color-secondary-shade) / <alpha-value>)',
+                },
+                link: {
+                    light: 'rgb(var(--color-link-light) / <alpha-value>)',
+                    DEFAULT: 'rgb(var(--color-link) / <alpha-value>)',
+                    dark: 'rgb(var(--color-link-dark) / <alpha-value>)',
+                    shade: 'rgb(var(--color-link-shade) / <alpha-value>)',
                 },
                 disabled: {
                     DEFAULT: 'rgb(var(--color-disabled) / <alpha-value>)',

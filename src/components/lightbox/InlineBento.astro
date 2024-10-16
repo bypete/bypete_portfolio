@@ -1,24 +1,47 @@
 ---
 import { getEntry } from 'astro:content';
-import Bento from '~/components/lightbox/Bento.astro';
+import Bento, {
+    type Props as BentoProps,
+} from '~/components/lightbox/Bento.astro';
 import { Icon } from 'astro-icon/components';
 
-const { gallerySlug, breakout = false } = Astro.props;
+const { collections, breakout = false } = Astro.props;
 
-const gallery = await getEntry('galleries', gallerySlug);
+// Ensure collections is an array
+const normalizedCollections = Array.isArray(collections)
+    ? collections
+    : [collections];
+
+// Fetch gallery entries and filter valid data
+const galleries = (
+    await Promise.all(
+        normalizedCollections.map((slug) =>
+            getEntry('galleries', slug).then((entry) => entry?.data),
+        ),
+    )
+).filter(Boolean);
+
+// Combine all images
+const combinedGallery: BentoProps['gallery'] = {
+    id: normalizedCollections[0],
+    collection: 'galleries',
+    data: {
+        images: galleries.flatMap((gallery) => gallery.images || []),
+    },
+};
 ---
 
 {
-    gallery && (
+    combinedGallery.data.images.length > 0 && (
         <div
             class:list={[
                 'bg-surface-sunken p-fl-space-s-m shadow-inset',
-                !breakout
-                    ? '-mx-fl-space-s-m my-fl-space-xl rounded-tight'
-                    : 'breakout',
+                breakout
+                    ? 'breakout'
+                    : '-mx-fl-space-s-m my-fl-space-xl rounded-tight',
             ]}
         >
-            <Bento gallery={gallery}>
+            <Bento gallery={combinedGallery}>
                 <div class="mb-fl-space-m flex flex-col items-start justify-between leading-snug md:flex-row">
                     <slot name="title" slot="title" />
                     <div

@@ -108,7 +108,6 @@ const galleries = defineCollection({
   type: 'data',
   schema: ({ image }) =>
     z.object({
-    path: z.string(),
     images: z.array(
       z.object({
         title: z.string(),

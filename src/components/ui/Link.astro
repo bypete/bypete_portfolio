@@ -34,11 +34,11 @@ const {
             ? 'h-fl-space-m px-fl-space-2xs py-0 text-fl-step--1 !leading-fl-space-m'
             : 'px-fl-space-xs py-fl-space-2xs text-fl-base/none',
         theme === 'primary' &&
-            'bg-accent text-white hover:border-black/10 hover:bg-accent-light ',
+            'bg-primary hover:bg-primary-light text-white hover:border-black/10',
         theme === 'secondary' &&
             'bg-secondary text-white hover:bg-secondary-dark',
         theme === 'disco' &&
-            'bg-gradient-to-r from-indigo-900 via-pink-500 to-pink-700 text-white hover:border-black/10  hover:via-pink-700 hover:to-pink-700 ',
+            'bg-gradient-to-r from-indigo-900 via-pink-500 to-pink-700 text-white hover:border-black/10 hover:via-pink-700 hover:to-pink-700',
         theme === 'white' && 'bg-content-light text-content-dark',
         theme === 'whiteline' &&
             'bg-transparent text-content-light ring-2 ring-inset ring-content-light hover:bg-content-light hover:text-content-dark',
@@ -46,7 +46,7 @@ const {
         theme === 'quiet' &&
             'bg-transparent text-line hover:border-line hover:bg-line-loud hover:text-white',
         theme === 'disabled' &&
-            'bg-transparent text-disabled ring-2 ring-disabled hover:border-disabled  hover:bg-transparent hover:text-disabled',
+            'bg-transparent text-disabled ring-2 ring-disabled hover:border-disabled hover:bg-transparent hover:text-disabled',
         isIcon && 'justify-between gap-x-fl-space-3xs',
         className,
     ]}

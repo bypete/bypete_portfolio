@@ -10,23 +10,23 @@ og:
   title: 'Eastside Locks'
   description: 'How did I help to turn a slow intranet into a quick and flexible resource for over 3,000 employees? See the visuals I created, as well as the Front-End templates I developed to optimise the site.'
   image: 
-    src: '../../assets/work/elekta/og__image.jpg'
+    src: '~/assets/work/elekta/og__image.jpg'
     alt: 'Elekta'
 brand: 
   bg: 'bg-[#747474]'
   color: 'text-[#747474]'
 logo:
-  src: '../../assets/logos/elekta.svg'
-  light: '../../assets/logos/light/elekta.svg'
+  src: '~/assets/logos/elekta.svg'
+  light: '~/assets/logos/light/elekta.svg'
 product:
-  src: './elekta/product.png'
+  src: '~/assets/work/elekta/product.png'
   alt: 'iPad image showing Elekta website'
 cover:
-  src: './elekta/cover.jpg'
+  src: '~/assets/work/elekta/cover.jpg'
   alt: 'Elekta logo'
   credit: 'Elekta'
 splash:
-  src: './elekta/tablet.jpg'
+  src: '~/assets/work/elekta/tablet.jpg'
   alt: 'iPad image showing Elekta website'
   credit: 'Elekta'
 skillset:
@@ -59,8 +59,7 @@ import InlineBento from '~/components/lightbox/InlineBento.astro'
 export const components = {ul: UL}
 import Note from '~/components/ui/Note.astro'
 
-import data from '~/data/work/elekta.data.json'
-import tablet from './elekta/tablet.jpg';
+import tablet from '~/assets/work/elekta/tablet.jpg';
 
 ## Overview
 
@@ -79,13 +78,13 @@ Our solution needed to be more flexible, reduce operational costs, reduce publis
 -   I created all of the Front-End HTML templates. These were then handed over to a team of back-end developers, complete with detailed annotations, listing indexes, and support documentation.
 -   I assisted in configuring the content management system (EPiServer) and oversaw the testing of the transferred site content throughout the development process. <span class="label label--info !m-0">collaboration</span>
 
-<InlineBento gallerySlug="elekta" >
+<InlineBento collections="elekta" >
 <Fragment slot='title'>
 ## Site visuals | Sales
 </Fragment>
 </InlineBento>
 
-<InlineBento gallerySlug="elekta.service" >
+<InlineBento collections="elekta.service" >
 <Fragment slot='title'>
 ## Site visuals | Service
 </Fragment>

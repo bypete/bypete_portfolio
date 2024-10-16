@@ -10,22 +10,22 @@ og:
   title: 'GamesYouLoved'
   description: 'Discover how I helped launch an immensely fun website lovingly curated by gaming enthusiasts - and see how it quickly became a huge retro hit. Learn how each genre was meticulously documented in order to help fans relive those sweet nostalgic childhood memories.'
   image: 
-    src: '../../assets/work/gyl/og__image.jpg'
+    src: '~/assets/work/gyl/og__image.jpg'
     alt: 'GamesYouLoved'
 brand: 
   bg: 'bg-[#24a7be]'
   color: 'text-[#24a7be]'
 logo:
-  src: '../../assets/logos/gyl.png'
+  src: '~/assets/logos/gyl.png'
 product:
-  src: './gyl/product.png'
+  src: '~/assets/work/gyl/product.png'
   alt: 'Laptop and iPhone image showing GamesYouLoved website'
 cover:
-  src: './gyl/cover.jpg'
+  src: '~/assets/work/gyl/cover.jpg'
   alt: 'GamesYouLoved logo'
   credit: 'GamesYouLoved'
 splash:
-  src: './gyl/laptop_iphone_front.jpg'
+  src: '~/assets/work/gyl/laptop_iphone_front.jpg'
   alt: 'Laptop and iPhone image showing GamesYouLoved website'
   credit: 'GamesYouLoved'
 skillset:
@@ -69,12 +69,9 @@ import Block from '~/components/blocks/Block.astro'
 export const components = {ul: UL}
 import Note from '~/components/ui/Note.astro'
 
-import gyl_logo from './gyl/gyl_logo_tv.png';
+import gyl_logo from '~/assets/work/gyl/gyl_logo_tv.png';
 import svgbg from '~/assets/details/heap__plus.svg';
-import block__sw_40 from './gyl/block__sw_40.jpg';
-
-import data from '~/data/work/gyl.data.json'
-
+import block__sw_40 from '~/assets/work/gyl/block__sw_40.jpg';
 
 
 ## Overview
@@ -125,7 +122,7 @@ GYL has a substantial social media presence across multiple platforms and the si
 > ...They evolved a simple idea of our love for everything retrogaming into an exciting and fun digital experience.
 ><cite class="text-fl-base ">GamesYouLoved.com</cite>
 
-<InlineBento gallerySlug="gyl" >
+<InlineBento collections="gyl" >
 <Fragment slot='title'>
 ## Site visuals
 </Fragment>

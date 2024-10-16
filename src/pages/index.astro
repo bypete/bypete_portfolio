@@ -16,9 +16,16 @@ const heroConfig = {
     dark: true,
 };
 
-const ogImage = {
-    src: '/og/og__home.jpg',
-    alt: 'byPete homepage',
+import ogImage from '~/assets/og/og__home.jpg';
+
+const og = {
+    title: 'About Pete Wallace',
+    description:
+        'Pete Wallace is an experienced Front-End developer based in Surrey, UK. Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.',
+    image: {
+        src: ogImage,
+        alt: 'ByPete Homepage',
+    },
 };
 
 import heatmap from '~/assets/hero/heatmap__right-center.png';
@@ -35,7 +42,7 @@ const formattedPosts = formatBlogPosts(allWork, {
 });
 ---
 
-<SplashLayout title={title} isHeroDark={heroConfig.dark} {ogImage}>
+<SplashLayout title={title} isHeroDark={heroConfig.dark} {og}>
     <section
         class="relative origin-top items-center overflow-x-hidden bg-slate-900 bg-cover pb-fl-space-splashoverlap angleclip lg:angleclip-lg [&+*]:-mt-fl-space-splashoverlap"
     >
@@ -83,7 +90,8 @@ const formattedPosts = formatBlogPosts(allWork, {
                             class="h-fl-space-s w-fl-space-s animate-nudge-right"
                         />
                     </Button>
-                    <Button href="/about/" theme="whiteline">Read my bio</Button>
+                    <Button href="/about/" theme="whiteline">Read my bio</Button
+                    >
                 </p>
             </div>
             <!-- END content -->

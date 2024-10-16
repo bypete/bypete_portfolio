@@ -4,7 +4,7 @@ import { type CollectionEntry } from 'astro:content';
 import { getImage, Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
-interface Props {
+export interface Props {
     gallery: CollectionEntry<'galleries'>;
 }
 
@@ -23,7 +23,7 @@ const optimizedImages = await Promise.all(
 );
 ---
 
-<section data-inview="lightbox" class:list={['lightbox not-prose relative']}>
+<section data-inview="lightbox" class:list={['lightbox not-prose']}>
     <slot />
     <div
         class="relative mt-fl-space-m grid grid-flow-dense auto-rows-[100px] grid-cols-3 gap-fl-space-s md:auto-rows-[160px] md:grid-cols-4"

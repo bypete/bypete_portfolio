@@ -10,23 +10,23 @@ og:
   title: 'OnePay'
   description: 'Discover how I contributed to the creation of a website that gives businesses and their employees a quick, easy, and efficient way to pay and receive wage payments.'
   image: 
-    src: '../../assets/work/onepay/og__image.jpg'
+    src: '~/assets/work/onepay/og__image.jpg'
     alt: 'OnePay'
 brand: 
   bg: 'bg-[#00a3e2]'
   color: 'text-[#00a3e2]'
 logo:
-  src: '../../assets/logos/onepay.svg'
-  light: '../../assets/logos/light/onepay.svg'
+  src: '~/assets/logos/onepay.svg'
+  light: '~/assets/logos/light/onepay.svg'
 product:
-  src: './onepay/product.png'
+  src: '~/assets/work/onepay/product.png'
   alt: 'Laptop and iPhone image showing Onepay website'
 cover:
-  src: './onepay/cover.jpg'
+  src: '~/assets/work/onepay/cover.jpg'
   alt: 'OnePay logo'
   credit: 'OnePay'
 splash:
-  src: './onepay/laptop_iphone_front.jpg'
+  src: '~/assets/work/onepay/laptop_iphone_front.jpg'
   alt: 'Laptop and iPhone image showing Onepay website'
   credit: 'OnePay'
 skillset:
@@ -69,9 +69,6 @@ import UL from '~/components/MDX/ul.astro'
 import InlineBento from '~/components/lightbox/InlineBento.astro'
 export const components = {ul: UL}
 
-import data from '~/data/work/onepay.data.json'
-
-
 ## Overview
 
 <p class="text-fl-step-1">OnePay are one of the UK’s leading providers of alternative payment solutions for temporary employees who can’t open a UK bank account. Their service provides businesses and their workers a fast, easy, and efficient way to pay and receive wage payments.</p>
@@ -92,19 +89,19 @@ Applicants are issued a Visa prepaid card, access to an online account and use o
 -   I assisted in configuring the content management system (Umbraco) and took responsibility for the initial population of all launch content. <span class="label label--info !m-0">collaboration</span>
 
 
-<InlineBento gallerySlug="onepay" >
+<InlineBento collections="onepay" >
 <Fragment slot='title'>
 ## Customer views
 </Fragment>
 </InlineBento>
 
-<InlineBento gallerySlug="onepay.agency" >
+<InlineBento collections="onepay.agency" >
 <Fragment slot='title'>
 ## Agency views
 </Fragment>
 </InlineBento>
 
-<InlineBento gallerySlug="onepay.cs" >
+<InlineBento collections="onepay.cs" >
 <Fragment slot='title'>
 ## Customer Services views
 </Fragment>
@@ -115,7 +112,7 @@ Applicants are issued a Visa prepaid card, access to an online account and use o
 The site was available in six languages and adopted the ‘One to One’ method – requiring only one instance of a page. **Vorto**, a property editor wrapper, converted each property editor into a multilingual property - allowing multiple languages per editable field.
 I was responsible for collating the translated content and entering it into the site as it became available, often with multiple revisions to manage. This included cross referencing all the dictionary elements within the .Net templates.
 
-<InlineBento gallerySlug="onepay.email" >
+<InlineBento collections="onepay.email" >
 <Fragment slot='title'>
 ## Email templates
 </Fragment>

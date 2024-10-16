@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import ModePair from '~/components/Blocks/ModePair.astro';
+import ModePair from '~/components/blocks/ModePair.astro';
 import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
 import SwipePrompt from '~/components/ui/SwipePrompt.astro';
 
@@ -97,7 +97,7 @@ switch (mode) {
 
     {
         prompt && (
-            <div class="pointer-events-none absolute left-1/2 top-screenSvh z-100 -translate-x-1/2 -translate-y-full pb-fl-space-s ">
+            <div class="pointer-events-none absolute left-1/2 top-screenSvh z-100 -translate-x-1/2 -translate-y-full pb-fl-space-s">
                 {prompt === 'scroll' && <ScrollPrompt />}
                 {prompt === 'swipe' && <SwipePrompt />}
             </div>

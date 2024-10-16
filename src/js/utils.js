@@ -17,13 +17,15 @@ export function truncate(str, limit) {
 }
 
 export function formatBlogPosts(
-    posts,
-    {
-        filterOutDrafts = true,
-        filterOutFuturePosts = true,
-        sortByDate = true,
-        limit,
-    } = {},
+  posts,
+  {
+      filterOutDrafts = true,
+      filterOutFuturePosts = true,
+      sortByTitle = false,
+      sortByDate = true,
+      sortByOrder = false,
+      limit = 0, // Default to 0 for unlimited
+  } = {},
 ) {
     const filteredPosts = posts.reduce((acc, post) => {
         const { pubDate, modDate, draft } = post.data;
@@ -38,22 +40,27 @@ export function formatBlogPosts(
         return acc;
     }, []);
 
-    if (sortByDate) {
+    if (sortByTitle) {
+      filteredPosts.sort((a, b) => a.data.title - b.data.title);
+    } else if (sortByOrder) {
+      filteredPosts.sort((a, b) => a.data.sortOrder - b.data.sortOrder);
+    } else if (sortByDate) {
         filteredPosts.sort(
             (a, b) =>
                 Date.parse(b.data.modDate || b.data.pubDate) -
                 Date.parse(a.data.modDate || a.data.pubDate),
         ); // use modDate if present
     } else {
-        console.log('random');
         filteredPosts.sort(() => Math.random() - 0.5);
     }
 
-    // Limit if number is passed
-    if (typeof limit === 'number') {
-        return filteredPosts.slice(0, limit);
-    }
-    return filteredPosts;
+ // If limit is defined and valid, slice the array
+ if (limit !== undefined && typeof limit === 'number' && limit > 0) {
+  return filteredPosts.slice(0, limit);
+}
+
+// If limit is not provided or invalid, return all posts (unlimited)
+return filteredPosts;
 }
 
 export function buildToc(headings) {

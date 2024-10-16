@@ -15,11 +15,10 @@ export interface SwiperImage {
   caption?: Caption;
 }
 
-import profile from "~/assets/home/profile__cutout--circle.png";
-import mykringapp from "~/content/work/mykringapp/product.png";
-import onepay from "~/content/work/onepay/product.png";
-import mykring from "~/content/work/mykring/product.png";
-import twotw from "~/content/work/twotw/product.png";
+import mykringapp from "~/assets/work/mykringapp/product.png";
+import onepay from "~/assets/work/onepay/product.png";
+import mykring from "~/assets/work/mykring/product.png";
+import twotw from "~/assets/work/twotw/product.png";
 
 export const heroSlides: SwiperImage[] = [
 

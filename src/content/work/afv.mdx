@@ -10,7 +10,7 @@ og:
   title: 'AF&V Privilege MasterCard'
   description: 'Read on to learn about my role in the launch of the Armed Forces & Veterans prepaid MasterCard, an exclusive cashback programme available to serving and retired members of the British Armed Forces and their immediate families.'
   image: 
-    src: '../../assets/work/afv/og__image.jpg'
+    src: '~/assets/work/afv/og__image.jpg'
     alt: 'AFV Estates Limited logo'
 brand: 
   bg: 'bg-[#384c55]'
@@ -18,14 +18,14 @@ brand:
 logo:
   src: '~/assets/logos/afv.webp'
 product:
-  src: './afv/product.png'
+  src: '~/assets/work/afv/product.png'
   alt: 'Laptop and iPhone image showing AFV Estates Limited website'
 cover:
-  src: './afv/cover.jpg'
+  src: '~/assets/work/afv/cover.jpg'
   alt: 'AFV Estates logo'
   credit: 'AFV Estates Limited'
 splash:
-  src: './afv/laptop_iphone_front.jpg'
+  src: '~/assets/work/afv/laptop_iphone_front.jpg'
   alt: 'Laptop and mobile'
   credit: 'AFV Estates Limited'
 skillset:
@@ -61,7 +61,6 @@ import Skills from '~/components/ui/Skills.astro'
 
 import InlineBento from '~/components/lightbox/InlineBento.astro'
 import exhibition from '~/content/galleries/afv.json';
-import data from '~/data/work/afv.data.json'
 export const components = {ul: UL}
 
 
@@ -85,7 +84,7 @@ The website needed to emphasise the benefits of their prepaid AF&V Privilege Car
 -   I assisted in configuring the content management system (Umbraco) and took responsibility for the initial population of all launch content. <span class="label label--info !m-0">collaboration</span>
 
 
-<InlineBento gallerySlug="afv" >
+<InlineBento collections="afv" >
 <Fragment slot='title'>
 ## Images
 </Fragment>

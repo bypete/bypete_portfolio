@@ -38,11 +38,11 @@ const { post, preview, class: ClassName } = Astro.props;
                 <h2
                     set:html={post.data.title}
                     class:list={[
-                        'text-fl-step-1/tight font-bold text-accent group-hover:text-accent-light',
+                        'text-primary group-hover:text-primary-light text-fl-step-1/tight font-bold',
                         preview === 'prev' && 'text-right',
                     ]}
                 />
-                <p class="text-fl-step--1 " set:html={post.data.excerpt} />
+                <p class="text-fl-step--1" set:html={post.data.excerpt} />
             </span>
         </a>
     )

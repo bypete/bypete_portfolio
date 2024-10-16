@@ -24,13 +24,13 @@ const { data } = Astro.props;
     >
         {
             data.map((review, i) => (
-                <div class="slide swiper-slide !flex items-center justify-center px-fl-space-m ">
+                <div class="slide swiper-slide !flex items-center justify-center px-fl-space-m">
                     <blockquote class="mx-auto mt-0 max-w-3xl px-0 md:text-fl-step-1">
                         <p class="m-0 font-headline text-fl-step-2 leading-tight">
                             <strong>{review.headline}</strong>
                         </p>
                         <Fragment set:html={review.comment} />
-                        <p class="cite ">
+                        <p class="cite">
                             <span class="mr-fl-space-3xs block">
                                 {[...Array(5)].map((_, index) => (
                                     <Icon
@@ -98,7 +98,7 @@ const { data } = Astro.props;
                 bulletClass:
                     'cursor-pointer mx-fl-space-3xs transition-all duration-300 inline-block w-fl-space-2xs h-fl-space-2xs border border-line rounded-full ',
                 bulletActiveClass:
-                    '!w-fl-space-s bg-accent !border-transparent',
+                    '!w-fl-space-s bg-primary !border-transparent',
             },
             autoplay: {
                 delay: 5000,

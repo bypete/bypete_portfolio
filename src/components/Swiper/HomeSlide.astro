@@ -52,17 +52,17 @@ const imageProps = {
                         <span
                             data-caption
                             class:list={[
-                                'absolute flex max-w-fl-space-4xl flex-col items-start text-content-light  opacity-0',
+                                'absolute flex max-w-fl-space-4xl flex-col items-start text-content-light opacity-0',
                                 caption.label && caption.label,
                             ]}
                         >
                             {caption.title && (
-                                <h2 class="relative z-10 -mb-fl-space-3xs inline-block -rotate-1 rounded-tight bg-accent-dark p-fl-space-3xs font-headline text-fl-step-0 font-semibold leading-none tracking-tight shadow-sm shadow-accent-dark ">
+                                <h2 class="bg-primary-dark shadow-primary-shade relative z-10 -mb-fl-space-3xs inline-block -rotate-1 rounded-tight p-fl-space-3xs font-headline text-fl-step-0 font-semibold leading-none tracking-tight shadow-sm">
                                     {caption.title}{' '}
                                 </h2>
                             )}
                             {caption.copy && (
-                                <p class="relative inline-block translate-x-px translate-y-0.5 rounded-tight bg-black/15 p-fl-space-3xs text-fl-step--2 leading-snug ">
+                                <p class="relative inline-block translate-x-px translate-y-0.5 rounded-tight bg-black/15 p-fl-space-3xs text-fl-step--2 leading-snug">
                                     {caption.copy}
                                 </p>
                             )}

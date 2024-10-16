@@ -10,22 +10,22 @@ og:
   title: 'Eastside Locks'
   description: "Discover how I helped to produce an aspirational brochure site to communicate Eastside Lock's vision and attract prospective clients for their 650,000 sq. ft urban development."
   image: 
-    src: '../../assets/work/eastsidelocks/og__image.jpg'
+    src: '~/assets/work/eastsidelocks/og__image.jpg'
     alt: 'Eastside Locks'
 brand: 
   bg: 'bg-[#6ab53f]'
   color: 'text-[#6ab53f]'
 logo:
-  src: '../../assets/logos/eastside_locks.svg'
+  src: '~/assets/logos/eastside_locks.svg'
 product:
-  src: './eastsidelocks/product.png'
+  src: '~/assets/work/eastsidelocks/product.png'
   alt: 'Laptop and iPhone image showing Eastside Locks website'
 cover:
-  src: './eastsidelocks/cover.jpg'
+  src: '~/assets/work/eastsidelocks/cover.jpg'
   alt: 'Eastside Locks preview'
   credit: 'Eastside Locks'
 splash:
-  src: './eastsidelocks/laptop_iphone_front.jpg'
+  src: '~/assets/work/eastsidelocks/laptop_iphone_front.jpg'
   alt: 'Laptop and iPhone image showing Eastside Locks website'
 skillset:
   text: 'text-white'
@@ -64,9 +64,8 @@ import InlineBento from '~/components/lightbox/InlineBento.astro'
 import Figure from '~/components/images/Figure.astro'
 export const components = {ul: UL}
 
-import vision_detail from './eastsidelocks/vision--detail.jpg'
-import home_detail from './eastsidelocks/home--detail.jpg'
-import data from '~/data/work/eastsidelocks.data.json'
+import vision_detail from '~/assets/work/eastsidelocks/vision--detail.jpg'
+import home_detail from '~/assets/work/eastsidelocks/home--detail.jpg'
 
 ## Overview
 
@@ -91,13 +90,13 @@ import data from '~/data/work/eastsidelocks.data.json'
   <Image src={vision_detail} alt="Map showing the development plan" class="w-full h-auto shadow-md border border-line" />
 </Figure>
 
-<InlineBento gallerySlug="eastsidelocks" >
+<InlineBento collections="eastsidelocks" >
 <Fragment slot='title'>
 ## Site visuals
 </Fragment>
 </InlineBento>
 
-<InlineBento gallerySlug="eastsidelocks.ui" >
+<InlineBento collections="eastsidelocks.ui" >
 <Fragment slot='title'>
 ## UI/UX
 </Fragment>
