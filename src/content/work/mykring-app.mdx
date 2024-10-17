@@ -64,7 +64,7 @@ import UL from '~/components/MDX/ul.astro'
 import Reviews from '~/components/Swiper/Reviews.astro'
 import Figure from '~/components/images/Figure.astro'
 
-import InlineBento from '~/components/lightbox/InlineBento.astro'
+import Lightbox from '~/components/MDX/Lightbox.astro'
 import web_autotopup from '~/assets/work/mykringapp/web-autotopup.jpg'
 import auto_topup from '~/assets/work/mykringapp/1.1.0_auto-topup.jpg'
 import auto_topup_open from '~/assets/work/mykringapp/1.1.0_auto-topup-open.jpg'
@@ -126,30 +126,24 @@ Although an initial wireframe document was provided, it was essentially an imita
 -   After launch, I began a review process of the product website to see what updates could be applied to provide a consistent user experience across the app and site.
 
 <Block
-      mode="pair"
-      bg="bg-neutral-100"
-      grid="grid mx-auto grid-cols-1 md:grid-cols-2 md:grid-rows-1 lg:grid-cols-block60 min-h-block gap-8 max-w-container"
-      breakout={true}
-      wrapper="my-fl-space-xl"
-  >
-  <Image src={svgbg} alt="background" class="object-cover w-full h-full absolute inset-0" />
-  <div
-    slot="mc1"
-    class="self-center md:order-2 py-fl-space-m"
-  >
-    <blockquote
-        class="not-prose m-0 pl-0 italic text-fl-step-1/snug "
-    >
+    layout={{ slots: 2, type: 'default' }}
+    data-inview="portfolio"
+    wrapperClass="bg-neutral-100 not-prose my-fl-space-2xl"
+    class="min-h-block"
+    slotConfig={{
+      1: ['py-fl-space-m','md:order-2'],
+      2: ['self-end', 'md:order-1'],
+    }}
+>
+    <div slot="background" class="absolute w-full h-full inset-0 bg-bottom bg-cover opacity-95" style={`background-image: url(${svgbg.src});`}></div>
+    <blockquote slot="s1" class="not-prose m-0 pl-0 italic text-fl-step-1/snug " >
         <p class="mb-fl-space-xs text-fl-step-2/snug font-headline"><strong>So glad there's finally an app for K&nbsp;Ring!</strong></p>
-<p>Good user experience: same interface style you're used to
-            from the website, but not just a web shell. Easy to navigate
-            and use. Notifications through the app are a plus!</p>
+        <p>Good user experience: same interface style you're used to
+        from the website, but not just a web shell. Easy to navigate
+        and use. Notifications through the app are a plus!</p>
         <p class="cite "><span class="mr-fl-space-2xs text-fl-step--1 text-gold leading-none block "><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span><span class="inline-block w-6 h-6 icon-[mdi--star]"></span></span>James, 26 November 2021, Play store</p>
     </blockquote>
-  </div>
-  <div slot="mc2" class="not-prose self-end md:order-1">
-    <Image src={iphone_hand} width={720} densities={[1.5, 2]} class="relative m-0 mt-fl-space-m h-[480px] w-full object-contain lg:h-[640px]" alt="Hand holding an iPhone with mykring app in use"/>
-  </div>
+    <Image slot="s2" src={iphone_hand} width={720} densities={[1.5, 2]} class="relative m-0 mt-fl-space-m h-[480px] w-full object-contain lg:h-[640px]" alt="Hand holding an iPhone with mykring app in use"/>
 </Block>
 
 The '**Auto top-up**' feature is a good example of a user path that was enhanced during the app development process. It was previously a load method but is now only available as an action for validated cards (a prerequisite of the auto top-up service) in the Manage Cards section.
@@ -167,20 +161,18 @@ The Auto top-up form was also streamlined and only appears when 'Use Auto top-up
 <Figure breakout="true"  caption='Users can manage Auto top-up functionality using a simple toggle.' credit='App v1.0.1, K&nbsp;Wearables Ltd.' >
   <Image src={splitscreen_auto_topup} alt="Auto top-up close ups" class="w-full h-auto" widths={[400, 960, 2100]} sizes={`100vw`} />
 </Figure>
- 
 
-<InlineBento collections="mykringapp" >
+<Lightbox collections={[{
+            id: 'mykringapp',
+        },
+        {
+            id: 'mykringapp.ux',
+            title: 'UX details',
+        },]} >
 <Fragment slot='title'>
 ## App screens
 </Fragment>
-</InlineBento>
-
-<InlineBento collections="mykringapp.ux" >
-<Fragment slot='title'>
-## UX details
-</Fragment>
-</InlineBento>
-
+</Lightbox>
 
 ## Ratings and Reviews
 
@@ -188,6 +180,5 @@ The Auto top-up form was also streamlined and only appears when 'Use Auto top-up
 
 <div class="breakout bg-surface-raised">
 <Reviews data={reviews}/></div>
-
 
 <BlockPicture src={floating_handsets} class="mb-fl-space-2xl" alt="Laptop and iPhone image showing K Ring website" credit={frontmatter.title} wrapper={true} />

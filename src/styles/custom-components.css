@@ -28,7 +28,7 @@
 
     .form__input,
     .form__select {
-        @apply block rounded border border-line bg-surface-sunken/15 px-fl-space-2xs py-fl-space-3xs placeholder:text-content/40 focus:border-surface focus:bg-surface  focus:outline-none focus:ring-2 focus:ring-focus;
+        @apply block rounded border border-line bg-surface-sunken/15 px-fl-space-2xs py-fl-space-3xs placeholder:text-content/40 focus:border-surface focus:bg-surface focus:outline-none focus:ring-2 focus:ring-focus;
     }
 
     .form__input.error,
@@ -38,20 +38,20 @@
     }
 
     .form__input.readonly {
-        @apply pointer-events-none select-none border border-gray-300  bg-gray-100 focus:border-gray-300 focus:bg-gray-100 focus:outline-none focus:ring-0;
+        @apply pointer-events-none select-none border border-gray-300 bg-gray-100 focus:border-gray-300 focus:bg-gray-100 focus:outline-none focus:ring-0;
     }
 
     .form__textarea {
-        @apply block rounded  border border-gray-300 bg-white px-fl-space-2xs py-fl-space-3xs placeholder:text-content-quiet  focus:border-focus focus:bg-white focus:outline-none focus:ring-2 focus:ring-focus;
+        @apply block rounded border border-gray-300 bg-white px-fl-space-2xs py-fl-space-3xs placeholder:text-content-quiet focus:border-focus focus:bg-white focus:outline-none focus:ring-2 focus:ring-focus;
     }
 
     .form__checkbox {
-        @apply rounded border border-gray-400 px-2 py-2 text-accent focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus;
+        @apply text-primary rounded border border-gray-400 px-2 py-2 focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus;
     }
 
     .form__checkbox,
     .form__radio {
-        @apply border border-gray-400 px-2 py-2 text-accent focus:border-focus focus:outline-none  focus:ring-2 focus:ring-focus;
+        @apply text-primary border border-gray-400 px-2 py-2 focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus;
     }
 
     .form__divider {
@@ -68,8 +68,7 @@
     }
 
     .switch__bg {
-        @apply relative  h-6 w-11 overflow-hidden rounded-full bg-gray-300 shadow-inset
-  after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border-2 after:border-gray-400 after:bg-white after:shadow-sm after:transition;
+        @apply relative h-6 w-11 overflow-hidden rounded-full bg-gray-300 shadow-inset after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border-2 after:border-gray-400 after:bg-white after:shadow-sm after:transition;
     }
 
     .switch__label {
@@ -77,12 +76,12 @@
     }
 
     input:checked + .switch__bg:after {
-        @apply border-accent;
+        @apply border-primary;
         transform: translateX(100%);
     }
 
     input:checked + .switch__bg {
-        @apply bg-accent;
+        @apply bg-primary;
     }
 
     /* Lists
@@ -91,7 +90,7 @@
         @apply space-y-2 !pl-0;
     }
     .list li {
-        @apply relative  leading-normal;
+        @apply relative leading-normal;
     }
 
     .list--bullet li,
@@ -100,7 +99,7 @@
     }
 
     .list--bullet li {
-        @apply before:icon-[ci--dummy-square-small] before:translate-y-px before:text-[24px] before:text-accent;
+        @apply before:text-primary before:icon-[ci--dummy-square-small] before:translate-y-px before:text-[24px];
     }
 
     .list--checklist li {
@@ -113,15 +112,14 @@
     }
 
     .list--counter > li:before {
-        @apply absolute left-0 top-fl-space-3xs mr-fl-space-xs block h-fl-space-m w-fl-space-m rounded-full bg-accent text-center text-fl-step-1 font-black text-white;
+        @apply bg-primary absolute left-0 top-fl-space-3xs mr-fl-space-xs block h-fl-space-m w-fl-space-m rounded-full text-center text-fl-step-1 font-black text-white;
         content: counter(a);
     }
 
     /* Blockquotes
   ---------------------------------------------------------------------------------*/
     blockquote {
-        @apply relative my-fl-space-l block pl-fl-space-xs text-left font-Georgia text-fl-step-1 before:icon-[lucide--message-square-quote]
-before:block before:text-[1.5em] before:leading-none before:text-accent;
+        @apply before:text-primary relative my-fl-space-l block pl-fl-space-xs text-left font-Georgia text-fl-step-1 before:icon-[lucide--message-square-quote] before:block before:text-[1.5em] before:leading-none;
     }
 
     blockquote .cite {

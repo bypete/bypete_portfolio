@@ -57,7 +57,7 @@ import UL from '~/components/MDX/ul.astro'
 import Skills from '~/components/ui/Skills.astro'
 
 
-import InlineBento from '~/components/lightbox/InlineBento.astro'
+import Lightbox from '~/components/MDX/Lightbox.astro'
 export const components = {ul: UL}
 import Block from '~/components/blocks/Block.astro'
 
@@ -74,21 +74,17 @@ User engagement was critical to the site's success because the album had a large
 The site promoted and then documented **8 Arena tours**, culminating in the _40<sup>th</sup> Anniversary UK tour_ in 2018.
 
 <Block
-        mode="plain"
-        bg="bg-amber-400"
-        breakout={true}
-        wrapper="my-fl-space-2xl"
-    >
-<div class="absolute w-full h-full inset-0 bg-bottom bg-cover opacity-[12%]" style={`background-image: url(${svgbg.src});`}></div>
-
-<div class="relative grid text-center leading-snug grid-cols-1 md:grid-cols-3 py-fl-space-3xl gap-fl-space-m text-teal-500 content-center max-w-container mx-auto">
-  <p><span class="block text-fl-step-6 font-black"><Icon name="lucide:message-circle-heart" class="w-fl-space-xl-2xl h-fl-space-xl-2xl mx-auto block" title="Users" />20K</span> Users</p>
-  <p><span class="block text-fl-step-6 font-black"><Icon name="lucide:message-square-text" class="w-fl-space-xl-2xl h-fl-space-xl-2xl mx-auto block" title="Message boards" />19</span> Message boards</p>
-  <p><span class="block text-fl-step-6 font-black"><Icon name="lucide:messages-square" class="w-fl-space-xl-2xl h-fl-space-xl-2xl mx-auto block" title="Topics" />3.2K</span> Topics</p>
-</div>
+    layout={{slots: 3, type: 'default'}}
+    data-inview="portfolio"
+    wrapperClass="bg-amber-400 not-prose my-fl-space-2xl"
+    class="py-fl-space-3xl justify-center text-center relative"
+    legibility='text-teal-500'
+>
+    <div slot="background" class="absolute w-full h-full inset-0 bg-bottom bg-cover opacity-[0.12]" style={`background-image: url(${svgbg.src});`}></div>
+    <p slot="s1" class="text-fl-step-7/tight font-black"><Icon name="lucide:message-circle-heart" class="w-fl-space-xl-2xl h-fl-space-xl-2xl mx-auto block" title="youtube" />20K <span class="text-fl-step--1 block font-medium">Users</span></p>
+    <p slot="s2" class="text-fl-step-7/tight font-black"><Icon name="lucide:message-square-text"  class="w-fl-space-xl-2xl h-fl-space-xl-2xl mx-auto block" title="instagram" />19 <span class="text-fl-step--1 block font-medium">Message boards</span></p>
+    <p slot="s3" class="text-fl-step-7/tight font-black"><Icon name="lucide:messages-square" class="w-fl-space-xl-2xl h-fl-space-xl-2xl mx-auto block" title="x-twitter" />3.2K <span class="text-fl-step--1 block font-medium">Topics</span></p>
 </Block>
-
-
 
 <Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
 ## My Skills and Contributions
@@ -103,16 +99,15 @@ The site promoted and then documented **8 Arena tours**, culminating in the _40<
 -   The client could write newsletters and some news items, but I was in charge of populating the majority of the content. Each tour or album release was usually preceded by a minor site rebranding.
 
 
-<InlineBento collections="twotw.old" >
+<Lightbox collections={[
+        {
+            id: 'twotw.old',
+        }, {
+            id: 'twotw',
+            title: 'Reworked visuals',
+            description: 'The images below were created for a site refresh in preparation for an Arena tour in the United Kingdom and Europe.',
+        },]} >
 <Fragment slot='title'>
 ## Original site
 </Fragment>
-</InlineBento>
-
-<InlineBento collections="twotw" >
-<Fragment slot='title'>
-## Reworked visuals
-</Fragment>
-The images below were created for a site refresh in preparation for an Arena tour in the United Kingdom and Europe.
-</InlineBento>
-
+</Lightbox>

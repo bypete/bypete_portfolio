@@ -23,10 +23,10 @@ const optimizedImages = await Promise.all(
 );
 ---
 
-<section data-inview="lightbox" class:list={['lightbox not-prose']}>
+<div data-inview="lightbox" class:list={['lightbox not-prose']}>
     <slot />
     <div
-        class="relative mt-fl-space-m grid grid-flow-dense auto-rows-[100px] grid-cols-3 gap-fl-space-s md:auto-rows-[160px] md:grid-cols-4"
+        class="relative grid grid-flow-dense auto-rows-[100px] grid-cols-3 gap-fl-space-s md:auto-rows-[160px] md:grid-cols-4"
     >
         {
             optimizedImages.map((item, i) => {
@@ -39,7 +39,7 @@ const optimizedImages = await Promise.all(
                             data-pswp-srcset={item.optimizedSrc}
                             data-pswp-width={item.src.width}
                             data-pswp-height={item.src.height}
-                            class="relative block h-full w-full overflow-hidden rounded shadow-sm hover:cursor-pointer"
+                            class="relative block h-full w-full overflow-hidden rounded bg-surface-raised shadow-sm hover:cursor-pointer"
                         >
                             <Image
                                 src={item.src}
@@ -68,7 +68,7 @@ const optimizedImages = await Promise.all(
             })
         }
     </div>
-</section>
+</div>
 
 <script>
     import PhotoSwipeLightbox from 'photoswipe/lightbox';

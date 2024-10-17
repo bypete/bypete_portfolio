@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import Bento from '~/components/lightbox/Bento.astro';
+import { Icon } from 'astro-icon/components';
+interface CollectionItem {
+    id: string;
+    title?: string;
+    description?: string;
+}
+
+interface Props {
+    collections?: CollectionItem[];
+    breakout: boolean;
+}
+
+const { collections = [], breakout = false } = Astro.props;
+
+const allGalleries = await getCollection('galleries');
+
+const galleries = allGalleries.filter((gallery) =>
+    collections.some((item) => item.id === gallery.id),
+);
+---
+
+{
+    collections && (
+        <div
+            class:list={[
+                'not-prose bg-surface-sunken p-fl-space-s-m shadow-inset',
+                !breakout
+                    ? '-mx-fl-space-s-m my-fl-space-xl rounded-tight'
+                    : 'breakout',
+            ]}
+        >
+            <div class="grid grid-flow-row justify-between leading-snug md:grid-flow-col">
+                <slot name="title" slot="title" />
+                <div class="pointer-events-none grid grid-cols-icon gap-fl-space-2xs text-fl-step--1 text-content-quiet md:max-w-[36ch]">
+                    <>
+                        <Icon
+                            name="lucide:zoom-in"
+                            class="inline-block h-auto w-fl-space-s"
+                        />
+                        <p>
+                            Tap any image to view in more detail. Pinch or mouse
+                            scroll to zoom in.
+                        </p>
+                    </>
+                </div>
+            </div>
+
+            <slot />
+
+            {collections.map((item) => {
+                const gallery = galleries.find((g) => g.id === item.id);
+                return gallery ? (
+                    <div class="mt-fl-space-m">
+                        {item.title && (
+                            <h3 class="font-display">{item.title}</h3>
+                        )}
+                        {item.description && (
+                            <p
+                                class="mb-fl-space-m"
+                                set:html={item.description}
+                            />
+                        )}
+                        <Bento {gallery} />
+                    </div>
+                ) : null;
+            })}
+        </div>
+    )
+}

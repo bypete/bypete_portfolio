@@ -1,103 +1,265 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import ModePair from '~/components/blocks/ModePair.astro';
+import { Image } from 'astro:assets';
 import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
 import SwipePrompt from '~/components/ui/SwipePrompt.astro';
 
+// Discriminated union for the layout type based on the slot count
+type LayoutConfig =
+    | { slots: 1; type: 'default' | 'left' | 'right' | 'center' }
+    | { slots: 2; type: 'default' | 'left' | 'right' | 'center' }
+    | { slots: 3; type: 'default' | 'center' }
+    | { slots: 4; type: 'default' };
+
+type MatrixConfig = {
+    grid: string[];
+    slots: { [key: number]: string[] }; // Classes for each slot
+};
+
 export interface Props extends HTMLAttributes<'div'> {
-    wrapper?: string;
-    grid?: string;
-    flex?: string;
-    dark?: boolean;
-    bg?: string;
-    mode?: 'plain' | 'pair' | 'image' | 'custom';
-    class?: string;
+    layout?: LayoutConfig;
+    gridClass?: string;
+    wrapperClass?: string;
+    className?: string;
     legibility?: string;
-    isContained?: boolean;
+    overflow?: boolean;
+    container?: boolean;
     prompt?: 'swipe' | 'scroll';
     breakout?: boolean;
+    background?: {
+        src: ImageMetadata;
+        alt: string;
+    };
+    dark?: boolean;
+    slotConfig?: {
+        [key: number]: string[]; // Dynamic slot configuration
+    };
 }
 
+// Extract props
 const {
-    dark = false,
-    wrapper = '',
-    grid = '',
-    bg = '',
-    mode = 'plain',
-    class: ClassName = '',
+    layout = { type: 'default', slots: 1 }, // Default to 1 slots
+    gridClass = '', // Override grid layout
+    wrapperClass = '',
+    class: className,
     legibility,
-    isContained,
+    overflow = false,
+    container = true,
     prompt,
-    breakout,
+    breakout = true,
+    background,
+    dark = false,
+    slotConfig = {},
     ...rest
 } = Astro.props;
 
-const color = legibility || (dark ? 'text-white' : 'text-slate-800');
-let wrapperClass = '';
+// Determine text color based on legibility or dark mode
+const color = legibility || (dark ? 'text-content-light' : 'text-content-dark');
 
-switch (mode) {
-    case 'plain':
-        wrapperClass = `${wrapper || ''} `;
-        break;
-    case 'pair':
-        wrapperClass = `${wrapper || ''} `;
-        break;
+// Matrix defining grid and slot configurations based on the number of slots and layout type
+const layoutMatrix: Record<number, Record<string, MatrixConfig>> = {
+    1: {
+        default: {
+            grid: ['items-center', 'justify-center', 'gap-fl-space-2xs'],
+            slots: { 1: ['max-w-[40ch]'] },
+        },
+        left: {
+            grid: [
+                'grid-flow-row',
+                'md:grid-cols-[1fr,2fr]',
+                'items-center',
+                'gap-fl-space-m',
+            ],
+            slots: { 1: ['py-fl-space-2xl'] },
+        },
+        right: {
+            grid: [
+                'grid-flow-row',
+                'md:grid-cols-[2fr,1fr]',
+                'items-center',
+                'gap-fl-space-m',
+            ],
+            slots: { 1: ['py-fl-space-2xl'] },
+        },
+        center: {
+            grid: ['grid-cols-1', 'text-center'],
+            slots: { 1: ['max-w-[40ch]', 'py-fl-space-2xl'] },
+        },
+    },
+    2: {
+        default: {
+            grid: [
+                'grid-flow-row',
+                'md:grid-cols-[1fr,1fr]',
+                'items-center',
+                'gap-fl-space-m',
+            ],
+            slots: { 1: [], 2: [] },
+        },
+        left: {
+            grid: [
+                'grid-flow-row',
+                'md:grid-cols-[3fr,2fr]',
+                'items-center',
+                'gap-fl-space-m',
+            ],
+            slots: { 1: [], 2: [] },
+        },
+        right: {
+            grid: [
+                'grid-flow-row',
+                'md:grid-cols-[2fr,3fr]',
+                'items-center',
+                'gap-fl-space-m',
+            ],
+            slots: { 1: [], 2: [] },
+        },
+    },
+    3: {
+        default: {
+            grid: [
+                'grid-flow-row',
+                'grid-cols-1',
+                'md:grid-cols-3',
+                'items-center',
+                'gap-fl-space-m',
+            ],
+            slots: { 1: [], 2: [], 3: [] },
+        },
+        center: {
+            grid: [
+                'grid-flow-row',
+                'grid-cols-1',
+                'md:grid-cols-3',
+                'items-center',
+                'justify-center',
+                'text-center',
+                'gap-fl-space-m',
+            ],
+            slots: { 1: [], 2: [], 3: [] },
+        },
+    },
+    4: {
+        default: {
+            grid: [
+                'grid-flow-row',
+                'grid-cols-2',
+                'md:grid-cols-4',
+                'items-center',
+                'gap-fl-space-m',
+            ],
+            slots: {
+                1: [],
+                2: [],
+                3: [],
+                4: [],
+            },
+        },
+    },
+};
 
-    case 'image':
-        wrapperClass = `${
-            wrapper || ''
-        } bg-white min-h-photo md:min-h-33vw xl:min-h-block`;
-        break;
-    case 'custom':
-        wrapperClass = `${wrapper || ''} custom-wrapper`;
-        break;
-    default:
-    // Handle default case, if necessary
+// Select the current layout configuration based on the number of slots and layout type
+const currentLayout =
+    layoutMatrix[layout.slots][layout.type] || layoutMatrix[2].default;
+
+const layoutClass = [
+    ...(gridClass ? gridClass.split(' ') : currentLayout.grid),
+    overflow && 'overflow-hidden',
+    container && 'mx-auto w-full max-w-container',
+    color,
+];
+
+// Define background properties if background exists
+let backgroundProps;
+if (background) {
+    backgroundProps = {
+        src: background.src.src,
+        alt: background.alt,
+        widths: [480, 1800],
+        sizes: '100vw',
+        class: 'absolute h-full w-full object-cover',
+        format: 'auto',
+        quality: 'high',
+    };
 }
 ---
 
 <div
+    {...layout.type && { 'data-layout': `block-${layout.type}` }}
     class:list={[
-        'relative w-full outline-none',
-        bg ? bg : '',
-        color ? color : '',
-        ClassName,
-        wrapperClass,
-        { 'overflow-hidden': isContained },
+        'relative',
+        wrapperClass && wrapperClass,
         breakout && 'breakout',
     ]}
-    {...rest}
 >
     {
-        mode === 'plain' && (
-            <>
-                <slot />
-            </>
+        background ? (
+            <div class="absolute inset-0 h-full w-full">
+                <Image {...backgroundProps} />
+            </div>
+        ) : (
+            <slot name="background" />
         )
     }
-    {
-        mode === 'pair' && (
-            <>
-                <ModePair grid={grid} class="relative mx-auto">
-                    <slot slot="mc1" name="mc1" />
-                    <slot slot="mc2" name="mc2" />
-                    <slot />
-                </ModePair>
-            </>
-        )
-    }
+    <div class:list={['grid', layoutClass, className && className]} {...rest}>
+        <slot />
 
-    {
-        mode === 'custom' && (
-            <>
-                <slot />
-            </>
-        )
-    }
-
+        {
+            layout.slots >= 1 && (
+                <div
+                    class:list={[
+                        'relative',
+                        currentLayout.slots[1],
+                        slotConfig[1],
+                    ]}
+                >
+                    <slot name="s1" />
+                </div>
+            )
+        }
+        {
+            layout.slots >= 2 && (
+                <div
+                    class:list={[
+                        'relative',
+                        currentLayout.slots[2],
+                        slotConfig[2],
+                    ]}
+                >
+                    <slot name="s2" />
+                </div>
+            )
+        }
+        {
+            layout.slots >= 3 && (
+                <div
+                    class:list={[
+                        'relative',
+                        currentLayout.slots[3],
+                        slotConfig[3],
+                    ]}
+                >
+                    <slot name="s3" />
+                </div>
+            )
+        }
+        {
+            layout.slots >= 4 && (
+                <div
+                    class:list={[
+                        'relative',
+                        currentLayout.slots[4],
+                        slotConfig[4],
+                    ]}
+                >
+                    <slot name="s4" />
+                </div>
+            )
+        }
+    </div>
     {
         prompt && (
-            <div class="pointer-events-none absolute left-1/2 top-screenSvh z-100 -translate-x-1/2 -translate-y-full pb-fl-space-s">
+            <div class="pointer-events-none absolute bottom-fl-space-s left-1/2 z-100 -translate-x-1/2">
                 {prompt === 'scroll' && <ScrollPrompt />}
                 {prompt === 'swipe' && <SwipePrompt />}
             </div>

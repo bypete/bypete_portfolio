@@ -84,8 +84,7 @@ import Figure from '~/components/images/Figure.astro'
 import UL from '~/components/MDX/ul.astro'
 import Skills from '~/components/ui/Skills.astro'
 
-
-import InlineBento from '~/components/lightbox/InlineBento.astro'
+import Lightbox from '~/components/MDX/Lightbox.astro'
 
 export const components = {ul: UL}
 
@@ -154,37 +153,35 @@ Any screen can be directly accessed by developers, partner clients, and stakehol
 -   I created a complete set of email HTML templates that would work with Umbraco's dictionary to handle the multilanguage requirements.
 -   I assisted in the configuration of the content management system (Umbraco) and was in charge of the initial populating of all launch content. <span class="label label--info !m-0">collaboration</span>
 
-
-<InlineBento collections="mykring" >
+<Lightbox collections={[{
+            id: 'mykring',
+            title: 'Public access',
+        },
+        {
+            id: 'mykring.account',
+            title: 'Account access',
+        },
+        {
+            id: 'mykring.ux',
+            title: 'UX',
+        },]} >
 <Fragment slot='title'>
-## Public access
+## Screens
 </Fragment>
-</InlineBento>
+</Lightbox>
 
-<InlineBento collections="mykring.account" >
-<Fragment slot='title'>
-## Account access
-</Fragment>
-</InlineBento>
-
-<InlineBento collections={['mykring.email']} >
+<Lightbox collections={[{
+            id: 'mykring.email',
+        },
+        {
+            id: 'mykring.cs',
+            title: 'Customer services',
+        },]} >
 <Fragment slot='title'>
 ## Email templates
 </Fragment>
 Each template has multilingual content. Repeated items are stored as dictionary terms in the CMS and referenced using **[#Email.Content...#]**. System data is referenced using **[[Firstname]]**'
-</InlineBento>
-
-<InlineBento collections="mykring.ux" >
-<Fragment slot='title'>
-## UX
-</Fragment>
-</InlineBento>
-
-<InlineBento collections="mykring.cs" >
-<Fragment slot='title'>
-## Customer services
-</Fragment>
-</InlineBento>
+</Lightbox>
 
 ## Learning points
 

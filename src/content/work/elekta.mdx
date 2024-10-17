@@ -55,7 +55,7 @@ import Skills from '~/components/ui/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
 
 
-import InlineBento from '~/components/lightbox/InlineBento.astro'
+import Lightbox from '~/components/MDX/Lightbox.astro'
 export const components = {ul: UL}
 import Note from '~/components/ui/Note.astro'
 
@@ -78,17 +78,17 @@ Our solution needed to be more flexible, reduce operational costs, reduce publis
 -   I created all of the Front-End HTML templates. These were then handed over to a team of back-end developers, complete with detailed annotations, listing indexes, and support documentation.
 -   I assisted in configuring the content management system (EPiServer) and oversaw the testing of the transferred site content throughout the development process. <span class="label label--info !m-0">collaboration</span>
 
-<InlineBento collections="elekta" >
+<Lightbox collections={[{
+            id: 'elekta',
+        },
+        {
+            id: 'elekta.service',
+            title: 'Service',
+        },]} >
 <Fragment slot='title'>
-## Site visuals | Sales
+## Site visuals
 </Fragment>
-</InlineBento>
-
-<InlineBento collections="elekta.service" >
-<Fragment slot='title'>
-## Site visuals | Service
-</Fragment>
-</InlineBento>
+</Lightbox>
 
 
 ## Final comments

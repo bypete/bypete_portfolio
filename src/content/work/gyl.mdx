@@ -63,7 +63,7 @@ import Skills from '~/components/ui/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
 
 
-import InlineBento from '~/components/lightbox/InlineBento.astro'
+import Lightbox from '~/components/MDX/Lightbox.astro'
 import Figure from '~/components/images/Figure.astro'
 import Block from '~/components/blocks/Block.astro'
 export const components = {ul: UL}
@@ -82,24 +82,19 @@ The site encouraged the community to submit their own game reviews, effectively 
 GYL has a substantial social media presence across multiple platforms and the site served as a central hub for these platforms, allowing for deeper engagement through rich editorial content.
 
 
-
 <Block
-        mode="plain"
-        bg="bg-sky-400"
-       wrapper="my-fl-space-2xl"
-        breakout={true}
-    >
-
-<div class="absolute w-full h-full inset-0 bg-bottom bg-cover opacity-[12%]" style={`background-image: url(${svgbg.src});`}></div>
-
-<div class="relative grid text-center leading-snug grid-cols-2 md:grid-cols-4 py-fl-space-3xl gap-fl-space-m text-content-light content-center max-w-container mx-auto">
-  <p><span class="block text-fl-step-6 font-black"><Icon name="fa6-brands:youtube" class="w-fl-space-xl-2xl h-fl-space-xl-2xl mx-auto block" title="youtube" />6.44K</span> Youtube subscribers</p>
-  <p><span class="block text-fl-step-6 font-black"><Icon name="fa6-brands:instagram" class="w-fl-space-xl-2xl h-fl-space-xl-2xl mx-auto block" title="instagram" />61.3K</span> Instagram followers</p>
-  <p><span class="block text-fl-step-6 font-black"><Icon name="fa6-brands:x-twitter" class="w-fl-space-xl-2xl h-fl-space-xl-2xl mx-auto block" title="x-twitter" />99.7K</span> X Followers</p>
-  <p><span class="block text-fl-step-6 font-black"><Icon name="fa6-brands:facebook" class="w-fl-space-xl-2xl h-fl-space-xl-2xl mx-auto block" title="facebook" />52K</span> Facebook Followers</p>
-</div>
+    layout={{ slots: 4, type: 'default' }}
+    data-inview="portfolio"
+    wrapperClass="bg-sky-400 not-prose my-fl-space-2xl"
+    class="py-fl-space-3xl text-center"
+    legibility='text-content-light'
+>
+    <div slot="background" class="absolute w-full h-full inset-0 bg-bottom bg-cover opacity-[0.12]" style={`background-image: url(${svgbg.src});`}></div>
+    <p slot="s1" class="text-fl-step-5/tight font-black"><Icon name="fa6-brands:youtube" class="w-fl-space-xl-2xl h-fl-space-xl-2xl mx-auto block" title="youtube" />6.44K <span class="text-fl-step--1 block font-medium">Youtube subscribers</span></p>
+    <p slot="s2" class="text-fl-step-5/tight font-black"><Icon name="fa6-brands:instagram" class="w-fl-space-xl-2xl h-fl-space-xl-2xl mx-auto block" title="instagram" />61.3K <span class="text-fl-step--1 block font-medium">Instagram followers</span></p>
+    <p slot="s3" class="text-fl-step-5/tight font-black"><Icon name="fa6-brands:x-twitter" class="w-fl-space-xl-2xl h-fl-space-xl-2xl mx-auto block" title="x-twitter" />99.7K <span class="text-fl-step--1 block font-medium">X Followers</span></p>
+    <p slot="s4" class="text-fl-step-5/tight font-black"><Icon name="fa6-brands:facebook" class="w-fl-space-xl-2xl h-fl-space-xl-2xl mx-auto block" title="facebook" />52K <span class="text-fl-step--1 block font-medium">Facebook Followers</span></p>
 </Block>
-
 
 <Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
 ## My Skills and Contributions
@@ -122,11 +117,14 @@ GYL has a substantial social media presence across multiple platforms and the si
 > ...They evolved a simple idea of our love for everything retrogaming into an exciting and fun digital experience.
 ><cite class="text-fl-base ">GamesYouLoved.com</cite>
 
-<InlineBento collections="gyl" >
+<Lightbox collections={[{
+            id: 'gyl',
+        },
+       ]} >
 <Fragment slot='title'>
 ## Site visuals
 </Fragment>
-</InlineBento>
+</Lightbox>
 
 <BlockPicture src={block__sw_40} class="my-fl-space-2xl" alt="Exhibition event" credit='GamesYouLoved' wrapper={true} />
 

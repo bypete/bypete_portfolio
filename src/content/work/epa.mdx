@@ -66,7 +66,7 @@ import Skills from '~/components/ui/Skills.astro'
 import UL from '~/components/MDX/ul.astro'
 
 
-import InlineBento from '~/components/lightbox/InlineBento.astro'
+import Lightbox from '~/components/MDX/Lightbox.astro'
 import Figure from '~/components/images/Figure.astro'
 
 
@@ -107,23 +107,23 @@ As new sections became available for review, the index listings were updated to 
 I collaborated closely with the developers to ensure that the site stayed true to the visuals approved by the client.
 Umbraco was used to create the development website. I was able to populate the site with real content from the first instance and continued to do so until the live site was launched.
 
-<InlineBento collections="epa" >
+<Lightbox collections={[{
+            id: 'epa',
+            title: 'Layouts',
+        },
+        {
+            id: 'epa.email',
+            title: 'Email newslettter',
+        },
+        {
+            id: 'epa.awards',
+            title: 'EPA Awards',
+        },]} >
 <Fragment slot='title'>
-## Layouts
+## Site visuals
 </Fragment>
-</InlineBento>
+</Lightbox>
 
-<InlineBento collections="epa.email" >
-<Fragment slot='title'>
-## Email newslettter
-</Fragment>
-</InlineBento>
-
-<InlineBento collections="epa.awards" >
-<Fragment slot='title'>
-## EPA Awards
-</Fragment>
-</InlineBento>
 
 ## Final comments
 

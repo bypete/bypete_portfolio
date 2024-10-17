@@ -16,20 +16,26 @@ const { wrapper, gridHeight } = Astro.props;
 ---
 
 <Block
-    mode="pair"
-    bg="bg-brand"
+    layout={{ slots: 2, type: 'default' }}
     data-inview="portfolio"
-    wrapper={wrapper ? wrapper : ''}
-    grid={`grid mx-auto grid-cols-1 md:grid-cols-2 md:grid-rows-1 gap-fl-space-m max-w-container ${gridHeight ? gridHeight : ''}`}
-    breakout={true}
+    wrapperClass="bg-brand not-prose"
 >
     <div class="plusheap absolute inset-0 h-full w-full opacity-20"></div>
-    <div
-        slot="mc1"
-        class="not-prose self-center py-fl-space-m text-content-loud md:order-2"
-    >
+
+    <div slot="s1" class="self-center" data-animate="scaleIn">
+        <Image
+            src={product}
+            quality="high"
+            loading="eager"
+            densities={[1.5, 2]}
+            width={600}
+            class="relative m-0 h-full w-full object-contain"
+            alt="iPhones with mykring app in use"
+        />
+    </div>
+    <div slot="s2" class="self-center py-fl-space-m text-content-loud">
         <h2
-            class="font-headline text-fl-step-3 font-bold leading-tight tracking-tight"
+            class="font-headline text-fl-step-3/tight font-bold tracking-tight"
             data-animate="fadeInDown"
         >
             Show and tell
@@ -42,34 +48,19 @@ const { wrapper, gridHeight } = Astro.props;
             <Button data-animate="scaleIn" theme="secondary" href="/work/"
                 >Explore the portfolio</Button
             >
-
             <RandomLink
                 theme="disco"
                 href="/work/"
                 data-animate="scaleIn"
                 isIcon={true}
                 choices={portfolio.collection}
-                >Random pick <Icon
+                >Random pick
+                <Icon
                     name="lucide:shuffle"
                     class="h-fl-space-xs w-auto animate-pulse"
-                /></RandomLink
-            >
+                />
+            </RandomLink>
         </p>
-    </div>
-    <div
-        slot="mc2"
-        class="not-prose h-full self-center md:order-1"
-        data-animate="scaleIn"
-    >
-        <Image
-            src={product}
-            quality="high"
-            loading="eager"
-            densities={[1.5, 2]}
-            width={600}
-            class="relative m-0 h-full w-full object-contain"
-            alt="iPhones with mykring app in use"
-        />
     </div>
 </Block>
 
