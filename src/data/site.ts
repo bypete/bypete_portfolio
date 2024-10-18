@@ -43,7 +43,7 @@ export type SiteInfo = {
   };
 };
 
-import ogDefaultImage from '../assets/og/og__default.jpg';
+import ogDefaultImage from '~/assets/og/og__default.jpg';
 
 const siteInfo: SiteInfo = {
   name: "byPete",

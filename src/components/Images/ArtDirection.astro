@@ -13,7 +13,7 @@ interface Props {
 const { artDirectives, src, alt, loading, ...attrs } = Astro.props;
 
 const imageFiles = import.meta.glob<{ default: ImageMetadata }>(
-    '../../assets/**/*.{png,webp,jpg,jpeg}',
+    '~/assets/**/*.{png,webp,jpg,jpeg}',
 );
 
 // Define a function to load images
@@ -25,7 +25,7 @@ const loadImage = async (
     if (typeof src === 'string') {
         try {
             // Load image from path
-            const imagePromise = imageFiles[`../../assets/${src}`];
+            const imagePromise = imageFiles[`~/assets/${src}`];
             const imageData = await imagePromise();
             // Handle conversion if needed
             if (convert === true) {

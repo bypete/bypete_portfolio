@@ -9,19 +9,20 @@ import { Image } from 'astro:assets';
 import HeroPicture from '~/components/images/HeroPicture.astro';
 import { readableDate, htmlDateString } from '~/js/utils.js';
 import TableOfContents from '~/components/ui/TableOfContents.astro';
-import WorkPreview from '~/components/ui/WorkPreview.astro';
+import NextPrev from '~/components/ui/NextPrev.astro';
 import BlockPicture from '~/components/images/BlockPicture.astro';
 import ReadTime from '~/components/ui/ReadTime.astro';
 
-const {
-    frontmatter,
-    section,
-    minutesRead,
-    headings,
-    prevPost,
-    nextPost,
-    gallery,
-} = Astro.props;
+export interface Props {
+    frontmatter: any;
+    section: string;
+    minutesRead: string;
+    headings: any;
+    prevPost: any;
+    nextPost: any;
+}
+const { frontmatter, section, minutesRead, headings, prevPost, nextPost } =
+    Astro.props;
 
 const fm = frontmatter || Astro.props;
 const { hideToc = false, hideBreadcrumbs = false } = fm;
@@ -40,6 +41,32 @@ const head: HeadProps = {
 
 const isHeroDark =
     (fm.isHeroDark || (fm.heroConfig && fm.heroConfig.dark)) ?? false;
+
+// Simplify the post before passing to NextPrev component
+const formatPostData = (post) => {
+    const thumb = post.data.cover
+        ? {
+              src: post.data.cover.src,
+              alt: post.data.cover.alt,
+          }
+        : undefined;
+    const overlay = post.data.logo
+        ? {
+              src: post.data.logo.light || post.data.logo.src,
+              alt: post.data.logo.alt,
+          }
+        : undefined;
+    return {
+        title: post.data.title,
+        url: `/${post.collection}/${post.slug}/`,
+        excerpt: post.data.excerpt || post.data.taster || '',
+        ...(thumb && { thumb }), // conditional thumbnail
+        ...(overlay && { overlay }), // conditional overlay
+    };
+};
+
+let nextPostData = nextPost ? formatPostData(nextPost) : undefined;
+let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
 ---
 
 <BaseLayout head={head} {isHeroDark}>
@@ -157,27 +184,10 @@ const isHeroDark =
     <aside
         class="bg-surface-sunken px-fl-space-m py-fl-space-2xl shadow-highlight"
     >
-        <div
-            class="mx-auto grid max-w-3xl grid-cols-1 items-start justify-between gap-fl-space-l md:grid-cols-prevnext"
-        >
-            {
-                nextPost && (
-                    <WorkPreview
-                        post={nextPost}
-                        class="md:col-start-1"
-                        preview={'next'}
-                    />
-                )
-            }
-            {
-                prevPost && (
-                    <WorkPreview
-                        post={prevPost}
-                        class="md:col-start-2"
-                        preview={'prev'}
-                    />
-                )
-            }
-        </div>
+        {
+            (nextPostData || prevPostData) && (
+                <NextPrev next={nextPostData} prev={prevPostData} />
+            )
+        }
     </aside>
 </BaseLayout>

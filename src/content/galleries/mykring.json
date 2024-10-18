@@ -2,69 +2,69 @@
   "images": [
     {
       "title": "Home",
-      "src": "../../assets/work/mykring/lightbox/home--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/home--detail.jpg",
       "cropped": false
     },
     {
       "title": "Mobile Home",
-      "src": "../../assets/work/mykring/lightbox/sm_home--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/sm_home--detail.jpg",
       "class": "row-span-2 col-span-1"
     },
     {
       "title": "Blog",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/blog.jpg",
+      "src": "~/assets/work/mykring/lightbox/blog.jpg",
       "class": "row-span-3 col-span-2"
     },
     {
       "title": "Blog detail",
       "caption": "Close up detail",
-      "src": "../../assets/work/mykring/lightbox/blog--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/blog--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Event",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/event.jpg"
+      "src": "~/assets/work/mykring/lightbox/event.jpg"
     },
     {
       "title": "Help FAQs detail",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/help__faq--detail.jpg"
+      "src": "~/assets/work/mykring/lightbox/help__faq--detail.jpg"
     },
     {
       "title": "Help FAQs",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/help__faq.jpg",
+      "src": "~/assets/work/mykring/lightbox/help__faq.jpg",
       "class": "hidden"
     },
     {
       "title": "Mobile Help FAQs detail",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/sm_help__faq--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/sm_help__faq--detail.jpg",
       "class": "row-span-2 col-span-1"
     },
     {
       "title": "Mobile Help FAQs detail",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/sm_help__faq-expanded--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/sm_help__faq-expanded--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "How to",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/howto.jpg"
+      "src": "~/assets/work/mykring/lightbox/howto.jpg"
     },
     {
       "title": "Mobile How to detail",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/sm_howto--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/sm_howto--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Mobile How to",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/sm_howto.jpg"
+      "src": "~/assets/work/mykring/lightbox/sm_howto.jpg"
     }
   ]
 }

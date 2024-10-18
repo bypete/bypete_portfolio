@@ -3,41 +3,41 @@
     {
       "title": "Auto top-up",
       "caption": "Auto top-up has been turned off so the options are hidden",
-      "src": "../../assets/work/mykringapp/lightbox/1.1.0_auto-topup.jpg"
+      "src": "~/assets/work/mykringapp/lightbox/1.1.0_auto-topup.jpg"
     },
     {
       "title": "Auto top-up - active",
       "caption": "Auto top-up is on so the relevant options are shown",
-      "src": "../../assets/work/mykringapp/lightbox/1.1.0_auto-topup-open.jpg"
+      "src": "~/assets/work/mykringapp/lightbox/1.1.0_auto-topup-open.jpg"
     },
     {
       "title": "Dialog",
-      "src": "../../assets/work/mykringapp/lightbox/1.1.0_dialog.jpg",
+      "src": "~/assets/work/mykringapp/lightbox/1.1.0_dialog.jpg",
       "caption": "This step confirms an action.",
       "class": "row-span-2",
       "cropped": false
     },
     {
       "title": "Log out",
-      "src": "../../assets/work/mykringapp/lightbox/1.1.0_logout.jpg",
+      "src": "~/assets/work/mykringapp/lightbox/1.1.0_logout.jpg",
       "class": "row-span-2",
       "cropped": false
     },
     {
       "title": "Devices",
-      "src": "../../assets/work/mykringapp/lightbox/1.1.0_devices.jpg"
+      "src": "~/assets/work/mykringapp/lightbox/1.1.0_devices.jpg"
     },
     {
       "title": "Devices locked",
-      "src": "../../assets/work/mykringapp/lightbox/1.1.0_devices-locked.jpg"
+      "src": "~/assets/work/mykringapp/lightbox/1.1.0_devices-locked.jpg"
     },
     {
       "title": "Load disabled",
-      "src": "../../assets/work/mykringapp/lightbox/1.1.0_load_amount--disabled.jpg"
+      "src": "~/assets/work/mykringapp/lightbox/1.1.0_load_amount--disabled.jpg"
     },
     {
       "title": "Load Active",
-      "src": "../../assets/work/mykringapp/lightbox/1.1.0_load_amount.jpg"
+      "src": "~/assets/work/mykringapp/lightbox/1.1.0_load_amount.jpg"
     }
   ]
 }

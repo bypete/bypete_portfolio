@@ -2,15 +2,15 @@
   "images": [
     {
       "title": "Email Student",
-      "src": "../../assets/work/kalixa/lightbox/email__student--detail.jpg"
+      "src": "~/assets/work/kalixa/lightbox/email__student--detail.jpg"
     },
     {
       "title": "Email newsletter",
-      "src": "../../assets/work/kalixa/lightbox/email__student.jpg"
+      "src": "~/assets/work/kalixa/lightbox/email__student.jpg"
     },
     {
       "title": "Email Student",
-      "src": "../../assets/work/kalixa/lightbox/email__student-002--detail.jpg",
+      "src": "~/assets/work/kalixa/lightbox/email__student-002--detail.jpg",
       "class": "hidden"
     }
   ]

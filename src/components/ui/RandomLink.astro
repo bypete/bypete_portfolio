@@ -1,52 +1,30 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-import type { Props } from '~/components/ui/Link.astro';
+import type { Props as ButtonProps } from '~/components/ui/Button.astro';
+import Button from '~/components/ui/Button.astro';
 
 // Extend the original interface with a new prop
-interface ExtendedProps extends Props {
+export interface ExtendedProps extends ButtonProps {
     choices: string[];
 }
 
 const {
-    theme = 'link',
-    class: className,
-    size,
-    isIcon = false,
-    choices,
-    ...rest
+    theme = 'disco',
+    choices = [],
+    ...buttonProps
 } = Astro.props as ExtendedProps;
 
 let stringChoices = JSON.stringify(choices);
 stringChoices = stringChoices.replace(/\"/g, "'");
 ---
 
-<a
+<Button
+    {theme}
     x-data={`{caseArray:${stringChoices}, ...randomcase()}`}
     @click.prevent="open()"
-    class:list={[
-        'inline-flex items-center rounded-full align-middle font-bold no-underline text-shadow-none hover:shadow-inset',
-        size === 'sm'
-            ? 'h-fl-space-m px-fl-space-2xs py-0 text-fl-step--1 !leading-fl-space-m'
-            : 'px-fl-space-xs py-fl-space-2xs text-fl-base/none',
-        theme === 'primary' &&
-            'bg-primary hover:bg-primary-light text-white hover:border-black/10',
-        theme === 'secondary' &&
-            'bg-secondary text-white hover:bg-secondary-dark',
-        theme === 'disco' &&
-            'bg-gradient-to-r from-indigo-800 via-pink-600 to-pink-800 text-white hover:border-black/10 hover:from-indigo-800 hover:via-sky-600 hover:to-indigo-800',
-        theme === 'white' && 'bg-content-light text-content-dark',
-        theme === 'whiteline' &&
-            'bg-transparent text-content-light ring-2 ring-inset ring-content-light hover:bg-content-light hover:text-content-dark',
-        theme === 'outline' && 'bg-transparent ring-2 ring-inset ring-line',
-        theme === 'quiet' &&
-            'bg-transparent text-content-quiet hover:border-line hover:bg-gray-600 hover:text-white',
-        theme === 'disabled' &&
-            'bg-transparent text-disabled ring-2 ring-disabled hover:border-disabled hover:bg-transparent hover:text-disabled',
-        isIcon && 'justify-between gap-x-fl-space-3xs',
-        className,
-    ]}
-    {...rest}><slot /></a
+    {...buttonProps}
 >
+    <slot />
+</Button>
 
 <script>
     import Alpine from 'alpinejs';

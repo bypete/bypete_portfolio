@@ -2,232 +2,232 @@
   "images": [
     {
       "title": "Home",
-      "src": "../../assets/work/mykring/lightbox/home--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/home--detail.jpg",
       "cropped": false
     },
     {
       "title": "Mobile Home",
-      "src": "../../assets/work/mykring/lightbox/sm_home--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/sm_home--detail.jpg",
       "class": "row-span-2 col-span-1"
     },
     {
       "title": "Blog",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/blog.jpg",
+      "src": "~/assets/work/mykring/lightbox/blog.jpg",
       "class": "row-span-3 col-span-2"
     },
     {
       "title": "Blog detail",
       "caption": "Close up detail",
-      "src": "../../assets/work/mykring/lightbox/blog--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/blog--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Event",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/event.jpg"
+      "src": "~/assets/work/mykring/lightbox/event.jpg"
     },
     {
       "title": "Help FAQs detail",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/help__faq--detail.jpg"
+      "src": "~/assets/work/mykring/lightbox/help__faq--detail.jpg"
     },
     {
       "title": "Help FAQs",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/help__faq.jpg",
+      "src": "~/assets/work/mykring/lightbox/help__faq.jpg",
       "class": "hidden"
     },
     {
       "title": "Mobile Help FAQs detail",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/sm_help__faq--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/sm_help__faq--detail.jpg",
       "class": "row-span-2 col-span-1"
     },
     {
       "title": "Mobile Help FAQs detail",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/sm_help__faq-expanded--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/sm_help__faq-expanded--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "How to",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/howto.jpg"
+      "src": "~/assets/work/mykring/lightbox/howto.jpg"
     },
     {
       "title": "Mobile How to detail",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/sm_howto--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/sm_howto--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Mobile How to",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/sm_howto.jpg"
+      "src": "~/assets/work/mykring/lightbox/sm_howto.jpg"
     }
   ],
   "gAccount": [
     {
       "title": "Signup",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/signup.jpg"
+      "src": "~/assets/work/mykring/lightbox/signup.jpg"
     },
     {
       "title": "Mobile Signup",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/sm_signup.jpg"
+      "src": "~/assets/work/mykring/lightbox/sm_signup.jpg"
     },
     {
       "title": "Registration",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/registration.jpg"
+      "src": "~/assets/work/mykring/lightbox/registration.jpg"
     },
     {
       "title": "Mobile Registration",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/sm_registration--detail.jpg"
+      "src": "~/assets/work/mykring/lightbox/sm_registration--detail.jpg"
     },
     {
       "title": "Mobile Registration",
       "caption": "",
       "class": "hidden",
-      "src": "../../assets/work/mykring/lightbox/sm_registration.jpg"
+      "src": "~/assets/work/mykring/lightbox/sm_registration.jpg"
     },
     {
       "title": "Know your customer",
       "caption": "Know your customer",
-      "src": "../../assets/work/mykring/lightbox/kyc.jpg"
+      "src": "~/assets/work/mykring/lightbox/kyc.jpg"
     },
     {
       "title": "Mobile Know your customer",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/sm_kyc--detail.jpg"
+      "src": "~/assets/work/mykring/lightbox/sm_kyc--detail.jpg"
     },
     {
       "title": "Mobile Know your customer",
       "caption": "",
       "class": "hidden",
-      "src": "../../assets/work/mykring/lightbox/sm_kyc.jpg"
+      "src": "~/assets/work/mykring/lightbox/sm_kyc.jpg"
     },
     {
       "title": "Welcome",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/user__welcome.jpg",
+      "src": "~/assets/work/mykring/lightbox/user__welcome.jpg",
       "class": "row-span-2 col-span-2"
     },
     {
       "title": "Mobile Welcome",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/sm_user__welcome-001--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/sm_user__welcome-001--detail.jpg",
       "class": "row-span-2 col-span-1"
     },
     {
       "title": "Mobile Welcome",
       "caption": "",
       "class": "hidden",
-      "src": "../../assets/work/mykring/lightbox/sm_user__welcome-002--detail.jpg"
+      "src": "~/assets/work/mykring/lightbox/sm_user__welcome-002--detail.jpg"
     },
     {
       "title": "Mobile Welcome",
       "caption": "",
       "class": "hidden",
-      "src": "../../assets/work/mykring/lightbox/sm_user__welcome-001.jpg"
+      "src": "~/assets/work/mykring/lightbox/sm_user__welcome-001.jpg"
     },
     {
       "title": "Devices",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/devices.jpg"
+      "src": "~/assets/work/mykring/lightbox/devices.jpg"
     },
     {
       "title": "Devices",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/devices-002.jpg"
+      "src": "~/assets/work/mykring/lightbox/devices-002.jpg"
     },
     {
       "title": "Profile",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/user__profile.jpg"
+      "src": "~/assets/work/mykring/lightbox/user__profile.jpg"
     },
     {
       "title": "Profile",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/sm_user__profile--detail.jpg"
+      "src": "~/assets/work/mykring/lightbox/sm_user__profile--detail.jpg"
     },
     {
       "title": "Statement",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/statement.jpg"
+      "src": "~/assets/work/mykring/lightbox/statement.jpg"
     },
     {
       "title": "Mobile Statement",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/sm_statement--detail.jpg"
+      "src": "~/assets/work/mykring/lightbox/sm_statement--detail.jpg"
     }
   ],
   "gUx": [
     {
       "title": "Login",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/login.jpg",
+      "src": "~/assets/work/mykring/lightbox/login.jpg",
       "class": "row-span-2 col-span-2"
     },
     {
       "title": "Login validation",
       "caption": "Log in with validation feedback",
-      "src": "../../assets/work/mykring/lightbox/login-validation.jpg"
+      "src": "~/assets/work/mykring/lightbox/login-validation.jpg"
     },
     {
       "title": "Manage cards",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/manage-cards.jpg"
+      "src": "~/assets/work/mykring/lightbox/manage-cards.jpg"
     },
     {
       "title": "Manage cards popup",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/manage-cards__popup.jpg"
+      "src": "~/assets/work/mykring/lightbox/manage-cards__popup.jpg"
     },
     {
       "title": "Authentication",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/authentication.jpg"
+      "src": "~/assets/work/mykring/lightbox/authentication.jpg"
     },
     {
       "title": "Authentication access",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/authentication__access.jpg"
+      "src": "~/assets/work/mykring/lightbox/authentication__access.jpg"
     },
     {
       "title": "Authentication error",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/authentication__error.jpg"
+      "src": "~/assets/work/mykring/lightbox/authentication__error.jpg"
     },
     {
       "title": "Authentication",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/authentication__timeout.jpg"
+      "src": "~/assets/work/mykring/lightbox/authentication__timeout.jpg"
     },
     {
       "title": "Devices",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/devices.jpg"
+      "src": "~/assets/work/mykring/lightbox/devices.jpg"
     },
     {
       "title": "Link a device",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/devices__link.jpg",
+      "src": "~/assets/work/mykring/lightbox/devices__link.jpg",
       "class": "hidden"
     },
     {
       "title": "Lost Device popup",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/devices__popup-lost.jpg",
+      "src": "~/assets/work/mykring/lightbox/devices__popup-lost.jpg",
       "class": "hidden"
     },
     {
       "title": "Device pin",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/devices__popup-pin.jpg",
+      "src": "~/assets/work/mykring/lightbox/devices__popup-pin.jpg",
       "class": "hidden"
     }
   ],
@@ -235,12 +235,12 @@
     {
       "title": "Customer Services - User view",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/cs__user.jpg"
+      "src": "~/assets/work/mykring/lightbox/cs__user.jpg"
     },
     {
       "title": "Customer Services - User detail",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/cs__user--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/cs__user--detail.jpg",
       "class": "hidden"
     }
   ],
@@ -248,31 +248,31 @@
     {
       "title": "Marketing",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/email__marketing.jpg",
+      "src": "~/assets/work/mykring/lightbox/email__marketing.jpg",
       "class": "row-span-4 col-span-1"
     },
     {
       "title": "Password",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/email__password.jpg",
+      "src": "~/assets/work/mykring/lightbox/email__password.jpg",
       "class": "row-span-2 col-span-1"
     },
     {
       "title": "Authentication",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/email__authentication.jpg",
+      "src": "~/assets/work/mykring/lightbox/email__authentication.jpg",
       "class": "row-span-2 col-span-1"
     },
     {
       "title": "Store",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/email__store.jpg",
+      "src": "~/assets/work/mykring/lightbox/email__store.jpg",
       "class": "row-span-2 col-span-1"
     },
     {
       "title": "Balance",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/email__balance.jpg",
+      "src": "~/assets/work/mykring/lightbox/email__balance.jpg",
       "class": "row-span-2 col-span-1"
     }
   ]

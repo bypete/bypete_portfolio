@@ -2,27 +2,27 @@
   "images": [
     {
       "title": "Gallery detail",
-      "src": "../../assets/work/eastsidelocks/lightbox/gallery__pop--detail.jpg"
+      "src": "~/assets/work/eastsidelocks/lightbox/gallery__pop--detail.jpg"
     },
     {
       "title": "Timeline detail",
-      "src": "../../assets/work/eastsidelocks/lightbox/sm_timeline--detail.jpg"
+      "src": "~/assets/work/eastsidelocks/lightbox/sm_timeline--detail.jpg"
     },
     {
       "title": "Timeline popup",
-      "src": "../../assets/work/eastsidelocks/lightbox/sm_timeline__pop--detail.jpg"
+      "src": "~/assets/work/eastsidelocks/lightbox/sm_timeline__pop--detail.jpg"
     },
     {
       "title": "Gallery popup detail",
-      "src": "../../assets/work/eastsidelocks/lightbox/gallery--detail.jpg"
+      "src": "~/assets/work/eastsidelocks/lightbox/gallery--detail.jpg"
     },
     {
       "title": "Vision detail",
-      "src": "../../assets/work/eastsidelocks/lightbox/vision--detail.jpg"
+      "src": "~/assets/work/eastsidelocks/lightbox/vision--detail.jpg"
     },
     {
       "title": "Vision popup detail",
-      "src": "../../assets/work/eastsidelocks/lightbox/vision__pop--detail.jpg"
+      "src": "~/assets/work/eastsidelocks/lightbox/vision__pop--detail.jpg"
     }
   ]
 }

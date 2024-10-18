@@ -3,12 +3,12 @@
     {
       "title": "Customer Services - User view",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/cs__user.jpg"
+      "src": "~/assets/work/mykring/lightbox/cs__user.jpg"
     },
     {
       "title": "Customer Services - User detail",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/cs__user--detail.jpg",
+      "src": "~/assets/work/mykring/lightbox/cs__user--detail.jpg",
       "class": "hidden"
     }
   ]

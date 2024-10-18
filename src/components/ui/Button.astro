@@ -7,6 +7,7 @@ export interface Props extends HTMLAttributes<'button'> {
     theme?:
         | 'primary'
         | 'secondary'
+        | 'disco'
         | 'whiteline'
         | 'white'
         | 'outline'
@@ -71,6 +72,16 @@ const themeClasses = {
         'ring-content-light',
     ],
     outline: ['bg-transparent', 'ring-2', 'ring-inset', 'ring-line'],
+    disco: [
+        'bg-gradient-to-r',
+        'from-indigo-900',
+        'via-pink-500',
+        'to-pink-700',
+        'text-white',
+        'hover:border-black/10',
+        'hover:via-pink-700',
+        'hover:to-pink-700',
+    ],
     quiet: [
         'bg-transparent',
         'text-content-quiet',

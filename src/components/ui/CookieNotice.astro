@@ -1,22 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Button from '~/components/ui/Button.astro';
-import siteInfo from '~/data/site';
 import Toast from '~/components/ui/Toast.astro';
-
-type Props = Record<string, never>;
-
-const build: string = import.meta.env.MODE;
-let domain: string;
-
-if (build === 'production') {
-    domain = siteInfo.domain.live;
-} else if (build === 'staging') {
-    domain = siteInfo.domain.staging;
-} else {
-    domain = 'localhost';
-}
-const isSecure: boolean = ['production', 'staging'].includes(build);
 ---
 
 <Toast id="toastCookie" theme={'settings'} hidden={true}>

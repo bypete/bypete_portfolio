@@ -4,7 +4,7 @@ import Button from '~/components/ui/Button.astro';
 import { Image, Picture } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
-import ArtDirection from '../Images/ArtDirection.astro';
+import ArtDirection from '~/components/images/ArtDirection.astro';
 
 interface Props extends HeroKeys {}
 
@@ -16,7 +16,6 @@ const {
     cover,
     headline,
 } = Astro.props;
-
 ---
 
 {
@@ -85,18 +84,20 @@ const {
                 class:list={[visual.wrapper ? visual.wrapper : 'relative']}
                 data-animate="slideInRight"
             >
-                { <Picture
-                    src={visual.src}
-                    densities={visual.densities ?? [1.5, 2]}
-                    width={visual.width ?? 600}
-                    class:list={[
-                        visual.class
-                            ? visual.class
-                            : 'h-full w-full object-contain object-bottom',
-                    ]}
-                    alt={visual.alt ?? 'feature image'}
-                    loading={'eager'}
-                /> }
+                {
+                    <Picture
+                        src={visual.src}
+                        densities={visual.densities ?? [1.5, 2]}
+                        width={visual.width ?? 600}
+                        class:list={[
+                            visual.class
+                                ? visual.class
+                                : 'h-full w-full object-contain object-bottom',
+                        ]}
+                        alt={visual.alt ?? 'feature image'}
+                        loading={'eager'}
+                    />
+                }
             </div>
         )
     }

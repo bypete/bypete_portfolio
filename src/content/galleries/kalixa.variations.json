@@ -2,42 +2,42 @@
   "images": [
     {
       "title": "Celtic",
-      "src": "../../assets/work/kalixa/lightbox/celtic.jpg"
+      "src": "~/assets/work/kalixa/lightbox/celtic.jpg"
     },
     {
       "title": "Celtic detail",
-      "src": "../../assets/work/kalixa/lightbox/celtic--detail.jpg",
+      "src": "~/assets/work/kalixa/lightbox/celtic--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Brit awards",
-      "src": "../../assets/work/kalixa/lightbox/brits.jpg"
+      "src": "~/assets/work/kalixa/lightbox/brits.jpg"
     },
     {
       "title": "Brit terms detail",
-      "src": "../../assets/work/kalixa/lightbox/brits__terms--detail.jpg"
+      "src": "~/assets/work/kalixa/lightbox/brits__terms--detail.jpg"
     },
     {
       "title": "Brit terms",
-      "src": "../../assets/work/kalixa/lightbox/brits__terms.jpg",
+      "src": "~/assets/work/kalixa/lightbox/brits__terms.jpg",
       "class": "hidden"
     },
     {
       "title": "Win a million",
-      "src": "../../assets/work/kalixa/lightbox/wam.jpg"
+      "src": "~/assets/work/kalixa/lightbox/wam.jpg"
     },
     {
       "title": "Mobile Win a million",
-      "src": "../../assets/work/kalixa/lightbox/sm_wam.jpg"
+      "src": "~/assets/work/kalixa/lightbox/sm_wam.jpg"
     },
     {
       "title": "Mobile Win a million detail",
-      "src": "../../assets/work/kalixa/lightbox/sm_wam--detail.jpg",
+      "src": "~/assets/work/kalixa/lightbox/sm_wam--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Mobile Win a million - about",
-      "src": "../../assets/work/kalixa/lightbox/sm_wam__about--detail.jpg",
+      "src": "~/assets/work/kalixa/lightbox/sm_wam__about--detail.jpg",
       "class": "hidden"
     }
   ]

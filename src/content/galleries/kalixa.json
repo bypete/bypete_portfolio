@@ -2,52 +2,52 @@
   "images": [
     {
       "title": "Money supermarket",
-      "src": "../../assets/work/kalixa/lightbox/msm.jpg",
+      "src": "~/assets/work/kalixa/lightbox/msm.jpg",
       "class": "row-span-2 col-span-2"
     },
     {
       "title": "Money supermarket detail",
-      "src": "../../assets/work/kalixa/lightbox/msm--detail.jpg",
+      "src": "~/assets/work/kalixa/lightbox/msm--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Money supermarket German translation",
-      "src": "../../assets/work/kalixa/lightbox/msm__de.jpg",
+      "src": "~/assets/work/kalixa/lightbox/msm__de.jpg",
       "class": "row-span-2 col-span-2"
     },
     {
       "title": "Money supermarket German translation detail",
-      "src": "../../assets/work/kalixa/lightbox/msm.jpg",
+      "src": "~/assets/work/kalixa/lightbox/msm.jpg",
       "class": "hidden"
     },
     {
       "title": "Mobile Money supermarket",
-      "src": "../../assets/work/kalixa/lightbox/sm_msm--detail.jpg",
+      "src": "~/assets/work/kalixa/lightbox/sm_msm--detail.jpg",
       "class": "row-span-2 col-span-1"
     },
     {
       "title": "Mobile Money supermarket",
-      "src": "../../assets/work/kalixa/lightbox/sm_msm.jpg",
+      "src": "~/assets/work/kalixa/lightbox/sm_msm.jpg",
       "class": "hidden"
     },
     {
       "title": "Pro",
-      "src": "../../assets/work/kalixa/lightbox/pro.jpg",
+      "src": "~/assets/work/kalixa/lightbox/pro.jpg",
       "class": "row-span-2 col-span-3"
     },
     {
       "title": "Pro detail",
-      "src": "../../assets/work/kalixa/lightbox/pro--detail.jpg",
+      "src": "~/assets/work/kalixa/lightbox/pro--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Landing",
-      "src": "../../assets/work/kalixa/lightbox/landing.jpg",
+      "src": "~/assets/work/kalixa/lightbox/landing.jpg",
       "class": "row-span-2 col-span-1"
     },
     {
       "title": "Landing detail",
-      "src": "../../assets/work/kalixa/lightbox/landing--detail.jpg",
+      "src": "~/assets/work/kalixa/lightbox/landing--detail.jpg",
       "class": "hidden"
     }
   ]

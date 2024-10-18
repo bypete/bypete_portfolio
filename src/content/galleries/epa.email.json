@@ -2,11 +2,11 @@
   "images": [
     {
       "title": "Email newsletter",
-      "src": "../../assets/work/epa/lightbox/email__newsletter--detail.jpg"
+      "src": "~/assets/work/epa/lightbox/email__newsletter--detail.jpg"
     },
     {
       "title": "Email newsletter",
-      "src": "../../assets/work/epa/lightbox/email__newsletter.jpg"
+      "src": "~/assets/work/epa/lightbox/email__newsletter.jpg"
     }
   ]
 }

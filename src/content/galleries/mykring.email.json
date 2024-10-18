@@ -3,31 +3,31 @@
     {
       "title": "Marketing",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/email__marketing.jpg",
+      "src": "~/assets/work/mykring/lightbox/email__marketing.jpg",
       "class": "row-span-4 col-span-1"
     },
     {
       "title": "Password",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/email__password.jpg",
+      "src": "~/assets/work/mykring/lightbox/email__password.jpg",
       "class": "row-span-2 col-span-1"
     },
     {
       "title": "Authentication",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/email__authentication.jpg",
+      "src": "~/assets/work/mykring/lightbox/email__authentication.jpg",
       "class": "row-span-2 col-span-1"
     },
     {
       "title": "Store",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/email__store.jpg",
+      "src": "~/assets/work/mykring/lightbox/email__store.jpg",
       "class": "row-span-2 col-span-1"
     },
     {
       "title": "Balance",
       "caption": "",
-      "src": "../../assets/work/mykring/lightbox/email__balance.jpg",
+      "src": "~/assets/work/mykring/lightbox/email__balance.jpg",
       "class": "row-span-2 col-span-1"
     }
   ]

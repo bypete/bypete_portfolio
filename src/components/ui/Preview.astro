@@ -1,0 +1,62 @@
+---
+import { Icon } from 'astro-icon/components';
+import { type Post } from '~/components/ui/NextPrev.astro';
+import { Image } from 'astro:assets';
+
+type Props = {
+    post: Post;
+    class?: string;
+    direction: string;
+};
+
+const { post, class: ClassName, direction } = Astro.props;
+const { url, title, excerpt, thumb, overlay } = post || {};
+---
+
+<a
+    href={url}
+    class:list={[ClassName, 'group grid grid-cols-1 gap-fl-space-2xs']}
+>
+    <span
+        class:list={[
+            'flex w-full items-center gap-fl-space-3xs text-fl-step--1 text-content-loud',
+            direction === 'next' && 'flex-row-reverse justify-start',
+        ]}
+    >
+        <Icon
+            name={direction === 'next'
+                ? 'hugeicons:square-arrow-right-02'
+                : 'hugeicons:square-arrow-left-02'}
+            class="h-fl-space-s w-auto"
+        />
+        {direction === 'next' ? 'Next' : 'Previous'}
+    </span>
+    {
+        thumb && (
+            <span class="relative overflow-hidden rounded-tight pb-widescreen">
+                <Image
+                    widths={[400]}
+                    quality="high"
+                    src={thumb.src}
+                    alt={thumb.alt}
+                    class="absolute inset-0 m-0 h-full w-full object-cover"
+                />
+                {overlay && (
+                    <Image
+                        src={overlay.src}
+                        widths={[300]}
+                        alt={title + ' logo'}
+                        class="absolute left-1/2 top-1/2 m-auto h-auto max-w-1/2 -translate-x-1/2 -translate-y-1/2 transition-transform group-hover:scale-90"
+                    />
+                )}
+            </span>
+        )
+    }
+    <span>
+        <h2
+            set:html={title}
+            class="text-fl-step-1/tight font-bold text-link group-hover:text-link-light"
+        />
+        {excerpt && <p class="text-fl-step--1">{excerpt}</p>}
+    </span>
+</a>

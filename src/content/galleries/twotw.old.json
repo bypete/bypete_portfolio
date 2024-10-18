@@ -2,29 +2,29 @@
   "images": [
     {
       "title": "Homepage",
-      "src": "../../assets/work/twotw/lightbox/old_home.jpg"
+      "src": "~/assets/work/twotw/lightbox/old_home.jpg"
     },
     {
       "title": "Homepage detail",
-      "src": "../../assets/work/twotw/lightbox/old_home--detail.jpg",
+      "src": "~/assets/work/twotw/lightbox/old_home--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "News",
-      "src": "../../assets/work/twotw/lightbox/old_news.jpg"
+      "src": "~/assets/work/twotw/lightbox/old_news.jpg"
     },
     {
       "title": "News detail",
-      "src": "../../assets/work/twotw/lightbox/old_news--detail.jpg",
+      "src": "~/assets/work/twotw/lightbox/old_news--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "News",
-      "src": "../../assets/work/twotw/lightbox/old_news__listing.jpg"
+      "src": "~/assets/work/twotw/lightbox/old_news__listing.jpg"
     },
     {
       "title": "News detail",
-      "src": "../../assets/work/twotw/lightbox/old_news__listing--detail.jpg",
+      "src": "~/assets/work/twotw/lightbox/old_news__listing--detail.jpg",
       "class": "hidden"
     }
   ]

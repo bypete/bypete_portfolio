@@ -2,49 +2,49 @@
   "images": [
     {
       "title": "Homepage",
-      "src": "../../assets/work/elekta/lightbox/homepage.jpg",
+      "src": "~/assets/work/elekta/lightbox/homepage.jpg",
       "class": "row-span-2 col-span-2"
     },
     {
       "title": "Homepage detail",
-      "src": "../../assets/work/elekta/lightbox/homepage--detail.jpg",
+      "src": "~/assets/work/elekta/lightbox/homepage--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Library",
-      "src": "../../assets/work/elekta/lightbox/library.jpg"
+      "src": "~/assets/work/elekta/lightbox/library.jpg"
     },
     {
       "title": "Result",
-      "src": "../../assets/work/elekta/lightbox/result.jpg"
+      "src": "~/assets/work/elekta/lightbox/result.jpg"
     },
     {
       "title": "Result detail",
-      "src": "../../assets/work/elekta/lightbox/result--detail.jpg",
+      "src": "~/assets/work/elekta/lightbox/result--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Document",
-      "src": "../../assets/work/elekta/lightbox/document.jpg",
+      "src": "~/assets/work/elekta/lightbox/document.jpg",
       "class": "row-span-2 col-span-2"
     },
     {
       "title": "Document detail",
-      "src": "../../assets/work/elekta/lightbox/document--detail.jpg",
+      "src": "~/assets/work/elekta/lightbox/document--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Basket",
-      "src": "../../assets/work/elekta/lightbox/basket.jpg",
+      "src": "~/assets/work/elekta/lightbox/basket.jpg",
       "class": "row-span-2 col-span-2"
     },
     {
       "title": "Registration",
-      "src": "../../assets/work/elekta/lightbox/registration.jpg"
+      "src": "~/assets/work/elekta/lightbox/registration.jpg"
     },
     {
       "title": "Profile",
-      "src": "../../assets/work/elekta/lightbox/profile.jpg"
+      "src": "~/assets/work/elekta/lightbox/profile.jpg"
     }
   ]
 }

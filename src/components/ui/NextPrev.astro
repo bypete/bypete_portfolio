@@ -1,0 +1,33 @@
+---
+import { type ImageMetadata } from 'astro';
+import Preview from '~/components/ui/Preview.astro';
+
+export type Post = {
+    title: string;
+    url: string;
+    excerpt?: string;
+    thumb?: {
+        src: ImageMetadata;
+        alt: string;
+    };
+    overlay?: {
+        src: ImageMetadata;
+        alt: string;
+    };
+};
+
+type Props = {
+    class?: string;
+    next?: Post;
+    prev?: Post;
+};
+
+const { next, prev, class: ClassName } = Astro.props;
+---
+
+<div
+    class="mx-auto grid max-w-3xl grid-cols-1 items-start justify-between gap-fl-space-l md:grid-cols-prevnext"
+>
+    {prev && <Preview post={prev} direction={'prev'} class="md:col-start-1" />}
+    {next && <Preview post={next} direction={'next'} class="md:col-start-2" />}
+</div>

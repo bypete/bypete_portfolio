@@ -2,32 +2,32 @@
   "images": [
     {
       "title": "Welcome",
-      "src": "../../assets/work/mykringapp/lightbox/1.1.0_welcome.jpg",
+      "src": "~/assets/work/mykringapp/lightbox/1.1.0_welcome.jpg",
       "class": "row-span-2",
       "cropped": false
     },
     {
       "title": "Devices",
-      "src": "../../assets/work/mykringapp/lightbox/1.1.0_devices.jpg"
+      "src": "~/assets/work/mykringapp/lightbox/1.1.0_devices.jpg"
     },
     {
       "title": "Manage cards",
-      "src": "../../assets/work/mykringapp/lightbox/1.1.0_managecards.jpg",
+      "src": "~/assets/work/mykringapp/lightbox/1.1.0_managecards.jpg",
       "class": "row-span-2 col-span-2"
     },
     {
       "title": "Auto top-up - active",
-      "src": "../../assets/work/mykringapp/lightbox/1.1.0_auto-topup-open.jpg"
+      "src": "~/assets/work/mykringapp/lightbox/1.1.0_auto-topup-open.jpg"
     },
     {
       "title": "Dialog",
-      "src": "../../assets/work/mykringapp/lightbox/1.1.0_dialog.jpg",
+      "src": "~/assets/work/mykringapp/lightbox/1.1.0_dialog.jpg",
       "class": "row-span-2",
       "cropped": false
     },
     {
       "title": "Log out",
-      "src": "../../assets/work/mykringapp/lightbox/1.1.0_logout.jpg",
+      "src": "~/assets/work/mykringapp/lightbox/1.1.0_logout.jpg",
       "class": "row-span-2",
       "cropped": false
     }

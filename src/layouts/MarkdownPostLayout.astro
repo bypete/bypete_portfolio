@@ -8,7 +8,17 @@ import Hero, { type Props as HeroProps } from '~/components/hero/Hero.astro';
 import { readableDate, htmlDateString } from '~/js/utils.js';
 import BlockPicture from '~/components/images/BlockPicture.astro';
 import TableOfContents from '~/components/ui/TableOfContents.astro';
-import PostPreview from '~/components/ui/PostPreview.astro';
+
+import NextPrev from '~/components/ui/NextPrev.astro';
+
+export interface Props {
+    frontmatter: any;
+    section: string;
+    minutesRead: string;
+    headings: any;
+    prevPost: any;
+    nextPost: any;
+}
 
 const { frontmatter, minutesRead, headings, prevPost, nextPost } = Astro.props;
 
@@ -24,6 +34,32 @@ const { hideToc = false, hideBreadcrumbs = false } = fm;
 
 const isHeroDark =
     (fm.isHeroDark || (fm.heroConfig && fm.heroConfig.dark)) ?? false;
+
+// Simplify the post before passing to NextPrev component
+const formatPostData = (post) => {
+    const thumb = post.data.cover
+        ? {
+              src: post.data.cover.src,
+              alt: post.data.cover.alt,
+          }
+        : undefined;
+    const overlay = post.data.logo
+        ? {
+              src: post.data.logo.light || post.data.logo.src,
+              alt: post.data.logo.alt,
+          }
+        : undefined;
+    return {
+        title: post.data.title,
+        url: `/${post.collection}/${post.slug}/`,
+        excerpt: post.data.excerpt || post.data.taster || '',
+        ...(thumb && { thumb }), // conditional thumbnail
+        ...(overlay && { overlay }), // conditional overlay
+    };
+};
+
+let nextPostData = nextPost ? formatPostData(nextPost) : undefined;
+let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
 ---
 
 <BaseLayout head={head} {isHeroDark}>
@@ -80,29 +116,14 @@ const isHeroDark =
             </div>
         </article>
     </main>
+
     <aside
-        class="border-t border-line bg-surface-sunken px-fl-space-s py-fl-space-2xl"
+        class="bg-surface-sunken px-fl-space-m py-fl-space-2xl shadow-highlight"
     >
-        <div
-            class="mx-auto grid max-w-3xl grid-cols-1 justify-between gap-fl-space-l md:grid-cols-prevnext"
-        >
-            {
-                nextPost && (
-                    <PostPreview
-                        post={nextPost}
-                        preview={'next'}
-                        class="md:col-start-1"
-                    />
-                )
-            }{
-                prevPost && (
-                    <PostPreview
-                        post={prevPost}
-                        preview={'prev'}
-                        class="md:col-start-2"
-                    />
-                )
-            }
-        </div>
+        {
+            (nextPostData || prevPostData) && (
+                <NextPrev next={nextPostData} prev={prevPostData} />
+            )
+        }
     </aside>
 </BaseLayout>

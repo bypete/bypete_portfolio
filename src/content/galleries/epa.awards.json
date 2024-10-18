@@ -2,23 +2,23 @@
   "images": [
     {
       "title": "Awards",
-      "src": "../../assets/work/epa/lightbox/awards.jpg"
+      "src": "~/assets/work/epa/lightbox/awards.jpg"
     },
     {
       "title": "Awards detail",
-      "src": "../../assets/work/epa/lightbox/awards--detail.jpg"
+      "src": "~/assets/work/epa/lightbox/awards--detail.jpg"
     },
     {
       "title": "Awards Event detail",
-      "src": "../../assets/work/epa/lightbox/awards__event--detail.jpg"
+      "src": "~/assets/work/epa/lightbox/awards__event--detail.jpg"
     },
     {
       "title": "Awards Landing detail",
-      "src": "../../assets/work/epa/lightbox/awards__landing--detail.jpg"
+      "src": "~/assets/work/epa/lightbox/awards__landing--detail.jpg"
     },
     {
       "title": "Awards News detail",
-      "src": "../../assets/work/epa/lightbox/awards__news--detail.jpg"
+      "src": "~/assets/work/epa/lightbox/awards__news--detail.jpg"
     }
   ]
 }

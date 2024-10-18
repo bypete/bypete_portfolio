@@ -2,48 +2,48 @@
   "images": [
     {
       "title": "Home",
-      "src": "../../assets/work/../../assets/work/afv/lightbox/home.jpg",
+      "src": "~/assets/work/afv/lightbox/home.jpg",
       "class": "row-span-2 col-span-2",
       "caption": "Homepage"
     },
     {
       "title": "Landing",
-      "src": "../../assets/work/../../assets/work/afv/lightbox/landing.jpg",
+      "src": "~/assets/work/afv/lightbox/landing.jpg",
       "class": "row-span-2 col-span-1"
     },
     {
       "title": "Landing",
-      "src": "../../assets/work/../../assets/work/afv/lightbox/landing--detail.jpg",
+      "src": "~/assets/work/afv/lightbox/landing--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Landing",
-      "src": "../../assets/work/../../assets/work/afv/lightbox/landing__002--detail.jpg",
+      "src": "~/assets/work/afv/lightbox/landing__002--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Landing",
-      "src": "../../assets/work/../../assets/work/afv/lightbox/landing__003--detail.jpg",
+      "src": "~/assets/work/afv/lightbox/landing__003--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Registration",
-      "src": "../../assets/work/../../assets/work/afv/lightbox/registration.jpg",
+      "src": "~/assets/work/afv/lightbox/registration.jpg",
       "class": "row-span-2 col-span-2"
     },
     {
       "title": "Registration detail",
-      "src": "../../assets/work/../../assets/work/afv/lightbox/registration--detail.jpg",
+      "src": "~/assets/work/afv/lightbox/registration--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Mobile registration",
-      "src": "../../assets/work/../../assets/work/afv/lightbox/sm_registration--detail.jpg",
+      "src": "~/assets/work/afv/lightbox/sm_registration--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Home",
-      "src": "../../assets/work/../../assets/work/afv/lightbox/sm_registration.jpg",
+      "src": "~/assets/work/afv/lightbox/sm_registration.jpg",
       "class": "row-span-2 col-span-1"
     }
   ]

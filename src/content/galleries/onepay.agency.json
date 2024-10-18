@@ -2,47 +2,47 @@
   "images": [
     {
       "title": "Register Online",
-      "src": "../../assets/work/onepay/lightbox/register.jpg"
+      "src": "~/assets/work/onepay/lightbox/register.jpg"
     },
     {
       "title": "Register Online - detail",
-      "src": "../../assets/work/onepay/lightbox/register--detail.jpg",
+      "src": "~/assets/work/onepay/lightbox/register--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Register Email",
-      "src": "../../assets/work/onepay/lightbox/register__email.jpg"
+      "src": "~/assets/work/onepay/lightbox/register__email.jpg"
     },
     {
       "title": "Register Email - detail",
-      "src": "../../assets/work/onepay/lightbox/register__email--detail.jpg",
+      "src": "~/assets/work/onepay/lightbox/register__email--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Activate",
-      "src": "../../assets/work/onepay/lightbox/activate.jpg"
+      "src": "~/assets/work/onepay/lightbox/activate.jpg"
     },
     {
       "title": "Activate - detail",
-      "src": "../../assets/work/onepay/lightbox/activate--detail.jpg",
+      "src": "~/assets/work/onepay/lightbox/activate--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Reports",
-      "src": "../../assets/work/onepay/lightbox/reports.jpg"
+      "src": "~/assets/work/onepay/lightbox/reports.jpg"
     },
     {
       "title": "Reports - detail",
-      "src": "../../assets/work/onepay/lightbox/reports--detail.jpg",
+      "src": "~/assets/work/onepay/lightbox/reports--detail.jpg",
       "class": "hidden"
     },
     {
       "title": "Reports",
-      "src": "../../assets/work/onepay/lightbox/reports.jpg"
+      "src": "~/assets/work/onepay/lightbox/reports.jpg"
     },
     {
       "title": "Reports - detail",
-      "src": "../../assets/work/onepay/lightbox/reports--detail.jpg",
+      "src": "~/assets/work/onepay/lightbox/reports--detail.jpg",
       "class": "hidden"
     }
   ]
