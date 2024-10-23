@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { type SwiperImage } from '~/data/home';
 
 export interface Props {
-    slide: Partial<SwiperImage>;
+    slide: SwiperImage;
 }
 
 const { slide } = Astro.props;
@@ -57,7 +57,7 @@ const imageProps = {
                             ]}
                         >
                             {caption.title && (
-                                <h2 class="bg-primary-dark shadow-primary-shade relative z-10 -mb-fl-space-3xs inline-block -rotate-1 rounded-tight p-fl-space-3xs font-headline text-fl-step-0 font-semibold leading-none tracking-tight shadow-sm">
+                                <h2 class="relative z-10 -mb-fl-space-3xs inline-block -rotate-1 rounded-tight bg-primary-dark p-fl-space-3xs font-headline text-fl-step-0 font-semibold leading-none tracking-tight shadow-sm shadow-primary-shade">
                                     {caption.title}{' '}
                                 </h2>
                             )}

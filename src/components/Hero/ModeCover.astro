@@ -1,17 +1,25 @@
 ---
-import type { HeroKeys } from '~/components/hero/Hero.astro';
+import type { VisualKeys, CoverKeys, CTA } from '~/components/hero/Hero.astro';
 import Button from '~/components/ui/Button.astro';
 import { Image, Picture } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
 import ArtDirection from '~/components/images/ArtDirection.astro';
 
-interface Props extends HeroKeys {}
+interface Props {
+    headline: string;
+    visual?: VisualKeys;
+    cover?: CoverKeys;
+    legibility?: string;
+    copy?: string;
+    actions?: CTA[];
+    class?: string;
+}
 
 const {
     class: ClassName,
     copy,
-    actions,
+    actions = [],
     visual,
     cover,
     headline,
@@ -19,7 +27,7 @@ const {
 ---
 
 {
-    cover?.src && cover?.alt && (
+    cover && (
         <div class="absolute inset-0 h-full w-full">
             <ArtDirection
                 src={cover.src}
@@ -27,9 +35,8 @@ const {
                 alt={cover.alt}
                 loading="eager"
                 class:list={[
-                    cover.class
-                        ? cover.class
-                        : 'h-full w-full object-cover object-bottom md:object-center',
+                    cover.class ||
+                        'h-full w-full object-cover object-bottom md:object-center',
                 ]}
             />
         </div>
@@ -49,31 +56,26 @@ const {
         <div class="rte">
             <Fragment set:html={copy} />
             {
-                actions && (
-                    <>
-                        <p
-                            class="flex flex-row gap-2"
-                            data-animate="fadeInDown"
-                        >
-                            {actions.map((action) => (
-                                <Button
-                                    theme={action.theme}
-                                    class={action.class}
-                                    href={action.href}
-                                    isIcon={!!action.icon}
-                                    {...(action.jump && { 'data-jump': '' })}
-                                >
-                                    {action.text}
-                                    {action.icon && (
-                                        <Icon
-                                            name={action.icon}
-                                            class="h-fl-space-s w-fl-space-s"
-                                        />
-                                    )}
-                                </Button>
-                            ))}
-                        </p>
-                    </>
+                actions?.length > 0 && (
+                    <p class="flex flex-row gap-2" data-animate="fadeInDown">
+                        {actions.map((action) => (
+                            <Button
+                                theme={action.theme}
+                                class={action.class}
+                                href={action.href}
+                                isIcon={!!action.icon}
+                                {...(action.jump && { 'data-jump': '' })}
+                            >
+                                {action.text}
+                                {action.icon && (
+                                    <Icon
+                                        name={action.icon}
+                                        class="h-fl-space-s w-fl-space-s"
+                                    />
+                                )}
+                            </Button>
+                        ))}
+                    </p>
                 )
             }
         </div>
@@ -86,15 +88,14 @@ const {
             >
                 {
                     <Picture
-                        src={visual.src}
+                        src={visual.src as ImageMetadata}
                         densities={visual.densities ?? [1.5, 2]}
                         width={visual.width ?? 600}
                         class:list={[
-                            visual.class
-                                ? visual.class
-                                : 'h-full w-full object-contain object-bottom',
+                            visual.class ||
+                                'h-full w-full object-contain object-bottom',
                         ]}
-                        alt={visual.alt ?? 'feature image'}
+                        alt={visual.alt}
                         loading={'eager'}
                     />
                 }

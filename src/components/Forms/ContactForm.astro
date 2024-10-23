@@ -5,19 +5,16 @@ import Button from '~/components/ui/Button.astro';
 ---
 
 <!-- https://usebasin.com/f/64b35c1258c2 -->
-<div x-data="formValidate" class="not-prose h-full">
+<div class="not-prose h-full">
     <form
         data-astro-reload
         id="contactForm"
-        x-on:submit.prevent="onSubmitData()"
         name="contact"
-        x-ref="form"
         class="form"
         action="/connect/thanks/"
         method="post"
         accept-charset="UTF-8"
         enctype="multipart/form-data"
-        x-bind:class="{ 'hidden' : isSent }"
     >
         <Input
             id="input_name"
@@ -62,26 +59,12 @@ import Button from '~/components/ui/Button.astro';
             <Button type="submit" theme="primary">Send now</Button>
         </div>
     </form>
-    <!-- <div
-        x-cloak
-        x-bind:class="{ 'flex items-center justify-center h-full w-full animate-appear' : isSent, 'hidden' : !isSent }"
-    >
-        <div class="rte w-full text-center">
-            <Icon
-                name="lucide:mail-check"
-                class="mx-auto h-fl-space-2xl w-auto animate-fade-in-up text-green-500 duration-500"
-            />
-            <h3 class="text-center">Your message has been sent</h3>
-            <p>Thanks for getting in touch, I'll try to respond quickly.</p>
-        </div>
-    </div> -->
 </div>
 <script>
-    // import Alpine from 'alpinejs';
     import JustValidate from 'just-validate';
 
     document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('contactForm');
+        const form = document.getElementById('contactForm') as HTMLFormElement;
         if (form) {
             const validator = new JustValidate(form, {
                 errorFieldCssClass: ['error'],

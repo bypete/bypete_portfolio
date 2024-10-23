@@ -11,8 +11,7 @@ interface DataKeys {
 }
 
 export interface Props {
-    data: Partial<DataKeys>;
-    class?: string | ImageMetadata;
+    data: DataKeys[];
 }
 
 const { data } = Astro.props;

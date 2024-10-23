@@ -4,16 +4,34 @@ import { Image } from 'astro:assets';
 import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
 import SwipePrompt from '~/components/ui/SwipePrompt.astro';
 
+type LayoutType = 'default' | 'left' | 'right' | 'center';
+type SlotNumber = 1 | 2 | 3 | 4;
+
 // Discriminated union for the layout type based on the slot count
 type LayoutConfig =
-    | { slots: 1; type: 'default' | 'left' | 'right' | 'center' }
-    | { slots: 2; type: 'default' | 'left' | 'right' | 'center' }
-    | { slots: 3; type: 'default' | 'center' }
-    | { slots: 4; type: 'default' };
+    | { slots: 1; type: LayoutType }
+    | { slots: 2; type: LayoutType }
+    | { slots: 3; type: Extract<LayoutType, 'default' | 'center'> }
+    | { slots: 4; type: Extract<LayoutType, 'default'> };
+
+// Define a type that enforces the correct layout types for each slot count
+type LayoutMatrix = {
+    1: Record<LayoutType, MatrixConfig>;
+    2: Record<LayoutType, MatrixConfig>;
+    3: Record<Extract<LayoutType, 'default' | 'center'>, MatrixConfig>;
+    4: Record<Extract<LayoutType, 'default'>, MatrixConfig>;
+};
+
+type SlotConfig = Partial<Record<SlotNumber, string[]>>; // All optional
 
 type MatrixConfig = {
-    grid: string[];
-    slots: { [key: number]: string[] }; // Classes for each slot
+    grid?: string[];
+    slots?: SlotConfig;
+};
+
+type BackgroundConfig = {
+    src: ImageMetadata;
+    alt: string;
 };
 
 export interface Props extends HTMLAttributes<'div'> {
@@ -26,17 +44,11 @@ export interface Props extends HTMLAttributes<'div'> {
     container?: boolean;
     prompt?: 'swipe' | 'scroll';
     breakout?: boolean;
-    background?: {
-        src: ImageMetadata;
-        alt: string;
-    };
+    background?: BackgroundConfig;
     dark?: boolean;
-    slotConfig?: {
-        [key: number]: string[]; // Dynamic slot configuration
-    };
+    slotConfig?: SlotConfig;
 }
 
-// Extract props
 const {
     layout = { type: 'default', slots: 1 }, // Default to 1 slots
     gridClass = '', // Override grid layout
@@ -56,29 +68,19 @@ const {
 // Determine text color based on legibility or dark mode
 const color = legibility || (dark ? 'text-content-light' : 'text-content-dark');
 
-// Matrix defining grid and slot configurations based on the number of slots and layout type
-const layoutMatrix: Record<number, Record<string, MatrixConfig>> = {
+// Type-safe layout matrix
+const layoutMatrix: LayoutMatrix = {
     1: {
         default: {
             grid: ['items-center', 'justify-center', 'gap-fl-space-2xs'],
             slots: { 1: ['max-w-[40ch]'] },
         },
         left: {
-            grid: [
-                'grid-flow-row',
-                'md:grid-cols-[1fr,2fr]',
-                'items-center',
-                'gap-fl-space-m',
-            ],
+            grid: ['grid-flow-row', 'md:grid-cols-[1fr,2fr]', 'gap-fl-space-m'],
             slots: { 1: ['py-fl-space-2xl'] },
         },
         right: {
-            grid: [
-                'grid-flow-row',
-                'md:grid-cols-[2fr,1fr]',
-                'items-center',
-                'gap-fl-space-m',
-            ],
+            grid: ['grid-flow-row', 'md:grid-cols-[2fr,1fr]', 'gap-fl-space-m'],
             slots: { 1: ['py-fl-space-2xl'] },
         },
         center: {
@@ -88,72 +90,34 @@ const layoutMatrix: Record<number, Record<string, MatrixConfig>> = {
     },
     2: {
         default: {
-            grid: [
-                'grid-flow-row',
-                'md:grid-cols-[1fr,1fr]',
-                'items-center',
-                'gap-fl-space-m',
-            ],
-            slots: { 1: [], 2: [] },
+            grid: ['grid-flow-row', 'md:grid-cols-[1fr,1fr]', 'gap-fl-space-m'],
         },
         left: {
-            grid: [
-                'grid-flow-row',
-                'md:grid-cols-[3fr,2fr]',
-                'items-center',
-                'gap-fl-space-m',
-            ],
-            slots: { 1: [], 2: [] },
+            grid: ['grid-flow-row', 'md:grid-cols-[3fr,2fr]', 'gap-fl-space-m'],
         },
         right: {
-            grid: [
-                'grid-flow-row',
-                'md:grid-cols-[2fr,3fr]',
-                'items-center',
-                'gap-fl-space-m',
-            ],
-            slots: { 1: [], 2: [] },
+            grid: ['grid-flow-row', 'md:grid-cols-[2fr,3fr]', 'gap-fl-space-m'],
+        },
+        center: {
+            grid: ['grid-cols-1', 'text-center'],
         },
     },
     3: {
         default: {
-            grid: [
-                'grid-flow-row',
-                'grid-cols-1',
-                'md:grid-cols-3',
-                'items-center',
-                'gap-fl-space-m',
-            ],
-            slots: { 1: [], 2: [], 3: [] },
+            grid: ['grid-cols-1', 'md:grid-cols-3', 'gap-fl-space-m'],
         },
         center: {
             grid: [
-                'grid-flow-row',
                 'grid-cols-1',
                 'md:grid-cols-3',
-                'items-center',
-                'justify-center',
                 'text-center',
                 'gap-fl-space-m',
             ],
-            slots: { 1: [], 2: [], 3: [] },
         },
     },
     4: {
         default: {
-            grid: [
-                'grid-flow-row',
-                'grid-cols-2',
-                'md:grid-cols-4',
-                'items-center',
-                'gap-fl-space-m',
-            ],
-            slots: {
-                1: [],
-                2: [],
-                3: [],
-                4: [],
-            },
+            grid: ['grid-cols-2', 'md:grid-cols-4', 'gap-fl-space-m'],
         },
     },
 };
@@ -162,24 +126,26 @@ const layoutMatrix: Record<number, Record<string, MatrixConfig>> = {
 const currentLayout =
     layoutMatrix[layout.slots][layout.type] || layoutMatrix[2].default;
 
+const grid = gridClass ? gridClass.split(' ') : currentLayout.grid ?? [];
+
 const layoutClass = [
-    ...(gridClass ? gridClass.split(' ') : currentLayout.grid),
+    ...grid,
     overflow && 'overflow-hidden',
     container && 'mx-auto w-full max-w-container',
     color,
-];
+].filter(Boolean); // Filter out falsey values like `undefined` or `false`
 
 // Define background properties if background exists
 let backgroundProps;
 if (background) {
     backgroundProps = {
-        src: background.src.src,
+        src: background.src,
         alt: background.alt,
         widths: [480, 1800],
         sizes: '100vw',
         class: 'absolute h-full w-full object-cover',
-        format: 'auto',
-        quality: 'high',
+        format: 'webp',
+        quality: 80,
     };
 }
 ---
@@ -209,7 +175,7 @@ if (background) {
                 <div
                     class:list={[
                         'relative',
-                        currentLayout.slots[1],
+                        currentLayout.slots?.[1],
                         slotConfig[1],
                     ]}
                 >
@@ -222,7 +188,7 @@ if (background) {
                 <div
                     class:list={[
                         'relative',
-                        currentLayout.slots[2],
+                        currentLayout.slots?.[2],
                         slotConfig[2],
                     ]}
                 >
@@ -235,7 +201,7 @@ if (background) {
                 <div
                     class:list={[
                         'relative',
-                        currentLayout.slots[3],
+                        currentLayout.slots?.[3],
                         slotConfig[3],
                     ]}
                 >
@@ -248,7 +214,7 @@ if (background) {
                 <div
                     class:list={[
                         'relative',
-                        currentLayout.slots[4],
+                        currentLayout.slots?.[4],
                         slotConfig[4],
                     ]}
                 >

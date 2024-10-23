@@ -5,35 +5,40 @@ import Button from '~/components/ui/Button.astro';
 import RandomLink from '~/components/ui/RandomLink.astro';
 import product from '~/assets/work/mykringapp/product.png';
 
-import portfolio from '~/data/work';
+import pieces from '~/data/work';
 
 import { Icon } from 'astro-icon/components';
 interface Props {
     wrapper?: string;
-    gridHeight?: string;
+    class?: string;
 }
-const { wrapper, gridHeight } = Astro.props;
+const { wrapper, class: className } = Astro.props;
 ---
 
 <Block
     layout={{ slots: 2, type: 'default' }}
     data-inview="portfolio"
-    wrapperClass="bg-brand not-prose"
+    wrapperClass={`${wrapper && wrapper} not-prose`}
+    class:list={[className && className]}
+    slotConfig={{
+        1: ['self-center'],
+        2: ['self-center'],
+    }}
 >
     <div class="plusheap absolute inset-0 h-full w-full opacity-20"></div>
 
-    <div slot="s1" class="self-center" data-animate="scaleIn">
-        <Image
-            src={product}
-            quality="high"
-            loading="eager"
-            densities={[1.5, 2]}
-            width={600}
-            class="relative m-0 h-full w-full object-contain"
-            alt="iPhones with mykring app in use"
-        />
-    </div>
-    <div slot="s2" class="self-center py-fl-space-m text-content-loud">
+    <Image
+        data-animate="scaleIn"
+        slot="s1"
+        src={product}
+        quality="high"
+        loading="eager"
+        densities={[1.5, 2]}
+        width={600}
+        class="relative m-0 h-full w-full object-contain"
+        alt="iPhones with mykring app in use"
+    />
+    <div slot="s2" class="py-fl-space-m text-content-loud">
         <h2
             class="font-headline text-fl-step-3/tight font-bold tracking-tight"
             data-animate="fadeInDown"
@@ -53,7 +58,7 @@ const { wrapper, gridHeight } = Astro.props;
                 href="/work/"
                 data-animate="scaleIn"
                 isIcon={true}
-                choices={portfolio.collection}
+                choices={pieces.collection}
                 >Random pick
                 <Icon
                     name="lucide:shuffle"

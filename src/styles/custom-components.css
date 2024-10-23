@@ -27,8 +27,9 @@
     }
 
     .form__input,
-    .form__select {
-        @apply block rounded border border-line bg-surface-sunken/15 px-fl-space-2xs py-fl-space-3xs placeholder:text-content/40 focus:border-surface focus:bg-surface focus:outline-none focus:ring-2 focus:ring-focus;
+    .form__select,
+    .form__textarea {
+        @apply block rounded border border-line bg-surface-raised px-fl-space-2xs py-fl-space-3xs placeholder:text-content/40 focus:border-surface focus:outline-none focus:ring-2 focus:ring-focus;
     }
 
     .form__input.error,
@@ -41,17 +42,13 @@
         @apply pointer-events-none select-none border border-gray-300 bg-gray-100 focus:border-gray-300 focus:bg-gray-100 focus:outline-none focus:ring-0;
     }
 
-    .form__textarea {
-        @apply block rounded border border-gray-300 bg-white px-fl-space-2xs py-fl-space-3xs placeholder:text-content-quiet focus:border-focus focus:bg-white focus:outline-none focus:ring-2 focus:ring-focus;
-    }
-
     .form__checkbox {
-        @apply text-primary rounded border border-gray-400 px-2 py-2 focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus;
+        @apply rounded border border-gray-400 px-2 py-2 text-primary focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus;
     }
 
     .form__checkbox,
     .form__radio {
-        @apply text-primary border border-gray-400 px-2 py-2 focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus;
+        @apply border border-gray-400 px-2 py-2 text-primary focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus;
     }
 
     .form__divider {
@@ -99,7 +96,7 @@
     }
 
     .list--bullet li {
-        @apply before:text-primary before:icon-[ci--dummy-square-small] before:translate-y-px before:text-[24px];
+        @apply before:icon-[ci--dummy-square-small] before:translate-y-px before:text-[24px] before:text-primary;
     }
 
     .list--checklist li {
@@ -112,14 +109,14 @@
     }
 
     .list--counter > li:before {
-        @apply bg-primary absolute left-0 top-fl-space-3xs mr-fl-space-xs block h-fl-space-m w-fl-space-m rounded-full text-center text-fl-step-1 font-black text-white;
+        @apply absolute left-0 top-fl-space-3xs mr-fl-space-xs block h-fl-space-m w-fl-space-m rounded-full bg-primary text-center text-fl-step-1 font-black text-white;
         content: counter(a);
     }
 
     /* Blockquotes
   ---------------------------------------------------------------------------------*/
     blockquote {
-        @apply before:text-primary relative my-fl-space-l block pl-fl-space-xs text-left font-Georgia text-fl-step-1 before:icon-[lucide--message-square-quote] before:block before:text-[1.5em] before:leading-none;
+        @apply relative my-fl-space-l block pl-fl-space-xs text-left font-Georgia text-fl-step-1 before:icon-[lucide--message-square-quote] before:block before:text-[1.5em] before:leading-none before:text-primary;
     }
 
     blockquote .cite {

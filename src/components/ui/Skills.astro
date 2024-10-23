@@ -18,7 +18,7 @@ export interface Props extends HTMLAttributes<'div'> {
     breakout?: boolean;
     bg?: string;
     class?: string;
-    skillset?: Partial<SkillsetProps>;
+    skillset?: SkillsetProps;
 }
 
 const {
@@ -36,9 +36,9 @@ const { text, icon, heading, shadow, areas } = skillset as SkillsetProps;
         'not-prose relative p-fl-space-m',
         className
             ? className
-            : `shadow-inset   ${
+            : `shadow-inset ${
                   !breakout
-                      ? 'con3xlpad:rounded-tight -mx-fl-space-m my-fl-space-xl'
+                      ? '-mx-fl-space-m my-fl-space-xl con3xlpad:rounded-tight'
                       : 'breakout'
               }`,
         bg,
@@ -61,11 +61,11 @@ const { text, icon, heading, shadow, areas } = skillset as SkillsetProps;
         >
             {
                 areas.map((area) => (
-                    <li class:list={['list-none ', area?.class]}>
+                    <li class:list={['list-none', area?.class]}>
                         <h3>{area.title}</h3>
                         <ul
                             class:list={[
-                                'space-y-fl-space-2xs ',
+                                'space-y-fl-space-2xs',
                                 icon || '[&>li]:before:!text-white',
                             ]}
                         >

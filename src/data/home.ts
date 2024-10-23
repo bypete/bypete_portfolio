@@ -5,7 +5,7 @@ export interface Caption {
 }
 
 export interface SwiperImage {
-  src: string | ImageMetadata
+  src: ImageMetadata
   widths?: number[];
   sizes?: string;
   alt: string;

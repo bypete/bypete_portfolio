@@ -1,11 +1,7 @@
 ---
 import SplashLayout from '~/layouts/SplashLayout.astro';
 import WorkSlide from '~/components/Swiper/WorkSlide.astro';
-import Hero from '~/components/hero/Hero.astro';
 import Work from '~/components/Swiper/Work.astro';
-import imgCover from '~/assets/blocks/inflated-half--slate--cr.webp';
-import BlockImage from '~/components/images/BlockImage.astro';
-import HeroPicture from '~/components/images/HeroPicture.astro';
 
 import { formatBlogPosts } from '~/js/utils';
 import { getCollection } from 'astro:content';
@@ -17,21 +13,26 @@ const formattedPosts = formatBlogPosts(allWork, {
     sortByDate: true,
     limit: undefined,
 });
-const postCount = allWork.length;
 
 const title = 'Show your workings';
-const ogImage = {
-    src: '/og/og__about.jpg',
-    alt: 'Portfolio Site',
-};
-const description =
-    "Take a closer look at some of the projects I've worked on as a Front-End developer.";
 const heroConfig = {
     dark: true,
 };
+
+import ogImage from '~/assets/og/og__work.jpg';
+
+const og = {
+    title: 'Featured Work',
+    description:
+        "Take a closer look at some of the projects I've worked on as a Front-End developer.",
+    image: {
+        src: ogImage,
+        alt: 'ByPete Work',
+    },
+};
 ---
 
-<SplashLayout title={title} isHeroDark={heroConfig.dark} {ogImage}>
+<SplashLayout title={title} isHeroDark={heroConfig.dark} {og}>
     <Work>
         {
             formattedPosts.map(async (post) => {

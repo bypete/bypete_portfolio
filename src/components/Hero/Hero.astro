@@ -14,24 +14,24 @@ type HeroTheme = {
 };
 
 export interface VisualKeys {
-    src: string | ImageMetadata;
+    src: ImageMetadata;
+    alt: string;
     widths?: number[];
     densities?: number[];
     width?: number;
     sizes?: string;
-    alt: string;
-    url: string;
+    url?: string;
     wrapper?: string;
     class?: string;
 }
 
 export interface ArtKeys {
-    src: string | ImageMetadata;
+    src: ImageMetadata;
     media: string;
 }
 
 export interface CoverKeys {
-    src: string | ImageMetadata;
+    src: ImageMetadata;
     artDirectives?: ArtKeys[];
     widths?: number[];
     sizes?: string;
@@ -41,7 +41,7 @@ export interface CoverKeys {
     class?: string;
 }
 
-interface CTA extends CTALinks {
+export interface CTA extends CTALinks {
     text: string;
     jump: boolean;
     href: string;
@@ -56,10 +56,10 @@ export interface HeroKeys {
     headline?: string;
     mode?: 'plain' | 'cover' | 'custom';
     class?: string;
-    visual?: Partial<VisualKeys>;
+    visual?: VisualKeys;
     copy?: string;
-    cover?: Partial<CoverKeys>;
-    legibility?: string;
+    cover?: CoverKeys;
+    legibility: string;
     overflow?: boolean;
     actions?: CTA[];
     prompt?: 'swipe' | 'scroll';
@@ -97,7 +97,7 @@ let inView = {
 
 const heroThemes: Record<string, HeroTheme> = {
     plain: {
-        wrapper: ['mb-fl-space-xl'],
+        // wrapper: ['mb-fl-space-xl'],
         hero: [
             'bg-surface-sunken',
             'curveclip',

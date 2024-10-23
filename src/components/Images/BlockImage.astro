@@ -2,6 +2,17 @@
 import { Image } from 'astro:assets';
 import Credit from '~/components/images/Credit.astro';
 
+interface Props {
+    src: ImageMetadata;
+    alt: string;
+    densities?: number[];
+    breakout?: boolean;
+    format?: 'avif' | 'webp' | 'jpeg' | 'png';
+    wrapper?: string;
+    credit?: string;
+    width?: number;
+}
+
 const {
     src,
     alt,
@@ -10,17 +21,17 @@ const {
     format = 'webp',
     wrapper = '',
     credit = '',
-    width = '768',
+    width = 768,
     ...attrs
 } = Astro.props;
 
 const imageProps = {
     src,
     alt,
-    ...attrs,
     quality: 'high',
-    densities,
     width,
+    densities,
+    ...attrs,
 };
 ---
 
@@ -34,7 +45,7 @@ const imageProps = {
             ]}
         >
             <Image {...imageProps} />
-            {credit && <Credit {credit} />}
+            {credit && <Credit credit={credit} />}
         </div>
     ) : (
         <Image {...imageProps} />

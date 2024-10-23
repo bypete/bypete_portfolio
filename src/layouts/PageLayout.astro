@@ -13,29 +13,29 @@ const head: HeadProps = {
     og: fm.og || fm.head?.og,
 };
 
-const isHeroDark = (fm.isHeroDark || (fm.heroConfig && fm.heroConfig.dark)) ?? false;
+const isHeroDark =
+    (fm.isHeroDark || (fm.heroConfig && fm.heroConfig.dark)) ?? false;
 const { headings, isWide = false, prose = true } = Astro.props;
 const { hideToc = false, hideBreadcrumbs = false } = fm;
 ---
 
 <BaseLayout {head} {isHeroDark}>
-    <main
-        id="main-content" class:list={[className && className]}>
-        <slot name="slothero" >
-          <Hero heroConfig={heroConfig} title={head.title} />
-        </slot>
+    <slot name="slothero">
+        <Hero heroConfig={heroConfig} title={head.title} />
+    </slot>
+    <main id="main-content" class:list={[className && className]}>
         <div
-        class:list={[
-          'mx-auto w-full pb-fl-space-2xl text-fl-step-0',
-          prose && 'rte prose',
-          isWide ? 'max-w-container' : 'max-w-3xl px-fl-space-m',
-      ]}
+            class:list={[
+                'mx-auto w-full py-fl-space-2xl text-fl-step-0',
+                prose && 'rte prose',
+                isWide ? 'max-w-container' : 'max-w-3xl px-fl-space-m',
+            ]}
         >
-        {
-          headings && headings.length > 2 && !hideToc && (
-              <TableOfContents headings={headings} />
-          )
-      }
+            {
+                headings && headings.length > 2 && !hideToc && (
+                    <TableOfContents headings={headings} />
+                )
+            }
             <slot />
         </div>
     </main>
