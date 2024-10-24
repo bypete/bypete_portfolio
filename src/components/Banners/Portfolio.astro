@@ -20,6 +20,7 @@ const { wrapper, class: className } = Astro.props;
     data-inview="portfolio"
     wrapperClass={`${wrapper && wrapper} not-prose`}
     class:list={[className && className]}
+    legibility="text-content-dark"
     slotConfig={{
         1: ['self-center'],
         2: ['self-center'],
@@ -38,7 +39,7 @@ const { wrapper, class: className } = Astro.props;
         class="relative m-0 h-full w-full object-contain"
         alt="iPhones with mykring app in use"
     />
-    <div slot="s2" class="py-fl-space-m text-content-loud">
+    <div slot="s2" class="py-fl-space-m">
         <h2
             class="font-headline text-fl-step-3/tight font-bold tracking-tight"
             data-animate="fadeInDown"
