@@ -1,11 +1,23 @@
 ---
 import { Picture } from 'astro:assets';
 import Credit from '~/components/images/Credit.astro';
+interface Props {
+    src: ImageMetadata;
+    alt: string;
+    class: string;
+    widths?: number[];
+    width?: number;
+    sizes?: string;
+    breakout?: boolean;
+    formats?: Array<'avif' | 'webp' | 'jpeg' | 'png'>;
+    wrapper?: string;
+    credit?: string;
+}
 
 const {
     src,
-    art,
     alt,
+    class: className,
     widths = [],
     sizes,
     formats = ['avif', 'webp'],
@@ -18,6 +30,7 @@ const resolvedWidths = widths.length ? widths : [360, 960, 1400, src.width];
 const resolvedSizes = sizes || `100vw`;
 
 const imageProps = {
+    ...(className ? { class: className } : {}),
     src,
     alt,
     ...attrs,

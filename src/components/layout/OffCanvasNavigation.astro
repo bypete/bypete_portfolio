@@ -8,12 +8,11 @@ import siteInfo from '~/data/site';
 import Social from '~/components/ui/Social.astro';
 
 interface Props {
-    class?: string;
     isHeroDark: boolean;
     id?: string;
 }
 
-const { id, class: ClassName, isHeroDark = false } = Astro.props;
+const { id, isHeroDark = false } = Astro.props;
 const year = new Date().getFullYear();
 
 const currentPath = new URL(Astro.request.url).pathname;
@@ -21,7 +20,7 @@ const currentPath = new URL(Astro.request.url).pathname;
 
 <div
     id={id}
-    class="bg-surface-bedrock shadow-inside invisible fixed bottom-0 right-0 top-0 h-full w-[85vw] overflow-y-scroll px-fl-space-m shadow-black md:w-[60vw]"
+    class="shadow-inside invisible fixed bottom-0 right-0 top-0 h-full w-[85vw] overflow-y-scroll bg-surface-bedrock px-fl-space-m shadow-black md:w-[60vw]"
     data-lenis-prevent
     x-cloak
 >
