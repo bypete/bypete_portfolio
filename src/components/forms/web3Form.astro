@@ -1,0 +1,237 @@
+---
+import Textarea from '~/components/forms/fields/Textarea.astro';
+import Input from '~/components/forms/fields/Input.astro';
+import Button from '~/components/ui/Button.astro';
+---
+
+<div class="not-prose">
+    <form
+        name="contact"
+        id="contactForm"
+        class="form"
+        method="POST"
+        action="/connect/thanks/"
+    >
+        <input
+            type="hidden"
+            name="access_key"
+            value="90d27f0a-a4a5-4562-beac-9807a028123f"
+        />
+        <input type="hidden" name="subject" value="New message received" />
+
+        <Input
+            id="input_name"
+            name="name"
+            label="Name"
+            type="text"
+            required={true}
+            placeholder="Enter your name and surname"
+        />
+
+        <Input
+            id="input_email"
+            name="email"
+            type="email"
+            class="mt-fl-space-m"
+            label="Email address"
+            required={true}
+            placeholder="you@example.com"
+        />
+
+        <Textarea
+            id="input_message"
+            name="message"
+            label="Your message"
+            class="mt-fl-space-m"
+            required={true}
+            placeholder="Enter your message"
+        />
+
+        <div class="absolute -z-10 h-0 w-0 opacity-0">
+            <label class="font-medium" for="_sc">When to call?</label>
+            <div class="relative">
+                <input
+                    id="_sc"
+                    tabindex="-1"
+                    autocomplete="off"
+                    type="checkbox"
+                    name="botcheck"
+                    aria-hidden="true"
+                    class="hidden"
+                    style="display: none;"
+                />
+            </div>
+        </div>
+
+        <!-- Cloudflare Turnstile Widget -->
+        <div
+            class="cf-turnstile mt-fl-space-m"
+            data-sitekey={import.meta.env.TURNSTILE_SITE_KEY ||
+                process.env.TURNSTILE_SITE_KEY}
+            data-callback="turnstileCallback"
+        >
+        </div>
+
+        <!-- Hidden input to store the Turnstile response -->
+        <input
+            type="hidden"
+            id="turnstile-response"
+            name="turnstile-response"
+        />
+
+        <div class="mt-fl-space-m">
+            <Button type="submit" theme="secondary">Send now</Button>
+        </div>
+    </form>
+</div>
+
+<script
+    is:inline
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=turnstileCallback"
+    defer
+    async></script>
+
+<script>
+    // Form Validation and Submission
+    import JustValidate from 'just-validate';
+
+    // Define Turnstile callback function on the window object for global scope
+    function turnstileCallback(token) {
+        // Update the hidden input field with the Turnstile token
+        document.getElementById('turnstile-response').value = token;
+        console.log('Turnstile Token:', token);
+    }
+    window.turnstileCallback = turnstileCallback;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('contactForm') as HTMLFormElement;
+        if (form) {
+            const validator = new JustValidate(form, {
+                errorFieldCssClass: ['error'],
+                errorLabelCssClass: [
+                    'text-red-600',
+                    'text-fl-step--1',
+                    'mt-fl-space-3xs',
+                ],
+                successFieldCssClass: ['valid'],
+                successLabelCssClass: ['valid'],
+                validateBeforeSubmitting: true,
+            });
+
+            validator
+                .addField(
+                    '#input_name',
+                    [
+                        {
+                            rule: 'required',
+                            errorMessage: 'Please add your name',
+                        },
+                    ],
+                    {
+                        errorsContainer: '#input_name_error',
+                    },
+                )
+                .addField(
+                    '#input_email',
+                    [
+                        {
+                            rule: 'required',
+                            errorMessage: 'Please add your email',
+                        },
+                        {
+                            rule: 'email',
+                            errorMessage: 'Please check your email address',
+                        },
+                    ],
+                    {
+                        errorsContainer: '#input_email_error',
+                    },
+                )
+                .addField(
+                    '#input_message',
+                    [
+                        {
+                            rule: 'required',
+                            errorMessage: "Don't forget to add your message!",
+                        },
+                        {
+                            validator: (value) =>
+                                value !== undefined &&
+                                value.trim().split(' ').length > 3,
+                            errorMessage:
+                                'Message should be more than 3 words.',
+                        },
+                    ],
+                    {
+                        errorsContainer: '#input_message_error',
+                    },
+                )
+                .addField('#_sc', [
+                    {
+                        validator: (value) => !value,
+                    },
+                ]);
+
+            // Handle form submission
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                try {
+                    const isValid = await validator.revalidate();
+                    const turnstileToken =
+                        document.getElementById('turnstile-response').value;
+
+                    if (isValid && turnstileToken) {
+                        // First validate Turnstile token
+                        const validateResponse = await fetch('/api/validate', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                'turnstile-response': turnstileToken,
+                            }),
+                        });
+
+                        const { valid } = await validateResponse.json();
+
+                        if (valid) {
+                            // Proceed with original form submission
+                            const formData = new FormData(form);
+                            const object = Object.fromEntries(formData);
+                            const json = JSON.stringify(object);
+
+                            fetch('https://api.web3forms.com/submit', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    Accept: 'application/json',
+                                },
+                                body: json,
+                            })
+                                .then(() => {
+                                    console.log('Form successfully submitted');
+                                    window.location.href =
+                                        form.action || '/connect/thanks/';
+                                })
+                                .catch((error) => {
+                                    console.error(
+                                        'Form submission error:',
+                                        error,
+                                    );
+                                });
+                        } else {
+                            console.error('Turnstile validation failed');
+                            // Optionally show an error message to user
+                        }
+                    } else {
+                        console.error(
+                            'Validation failed or Turnstile token missing',
+                        );
+                    }
+                } catch (error) {
+                    console.error('Validation or submission error:', error);
+                }
+            });
+        }
+    });
+</script>
