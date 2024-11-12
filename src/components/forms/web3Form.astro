@@ -89,7 +89,7 @@ declare global {
 <script is:inline>
     // Cloudflare Turnstile callback
     function turnstileCallback(token) {
-        console.log('Turnstile Token:', token);
+        // console.log('Turnstile Token:', token);
         window.turnstileToken = token; // Store token on window object
     }
     window.turnstileCallback = turnstileCallback;
@@ -196,13 +196,10 @@ declare global {
                             console.info('Turnstile validation passed');
                             // Submit form to backend
                             const formData = new FormData(form);
-                            console.table(formData);
                             formData.delete('cf-turnstile-response');
-                            console.table(formData);
                             const jsonData = JSON.stringify(
                                 Object.fromEntries(formData),
                             );
-                            console.table(jsonData);
 
                             await fetch('https://api.web3forms.com/submit', {
                                 method: 'POST',
