@@ -9,10 +9,10 @@ export async function onRequestPost(context) {
       const ip = request.headers.get('CF-Connecting-IP');
 
       // Get secret key from environment variable
-      const SECRET_KEY = context.env.TURNSTILE_SECRET_KEY;
+      const SECRET_KEY = context.env.TURNSTILE_SITE_SECRET;
       
       if (!SECRET_KEY) {
-          throw new Error('Missing TURNSTILE_SECRET_KEY environment variable');
+          throw new Error('Missing TURNSTILE_SITE_SECRET environment variable');
       }
 
       // Prepare the verification request

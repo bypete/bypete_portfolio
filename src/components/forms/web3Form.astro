@@ -2,6 +2,12 @@
 import Textarea from '~/components/forms/fields/Textarea.astro';
 import Input from '~/components/forms/fields/Input.astro';
 import Button from '~/components/ui/Button.astro';
+
+declare global {
+    interface Window {
+        turnstileCallback: (token: string) => void;
+    }
+}
 ---
 
 <div class="not-prose">
@@ -89,13 +95,12 @@ import Button from '~/components/ui/Button.astro';
     // Form Validation and Submission
     import JustValidate from 'just-validate';
 
-    let turnstileToken;
     // Cloudflare Turnstile callback
     function turnstileCallback(token) {
+        let turnstileToken;
         console.log('Turnstile Token:', token);
         turnstileToken = token;
     }
-
     window.turnstileCallback = turnstileCallback;
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -163,7 +168,7 @@ import Button from '~/components/ui/Button.astro';
                 )
                 .addField('#_sc', [
                     {
-                        validator: (value) => !value,
+                        validator: (value) => !value, // Returns true if empty, false if filled
                     },
                 ]);
 
@@ -171,15 +176,17 @@ import Button from '~/components/ui/Button.astro';
             form.addEventListener('submit', async (event) => {
                 event.preventDefault();
                 const isValid = await validator.revalidate();
+                const responseToken = turnstile.getResponse();
 
-                if (isValid && turnstileToken) {
+                console.log(`r: ${responseToken}, t: ${turnstile}`);
+                if (isValid && responseToken) {
                     try {
                         // Validate Turnstile token
                         const response = await fetch('/api/validate', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
-                                'turnstile-response': turnstileToken,
+                                'turnstile-response': responseToken,
                             }),
                         });
 
@@ -212,9 +219,7 @@ import Button from '~/components/ui/Button.astro';
                         console.error('Submission error:', error);
                     }
                 } else {
-                    console.error(
-                        'Form validation failed or Turnstile token missing',
-                    );
+                    console.error('Form validation failed');
                 }
             });
         }
