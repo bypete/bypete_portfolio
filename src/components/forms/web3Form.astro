@@ -171,14 +171,13 @@ import Button from '~/components/ui/Button.astro';
                 event.preventDefault();
                 try {
                     const isValid = await validator.revalidate();
+                    const isExpired = turnstile.isExpired();
 
-                    const turnstileExpired = turnstile.isExpired();
-
-                    if (turnstileExpired) {
+                    if (isExpired) {
                         turnstile.reset(turnstileToken);
                     }
 
-                    if (isValid && !turnstileExpired) {
+                    if (isValid && !isExpired) {
                         // First validate Turnstile token
                         const validateResponse = await fetch('/api/validate', {
                             method: 'POST',
