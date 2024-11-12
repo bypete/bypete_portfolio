@@ -35,6 +35,7 @@ export default defineConfig({
     // },
     integrations: [
         preact(),
+
         mdx({
             rehypePlugins: [rehypeAttrs, rehypeExternalLinksConfig],
         }),
