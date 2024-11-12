@@ -6,6 +6,7 @@ import Button from '~/components/ui/Button.astro';
 declare global {
     interface Window {
         turnstileCallback: (token: string) => void;
+        turnstileToken?: string; // Add this to store token globally
     }
 }
 ---
@@ -84,7 +85,14 @@ declare global {
         </div>
     </form>
 </div>
-
+<script is:inline>
+    // Cloudflare Turnstile callback
+    function turnstileCallback(token) {
+        console.log('Turnstile Token:', token);
+        window.turnstileToken = token; // Store token on window object
+    }
+    window.turnstileCallback = turnstileCallback;
+</script>
 <script
     is:inline
     src="https://challenges.cloudflare.com/turnstile/v0/api.js"
@@ -94,14 +102,6 @@ declare global {
 <script>
     // Form Validation and Submission
     import JustValidate from 'just-validate';
-
-    // Cloudflare Turnstile callback
-    function turnstileCallback(token) {
-        let turnstileToken;
-        console.log('Turnstile Token:', token);
-        turnstileToken = token;
-    }
-    window.turnstileCallback = turnstileCallback;
 
     document.addEventListener('DOMContentLoaded', () => {
         const form = document.getElementById('contactForm') as HTMLFormElement;
