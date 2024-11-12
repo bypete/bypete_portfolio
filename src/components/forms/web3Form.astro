@@ -88,6 +88,7 @@ import Button from '~/components/ui/Button.astro';
 <script>
     // Form Validation and Submission
     import JustValidate from 'just-validate';
+    import type { log } from 'node_modules/astro/dist/core/logger/core';
     let turnstileToken;
     function turnstileCallback(token) {
         console.log('Turnstile Token:', token);
@@ -172,7 +173,6 @@ import Button from '~/components/ui/Button.astro';
                     const isValid = await validator.revalidate();
 
                     const turnstileExpired = turnstile.isExpired();
-                    const SECRET_KEY = '1x0000000000000000000000000000000AA';
 
                     if (turnstileExpired) {
                         turnstile.reset(turnstileToken);
@@ -180,7 +180,6 @@ import Button from '~/components/ui/Button.astro';
 
                     if (isValid && !turnstileExpired) {
                         // First validate Turnstile token
-                        console.log(turnstileExpired);
                         const validateResponse = await fetch('/api/validate', {
                             method: 'POST',
                             headers: {
@@ -192,7 +191,7 @@ import Button from '~/components/ui/Button.astro';
                         });
 
                         const { valid } = await validateResponse.json();
-
+                        console.log(valid);
                         if (valid) {
                             // Proceed with original form submission
                             const formData = new FormData(form);
