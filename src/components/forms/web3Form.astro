@@ -88,8 +88,9 @@ import Button from '~/components/ui/Button.astro';
 <script>
     // Form Validation and Submission
     import JustValidate from 'just-validate';
-    import type { log } from 'node_modules/astro/dist/core/logger/core';
+
     let turnstileToken;
+    // Cloudflare Turnstile callback
     function turnstileCallback(token) {
         console.log('Turnstile Token:', token);
         turnstileToken = token;
@@ -169,64 +170,51 @@ import Button from '~/components/ui/Button.astro';
             // Handle form submission
             form.addEventListener('submit', async (event) => {
                 event.preventDefault();
-                try {
-                    const isValid = await validator.revalidate();
-                    const isExpired = turnstile.isExpired();
+                const isValid = await validator.revalidate();
 
-                    if (isExpired) {
-                        turnstile.reset(turnstileToken);
-                    }
-
-                    if (isValid && !isExpired) {
-                        // First validate Turnstile token
-                        const validateResponse = await fetch('/api/validate', {
+                if (isValid && turnstileToken) {
+                    try {
+                        // Validate Turnstile token
+                        const response = await fetch('/api/validate', {
                             method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
+                            headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
                                 'turnstile-response': turnstileToken,
                             }),
                         });
 
-                        const { valid } = await validateResponse.json();
-                        console.log(valid);
-                        if (valid) {
-                            // Proceed with original form submission
-                            const formData = new FormData(form);
-                            const object = Object.fromEntries(formData);
-                            const json = JSON.stringify(object);
+                        const { valid } = await response.json();
+                        console.log(`valid: ${valid}`);
 
-                            fetch('https://api.web3forms.com/submit', {
+                        if (valid) {
+                            // Submit form to backend
+                            const formData = new FormData(form);
+                            const jsonData = JSON.stringify(
+                                Object.fromEntries(formData),
+                            );
+
+                            await fetch('https://api.web3forms.com/submit', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
                                     Accept: 'application/json',
                                 },
-                                body: json,
-                            })
-                                .then(() => {
-                                    console.log('Form successfully submitted');
-                                    window.location.href =
-                                        form.action || '/connect/thanks/';
-                                })
-                                .catch((error) => {
-                                    console.error(
-                                        'Form submission error:',
-                                        error,
-                                    );
-                                });
+                                body: jsonData,
+                            });
+
+                            // Redirect on successful submission
+                            window.location.href =
+                                form.action || '/connect/thanks/';
                         } else {
                             console.error('Turnstile validation failed');
-                            // Optionally show an error message to user
                         }
-                    } else {
-                        console.error(
-                            'Validation failed or Turnstile token missing',
-                        );
+                    } catch (error) {
+                        console.error('Submission error:', error);
                     }
-                } catch (error) {
-                    console.error('Validation or submission error:', error);
+                } else {
+                    console.error(
+                        'Form validation failed or Turnstile token missing',
+                    );
                 }
             });
         }

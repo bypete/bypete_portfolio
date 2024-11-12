@@ -1,40 +1,57 @@
-// Simplified Cloudflare API function that only checks Turnstile
 export async function onRequestPost(context) {
   try {
-    return await handleRequest(context);
-  } catch (e) {
-    console.error(e);
-    return new Response(JSON.stringify({ valid: false }), { 
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    });
+      // Get the token from the request body
+      const request = context.request;
+      const body = await request.json();
+      const token = body['turnstile-response'];
+      
+      // Get the connecting IP
+      const ip = request.headers.get('CF-Connecting-IP');
+
+      // Get secret key from environment variable
+      const SECRET_KEY = context.env.TURNSTILE_SECRET_KEY;
+      
+      if (!SECRET_KEY) {
+          throw new Error('Missing TURNSTILE_SECRET_KEY environment variable');
+      }
+
+      // Prepare the verification request
+      const formData = new FormData();
+      formData.append('secret', SECRET_KEY);
+      formData.append('response', token);
+      formData.append('remoteip', ip);
+
+      // Verify the token
+      const result = await fetch(
+          'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+          {
+              body: formData,
+              method: 'POST',
+          }
+      );
+
+      const outcome = await result.json();
+
+      // Return simple boolean response
+      return new Response(
+          JSON.stringify({ valid: outcome.success }),
+          {
+              headers: {
+                  'Content-Type': 'application/json',
+              }
+          }
+      );
+
+  } catch (error) {
+      // Return false if there's any error
+      return new Response(
+          JSON.stringify({ valid: false }),
+          {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Status': '400'
+              }
+          }
+      );
   }
-}
-
-async function handleRequest({ request, env }) {
-  const ip = request.headers.get("CF-Connecting-IP");
-  const data = await request.json();
-  const token = data['turnstile-response'];
-  
-  const tokenValidated = await validateToken(ip, token, env.TURNSTILE_SECRET_KEY);
-  
-  return new Response(JSON.stringify({ valid: tokenValidated }), {
-    headers: { 'Content-Type': 'application/json' }
-  });
-}
-
-async function validateToken(ip, token, secretKey) {
-  const formData = new FormData();
-  formData.append("secret", secretKey);
-  formData.append("response", token);
-  formData.append("remoteip", ip);
-  
-  const url = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
-  const result = await fetch(url, {
-    body: formData,
-    method: "POST",
-  });
-  
-  const outcome = await result.json();
-  return outcome.success;
 }
