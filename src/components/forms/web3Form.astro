@@ -2,7 +2,8 @@
 import Textarea from '~/components/forms/fields/Textarea.astro';
 import Input from '~/components/forms/fields/Input.astro';
 import Button from '~/components/ui/Button.astro';
-
+// SC 90d27f0a-a4a5-4562-beac-9807a028123f
+// DEV a033fd5b-c962-4e21-9590-49f7406f6058
 declare global {
     interface Window {
         turnstileCallback: (token: string) => void;
@@ -22,7 +23,7 @@ declare global {
         <input
             type="hidden"
             name="access_key"
-            value="90d27f0a-a4a5-4562-beac-9807a028123f"
+            value="a033fd5b-c962-4e21-9590-49f7406f6058"
         />
         <input type="hidden" name="subject" value="New message received" />
 
@@ -178,7 +179,6 @@ declare global {
                 const isValid = await validator.revalidate();
                 const responseToken = window.turnstileToken;
 
-                console.log(`r: ${responseToken}`);
                 if (isValid && responseToken) {
                     try {
                         // Validate Turnstile token
@@ -191,14 +191,15 @@ declare global {
                         });
 
                         const { valid } = await response.json();
-                        console.log(`valid: ${valid}`);
 
                         if (valid) {
+                            console.info('Turnstile validation passed');
                             // Submit form to backend
                             const formData = new FormData(form);
                             const jsonData = JSON.stringify(
                                 Object.fromEntries(formData),
                             );
+                            console.table(jsonData);
 
                             await fetch('https://api.web3forms.com/submit', {
                                 method: 'POST',
