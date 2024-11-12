@@ -176,9 +176,9 @@ declare global {
             form.addEventListener('submit', async (event) => {
                 event.preventDefault();
                 const isValid = await validator.revalidate();
-                const responseToken = turnstile.getResponse();
+                const responseToken = window.turnstileToken;
 
-                console.log(`r: ${responseToken}, t: ${turnstile}`);
+                console.log(`r: ${responseToken}`);
                 if (isValid && responseToken) {
                     try {
                         // Validate Turnstile token
@@ -219,7 +219,11 @@ declare global {
                         console.error('Submission error:', error);
                     }
                 } else {
-                    console.error('Form validation failed');
+                    console.error(
+                        isValid
+                            ? 'Missing Turnstile token'
+                            : 'Form validation failed',
+                    );
                 }
             });
         }
