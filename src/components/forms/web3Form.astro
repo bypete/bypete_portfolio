@@ -196,6 +196,7 @@ declare global {
                             console.info('Turnstile validation passed');
                             // Submit form to backend
                             const formData = new FormData(form);
+                            console.table(formData);
                             const jsonData = JSON.stringify(
                                 Object.fromEntries(formData),
                             );
