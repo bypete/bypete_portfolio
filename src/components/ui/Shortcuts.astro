@@ -3,24 +3,46 @@ import { Icon } from 'astro-icon/components';
 ---
 
 <div
-    class="fixed bottom-fl-space-m right-fl-space-m z-shortcuts flex flex-col items-center space-y-fl-space-2xs"
+    class="fixed bottom-fl-space-2xl right-0 z-shortcuts flex min-w-[64px] flex-col items-center space-y-fl-space-xs"
+    id="shortcuts"
 >
     <a
         id="pageTop"
         href="#top"
         data-jump
         aria-hidden="true"
-        class="scroll bg-primary hover:bg-primary-light translate-y-fl-space-2xl items-center justify-center rounded-full p-fl-space-2xs text-white shadow-floated hover:border-black/10 focus:outline-none"
+        class="scroll scale-0 rounded-full stroke-2 p-0 text-brand backdrop-blur-sm hover:bg-surface-raised focus:bg-surface-raised focus:outline-none"
     >
         <Icon
             name="lucide:arrow-up-to-line"
-            class="h-fl-space-m w-fl-space-m"
+            class="m-fl-space-3xs h-fl-space-m w-fl-space-m"
         />
+        <svg
+            width="48"
+            height="48"
+            viewBox="0 0 100 100"
+            class="absolute inset-0 h-full w-full -rotate-90 stroke-[4px]"
+        >
+            <circle
+                cx="50"
+                cy="50"
+                r="46"
+                pathLength="1"
+                class="fill-transparent stroke-brand-dark/20"></circle>
+            <circle
+                cx="50"
+                cy="50"
+                r="46"
+                pathLength="1"
+                class="progress fill-transparent stroke-brand"
+                style="stroke-dasharray: 0, 1"></circle>
+        </svg>
     </a>
 
     <button
-        class="bg-primary hover:bg-primary-light focus:bg-primary-light group relative flex h-fl-space-2xl w-fl-space-2xl items-center justify-center rounded-full p-0 shadow-floated lg:hidden"
+        class="group relative flex h-[64px] w-[64px] origin-right items-center justify-center self-end rounded-l-full bg-brand p-0 shadow-floated hover:bg-brand-dark focus:bg-brand-dark lg:hidden"
         name="hamburger"
+        id="hamburger"
         type="button"
         aria-label="Mobile menu"
         :aria-label="isMobileNavOpen ? 'Close main menu' : 'Mobile menu'"
@@ -48,7 +70,7 @@ import { Icon } from 'astro-icon/components';
 
 <script>
     import Alpine from 'alpinejs';
-    import { animate, timeline, type TimelineDefinition } from 'motion';
+    import { scroll, animate, timeline, type TimelineDefinition } from 'motion';
 
     import Lenis from '@studio-freight/lenis';
     const lenis = new Lenis();
@@ -63,6 +85,9 @@ import { Icon } from 'astro-icon/components';
     const wrapperOffCanvasRight = document.getElementById(
         'wrapperOffCanvasRight',
     );
+    const shortcuts = document.getElementById('shortcuts');
+    const hamburger = document.getElementById('hamburger');
+    const closeMobileNav = document.getElementById('closeMobileNav');
     const wrapperContent = document.getElementById('wrapperContent');
     const mobileNavigation = document.getElementById('mobileNavigation');
     const stickies = document.querySelectorAll('[data-off-canvas-sticky]');
@@ -96,6 +121,8 @@ import { Icon } from 'astro-icon/components';
         };
     };
 
+    scroll(animate('.progress', { strokeDasharray: ['0,1', '1,1'] }));
+
     // Function to handle page scrolling and toggle page top visibility
     const handlePageTop = () => {
         // Check if animation is already in progress, if so, return
@@ -103,11 +130,11 @@ import { Icon } from 'astro-icon/components';
             return;
         }
         // If page is scrolled beyond vh and page top is not visible, show it
-        if (page.scrollTop > vh && !isPageTopVisible) {
+        if (page.scrollTop > 5 && !isPageTopVisible) {
             togglePageTopVisibility(true); // show
         }
         // If page is scrolled back within vh and page top is visible, hide it
-        if (page.scrollTop <= vh && isPageTopVisible) {
+        if (page.scrollTop <= 5 && isPageTopVisible) {
             togglePageTopVisibility(false); // hide
         }
     };
@@ -139,16 +166,29 @@ import { Icon } from 'astro-icon/components';
 
     // Offscreen Menu for smaller screens
     const sidenav = (visible, scrollCache, viewWidth) => {
-        if (wrapperContent && mobileNavigation) {
+        if (
+            wrapperContent &&
+            mobileNavigation &&
+            shortcuts &&
+            hamburger &&
+            closeMobileNav
+        ) {
             const sequenceShowOffscreen: TimelineDefinition = [
                 [
                     wrapperContent,
                     {
-                        transform: `${viewWidth <= 768 ? 'translateX(-85vw)' : 'translateX(-60vw)'}`,
+                        transform: `${viewWidth <= 768 ? 'translateX(calc(-100vw + 80px))' : 'translateX(-60vw)'}`,
                     },
                     {
                         duration: 0.5,
                     },
+                ],
+                [
+                    shortcuts,
+                    {
+                        transform: `${viewWidth <= 768 ? 'translateX(calc(-100vw + 80px)) ' : 'translateX(-60vw) '}`,
+                    },
+                    { at: '<', duration: 0.5 },
                 ],
                 [
                     mobileNavigation,
@@ -166,6 +206,13 @@ import { Icon } from 'astro-icon/components';
                 [mobileNavigation, { opacity: 0 }, { duration: 0.25 }],
                 [
                     wrapperContent,
+                    {
+                        transform: 'none',
+                    },
+                    { at: '<', duration: 0.5, delay: 0.25 },
+                ],
+                [
+                    shortcuts,
                     {
                         transform: 'none',
                     },

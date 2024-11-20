@@ -303,6 +303,10 @@ export default {
                     '0px 2px 10px -1px rgb(var( --color-shadow-overlay) / 0.10)',
                     '0px 0px 5px -1px rgb(var( --color-shadow-overlay) / 0.45)',
                 ],
+                inside: [
+                  'inset 0 25px 50px -20px hsl(var( --color-shadow-sunk) / 0.08)',
+                  'inset 0 2px 0px -1px hsl(var( --color-shadow-sunk) / 0.08)',
+              ],
                 inset: [
                     'inset 0 2px 6px -1px rgb(var( --color-shadow-inset) / 0.16)',
                     '0px 0px 1px 1px rgb(var( --color-shadow-highlight) / 0.25)',

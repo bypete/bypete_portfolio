@@ -8,11 +8,12 @@ import siteInfo from '~/data/site';
 import Social from '~/components/ui/Social.astro';
 
 interface Props {
+    class?: string;
     isHeroDark: boolean;
     id?: string;
 }
 
-const { id, isHeroDark = false } = Astro.props;
+const { id, class: className, isHeroDark = false } = Astro.props;
 const year = new Date().getFullYear();
 
 const currentPath = new URL(Astro.request.url).pathname;
@@ -20,7 +21,7 @@ const currentPath = new URL(Astro.request.url).pathname;
 
 <div
     id={id}
-    class="shadow-inside invisible fixed bottom-0 right-0 top-0 h-full w-[85vw] overflow-y-scroll bg-surface-bedrock px-fl-space-m shadow-black md:w-[60vw]"
+    class="shadow-inside invisible fixed bottom-0 right-0 top-0 h-full w-[calc(100vw-80px)] overflow-y-scroll bg-surface-bedrock px-fl-space-m shadow-black md:w-[60vw]"
     data-lenis-prevent
     x-cloak
 >
@@ -82,6 +83,8 @@ const currentPath = new URL(Astro.request.url).pathname;
 </div>
 
 <button
-    class="fixed right-[85vw] top-0 z-1000 h-full w-[15vw] opacity-0 md:right-[60vw] md:w-[40vw]"
-    @click="isMobileNavOpen = false"
-    x-show="isMobileNavOpen"></button>
+    x-cloak
+    id="closeMobileNav"
+    class="fixed left-0 top-0 z-1000 h-full w-[80px] bg-surface-raised opacity-0 md:w-[40vw]"
+    x-show="isMobileNavOpen"
+    @click="isMobileNavOpen = false"></button>
