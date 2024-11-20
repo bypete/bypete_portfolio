@@ -142,10 +142,12 @@ import { Icon } from 'astro-icon/components';
     const togglePageTopVisibility = (visible) => {
         animationInProgress = true;
         const animationProperties = visible
-            ? { opacity: 1, transform: ['translateX(0)'] }
+            ? { opacity: 1, transform: ['translateY(0) scale(1)'] }
             : {
                   opacity: 1,
-                  transform: ['translateY(var(--space-2xl)) scale(0.25)'],
+                  transform: [
+                      'translateY(calc(100% + var(--space-2xs))) scale(0)',
+                  ],
               };
         if (pageTop) {
             animate(pageTop, animationProperties, {
