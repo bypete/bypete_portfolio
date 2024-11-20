@@ -26,9 +26,9 @@ let svgoPrefixIdsCount = 0;
 export default defineConfig({
     site: 'https://bypete.uk',
     trailingSlash: 'always',
-    redirects: {
-        '/bio/': '/about',
-    },
+    // redirects: {
+    //     '/bio/': '/about',
+    // },
     compressHTML: true,
     // build: {
     //     format: 'file',
