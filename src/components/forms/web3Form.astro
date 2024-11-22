@@ -204,8 +204,7 @@ declare global {
                             });
 
                             // Redirect on successful submission
-                            window.location.href =
-                                form.action || '/connect/thanks/';
+                            window.location.href = '/connect/thanks/';
                         } else {
                             console.error('Turnstile validation failed');
                         }
