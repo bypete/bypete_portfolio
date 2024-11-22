@@ -13,13 +13,7 @@ declare global {
 ---
 
 <div class="not-prose">
-    <form
-        name="contact"
-        id="contactForm"
-        class="form"
-        method="POST"
-        action="/connect/thanks/"
-    >
+    <form name="contact" id="contactForm" class="form" method="POST">
         <input
             type="hidden"
             name="access_key"
@@ -205,7 +199,6 @@ declare global {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
-                                    Accept: 'application/json',
                                 },
                                 body: jsonData,
                             });
