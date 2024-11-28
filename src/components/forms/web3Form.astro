@@ -2,8 +2,6 @@
 import Textarea from '~/components/forms/fields/Textarea.astro';
 import Input from '~/components/forms/fields/Input.astro';
 import Button from '~/components/ui/Button.astro';
-// SC 90d27f0a-a4a5-4562-beac-9807a028123f
-// DEV a033fd5b-c962-4e21-9590-49f7406f6058
 declare global {
     interface Window {
         turnstileCallback: (token: string) => void;
@@ -50,10 +48,10 @@ declare global {
         />
 
         <div class="absolute -z-10 h-0 w-0 opacity-0">
-            <label class="font-medium" for="_sc">When to call?</label>
+            <label class="font-medium" for="_bp">When to call?</label>
             <div class="relative">
                 <input
-                    id="_sc"
+                    id="_bp"
                     tabindex="-1"
                     autocomplete="off"
                     type="checkbox"
@@ -83,7 +81,6 @@ declare global {
 <script is:inline>
     // Cloudflare Turnstile callback
     function turnstileCallback(token) {
-        // console.log('Turnstile Token:', token);
         window.turnstileToken = token; // Store token on window object
     }
     window.turnstileCallback = turnstileCallback;
@@ -161,7 +158,7 @@ declare global {
                         errorsContainer: '#input_message_error',
                     },
                 )
-                .addField('#_sc', [
+                .addField('#_bp', [
                     {
                         validator: (value) => !value, // Returns true if empty, false if filled
                     },
