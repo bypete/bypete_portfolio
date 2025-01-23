@@ -1,0 +1,39 @@
+{
+  "images": [
+    {
+      "title": "Off screen menu",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/ux_menu--open.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "Off screen menu",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/ux_menu--expanded.jpg",
+      "class": "row-span-2 col-span-1",
+      "caption": "Expanded view of offscreen menu links"
+    },
+    {
+      "title": "Table of contents",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/ux_toc.jpg",
+      "class": "row-span-2 col-span-1",
+      "caption": "Related pages within this section"
+    },
+    {
+      "title": "Table of contents",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/ux_toc--open.jpg",
+      "class": "row-span-2 col-span-1",
+      "caption": "Expanded view of section pages"
+    },
+    {
+      "title": "Scroll position",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/ux_scroll-position.jpg",
+      "class": "row-span-2 col-span-1",
+      "caption": "Jump to top link indicates the amount of content that has been viewed"
+    },
+    {
+      "title": "Scroll position",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/ux_scroll-position--end.jpg",
+      "class": "row-span-2 col-span-1",
+      "caption": "Almost at the end of the content"
+    }
+  ]
+}

@@ -15,6 +15,7 @@ export interface SwiperImage {
   caption?: Caption;
 }
 
+import shirley from "~/assets/work/shirleychauffeurs/product.png";
 import mykringapp from "~/assets/work/mykringapp/product.png";
 import onepay from "~/assets/work/onepay/product.png";
 import mykring from "~/assets/work/mykring/product.png";
@@ -23,6 +24,15 @@ import twotw from "~/assets/work/twotw/product.png";
 export const heroSlides: SwiperImage[] = [
 
   {
+    src: shirley,
+    alt: "laptop and mobile showing site in use",
+    url: '/work/shirleychauffeurs/',
+    caption: {
+      title: 'Shirley Chauffeurs',
+      copy: 'Branding and Online',
+      label: 'bottom-fl-space-xl left-0 md:left-auto md:bottom-[15%] md:right-[45%]',
+    },
+  }, {
     src: mykringapp,
     alt: "3 phones showing the myKRing app in use",
     url: '/work/mykring-app/',
@@ -50,16 +60,6 @@ export const heroSlides: SwiperImage[] = [
       title: 'K Ring ',
       copy: 'Mobile-first responsive site',
       label: 'bottom-fl-space-xl left-0 md:left-auto md:bottom-[25%] md:right-[15%]',
-    },
-  },
-  {
-    src: twotw,
-    alt: "iPad mockup of twotw website",
-    url: '/work/twotw/',
-    caption: {
-      title: 'TWOTW',
-      copy: 'Jeff Wayne\'s Musical Version',
-      label: 'bottom-fl-space-xl left-0 md:left-auto md:bottom-[10%] md:left-[33%]',
     },
   },
 ];

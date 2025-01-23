@@ -1,0 +1,56 @@
+{
+  "images": [
+    {
+      "title": "Home",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/dark__home--detail.jpg",
+      "cropped": false,
+      "class": "row-span-2 col-span-3"
+    },
+    {
+      "title": "Home fullscreen",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/dark__home.jpg",
+      "class": "hidden",
+      "cropped": false
+    },
+    {
+      "title": "Mobile Home",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/dark__sm_home--detail.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "Cassie detailed view",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/dark__cassie--detail.jpg",
+      "class": "row-span-2 col-span-3"
+    },
+    {
+      "title": "Cassie",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/dark__cassie.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Cassie reponsive view",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/dark__sm_cassie--detail.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "Service detail",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/dark__service--detail.jpg",
+      "class": "row-span-2 col-span-3"
+    },
+    {
+      "title": "Service",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/dark__service.jpg",
+      "class": "hidden"
+    },
+    {
+      "title": "Get a quote",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/dark__sm_quote.jpg",
+      "class": "row-span-2 col-span-1"
+    },
+    {
+      "title": "Get a quote detailed view",
+      "src": "~/assets/work/shirleychauffeurs/lightbox/dark__sm_quote--detail.jpg",
+      "class": "hidden"
+    }
+  ]
+}

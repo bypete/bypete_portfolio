@@ -13,7 +13,10 @@ export const navigation: NavItem[] = [
       label: 'Work',
       url: '/work/',
       children: [
-          {
+        {
+          label: 'Shirley Chauffeurs',
+          url: '/work/shirleychauffeurs/',
+      },{
               label: 'MyKRing App',
               url: '/work/mykring-app/',
           },

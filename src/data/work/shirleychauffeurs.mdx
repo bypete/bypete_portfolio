@@ -1,0 +1,102 @@
+---
+title: 'Shirley Chauffeurs'
+pubDate: 2025-01-23
+modDate: 2025-01-23
+excerpt: 'Learn how myKRing.com evolved into a multilanguage hub for the K Ring product'
+taster: 'Family run business providing a reliable, professional approach to the wedding car hire business with affordable prices'
+description: 'See how I launched and continued to maintain this site'
+author: 'Pete Wallace'
+og:
+  title: 'Shirley Chauffeurs'
+  description: 'See how I launched and continued to maintain this site'
+  image: 
+    src: '~/assets/work/shirleychauffeurs/og__image.jpg'
+    alt: 'Shirley Chauffeurs'
+brand: 
+  bg: 'bg-[#0a1a29]'
+  color: 'text-[#00cccc]'
+logo:
+  src: '~/assets/logos/sc__logo.svg'
+  light: '~/assets/logos/light/sc__white.svg'
+product: 
+  src: '~/assets/work/shirleychauffeurs/product.png'
+  alt: 'Shirley Chauffeurs responsive site'
+cover:
+  src: '~/assets/work/shirleychauffeurs/cover.jpg'
+  alt: 'Shirley Chauffeurs logo'
+  credit: 'Shirley Chauffeurs'
+skillset:
+  text: 'text-content-light'
+  icon: ''
+  heading: 'permalink:text-white permalink:before:text-[#00a3e2]'
+  shadow: ''
+  areas:
+    - title: 'Design'
+      skills:
+          - 'Adobe Photoshop'
+          - 'Adobe Illustrator'
+          - 'Tailwind CSS'
+    - title: 'Development'
+      skills:
+          - 'Visual Studio Code'
+          - 'HTML Templates'
+          - 'HTML Email templates'
+          - 'Content population'
+          - 'Wireframes'
+          - 'Alpine.js and vanilla js'
+          - 'npm'
+          - 'Asset preparation'
+          - 'UX/UI'
+tags: 
+  - 'case study'
+  - 'featured'
+  - 'responsive'
+---
+import BlockPicture from '~/components/images/BlockPicture.astro';
+import { Image } from 'astro:assets';
+import Note from '~/components/ui/Note.astro'
+import basket_40 from '~/assets/work/shirleychauffeurs/basket_40.jpg';
+import Figure from '~/components/images/Figure.astro'
+import UL from '~/components/MDX/ul.astro'
+import Skills from '~/components/ui/Skills.astro'
+
+import Lightbox from '~/components/MDX/Lightbox.astro'
+
+export const components = {ul: UL}
+
+
+<p class="text-fl-step-1">[Shirley Chauffeurs](https://shirleychauffeurs.co.uk/)</p>
+
+<Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
+## My Skills and Contributions
+</Skills>
+
+
+## My responsibilities
+
+
+<Lightbox collections={[{
+            id: 'shirleychauffeurs',
+        },
+        {
+            id: 'shirleychauffeurs-dark',
+            title: 'Dark mode',
+        },
+        {
+            id: 'shirleychauffeurs-ux',
+            title: 'UX',
+        },]} >
+<Fragment slot='title'>
+## Screens
+</Fragment>
+</Lightbox>
+
+
+## Learning points
+
+## Scope for improvement
+
+
+<BlockPicture src={basket_40} class="my-fl-space-2xl" alt="Close up of K Ring and cyclist" credit={frontmatter.title} wrapper={true} />
+
+## Final thoughts
