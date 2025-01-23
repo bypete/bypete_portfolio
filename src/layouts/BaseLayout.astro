@@ -2,7 +2,6 @@
 import MainSEO, { type Props as HeadProps } from '~/components/SEO/Main.astro';
 import GoogleTagNoScript from '~/components/SEO/GoogleTagNoScript.astro';
 import GoogleTag from '~/components/SEO/GoogleTag.astro';
-import { ViewTransitions } from 'astro:transitions';
 import Header from '~/components/layout/Header.astro';
 import Footer from '~/components/layout/Footer.astro';
 import Underlay from '~/components/ui/Underlay.astro';
@@ -30,7 +29,6 @@ import '~/styles/tailwind.css';
         <MainSEO {...head} {isHeroDark} />
         <!-- {isProduction && <GoogleTag />} -->
         <GoogleTag />
-        <!-- <ViewTransitions /> -->
     </head>
     <body
         class="relative m-0 overflow-x-hidden bg-surface font-Roboto text-fl-base text-content antialiased"

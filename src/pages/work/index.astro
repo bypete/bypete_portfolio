@@ -4,7 +4,7 @@ import WorkSlide from '~/components/Swiper/WorkSlide.astro';
 import Work from '~/components/Swiper/Work.astro';
 
 import { formatBlogPosts } from '~/js/utils';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 const allWork = await getCollection('work');
 
 const formattedPosts = formatBlogPosts(allWork, {
@@ -36,12 +36,12 @@ const og = {
     <Work>
         {
             formattedPosts.map(async (post) => {
-                const { remarkPluginFrontmatter } = await post.render();
+                const { remarkPluginFrontmatter } = await render(post);
                 const featured = post.data.tags.includes('featured');
                 return (
                     <div class="slide swiper-slide">
                         <WorkSlide
-                            url={`/${post.collection}/${post.slug}/`}
+                            url={`/${post.collection}/${post.id}/`}
                             title={post.data.title}
                             taster={post.data.taster}
                             tags={post.data.tags}

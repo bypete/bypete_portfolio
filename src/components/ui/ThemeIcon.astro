@@ -6,7 +6,7 @@ import { Icon } from 'astro-icon/components';
     x-data="theme"
     x-cloak
     class:list={[
-        'grid-col-1 grid-row-1  relative grid size-fl-space-l justify-center overflow-hidden rounded-full bg-surface-overlay text-center leading-none text-content shadow-inset transition-colors duration-[750ms] ',
+        'grid-col-1 grid-row-1 relative grid size-fl-space-l justify-center overflow-hidden rounded-full bg-surface-overlay text-center leading-none text-content shadow-inset transition-colors duration-[750ms]',
     ]}
 >
     <button
@@ -47,7 +47,6 @@ import { Icon } from 'astro-icon/components';
 </script>
 
 <script>
-    import Alpine from 'alpinejs';
     import { timeline, type TimelineDefinition } from 'motion';
 
     const setThemeLight = document.getElementById('setThemeLight');
@@ -107,7 +106,8 @@ import { Icon } from 'astro-icon/components';
             theme: localStorage.getItem('theme') || 'light',
 
             setTheme(value) {
-                localStorage.setItem('theme', value);
+                this.theme = value; // Update Alpine state
+                localStorage.setItem('theme', value); // Persist theme
                 animateTheme(value);
                 const html = document.querySelector('html');
                 const meta = document.querySelector('meta[name="theme-color"]');

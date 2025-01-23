@@ -16,11 +16,6 @@
       "class": "row-span-2 col-span-1"
     },
     {
-      "title": "Home",
-      "src": "~/assets/work/eastsidelocks/lightbox/sm_home.jpg",
-      "class": "hidden"
-    },
-    {
       "title": "Vision",
       "src": "~/assets/work/eastsidelocks/lightbox/vision.jpg",
       "class": "row-span-2 col-span-1"

@@ -3,23 +3,6 @@
 ---
 
 <script is:inline>
-    // Viewtransitions
-    // document.addEventListener('astro:before-preparation', () => {
-    //   console.log('Before preparation event triggered');
-    //   // Hide the body during preparation
-    //   document.querySelector('body').style.visibility = 'hidden';
-    //   // Show the loading indicator
-    //   document.querySelector('#loading').style.visibility = 'visible';
-    // });
-
-    // document.addEventListener('astro:after-preparation', () => {
-    //   console.log('After preparation event triggered');
-    //   // Hide the loading indicator
-    //   document.querySelector('#loading').style.visibility = 'hidden';
-    //   // Show the body after preparation is complete
-    //   document.querySelector('body').style.visibility = 'visible';
-    // });
-
     document.onreadystatechange = function () {
         if (document.readyState !== 'complete') {
             document.querySelector('body').style.visibility = 'hidden';

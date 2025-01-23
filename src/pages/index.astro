@@ -31,7 +31,7 @@ const og = {
 import heatmap from '~/assets/hero/heatmap__right-center.png';
 
 import { formatBlogPosts } from '~/js/utils';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 const allWork = await getCollection('work');
 
 const formattedPosts = formatBlogPosts(allWork, {
@@ -126,11 +126,11 @@ const formattedPosts = formatBlogPosts(allWork, {
             >
                 {
                     formattedPosts.map(async (post) => {
-                        const { remarkPluginFrontmatter } = await post.render();
+                        const { remarkPluginFrontmatter } = await render(post);
                         const featured = post.data.tags.includes('featured');
                         return (
                             <WorkCard
-                                url={`/${post.collection}/${post.slug}/`}
+                                url={`/${post.collection}/${post.id}/`}
                                 title={post.data.title}
                                 taster={post.data.taster}
                                 tags={post.data.tags}

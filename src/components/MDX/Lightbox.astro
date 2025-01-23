@@ -35,16 +35,14 @@ const galleries = allGalleries.filter((gallery) =>
             <div class="grid grid-flow-row justify-between leading-snug md:grid-flow-col">
                 <slot name="title" slot="title" />
                 <div class="pointer-events-none grid grid-cols-icon gap-fl-space-2xs text-fl-step--1 text-content-quiet md:max-w-[36ch]">
-                    <>
-                        <Icon
-                            name="lucide:zoom-in"
-                            class="inline-block h-auto w-fl-space-s"
-                        />
-                        <p>
-                            Tap any image to view in more detail. Pinch or mouse
-                            scroll to zoom in.
-                        </p>
-                    </>
+                    <Icon
+                        name="lucide:zoom-in"
+                        class="inline-block h-auto w-fl-space-s"
+                    />
+                    <p>
+                        Tap any image to view in more detail. Pinch or mouse
+                        scroll to zoom in.
+                    </p>
                 </div>
             </div>
 

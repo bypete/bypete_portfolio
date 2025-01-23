@@ -3,7 +3,6 @@ import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 
 export async function GET(context) {
-    const allPosts = await getCollection('posts');
     const allWorks = await getCollection('work');
     // const collection = [...allWorks, ...allPosts]; // Switch to this when blog is ready
     const collection = allWorks;
@@ -15,7 +14,7 @@ export async function GET(context) {
             title: post.data.title,
             pubDate: post.data.pubDate,
             description: post.data.description,
-            link: `/${post.collection}/${post.slug}/`,
+            link: `/${post.collection}/${post.id}/`,
         })),
         customData: `<language>en-gb</language>`,
     });

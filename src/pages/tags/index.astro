@@ -3,9 +3,10 @@ import { getCollection } from 'astro:content';
 import PageLayout from '~/layouts/PageLayout.astro';
 import Tags from '~/components/ui/Tags.astro';
 
-const allPosts = await getCollection('posts');
+// const allPosts = await getCollection('posts');
 const allWorks = await getCollection('work');
-const collection = [...allPosts, ...allWorks];
+// const collection = [...allPosts, ...allWorks];
+const collection = [...allWorks];
 
 let tags = [
     ...new Set(collection.map((post) => post.data.tags).flat()),

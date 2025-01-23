@@ -1,12 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import PageLayout from '~/layouts/PageLayout.astro';
 import BlogPost from '~/components/BlogPost.astro';
 import { formatBlogPosts } from '~/js/utils';
 export async function getStaticPaths() {
-    const allPosts = await getCollection('posts');
     const allWorks = await getCollection('work');
-    const collection = [...allPosts, ...allWorks];
+    // const collection = [...allPosts, ...allWorks];
+    const collection = [...allWorks];
     const uniqueTags = [
         ...new Set(collection.map((post) => post.data.tags).flat()),
     ];
@@ -41,11 +41,11 @@ const formattedPosts = formatBlogPosts(posts, {
     <div class="grid columns-1 gap-y-fl-space-xl">
         {
             formattedPosts.map(async (post) => {
-                const { remarkPluginFrontmatter } = await post.render();
+                const { remarkPluginFrontmatter } = await render(post);
                 const featured = post.data.tags.includes('featured');
                 return (
                     <BlogPost
-                        url={`/${post.collection}/${post.slug}/`}
+                        url={`/${post.collection}/${post.id}/`}
                         title={post.data.title}
                         taster={post.data.taster}
                         tags={post.data.tags}

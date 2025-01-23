@@ -11,7 +11,7 @@ const { credit } = Astro.props;
     x-data="credit"
 >
     <button
-        class="bg-primary z-10 flex items-center justify-center rounded-full p-fl-space-3xs"
+        class="z-10 flex items-center justify-center rounded-full bg-primary p-fl-space-3xs"
         @click="toggle()"
         aria-label="show image credit"
         x-bind:aria-expanded="open ? 'true' : 'false'"
@@ -29,8 +29,6 @@ const { credit } = Astro.props;
 </div>
 
 <script>
-    import Alpine from 'alpinejs';
-
     import { timeline, type TimelineDefinition } from 'motion';
 
     const toggleCreditVisibility = (visible, target) => {

@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
 import MarkdownWorkLayout from '~/layouts/MarkdownWorkLayout.astro';
 import { formatBlogPosts } from '~/js/utils';
 
@@ -15,7 +15,8 @@ export async function getStaticPaths() {
     });
 
     return formattedPosts.map((entry, i) => ({
-        params: { slug: entry.slug },
+        // params: { slug: entry.slug },
+        params: { id: entry.id },
         props: {
             entry,
             prevPost: i + 1 !== numberOfPosts ? formattedPosts[i + 1] : null,
@@ -31,7 +32,7 @@ type Props = {
 };
 
 const { entry, prevPost, nextPost } = Astro.props;
-const { Content, headings, remarkPluginFrontmatter } = await entry.render();
+const { Content, headings, remarkPluginFrontmatter } = await render(entry);
 ---
 
 <MarkdownWorkLayout

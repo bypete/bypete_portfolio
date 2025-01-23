@@ -58,7 +58,7 @@ const formatPostData = (post) => {
         : undefined;
     return {
         title: post.data.title,
-        url: `/${post.collection}/${post.slug}/`,
+        url: `/${post.collection}/${post.id}/`,
         excerpt: post.data.excerpt || post.data.taster || '',
         ...(thumb && { thumb }), // conditional thumbnail
         ...(overlay && { overlay }), // conditional overlay
