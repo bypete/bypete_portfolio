@@ -31,21 +31,22 @@ skillset:
   heading: 'permalink:text-white permalink:before:text-[#00a3e2]'
   shadow: ''
   areas:
-    - title: 'Design'
+    - title: 'Design and visuals'
       skills:
           - 'Adobe Photoshop'
           - 'Adobe Illustrator'
-          - 'Tailwind CSS'
+          - 'Asset preparation'
     - title: 'Development'
       skills:
           - 'Visual Studio Code'
-          - 'HTML Templates'
-          - 'HTML Email templates'
-          - 'Content population'
-          - 'Wireframes'
+          - 'Astro js'
+          - 'Typescript'
           - 'Alpine.js and vanilla js'
+          - 'Tailwind, Utopia, CSS, PostCSS'
           - 'npm'
-          - 'Asset preparation'
+          - 'git, github'
+          - 'Netlify'
+          - 'Content management (MDX)'
           - 'UX/UI'
 tags: 
   - 'case study'
@@ -56,6 +57,8 @@ import BlockPicture from '~/components/images/BlockPicture.astro';
 import { Image } from 'astro:assets';
 import Note from '~/components/ui/Note.astro'
 import basket_40 from '~/assets/work/shirleychauffeurs/basket_40.jpg';
+import quotation from '~/assets/work/shirleychauffeurs/quote.jpg';
+import cta from '~/assets/work/shirleychauffeurs/cta.jpg';
 import Figure from '~/components/images/Figure.astro'
 import UL from '~/components/MDX/ul.astro'
 import Skills from '~/components/ui/Skills.astro'
@@ -68,11 +71,45 @@ export const components = {ul: UL}
 <p class="text-fl-step-1">[Shirley Chauffeurs](https://shirleychauffeurs.co.uk/)</p>
 
 <Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
-## My Skills and Contributions
+## My Skills
 </Skills>
 
 
 ## My responsibilities
+
+<Figure  caption='Custom call to action for each car in the fleet' credit='Shirley Chauffeurs' >
+  <Image src={cta} alt="Call to action" class="w-full h-auto" quality={'high'} widths={[400, 720, 960]} sizes={`768px`} />
+</Figure>
+
+
+<Figure  caption='Relevant testimonals are sorted to the front of the list using key words, and then limited to five. Selected words are highlighted with a svg penstroke to add emphasis and make the recommendataion appear more personable.' credit='Shirley Chauffeurs' >
+  <Image src={quotation} alt="Sample customer quote" class="w-full h-auto" quality={'high'} widths={[400, 720, 960]} sizes={`769px`} />
+</Figure>
+
+```
+---
+id: 1
+title: 'Pleasurable and *utterly* professional'
+referee: 'Adele and Rich'
+tags:
+    - 'Gordon'
+---
+
+Just a quick note to say what a fantastic job your driver and Gordon did for us on our wedding...
+```
+
+A custom helper function parses titles that have been wrapped with asterisks for emphasis. This function wraps *utterly* with the Underlined component and applies an absolute positioned svg. This simplifies the MDX files. 
+
+```
+// Helper function to parse underlined titles
+export function parseTitle(title) {
+    return title.split(/(\*[^*]+\*)/).map((part, index) => 
+        part.startsWith('*') && part.endsWith('*')
+            ? { type: 'emphasized', content: part.slice(1, -1), key: index }
+            : { type: 'regular', content: part, key: index }
+    );
+}
+```
 
 
 <Lightbox collections={[{
