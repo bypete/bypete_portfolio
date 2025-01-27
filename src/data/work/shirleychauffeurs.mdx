@@ -59,6 +59,7 @@ import Note from '~/components/ui/Note.astro'
 import basket_40 from '~/assets/work/shirleychauffeurs/basket_40.jpg';
 import quotation from '~/assets/work/shirleychauffeurs/quote.jpg';
 import cta from '~/assets/work/shirleychauffeurs/cta.jpg';
+import lighthouse from '~/assets/work/shirleychauffeurs/lighthouse.png'
 import Figure from '~/components/images/Figure.astro'
 import UL from '~/components/MDX/ul.astro'
 import Skills from '~/components/ui/Skills.astro'
@@ -68,14 +69,94 @@ import Lightbox from '~/components/MDX/Lightbox.astro'
 export const components = {ul: UL}
 
 
-<p class="text-fl-step-1">[Shirley Chauffeurs](https://shirleychauffeurs.co.uk/)</p>
+<p class="text-fl-step-1">[Shirley Chauffeurs](https://shirleychauffeurs.co.uk/) is an independent family business that required an online presence to complement their exemplary professional service. The business took great pride in their attention to detail, ensuring their role in the customer's special day was as perfect as possible.</p>
+
+As a first point of contact, the site needed to complement their professional standards and instill trust in the company's capabilities. 
 
 <Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
 ## My Skills
 </Skills>
 
+## Performance
 
-## My responsibilities
+The live site performs well and adopts a variety of best practice methods to stay optimized. The site is built in Astro, a performant <abbr title="Static Site Generator">SSG</abbr>. It deploys to Netlify via a linked repository on GitHub and makes use of Netlify's serverless form handing. 
+
+ The chrome Lighthouse results are excellent.
+
+
+<Figure  caption='100% achieved in 3 out of 4 categories' credit='Google Chrome Lighthouse' >
+  <Image src={lighthouse} alt="Call to action" class="max-w-full mx-auto h-auto" quality={100} widths={[400, 760]} sizes={`768px`} />
+</Figure>
+
+
+
+## UX/UI
+The site is presented in a light or dark theme based on the users device preference. This can also be switched with the header icon which switches from sun to moon. All of the colours in the site are set via CSS variables and are overwritten if the attribute `data-theme=dark` is present in the root `<html>` tag. 
+Semantic 
+
+```
+@layer base {
+  :root {
+      --surface-10: 0deg 0% 100%; /* #FFFFFF */
+      --surface: 180deg 0% 98.4%; /* #FBFBFB */
+      --surface--10: 80deg 10% 95%; /* #F7F8F8 */
+      --surface--20: 80deg 5% 92%; /* #EBECEA */
+      --surface--100: 209deg 61% 10%; /* #0A1A29 */
+      
+      ...
+
+      /* Semantic Tailwind variables */
+      --color-surface-raised: var(--surface-10);
+      --color-surface: var(--surface);
+      --color-surface-sunken: var(--surface--10);
+      --color-surface-sunk: var(--surface--20);
+      --color-surface-bedrock: var(--surface--100);
+  }
+
+  /* Alpine will set data-theme value based on (prefers-color-scheme: dark) */
+  :root[data-theme='dark'] {
+      --surface-10: 240deg 12% 20%; /* #2D2D39 */
+      --surface: 240deg 13% 14%; /* #1F1F28 */
+      --surface--10: 240deg 13% 10%; /* #16161D */
+      --surface--20: 240deg 13% 8%; /* #121217 */
+      --surface--100: 240deg 13% 6%; /* #0D0D11 */
+      ...
+  }
+}    
+```
+
+These semantic vars are then referenced in `tailwind.config.cjs`. The human friendly naming keeps the file readable.
+
+The resultant Tailwind class would be `bg-surface-sunken` or `bg-surface`. This design system ensures consistency when adding new elements. Any edits to the colour values will cascade through the CSS. 
+
+```
+surface: {
+    raised: 'hsl(var(--color-surface-raised) / <alpha-value>)',
+    DEFAULT: 'hsl(var(--color-surface) / <alpha-value>)',
+    sunken: 'hsl(var(--color-surface-sunken) / <alpha-value>)',
+    sunk: 'hsl(var(--color-surface-sunk) / <alpha-value>)',
+    bedrock: 'hsl(var(--color-surface-bedrock) / <alpha-value>)',
+    overlay: 'hsl(var(--color-surface-overlay) / <alpha-value>)',
+},
+```
+
+
+<Lightbox collections={[{
+            id: 'shirleychauffeurs',
+        },
+        {
+            id: 'shirleychauffeurs-dark',
+            title: 'Dark mode',
+        },
+        {
+            id: 'shirleychauffeurs-ux',
+            title: 'UX',
+        },]} >
+<Fragment slot='title'>
+## Screens
+</Fragment>
+Light and dark themes are available. A user's system preference is retrieved using vanilla js, and then managed with Alpine.js and local storage.
+</Lightbox>
 
 <Figure  caption='Custom call to action for each car in the fleet' credit='Shirley Chauffeurs' >
   <Image src={cta} alt="Call to action" class="w-full h-auto" quality={'high'} widths={[400, 720, 960]} sizes={`768px`} />
@@ -112,24 +193,9 @@ export function parseTitle(title) {
 ```
 
 
-<Lightbox collections={[{
-            id: 'shirleychauffeurs',
-        },
-        {
-            id: 'shirleychauffeurs-dark',
-            title: 'Dark mode',
-        },
-        {
-            id: 'shirleychauffeurs-ux',
-            title: 'UX',
-        },]} >
-<Fragment slot='title'>
-## Screens
-</Fragment>
-</Lightbox>
-
 
 ## Learning points
+This was a freelance project that I delivered independently. It was a good introduction to Netlify's automated deploys and built on my knowledge of Astro. 
 
 ## Scope for improvement
 
