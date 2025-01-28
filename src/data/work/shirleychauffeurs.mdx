@@ -31,14 +31,20 @@ skillset:
   heading: 'permalink:text-white permalink:before:text-[#00a3e2]'
   shadow: ''
   areas:
-    - title: 'Design and visuals'
+    - title: 'Applications'
       skills:
-          - 'Adobe Photoshop'
-          - 'Adobe Illustrator'
-          - 'Asset preparation'
+        - 'Visual Studio Code'
+        - 'Adobe Photoshop'
+        - 'Adobe Lightroom'
+        - 'Adobe Illustrator'
     - title: 'Development'
       skills:
-          - 'Visual Studio Code'
+        - 'Prepare visual assets'
+        - 'Populate initial content'
+        - 'Publish Astro site to Netlify and maintain updates'
+    - title: 'Experience'
+      class: 'col-span-full'
+      skills:
           - 'Astro js'
           - 'Typescript'
           - 'Alpine.js and vanilla js'
@@ -69,9 +75,9 @@ import Lightbox from '~/components/MDX/Lightbox.astro'
 export const components = {ul: UL}
 
 
-<p class="text-fl-step-1">[Shirley Chauffeurs](https://shirleychauffeurs.co.uk/) is an independent family business that required an online presence to complement their exemplary professional service. The business took great pride in their attention to detail, ensuring their role in the customer's special day was as perfect as possible.</p>
+<p class="text-fl-step-1">[Shirley Chauffeurs](https://shirleychauffeurs.co.uk/) is a family-run business known for their exceptional service and attention to detail. The business takes great pride in their attention to detail, ensuring their role in the customer's special day is as perfect as possible.</p>
 
-As a first point of contact, the site needed to complement their professional standards and instill trust in the company's capabilities. 
+I was commissioned to build an online presence that would reflect their professional standards and build trust in their expertise. 
 
 <Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
 ## My Skills
@@ -92,7 +98,6 @@ The live site performs well and adopts a variety of best practice methods to sta
 
 ## UX/UI
 The site is presented in a light or dark theme based on the users device preference. This can also be switched with the header icon which switches from sun to moon. All of the colours in the site are set via CSS variables and are overwritten if the attribute `data-theme=dark` is present in the root `<html>` tag. 
-Semantic 
 
 ```
 @layer base {
@@ -163,7 +168,7 @@ Light and dark themes are available. A user's system preference is retrieved usi
 </Figure>
 
 
-<Figure  caption='Relevant testimonals are sorted to the front of the list using key words, and then limited to five. Selected words are highlighted with a svg penstroke to add emphasis and make the recommendataion appear more personable.' credit='Shirley Chauffeurs' >
+<Figure  caption='Relevant testimonals are sorted to the front of the list using key words, and then limited to five. Selected words are highlighted with a svg underline to add emphasis and make the recommendataion appear more personable.' credit='Shirley Chauffeurs' >
   <Image src={quotation} alt="Sample customer quote" class="w-full h-auto" quality={'high'} widths={[400, 720, 960]} sizes={`769px`} />
 </Figure>
 
@@ -195,10 +200,14 @@ export function parseTitle(title) {
 
 
 ## Learning points
-This was a freelance project that I delivered independently. It was a good introduction to Netlify's automated deploys and built on my knowledge of Astro. 
+This was a freelance project that I delivered independently.
+It was a good introduction to Netlify's automated deploys and built on my knowledge of Astro. User preferences and themes are now managed using local storage, rather than cookies. 
+
+A lot of attention was given to site optimization and the effort has produced some excellent Lighthouse scores. 
 
 ## Scope for improvement
-
+All of the site colours are set with hsl vars and available as Tailwind classes. This allows for precise control, but it results in a significantly large base CSS file.
+It also requires a large tailwind.config.cjs file which can be tricky to maintain. The next phase would be to look at Tailwind CSS v4.0 to make use of the improved CSS variables handling. 
 
 <BlockPicture src={basket_40} class="my-fl-space-2xl" alt="Close up of K Ring and cyclist" credit={frontmatter.title} wrapper={true} />
 
