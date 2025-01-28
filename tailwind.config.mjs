@@ -661,20 +661,20 @@ export default {
         require('@savvywombat/tailwindcss-grid-areas'),
         addDynamicIconSelectors(),
         // https://laravel-code.tips/you-can-add-this-tailwind-plugin-to-generate-child-selector-variants/
-        plugin(({ addVariant }) => {
-            // Targets any img tag inside the element with img: class
-            addVariant('img', '& img');
-            addVariant('svg', '& svg');
-            addVariant('permalink', ['& h1', '& h2']);
-            addVariant('x-cloak', '&[x-cloak]');
-            addVariant('permalink-first', [
-                '&:first-child h1',
-                '&:first-child h2',
-                '&:first-child h3',
-                '&:first-child h4',
-                '&:first-child h5',
-            ]);
-        }),
+        // plugin(({ addVariant }) => {
+        //     // Targets any img tag inside the element with img: class
+        //     addVariant('img', '& img');
+        //     addVariant('svg', '& svg');
+        //     addVariant('permalink', ['& h1', '& h2']);
+        //     addVariant('x-cloak', '&[x-cloak]');
+        //     addVariant('permalink-first', [
+        //         '&:first-child h1',
+        //         '&:first-child h2',
+        //         '&:first-child h3',
+        //         '&:first-child h4',
+        //         '&:first-child h5',
+        //     ]);
+        // }),
         plugin(({ addUtilities, matchUtilities, theme }) => {
             addUtilities({
                 '.breakout': {
