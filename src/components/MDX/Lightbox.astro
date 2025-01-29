@@ -26,18 +26,18 @@ const galleries = allGalleries.filter((gallery) =>
     collections && (
         <div
             class:list={[
-                'not-prose bg-surface-sunken p-fl-space-s-m shadow-inset',
+                'not-prose bg-surface-sunken p-fluid-s-m shadow-inset',
                 !breakout
-                    ? '-mx-fl-space-s-m my-fl-space-xl rounded-tight'
+                    ? '-mx-fluid-s-m my-fluid-xl rounded-tight'
                     : 'breakout',
             ]}
         >
             <div class="grid grid-flow-row justify-between leading-snug md:grid-flow-col">
                 <slot name="title" slot="title" />
-                <div class="pointer-events-none grid grid-cols-icon gap-fl-space-2xs text-fl-step--1 text-content-quiet md:max-w-[36ch]">
+                <div class="gap-fluid-2xs text-step--1 text-content-quiet pointer-events-none grid grid-cols-(--gtc-icon) md:max-w-[36ch]">
                     <Icon
                         name="lucide:zoom-in"
-                        class="inline-block h-auto w-fl-space-s"
+                        class="w-fluid-s inline-block h-auto"
                     />
                     <p>
                         Tap any image to view in more detail. Pinch or mouse
@@ -51,15 +51,12 @@ const galleries = allGalleries.filter((gallery) =>
             {collections.map((item) => {
                 const gallery = galleries.find((g) => g.id === item.id);
                 return gallery ? (
-                    <div class="mt-fl-space-m">
+                    <div class="mt-fluid-m">
                         {item.title && (
                             <h3 class="font-display">{item.title}</h3>
                         )}
                         {item.description && (
-                            <p
-                                class="mb-fl-space-m"
-                                set:html={item.description}
-                            />
+                            <p class="mb-fluid-m" set:html={item.description} />
                         )}
                         <Bento {gallery} />
                     </div>

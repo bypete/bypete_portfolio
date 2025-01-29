@@ -60,23 +60,23 @@ const {
         />
     </div>
     <div
-        class="mx-auto grid h-full w-full max-w-container grid-cols-1 grid-rows-work items-center justify-items-center pt-[var(--headerheight)] text-content-light md:grid-rows-2 lg:grid-cols-block50 lg:grid-rows-1"
+        class="text-content-light container mx-auto grid h-full w-full grid-cols-1 grid-rows-(--gtr-work) items-center justify-items-center pt-[var(--headerheight)] md:grid-rows-2 lg:grid-cols-(--gtc-block50) lg:grid-rows-1"
     >
         <div
-            class="relative max-w-[45ch] self-start rounded pt-fl-space-l text-content-light backdrop-blur-md backdrop-brightness-95 backdrop-opacity-10 md:order-2 md:pt-0 lg:self-center lg:py-0"
+            class="pt-fluid-l text-content-light relative max-w-[45ch] self-start rounded-xs backdrop-blur-md backdrop-brightness-95 backdrop-opacity-10 md:order-2 md:pt-0 lg:self-center lg:py-0"
         >
             <div>
                 {
                     readTime && (
                         <ReadTime
                             duration={readTime}
-                            class="text-fl-step--1 text-content-light/75"
+                            class="text-step--1 text-content-light/75"
                         />
                     )
                 }
 
                 <h2
-                    class="capline font-headline text-fl-step-2 leading-tight xl:text-fl-step-3"
+                    class="capline font-headline text-step-2 xl:text-step-3 leading-tight"
                 >
                     <a href={url} set:html={title} />
                 </h2>
@@ -85,7 +85,7 @@ const {
                 taster && (
                     <p
                         set:html={taster}
-                        class="my-fl-space-m line-clamp-4 lg:line-clamp-none "
+                        class="my-fluid-m line-clamp-4 lg:line-clamp-none"
                     />
                 )
             }
@@ -99,16 +99,16 @@ const {
                     View this project
                     <Icon
                         name="lucide:arrow-right-circle"
-                        class="h-fl-space-s w-auto animate-nudge-right"
+                        class="h-fluid-s animate-nudge-right w-auto"
                     />
                 </Button>
             </p>
             <span class="hidden md:block">
-                <Tags {tags} url={true} class="mt-fl-space-m" />
+                <Tags {tags} url={true} class="mt-fluid-m" />
             </span>
         </div>
         <div
-            class="pb-fl-space- md:pb-0l relative flex w-full md:order-1 md:h-full lg:pb-0"
+            class="pb-fluid- md:pb-0l relative flex w-full md:order-1 md:h-full lg:pb-0"
         >
             {
                 product && (
@@ -117,7 +117,7 @@ const {
                         src={product.src}
                         densities={[1.5, 2]}
                         width={600}
-                        class=" h-full max-h-full w-full max-w-[full] self-end  object-contain object-bottom  lg:object-center"
+                        class="h-full max-h-full w-full max-w-[full] self-end object-contain object-bottom lg:object-center"
                         alt={product.alt}
                     />
                 )

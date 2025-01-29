@@ -6,13 +6,12 @@ interface Props {
 }
 const {
     duration = '0 min',
-    class: className = 'text-fl-step--1 text-content-quiet',
+    class: className = 'text-step--1 text-content-quiet',
 } = Astro.props;
 ---
 
 <p class:list={['flex items-center', className]}>
-    <Icon
-        name="lucide:timer"
-        class="mr-fl-space-3xs inline-block h-4 w-auto"
-    />{duration}
+    <Icon name="lucide:timer" class="mr-fluid-3xs inline-block h-4 w-auto" />{
+        duration
+    }
 </p>

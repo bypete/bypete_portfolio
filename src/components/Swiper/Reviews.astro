@@ -18,23 +18,21 @@ const { data } = Astro.props;
 ---
 
 <div class="swiper swiper--reviews">
-    <div
-        class="swiper-wrapper not-prose flex items-center !py-fl-space-3xl-4xl"
-    >
+    <div class="swiper-wrapper not-prose py-fluid-3xl-4xl! flex items-center">
         {
             data.map((review, i) => (
-                <div class="slide swiper-slide !flex items-center justify-center px-fl-space-m">
-                    <blockquote class="mx-auto mt-0 max-w-3xl px-0 md:text-fl-step-1">
-                        <p class="m-0 font-headline text-fl-step-2 leading-tight">
+                <div class="slide swiper-slide px-fluid-m flex! items-center justify-center">
+                    <blockquote class="md:text-step-1 mx-auto mt-0 max-w-3xl px-0">
+                        <p class="font-headline text-step-2 m-0 leading-tight">
                             <strong>{review.headline}</strong>
                         </p>
                         <Fragment set:html={review.comment} />
                         <p class="cite">
-                            <span class="mr-fl-space-3xs block">
+                            <span class="mr-fluid-3xs block">
                                 {[...Array(5)].map((_, index) => (
                                     <Icon
                                         name="mdi:star"
-                                        class={`inline-block h-fl-space-s w-auto ${
+                                        class={`h-fluid-s inline-block w-auto ${
                                             index < review.rating
                                                 ? 'text-gold'
                                                 : 'text-content-quiet'
@@ -50,7 +48,7 @@ const { data } = Astro.props;
         }
     </div>
     <div
-        class="swiper--reviews__pagination absolute !bottom-fl-space-m z-10 mx-auto text-center"
+        class="swiper--reviews__pagination bottom-fluid-m! absolute z-10 mx-auto text-center"
     >
     </div>
 </div>
@@ -95,9 +93,8 @@ const { data } = Astro.props;
                 el: `${swiperClass}__pagination`,
                 clickable: true,
                 bulletClass:
-                    'cursor-pointer mx-fl-space-3xs transition-all duration-300 inline-block w-fl-space-2xs h-fl-space-2xs border border-line rounded-full ',
-                bulletActiveClass:
-                    '!w-fl-space-s bg-primary !border-transparent',
+                    'cursor-pointer mx-fluid-3xs transition-all duration-300 inline-block w-fluid-2xs h-fluid-2xs border border-line rounded-full ',
+                bulletActiveClass: 'w-fluid-s! bg-primary border-transparent!',
             },
             autoplay: {
                 delay: 5000,

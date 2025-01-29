@@ -3,7 +3,7 @@ import { Icon } from 'astro-icon/components';
 ---
 
 <div
-    class="fixed bottom-fl-space-2xl right-0 z-shortcuts flex min-w-[64px] flex-col items-center space-y-fl-space-xs"
+    class="bottom-fluid-2xl space-y-fluid-xs fixed right-0 z-(--z-shortcuts) flex min-w-[64px] flex-col items-center"
     id="shortcuts"
 >
     <a
@@ -11,11 +11,11 @@ import { Icon } from 'astro-icon/components';
         href="#top"
         data-jump
         aria-hidden="true"
-        class="scroll scale-0 rounded-full stroke-2 p-0 text-brand backdrop-blur-sm hover:bg-surface-raised focus:bg-surface-raised focus:outline-none"
+        class="scroll text-brand hover:bg-surface-raised focus:bg-surface-raised scale-0 rounded-full stroke-2 p-0 backdrop-blur-xs focus:outline-hidden"
     >
         <Icon
             name="lucide:arrow-up-to-line"
-            class="m-fl-space-3xs h-fl-space-m w-fl-space-m"
+            class="m-fluid-3xs h-fluid-m w-fluid-m"
         />
         <svg
             width="48"
@@ -28,19 +28,19 @@ import { Icon } from 'astro-icon/components';
                 cy="50"
                 r="46"
                 pathLength="1"
-                class="fill-transparent stroke-brand-dark/20"></circle>
+                class="stroke-brand-dark/20 fill-transparent"></circle>
             <circle
                 cx="50"
                 cy="50"
                 r="46"
                 pathLength="1"
-                class="progress fill-transparent stroke-brand"
+                class="progress stroke-brand fill-transparent"
                 style="stroke-dasharray: 0, 1"></circle>
         </svg>
     </a>
 
     <button
-        class="group relative flex h-[64px] w-[64px] origin-right items-center justify-center self-end rounded-l-full bg-brand p-0 shadow-floated hover:bg-brand-dark focus:bg-brand-dark lg:hidden"
+        class="group bg-brand shadow-floated hover:bg-brand-dark focus:bg-brand-dark relative flex h-[64px] w-[64px] origin-right items-center justify-center self-end rounded-l-full p-0 lg:hidden"
         name="hamburger"
         id="hamburger"
         type="button"

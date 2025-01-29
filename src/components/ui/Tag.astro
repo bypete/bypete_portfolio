@@ -7,7 +7,7 @@ interface Props {
 }
 const { featured = false, href, isLink = false } = Astro.props;
 const common =
-    'inline-flex items-center gap-x-fl-space-3xs whitespace-nowrap rounded-tight font-medium leading-none px-fl-space-3xs py-fl-space-3xs';
+    'inline-flex items-center gap-x-fluid-3xs whitespace-nowrap rounded-tight font-medium leading-none px-fluid-3xs py-fluid-3xs';
 ---
 
 {
@@ -19,19 +19,19 @@ const common =
                 'hover:bg-tag-bg__hover border',
                 featured
                     ? 'border-tag-featured bg-tag-featured text-content-featured'
-                    : 'border-tag-link bg-tag-link text-content-tag ',
+                    : 'border-tag-link bg-tag-link text-content-tag',
             ]}
         >
             {featured && (
-                <div class="before:bookmarkclip pointer-events-none relative z-10 -my-fl-space-s  block pb-fl-space-2xs pt-fl-space-3xs text-center drop-shadow-sm before:absolute before:inset-0 before:h-full before:w-full before:bg-brand">
+                <div class="before:bookmarkclip -my-fluid-s pb-fluid-2xs pt-fluid-3xs before:bg-brand pointer-events-none relative z-10 block text-center drop-shadow-xs before:absolute before:inset-0 before:h-full before:w-full">
                     <div class="relative flex justify-center">
                         <Icon
                             name="mdi:star"
-                            class="relative mx-auto h-fl-space-s w-fl-space-s text-white"
+                            class="h-fluid-s w-fluid-s relative mx-auto text-white"
                         />
                         <Icon
                             name="mdi:star"
-                            class="absolute mx-auto h-fl-space-s w-fl-space-s animate-ping text-white opacity-40"
+                            class="h-fluid-s w-fluid-s absolute mx-auto animate-ping text-white opacity-40"
                         />
                     </div>
                 </div>
@@ -44,20 +44,20 @@ const common =
                 common,
                 'border',
                 featured
-                    ? 'border-tag-featured bg-tag-featured text-content-featured '
-                    : 'border border-line',
+                    ? 'border-tag-featured bg-tag-featured text-content-featured'
+                    : 'border-line border',
             ]}
         >
             {featured && (
-                <div class="before:bookmarkclip pointer-events-none relative z-10 -my-fl-space-s block pb-fl-space-2xs pt-fl-space-3xs text-center drop-shadow-sm before:absolute before:inset-0 before:h-full before:w-full before:bg-brand">
+                <div class="before:bookmarkclip -my-fluid-s pb-fluid-2xs pt-fluid-3xs before:bg-brand pointer-events-none relative z-10 block text-center drop-shadow-xs before:absolute before:inset-0 before:h-full before:w-full">
                     <div class="relative flex justify-center">
                         <Icon
                             name="mdi:star"
-                            class="relative mx-auto h-fl-space-s w-fl-space-s text-white"
+                            class="h-fluid-s w-fluid-s relative mx-auto text-white"
                         />
                         <Icon
                             name="mdi:star"
-                            class="absolute mx-auto h-fl-space-s w-fl-space-s animate-ping text-white opacity-40"
+                            class="h-fluid-s w-fluid-s absolute mx-auto animate-ping text-white opacity-40"
                         />
                     </div>
                 </div>

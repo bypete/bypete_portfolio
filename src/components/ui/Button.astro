@@ -43,14 +43,14 @@ const baseClasses = [
 // Size variants
 const sizeClasses = {
     sm: [
-        'h-fl-space-m',
-        'px-fl-space-2xs',
+        'h-fluid-m',
+        'px-fluid-2xs',
         'py-0',
-        'text-fl-step--1',
-        '!leading-fl-space-m',
+        'text-step--1',
+        'leading-fluid-m!',
     ],
-    md: ['px-fl-space-xs', 'py-fl-space-3xs', 'text-fl-base'],
-    lg: ['px-fl-space-sm', 'py-fl-space-2xs', 'text-fl-step-1'],
+    md: ['px-fluid-xs', 'py-fluid-3xs', 'text-step-0'],
+    lg: ['px-fluid-sm', 'py-fluid-2xs', 'text-step-1'],
 };
 
 // Theme variants
@@ -73,7 +73,7 @@ const themeClasses = {
     ],
     outline: ['bg-transparent', 'ring-2', 'ring-inset', 'ring-line'],
     disco: [
-        'bg-gradient-to-r',
+        'bg-linear-to-r',
         'from-indigo-900',
         'via-pink-500',
         'to-pink-700',
@@ -104,7 +104,7 @@ const classResult = [
     ...baseClasses,
     ...sizeClasses[size],
     ...themeClasses[theme],
-    isIcon && 'justify-between gap-x-fl-space-3xs',
+    isIcon && 'justify-between gap-x-fluid-3xs',
     className,
 ];
 ---

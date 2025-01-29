@@ -27,11 +27,11 @@ const toc = buildToc(headings);
     x-id="['panel-toc']"
     aria-label="Content sections"
     data-off-canvas-sticky
-    class="sticky-root sticky -top-px z-toc my-fl-space-l flex w-full flex-row items-center justify-center"
+    class="sticky-root my-fluid-l sticky -top-px z-(--z-toc) flex w-full flex-row items-center justify-center"
 >
     <div
         id="tocWrapper"
-        class="relative mx-auto w-auto rounded-b shadow-raised"
+        class="shadow-raised relative mx-auto w-auto rounded-b"
         x-sticky.sticky-root="isStuck"
     >
         <button
@@ -40,7 +40,7 @@ const toc = buildToc(headings);
             aria-label="Toggle page links"
             :aria-expanded="open"
             :aria-controls="$id('panel-toc')"
-            class="group flex w-full items-center justify-between gap-x-fl-space-2xs whitespace-nowrap rounded border border-line bg-surface-raised px-fl-space-s py-fl-space-2xs font-semibold"
+            class="group gap-x-fluid-2xs border-line bg-surface-raised px-fluid-s py-fluid-2xs flex w-full items-center justify-between rounded-xs border font-semibold whitespace-nowrap"
             x-sticky.sticky-root="rounded-t-none"
             x-bind:class="open ? 'rounded-none ' : ''"
         >
@@ -55,7 +55,7 @@ const toc = buildToc(headings);
                 x-cloak
                 x-ref="panel"
                 :id="$id('panel-toc')"
-                class="absolute left-0 top-0 hidden max-h-[calc(100dvh-var(--headerheight))] w-full grow overflow-y-scroll rounded-b border border-t-0 border-line bg-surface-overlay px-fl-space-s py-fl-space-2xs opacity-0 shadow-raised"
+                class="border-line bg-surface-overlay px-fluid-s py-fluid-2xs shadow-raised absolute top-0 left-0 hidden max-h-[calc(100dvh-var(--headerheight))] w-full grow overflow-y-scroll rounded-b border border-t-0 opacity-0"
             >
                 <ol class="m-0">
                     {

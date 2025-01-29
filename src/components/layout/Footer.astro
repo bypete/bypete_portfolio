@@ -9,26 +9,25 @@ const year = new Date().getFullYear();
 ---
 
 <footer
-    class="relative hidden bg-surface-bedrock py-fl-space-2xl text-content-footer shadow-inset lg:block"
+    class="bg-surface-bedrock py-fluid-2xl text-content-footer shadow-inset relative hidden lg:block"
 >
     <div
-        class="relative mx-auto grid max-w-container grid-cols-1 items-end gap-fl-space-m pr-fl-space-xl leading-none grid-areas-footer md:grid-cols-3 md:grid-areas-footerwide"
+        class="gap-fluid-m pr-fluid-xl relative container mx-auto grid grid-cols-3 items-end leading-none"
     >
         <a
             href="/"
-            class="col-span-2 justify-self-start grid-in-logo"
+            class="justify-self-start md:col-span-3"
             title="Return to home"
         >
             <Icon
                 name="bypete__footer"
                 title="byPete logo in white"
-                class="h-fl-space-l w-auto"
+                class="h-fluid-l w-auto"
             />
         </a>
-
         {
             footerNavigation && (
-                <ul class="flex flex-row flex-wrap gap-fl-space-s leading-tight grid-in-legal">
+                <ul class="gap-fluid-s flex flex-row flex-wrap leading-tight">
                     {footerNavigation.map((item) => (
                         <li>
                             <a href={item.url} class="link" title={item.label}>
@@ -40,10 +39,11 @@ const year = new Date().getFullYear();
                 </ul>
             )
         }
+        <p class="text-step--1/relaxed justify-self-center">
+            I'm <Availability url={`/connect/`} /> for new roles.
+        </p>
 
-        <div
-            class="-mx-fl-space-2xs flex justify-start grid-in-social md:justify-self-end"
-        >
+        <div class="-mx-fluid-2xs flex justify-self-end">
             {
                 siteInfo.socials.map((channel) => (
                     <Social
@@ -54,10 +54,5 @@ const year = new Date().getFullYear();
                 ))
             }
         </div>
-        <p
-            class="text-fl-step--1/relaxed grid-in-availability md:justify-self-center"
-        >
-            I'm <Availability url={`/connect/`} /> for new roles.
-        </p>
     </div>
 </footer>

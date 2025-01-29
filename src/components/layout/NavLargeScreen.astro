@@ -20,10 +20,7 @@ const {
 } = Astro.props;
 ---
 
-<ul
-    x-ref="menu"
-    class:list={['flex justify-end space-x-fl-space-2xs', className]}
->
+<ul x-ref="menu" class:list={['space-x-fluid-2xs flex justify-end', className]}>
     {
         items.map((item) => {
             const isActive =
@@ -34,7 +31,7 @@ const {
                         <MenuLink
                             {isActive}
                             url={item.url}
-                            class="pr-fl-space-l"
+                            class="pr-fluid-l"
                             title={item.label}
                             {isHeroDark}
                         />
@@ -47,24 +44,24 @@ const {
                             x-bind:aria-expanded="open"
                             x-bind:aria-controls="$id('dropdown-button')"
                             class:list={[
-                                'absolute right-fl-space-3xs flex size-fl-space-m items-center justify-center rounded-full bg-surface-raised p-0 text-content-shout focus:outline-none focus:ring-2 focus:ring-inset',
+                                'right-fluid-3xs size-fluid-m bg-surface-raised text-content-shout absolute flex items-center justify-center rounded-full p-0 focus:ring-2 focus:outline-hidden focus:ring-inset',
                                 // isActive ? currentTheme.active : currentTheme.text,
                             ]}
                         >
                             <Icon
                                 name="hugeicons:arrow-down-01"
-                                class="size-fl-space-s"
+                                class="size-fluid-s"
                             />
                         </button>
                     </div>
                     <ul
                         x-cloak
                         x-ref="children"
-                        class="absolute right-0 mt-fl-space-2xs hidden w-auto origin-top-right opacity-0"
+                        class="mt-fluid-2xs absolute right-0 hidden w-auto origin-top-right opacity-0"
                         x-bind:id="$id('dropdown-button')"
                         x-on:click.outside="open && !$refs.button.contains($event.target) && close($refs.button)"
                     >
-                        <div class="max-h-[calc(100vh-3rem-var(--headerheight))] min-w-fl-space-3xl overflow-y-scroll rounded-md bg-surface-overlay shadow-overlay">
+                        <div class="bg-surface-overlay shadow-overlay max-h-[calc(100vh-3rem-var(--headerheight))] min-w-50 overflow-y-scroll rounded-md">
                             {item.children.map((child) => {
                                 const isActive = currentPath === child.url;
                                 return (

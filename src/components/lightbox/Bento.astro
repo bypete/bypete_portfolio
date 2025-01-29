@@ -25,7 +25,7 @@ const optimizedImages = await Promise.all(
 <div data-inview="lightbox" class:list={['lightbox not-prose']}>
     <slot />
     <div
-        class="relative grid grid-flow-dense auto-rows-[100px] grid-cols-3 gap-fl-space-s md:auto-rows-[160px] md:grid-cols-4"
+        class="gap-fluid-s relative grid grid-flow-dense auto-rows-[100px] grid-cols-3 md:auto-rows-[160px] md:grid-cols-4"
     >
         {
             optimizedImages.map((item, i) => {
@@ -38,7 +38,7 @@ const optimizedImages = await Promise.all(
                             data-pswp-srcset={item.optimizedSrc}
                             data-pswp-width={item.src.width}
                             data-pswp-height={item.src.height}
-                            class="relative block h-full w-full overflow-hidden rounded bg-surface-raised shadow-sm hover:cursor-pointer"
+                            class="bg-surface-raised relative block h-full w-full overflow-hidden rounded-xs shadow-xs hover:cursor-pointer"
                         >
                             <Image
                                 src={item.src}
@@ -58,8 +58,8 @@ const optimizedImages = await Promise.all(
                                     set:html={item.caption}
                                 />
                             )}
-                            <span class="z-1 absolute h-full w-full opacity-0 backdrop-blur-sm backdrop-brightness-125 transition duration-300 hover:bg-slate-900/75 hover:opacity-100">
-                                <span class="icon-[lucide--zoom-in] absolute left-1/2 top-1/2 z-10 h-10 w-10 -translate-x-1/2 -translate-y-1/2 text-content-light" />
+                            <span class="absolute z-1 h-full w-full opacity-0 backdrop-blur-xs backdrop-brightness-125 transition duration-300 hover:bg-slate-900/75 hover:opacity-100">
+                                <span class="icon-[lucide--zoom-in] text-content-light absolute top-1/2 left-1/2 z-10 h-10 w-10 -translate-x-1/2 -translate-y-1/2" />
                             </span>
                         </a>
                     </div>
@@ -109,12 +109,12 @@ const optimizedImages = await Promise.all(
             isButton: false,
             appendTo: 'root',
             className:
-                'bg-slate-900/75 !opacity-0 duration-300 rounded text-content-light text-fl-step--1 max-w-[calc(100%-4rem)] w-auto absolute left-1/2 -translate-x-1/2 bottom-2.5 px-2 py-1',
+                'bg-slate-900/75 opacity-0! duration-300 rounded-xs text-content-light text-step--1 max-w-[calc(100%-4rem)] w-auto absolute left-1/2 -translate-x-1/2 bottom-2.5 px-2 py-1',
             html: 'Caption text',
             // eslint-disable-next-line no-unused-vars
             onInit: (el, pswp) => {
                 lightbox.pswp?.on('change', () => {
-                    el.classList.add('!opacity-0');
+                    el.classList.add('opacity-0!');
                     const currSlideElement =
                         lightbox.pswp?.currSlide?.data.element;
                     const hiddenCaption =
@@ -125,7 +125,7 @@ const optimizedImages = await Promise.all(
                         hiddenCaption?.innerHTML ||
                         imgElement?.getAttribute('alt') ||
                         '';
-                    el.classList.toggle('!opacity-0', !hiddenCaption);
+                    el.classList.toggle('opacity-0!', !hiddenCaption);
                     el.innerHTML = captionHTML;
                 });
             },

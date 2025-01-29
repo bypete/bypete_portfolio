@@ -29,8 +29,8 @@ const themeSet = {
     id={id}
     x-cloak
     class:list={[
-        'pointer-events-auto rounded-tight shadow-overlay',
-        bg || 'bg-gradient-to-b from-surface-overlay to-surface',
+        'rounded-tight shadow-overlay pointer-events-auto',
+        bg || 'from-surface-overlay to-surface bg-linear-to-b',
         hidden && 'hidden',
     ]}
 >
@@ -38,18 +38,18 @@ const themeSet = {
         theme === 'plain' ? (
             <slot />
         ) : (
-            <div class="grid grid-cols-[auto,1fr] ">
+            <div class="grid grid-cols-[auto_1fr]">
                 <div
                     class:list={[
                         themeSet[theme].bg,
                         themeSet[theme].stroke,
                         themeSet[theme].border,
-                        'overflow-hidden rounded-bl-tight rounded-tl-tight border-r',
+                        'rounded-bl-tight rounded-tl-tight overflow-hidden border-r',
                     ]}
                 >
                     <Icon
                         name={themeSet[theme].icon}
-                        class="m-fl-space-2xs-xs h-auto w-fl-space-s-m"
+                        class="m-fluid-2xs-xs w-fluid-s-m h-auto"
                     />
                 </div>
                 <slot />

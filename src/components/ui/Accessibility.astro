@@ -16,7 +16,7 @@ const { a11yLinks } = Astro.props;
 {
     a11yLinks.map((link) => (
         <a
-            class="absolute left-1/2 -translate-x-1/2 -translate-y-full bg-attention p-fl-space-2xs text-black transition focus:z-[10000] focus:translate-y-0"
+            class="bg-attention p-fluid-2xs absolute left-1/2 -translate-x-1/2 -translate-y-full text-black transition focus:z-10000 focus:translate-y-0"
             href={link.anchor}
         >
             Skip to {link.label}

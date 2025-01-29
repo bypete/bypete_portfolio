@@ -12,7 +12,7 @@ const { title, url, isHeroDark, isActive, class: className } = Astro.props;
 <a
     href={url}
     class:list={[
-        'font-display hover:text-primary focus:text-primary block w-full py-fl-space-2xs text-fl-step-3 font-black leading-tight tracking-tight',
+        'font-display hover:text-primary focus:text-primary py-fluid-2xs text-step-3 block w-full leading-tight font-black tracking-tight',
         isActive ? 'text-primary' : 'text-content-light',
     ]}>{title}</a
 >

@@ -36,12 +36,12 @@ const attrs = {
             <slot />
         </select>
         <label
-            class="pointer-events-none ml-fl-space-3xs -translate-y-1/2 self-start justify-self-start bg-surface-raised px-fl-space-2xs text-fl-step--1 font-medium leading-none text-content-quiet shadow-surface-raised transition-all text-shadow-xs peer-placeholder-shown:translate-y-fl-space-2xs peer-placeholder-shown:self-start peer-placeholder-shown:text-fl-step-0 peer-focus:-translate-y-1/2 peer-focus:self-start peer-focus:text-fl-step--1"
+            class="ml-fluid-3xs bg-surface-raised px-fluid-2xs text-step--1 text-content-quiet shadow-surface-raised text-shadow-xs peer-placeholder-shown:translate-y-fluid-2xs peer-placeholder-shown:text-step-0 peer-focus:text-step--1 pointer-events-none -translate-y-1/2 self-start justify-self-start leading-none font-medium transition-all peer-placeholder-shown:self-start peer-focus:-translate-y-1/2 peer-focus:self-start"
             for={id}>{label}</label
         >
         {
             !required && (
-                <span class="-translate-y-full self-start justify-self-end text-fl-step--2/loose text-content-quiet">
+                <span class="text-step--2/loose text-content-quiet -translate-y-full self-start justify-self-end">
                     Optional
                 </span>
             )

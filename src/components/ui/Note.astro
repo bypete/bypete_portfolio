@@ -52,20 +52,22 @@ const themeSet = {
 
 <div
     class:list={[
-        'not-prose overflow-hidden text-fl-step--1/snug',
+        'not-prose text-step--1/snug overflow-hidden',
         display,
         className
             ? className
-            : 'items-center justify-center rounded-tight bg-surface-raised text-content shadow-raised',
+            : 'rounded-tight bg-surface-raised text-content shadow-raised items-center justify-center',
     ]}
     {...rest}
 >
     <div
-        class:list={['grid h-full grid-cols-icon items-center gap-fl-space-xs']}
+        class:list={[
+            'gap-fluid-xs grid h-full grid-cols-(--gtc-icon) items-center',
+        ]}
     >
         <div
             class:list={[
-                ' h-full min-w-fl-space-2xs py-fl-space-2xs ',
+                'min-w-fluid-2xs py-fluid-2xs h-full',
                 themeSet[theme].bg,
             ]}
         >
@@ -73,20 +75,20 @@ const themeSet = {
                 hasIcon && (
                     <span
                         class:list={[
-                            'mx-fl-space-2xs flex items-center justify-center rounded-full p-fl-space-2xs shadow-icon',
+                            'mx-fluid-2xs p-fluid-2xs shadow-icon flex items-center justify-center rounded-full',
                             themeSet[theme].inset,
                             themeSet[theme].stroke,
                         ]}
                     >
                         <Icon
                             name={themeSet[theme].icon}
-                            class="h-auto w-fl-space-s"
+                            class="w-fluid-s h-auto"
                         />
                     </span>
                 )
             }
         </div>
-        <div class="rte p-fl-space-xs pl-0">
+        <div class="rte p-fluid-xs pl-0">
             <slot />
         </div>
     </div>

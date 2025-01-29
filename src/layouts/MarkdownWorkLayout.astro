@@ -72,7 +72,7 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
 <BaseLayout head={head} {isHeroDark}>
     <slot name="hero">
         <div
-            class="relative z-10 grid w-full grid-cols-1 shadow-lg shadow-content-dark/10 lg:h-screenSvh lg:grid-cols-2 conpad:grid-cols-workcontianer"
+            class="shadow-content-dark/10 lg:not-dynamic:h-screen @min-page/page:grid-cols-(--gtc-workcontianer) relative z-10 grid w-full grid-cols-1 shadow-lg lg:h-svh lg:grid-cols-2"
         >
             <div
                 class="relative flex h-[75vw] items-center justify-center lg:h-full"
@@ -96,16 +96,16 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                     )
                 }
             </div>
-            <div class="rte self-end px-fl-space-m py-fl-space-m">
+            <div class="rte px-fluid-m py-fluid-m self-end">
                 <h1
-                    class="capline text-fl-step-3/none"
+                    class="capline text-step-3/none"
                     set:html={frontmatter.title}
                 /><ReadTime duration={minutesRead} />
                 <p>{frontmatter.taster}</p>
-                <div class="mt-fl-space-m flex justify-between">
+                <div class="mt-fluid-m flex justify-between">
                     <Tags tags={frontmatter.tags} url={true} />
                 </div>
-                <p class="mt-fl-space-m hidden md:block">
+                <p class="mt-fluid-m hidden md:block">
                     <Button
                         theme="outline"
                         isIcon={true}
@@ -115,7 +115,7 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                     >
                         Scroll to start <Icon
                             name="lucide:mouse"
-                            class="h-4 w-4 animate-nudge-down"
+                            class="animate-nudge-down h-4 w-4"
                         />
                     </Button>
                 </p>
@@ -123,15 +123,12 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
         </div>
     </slot>
 
-    <main
-        id="main-content"
-        class="relative mx-auto max-w-container pb-fl-space-xl"
-    >
+    <main id="main-content" class="pb-fluid-xl relative container mx-auto">
         <article id="start" class="relative">
-            <div class="rte prose mx-auto max-w-3xl text-fl-step-0">
+            <div class="rte prose text-step-0 @container mx-auto max-w-3xl">
                 {
                     frontmatter.product && (
-                        <div class="flex h-photo items-center justify-center bg-surface-sunken breakout md:h-block">
+                        <div class="h-photo not-prose bg-surface-sunken breakout md:h-block flex items-center justify-center">
                             <BlockPicture
                                 src={frontmatter.product.src}
                                 widths={[480, 1200]}
@@ -153,15 +150,15 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                 }
                 <slot />
             </div>
-            <aside class="mx-auto mt-fl-space-m w-full max-w-3xl py-fl-space-m">
+            <aside class="mt-fluid-m py-fluid-m mx-auto w-full max-w-3xl">
                 <p
-                    class="inline-flex items-center text-fl-step--1 text-content-quiet"
+                    class="text-step--1 text-content-quiet inline-flex items-center"
                 >
                     <Icon
                         name="lucide:calendar"
                         class="inline-block h-4 w-auto"
                     />
-                    <span class="mx-fl-space-3xs">Last updated:</span>
+                    <span class="mx-fluid-3xs">Last updated:</span>
                     <time
                         datetime={htmlDateString(
                             frontmatter.modDate || frontmatter.pubDate,
@@ -173,17 +170,11 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                         }
                     </time>
                 </p>
-                <Tags
-                    tags={frontmatter.tags}
-                    url={true}
-                    class="mt-fl-space-m"
-                />
+                <Tags tags={frontmatter.tags} url={true} class="mt-fluid-m" />
             </aside>
         </article>
     </main>
-    <aside
-        class="bg-surface-sunken px-fl-space-m py-fl-space-2xl shadow-highlight"
-    >
+    <aside class="bg-surface-sunken px-fluid-m py-fluid-2xl shadow-highlight">
         {
             (nextPostData || prevPostData) && (
                 <NextPrev next={nextPostData} prev={prevPostData} />

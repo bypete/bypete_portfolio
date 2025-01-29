@@ -4,8 +4,6 @@ module.exports = {
         'postcss-inline-svg': {
             paths: ['src/assets/svg/'],
         },
-        'tailwindcss/nesting': {},
-        tailwindcss: {},
-        autoprefixer: {},
+        '@tailwindcss/postcss': {},
     },
 };

@@ -10,9 +10,9 @@ const { swiper, class: className } = Astro.props;
 <div
     class:list={[
         swiper && `${swiper}__next`,
-        'absolute left-auto top-1/2 z-10 flex -translate-y-1/2 cursor-pointer items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100',
-        className ? className : 'text-primary right-fl-space-m',
+        'absolute top-1/2 left-auto z-10 flex -translate-y-1/2 cursor-pointer items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100',
+        className ? className : 'text-primary right-fluid-m',
     ]}
 >
-    <Icon name="lucide:chevron-right" class="h-fl-space-l w-auto" />
+    <Icon name="lucide:chevron-right" class="h-fluid-l w-auto" />
 </div>

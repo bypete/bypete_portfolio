@@ -13,13 +13,10 @@ const { post, class: ClassName, direction } = Astro.props;
 const { url, title, excerpt, thumb, overlay } = post || {};
 ---
 
-<a
-    href={url}
-    class:list={[ClassName, 'group grid grid-cols-1 gap-fl-space-2xs']}
->
+<a href={url} class:list={[ClassName, 'group gap-fluid-2xs grid grid-cols-1']}>
     <span
         class:list={[
-            'flex w-full items-center gap-fl-space-3xs text-fl-step--1 text-content-loud',
+            'gap-fluid-3xs text-step--1 text-content-loud flex w-full items-center',
             direction === 'next' && 'flex-row-reverse justify-start',
         ]}
     >
@@ -27,13 +24,13 @@ const { url, title, excerpt, thumb, overlay } = post || {};
             name={direction === 'next'
                 ? 'hugeicons:square-arrow-right-02'
                 : 'hugeicons:square-arrow-left-02'}
-            class="h-fl-space-s w-auto"
+            class="h-fluid-s w-auto"
         />
         {direction === 'next' ? 'Next' : 'Previous'}
     </span>
     {
         thumb && (
-            <span class="relative overflow-hidden rounded-tight pb-widescreen">
+            <span class="rounded-tight aspect-cinema xl:aspect-widescreen relative overflow-hidden">
                 <Image
                     widths={[400]}
                     quality="high"
@@ -46,7 +43,7 @@ const { url, title, excerpt, thumb, overlay } = post || {};
                         src={overlay.src}
                         widths={[300]}
                         alt={title + ' logo'}
-                        class="absolute left-1/2 top-1/2 m-auto h-auto max-w-1/2 -translate-x-1/2 -translate-y-1/2 transition-transform group-hover:scale-90"
+                        class="absolute top-1/2 left-1/2 m-auto h-auto max-w-1/2 -translate-x-1/2 -translate-y-1/2 transition-transform group-hover:scale-90"
                     />
                 )}
             </span>
@@ -55,8 +52,8 @@ const { url, title, excerpt, thumb, overlay } = post || {};
     <span>
         <h2
             set:html={title}
-            class="text-fl-step-1/tight font-bold text-link group-hover:text-link-light"
+            class="text-step-1/tight text-link group-hover:text-link-light font-bold"
         />
-        {excerpt && <p class="text-fl-step--1">{excerpt}</p>}
+        {excerpt && <p class="text-step--1">{excerpt}</p>}
     </span>
 </a>

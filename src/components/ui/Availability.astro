@@ -21,13 +21,13 @@ const { url } = Astro.props;
             >
                 <Icon
                     name="lucide:handshake"
-                    class="inline h-fl-space-s w-fl-space-s"
+                    class="h-fluid-s w-fluid-s inline"
                 />
                 available
             </Button>
         </>
     ) : (
-        <span class="inline-block whitespace-nowrap px-1.5 py-1 align-middle leading-tight">
+        <span class="inline-block px-1.5 py-1 align-middle leading-tight whitespace-nowrap">
             unavailable
         </span>
     )

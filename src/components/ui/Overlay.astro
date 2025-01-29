@@ -7,7 +7,7 @@ const { class: className } = Astro.props;
 
 <div
     class:list={[
-        'fixed inset-0 z-overlay hidden h-full min-h-screen bg-opacity-80 opacity-0 backdrop-blur-sm backdrop-grayscale',
+        'fixed inset-0 z-(--z-overlay) hidden h-full min-h-screen opacity-0 backdrop-blur-xs backdrop-grayscale',
         className,
     ]}
     id="overlay"

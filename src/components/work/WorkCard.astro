@@ -34,10 +34,10 @@ const { title, featured, url, cover, logo, product, taster, tags, readTime } =
 <a
     href={url}
     animate-card
-    class="group relative grid w-full grid-rows-workcard rounded-tight bg-surface-raised no-underline opacity-0 shadow-raised hover:no-underline hover:shadow-lg hover:duration-300"
+    class="group rounded-tight bg-surface-raised shadow-raised relative grid w-full grid-rows-(--gtr-workcard) no-underline opacity-0 hover:no-underline hover:shadow-lg hover:duration-300"
 >
     <div
-        class="relative block overflow-hidden bg-line-quiet pb-photo hover:rounded-t-tight"
+        class="bg-line-quiet aspect-widescreen lg:aspect-photo hover:rounded-t-tight relative block overflow-hidden"
     >
         <Image
             src={cover.src}
@@ -55,7 +55,7 @@ const { title, featured, url, cover, logo, product, taster, tags, readTime } =
                     densities={[1.5, 2]}
                     width={300}
                     alt={title + ' logo'}
-                    class="absolute left-1/2 top-1/2 m-auto h-auto max-w-1/3 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 "
+                    class="absolute top-1/2 left-1/2 m-auto h-auto max-w-1/3 -translate-x-1/2 -translate-y-1/2 transition-all duration-200"
                 />
             )
         }
@@ -67,19 +67,19 @@ const { title, featured, url, cover, logo, product, taster, tags, readTime } =
                 width={300}
                 densities={[1.5, 2]}
                 alt={product.alt + ' logo'}
-                class="z-10 -mt-fl-space-2xl h-fl-space-4xl w-full object-contain transition-transform duration-700 group-hover:scale-125 group-focus:scale-125"
+                class="-mt-fluid-2xl h-fluid-4xl z-10 w-full object-contain transition-transform duration-700 group-hover:scale-125 group-focus:scale-125"
             />
         )
     }
-    <div class="px-fl-space-s">
+    <div class="px-fluid-s">
         {readTime && <ReadTime duration={readTime} />}
         <h2
-            class="link mb-fl-space-2xs font-headline text-fl-step-1/tight font-extrabold"
+            class="link mb-fluid-2xs font-headline text-step-1/tight font-extrabold"
             set:html={title}
         />
         {taster && <p class="text-base/snug" set:html={taster} />}
     </div>
-    <div class="p-fl-space-s">
+    <div class="p-fluid-s">
         <Tags {tags} />
     </div>
 </a>

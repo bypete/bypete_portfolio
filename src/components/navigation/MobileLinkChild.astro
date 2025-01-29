@@ -10,9 +10,9 @@ const { title, url, isActive } = Astro.props;
 <a
     href={url}
     class:list={[
-        'hover:text-primary focus:text-primary block w-full rounded-tight px-fl-space-2xs py-fl-space-3xs text-fl-step-0 text-content-light focus:outline-none',
+        'hover:text-primary focus:text-primary rounded-tight px-fluid-2xs py-fluid-3xs text-step-0 text-content-light block w-full focus:outline-hidden',
         isActive &&
-            'border-l-tight border-l-brand font-semibold text-content-light',
+            'border-l-tight border-l-brand text-content-light font-semibold',
     ]}
 >
     <span class="line-clamp-2" set:html={title} />

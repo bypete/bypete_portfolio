@@ -97,13 +97,13 @@ let inView = {
 
 const heroThemes: Record<string, HeroTheme> = {
     plain: {
-        // wrapper: ['mb-fl-space-xl'],
+        // wrapper: ['mb-fluid-xl'],
         hero: [
             'bg-surface-sunken',
             'curveclip',
             'shadow-hero',
             'shadow-surface-sunk',
-            'pt-[var(--headerheight)]',
+            'pt-headerheight',
         ],
     },
     image: {
@@ -131,7 +131,7 @@ const heroResult = [
 >
     <div
         class:list={[
-            'relative flow-root w-full border-b border-transparent outline-none',
+            'relative flow-root w-full border-b border-transparent outline-hidden',
             heroResult,
         ]}
         {...inView}
@@ -158,7 +158,7 @@ const heroResult = [
 
         {
             prompt && (
-                <div class="pointer-events-none absolute bottom-fl-space-s left-1/2 z-100 -translate-x-1/2">
+                <div class="bottom-fluid-s pointer-events-none absolute left-1/2 z-100 -translate-x-1/2">
                     {prompt === 'scroll' && <ScrollPrompt />}
                     {prompt === 'swipe' && <SwipePrompt />}
                 </div>

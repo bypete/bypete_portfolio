@@ -1,154 +1,118 @@
 @layer base {
     /* https://divmagic.com/tools/color-converter */
     :root {
-        --white: 255 255 255; /* absolute white */
-        --black: 0 0 0; /* absolute black */
-        --offblack: 24 24 27; /* zinc-800 */
+        --white: rgb(255, 255, 255); /* absolute white */
+        --black: rgb(0, 0, 0); /* absolute black */
+        --offblack: rgb(24, 24, 27); /* zinc-800 */
 
         --banner: transparent;
-        --banner-up: 255 255 255; /* absolute white */
+        --banner-up: rgb(255, 255, 255); /* absolute white */
 
-        --surface-10: 255 255 255; /* #FFFFFF Shade +1 */
-        --surface: 252 252 252; /* #fcfcfc https://www.colorhexa.com/fcfcfc */
-        --surface--20: 234 234 232; /* #f3f3f2 Shade -2 */
-        --surface--10: 243 243 242; /* #f3f3f2 Shade -1 */
-        --surface--100: 20 20 26; /* 14141a Footer and offscreen */
+        --surface-10: rgb(255, 255, 255); /* #FFFFFF Shade +1 */
+        --surface: rgb(252, 252, 252); /* #fcfcfc */
+        --surface--20: rgb(234, 234, 232); /* #f3f3f2 Shade -2 */
+        --surface--10: rgb(243, 243, 242); /* #f3f3f2 Shade -1 */
+        --surface--100: rgb(20, 20, 26); /* 14141a Footer and offscreen */
 
-        --shadow-highlight: 255 255 255; /* absolute white */
-        --shadow-dark: 24 24 27; /* #18181B */
+        --accent-light: rgb(240, 25, 101); /* #f01965 */
+        --accent: rgb(230, 15, 91); /* #E60F5B */
+        --accent-dark: rgb(212, 14, 84); /* #d40e54 */
+        --accent-shade: rgb(212, 14, 84); /* #d40e54 */
 
-        --accent-light: 240 25 101; /* #f01965 */
-        --accent: 230 15 91; /* #E60F5B */
-        --accent-dark: 212 14 84; /* #d40e54 */
-        --accent-shade: 212 14 84; /* #d40e54 */
+        --brand-light: rgb(255, 213, 20); /* #ffd514 */
+        --brand: rgb(255, 210, 0); /* #ffd200 */
+        --brand-dark: rgb(235, 194, 0); /* #ebc200 */
+        --brand-shade: rgb(255, 189, 0); /* #ffbd00 */
 
-        --brand-light: 255 213 20; /* #ffd514  */
-        --brand: 255 210 0; /* #ffd200  */
-        --brand-dark: 235 194 0; /* #ebc200 */
-        --brand-shade: 255 189 0; /* #ffbd00 */
+        --primary-light: rgb(240, 25, 101); /* #f01965 */
+        --primary: rgb(230, 15, 91); /* #E60F5B */
+        --primary-dark: rgb(212, 14, 84); /* #d40e54 */
+        --primary-shade: rgb(212, 14, 84); /* #d40e54 */
 
-        --primary-light: 240 25 101; /* #f01965 */
-        --primary: 230 15 91; /* #E60F5B */
-        --primary-dark: 212 14 84; /* #d40e54 */
-        --primary-shade: 212 14 84; /* #d40e54 */
+        --secondary-light: rgb(51, 65, 85); /* slate-700 */
+        --secondary: rgb(30, 41, 59); /* slate-800 */
+        --secondary-dark: rgb(15, 23, 42); /* slate-900 */
+        --secondary-shade: rgb(2, 6, 23); /* slate-950 */
 
-        --secondary-light: 51 65 85; /* slate-700 */
-        --secondary: 30 41 59; /* slate-800 */
-        --secondary-dark: 15 23 42; /* slate-900 */
-        --secondary-shade: 2 6 23; /* slate-950 */
+        --link-light: rgb(240, 25, 101); /* #f01965 */
+        --link: rgb(230, 15, 91); /* #E60F5B */
+        --link-dark: rgb(212, 14, 84); /* #d40e54 */
+        --link-shade: rgb(212, 14, 84); /* #d40e54 */
 
-        --link-light: 240 25 101; /* #f01965 */
-        --link: 230 15 91; /* #E60F5B */
-        --link-dark: 212 14 84; /* #d40e54 */
-        --link-shade: 212 14 84; /* #d40e54 */
+        --copy-light: rgb(250, 250, 250); /* zinc-50 */
+        --copy-dark: rgb(31, 41, 55); /* gray-800 */
 
-        --copy-light: 250 250 250; /* zinc-50 */
-        --copy-dark: 31 41 55; /* gray-800 */
+        --copy-whisper: rgb(209, 213, 219); /* gray-300 */
+        --copy-quiet: rgb(107, 114, 128); /* gray-500 */
+        --copy: rgb(55, 65, 81); /* gray-700 */
+        --copy-loud: rgb(17, 24, 39); /* gray-900 */
+        --copy-shout: rgb(3, 7, 18); /* gray-950 */
 
-        --copy-whisper: 209 213 219; /* gray-300 */
-        --copy-quiet: 107 114 128; /* gray-500 */
-        --copy: 55 65 81; /* gray-700 */
-        --copy-loud: 17 24 39; /* gray-900 */
-        --copy-shout: 3 7 18; /* gray-950 */
+        --line-whisper: rgb(251, 251, 252); /* #fbfbfc Shade + 2 */
+        --line-quiet: rgb(240, 241, 244); /* #f0f1f4 Shade + 1 */
+        --line: rgb(228, 228, 231); /* zinc-200 #e5e7eb Shade + 0 */
+        --line-loud: rgb(207, 211, 218); /* #cfd3da Shade - 2 */
+        --line-shout: rgb(185, 190, 201); /* #b9bec9 Shade - 4 */
 
-        --line-whisper: 251 251 252; /* #fbfbfc Shade + 2 */
-        --line-quiet: 240 241 244; /* #f0f1f4 Shade + 1 */
-        --line: 228 228 231; /* zinc-200 #e5e7eb Shade + 0 */
-        --line-loud: 207 211 218; /* #cfd3da Shade - 2 */
-        --line-shout: 185 190 201; /* #b9bec9 Shade - 4 */
+        --copy-tag: rgb(63, 63, 70); /* zinc-700 */
+        --copy-featured: rgb(63, 63, 70); /* zinc-700 */
 
-        --copy-tag: 63 63 70; /* zinc-700 */
-        --copy-featured: 63 63 70; /* zinc-700 */
+        --tag: rgb(244, 244, 245); /* zinc-100 */
+        --tag-link: rgb(253, 224, 71); /* yellow-300 */
+        --tag-hover: rgb(250, 204, 21); /* yellow-400 */
+        --tag-featured: rgb(253, 224, 71); /* yellow-300 */
 
-        --tag: 244 244 245; /* zinc-100 */
-        --tag-link: 253 224 71; /* yellow-300 */
-        --tag-hover: 250 204 21; /* yellow-400 */
-        --tag-featured: 253 224 71; /* yellow-300 */
+        --note: rgb(254, 240, 138); /* yellow-200 */
+        --note-shade: rgb(250, 204, 21); /* yellow-400 */
 
-        --note: 254 240 138; /* yellow-200 */
-        --note-shade: 250 204 21; /* yellow-400 */
+        --info: rgb(56, 189, 248); /* sky-400 */
+        --info-shade: rgb(14, 165, 233); /* sky-500 */
 
-        --info: 56 189 248; /* sky-400 */
-        --info-shade: 14 165 233; /* sky-500 */
+        --attention: rgb(253, 224, 71); /* yellow-300 */
+        --attention-shade: rgb(234, 179, 8); /* yellow-500 */
 
-        --attention: 253 224 71; /* yellow-300 */
-        --attention-shade: 234 179 8; /* yellow-500 */
+        --warning: rgb(220, 38, 38); /* red-600 */
+        --warning-shade: rgb(185, 28, 28); /* red-700 */
 
-        --warning: 220 38 38; /* red-600 */
-        --warning-shade: 185 28 28; /* red-700 */
+        --hilite: rgb(253, 224, 71); /* yellow-300 */
+        --gold: rgb(182, 160, 108); /* #b6a06c */
 
-        --hilite: 253 224 71; /* yellow-300 */
-        --gold: 182 160 108; /* #b6a06c */
-
-        --focus: 56 189 248; /* sky-400 */
+        --focus: rgb(56, 189, 248); /* sky-400 */
 
         --shader: svg-load('stack__papercuts.svg');
         --plus: svg-load('heap__plus.svg');
 
+        --shadow-highlight: rgba(255, 255, 255, 0.75); /* absolute white */
+        --shadow-dark: rgba(24, 24, 27, 0.25); /* #18181B */
+        --shadow-floated: rgba(24, 24, 27, 0.12); /* #18181B */
+
         --container-max: 75rem;
 
-        /* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1200,18,1.25,5,2,768&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
-        --step--2: clamp(0.6944rem, 0.6855rem + 0.0446vw, 0.72rem);
-        --step--1: clamp(0.8331rem, 0.8099rem + 0.1163vw, 0.9rem);
-        --step-0: clamp(1rem, 0.9565rem + 0.2174vw, 1.125rem);
-        --step-1: clamp(1.2rem, 1.1283rem + 0.3587vw, 1.4063rem);
-        --step-2: clamp(1.44rem, 1.3293rem + 0.5533vw, 1.7581rem);
-        --step-3: clamp(1.7281rem, 1.5649rem + 0.8163vw, 2.1975rem);
-        --step-4: clamp(2.0738rem, 1.8396rem + 1.1707vw, 2.7469rem);
-        --step-5: clamp(2.4881rem, 2.1594rem + 1.6435vw, 3.4331rem);
-        --step-6: clamp(2.9863rem, 2.5323rem + 2.2696vw, 4.2913rem);
-        --step-7: clamp(3.5831rem, 2.9636rem + 3.0978vw, 5.3644rem);
+        --z-toast: 2001;
+        --z-overlay: 2000;
+        --z-shortcuts: 1001;
+        --z-banner: 1000;
+        --z-underlay: 990;
+        --z-toc: 900;
 
-        /* @link https://utopia.fyi/space/calculator?c=320,16,1.2,1200,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6|8,s-l|m-s|s-xs&g=s,l,xl,12 */
+        /* Grid Template Columns */
+        --gtc-header: 1fr auto 1fr;
+        --gtc-block33: minmax(0, 1fr) minmax(0, 2fr);
+        --gtc-block40: minmax(0, 2fr) minmax(0, 3fr);
+        --gtc-block50: repeat(2, minmax(0, 1fr));
+        --gtc-block60: minmax(0, 3fr) minmax(0, 2fr);
+        --gtc-block66: minmax(0, 2fr) minmax(0, 1fr);
+        --gtc-listing: minmax(0, 2fr) minmax(0, 1fr);
+        --gtc-prevnext: repeat(2, minmax(0, 320px));
+        --gtc-credit: auto minmax(auto, 1fr);
+        --gtc-icon: auto minmax(auto, 1fr);
+        --gtc-workcontianer: 56.25vw calc(43.75vw - ((100vw - 78.75rem) / 2))
+            minmax(0, 1fr);
 
-        /* Space 3xs: 4px → 5px */
-        --space-3xs: clamp(0.25rem, 0.2273rem + 0.1136vi, 0.3125rem);
-        /* Space 2xs: 8px → 10px */
-        --space-2xs: clamp(0.5rem, 0.4545rem + 0.2273vi, 0.625rem);
-        /* Space xs: 12px → 15px */
-        --space-xs: clamp(0.75rem, 0.6818rem + 0.3409vi, 0.9375rem);
-        /* Space s: 16px → 20px */
-        --space-s: clamp(1rem, 0.9091rem + 0.4545vi, 1.25rem);
-        /* Space m: 24px → 30px */
-        --space-m: clamp(1.5rem, 1.3636rem + 0.6818vi, 1.875rem);
-        /* Space l: 32px → 40px */
-        --space-l: clamp(2rem, 1.8182rem + 0.9091vi, 2.5rem);
-        /* Space xl: 48px → 60px */
-        --space-xl: clamp(3rem, 2.7273rem + 1.3636vi, 3.75rem);
-        /* Space 2xl: 64px → 80px */
-        --space-2xl: clamp(4rem, 3.6364rem + 1.8182vi, 5rem);
-        /* Space 3xl: 96px → 120px */
-        --space-3xl: clamp(6rem, 5.4545rem + 2.7273vi, 7.5rem);
-        /* Space 4xl: 128px → 160px */
-        --space-4xl: clamp(8rem, 7.2727rem + 3.6364vi, 10rem);
-
-        /* One-up pairs */
-        /* Space 3xs-2xs: 4px → 10px */
-        --space-3xs-2xs: clamp(0.25rem, 0.1136rem + 0.6818vi, 0.625rem);
-        /* Space 2xs-xs: 8px → 15px */
-        --space-2xs-xs: clamp(0.5rem, 0.3409rem + 0.7955vi, 0.9375rem);
-        /* Space xs-s: 12px → 20px */
-        --space-xs-s: clamp(0.75rem, 0.5682rem + 0.9091vi, 1.25rem);
-        /* Space s-m: 16px → 30px */
-        --space-s-m: clamp(1rem, 0.6818rem + 1.5909vi, 1.875rem);
-        /* Space m-l: 24px → 40px */
-        --space-m-l: clamp(1.5rem, 1.1364rem + 1.8182vi, 2.5rem);
-        /* Space l-xl: 32px → 60px */
-        --space-l-xl: clamp(2rem, 1.3636rem + 3.1818vi, 3.75rem);
-        /* Space xl-2xl: 48px → 80px */
-        --space-xl-2xl: clamp(3rem, 2.2727rem + 3.6364vi, 5rem);
-        /* Space 2xl-3xl: 64px → 120px */
-        --space-2xl-3xl: clamp(4rem, 2.7273rem + 6.3636vi, 7.5rem);
-        /* Space 3xl-4xl: 96px → 160px */
-        --space-3xl-4xl: clamp(6rem, 4.5455rem + 7.2727vi, 10rem);
-
-        /* Custom pairs */
-        /* Space s-l: 16px → 40px */
-        --space-s-l: clamp(1rem, 0.4545rem + 2.7273vi, 2.5rem);
-        /* Space m-s: 24px → 20px */
-        --space-m-s: clamp(1.25rem, 1.5909rem + -0.4545vi, 1.5rem);
-        /* Space s-xs: 16px → 15px */
-        --space-s-xs: clamp(0.9375rem, 1.0227rem + -0.1136vi, 1rem);
+        /* Grid Template Rows */
+        --gtr-workcard: auto auto minmax(0, 1fr) auto;
+        --gtr-work: auto minmax(0, 1fr);
+        --gtr-home: auto minmax(0, 1fr);
 
         /* Space 30px up to 1200px then reduce down to 0px by 1260px */
         --container-tramline: clamp(0rem, 39.375rem + -50vi, 1.875rem);
@@ -161,7 +125,7 @@
         --container-width-xl: 1280px;
 
         /* Semantic Tailwind variables */
-        --color-banner: var(--banner);
+        /* --color-banner: var(--banner);
         --color-banner-up: var(--banner-up);
 
         --color-link-light: var(--link-light);
@@ -236,7 +200,7 @@
 
         --color-headline: var(--copy-shout);
         --color-headline-start: 2 132 199; /* sky-600 */
-        --color-headline-end: var(--copy-shout);
+        /*   --color-headline-end: var(--copy-shout);
 
         --color-brand-light: var(--brand-light);
         --color-brand: var(--brand);
@@ -260,45 +224,45 @@
 
         --color-blockquote: var(--copy-dark);
 
-        --color-disabled: var(--line-quiet);
+        --color-disabled: var(--line-quiet); */
     }
 
     /* Alpine will set data-theme value based on (prefers-color-scheme: dark)  */
     :root[data-theme='dark'] {
         --banner: transparent;
-        --banner-up: 11 11 15; /* #0A0A0D */
+        --banner-up: rgb(11, 11, 15); /* #0A0A0D */
 
-        --surface-10: 42 42 54; /* #2a2a36 +1 Shade */
-        --surface: 31 31 40; /* #1f1f28 */
-        --surface--10: 22 22 29; /* #16161d -1 Shade */
-        --surface--20: 14 14 18; /* #0e0e12 -2 Shade */
-        --surface--100: 3 3 4; /* #030304 Footer and offscreen */
+        --surface-10: rgb(42, 42, 54); /* #2a2a36 +1 Shade */
+        --surface: rgb(31, 31, 40); /* #1f1f28 */
+        --surface--10: rgb(22, 22, 29); /* #16161d -1 Shade */
+        --surface--20: rgb(14, 14, 18); /* #0e0e12 -2 Shade */
+        --surface--100: rgb(3, 3, 4); /* #030304 Footer and offscreen */
 
-        --shadow-highlight: 54 54 70; /* #363646 */
+        --shadow-highlight: rgb(54, 54, 70); /* #363646 */
 
-        --footer-start: 22 22 29; /* #16161d */
-        --footer: 14 14 18; /* #0e0e12 */
-        --footer-end: 14 14 18; /* #0e0e12 */
+        --footer-start: rgb(22, 22, 29); /* #16161d */
+        --footer: rgb(14, 14, 18); /* #0e0e12 */
+        --footer-end: rgb(14, 14, 18); /* #0e0e12 */
 
-        --line-whisper: 37 37 48; /* #252530 Shade + 2 */
-        --line-quiet: 54 54 70; /* #363646 Shade + 4 */
-        --line: 71 71 93; /* #363646 Shade + 6 */
-        --line-loud: 88 88 115; /* #585873 Shade + 8 */
-        --line-shout: 105 105 137; /* #696989 Shade + 10 */
+        --line-whisper: rgb(37, 37, 48); /* #252530 Shade + 2 */
+        --line-quiet: rgb(54, 54, 70); /* #363646 Shade + 4 */
+        --line: rgb(71, 71, 93); /* #47475D Shade + 6 */
+        --line-loud: rgb(88, 88, 115); /* #585873 Shade + 8 */
+        --line-shout: rgb(105, 105, 137); /* #696989 Shade + 10 */
 
-        --copy-light: 249 250 251; /* gray-50  */
-        --copy-dark: 31 41 55; /* gray-800 */
+        --copy-light: rgb(249, 250, 251); /* gray-50  */
+        --copy-dark: rgb(31, 41, 55); /* gray-800 */
 
-        --copy-whisper: 55 65 81; /* gray-700 */
-        --copy-quiet: 107 114 128; /* gray-500 */
-        --copy: 229 231 235; /* gray-200 */
-        --copy-loud: 243 244 246; /* gray-100 */
-        --copy-shout: 249 250 251; /* gray-50 */
+        --copy-whisper: rgb(55, 65, 81); /* gray-700 */
+        --copy-quiet: rgb(107, 114, 128); /* gray-500 */
+        --copy: rgb(229, 231, 235); /* gray-200 */
+        --copy-loud: rgb(243, 244, 246); /* gray-100 */
+        --copy-shout: rgb(249, 250, 251); /* gray-50 */
 
-        --copy-tag: 63 63 70; /* zinc-700 */
-        --copy-featured: 31 41 55; /* gray-800 */
+        --copy-tag: rgb(63, 63, 70); /* zinc-700 */
+        --copy-featured: rgb(31, 41, 55); /* gray-800 */
 
-        --focus: 3 105 161; /* sky-700 */
+        --focus: rgb(3, 105, 161); /* sky-700 */
 
         --shader: svg-load('shade__dark.svg');
 
@@ -315,150 +279,5 @@
         --color-headline-end: var(--copy);
 
         --color-blockquote: var(--copy-light);
-    }
-
-    /* Containers
----------------------------------------------------------------------------------*/
-    .max-w-container {
-        @apply /* mincon:px-fl-space-containertramline*/ px-fl-space-m;
-    }
-
-    /* SVGs
----------------------------------------------------------------------------------*/
-    svg {
-        stroke-width: 2;
-    }
-
-    path,
-    circle,
-    ellipse,
-    line,
-    polygon,
-    polyline,
-    rect {
-        stroke-width: inherit;
-    }
-
-    /* Uses SVGs in this folder: src/assets/svg */
-    .mask--plus__base_repeat {
-        mask: svg-load('plus__base_repeat.svg');
-    }
-
-    .shader {
-        background-image: svg-load('arcs__shadow.svg');
-        background-repeat: repeat-y;
-        background-size: 100%;
-        background-position: center top;
-    }
-
-    .plusheap {
-        background-image: var(--plus);
-        background-repeat: repeat-x;
-        background-size: 100%;
-        background-position: center bottom;
-    }
-
-    /* Editorial
----------------------------------------------------------------------------------*/
-    .link {
-        @apply font-medium text-link decoration-solid decoration-2 hover:underline;
-    }
-
-    .hilite {
-        @apply rounded-tight bg-hilite px-fl-space-2xs py-fl-space-3xs font-medium text-content-dark;
-    }
-
-    .font-headline a {
-        @apply font-extrabold;
-    }
-
-    .capline {
-        @apply relative mb-[1em] before:absolute before:-bottom-[0.5em] before:left-0 before:w-[1.25em] before:border-b-tight before:border-b-teal-400;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        @apply font-headline tracking-tight;
-    }
-
-    h1 {
-        @apply font-extrabold;
-    }
-
-    /* Richtext editor content */
-
-    .rte h2 {
-        @apply capline text-fl-step-3 font-bold tracking-tight;
-    }
-
-    .rte h3 {
-        @apply mb-fl-space-3xs text-fl-step-1 font-bold;
-    }
-
-    .rte h4 {
-        @apply mb-fl-space-3xs text-fl-step-1 font-medium;
-    }
-
-    .rte > p {
-        @apply mb-fl-space-xs;
-    }
-
-    .rte > :last-child {
-        @apply mb-0;
-    }
-
-    .rte strong {
-        @apply font-bold;
-    }
-
-    /*.rte .heading {
-  @apply mb-[1em];
-} */
-
-    /* subsequent-sibling combinator */
-    .rte .heading ~ .heading {
-        @apply mt-[1.5em];
-    }
-
-    /* Typography | Superscript */
-    sup.new {
-        @apply bg-primary rounded-sm px-0.5 py-px align-top text-fl-step--1 font-medium leading-none !text-white;
-    }
-
-    /* Tables
----------------------------------------------------------------------------------*/
-    .table thead {
-        @apply text-left font-bold;
-    }
-
-    .table th {
-        @apply border-b pb-fl-space-2xs pt-0;
-    }
-
-    .table th,
-    .table tbody td {
-        @apply py-1;
-    }
-
-    .table--rows tr {
-        @apply border-b border-gray-300 last:border-0;
-    }
-
-    .table--padded th,
-    .table--padded tbody td {
-        @apply py-fl-space-2xs pl-fl-space-2xs lg:pl-fl-space-xs;
-    }
-    .table--padded tr th,
-    .table--padded tr td {
-        @apply last:pr-fl-space-2xs last:lg:pr-fl-space-xs;
-    }
-
-    .table--noindent tr td,
-    .table--noindent thead th {
-        @apply first:pl-0 last:pr-0;
     }
 }

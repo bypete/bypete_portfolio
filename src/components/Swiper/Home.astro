@@ -15,13 +15,13 @@ const { slides } = Astro.props;
 ---
 
 <div
-    class="swiper swiper--home group h-full w-full transition-opacity duration-300 x-cloak:opacity-0"
+    class="swiper swiper--home group x-cloak:opacity-0 h-full w-full transition-opacity duration-300"
     x-cloak
 >
     <div class="swiper-wrapper not-prose flex items-center">
         {
             slides.map((slide, i) => (
-                <div class="slide swiper-slide ">
+                <div class="slide swiper-slide">
                     <Slide slide={slide} />
                 </div>
             ))
@@ -29,14 +29,14 @@ const { slides } = Astro.props;
     </div>
     <Prev
         swiper="swiper--home"
-        class="left-0 hidden text-content-light md:block"
+        class="text-content-light left-0 hidden md:block"
     />
     <Next
         swiper="swiper--home"
-        class="right-0 hidden text-content-light md:block"
+        class="text-content-light right-0 hidden md:block"
     />
     <div
-        class="swiper--home__pagination absolute !bottom-fl-space-s z-10 mx-auto text-left lg:text-right"
+        class="swiper--home__pagination bottom-fluid-s! absolute z-10 mx-auto text-left lg:text-right"
     >
     </div>
 </div>
@@ -92,9 +92,9 @@ const { slides } = Astro.props;
                 el: `${swiperClass}__pagination`,
                 clickable: true,
                 bulletClass:
-                    'cursor-pointer mx-fl-space-3xs transition-all duration-300 inline-block w-fl-space-2xs h-fl-space-2xs border border-content-light/50 rounded-full',
+                    'cursor-pointer mx-fluid-3xs transition-all duration-300 inline-block w-fluid-2xs h-fluid-2xs border border-content-light/50 rounded-full',
                 bulletActiveClass:
-                    '!w-fl-space-s shadow-floated !bg-content-light !border-content-light',
+                    'w-fluid-s! shadow-floated bg-content-light! border-content-light!',
             },
             watchOverflow: true, // disable if only single slide
             on: {

@@ -33,12 +33,12 @@ const { text, icon, heading, shadow, areas } = skillset as SkillsetProps;
 
 <div
     class:list={[
-        'not-prose relative p-fl-space-m',
+        'not-prose p-fluid-m relative',
         className
             ? className
             : `shadow-inset ${
                   !breakout
-                      ? '-mx-fl-space-m my-fl-space-xl con3xlpad:rounded-tight'
+                      ? '-mx-fluid-m my-fluid-xl @3xl:rounded'
                       : 'breakout'
               }`,
         bg,
@@ -54,9 +54,9 @@ const { text, icon, heading, shadow, areas } = skillset as SkillsetProps;
         <slot />
         <ul
             class:list={[
-                'grid grid-cols-1 gap-fl-space-m lg:grid-cols-2',
+                'gap-fluid-m grid grid-cols-1 lg:grid-cols-2',
                 text || 'text-content-light',
-                shadow || 'shadow-black/25 text-shadow-emboss',
+                shadow || 'text-shadow-emboss shadow-black/25',
             ]}
         >
             {
@@ -65,12 +65,12 @@ const { text, icon, heading, shadow, areas } = skillset as SkillsetProps;
                         <h3>{area.title}</h3>
                         <ul
                             class:list={[
-                                'space-y-fl-space-2xs',
-                                icon || '[&>li]:before:!text-white',
+                                'space-y-fluid-2xs',
+                                icon || '[&>li]:before:text-white!',
                             ]}
                         >
                             {area.skills.map((skill) => (
-                                <li class="relative pl-fl-space-m leading-normal before:icon-[lucide--check-circle-2] before:absolute before:left-0 before:top-tight before:h-fl-space-s before:w-fl-space-s before:leading-normal">
+                                <li class="pl-fluid-m before:icon-[lucide--check-circle-2] before:top-tight before:h-fluid-s before:w-fluid-s relative leading-normal before:absolute before:left-0 before:leading-normal">
                                     {skill}
                                 </li>
                             ))}

@@ -7,20 +7,20 @@ const { credit } = Astro.props;
 ---
 
 <div
-    class="absolute bottom-fl-space-2xs left-fl-space-s z-50 grid cursor-help grid-cols-credit items-center overflow-hidden rounded-l-full text-left text-content-light opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+    class="bottom-fluid-2xs left-fluid-s text-content-light absolute z-50 grid cursor-help grid-cols-(--gtc-credit) items-center overflow-hidden rounded-l-full text-left opacity-0 transition-opacity duration-300 group-hover:opacity-100"
     x-data="credit"
 >
     <button
-        class="z-10 flex items-center justify-center rounded-full bg-primary p-fl-space-3xs"
+        class="bg-primary p-fluid-3xs z-10 flex items-center justify-center rounded-full"
         @click="toggle()"
         aria-label="show image credit"
         x-bind:aria-expanded="open ? 'true' : 'false'"
     >
-        <Icon name="lucide:camera" class="h-fl-space-s w-fl-space-s" />
+        <Icon name="lucide:camera" class="h-fluid-s w-fluid-s" />
         <span class="sr-only">Show image credit</span>
     </button>
     <div
-        class="z-0 -ml-fl-space-2xs hidden origin-left rounded rounded-l-none bg-black/75 py-fl-space-3xs pl-fl-space-xs pr-fl-space-3xs text-fl-step--2/none"
+        class="-ml-fluid-2xs py-fluid-3xs pl-fluid-xs pr-fluid-3xs text-step--2/none z-0 hidden origin-left rounded-xs rounded-l-none bg-black/75"
         x-cloak
         x-ref="credit"
     >

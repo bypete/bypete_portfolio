@@ -32,7 +32,7 @@ declare global {
             id="input_email"
             name="email"
             type="email"
-            class="mt-fl-space-m"
+            class="mt-fluid-m"
             label="Email address"
             required={true}
             placeholder="you@example.com"
@@ -42,7 +42,7 @@ declare global {
             id="input_message"
             name="message"
             label="Your message"
-            class="mt-fl-space-m"
+            class="mt-fluid-m"
             required={true}
             placeholder="Enter your message"
         />
@@ -65,7 +65,7 @@ declare global {
 
         <!-- Cloudflare Turnstile Widget -->
         <div
-            class="cf-turnstile mt-fl-space-m"
+            class="cf-turnstile mt-fluid-m"
             data-sitekey={import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ||
                 process.env.PUBLIC_TURNSTILE_SITE_KEY}
             data-callback="turnstileCallback"
@@ -73,7 +73,7 @@ declare global {
         >
         </div>
 
-        <div class="mt-fl-space-m">
+        <div class="mt-fluid-m">
             <Button type="submit" theme="secondary">Send now</Button>
         </div>
     </form>
@@ -102,8 +102,8 @@ declare global {
                 errorFieldCssClass: ['error'],
                 errorLabelCssClass: [
                     'text-red-600',
-                    'text-fl-step--1',
-                    'mt-fl-space-3xs',
+                    'text-step--1',
+                    'mt-fluid-3xs',
                 ],
                 successFieldCssClass: ['valid'],
                 successLabelCssClass: ['valid'],

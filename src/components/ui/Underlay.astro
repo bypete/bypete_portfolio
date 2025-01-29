@@ -10,7 +10,7 @@ const shade = isHeroDark ? 'bg-underlay-dark/90' : 'bg-underlay-light/90';
 <div
     id="underlay"
     class:list={[
-        'fixed inset-0 z-underlay hidden h-full min-h-screen w-full backdrop-blur-sm backdrop-grayscale',
+        'fixed inset-0 z-(--z-underlay) hidden h-full min-h-screen w-full backdrop-blur-xs backdrop-grayscale',
         className,
         shade,
     ]}

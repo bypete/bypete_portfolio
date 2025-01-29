@@ -14,14 +14,14 @@ const currentPath = new URL(Astro.request.url).pathname;
 
 <header
     id="banner"
-    class="group fixed top-0 z-banner w-full py-fl-space-s opacity-0 shadow-banner shadow-gray-950/10 backdrop-blur-[1px] group-data-start/page:shadow-none"
+    class="group py-fluid-s shadow-banner fixed top-0 z-(--z-banner) w-full opacity-0 shadow-gray-950/10 backdrop-blur-[1px] group-data-start/page:shadow-none"
     x-cloak
     data-off-canvas-sticky
 >
     <div
         class:list={[
-            'mx-auto grid max-w-container grid-cols-header items-center gap-x-fl-space-m group-data-up/page:shadow-transparent',
-            isHeroDark && 'shadow-black/25 drop-shadow-logo',
+            'gap-x-fluid-m container mx-auto grid grid-cols-(--gtc-header) items-center group-data-up/page:shadow-transparent',
+            isHeroDark && 'drop-shadow-logo shadow-black/25',
         ]}
     >
         <div class="logo justify-self-start">
@@ -29,7 +29,7 @@ const currentPath = new URL(Astro.request.url).pathname;
                 href="/"
                 x-cloak
                 aria-label="byPete - home"
-                class="grid h-fl-space-l w-auto grid-cols-1 grid-rows-1"
+                class="h-fluid-l grid w-auto grid-cols-1 grid-rows-1"
             >
                 {
                     isHeroDark ? (
@@ -37,21 +37,18 @@ const currentPath = new URL(Astro.request.url).pathname;
                             <span class="col-start-1 group-data-up/page:opacity-0">
                                 <Icon
                                     name="bypete__white"
-                                    class="h-fl-space-l w-auto"
+                                    class="h-fluid-l w-auto"
                                 />
                             </span>
                             <span class="col-start-1 opacity-0 group-data-up/page:opacity-100">
                                 <Icon
                                     name="bypete__brand"
-                                    class="h-fl-space-l w-auto"
+                                    class="h-fluid-l w-auto"
                                 />
                             </span>
                         </>
                     ) : (
-                        <Icon
-                            name="bypete__brand"
-                            class="h-fl-space-l w-auto"
-                        />
+                        <Icon name="bypete__brand" class="h-fluid-l w-auto" />
                     )
                 }
             </a>
@@ -169,7 +166,7 @@ const currentPath = new URL(Astro.request.url).pathname;
                     banner,
                     {
                         opacity: 1,
-                        background: 'rgb(var(--banner-up)/1)',
+                        background: 'var(--banner-up)',
                     },
                     { duration: 0 },
                 ],
@@ -177,7 +174,7 @@ const currentPath = new URL(Astro.request.url).pathname;
                     banner,
                     {
                         transform: ['translateY(0)'],
-                        background: 'rgb(var(--banner-up)/1)',
+                        background: 'var(--banner-up)',
                     },
                 ],
             ];

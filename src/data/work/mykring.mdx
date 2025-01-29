@@ -94,7 +94,7 @@ The live site is currently unavailable but a detailed record of the templates an
 
 ## A brief history
 
-<p class="text-fl-step-1">In Autumn 2015, the site, formerly known as kerv.com, debuted as a simple static support site for the Kickstarter crowdfunding campaign. I created the static templates using the Foundation v5 framework, which claimed to be at the cutting edge of responsive development at the time.</p>
+<p class="text-step-1">In Autumn 2015, the site, formerly known as kerv.com, debuted as a simple static support site for the Kickstarter crowdfunding campaign. I created the static templates using the Foundation v5 framework, which claimed to be at the cutting edge of responsive development at the time.</p>
 
 > Foundation is the most advanced, responsive front-end framework in the world. The framework is mobile friendly and ready for you to customize it any way you want to use it.
 
@@ -137,7 +137,7 @@ I saw this project as an opportunity to use the static site generator [Eleventy]
 
 Any screen can be directly accessed by developers, partner clients, and stakeholders. This was especially useful for translators, who often need more context to create concise translations. Some screens can only be accessed under certain conditions, which can be difficult and sometimes impossible for third parties to recreate.
 
-<Figure x-data="{compare: true}" grid="flex flex-col md:flex-row items-center gap-fl-space-m p-fl-space-s-m" caption='An example of before (left) and after (right) the spring refresh. The brief was to reduce the visual gap between app and website.  Tap each image to view in detail' credit={frontmatter.title}>
+<Figure x-data="{compare: true}" grid="flex flex-col md:flex-row items-center gap-fluid-m p-fluid-s-m" caption='An example of before (left) and after (right) the spring refresh. The brief was to reduce the visual gap between app and website.  Tap each image to view in detail' credit={frontmatter.title}>
   <div class="transition-all duration-300" x-bind:class="compare ? 'w-1/3' : 'w-full md:w-2/3'" x-on:click="compare = ! compare">
   <Image src={devices} alt="Devices view" class="w-full h-auto shadow-md border border-line hover:cursor-pointer" />
   </div>
@@ -148,10 +148,10 @@ Any screen can be directly accessed by developers, partner clients, and stakehol
 
 ## My responsibilities
 
--   The designs and static templates were hosted in a secure listing to keep stakeholders informed throughout the development process. <span class="label label--info !m-0">Project management</span>
+-   The designs and static templates were hosted in a secure listing to keep stakeholders informed throughout the development process. <span class="label label--info m-0!">Project management</span>
 -   I built all of the Front-End HTML templates from scratch using an internal wireframe ppt document. These were then given to a team of back-end developers, along with detailed annotations, listing indexes, and support documentation.
 -   I created a complete set of email HTML templates that would work with Umbraco's dictionary to handle the multilanguage requirements.
--   I assisted in the configuration of the content management system (Umbraco) and was in charge of the initial populating of all launch content. <span class="label label--info !m-0">collaboration</span>
+-   I assisted in the configuration of the content management system (Umbraco) and was in charge of the initial populating of all launch content. <span class="label label--info m-0!">collaboration</span>
 
 <Lightbox collections={[{
             id: 'mykring',
@@ -191,7 +191,7 @@ The redesign process provided an excellent opportunity for me to become acquaint
 
 The myKRing app accomodates "dark mode" functionality and it would be nice to offer that functionality on the website. Tailwind CSS includes a `dark:` variant that can be switched manually via javascript and `localstorage` or using the system preferences.
 
-<BlockPicture src={block__cyclist_40} class="my-fl-space-2xl" alt="Close up of K Ring and cyclist" credit={frontmatter.title} wrapper={true} />
+<BlockPicture src={block__cyclist_40} class="my-fluid-2xl" alt="Close up of K Ring and cyclist" credit={frontmatter.title} wrapper={true} />
 
 ## Final thoughts
 

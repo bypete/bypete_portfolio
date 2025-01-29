@@ -16,24 +16,19 @@ const {
     caption,
     class: className,
     credit,
-    grid = 'grid grid-cols-1 items-center gap-fl-space-m',
+    grid = 'grid grid-cols-1 items-center gap-fluid-m',
     ...attrs
 } = Astro.props;
 ---
 
 <figure
-    class:list={[
-        'not-prose relative',
-        className ? className : 'my-fl-space-xl',
-    ]}
+    class:list={['not-prose relative', className ? className : 'my-fluid-xl']}
     {...attrs}
 >
     <div
         class:list={[
             bg,
-            breakout
-                ? 'breakout'
-                : '-mx-fl-space-s-m rounded-tight p-fl-space-s-m',
+            breakout ? 'breakout' : '-mx-fluid-s-m rounded-tight p-fluid-s-m',
             grid,
         ]}
     >
@@ -41,13 +36,13 @@ const {
     </div>
     {
         caption && (
-            <figcaption class="mt-fl-space-xs flex w-full flex-col justify-between gap-fl-space-xs text-fl-step--1 leading-snug md:flex-row">
+            <figcaption class="mt-fluid-xs gap-fluid-xs text-step--1 flex w-full flex-col justify-between leading-snug md:flex-row">
                 <p>{caption}</p>
                 {credit && (
-                    <span class="grid grid-cols-icon gap-fl-space-3xs text-fl-step--2/fl-space-xs text-content-quiet">
+                    <span class="gap-fluid-3xs text-step--2/fluid-xs text-content-quiet grid grid-cols-(--gtc-icon)">
                         <Icon
                             name="lucide:camera"
-                            class="h-fl-space-xs w-fl-space-xs"
+                            class="h-fluid-xs w-fluid-xs"
                         />
                         <Fragment set:html={credit} />
                     </span>

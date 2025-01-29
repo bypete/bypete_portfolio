@@ -1,3 +1,145 @@
+@utility holder {
+    /* Placeholders 
+---------------------------------------------------------------------------------*/
+    @apply before:border-line relative before:absolute before:inset-0 before:border-2 before:border-dashed;
+}
+@utility form__input {
+    @apply border-line bg-surface-raised px-fluid-2xs py-fluid-3xs placeholder:text-content/40 focus:border-surface focus:ring-focus block rounded-xs border focus:ring-2 focus:outline-hidden;
+
+    &.error {
+        @apply focus:border-focus focus:ring-focus border-transparent ring-2 ring-red-200;
+    }
+
+    &.readonly {
+        @apply pointer-events-none border border-gray-300 bg-gray-100 select-none focus:border-gray-300 focus:bg-gray-100 focus:ring-0 focus:outline-hidden;
+    }
+}
+@utility form__select {
+    @apply border-line bg-surface-raised px-fluid-2xs py-fluid-3xs placeholder:text-content/40 focus:border-surface focus:ring-focus block rounded-xs border focus:ring-2 focus:outline-hidden;
+
+    &.error {
+        @apply focus:border-focus focus:ring-focus border-transparent ring-2 ring-red-200;
+    }
+}
+@utility form__textarea {
+    @apply border-line bg-surface-raised px-fluid-2xs py-fluid-3xs placeholder:text-content/40 focus:border-surface focus:ring-focus block rounded-xs border focus:ring-2 focus:outline-hidden;
+}
+@utility error {
+    &.form__input {
+        @apply focus:border-focus focus:ring-focus border-transparent ring-2 ring-red-200;
+    }
+
+    & .form__select {
+        @apply focus:border-focus focus:ring-focus border-transparent ring-2 ring-red-200;
+    }
+
+    & .form__checkbox {
+        @apply focus:border-focus focus:ring-focus border-transparent ring-2 ring-red-200;
+    }
+}
+@utility form__checkbox {
+    &.error {
+        @apply focus:border-focus focus:ring-focus border-transparent ring-2 ring-red-200;
+    }
+    @apply text-primary focus:border-focus focus:ring-focus rounded-xs border border-gray-400 px-2 py-2 focus:ring-2 focus:outline-hidden;
+    @apply text-primary focus:border-focus focus:ring-focus border border-gray-400 px-2 py-2 focus:ring-2 focus:outline-hidden;
+}
+@utility readonly {
+    &.form__input {
+        @apply pointer-events-none border border-gray-300 bg-gray-100 select-none focus:border-gray-300 focus:bg-gray-100 focus:ring-0 focus:outline-hidden;
+    }
+}
+@utility form__radio {
+    @apply text-primary focus:border-focus focus:ring-focus border border-gray-400 px-2 py-2 focus:ring-2 focus:outline-hidden;
+}
+@utility form__divider {
+    @apply -mx-fluid-xs my-fluid-m border-line lg:mx-0 lg:w-full;
+}
+@utility form__divider--panel {
+    @apply -mx-fluid-xs lg:-mx-fluid-m w-auto;
+}
+@utility switch {
+    /* Forms | Switch */
+    @apply flex cursor-pointer items-center;
+}
+@utility switch__bg {
+    @apply shadow-inset relative h-6 w-11 overflow-hidden rounded-full bg-gray-300 after:absolute after:top-0.5 after:left-0.5 after:h-5 after:w-5 after:rounded-full after:border-2 after:border-gray-400 after:bg-white after:shadow-xs after:transition;
+
+    input:checked + &:after {
+        @apply border-primary;
+        transform: translateX(100%);
+    }
+
+    input:checked + & {
+        @apply bg-primary;
+    }
+}
+@utility switch__label {
+    @apply mr-3;
+}
+@utility list {
+    /* Lists
+---------------------------------------------------------------------------------*/
+    @apply space-y-2 pl-0!;
+    & li {
+        @apply relative leading-normal;
+    }
+}
+@utility list--bullet {
+    & li {
+        @apply pl-fluid-m list-none before:absolute before:top-0 before:left-0 before:w-6 before:leading-normal;
+    }
+
+    & li {
+        @apply before:i-ci-dummy-square-small before:text-primary before:translate-y-px before:text-[24px];
+    }
+}
+@utility list--checklist {
+    & li {
+        @apply pl-fluid-m list-none before:absolute before:top-0 before:left-0 before:w-6 before:leading-normal;
+    }
+
+    & li {
+        @apply before:i-lucide-check-circle-2 before:text-teal-500;
+    }
+}
+@utility list--counter {
+    & > li {
+        @apply pl-fluid-l relative list-none;
+        counter-increment: a;
+    }
+
+    & > li:before {
+        @apply top-fluid-3xs mr-fluid-xs h-fluid-m w-fluid-m bg-primary text-step-1 absolute left-0 block rounded-full text-center font-black text-white;
+        content: counter(a);
+    }
+}
+@utility cite {
+    blockquote & {
+        @apply mt-fluid-xs text-step-0 leading-fluid-m text-content-quiet mb-0 not-italic;
+    }
+}
+@utility label {
+    /* labels
+  ---------------------------------------------------------------------------------*/
+    @apply px-fluid-3xs py-fluid-3xs text-step--2 inline-block rounded-xs align-text-bottom leading-none uppercase;
+}
+@utility label-pin {
+    @apply text-step--2 flex items-center rounded-full;
+}
+@utility label-pin__icon {
+    @apply h-fluid-m w-auto;
+}
+@utility label--info {
+    @apply border-brand bg-brand text-content-dark border;
+}
+@utility label--disabled {
+    @apply text-content-dark/25 border border-gray-300 bg-gray-300;
+}
+@utility label--alert {
+    @apply bg-warning text-content-light border-red-600;
+}
+
 /* Add styles here to allow components to override them */
 @layer components {
     /* Animations 
@@ -5,12 +147,6 @@
 
     [data-animate] {
         @apply opacity-0;
-    }
-
-    /* Placeholders 
----------------------------------------------------------------------------------*/
-    .holder {
-        @apply relative before:absolute before:inset-0 before:border-2 before:border-dashed before:border-line;
     }
 
     /* Forms 
@@ -26,126 +162,9 @@
         -moz-appearance: textfield;
     }
 
-    .form__input,
-    .form__select,
-    .form__textarea {
-        @apply block rounded border border-line bg-surface-raised px-fl-space-2xs py-fl-space-3xs placeholder:text-content/40 focus:border-surface focus:outline-none focus:ring-2 focus:ring-focus;
-    }
-
-    .form__input.error,
-    .form__select.error,
-    .form__checkbox.error {
-        @apply border-transparent ring-2 ring-red-200 focus:border-focus focus:ring-focus;
-    }
-
-    .form__input.readonly {
-        @apply pointer-events-none select-none border border-gray-300 bg-gray-100 focus:border-gray-300 focus:bg-gray-100 focus:outline-none focus:ring-0;
-    }
-
-    .form__checkbox {
-        @apply rounded border border-gray-400 px-2 py-2 text-primary focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus;
-    }
-
-    .form__checkbox,
-    .form__radio {
-        @apply border border-gray-400 px-2 py-2 text-primary focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus;
-    }
-
-    .form__divider {
-        @apply -mx-fl-space-xs my-fl-space-m border-line lg:mx-0 lg:w-full;
-    }
-
-    .form__divider--panel {
-        @apply -mx-fl-space-xs w-auto lg:-mx-fl-space-m;
-    }
-
-    /* Forms | Switch */
-    .switch {
-        @apply flex cursor-pointer items-center;
-    }
-
-    .switch__bg {
-        @apply relative h-6 w-11 overflow-hidden rounded-full bg-gray-300 shadow-inset after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border-2 after:border-gray-400 after:bg-white after:shadow-sm after:transition;
-    }
-
-    .switch__label {
-        @apply mr-3;
-    }
-
-    input:checked + .switch__bg:after {
-        @apply border-primary;
-        transform: translateX(100%);
-    }
-
-    input:checked + .switch__bg {
-        @apply bg-primary;
-    }
-
-    /* Lists
----------------------------------------------------------------------------------*/
-    .list {
-        @apply space-y-2 !pl-0;
-    }
-    .list li {
-        @apply relative leading-normal;
-    }
-
-    .list--bullet li,
-    .list--checklist li {
-        @apply list-none pl-fl-space-m before:absolute before:left-0 before:top-0 before:w-6 before:leading-normal;
-    }
-
-    .list--bullet li {
-        @apply before:icon-[ci--dummy-square-small] before:translate-y-px before:text-[24px] before:text-primary;
-    }
-
-    .list--checklist li {
-        @apply before:icon-[lucide--check-circle-2] before:text-teal-500;
-    }
-
-    .list--counter > li {
-        @apply relative list-none pl-fl-space-l;
-        counter-increment: a;
-    }
-
-    .list--counter > li:before {
-        @apply absolute left-0 top-fl-space-3xs mr-fl-space-xs block h-fl-space-m w-fl-space-m rounded-full bg-primary text-center text-fl-step-1 font-black text-white;
-        content: counter(a);
-    }
-
     /* Blockquotes
   ---------------------------------------------------------------------------------*/
     blockquote {
-        @apply relative my-fl-space-l block pl-fl-space-xs text-left font-Georgia text-fl-step-1 before:icon-[lucide--message-square-quote] before:block before:text-[1.5em] before:leading-none before:text-primary;
-    }
-
-    blockquote .cite {
-        @apply mb-0 mt-fl-space-xs text-fl-step-0 not-italic leading-fl-space-m text-content-quiet;
-    }
-
-    /* labels
-  ---------------------------------------------------------------------------------*/
-    .label {
-        @apply inline-block rounded px-fl-space-3xs py-fl-space-3xs align-text-bottom text-fl-step--2 uppercase leading-none;
-    }
-
-    .label-pin {
-        @apply flex items-center rounded-full text-fl-step--2;
-    }
-
-    .label-pin__icon {
-        @apply h-fl-space-m w-auto;
-    }
-
-    .label--info {
-        @apply border border-brand bg-brand text-content-dark;
-    }
-
-    .label--disabled {
-        @apply border border-gray-300 bg-gray-300 text-content-dark/25;
-    }
-
-    .label--alert {
-        @apply border-red-600 bg-warning text-content-light;
+        @apply my-fluid-l pl-fluid-xs font-Georgia text-step-1 before:i-lucide-message-square-quote before:text-primary relative block text-left before:block before:text-[1.5em] before:leading-none;
     }
 }

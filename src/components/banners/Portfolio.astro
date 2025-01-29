@@ -39,18 +39,18 @@ const { wrapper, class: className } = Astro.props;
         class="relative m-0 h-full w-full object-contain"
         alt="iPhones with mykring app in use"
     />
-    <div slot="s2" class="py-fl-space-m">
+    <div slot="s2" class="py-fluid-m">
         <h2
-            class="font-headline text-fl-step-3/tight font-bold tracking-tight"
+            class="font-headline text-step-3/tight font-bold tracking-tight"
             data-animate="fadeInDown"
         >
             Show and tell
         </h2>
-        <p class="mb-fl-space-m" data-animate="fadeInDown">
+        <p class="mb-fluid-m" data-animate="fadeInDown">
             Curious to see my work in action? Discover the stories behind my
             projects, the challenges addressed, and the solutions crafted.
         </p>
-        <p class="flex flex-row gap-fl-space-3xs">
+        <p class="gap-fluid-3xs flex flex-row">
             <Button data-animate="scaleIn" theme="secondary" href="/work/"
                 >Explore the portfolio</Button
             >
@@ -63,7 +63,7 @@ const { wrapper, class: className } = Astro.props;
                 >Random pick
                 <Icon
                     name="lucide:shuffle"
-                    class="h-fl-space-xs w-auto animate-pulse"
+                    class="h-fluid-xs w-auto animate-pulse"
                 />
             </RandomLink>
         </p>

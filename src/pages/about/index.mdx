@@ -10,7 +10,7 @@ heroConfig:
     dark: true
 skillset:
     text: 'text-content'
-    icon: '[&>li]:before:!text-primary'
+    icon: '[&>li]:before:text-primary!'
     heading: 'permalink:text-heading permalink:before:text-[#00a3e2]'
     shadow: 'text-shadow-emboss shadow-surface-sunken/20'
     areas:
@@ -93,7 +93,7 @@ import ogImage from '~/assets/og/og__about.jpg';
       heroConfig={{
           ...frontmatter.heroConfig,
           mode: 'cover',
-          copy: "<p class='text-fl-step-1' data-animate='fadeInDown'>I'm Pete Wallace, a surrey based Front-End developer with over two decades of experience in digital.</p>",
+          copy: "<p class='text-step-1' data-animate='fadeInDown'>I'm Pete Wallace, a surrey based Front-End developer with over two decades of experience in digital.</p>",
           actions: [
               {
                   text: 'Read my bio',
@@ -161,12 +161,12 @@ Recognising the importance of context in translations, I introduced a template i
 ## What comes next? 
 This static site was crafted using [Astro](https://astro.build/), integrating [Tailwind CSS](https://tailwindcss.com/) alongside [Alpine.js](https://alpinejs.dev/). It replaces the previous version, which was developed using [11ty](https://www.11ty.dev/) and [Webpack](https://webpack.js.org/). I've enjoyed learning Astro and am eager to explore its potential in upcoming projects.
 
-<BlockPicture widths={[400,768,1920]} src={woodland} class="w-full h-full object-cover inset-0 absolute" alt="Woodland scene" credit="Adobe Photoshop (beta) - Generative fill" wrapper="my-fl-space-2xl h-photo md:h-block" />
+<BlockPicture widths={[400,768,1920]} src={woodland} class="w-full h-full object-cover inset-0 absolute" alt="Woodland scene" credit="Adobe Photoshop (beta) - Generative fill" wrapper="my-fluid-2xl h-photo md:h-block" />
 
 ## Achieving Balance and Wellbeing
 Beyond work, I enjoy spending time outdoors with my family, especially my two young and adventurous boys. Exploring nature helps me maintain a sense of balance and wellbeing, although tackling their curiosities often leads us to rely on technology like [Google Lens](https://lens.google/intl/en-GB/#cta-section) for assistance!
 
-<BlockImage src={google_lens} width={768} breakout={false} class="my-0 w-full" alt="Beach scene with close up of jellyfish. Detail shows iPhone with google lens app" credit="Google Lens (App visuals)" wrapper="my-fl-space-l" />
+<BlockImage src={google_lens} width={768} breakout={false} class="my-0 w-full" alt="Beach scene with close up of jellyfish. Detail shows iPhone with google lens app" credit="Google Lens (App visuals)" wrapper="my-fluid-l" />
 
 ## Availability
 Thanks for exploring my bio! I'm currently <Availability url={`/connect/`} /> for new roles in Front-End development. If you believe I could be a good addition to your team, please don't hesitate to [connect](/connect/) and send me a message - or reach out via [LinkedIn](https://www.linkedin.com/in/peter-wallace-a5002a7a/). I'm genuinely looking forward to potential collaborations.

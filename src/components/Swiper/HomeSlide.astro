@@ -31,7 +31,7 @@ const imageProps = {
     (
         <a
             href={slide.url}
-            class="flex h-full w-full items-center justify-center py-fl-space-l"
+            class="py-fluid-l flex h-full w-full items-center justify-center"
         >
             {slide.wrapper ? (
                 <div class={slide.wrapper}>
@@ -52,17 +52,17 @@ const imageProps = {
                         <span
                             data-caption
                             class:list={[
-                                'absolute flex max-w-fl-space-4xl flex-col items-start text-content-light opacity-0',
+                                'max-w-fluid-4xl text-content-light absolute flex flex-col items-start opacity-0',
                                 caption.label && caption.label,
                             ]}
                         >
                             {caption.title && (
-                                <h2 class="relative z-10 -mb-fl-space-3xs inline-block -rotate-1 rounded-tight bg-primary-dark p-fl-space-3xs font-headline text-fl-step-0 font-semibold leading-none tracking-tight shadow-sm shadow-primary-shade">
+                                <h2 class="-mb-fluid-3xs rounded-tight bg-primary-dark p-fluid-3xs font-headline text-step-0 shadow-primary-shade relative z-10 inline-block -rotate-1 leading-none font-semibold tracking-tight shadow-xs">
                                     {caption.title}{' '}
                                 </h2>
                             )}
                             {caption.copy && (
-                                <p class="relative inline-block translate-x-px translate-y-0.5 rounded-tight bg-black/15 p-fl-space-3xs text-fl-step--2 leading-snug">
+                                <p class="rounded-tight p-fluid-3xs text-step--2 relative inline-block translate-x-px translate-y-0.5 bg-black/15 leading-snug">
                                     {caption.copy}
                                 </p>
                             )}

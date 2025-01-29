@@ -44,7 +44,7 @@ const formattedPosts = formatBlogPosts(allWork, {
 
 <SplashLayout title={title} isHeroDark={heroConfig.dark} {og}>
     <section
-        class="relative origin-top items-center overflow-x-hidden bg-slate-900 bg-cover pb-fl-space-splashoverlap angleclip lg:angleclip-lg [&+*]:-mt-fl-space-splashoverlap"
+        class="pb-splash-overlap angleclip lg:angleclip-lg [&+*]:-mt-splash-overlap relative origin-top items-center overflow-x-hidden bg-slate-900 bg-cover"
     >
         <div class="absolute inset-0 h-full w-full">
             <Picture
@@ -63,21 +63,19 @@ const formattedPosts = formatBlogPosts(allWork, {
         </div>
 
         <div
-            class="relative mx-auto grid h-screenSvh w-full max-w-container grid-cols-1 grid-rows-home pt-[var(--headerheight)] lg:grid-flow-col lg:grid-cols-block40 lg:grid-rows-1"
+            class="not-dynamic:h-screen relative container mx-auto grid h-svh w-full grid-cols-1 grid-rows-(--gtr-home) pt-[var(--headerheight)] lg:grid-flow-col lg:grid-cols-(--gtc-block40) lg:grid-rows-1"
         >
             <!-- content -->
-            <div
-                class="rte-content pt-fl-space-l lg:max-w-[60ch] lg:self-center"
-            >
+            <div class="rte-content pt-fluid-l lg:max-w-[60ch] lg:self-center">
                 <Roles roles={roles} />
                 <p
-                    class="my-fl-space-s text-fl-step-0 text-content-light shadow-slate-900 text-shadow-emboss"
+                    class="my-fluid-s text-step-0 text-content-light text-shadow-emboss shadow-slate-900"
                 >
                     Discover the stories behind my projects, the challenges
                     addressed, and the solutions crafted.
                 </p>
                 <p
-                    class="flex flex-wrap items-center gap-fl-space-xs text-shadow-none"
+                    class="gap-fluid-xs text-shadow-none flex flex-wrap items-center"
                 >
                     <Button
                         theme="primary"
@@ -87,7 +85,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                     >
                         View the portfolio <Icon
                             name="lucide:arrow-right-circle"
-                            class="h-fl-space-s w-fl-space-s animate-nudge-right"
+                            class="h-fluid-s w-fluid-s animate-nudge-right"
                         />
                     </Button>
                     <Button href="/about/" theme="whiteline">Read my bio</Button
@@ -105,24 +103,21 @@ const formattedPosts = formatBlogPosts(allWork, {
             <!-- END visual -->
         </div>
         <div
-            class="pointer-events-none absolute left-1/2 top-screenSvh z-100 -translate-x-1/2 -translate-y-full pb-fl-space-s text-content-light"
+            class="top-screenSvh pb-fluid-s text-content-light pointer-events-none absolute left-1/2 z-100 -translate-x-1/2 -translate-y-full"
         >
             <ScrollPrompt />
         </div>
     </section>
 
-    <section
-        id="featured"
-        class="from-page-contrast bg-gradient-to-b pb-fl-space-s"
-    >
-        <div class="relative mx-auto max-w-container">
+    <section id="featured" class="from-page-contrast pb-fluid-s bg-linear-to-b">
+        <div class="relative container mx-auto">
             <h2
-                class="m-0 text-center font-headline text-fl-step-4 font-bold tracking-tight text-content-light"
+                class="font-headline text-step-4 text-content-light m-0 text-center font-bold tracking-tight"
             >
                 Featured work
             </h2>
             <div
-                class="my-fl-space-m grid grid-cols-1 gap-fl-space-xl md:grid-cols-2 lg:grid-cols-3"
+                class="my-fluid-m gap-fluid-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
             >
                 {
                     formattedPosts.map(async (post) => {
@@ -144,10 +139,10 @@ const formattedPosts = formatBlogPosts(allWork, {
                     })
                 }
 
-                <div animate-card class="rte self-center p-fl-space-s">
+                <div animate-card class="rte p-fluid-s self-center">
                     <Icon
                         name="lucide:folder-archive"
-                        class="h-fl-space-l w-fl-space-l animate-pulse"
+                        class="h-fluid-l w-fluid-l animate-pulse"
                     />
                     <h2 class="font-headline">Want to see more...?</h2>
                     <p>
@@ -164,7 +159,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                         >
                             Explore the collection <Icon
                                 name="lucide:arrow-right-circle"
-                                class="h-fl-space-s w-fl-space-s animate-nudge-right"
+                                class="h-fluid-s w-fluid-s animate-nudge-right"
                             />
                         </Button>
                     </p>
@@ -172,9 +167,9 @@ const formattedPosts = formatBlogPosts(allWork, {
             </div>
         </div>
     </section>
-    <div class="relative mx-auto max-w-container py-fl-space-2xl">
+    <div class="py-fluid-2xl relative container mx-auto">
         <h3
-            class="mb-fl-space-s text-center text-fl-step-1 font-bold text-content-quiet"
+            class="mb-fluid-s text-step-1 text-content-quiet text-center font-bold"
         >
             Some of the brands I've worked with:
         </h3>

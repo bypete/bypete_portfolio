@@ -7,9 +7,9 @@ import Toast from '~/components/ui/Toast.astro';
 <Toast id="toastCookie" theme={'settings'} hidden={true}>
     <div
         x-data="consentHandler({ select: false })"
-        class="grid items-start gap-y-fl-space-xs p-fl-space-xs grid-areas-toast"
+        class="gap-y-fluid-xs p-fluid-xs grid items-start"
     >
-        <div class="text-fl-step--1 grid-in-message">
+        <div class="text-step--1">
             <p>
                 We use cookies to understand how visitors interact with our
                 site. This helps us to provide a better user experience. Use the
@@ -19,7 +19,7 @@ import Toast from '~/components/ui/Toast.astro';
                 >
             </p>
 
-            <div class="my-fl-space-2xs grid grid-cols-2 gap-fl-space-2xs">
+            <div class="my-fluid-2xs gap-fluid-2xs grid grid-cols-2">
                 <label
                     ><input
                         id="consent_necessary"
@@ -59,13 +59,11 @@ import Toast from '~/components/ui/Toast.astro';
             type="button"
             aria-label="hide notice"
             @click="freeze(false)"
-            class="-mr-fl-space-s -mt-fl-space-s rounded-full bg-warning p-fl-space-3xs text-white shadow-floated grid-in-close hover:bg-warning-shade"
+            class="-mr-fluid-s -mt-fluid-s bg-warning p-fluid-3xs shadow-floated hover:bg-warning-shade rounded-full text-white"
         >
             <Icon name="mdi:hide" class="h-4 w-auto" />
         </button>
-        <p
-            class="grid grid-flow-col justify-between gap-fl-space-s grid-in-action"
-        >
+        <p class="gap-fluid-s col-span-2 grid grid-flow-col justify-between">
             <Button
                 id="consent_reject"
                 type="button"
@@ -130,7 +128,7 @@ import Toast from '~/components/ui/Toast.astro';
 
             overlay.classList.toggle('hidden', !visible);
             cookie.classList.toggle('hidden', !visible);
-            body.classList.toggle('!h-screenSvh', visible);
+            body.classList.toggle('h-svh!', visible);
 
             const sequence = visible ? show : hide;
 

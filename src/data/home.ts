@@ -30,7 +30,7 @@ export const heroSlides: SwiperImage[] = [
     caption: {
       title: 'Shirley Chauffeurs',
       copy: 'Branding and Online',
-      label: 'bottom-fl-space-xl left-0 md:left-auto md:bottom-[15%] md:right-[45%]',
+      label: 'bottom-fluid-xl left-0 md:left-auto md:bottom-[15%] md:right-[45%]',
     },
   }, {
     src: mykringapp,
@@ -39,7 +39,7 @@ export const heroSlides: SwiperImage[] = [
     caption: {
       title: 'MyKRing app',
       copy: 'iOS + Android solution',
-      label: 'bottom-fl-space-xl left-0 md:left-auto md:bottom-[20%] md:right-[15%]',
+      label: 'bottom-fluid-xl left-0 md:left-auto md:bottom-[20%] md:right-[15%]',
     },
   },
   {
@@ -49,7 +49,7 @@ export const heroSlides: SwiperImage[] = [
     caption: {
       title: 'OnePay',
       copy: 'Fast, easy, efficient wage payments',
-      label: 'bottom-fl-space-xl left-0 md:left-auto md:bottom-[15%] md:left-[40%]',
+      label: 'bottom-fluid-xl left-0 md:left-auto md:bottom-[15%] md:left-[40%]',
     },
   },
   {
@@ -59,7 +59,7 @@ export const heroSlides: SwiperImage[] = [
     caption: {
       title: 'K Ring ',
       copy: 'Mobile-first responsive site',
-      label: 'bottom-fl-space-xl left-0 md:left-auto md:bottom-[25%] md:right-[15%]',
+      label: 'bottom-fluid-xl left-0 md:left-auto md:bottom-[25%] md:right-[15%]',
     },
   },
 ];

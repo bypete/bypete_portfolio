@@ -10,9 +10,11 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 ---
 
-<section class="h-screenSvh w-full bg-slate-900 text-content-light">
+<section
+    class="not-dynamic:h-screen text-content-light h-svh w-full bg-slate-900"
+>
     <div
-        class="swiper swiper--work group h-full w-full transition-opacity duration-300 x-cloak:opacity-0"
+        class="swiper swiper--work group x-cloak:opacity-0 h-full w-full transition-opacity duration-300"
         x-cloak
     >
         <div class="swiper-wrapper flex items-center">
@@ -20,18 +22,18 @@ import 'swiper/css/pagination';
         </div>
         <Prev
             swiper="swiper--work"
-            class="left-fl-space-s hidden text-content-light md:block"
+            class="left-fluid-s text-content-light hidden md:block"
         />
         <Next
             swiper="swiper--work"
-            class="right-fl-space-s hidden text-content-light md:block"
+            class="right-fluid-s text-content-light hidden md:block"
         />
         <div
-            class="swiper--work__pagination absolute !bottom-fl-space-s !left-fl-space-s right-auto z-10 mx-auto w-auto text-left text-fl-step--1 font-light !text-content-light md:!left-auto md:!right-fl-space-s md:text-right"
+            class="swiper--work__pagination bottom-fluid-s! left-fluid-s! text-step--1 text-content-light! md:right-fluid-s! absolute right-auto z-10 mx-auto w-auto text-left font-light md:left-auto! md:text-right"
         >
         </div>
         <div
-            class="pointer-events-none absolute left-1/2 top-screenSvh z-shortcuts -translate-x-1/2 -translate-y-full pb-fl-space-s"
+            class="top-screenSvh pb-fluid-s pointer-events-none absolute left-1/2 z-(--z-shortcuts) -translate-x-1/2 -translate-y-full"
         >
             <SwipePrompt />
         </div>

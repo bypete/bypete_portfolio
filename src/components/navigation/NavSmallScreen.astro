@@ -32,7 +32,7 @@ const {
                     x-id="['accordion-header-id', 'accordion-panel-id']"
                     x-bind:aria-expanded="isOpen"
                 >
-                    <div class="flex items-center justify-between gap-x-fl-space-s">
+                    <div class="gap-x-fluid-s flex items-center justify-between">
                         <MobileLink
                             {isActive}
                             url={item.url}
@@ -53,7 +53,7 @@ const {
                                 name="hugeicons:plus-sign-circle"
                                 title="close icon"
                                 x-bind:class="{'rotate-45': isOpen, 'rotate-0': !isOpen}"
-                                class="h-fl-space-m w-fl-space-m transition-transform duration-500"
+                                class="h-fluid-m w-fluid-m transition-transform duration-500"
                             />
                         </button>
                     </div>

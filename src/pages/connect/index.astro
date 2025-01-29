@@ -9,18 +9,18 @@ const title = 'Connect';
 ---
 
 <PageLayout title={title} isWide={true} prose={false}>
-    <div class="grid grid-cols-1 gap-fl-space-m md:grid-cols-2">
-        <div class="md:order-2 md:mt-fl-space-m">
+    <div class="gap-fluid-m grid grid-cols-1 md:grid-cols-2">
+        <div class="md:mt-fluid-m md:order-2">
             <div class="mr-auto w-full max-w-[40ch]">
                 <Note theme="info" hasIcon={true}>
-                    <p class="text-fl-step-0 font-semibold">
+                    <p class="text-step-0 font-semibold">
                         Use this form to send me a message and I'll get back to
                         you shortly.
                     </p>{
                         available && (
                             <p>
                                 I'm
-                                <span class="hilite inline-block whitespace-nowrap px-fl-space-3xs py-px">
+                                <span class="hilite px-fluid-3xs inline-block py-px whitespace-nowrap">
                                     currently available
                                 </span>
                                 for new roles in
@@ -34,15 +34,15 @@ const title = 'Connect';
                             href="/about/"
                             class="link">bio</a
                         > or visit my LinkedIn profile.
-                    </p><p class="mt-fl-space-m">
+                    </p><p class="mt-fluid-m">
                         <a
                             href="https://www.linkedin.com/in/peter-wallace-a5002a7a/"
-                            class="link flex items-center justify-center gap-2 rounded border border-solid border-slate-800 bg-slate-800 px-fl-space-2xs py-fl-space-3xs text-sky-400 no-underline hover:border-sky-500 hover:bg-sky-500 hover:text-white hover:no-underline"
+                            class="link px-fluid-2xs py-fluid-3xs flex items-center justify-center gap-2 rounded-xs border border-solid border-slate-800 bg-slate-800 text-sky-400 no-underline hover:border-sky-500 hover:bg-sky-500 hover:text-white hover:no-underline"
                         >
                             View my profile
                             <Icon
                                 name="mdi:linkedin"
-                                class="h-fl-space-m w-auto fill-current"
+                                class="h-fluid-m w-auto fill-current"
                             />
                         </a>
                     </p>
@@ -50,7 +50,7 @@ const title = 'Connect';
             </div>
         </div>
         <div
-            class="rounded bg-surface-raised p-fl-space-m shadow-raised md:order-1"
+            class="bg-surface-raised p-fluid-m shadow-raised rounded-xs md:order-1"
         >
             <ContactForm />
         </div>

@@ -27,15 +27,13 @@ interface Props {
 const { cover, logo, readTime, tags, taster, title, url } = Astro.props;
 ---
 
-<article
-    class="grid grid-cols-1 gap-fl-space-m grid-areas-listing md:grid-cols-listing md:grid-areas-listingwide"
->
+<article class="gap-fluid-m grid grid-cols-1 md:grid-cols-(--gtc-listing)">
     {
         cover && (
-            <div class="grid-in-image">
+            <div class="md:order-2">
                 <a
                     href={url}
-                    class="relative block w-full pb-widescreen lg:pb-tv"
+                    class="aspect-photo relative block w-full md:aspect-video"
                 >
                     <Image
                         src={cover.src}
@@ -53,16 +51,16 @@ const { cover, logo, readTime, tags, taster, title, url } = Astro.props;
                             densities={[1.5, 2]}
                             width={300}
                             alt={title + ' logo'}
-                            class="absolute left-1/2 top-1/2 m-auto h-auto max-w-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 group-hover:max-w-1/2 group-focus:max-w-1/2 "
+                            class="absolute top-1/2 left-1/2 m-auto h-auto max-w-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 group-hover:max-w-1/2 group-focus:max-w-1/2"
                         />
                     )}
                 </a>
             </div>
         )
     }
-    <div class="grid grid-cols-1 gap-fl-space-xs grid-in-description">
+    <div class="gap-fluid-xs grid grid-cols-1 md:order-1">
         <div>
-            <h2 class="font-headline text-fl-step-3 leading-tight">
+            <h2 class="font-headline text-step-3 leading-tight">
                 <a href={url} class="link" set:html={title} />
             </h2>
             {taster && <p set:html={taster} />}

@@ -31,7 +31,7 @@ import '~/styles/tailwind.css';
         <GoogleTag />
     </head>
     <body
-        class="relative m-0 overflow-x-hidden bg-surface font-Roboto text-fl-base text-content antialiased"
+        class="bg-surface font-Roboto text-step-0 text-content relative m-0 overflow-x-hidden antialiased"
         x-data="{ isMobileNavOpen: false, showOverlay: false, showUnderlay: false, }"
         x-ref="body"
         id="top"
@@ -47,15 +47,15 @@ import '~/styles/tailwind.css';
         <div id="wrapperCanvas" class="relative">
             <OffCanvasNavigation id="wrapperOffCanvasRight" {isHeroDark} />
 
-            <Overlay class="bg-overlay-dark" />
+            <Overlay class="bg-overlay-dark/80" />
 
             <div
                 id="wrapperContent"
-                class="relative grid grid-cols-1 grid-rows-[auto_1fr_auto] bg-surface"
+                class="bg-surface @container/page relative grid grid-cols-1 grid-rows-[auto_1fr_auto]"
             >
                 <Header {isHeroDark} />
                 <Underlay {isHeroDark} />
-                <div class="bg-surface outline-none">
+                <div class="bg-surface outline-hidden">
                     <div
                         class="shader pointer-events-none absolute inset-0 h-full w-full opacity-[2%]"
                     >
@@ -67,7 +67,7 @@ import '~/styles/tailwind.css';
         </div>
 
         <div
-            class="pointer-events-none fixed left-1/2 top-screenSvh z-toast w-full -translate-x-1/2 -translate-y-full p-fl-space-xs md:max-w-sm"
+            class="p-fluid-xs not-dynamic:top-[100vh] pointer-events-none fixed top-[100svh] left-1/2 z-(--z-toast) w-full -translate-x-1/2 -translate-y-full md:max-w-sm"
         >
             <CookieNotice />
         </div>

@@ -13,18 +13,18 @@ const { clients } = Astro.props;
 ---
 
 <div
-    class="swiper swiper--clients bg-surface-raised py-fl-space-s lg:rounded-lg lg:border-x-2 lg:border-line-quiet"
+    class="swiper swiper--clients border-line-quiet bg-surface-raised rounded border-x-2"
 >
-    <div class="swiper-wrapper not-prose flex items-center">
+    <div class="swiper-wrapper py-fluid-s not-prose flex items-center">
         {
             clients.map((client, i) => (
-                <div class="slide swiper-slide flex items-center justify-center px-fl-space-m">
+                <div class="slide swiper-slide px-fluid-m flex items-center justify-center">
                     <Image
                         src={client.src}
                         alt={client.alt}
                         width={300}
                         loading="eager"
-                        class="max-h-fl-space-l w-auto max-w-fl-space-3xl opacity-60 grayscale transition-all hover:opacity-100 hover:filter-none "
+                        class="max-h-fluid-l max-w-fluid-3xl w-auto opacity-60 grayscale transition-all hover:opacity-100 hover:filter-none"
                     />
                 </div>
             ))

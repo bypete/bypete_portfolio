@@ -33,12 +33,12 @@ const formattedPosts = formatBlogPosts(posts, {
 ---
 
 <PageLayout title={tag} isWide={false} prose={false}>
-    <p class="mb-fl-space-m">
+    <p class="mb-fluid-m">
         Displaying {formattedPosts.length} post{
             formattedPosts.length > 1 && 's'
         } tagged with <strong>{tag}</strong>
     </p>
-    <div class="grid columns-1 gap-y-fl-space-xl">
+    <div class="gap-y-fluid-xl grid columns-1">
         {
             formattedPosts.map(async (post) => {
                 const { remarkPluginFrontmatter } = await render(post);
@@ -57,7 +57,7 @@ const formattedPosts = formatBlogPosts(posts, {
             })
         }
     </div>
-    <p class="mt-fl-space-xl">
+    <p class="mt-fluid-xl">
         View <a href="/tags/" class="link">all tags</a>
     </p>
 </PageLayout>

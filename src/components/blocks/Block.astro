@@ -72,31 +72,31 @@ const color = legibility || (dark ? 'text-content-light' : 'text-content-dark');
 const layoutMatrix: LayoutMatrix = {
     1: {
         default: {
-            grid: ['items-center', 'justify-center', 'gap-fl-space-2xs'],
+            grid: ['items-center', 'justify-center', 'gap-fluid-2xs'],
             slots: { 1: ['max-w-[40ch]'] },
         },
         left: {
-            grid: ['grid-flow-row', 'md:grid-cols-[1fr,2fr]', 'gap-fl-space-m'],
-            slots: { 1: ['py-fl-space-2xl'] },
+            grid: ['grid-flow-row', 'md:grid-cols-[1fr_2fr]', 'gap-fluid-m'],
+            slots: { 1: ['py-fluid-2xl'] },
         },
         right: {
-            grid: ['grid-flow-row', 'md:grid-cols-[2fr,1fr]', 'gap-fl-space-m'],
-            slots: { 1: ['py-fl-space-2xl'] },
+            grid: ['grid-flow-row', 'md:grid-cols-[2fr_1fr]', 'gap-fluid-m'],
+            slots: { 1: ['py-fluid-2xl'] },
         },
         center: {
             grid: ['grid-cols-1', 'text-center'],
-            slots: { 1: ['max-w-[40ch]', 'py-fl-space-2xl'] },
+            slots: { 1: ['max-w-[40ch]', 'py-fluid-2xl'] },
         },
     },
     2: {
         default: {
-            grid: ['grid-flow-row', 'md:grid-cols-[1fr,1fr]', 'gap-fl-space-m'],
+            grid: ['grid-flow-row', 'md:grid-cols-[1fr_1fr]', 'gap-fluid-m'],
         },
         left: {
-            grid: ['grid-flow-row', 'md:grid-cols-[3fr,2fr]', 'gap-fl-space-m'],
+            grid: ['grid-flow-row', 'md:grid-cols-[3fr_2fr]', 'gap-fluid-m'],
         },
         right: {
-            grid: ['grid-flow-row', 'md:grid-cols-[2fr,3fr]', 'gap-fl-space-m'],
+            grid: ['grid-flow-row', 'md:grid-cols-[2fr_3fr]', 'gap-fluid-m'],
         },
         center: {
             grid: ['grid-cols-1', 'text-center'],
@@ -104,20 +104,20 @@ const layoutMatrix: LayoutMatrix = {
     },
     3: {
         default: {
-            grid: ['grid-cols-1', 'md:grid-cols-3', 'gap-fl-space-m'],
+            grid: ['grid-cols-1', 'md:grid-cols-3', 'gap-fluid-m'],
         },
         center: {
             grid: [
                 'grid-cols-1',
                 'md:grid-cols-3',
                 'text-center',
-                'gap-fl-space-m',
+                'gap-fluid-m',
             ],
         },
     },
     4: {
         default: {
-            grid: ['grid-cols-2', 'md:grid-cols-4', 'gap-fl-space-m'],
+            grid: ['grid-cols-2', 'md:grid-cols-4', 'gap-fluid-m'],
         },
     },
 };
@@ -131,7 +131,7 @@ const grid = gridClass ? gridClass.split(' ') : currentLayout.grid ?? [];
 const layoutClass = [
     ...grid,
     overflow && 'overflow-hidden',
-    container && 'mx-auto w-full max-w-container',
+    container && 'mx-auto w-full container',
     color,
 ].filter(Boolean); // Filter out falsey values like `undefined` or `false`
 
@@ -225,7 +225,7 @@ if (background) {
     </div>
     {
         prompt && (
-            <div class="pointer-events-none absolute bottom-fl-space-s left-1/2 z-100 -translate-x-1/2">
+            <div class="bottom-fluid-s pointer-events-none absolute left-1/2 z-100 -translate-x-1/2">
                 {prompt === 'scroll' && <ScrollPrompt />}
                 {prompt === 'swipe' && <SwipePrompt />}
             </div>
