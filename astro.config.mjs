@@ -14,10 +14,13 @@ const rehypeExternalLinksConfig = [
     {
         target: '_blank',
         rel: ['noopener', 'noreferrer'],
-        content: {
-            type: 'text',
-            value: '🔗',
-        },
+        // content: {
+        //     type: 'text',
+        //     value: '🔗',
+        // },
+        properties: {
+          className: ['external']
+        }
     },
 ];
 let svgoPrefixIdsCount = 0;

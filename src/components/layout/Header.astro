@@ -14,13 +14,13 @@ const currentPath = new URL(Astro.request.url).pathname;
 
 <header
     id="banner"
-    class="group py-fluid-s shadow-banner fixed top-0 z-(--z-banner) w-full opacity-0 shadow-gray-950/10 backdrop-blur-[1px] group-data-start/page:shadow-none"
+    class="group py-fluid-s shadow-banner fixed top-0 z-(--z-banner) w-full opacity-0 shadow-gray-950/10 backdrop-blur-[1px] group-data-[banner=start]/page:shadow-none"
     x-cloak
     data-off-canvas-sticky
 >
     <div
         class:list={[
-            'gap-x-fluid-m container mx-auto grid grid-cols-(--gtc-header) items-center group-data-up/page:shadow-transparent',
+            'gap-x-fluid-m container mx-auto grid grid-cols-(--gtc-header) items-center group-data-[banner=up]/page:drop-shadow-none',
             isHeroDark && 'drop-shadow-logo shadow-black/25',
         ]}
     >
@@ -40,7 +40,7 @@ const currentPath = new URL(Astro.request.url).pathname;
                                     class="h-fluid-l w-auto"
                                 />
                             </span>
-                            <span class="col-start-1 opacity-0 group-data-up/page:opacity-100">
+                            <span class="col-start-1 opacity-0 group-data-[banner=up]/page:opacity-100">
                                 <Icon
                                     name="bypete__brand"
                                     class="h-fluid-l w-auto"

@@ -5,240 +5,9 @@
 @plugin '@tailwindcss/typography';
 @plugin '@tailwindcss/forms';
 
-/* @config '../../tailwind.config.mjs'; */
-@utility container {
-    padding-inline: var(--spacing-fluid-m);
-    max-width: 78.75rem; /* 1260px */
-}
-
-@layer base {
-    .link {
-        @apply font-medium text-(--link) decoration-solid decoration-2 hover:underline;
-    }
-    h1 {
-        @apply font-extrabold;
-    }
-
-    /* SVGs
----------------------------------------------------------------------------------*/
-    svg {
-        stroke-width: 2;
-    }
-
-    path,
-    circle,
-    ellipse,
-    line,
-    polygon,
-    polyline,
-    rect {
-        stroke-width: inherit;
-    }
-
-    /* Uses SVGs in this folder: src/assets/svg */
-    .mask--plus__base_repeat {
-        mask: svg-load('plus__base_repeat.svg');
-    }
-
-    .shader {
-        background-image: svg-load('arcs__shadow.svg');
-        background-repeat: repeat-y;
-        background-size: 100%;
-        background-position: center top;
-    }
-
-    .plusheap {
-        background-image: var(--plus);
-        background-repeat: repeat-x;
-        background-size: 100%;
-        background-position: center bottom;
-    }
-
-    /* Editorial
----------------------------------------------------------------------------------*/
-
-    .hilite {
-        @apply px-fluid-2xs py-fluid-3xs text-content-dark rounded-xs bg-(--color-hilite) font-medium;
-    }
-
-    .font-headline a {
-        @apply font-extrabold;
-    }
-
-    .capline {
-        @apply relative mb-[1em] before:absolute before:-bottom-[0.5em] before:left-0 before:w-[1.25em] before:border-b-3 before:border-b-teal-400;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        @apply font-headline tracking-tight;
-    }
-
-    h1 {
-        @apply font-extrabold;
-    }
-
-    /* Richtext editor content */
-
-    .rte h2 {
-        /* @apply capline text-step-3 font-bold tracking-tight; */
-        @apply text-step-3 font-bold tracking-tight;
-    }
-
-    .rte h3 {
-        @apply mb-fluid-3xs text-step-1 font-bold;
-    }
-
-    .rte h4 {
-        @apply mb-fluid-3xs text-step-1 font-medium;
-    }
-
-    .rte > p {
-        @apply mb-fluid-xs;
-    }
-
-    .rte > :last-child {
-        @apply mb-0;
-    }
-
-    .rte strong {
-        @apply font-bold;
-    }
-
-    /* subsequent-sibling combinator */
-    .rte .heading ~ .heading {
-        @apply mt-[1.5em];
-    }
-
-    /* Typography | Superscript */
-    sup.new {
-        @apply bg-primary text-step--1 rounded-xs px-0.5 py-px align-top leading-none font-medium text-white!;
-    }
-
-    /* Tables
----------------------------------------------------------------------------------*/
-    .table thead {
-        @apply text-left font-bold;
-    }
-
-    .table th {
-        @apply pb-fluid-2xs border-b pt-0;
-    }
-
-    .table th,
-    .table tbody td {
-        @apply py-1;
-    }
-
-    .table--rows tr {
-        @apply border-b border-gray-300 last:border-0;
-    }
-
-    .table--padded th,
-    .table--padded tbody td {
-        @apply py-fluid-2xs pl-fluid-2xs lg:pl-fluid-xs;
-    }
-    .table--padded tr th,
-    .table--padded tr td {
-        @apply last:pr-fluid-2xs lg:last:pr-fluid-xs;
-    }
-
-    .table--noindent tr td,
-    .table--noindent thead th {
-        @apply first:pl-0 last:pr-0;
-    }
-}
-
-/* Typography plugin */
-@utility prose {
-    --tw-prose-body: var(--color-content);
-    --tw-prose-headings: var(--color-headline);
-    --tw-prose-bold: var(--color-content);
-    --tw-prose-quotes: var(--color-blockquote);
-    --tw-prose-code: var(--color-content);
-
-    code:not(pre[data-language] code) {
-        background: var(--color-line-quiet);
-        padding: var(--spacing-fluid-3xs);
-        border-radius: var(--radius-tight);
-        border: 1px solid var(--color-line);
-        &::before,
-        &::after {
-            display: none;
-        }
-        text-wrap: nowrap;
-    }
-    a {
-        color: var(--color-link);
-        &:hover {
-            color: var(--color-link-dark);
-        }
-    }
-
-    img {
-    }
-
-    picture {
-    }
-
-    figure {
-    }
-
-    blockquote {
-        font-weight: 400;
-    }
-}
-
-@utility breakout {
-    width: 100vw;
-    max-width: none;
-    left: 50%;
-    right: 50%;
-    position: relative;
-    margin-inline: -50vw;
-}
-
-@utility bookmarkclip {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 10%), 0 100%);
-}
-@utility angleclip {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% calc(100% - 80px));
-}
-
-@utility angleclip-lg {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% calc(100% - 120px));
-}
-
-/* prettier-ignore */
-@utility grid-areas-* {
-    grid-template-areas: --value(--gta-*);
-}
-
-@custom-variant permalink {
-    h1,
-    h2 {
-        @slot;
-    }
-}
-
-@custom-variant dynamic {
-    @supports (height: 100dvh) {
-        @slot;
-    }
-}
-
-@custom-variant x-cloak {
-    [x-cloak] {
-        @slot;
-    }
-}
-
 @theme {
-    /* @link https://utopia.fyi/space/calculator?c=320,16,1.2,1200,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6|8,s-l|m-s|s-xs&g=s,l,xl,12 */
+    /* @link https://utopia.fyi/space/calculator?c=320,16,1.2,1200,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6|8|12|16|24,s-l|m-s|s-xs&g=s,l,xl,12 */
+
     /* Space 3xs: 4px → 5px */
     --spacing-fluid-3xs: clamp(0.25rem, 0.2273rem + 0.1136vw, 0.3125rem);
     /* Space 2xs: 8px → 10px */
@@ -259,6 +28,12 @@
     --spacing-fluid-3xl: clamp(6rem, 5.4545rem + 2.7273vw, 7.5rem);
     /* Space 4xl: 128px → 160px */
     --spacing-fluid-4xl: clamp(8rem, 7.2727rem + 3.6364vw, 10rem);
+    /* Space 5xl: 192px → 240px */
+    --spacing-fluid-5xl: clamp(12rem, 10.9091rem + 5.4545vw, 15rem);
+    /* Space 6xl: 256px → 320px */
+    --spacing-fluid-6xl: clamp(16rem, 14.5455rem + 7.2727vw, 20rem);
+    /* Space 7xl: 384px → 480px */
+    --spacing-fluid-7xl: clamp(24rem, 21.8182rem + 10.9091vw, 30rem);
 
     /* One-up pairs */
     /* Space 3xs-2xs: 4px → 10px */
@@ -279,6 +54,12 @@
     --spacing-fluid-2xl-3xl: clamp(4rem, 2.7273rem + 6.3636vw, 7.5rem);
     /* Space 3xl-4xl: 96px → 160px */
     --spacing-fluid-3xl-4xl: clamp(6rem, 4.5455rem + 7.2727vw, 10rem);
+    /* Space 4xl-5xl: 128px → 240px */
+    --spacing-fluid-4xl-5xl: clamp(8rem, 5.4545rem + 12.7273vw, 15rem);
+    /* Space 5xl-6xl: 192px → 320px */
+    --spacing-fluid-5xl-6xl: clamp(12rem, 9.0909rem + 14.5455vw, 20rem);
+    /* Space 6xl-7xl: 256px → 480px */
+    --spacing-fluid-6xl-7xl: clamp(16rem, 10.9091rem + 25.4545vw, 30rem);
 
     /* Custom pairs */
     /* Space s-l: 16px → 40px */
@@ -287,26 +68,19 @@
     --spacing-fluid-m-s: clamp(1.25rem, 1.5909rem + -0.4545vw, 1.5rem);
     /* Space s-xs: 16px → 15px */
     --spacing-fluid-s-xs: clamp(0.9375rem, 1.0227rem + -0.1136vw, 1rem);
+
+    /* Custom */
     --spacing-splash-overlap: calc(var(--spacing-fluid-3xl) * 2);
     --spacing-headerheight: calc(
         var(--spacing-fluid-l) + (var(--spacing-fluid-s) * 2)
     );
 
     --spacing-tight: 3px;
-    --spacing-50: 12.5rem; /* 200px */
-    --spacing-120: 30rem; /* 480px */
-    --spacing-100: 25rem; /* 400px */
     --spacing-block: 40vw; /* 5:2 default block / cinema */
     --spacing-spread: 50vw; /* 2:1 */
     --spacing-square: 100vw; /* 1:1 */
     --spacing-widescreen: 56.25vw; /* 16:9 */
     --spacing-photo: 66.67vw; /* 3:2 */
-    --spacing-portrait: 150vw; /* 2:3 */
-    --spacing-tv: 75vw; /* 4:3 */
-    --spacing-super16: 60vw; /* 5:3 mobile block image */
-    --spacing-5/2pc: 2.5%;
-    --spacing-5pc: 5%;
-    --spacing-5px: 0.3125rem; /* 5px */
 
     --container-page: 78.75rem; /* 1260px */
 
@@ -322,11 +96,11 @@
 
     --shadow-icon: inset 0 2px 6px -1px var(--tw-shadow-color);
     --shadow-raised: 0px 2px 6px -1px rgba(0, 0, 0, 0.08),
-        0px 0px 3px -1px rgba(0, 0, 0, 0.8);
+        0px 0px 3px -1px rgba(0, 0, 0, 0.08);
     --shadow-overlay: 0px 2px 10px -1px rgba(0, 0, 0, 0.1),
         0px 0px 5px -1px rgba(0, 0, 0, 0.45);
-    --shadow-inside: inset 0 25px 50px -20px rgba(0, 0, 0, 0.8),
-        inset 0 2px 0px -1px rgba(0, 0, 0, 0.8);
+    --shadow-inside: inset 0 25px 50px -20px rgba(0, 0, 0, 0.08),
+        inset 0 2px 0px -1px rgba(0, 0, 0, 0.08);
 
     --shadow-inset: inset 0 2px 6px -1px var(--color-shadow-inset),
         0px 0px 1px 1px var(--color-shadow-highlight);
@@ -472,6 +246,286 @@
     --color-blockquote: var(--copy-dark);
 
     --color-disabled: var(--line-quiet);
+
+    /* Animations */
+    --animate-blink: blink 1s infinite;
+    --animate-nudge-right: nudge-right 1s 3;
+    --animate-nudge-down: nudge-down 1s 3;
+    --animate-fade-in-up: fade-in-up 250ms ease-in-out forwards;
+
+    /* Animation Keyframes */
+    @keyframes blink {
+        0%,
+        100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes nudge-right {
+        0%,
+        100% {
+            transform: translateX(0%);
+            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+        }
+        50% {
+            transform: translateX(25%);
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+        }
+    }
+
+    @keyframes nudge-down {
+        0%,
+        100% {
+            transform: translateY(0%);
+            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+        }
+        50% {
+            transform: translateY(25%);
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+        }
+    }
+
+    @keyframes fade-in-up {
+        0% {
+            opacity: 0;
+            transform: translateY(50%);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+@layer base {
+    .link {
+        @apply text-link font-medium decoration-solid decoration-2 hover:underline;
+    }
+    h1 {
+        @apply font-extrabold;
+    }
+
+    svg {
+        stroke-width: 2;
+    }
+
+    path,
+    circle,
+    ellipse,
+    line,
+    polygon,
+    polyline,
+    rect {
+        stroke-width: inherit;
+    }
+
+    /* Uses SVGs in this folder: src/assets/svg */
+    .mask--plus__base_repeat {
+        mask: svg-load('plus__base_repeat.svg');
+    }
+
+    .shader {
+        background-image: svg-load('arcs__shadow.svg');
+        background-repeat: repeat-y;
+        background-size: 100%;
+        background-position: center top;
+    }
+
+    .plusheap {
+        background-image: var(--plus);
+        background-repeat: repeat-x;
+        background-size: 100%;
+        background-position: center bottom;
+    }
+
+    /*--- Editorial ---*/
+
+    .hilite {
+        @apply px-fluid-2xs py-fluid-3xs text-content-dark rounded-xs bg-(--color-hilite) font-medium;
+    }
+
+    .font-headline a {
+        @apply font-extrabold;
+    }
+
+    .capline {
+        @apply relative mb-[1em] before:absolute before:-bottom-[0.5em] before:left-0 before:w-[1.25em] before:border-b-3 before:border-b-teal-400;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-headline tracking-tight;
+    }
+
+    h1 {
+        @apply font-extrabold;
+    }
+
+    /* Richtext editor content */
+
+    .rte h2 {
+        /* @apply capline text-step-3 font-bold tracking-tight; */
+        @apply text-step-3 font-bold tracking-tight;
+    }
+
+    .rte h3 {
+        @apply mb-fluid-3xs text-step-1 font-bold;
+    }
+
+    .rte h4 {
+        @apply mb-fluid-3xs text-step-1 font-medium;
+    }
+
+    .rte > p {
+        @apply mb-fluid-xs;
+    }
+
+    .rte > :last-child {
+        @apply mb-0;
+    }
+
+    .rte strong {
+        @apply font-bold;
+    }
+
+    /* subsequent-sibling combinator */
+    .rte .heading ~ .heading {
+        @apply mt-[1.5em];
+    }
+
+    /* Typography | Superscript */
+    sup.new {
+        @apply bg-primary text-step--1 rounded-xs px-0.5 py-px align-top leading-none font-medium text-white!;
+    }
+
+    /*--- Tables ---*/
+    .table thead {
+        @apply text-left font-bold;
+    }
+
+    .table th {
+        @apply pb-fluid-2xs border-b pt-0;
+    }
+
+    .table th,
+    .table tbody td {
+        @apply py-1;
+    }
+
+    .table--rows tr {
+        @apply border-b border-gray-300 last:border-0;
+    }
+
+    .table--padded th,
+    .table--padded tbody td {
+        @apply py-fluid-2xs pl-fluid-2xs lg:pl-fluid-xs;
+    }
+    .table--padded tr th,
+    .table--padded tr td {
+        @apply last:pr-fluid-2xs lg:last:pr-fluid-xs;
+    }
+
+    .table--noindent tr td,
+    .table--noindent thead th {
+        @apply first:pl-0 last:pr-0;
+    }
+}
+
+/* Typography plugin */
+@utility prose {
+    --tw-prose-body: var(--color-content);
+    --tw-prose-headings: var(--color-headline);
+    --tw-prose-bold: var(--color-content);
+    --tw-prose-quotes: var(--color-blockquote);
+    --tw-prose-code: var(--color-content);
+
+    code:not(pre[data-language] code) {
+        background: var(--color-line-quiet);
+        padding: var(--spacing-fluid-3xs);
+        border-radius: var(--radius-tight);
+        border: 1px solid var(--color-line);
+        &::before,
+        &::after {
+            display: none;
+        }
+        text-wrap: nowrap;
+    }
+    a:not(.btn) {
+        color: var(--color-link);
+        &:hover {
+            color: var(--color-link-dark);
+        }
+    }
+
+    img {
+    }
+
+    picture {
+    }
+
+    figure {
+    }
+
+    blockquote {
+        font-weight: 400;
+    }
+}
+
+@utility breakout {
+    width: 100vw;
+    max-width: none;
+    left: 50%;
+    right: 50%;
+    position: relative;
+    margin-inline: -50vw;
+}
+
+@utility bookmarkclip {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 10%), 0 100%);
+}
+/* prettier-ignore */
+@utility angleclip-* {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% calc(100% - --value(--spacing-*, length, [length])));
+}
+
+/* prettier-ignore */
+@utility grid-areas-* {
+    grid-template-areas: --value(--gta-*);
+}
+
+@utility external {
+    @apply after:i-lucide-external-link after:text-step--1 after:ml-0.5 after:-translate-y-0.5;
+}
+
+@custom-variant permalink {
+    h1,
+    h2 {
+        @slot;
+    }
+}
+
+@custom-variant dynamic {
+    @supports (height: 100dvh) {
+        @slot;
+    }
+}
+
+@custom-variant x-cloak {
+    [x-cloak] {
+        @slot;
+    }
+}
+
+@utility container {
+    padding-inline: var(--spacing-fluid-m);
+    max-width: 78.75rem; /* 1260px */
 }
 
 /*
@@ -495,7 +549,6 @@
 /* These styles will always be included in the build and take precedence */
 :root {
     --swiper-theme-color: var(--color-accent);
-    /* --swiper-pagination-color: theme('colors.white'); */
     --swiper-pagination-bullet-inactive-color: white;
     --swiper-pagination-bullet-inactive-opacity: 1;
 }
