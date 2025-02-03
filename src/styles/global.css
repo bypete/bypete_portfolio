@@ -647,6 +647,15 @@
     .rte :where(blockquote p):not(:where(.not-rte, .not-rte *)):last-child {
         margin-bottom: 0;
     }
+
+    .rte :where(code):not(:where(.not-rte, .not-rte *, pre *)) {
+        background: var(--color-surface-raised);
+        padding-inline: var(--spacing-fluid-3xs);
+        padding-block: var(--spacing-fluid-3xs);
+        border-radius: var(--radius-tight);
+        border: 1px solid var(--color-line-shout);
+        font-weight: var(--font-weight-semibold);
+    }
 }
 
 @utility breakout {
