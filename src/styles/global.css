@@ -1,8 +1,7 @@
 @import 'tailwindcss';
-@import './custom-base-styles.css' layer(base);
-@import './custom-components.css';
+@import './base.css' layer(base);
 @plugin '@egoist/tailwindcss-icons';
-@plugin '@tailwindcss/typography';
+/* @plugin '@tailwindcss/typography'; */
 @plugin '@tailwindcss/forms';
 
 @theme {
@@ -142,7 +141,7 @@
 
     --font-Roboto: 'Roboto', 'sans-serif';
     --font-headline: 'Montserrat', 'sans-serif';
-    --font-Georgia: 'Georgia', 'Times New Roman', 'Times,serif';
+    --font-georgia: 'Georgia', 'Times New Roman', 'Times,serif';
 
     --color-transparent: transparent;
 
@@ -300,12 +299,47 @@
     }
 }
 
+/* Layer | Base
+------------------------------------------------------------ */
 @layer base {
-    .link {
-        @apply text-link font-medium decoration-solid decoration-2 hover:underline;
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
     }
+
     h1 {
-        @apply font-extrabold;
+        font-weight: var(--font-weight-extrabold);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-headline);
+        letter-spacing: var(--tracking-tight);
+        & a {
+            font-weight: var(--font-weight-extrabold);
+        }
+    }
+
+    h2 {
+        font-size: var(--text-step-3);
+        font-weight: var(--font-weight-bold);
+    }
+
+    h3 {
+        font-size: var(--text-step-1);
+        font-weight: var(--font-weight-bold);
+    }
+
+    h4 {
+        font-size: var(--text-step-0);
+        font-weight: var(--font-weight-medium);
     }
 
     svg {
@@ -321,19 +355,197 @@
     rect {
         stroke-width: inherit;
     }
+}
 
-    /* Uses SVGs in this folder: src/assets/svg */
-    .mask--plus__base_repeat {
-        mask: svg-load('plus__base_repeat.svg');
+/* Layer | Utilities
+------------------------------------------------------------ */
+@layer utilities {
+}
+
+/* Layer | Components
+------------------------------------------------------------ */
+@layer components {
+    .link {
+        color: var(--color-link);
+        font-weight: var(--font-weight-medium);
+        text-decoration-style: solid;
+        text-decoration-thickness: 2px;
+        &:hover {
+            text-decoration-line: underline;
+        }
+    }
+    /*--- Forms --- */
+
+    input {
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        &[type='number'] {
+            -moz-appearance: textfield;
+        }
     }
 
-    .shader {
-        background-image: svg-load('arcs__shadow.svg');
-        background-repeat: repeat-y;
-        background-size: 100%;
-        background-position: center top;
+    .form__input,
+    .form__select,
+    .form__textarea {
+        @apply form-base form-focus;
     }
 
+    .form__input,
+    .form__select,
+    .form__textarea,
+    .form__checkbox {
+        &.error {
+            @apply focus:border-focus focus:ring-focus border-transparent ring-2 ring-red-200;
+        }
+    }
+
+    .form__input.readonly,
+    .form__select.readonly {
+        @apply pointer-events-none border border-gray-300 bg-gray-100 select-none focus:border-gray-300 focus:bg-gray-100 focus:ring-0 focus:outline-hidden;
+    }
+
+    .form__checkbox {
+        @apply text-primary border-line form-focus rounded-xs border px-2 py-2;
+    }
+
+    .form__radio {
+        @apply text-primary border-line form-focus border px-2 py-2;
+    }
+
+    /*--- Forms | Switch ---*/
+    .switch {
+        @apply flex cursor-pointer items-center;
+        &__bg {
+            @apply shadow-inset relative h-6 w-11 overflow-hidden rounded-full bg-gray-300 after:absolute after:top-0.5 after:left-0.5 after:h-5 after:w-5 after:rounded-full after:border-2 after:border-gray-400 after:bg-white after:shadow-xs after:transition;
+            input:checked + & {
+                @apply bg-primary;
+                &::after {
+                    @apply border-primary translate-x-full transform;
+                }
+            }
+        }
+        &__label {
+            @apply mr-3;
+        }
+    }
+
+    /*--- Lists ---*/
+    .list {
+        @apply space-y-2 pl-0!;
+        & li {
+            @apply list-li-base;
+            position: relative;
+            line-height: var(--leading-normal);
+        }
+    }
+
+    .list--bullet li {
+        @apply before:i-ci-dummy-square-small before:text-primary before:translate-y-px before:text-[24px];
+    }
+    .list--checklist li {
+        @apply before:i-lucide-check-circle-2 before:text-teal-500;
+    }
+    .list--counter {
+        & > li {
+            @apply pl-fluid-l relative list-none;
+            counter-increment: a;
+            &::before {
+                @apply top-fluid-3xs mr-fluid-xs h-fluid-m w-fluid-m bg-primary text-step-1 absolute left-0 block rounded-full text-center font-black text-white;
+                content: counter(a);
+            }
+        }
+    }
+
+    /*--- Tables ---*/
+    .table thead {
+        text-align: left;
+        font-weight: var(--font-weight-bold);
+    }
+
+    .table th {
+        padding-bottom: var(--spacing-fluid-2xs);
+        border-bottom-width: 1px;
+        padding-top: calc(var(--spacing) * 0);
+    }
+
+    .table th,
+    .table tbody td {
+        padding-block: calc(var(--spacing) * 1);
+    }
+
+    .table--rows tr {
+        border-bottom-width: 1px;
+        border-color: var(--color-line);
+        &:last-child {
+            border-width: 0px;
+        }
+    }
+
+    .table--padded th,
+    .table--padded tbody td {
+        padding-block: var(--spacing-fluid-2xs);
+        padding-left: var(--spacing-fluid-2xs);
+        @apply lg:pl-fluid-xs;
+    }
+    .table--padded tr th,
+    .table--padded tr td {
+        &:last-child {
+            padding-right: var(--spacing-fluid-2xs);
+        }
+        @apply lg:last:pr-fluid-xs;
+    }
+
+    .table--noindent tr td,
+    .table--noindent thead th {
+        &:last-child {
+            padding-left: calc(var(--spacing) * 0);
+        }
+        &:first-child {
+            padding-right: calc(var(--spacing) * 0);
+        }
+    }
+
+    /*--- Labels ---*/
+    .label-info {
+        @apply label-base;
+        background-color: var(--color-brand);
+        color: var(--color-content-dark);
+        border-color: var(--color-brand);
+    }
+    .label-disabled {
+        @apply label-base;
+        background-color: var(--color-line-whisper);
+        color: var(--color-line-loud);
+        border-color: var(--color-line-quiet);
+    }
+    .label-alert {
+        @apply label-base;
+        background-color: var(--color-warning);
+        color: var(--color-content-light);
+        border-color: var(--color-warning);
+    }
+
+    /*--- Animation ---*/
+    [data-animate] {
+        opacity: 0;
+    }
+
+    /*--- Blockquotes ---*/
+    blockquote {
+        @apply my-fluid-l pl-fluid-xs font-georgia text-step-1 relative block text-left;
+        &::before {
+            @apply text-primary i-lucide-message-square-quote block text-[1.5em] leading-none;
+            content: '';
+        }
+        cite {
+            @apply mt-fluid-xs text-step-0 leading-fluid-m text-content-quiet mb-0 not-italic;
+        }
+    }
+
+    /*--- SVGs | folder: src/assets/svg ---*/
     .plusheap {
         background-image: var(--plus);
         background-repeat: repeat-x;
@@ -341,140 +553,99 @@
         background-position: center bottom;
     }
 
+    .shader {
+        background-image: var(--shader);
+        background-repeat: repeat-y;
+        background-size: 100%;
+        background-position: center top;
+    }
+
     /*--- Editorial ---*/
-
     .hilite {
-        @apply px-fluid-2xs py-fluid-3xs text-content-dark rounded-xs bg-(--color-hilite) font-medium;
+        padding: var(--spacing-fluid-3xs);
+        color: var(--color-content-dark);
+        border-radius: var(--radius-xs);
+        background-color: var(--color-hilite);
+        font-weight: var(--font-weight-medium);
     }
 
-    .font-headline a {
-        @apply font-extrabold;
+    sup.new {
+        background-color: var(--color-primary);
+        font-size: var(--text-step--1);
+        border-radius: var(--radius-xs);
+        padding-inline: calc(var(--spacing) * 0.5);
+        padding-block: 1px;
+        vertical-align: top;
+        line-height: 1;
+        font-weight: var(--font-weight-medium);
+        color: var(--color-white);
     }
 
-    .capline {
-        @apply relative mb-[1em] before:absolute before:-bottom-[0.5em] before:left-0 before:w-[1.25em] before:border-b-3 before:border-b-teal-400;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        @apply font-headline tracking-tight;
-    }
-
-    h1 {
-        @apply font-extrabold;
-    }
-
-    /* Richtext editor content */
-
-    .rte h2 {
-        /* @apply capline text-step-3 font-bold tracking-tight; */
-        @apply text-step-3 font-bold tracking-tight;
-    }
-
-    .rte h3 {
-        @apply mb-fluid-3xs text-step-1 font-bold;
-    }
-
-    .rte h4 {
-        @apply mb-fluid-3xs text-step-1 font-medium;
-    }
-
-    .rte > p {
-        @apply mb-fluid-xs;
-    }
-
-    .rte > :last-child {
-        @apply mb-0;
-    }
-
-    .rte strong {
-        @apply font-bold;
+    .rte {
+        h2 {
+            @apply capline;
+        }
     }
 
     /* subsequent-sibling combinator */
-    .rte .heading ~ .heading {
-        @apply mt-[1.5em];
+    .rte
+        :where(h1, h2, h3, h4, h5, h6)
+        ~ :where(h1, h2, h3, h4, h5, h6):not(:where(.not-rte, .not-rte *)) {
+        margin-top: 1.5em;
     }
 
-    /* Typography | Superscript */
-    sup.new {
-        @apply bg-primary text-step--1 rounded-xs px-0.5 py-px align-top leading-none font-medium text-white!;
-    }
-
-    /*--- Tables ---*/
-    .table thead {
-        @apply text-left font-bold;
-    }
-
-    .table th {
-        @apply pb-fluid-2xs border-b pt-0;
-    }
-
-    .table th,
-    .table tbody td {
-        @apply py-1;
-    }
-
-    .table--rows tr {
-        @apply border-b border-gray-300 last:border-0;
-    }
-
-    .table--padded th,
-    .table--padded tbody td {
-        @apply py-fluid-2xs pl-fluid-2xs lg:pl-fluid-xs;
-    }
-    .table--padded tr th,
-    .table--padded tr td {
-        @apply last:pr-fluid-2xs lg:last:pr-fluid-xs;
-    }
-
-    .table--noindent tr td,
-    .table--noindent thead th {
-        @apply first:pl-0 last:pr-0;
-    }
-}
-
-/* Typography plugin */
-@utility prose {
-    --tw-prose-body: var(--color-content);
-    --tw-prose-headings: var(--color-headline);
-    --tw-prose-bold: var(--color-content);
-    --tw-prose-quotes: var(--color-blockquote);
-    --tw-prose-code: var(--color-content);
-
-    code:not(pre[data-language] code) {
-        background: var(--color-line-quiet);
-        padding: var(--spacing-fluid-3xs);
-        border-radius: var(--radius-tight);
-        border: 1px solid var(--color-line);
-        &::before,
-        &::after {
-            display: none;
-        }
-        text-wrap: nowrap;
-    }
-    a:not(.btn) {
+    .rte :where(a):not(:where(.not-rte, .not-rte *)) {
         color: var(--color-link);
         &:hover {
             color: var(--color-link-dark);
         }
     }
 
-    img {
+    .rte :where(p):not(:where(.not-rte, .not-rte *)) {
+        margin-block: var(--spacing-fluid-s);
     }
 
-    picture {
+    .rte > :last-child {
+        margin-bottom: 0;
     }
 
-    figure {
+    .rte pre {
+        padding: var(--spacing-fluid-m);
+        margin-block: var(--spacing-fluid-m);
     }
 
-    blockquote {
-        font-weight: 400;
+    .rte :where(ol, ol > li):not(:where(.not-rte, .not-rte *)) {
+        list-style-type: decimal;
+        padding-inline-start: var(--spacing-fluid-m);
+    }
+
+    .rte :where(li):not(:where(.not-rte, .not-rte *)) {
+        margin-block: var(--spacing-fluid-2xs);
+    }
+
+    .rte :where(ol > li):not(:where(.not-rte, .not-rte *)) {
+        list-style-type: decimal;
+        padding-inline-start: var(--spacing-fluid-2xs);
+    }
+
+    .rte :where(ul ul, ul ol, ol ul, ol ol):not(:where(.not-rte, .not-rte *)) {
+        margin-block: var(--spacing-fluid-2xs);
+    }
+
+    .rte strong {
+        font-weight: var(--font-weight-bold);
+    }
+
+    .rte :where(blockquote):not(:where(.not-rte, .not-rte *)) {
+        border-color: var(--color-line);
+        border-width: 0px;
+        border-left-width: 3px;
+        padding-inline-start: var(--spacing-fluid-m);
+        padding-block: var(--spacing-fluid-2xs);
+    }
+
+    .rte :where(blockquote p):not(:where(.not-rte, .not-rte *)):last-child {
+        margin-bottom: 0;
     }
 }
 
@@ -523,27 +694,67 @@
     }
 }
 
+@utility form-base {
+    border-color: var(--color-line);
+    background-color: var(--color-surface-raised);
+    padding-inline: var(--spacing-fluid-2xs);
+    padding-block: var(--spacing-fluid-3xs);
+    display: block;
+    border-radius: var(--radius-tight);
+    border-width: 1px;
+}
+
+@utility form-focus {
+    &:focus {
+        border-color: var(--color-surface);
+        ring-color: var(--color-focus);
+        ring-width: 2px;
+        outline: none;
+    }
+}
+
+@utility list-li-base {
+    padding-left: var(--spacing-fluid-m);
+    list-style: none;
+    position: relative;
+    &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1.5rem;
+        line-height: normal;
+    }
+}
+
+@utility label-base {
+    padding-inline: var(--spacing-fluid-3xs);
+    padding-block: var(--spacing-fluid-3xs);
+    font-size: var(--text-step--2);
+    display: inline-block;
+    border-radius: var(--radius-tight);
+    border-width: 1px;
+    vertical-align: text-bottom;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+@utility external {
+    &::after {
+        content: '';
+        background-image: url('data:image/svg+xml,...');
+        font-size: var(--text-step--1);
+        margin-left: 0.125rem;
+        transform: translateY(-0.125rem);
+    }
+}
+
 @utility container {
     padding-inline: var(--spacing-fluid-m);
     max-width: 78.75rem; /* 1260px */
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-    *,
-    ::after,
-    ::before,
-    ::backdrop,
-    ::file-selector-button {
-        border-color: var(--color-gray-200, currentColor);
-    }
+@utility capline {
+    @apply relative mb-[1em] before:absolute before:-bottom-[0.25em] before:left-0 before:w-[1.25em] before:border-b-3 before:border-b-teal-400;
 }
 
 /* These styles will always be included in the build and take precedence */

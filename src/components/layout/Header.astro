@@ -20,7 +20,7 @@ const currentPath = new URL(Astro.request.url).pathname;
 >
     <div
         class:list={[
-            'gap-x-fluid-m container mx-auto grid grid-cols-(--gtc-header) items-center group-data-[banner=up]/page:drop-shadow-none',
+            'gap-x-fluid-m container mx-auto grid grid-cols-[1fr_auto_1fr] items-center group-data-[banner=up]/page:drop-shadow-none',
             isHeroDark && 'drop-shadow-logo shadow-black/25',
         ]}
     >

@@ -52,11 +52,9 @@ const themeSet = {
 
 <div
     class:list={[
-        'not-prose text-step--1/snug overflow-hidden',
+        'not-prose not-rte text-step--1/snug rounded-tight bg-surface-raised text-content shadow-raised items-center justify-center overflow-hidden',
         display,
-        className
-            ? className
-            : 'rounded-tight bg-surface-raised text-content shadow-raised items-center justify-center',
+        className && className,
     ]}
     {...rest}
 >

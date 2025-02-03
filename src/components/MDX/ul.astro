@@ -6,7 +6,10 @@ const { class: className, ...attrs } = Astro.props;
 ---
 
 <Fragment>
-    <ul {...attrs} class:list={['list list--bullet not-prose', className]}>
+    <ul
+        {...attrs}
+        class:list={['list list--bullet not-prose not-rte', className]}
+    >
         <slot />
     </ul>
 </Fragment>

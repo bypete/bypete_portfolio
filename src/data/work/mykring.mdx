@@ -88,7 +88,7 @@ import Lightbox from '~/components/MDX/Lightbox.astro'
 
 export const components = {ul: UL}
 
-<Note theme="note" display="block" hasIcon={true}>
+<Note theme="note" display="block" hasIcon={true} class='my-fluid-m'>
 The live site is currently unavailable but a detailed record of the templates and design process can be viewed below. The site was reimagined in 2022/3 to complement the app, but unfortunately the designs were frozen in the development phase due to funding issues.
 </Note>
 
@@ -164,24 +164,20 @@ Any screen can be directly accessed by developers, partner clients, and stakehol
         {
             id: 'mykring-ux',
             title: 'UX',
-        },]} >
-<Fragment slot='title'>
-## Screens
-</Fragment>
-</Lightbox>
-
-<Lightbox collections={[{
+        },{
             id: 'mykring-email',
+            title: 'Email templates',
+            description: 'Each template has multilingual content. Repeated items are stored as dictionary terms in the CMS and referenced using [#Email.Content...#]. System data is referenced using [[Firstname]]'
         },
         {
             id: 'mykring-cs',
             title: 'Customer services',
         },]} >
 <Fragment slot='title'>
-## Email templates
+## Screens
 </Fragment>
-Each template has multilingual content. Repeated items are stored as dictionary terms in the CMS and referenced using **[#Email.Content...#]**. System data is referenced using **[[Firstname]]**'
 </Lightbox>
+
 
 ## Learning points
 

@@ -26,10 +26,8 @@ const galleries = allGalleries.filter((gallery) =>
     collections && (
         <div
             class:list={[
-                'not-prose bg-surface-sunken p-fluid-s-m shadow-inset',
-                !breakout
-                    ? '-mx-fluid-s-m my-fluid-xl rounded-tight'
-                    : 'breakout',
+                'not-prose not-rte bg-surface-sunken p-fluid-s-m shadow-inset relative',
+                !breakout ? '-mx-fluid-m my-fluid-xl @3xl:rounded' : 'breakout',
             ]}
         >
             <div class="grid grid-flow-row justify-between leading-snug md:grid-flow-col">

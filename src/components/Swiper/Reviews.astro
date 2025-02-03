@@ -18,7 +18,9 @@ const { data } = Astro.props;
 ---
 
 <div class="swiper swiper--reviews">
-    <div class="swiper-wrapper not-prose py-fluid-3xl-4xl! flex items-center">
+    <div
+        class="swiper-wrapper not-prose not-rte py-fluid-3xl-4xl! flex items-center"
+    >
         {
             data.map((review, i) => (
                 <div class="slide swiper-slide px-fluid-m flex! items-center justify-center">

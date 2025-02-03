@@ -18,7 +18,7 @@ const { slides } = Astro.props;
     class="swiper swiper--home group x-cloak:opacity-0 h-full w-full transition-opacity duration-300"
     x-cloak
 >
-    <div class="swiper-wrapper not-prose flex items-center">
+    <div class="swiper-wrapper not-prose not-rte flex items-center">
         {
             slides.map((slide, i) => (
                 <div class="slide swiper-slide">

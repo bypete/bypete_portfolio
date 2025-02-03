@@ -18,7 +18,7 @@ const { wrapper, class: className } = Astro.props;
 <Block
     layout={{ slots: 2, type: 'default' }}
     data-inview="portfolio"
-    wrapperClass={`${wrapper && wrapper} not-prose`}
+    wrapperClass={`${wrapper && wrapper} not-prose not-rte`}
     class:list={[className && className]}
     legibility="text-content-dark"
     slotConfig={{

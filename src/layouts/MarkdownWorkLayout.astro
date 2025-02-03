@@ -128,7 +128,7 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
             <div class="rte prose text-step-0 @container mx-auto max-w-3xl">
                 {
                     frontmatter.product && (
-                        <div class="h-photo not-prose bg-surface-sunken breakout md:h-block flex items-center justify-center">
+                        <div class="h-photo not-prose not-rte bg-surface-sunken breakout md:h-block flex items-center justify-center">
                             <BlockPicture
                                 src={frontmatter.product.src}
                                 widths={[480, 1200]}

@@ -35,7 +35,7 @@ const combinedGallery: BentoProps['gallery'] = {
     combinedGallery.data.images.length > 0 && (
         <div
             class:list={[
-                'bg-surface-sunken p-fluid-s-m shadow-inset',
+                'not-prose not-rte bg-surface-sunken -mx-fluid-m my-fluid-xl p-fluid-s-m shadow-inset relative @3xl:rounded',
                 breakout
                     ? 'breakout'
                     : '-mx-fluid-s-m my-fluid-xl rounded-tight',
