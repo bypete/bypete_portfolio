@@ -408,37 +408,38 @@
     }
 
     .form__checkbox {
-        @apply text-primary border-line form-focus rounded-xs border px-2 py-2;
+        @apply text-primary border-line form-focus rounded-xs border p-2;
     }
 
     .form__radio {
-        @apply text-primary border-line form-focus border px-2 py-2;
+        @apply text-primary border-line form-focus border p-2;
     }
 
     /*--- Forms | Switch ---*/
     .switch {
         @apply flex cursor-pointer items-center;
-        &__bg {
-            @apply shadow-inset relative h-6 w-11 overflow-hidden rounded-full bg-gray-300 after:absolute after:top-0.5 after:left-0.5 after:h-5 after:w-5 after:rounded-full after:border-2 after:border-gray-400 after:bg-white after:shadow-xs after:transition;
-            input:checked + & {
-                @apply bg-primary;
-                &::after {
-                    @apply border-primary translate-x-full transform;
-                }
+    }
+    .switch__bg {
+        @apply shadow-inset relative h-6 w-11 overflow-hidden rounded-full bg-gray-300 after:absolute after:top-0.5 after:left-0.5 after:h-5 after:w-5 after:rounded-full after:border-2 after:border-gray-400 after:bg-white after:shadow-xs after:transition;
+    }
+    .switch input {
+        @apply hidden;
+        &:checked + .switch__bg {
+            @apply bg-primary;
+            &::after {
+                @apply border-primary translate-x-full;
             }
         }
-        &__label {
-            @apply mr-3;
-        }
+    }
+    .switch__label {
+        @apply mr-3;
     }
 
     /*--- Lists ---*/
     .list {
         @apply space-y-2 pl-0!;
-        & li {
+        li {
             @apply list-li-base;
-            position: relative;
-            line-height: var(--leading-normal);
         }
     }
 
@@ -648,7 +649,7 @@
         margin-bottom: 0;
     }
 
-    .rte :where(code):not(:where(.not-rte, .not-rte *, pre *)) {
+    .rte :where(code):not(:where(.not-rte, .not-rte *, pre code)) {
         background: var(--color-surface-raised);
         padding-inline: var(--spacing-fluid-3xs);
         padding-block: var(--spacing-fluid-3xs);
@@ -704,66 +705,28 @@
 }
 
 @utility form-base {
-    border-color: var(--color-line);
-    background-color: var(--color-surface-raised);
-    padding-inline: var(--spacing-fluid-2xs);
-    padding-block: var(--spacing-fluid-3xs);
-    display: block;
-    border-radius: var(--radius-tight);
-    border-width: 1px;
+    @apply border-line bg-surface-raised px-fluid-2xs py-fluid-2xs rounded-tight block border;
 }
 
 @utility form-focus {
-    &:focus {
-        border-color: var(--color-surface);
-        ring-color: var(--color-focus);
-        ring-width: 2px;
-        outline: none;
-    }
+    @apply focus:border-surface focus:ring-focus focus:ring-2 focus:outline-none;
 }
 
 @utility list-li-base {
-    padding-left: var(--spacing-fluid-m);
-    list-style: none;
-    position: relative;
-    &:before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 1.5rem;
-        line-height: normal;
-    }
+    @apply pl-fluid-m relative list-none leading-normal before:absolute before:top-0 before:left-0 before:w-[1.5rem];
 }
 
 @utility label-base {
-    padding-inline: var(--spacing-fluid-3xs);
-    padding-block: var(--spacing-fluid-3xs);
-    font-size: var(--text-step--2);
-    display: inline-block;
-    border-radius: var(--radius-tight);
-    border-width: 1px;
-    vertical-align: text-bottom;
-    line-height: 1;
-    text-transform: uppercase;
-}
-
-@utility external {
-    &::after {
-        content: '';
-        background-image: url('data:image/svg+xml,...');
-        font-size: var(--text-step--1);
-        margin-left: 0.125rem;
-        transform: translateY(-0.125rem);
-    }
+    @apply p-fluid-3xs rounded-tight text-step--2/none inline-block border align-text-bottom uppercase;
 }
 
 @utility container {
-    padding-inline: var(--spacing-fluid-m);
+    @apply px-fluid-m;
     max-width: 78.75rem; /* 1260px */
 }
 
 @utility capline {
-    @apply relative mb-[1em] before:absolute before:-bottom-[0.25em] before:left-0 before:w-[1.25em] before:border-b-3 before:border-b-teal-400;
+    @apply relative mb-[1em] before:absolute before:-bottom-[0.25em] before:left-0 before:w-[1.25em] before:border-b-[3px] before:border-b-teal-400;
 }
 
 /* These styles will always be included in the build and take precedence */
