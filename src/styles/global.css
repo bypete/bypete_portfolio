@@ -415,26 +415,6 @@
         @apply text-primary border-line form-focus border p-2;
     }
 
-    /*--- Forms | Switch ---*/
-    .switch {
-        @apply flex cursor-pointer items-center;
-    }
-    .switch__bg {
-        @apply shadow-inset relative h-6 w-11 overflow-hidden rounded-full bg-gray-300 after:absolute after:top-0.5 after:left-0.5 after:h-5 after:w-5 after:rounded-full after:border-2 after:border-gray-400 after:bg-white after:shadow-xs after:transition;
-    }
-    .switch input {
-        @apply hidden;
-        &:checked + .switch__bg {
-            @apply bg-primary;
-            &::after {
-                @apply border-primary translate-x-full;
-            }
-        }
-    }
-    .switch__label {
-        @apply mr-3;
-    }
-
     /*--- Lists ---*/
     .list {
         @apply space-y-2 pl-0!;
