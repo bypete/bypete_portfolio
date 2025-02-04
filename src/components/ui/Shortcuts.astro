@@ -11,7 +11,7 @@ import { Icon } from 'astro-icon/components';
         href="#top"
         data-jump
         aria-hidden="true"
-        class="scroll text-brand hover:bg-surface-raised focus:bg-surface-raised scale-0 rounded-full stroke-2 p-0 backdrop-blur-xs focus:outline-hidden"
+        class="scroll text-brand hover:bg-surface-raised focus:bg-surface-raised rounded-full stroke-2 p-0 backdrop-blur-xs focus:outline-hidden"
     >
         <Icon
             name="lucide:arrow-up-to-line"
@@ -143,9 +143,9 @@ import { Icon } from 'astro-icon/components';
         const animationProperties = visible
             ? { opacity: 1, transform: ['translateY(0) scale(1)'] }
             : {
-                  opacity: 1,
+                  opacity: 0,
                   transform: [
-                      'translateY(calc(100% + var(--space-2xs))) scale(0)',
+                      'translateY(calc(100% + var(--spacing-fluid-2xs))) scale(0)',
                   ],
               };
         if (pageTop) {
@@ -196,7 +196,7 @@ import { Icon } from 'astro-icon/components';
                     {
                         opacity: [0, 1],
                         transform: [
-                            'translateX(calc(-1 * var(--space-3xl))) scale(.75)',
+                            'translateX(calc(-1 * var(--spacing-fluid-3xl))) scale(.75)',
                             'scale(1)',
                         ],
                     },

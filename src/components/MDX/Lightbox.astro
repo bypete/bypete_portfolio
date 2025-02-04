@@ -26,7 +26,7 @@ const galleries = allGalleries.filter((gallery) =>
     collections && (
         <div
             class:list={[
-                'not-prose not-rte bg-surface-sunken p-fluid-s-m shadow-inset relative',
+                'not-prose bg-surface-sunken p-fluid-s-m shadow-inset relative',
                 !breakout ? '-mx-fluid-m my-fluid-xl @3xl:rounded' : 'breakout',
             ]}
         >
@@ -51,7 +51,9 @@ const galleries = allGalleries.filter((gallery) =>
                 return gallery ? (
                     <div class="mt-fluid-m">
                         {item.title && (
-                            <h3 class="font-display">{item.title}</h3>
+                            <h3 class="font-display" id={item.id}>
+                                {item.title}
+                            </h3>
                         )}
                         {item.description && (
                             <p class="mb-fluid-m" set:html={item.description} />

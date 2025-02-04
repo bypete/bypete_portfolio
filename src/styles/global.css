@@ -310,21 +310,17 @@
         border-color: var(--color-gray-200, currentColor);
     }
 
-    h1 {
+    :where(h1, h2, h3, h4, h5, h6) {
+        font-family: var(--font-headline);
+        letter-spacing: var(--tracking-tight);
+        margin-bottom: 0.333em;
+    }
+    :where(h1, h2, h3, h4, h5, h6) a {
         font-weight: var(--font-weight-extrabold);
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: var(--font-headline);
-        letter-spacing: var(--tracking-tight);
-        & a {
-            font-weight: var(--font-weight-extrabold);
-        }
+    h1 {
+        font-weight: var(--font-weight-extrabold);
     }
 
     h2 {
@@ -360,33 +356,25 @@
 /* Layer | Utilities
 ------------------------------------------------------------ */
 @layer utilities {
+    .font-headline a {
+        @apply font-bold;
+    }
 }
 
 /* Layer | Components
 ------------------------------------------------------------ */
 @layer components {
+    /*--- Links ---*/
+
+    .external {
+        @apply after:i-lucide-external-link after:text-step--1 after:ml-0.5 after:-translate-y-0.5;
+    }
+    .rte :where(a):not(:where(.not-rte, .not-rte *)),
     .link {
-        color: var(--color-link);
-        font-weight: var(--font-weight-medium);
-        text-decoration-style: solid;
-        text-decoration-thickness: 2px;
-        &:hover {
-            text-decoration-line: underline;
-        }
+        @apply text-link font-medium decoration-solid decoration-2 hover:underline;
     }
+
     /*--- Forms --- */
-
-    input {
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        &[type='number'] {
-            -moz-appearance: textfield;
-        }
-    }
-
     .form__input,
     .form__select,
     .form__textarea {
@@ -398,13 +386,15 @@
     .form__textarea,
     .form__checkbox {
         &.error {
-            @apply focus:border-focus focus:ring-focus border-transparent ring-2 ring-red-200;
+            @apply focus:border-focus focus:ring-focus ring-attention border-transparent ring-2;
         }
     }
 
-    .form__input.readonly,
-    .form__select.readonly {
-        @apply pointer-events-none border border-gray-300 bg-gray-100 select-none focus:border-gray-300 focus:bg-gray-100 focus:ring-0 focus:outline-hidden;
+    .form__input,
+    .form__select {
+        &:read-only {
+            @apply border-line-quiet bg-line-whisper focus:border-line-quiet focus:bg-line-whisper pointer-events-none select-none focus:ring-0 focus:outline-hidden;
+        }
     }
 
     .form__checkbox {
@@ -424,10 +414,10 @@
     }
 
     .list--bullet li {
-        @apply before:i-ci-dummy-square-small before:text-primary before:translate-y-px before:text-[24px];
+        @apply list-li-bullet;
     }
     .list--checklist li {
-        @apply before:i-lucide-check-circle-2 before:text-teal-500;
+        @apply list-li-checklist;
     }
     .list--counter {
         & > li {
@@ -562,27 +552,26 @@
         color: var(--color-white);
     }
 
-    .rte {
-        h2 {
-            @apply capline;
-        }
+    .rte :not(:where(.not-rte, .not-rte *)) {
+        @apply leading-relaxed;
+    }
+
+    .rte h2:not(:where(.not-rte, .not-rte *)) {
+        @apply capline;
     }
 
     /* subsequent-sibling combinator */
-    .rte
+    /* .rte
         :where(h1, h2, h3, h4, h5, h6)
         ~ :where(h1, h2, h3, h4, h5, h6):not(:where(.not-rte, .not-rte *)) {
         margin-top: 1.5em;
+    } */
+
+    .rte :where(h1, h2, h3, h4, h5, h6):not(:first-child) {
+        margin-top: 1.5em;
     }
 
-    .rte :where(a):not(:where(.not-rte, .not-rte *)) {
-        color: var(--color-link);
-        &:hover {
-            color: var(--color-link-dark);
-        }
-    }
-
-    .rte :where(p):not(:where(.not-rte, .not-rte *)) {
+    .rte :where(p):not(:where(.not-rte, .not-rte *)):not(:first-child) {
         margin-block: var(--spacing-fluid-s);
     }
 
@@ -595,13 +584,24 @@
         margin-block: var(--spacing-fluid-m);
     }
 
+    .rte :where(ul, ul > li):not(:where(.not-rte, .not-rte *)) {
+        list-style-type: none;
+    }
+
+    .rte :where(ul):not(:where(.not-rte, .not-rte *, .list)):not([class]) {
+        @apply space-y-2 pl-0!;
+        li {
+            @apply list-li-base list-li-bullet;
+        }
+    }
+
+    .rte :where(li):not(:where(.not-rte, .not-rte *, .list *)) {
+        margin-block: var(--spacing-fluid-2xs);
+    }
+
     .rte :where(ol, ol > li):not(:where(.not-rte, .not-rte *)) {
         list-style-type: decimal;
         padding-inline-start: var(--spacing-fluid-m);
-    }
-
-    .rte :where(li):not(:where(.not-rte, .not-rte *)) {
-        margin-block: var(--spacing-fluid-2xs);
     }
 
     .rte :where(ol > li):not(:where(.not-rte, .not-rte *)) {
@@ -631,11 +631,14 @@
 
     .rte :where(code):not(:where(.not-rte, .not-rte *, pre code)) {
         background: var(--color-surface-raised);
+        margin: 1px;
         padding-inline: var(--spacing-fluid-3xs);
         padding-block: var(--spacing-fluid-3xs);
         border-radius: var(--radius-tight);
+        line-height: var(--leading-tight);
         border: 1px solid var(--color-line-shout);
         font-weight: var(--font-weight-semibold);
+        display: inline-block;
     }
 }
 
@@ -659,10 +662,6 @@
 /* prettier-ignore */
 @utility grid-areas-* {
     grid-template-areas: --value(--gta-*);
-}
-
-@utility external {
-    @apply after:i-lucide-external-link after:text-step--1 after:ml-0.5 after:-translate-y-0.5;
 }
 
 @custom-variant permalink {
@@ -696,6 +695,13 @@
     @apply pl-fluid-m relative list-none leading-normal before:absolute before:top-0 before:left-0 before:w-[1.5rem];
 }
 
+@utility list-li-bullet {
+    @apply before:i-ci-dummy-square-small before:text-primary before:translate-y-px before:text-[24px];
+}
+@utility list-li-checklist {
+    @apply before:i-lucide-check-circle-2 before:text-teal-500;
+}
+
 @utility label-base {
     @apply p-fluid-3xs rounded-tight text-step--2/none inline-block border align-text-bottom uppercase;
 }
@@ -706,7 +712,7 @@
 }
 
 @utility capline {
-    @apply relative mb-[1em] before:absolute before:-bottom-[0.25em] before:left-0 before:w-[1.25em] before:border-b-[3px] before:border-b-teal-400;
+    @apply relative mb-[1em] before:absolute before:-bottom-[0.5em] before:left-0 before:w-[1.25em] before:border-b-[3px] before:border-b-teal-400;
 }
 
 /* These styles will always be included in the build and take precedence */

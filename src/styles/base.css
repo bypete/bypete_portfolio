@@ -111,16 +111,6 @@
         --gtr-workcard: auto auto minmax(0, 1fr) auto;
         --gtr-work: auto minmax(0, 1fr);
         --gtr-home: auto minmax(0, 1fr);
-
-        /* Space 30px up to 1200px then reduce down to 0px by 1260px */
-        --container-tramline: clamp(0rem, 39.375rem + -50vi, 1.875rem);
-        --headerheight: calc(var(--space-l) + (var(--space-s) * 2));
-        --splash-overlap: calc(var(--space-3xl) * 2);
-        --container-width-max: 1200px;
-        --container-width-sm: 640px;
-        --container-width-md: 768px;
-        --container-width-lg: 1024px;
-        --container-width-xl: 1280px;
     }
 
     /* Alpine will set data-theme value based on (prefers-color-scheme: dark)  */
