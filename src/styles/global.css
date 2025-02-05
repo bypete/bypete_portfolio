@@ -1,7 +1,6 @@
 @import 'tailwindcss';
 @import './base.css' layer(base);
 @plugin '@egoist/tailwindcss-icons';
-/* @plugin '@tailwindcss/typography'; */
 @plugin '@tailwindcss/forms';
 
 @theme {
@@ -353,6 +352,85 @@
     }
 }
 
+/* Specific Utilities 
+------------------------------------------------------------ */
+@utility external {
+    @apply after:i-lucide-external-link after:text-step--1 after:ml-0.5 after:-translate-y-0.5;
+}
+@utility capline {
+    @apply relative mb-[1em] before:absolute before:-bottom-[0.5em] before:left-0 before:w-[1.25em] before:border-b-[3px] before:border-b-teal-400;
+}
+
+@utility breakout {
+    width: 100vw;
+    max-width: none;
+    left: 50%;
+    right: 50%;
+    position: relative;
+    margin-inline: -50vw;
+}
+
+@utility bookmarkclip {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 10%), 0 100%);
+}
+
+@utility form-base {
+    @apply border-line bg-surface-raised px-fluid-2xs py-fluid-2xs rounded-tight block border;
+}
+
+@utility form-focus {
+    @apply focus:border-surface focus:ring-focus focus:ring-2 focus:outline-none;
+}
+
+@utility list-li-base {
+    @apply pl-fluid-m relative list-none leading-normal before:absolute before:top-0 before:left-0 before:w-[1.5rem];
+}
+
+@utility list-li-bullet {
+    @apply before:i-ci-dummy-square-small before:text-primary before:translate-y-px before:text-[24px];
+}
+@utility list-li-checklist {
+    @apply before:i-lucide-check-circle-2 before:text-teal-500;
+}
+
+@utility label-base {
+    @apply p-fluid-3xs rounded-tight text-step--2/none inline-block border align-text-bottom uppercase;
+}
+
+@utility container {
+    @apply px-fluid-m;
+    max-width: 78.75rem; /* 1260px */
+}
+
+/* prettier-ignore */
+@utility angleclip-* {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% calc(100% - --value(--spacing-*, length, [length])));
+}
+
+/* prettier-ignore */
+@utility grid-areas-* {
+    grid-template-areas: --value(--gta-*);
+}
+
+@custom-variant permalink {
+    h1,
+    h2 {
+        @slot;
+    }
+}
+
+@custom-variant dynamic {
+    @supports (height: 100dvh) {
+        @slot;
+    }
+}
+
+@custom-variant x-cloak {
+    [x-cloak] {
+        @slot;
+    }
+}
+
 /* Layer | Utilities
 ------------------------------------------------------------ */
 @layer utilities {
@@ -364,16 +442,6 @@
 /* Layer | Components
 ------------------------------------------------------------ */
 @layer components {
-    /*--- Links ---*/
-
-    .external {
-        @apply after:i-lucide-external-link after:text-step--1 after:ml-0.5 after:-translate-y-0.5;
-    }
-    .rte :where(a):not(:where(.not-rte, .not-rte *)),
-    .link {
-        @apply text-link font-medium decoration-solid decoration-2 hover:underline;
-    }
-
     /*--- Forms --- */
     .form__input,
     .form__select,
@@ -532,6 +600,7 @@
     }
 
     /*--- Editorial ---*/
+
     .hilite {
         padding: var(--spacing-fluid-3xs);
         color: var(--color-content-dark);
@@ -540,16 +609,9 @@
         font-weight: var(--font-weight-medium);
     }
 
-    sup.new {
-        background-color: var(--color-primary);
-        font-size: var(--text-step--1);
-        border-radius: var(--radius-xs);
-        padding-inline: calc(var(--spacing) * 0.5);
-        padding-block: 1px;
-        vertical-align: top;
-        line-height: 1;
-        font-weight: var(--font-weight-medium);
-        color: var(--color-white);
+    .rte :where(a):not(:where(.not-rte, .not-rte *)),
+    .link {
+        @apply text-link font-medium decoration-solid decoration-2 hover:underline;
     }
 
     .rte :not(:where(.not-rte, .not-rte *)) {
@@ -559,13 +621,6 @@
     .rte h2:not(:where(.not-rte, .not-rte *)) {
         @apply capline;
     }
-
-    /* subsequent-sibling combinator */
-    /* .rte
-        :where(h1, h2, h3, h4, h5, h6)
-        ~ :where(h1, h2, h3, h4, h5, h6):not(:where(.not-rte, .not-rte *)) {
-        margin-top: 1.5em;
-    } */
 
     .rte :where(h1, h2, h3, h4, h5, h6):not(:first-child) {
         margin-top: 1.5em;
@@ -640,79 +695,6 @@
         font-weight: var(--font-weight-semibold);
         display: inline-block;
     }
-}
-
-@utility breakout {
-    width: 100vw;
-    max-width: none;
-    left: 50%;
-    right: 50%;
-    position: relative;
-    margin-inline: -50vw;
-}
-
-@utility bookmarkclip {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 10%), 0 100%);
-}
-/* prettier-ignore */
-@utility angleclip-* {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% calc(100% - --value(--spacing-*, length, [length])));
-}
-
-/* prettier-ignore */
-@utility grid-areas-* {
-    grid-template-areas: --value(--gta-*);
-}
-
-@custom-variant permalink {
-    h1,
-    h2 {
-        @slot;
-    }
-}
-
-@custom-variant dynamic {
-    @supports (height: 100dvh) {
-        @slot;
-    }
-}
-
-@custom-variant x-cloak {
-    [x-cloak] {
-        @slot;
-    }
-}
-
-@utility form-base {
-    @apply border-line bg-surface-raised px-fluid-2xs py-fluid-2xs rounded-tight block border;
-}
-
-@utility form-focus {
-    @apply focus:border-surface focus:ring-focus focus:ring-2 focus:outline-none;
-}
-
-@utility list-li-base {
-    @apply pl-fluid-m relative list-none leading-normal before:absolute before:top-0 before:left-0 before:w-[1.5rem];
-}
-
-@utility list-li-bullet {
-    @apply before:i-ci-dummy-square-small before:text-primary before:translate-y-px before:text-[24px];
-}
-@utility list-li-checklist {
-    @apply before:i-lucide-check-circle-2 before:text-teal-500;
-}
-
-@utility label-base {
-    @apply p-fluid-3xs rounded-tight text-step--2/none inline-block border align-text-bottom uppercase;
-}
-
-@utility container {
-    @apply px-fluid-m;
-    max-width: 78.75rem; /* 1260px */
-}
-
-@utility capline {
-    @apply relative mb-[1em] before:absolute before:-bottom-[0.5em] before:left-0 before:w-[1.25em] before:border-b-[3px] before:border-b-teal-400;
 }
 
 /* These styles will always be included in the build and take precedence */
