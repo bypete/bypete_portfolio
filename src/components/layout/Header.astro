@@ -157,7 +157,7 @@ const currentPath = new URL(Astro.request.url).pathname;
     const toggleBanner = (isVisible, isTocSticky) => {
         animationInProgress = true;
         const tocWrapperAnimation = isTocSticky
-            ? { transform: ['translateY(var(--headerheight))'] }
+            ? { transform: ['translateY(var(--spacing-headerheight))'] }
             : { transform: ['translateY(0%)'] };
 
         if (banner) {

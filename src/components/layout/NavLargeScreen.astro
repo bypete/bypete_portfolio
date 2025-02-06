@@ -61,7 +61,7 @@ const {
                         x-bind:id="$id('dropdown-button')"
                         x-on:click.outside="open && !$refs.button.contains($event.target) && close($refs.button)"
                     >
-                        <div class="bg-surface-overlay shadow-overlay max-h-[calc(100vh-3rem-var(--headerheight))] min-w-50 overflow-y-scroll rounded-md">
+                        <div class="bg-surface-overlay shadow-overlay max-h-[calc(100vh-var(--spacing-headerheight))] min-w-50 overflow-y-scroll rounded-md">
                             {item.children.map((child) => {
                                 const isActive = currentPath === child.url;
                                 return (

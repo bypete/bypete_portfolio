@@ -394,7 +394,7 @@
 }
 
 @utility label-base {
-    @apply p-fluid-3xs rounded-tight text-step--2/none inline-block border align-text-bottom uppercase;
+    @apply px-fluid-3xs rounded-tight text-step--2/none inline-block border py-px align-text-bottom uppercase;
 }
 
 @utility container {
@@ -627,7 +627,7 @@
     }
 
     .rte :where(p):not(:where(.not-rte, .not-rte *)):not(:first-child) {
-        margin-block: var(--spacing-fluid-s);
+        margin-bottom: var(--spacing-fluid-s);
     }
 
     .rte > :last-child {

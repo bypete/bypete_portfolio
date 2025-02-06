@@ -98,11 +98,14 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
             </div>
             <div class="rte px-fluid-m py-fluid-m self-end">
                 <h1
-                    class="capline text-step-3"
+                    class="capline text-step-3/none"
                     set:html={frontmatter.title}
-                /><ReadTime duration={minutesRead} />
+                /><ReadTime
+                    duration={minutesRead}
+                    class="text-step--1 text-content-quiet my-fluid-2xs"
+                />
                 <p>{frontmatter.taster}</p>
-                <div class="mt-fluid-m flex justify-between">
+                <div class="mt-fluid-m not-rte flex justify-between">
                     <Tags tags={frontmatter.tags} url={true} />
                 </div>
                 <p class="mt-fluid-m hidden md:block">

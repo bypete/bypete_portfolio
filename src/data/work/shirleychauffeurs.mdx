@@ -1,14 +1,14 @@
 ---
 title: 'Shirley Chauffeurs'
-pubDate: 2025-01-23
-modDate: 2025-01-23
-excerpt: 'Learn how myKRing.com evolved into a multilanguage hub for the K Ring product'
+pubDate: 2025-02-06
+modDate: 2025-02-06
+excerpt: 'See how I helped this family business launch their online presence'
 taster: 'Family run business providing a reliable, professional approach to the wedding car hire business with affordable prices'
 description: 'See how I launched and continued to maintain this site'
 author: 'Pete Wallace'
 og:
   title: 'Shirley Chauffeurs'
-  description: 'See how I launched and continued to maintain this site'
+  description: 'See how I launched and continued to maintain this online presence'
   image: 
     src: '~/assets/work/shirleychauffeurs/og__image.jpg'
     alt: 'Shirley Chauffeurs'
@@ -61,6 +61,7 @@ tags:
 ---
 import BlockPicture from '~/components/images/BlockPicture.astro';
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
 import Note from '~/components/ui/Note.astro'
 import basket_40 from '~/assets/work/shirleychauffeurs/basket_40.jpg';
 import quotation from '~/assets/work/shirleychauffeurs/quote.jpg';
@@ -74,8 +75,7 @@ import Lightbox from '~/components/MDX/Lightbox.astro'
 
 export const components = {ul: UL}
 
-
-<p class="text-step-1">[Shirley Chauffeurs](https://shirleychauffeurs.co.uk/) is a family-run business known for their exceptional service and attention to detail. The business takes great pride in their attention to detail, ensuring their role in the customer's special day is as perfect as possible.</p>
+<p class="text-step-1">[Shirley Chauffeurs](https://shirleychauffeurs.co.uk/) is a family-run business known for its exceptional service and meticulous attention to detail. The business takes great pride in ensuring its role in the customer's special day is as perfect as possible.</p>
 
 I was commissioned to build an online presence that would reflect their professional standards and build trust in their expertise. 
 
@@ -85,9 +85,16 @@ I was commissioned to build an online presence that would reflect their professi
 
 ## Performance
 
-The live site performs well and adopts a variety of best practice methods to stay optimized. The site is built in Astro, a performant <abbr title="Static Site Generator">SSG</abbr>. It deploys to Netlify via a linked repository on GitHub and makes use of Netlify's serverless form handing. 
+The live site performs well and adopts a variety of best practice methods to remain optimized. The site is built in Astro, a performant <abbr title="Static Site Generator">SSG</abbr>. It deploys to Netlify via a linked repository on GitHub and makes use of Netlify's serverless form handling. 
 
- The chrome [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview) results are excellent.
+The Chrome [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview) results are excellent.
+
+<div class="breakout bg-radial-[at_50%_75%] from-slate-700 to-slate-950 to-90% my-fluid-2xl py-fluid-3xl text-center not-rte">
+  <div class="container mx-auto">
+  <Icon name="mdi:lighthouse" class="h-fluid-2xl w-fluid-2xl text-content-light mx-auto rounded-full bg-slate-700/80 p-fluid-xs mb-fluid-s" />
+  <p class="font-headline text-step-2 md:text-step-4/tight font-normal text-content-light ">Site optimisation was a key focus during development, and the effort has produced some <strong class="font-extrabold">excellent</strong> Lighthouse results</p>
+  </div>
+</div>
 
 
 <Figure  caption='100% achieved in 3 out of 4 categories' credit='Google Chrome Lighthouse' >
@@ -97,7 +104,7 @@ The live site performs well and adopts a variety of best practice methods to sta
 
 
 ## UX/UI
-The site is presented in a light or dark theme based on the users device preference. This can also be switched with the header icon which switches from sun to moon. All of the colours in the site are set via CSS variables and are overwritten if the attribute `data-theme=dark` is present in the root `<html>` tag. 
+The site is presented in a light or dark theme based on the users device preference. This can also be switched with the header icon which visually toggles from sun to moon. All of the colours in the site are defined via CSS variables and are overwritten when the attribute `data-theme=dark` is present in the root `<html>` tag. 
 
 ```
 @layer base {
@@ -130,9 +137,9 @@ The site is presented in a light or dark theme based on the users device prefere
 }    
 ```
 
-These semantic vars are then referenced in `tailwind.config.cjs`. The human friendly naming keeps the file readable.
+These semantic variables are then referenced in `tailwind.config.cjs`, and the human-friendly naming keeps the file readable.
 
-The resultant Tailwind class would be `bg-surface-sunken` or `bg-surface`. This design system ensures consistency when adding new elements. Any edits to the colour values will cascade through the CSS. 
+The resultant Tailwind class would be `bg-surface-sunken` or `bg-surface`. This design system ensures consistency when adding new elements, and any edits to the colour values will cascade throughout the CSS. 
 
 ```
 surface: {
@@ -160,7 +167,7 @@ surface: {
 <Fragment slot='title'>
 ## Screens
 </Fragment>
-Light and dark themes are available. A user's system preference is retrieved using vanilla js, and then managed with Alpine.js and local storage.
+Light and dark themes are available. A user's system preference is detected using vanilla JS, and then managed with Alpine.js and local storage.
 </Lightbox>
 
 <Figure  caption='Custom call to action for each car in the fleet' credit='Shirley Chauffeurs' >
@@ -184,7 +191,7 @@ tags:
 Just a quick note to say what a fantastic job your driver and Gordon did for us on our wedding...
 ```
 
-A custom helper function parses titles that have been wrapped with asterisks for emphasis. This function wraps *utterly* with the Underlined component and applies an absolute positioned svg. This simplifies the MDX files. 
+A custom helper function parses titles that have been wrapped with asterisks for emphasis. This function wraps `*utterly*` with the Underlined component and applies an absolutely positioned SVG, thereby simplifying the MDX files. 
 
 ```
 // Helper function to parse underlined titles
@@ -197,17 +204,13 @@ export function parseTitle(title) {
 }
 ```
 
-
-
 ## Learning points
-This was a freelance project that I delivered independently.
-It was a good introduction to Netlify's automated deploys and built on my knowledge of Astro. User preferences and themes are now managed using local storage, rather than cookies. 
+This was a freelance project that I delivered independently. It was a good introduction to Netlify's automated deployments and expanded my knowledge of Astro. User preferences and themes are now managed using local storage rather than cookies.
 
-A lot of attention was given to site optimization and the effort has produced some excellent Lighthouse scores. 
+A lot of attention was given to site optimization, and the effort has produced some excellent Lighthouse scores.
 
 ## Scope for improvement
-All of the site colours are set with hsl vars and available as Tailwind classes. This allows for precise control, but it results in a significantly large base CSS file.
-It also requires a large tailwind.config.cjs file which can be tricky to maintain. The next phase would be to look at Tailwind CSS v4.0 to make use of the improved CSS variables handling. 
+All of the site's colours are set with HSL variables and made available as Tailwind classes. This allows for precise control, but it results in a significantly large base CSS file. It also requires an extensive `tailwind.config.cjs` file, which can be challenging to maintain. The next phase would be to explore Tailwind CSS v4.0 to take advantage of its improved handling of CSS variables.. 
 
 <BlockPicture src={basket_40} class="my-fluid-2xl" alt="Close up of K Ring and cyclist" credit={frontmatter.title} wrapper={true} />
 
