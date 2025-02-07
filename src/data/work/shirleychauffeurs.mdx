@@ -3,12 +3,12 @@ title: 'Shirley Chauffeurs'
 pubDate: 2025-02-06
 modDate: 2025-02-06
 excerpt: 'See how I helped this family business launch their online presence'
-taster: 'Family run business providing a reliable, professional approach to the wedding car hire business with affordable prices'
-description: 'See how I launched and continued to maintain this site'
+taster: 'Establish and maintain an online presence for a prestigious wedding chauffeur business.'
+description: 'See how I launched and maintained an online presence for a prestigious wedding chauffeur business.'
 author: 'Pete Wallace'
 og:
   title: 'Shirley Chauffeurs'
-  description: 'See how I launched and continued to maintain this online presence'
+  description: 'See how I launched and maintained an online presence for a prestigious wedding chauffeur business.'
   image: 
     src: '~/assets/work/shirleychauffeurs/og__image.jpg'
     alt: 'Shirley Chauffeurs'
@@ -31,29 +31,26 @@ skillset:
   heading: 'permalink:text-white permalink:before:text-[#00a3e2]'
   shadow: ''
   areas:
-    - title: 'Applications'
+    - title: 'My Role'
+      class: 'col-span-full border-b border-b-line pb-fluid-m'
+      skills:
+        - 'Branding, Visual design, User experience'
+        - 'Rapid Prototyping'
+        - 'Full development'
+        - 'Prepare visual assets and populate content'
+        - 'Publish Astro site to Netlify and maintain updates'
+    - title: 'Tools'
       skills:
         - 'Visual Studio Code'
-        - 'Adobe Photoshop'
-        - 'Adobe Lightroom'
-        - 'Adobe Illustrator'
+        - 'Adobe Photoshop, Lightroom, Illustrator'
+        - 'npm, git, github'
+        - 'Netlify'
     - title: 'Development'
       skills:
-        - 'Prepare visual assets'
-        - 'Populate initial content'
-        - 'Publish Astro site to Netlify and maintain updates'
-    - title: 'Experience'
-      class: 'col-span-full'
-      skills:
-          - 'Astro js'
-          - 'Typescript'
-          - 'Alpine.js and vanilla js'
+          - 'Astro, MDX Content management'
+          - 'Typescript, Alpine.js and vanilla js'
+          - 'Motion (JS Animation library)'
           - 'Tailwind, Utopia, CSS, PostCSS'
-          - 'npm'
-          - 'git, github'
-          - 'Netlify'
-          - 'Content management (MDX)'
-          - 'UX/UI'
 tags: 
   - 'case study'
   - 'featured'
@@ -80,7 +77,7 @@ export const components = {ul: UL}
 I was commissioned to build an online presence that would reflect their professional standards and build trust in their expertise. 
 
 <Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
-## My Skills
+## Experience
 </Skills>
 
 ## Performance
@@ -210,8 +207,10 @@ This was a freelance project that I delivered independently. It was a good intro
 A lot of attention was given to site optimization, and the effort has produced some excellent Lighthouse scores.
 
 ## Scope for improvement
-All of the site's colours are set with HSL variables and made available as Tailwind classes. This allows for precise control, but it results in a significantly large base CSS file. It also requires an extensive `tailwind.config.cjs` file, which can be challenging to maintain. The next phase would be to explore Tailwind CSS v4.0 to take advantage of its improved handling of CSS variables.. 
+All of the site's colours are set with HSL variables and made available as Tailwind classes. This allows for precise control, but it results in a significantly large base CSS file. It also requires an extensive `tailwind.config.cjs` file, which can be challenging to maintain. The next phase would be to explore Tailwind CSS v4.0 to take advantage of its improved handling of CSS variables. 
 
 <BlockPicture src={basket_40} class="my-fluid-2xl" alt="Close up of K Ring and cyclist" credit={frontmatter.title} wrapper={true} />
 
 ## Final thoughts
+
+The site is live and can be viewed at [Shirley Chauffeurs](https://shirleychauffeurs.co.uk/). 
