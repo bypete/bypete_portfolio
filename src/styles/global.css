@@ -406,6 +406,23 @@
 @utility angleclip-* {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0% calc(100% - --value(--spacing-*, length, [length])));
 }
+/* prettier-ignore */
+@utility angleclip-tl-* {
+  clip-path: polygon(0 --value(--spacing-*, length, [length]), 100% 0, 100% 100%, 0% 100% );
+}
+/* prettier-ignore */
+@utility angleclip-tr-* {
+  clip-path: polygon(0 0, 100% --value(--spacing-*, length, [length]), 100% 100%, 0% 100% );
+}
+/* prettier-ignore */
+@utility angleclip-bl-* {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% calc(100% - --value(--spacing-*, length, [length])));
+}
+
+/* prettier-ignore */
+@utility angleclip-br-* {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - --value(--spacing-*, length, [length])), 0% 100%);
+}
 
 /* prettier-ignore */
 @utility grid-areas-* {
