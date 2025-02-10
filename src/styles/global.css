@@ -626,7 +626,7 @@
         margin-top: 1.5em;
     }
 
-    .rte :where(p):not(:where(.not-rte, .not-rte *)):not(:first-child) {
+    .rte :where(p):not(:where(.not-rte, .not-rte *)):not(:last-child) {
         margin-bottom: var(--spacing-fluid-s);
     }
 
