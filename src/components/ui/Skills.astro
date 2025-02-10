@@ -1,5 +1,8 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import { remark } from 'remark';
+import remarkHtml from 'remark-html';
+
 interface Area {
     title: string;
     skills: string[];
@@ -28,7 +31,24 @@ const {
     skillset,
     ...rest
 } = Astro.props;
+
 const { text, icon, heading, shadow, areas } = skillset as SkillsetProps;
+
+// Function to parse markdown
+async function parseMarkdown(content: string) {
+    const result = await remark().use(remarkHtml).process(content);
+    return String(result);
+}
+
+// Pre-process all skills markdown
+const processedAreas = await Promise.all(
+    areas.map(async (area) => ({
+        ...area,
+        processedSkills: await Promise.all(
+            area.skills.map((skill) => parseMarkdown(skill)),
+        ),
+    })),
+);
 ---
 
 <div
@@ -70,9 +90,10 @@ const { text, icon, heading, shadow, areas } = skillset as SkillsetProps;
                             ]}
                         >
                             {area.skills.map((skill) => (
-                                <li class="pl-fluid-m before:i-lucide-check-circle-2 before:top-tight before:h-fluid-s before:w-fluid-s relative leading-normal before:absolute before:left-0 before:leading-normal">
-                                    {skill}
-                                </li>
+                                <li
+                                    class="pl-fluid-m before:i-lucide-check-circle-2 before:top-tight before:h-fluid-s before:w-fluid-s relative leading-normal before:absolute before:left-0 before:leading-normal"
+                                    set:html={parseMarkdown(skill)}
+                                />
                             ))}
                         </ul>
                     </li>

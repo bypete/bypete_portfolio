@@ -78,6 +78,8 @@
     "postcss-inline-svg": "^6.0.0",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.11",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
     "save": "^2.9.0",
     "smartypants": "^0.2.2",
     "swiper": "^11.1.14",
