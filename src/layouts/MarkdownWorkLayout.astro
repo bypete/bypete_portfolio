@@ -131,14 +131,14 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
             <div class="rte prose text-step-0 @container mx-auto max-w-3xl">
                 {
                     frontmatter.product && (
-                        <div class="h-photo not-prose not-rte bg-surface-sunken breakout md:h-block flex items-center justify-center">
+                        <div class="h-square not-prose not-rte bg-surface-sunken breakout md:h-block flex items-center justify-center">
                             <BlockPicture
                                 src={frontmatter.product.src}
                                 widths={[480, 1200]}
                                 sizes={`100vw, (min-width: 75rem) 75rem`}
                                 class="h-full w-full object-contain"
                                 breakout={false}
-                                wrapper="w-full h-full max-w-[75rem]"
+                                wrapper="w-full h-full max-w-[75rem] "
                                 alt={frontmatter.product.alt}
                                 credit={frontmatter.title}
                             />
