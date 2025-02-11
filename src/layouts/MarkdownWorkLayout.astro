@@ -131,7 +131,7 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
             <div class="rte prose text-step-0 @container mx-auto max-w-3xl">
                 {
                     frontmatter.product && (
-                        <div class="h-square not-prose not-rte bg-surface-sunken breakout md:h-block flex items-center justify-center">
+                        <div class="h-square not-prose not-rte breakout md:h-block to-surface/0 from-surface-sunken via-surface-sunk flex items-center justify-center bg-linear-to-b from-[50%] via-[50%] to-[58%]">
                             <BlockPicture
                                 src={frontmatter.product.src}
                                 widths={[480, 1200]}
