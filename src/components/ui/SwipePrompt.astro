@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 ---
 
 <div class="swipePrompt gap-fluid-3xs text-step--1 flex opacity-0">
@@ -7,17 +7,17 @@ import { Icon } from 'astro-icon/components';
     <Icon name="lucide:arrow-right-left" class="nudge size-fluid-s" />
 </div>
 <script>
-    import { animate, timeline, type TimelineDefinition, inView } from 'motion';
+    import { animate, type AnimationSequence, inView } from 'motion';
 
     const swipePrompts = document.querySelectorAll('.swipePrompt');
     if (swipePrompts != null) {
         inView(
             swipePrompts,
             (el) => {
-                const nudge = el.target.querySelector('.nudge');
-                const sequence: TimelineDefinition = [
+                const nudge = el.querySelector('.nudge');
+                const sequence: AnimationSequence = [
                     [
-                        el.target,
+                        el,
                         {
                             opacity: [0, 0.5, 1],
                             y: ['50%', '25%', '0%'],
@@ -29,21 +29,21 @@ import { Icon } from 'astro-icon/components';
                     ],
                 ];
 
-                timeline(sequence, {}).finished.then(() => {
+                animate(sequence, {}).then(() => {
                     if (nudge) {
                         // animate to allow repeat attribute
                         animate(
                             nudge,
                             {
-                                x: ['0%', '25%', '10%', '0%'],
+                                x: ['0%', '25%', '0%'],
                                 skewY: ['0deg', '10deg', '0deg'],
                                 rotate: ['0deg', '-5deg', '0deg'],
                             },
                             {
                                 duration: 0.25,
-                                delay: 2.5,
+                                repeatDelay: 0.15,
                                 repeat: 1,
-                                easing: 'ease-in',
+                                ease: 'easeOut',
                             },
                         );
                     }
@@ -52,7 +52,7 @@ import { Icon } from 'astro-icon/components';
                 return (leave) => {
                     if (leave) {
                         animate(
-                            el.target,
+                            el,
                             { opacity: [0] },
                             { duration: 0.25 },
                         );

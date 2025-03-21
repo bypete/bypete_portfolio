@@ -13,24 +13,17 @@ const { post, class: ClassName, direction } = Astro.props;
 const { url, title, excerpt, thumb, overlay } = post || {};
 ---
 
-<a href={url} class:list={[ClassName, 'group gap-fluid-2xs grid grid-cols-1']}>
+<a href={url} class:list={[ClassName, 'group grid grid-cols-1 gap-fluid-2xs']}>
     <span
         class:list={[
-            'gap-fluid-3xs text-step--1 text-content-loud flex w-full items-center',
+            '-mb-fluid-2xs flex w-full items-baseline gap-fluid-3xs px-fluid-3xs text-step-3 leading-[0.65] font-black text-content',
             direction === 'next' && 'flex-row-reverse justify-start',
         ]}
-    >
-        <Icon
-            name={direction === 'next'
-                ? 'hugeicons:square-arrow-right-02'
-                : 'hugeicons:square-arrow-left-02'}
-            class="h-fluid-s w-auto"
-        />
-        {direction === 'next' ? 'Next' : 'Previous'}
-    </span>
+        set:html={direction === 'next' ? 'Next' : 'Previous'}
+    />
     {
         thumb && (
-            <span class="rounded-tight aspect-cinema xl:aspect-widescreen relative overflow-hidden">
+            <span class="relative aspect-cinema overflow-hidden rounded-tight border-[3px] border-content xl:aspect-widescreen">
                 <Image
                     widths={[400]}
                     quality="high"
@@ -52,7 +45,7 @@ const { url, title, excerpt, thumb, overlay } = post || {};
     <span>
         <h2
             set:html={title}
-            class="text-step-1/tight text-link group-hover:text-link-light font-bold"
+            class="text-step-1/tight font-bold text-link group-hover:text-link-light"
         />
         {excerpt && <p class="text-step--1">{excerpt}</p>}
     </span>

@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 ---
 
 <div
@@ -10,17 +10,17 @@ import { Icon } from 'astro-icon/components';
 </div>
 
 <script>
-    import { animate, timeline, type TimelineDefinition, inView } from 'motion';
+    import { animate, type AnimationSequence, inView } from 'motion';
 
     const scrollers = document.querySelectorAll('.scrollPrompt');
     if (scrollers != null) {
         inView(
             scrollers,
             (el) => {
-                const nudge = el.target.querySelector('.nudge');
-                const sequence: TimelineDefinition = [
+                const nudge = el.querySelector('.nudge');
+                const sequence: AnimationSequence = [
                     [
-                        el.target,
+                        el,
                         {
                             opacity: [0, 0.5, 1],
                             y: ['50%', '25%', '0%'],
@@ -32,7 +32,7 @@ import { Icon } from 'astro-icon/components';
                     ],
                 ];
 
-                timeline(sequence, {}).finished.then(() => {
+                animate(sequence, {}).then(() => {
                     if (nudge) {
                         // animate to allow repeat attribute
                         animate(
@@ -44,9 +44,9 @@ import { Icon } from 'astro-icon/components';
                             },
                             {
                                 duration: 0.25,
-                                delay: 2.5,
+                                repeatDelay: 2.5,
                                 repeat: 1,
-                                easing: 'ease-in',
+                                ease: 'easeOut',
                             },
                         );
                     }
@@ -55,7 +55,7 @@ import { Icon } from 'astro-icon/components';
                 return (leave) => {
                     if (leave) {
                         animate(
-                            el.target,
+                            el,
                             { opacity: [0] },
                             { duration: 0.25 },
                         );

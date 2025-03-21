@@ -1,26 +1,34 @@
 ---
-import BaseLayout from './BaseLayout.astro';
-import { type Props as HeadProps } from '~/components/SEO/Main.astro';
-import Hero, { type Props as HeroProps } from '~/components/hero/Hero.astro';
-import TableOfContents from '~/components/ui/TableOfContents.astro';
+import BaseLayout from "./BaseLayout.astro";
+import type { Props as HeadProps } from "~/components/SEO/Main.astro";
+import Hero from "~/components/hero/Hero.astro";
+import TocMenu from "~/components/preact/navigation/TocMenu";
 
-const fm = Astro.props.frontmatter || Astro.props;
+const {
+	frontmatter,
+	headings,
+	customHeadings,
+	isWide = false,
+	prose = true,
+} = Astro.props;
+const fm = frontmatter || Astro.props;
 const { heroConfig = {}, class: className } = fm;
+const { hideToc = false, hideBreadcrumbs = false } = fm;
+
+const finalHeadings = headings || customHeadings || []; // Ensure it's always an array
+
 const head: HeadProps = {
-    ...fm.head, // Spread any existing values in `fm.head`
-    title: fm.title || fm.head?.title,
-    description: fm.description || fm.head?.description,
-    og: fm.og || fm.head?.og,
+	...fm.head, // Spread any existing values in `fm.head`
+	title: fm.title || fm.head?.title,
+	description: fm.description || fm.head?.description,
+	og: fm.og || fm.head?.og,
 };
 
-const isHeroDark =
-    (fm.isHeroDark || (fm.heroConfig && fm.heroConfig.dark)) ?? false;
-const { headings, isWide = false, prose = true } = Astro.props;
-const { hideToc = false, hideBreadcrumbs = false } = fm;
+const isHeroDark = (fm.isHeroDark || fm.heroConfig?.dark) ?? false;
 ---
 
 <BaseLayout {head} {isHeroDark}>
-    <slot name="slothero">
+  <slot name="slothero">
         <Hero heroConfig={heroConfig} title={head.title} />
     </slot>
     <main id="main-content" class:list={[className && className]}>
@@ -32,8 +40,8 @@ const { hideToc = false, hideBreadcrumbs = false } = fm;
             ]}
         >
             {
-                headings && headings.length > 2 && !hideToc && (
-                    <TableOfContents headings={headings} />
+                finalHeadings && finalHeadings.length > 2 && !hideToc && (
+                    <TocMenu class="mb-fluid-l" headings={finalHeadings} client:load/>
                 )
             }
             <slot />

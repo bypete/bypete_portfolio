@@ -5,7 +5,7 @@ import { clientSlides } from '~/data/clients';
 import SwiperHome from '~/components/Swiper/Home.astro';
 import SplashLayout from '~/layouts/SplashLayout.astro';
 import WorkCard from '~/components/work/WorkCard.astro';
-import Button from '~/components/ui/Button.astro';
+import Button from '~/components/preact/Button.tsx';
 import { Icon } from 'astro-icon/components';
 import Roles from '~/components/Roles.astro';
 import SwiperClients from '~/components/Swiper/Clients.astro';
@@ -103,7 +103,7 @@ const formattedPosts = formatBlogPosts(allWork, {
             <!-- END visual -->
         </div>
         <div
-            class="top-screenSvh pb-fluid-s text-content-light pointer-events-none absolute left-1/2 z-100 -translate-x-1/2 -translate-y-full"
+            class="pb-fluid-s text-content-light not-dynamic:top-[100vh] pointer-events-none absolute top-[100svh] left-1/2 z-100 -translate-x-1/2 -translate-y-full"
         >
             <ScrollPrompt />
         </div>
@@ -139,12 +139,11 @@ const formattedPosts = formatBlogPosts(allWork, {
                     })
                 }
 
-                <div animate-card class="rte p-fluid-s self-center">
-                    <Icon
-                        name="lucide:folder-archive"
-                        class="h-fluid-l w-fluid-l animate-pulse"
-                    />
-                    <h2 class="font-headline">Want to see more...?</h2>
+                <div animate-card class="self-center">
+                    <span
+                        class="i-lucide-folder-archive h-fluid-l w-fluid-l animate-pulse"
+                    ></span>
+                    <h2 class="text-step-2 mt-0">Want to see more...?</h2>
                     <p>
                         A complete list of case studies can be found in the <strong
                             >Work</strong
@@ -177,13 +176,7 @@ const formattedPosts = formatBlogPosts(allWork, {
     </div>
 </SplashLayout>
 <script>
-    import {
-        inView,
-        animate,
-        timeline,
-        type TimelineDefinition,
-        stagger,
-    } from 'motion';
+    import { inView, animate, stagger, type AnimationSequence } from 'motion';
 
     const { body, documentElement: page } = document;
     const viewWidth = window.innerWidth || page.clientWidth;
@@ -195,25 +188,25 @@ const formattedPosts = formatBlogPosts(allWork, {
         viewWidth <= 768
             ? inView(
                   '[animate-card]',
-                  (info) => {
+                  (element) => {
                       animate(
-                          info.target,
+                          element,
                           { opacity: [0, 1], y: ['40px', '0'] },
-                          { delay: 0.25, duration: 0.75 },
+                          { delay: 0.25, duration: 0.75 }
                       );
                   },
-                  { margin: '0%' },
+                  { margin: '0%' }
               )
             : inView(
                   featured,
-                  (info) => {
+                  (element) => {
                       animate(
-                          info.target.querySelectorAll('[animate-card]'),
+                          element.querySelectorAll('[animate-card]'),
                           { opacity: [0, 1] },
-                          { duration: 0.25, delay: stagger(0.15) },
+                          { duration: 0.25, delay: stagger(0.15) }
                       );
                   },
-                  { margin: '-20%' },
+                  { margin: '-20%' }
               );
     }
 
@@ -278,7 +271,7 @@ const formattedPosts = formatBlogPosts(allWork, {
         const directionX = Math.random() > 0.5 ? 1 : -1; // Randomly choose left or right direction
         const directionY = Math.random() > 0.5 ? 1 : -1; // Randomly choose up or down direction
 
-        const shoot: TimelineDefinition = [
+        const shoot: AnimationSequence = [
             [
                 randomParticle,
                 {
@@ -298,7 +291,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                 { duration: 0.25, delay: 2 },
             ],
         ];
-        timeline(shoot, {}).finished.then(() => {
+        animate(shoot).then(() => {
             animationInProgress = false;
         });
     };

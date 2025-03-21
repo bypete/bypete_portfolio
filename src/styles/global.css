@@ -70,8 +70,10 @@
     /* Custom */
     --spacing-splash-overlap: calc(var(--spacing-fluid-3xl) * 2);
     --spacing-headerheight: calc(
-        var(--spacing-fluid-l) + (var(--spacing-fluid-s) * 2)
+        var(--spacing-fluid-l) + (var(--spacing-fluid-2xs) * 2)
     );
+    --spacing-tramline: var(--tramline);
+    --spacing-offset: var(--offset);
 
     --spacing-tight: 3px;
     --spacing-block: 40vw; /* 5:2 default block / cinema */
@@ -81,6 +83,7 @@
     --spacing-photo: 66.67vw; /* 3:2 */
 
     --container-page: 78.75rem; /* 1260px */
+    --container-page: 87.5rem; /* 1400px */
 
     --aspect-retro: 4 / 3;
     --aspect-cinema: 5 / 2;
@@ -93,14 +96,21 @@
     --radius-tight: 3px;
 
     --shadow-icon: inset 0 2px 6px -1px var(--tw-shadow-color);
-    --shadow-raised: 0px 2px 6px -1px rgba(0, 0, 0, 0.08),
+
+    --shadow-raised:
+        0px 2px 6px -1px rgba(0, 0, 0, 0.08),
         0px 0px 3px -1px rgba(0, 0, 0, 0.08);
-    --shadow-overlay: 0px 2px 10px -1px rgba(0, 0, 0, 0.1),
+
+    --shadow-overlay:
+        0px 2px 10px -1px rgba(0, 0, 0, 0.1),
         0px 0px 5px -1px rgba(0, 0, 0, 0.45);
-    --shadow-inside: inset 0 25px 50px -20px rgba(0, 0, 0, 0.08),
+
+    --shadow-inside:
+        inset 0 25px 50px -20px rgba(0, 0, 0, 0.08),
         inset 0 2px 0px -1px rgba(0, 0, 0, 0.08);
 
-    --shadow-inset: inset 0 2px 6px -1px var(--color-shadow-inset),
+    --shadow-inset:
+        inset 0 2px 6px -1px var(--color-shadow-inset),
         0px 0px 1px 1px var(--color-shadow-highlight);
 
     --shadow-highlight: 0px -1px 0px 0px var(--color-shadow-highlight);
@@ -109,12 +119,15 @@
     --shadow-banner: -4px 0px 8px 4px var(--tw-shadow-color);
     --shadow-dropdown: 0px 5px 15px var(--tw-shadow-color);
 
-    --shadow-floated: 0px 2px 1px -1px var(--shadow-highlight),
+    --shadow-floated:
+        0px 2px 1px -1px var(--white),
         inset 0px 2px 1px 1px var(--color-shadow-floated),
         0px 0px 10px 5px var(--color-shadow-floated);
 
     --drop-shadow-svg: 0px 0px 16px rgba(0, 0, 0, 0.1);
     --drop-shadow-logo: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    --drop-shadow-banner: 1px 1px 5px rgba(0, 0, 0, 0.12);
+    --drop-shadow-transparent: 0 0 0 rgba(0, 0, 0, 0);
 
     /* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1200,18,1.25,7,2,768&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
     /* Step -2: 11.1111px → 11.52px */
@@ -167,10 +180,10 @@
 
     --color-shadow-raised: var(--shadow-dark);
     --color-shadow-sunk: var(--shadow-dark);
-    --color-shadow-floated: var(--shadow-floated);
+    --color-shadow-floated: var(--shadow-surface-10);
     --color-shadow-overlay: var(--shadow-dark);
     --color-shadow-inset: var(--shadow-dark);
-    --color-shadow-highlight: var(--shadow-highlight);
+    --color-shadow-highlight: var(--shadow-light);
 
     --color-line-whisper: var(--line-whisper);
     --color-line-quiet: var(--line-quiet);
@@ -354,6 +367,7 @@
 
 /* Specific Utilities 
 ------------------------------------------------------------ */
+
 @utility external {
     @apply after:i-lucide-external-link after:text-step--1 after:ml-0.5 after:-translate-y-0.5;
 }
@@ -361,13 +375,26 @@
     @apply relative mb-[1em] before:absolute before:-bottom-[0.5em] before:left-0 before:w-[1.25em] before:border-b-[3px] before:border-b-teal-400;
 }
 
-@utility breakout {
+/* @utility breakout {
     width: 100vw;
     max-width: none;
     left: 50%;
     right: 50%;
     position: relative;
     margin-inline: -50vw;
+    @media (min-width: 768px) {
+        opacity: 0.5;
+        width: calc(100vw - (var(--spacing-container-padding) * 2));
+        left: calc(50% - var(--spacing-fluid-3xl));
+        right: calc(50% + var(--spacing-fluid-3xl));
+    }
+} */
+
+@utility breakout {
+    width: calc(100vw - var(--offset));
+    max-width: none;
+    position: relative;
+    margin-left: calc(-50vw + 50% + (var(--offset) / 2));
 }
 
 @utility bookmarkclip {
@@ -375,15 +402,15 @@
 }
 
 @utility form-base {
-    @apply border-line bg-surface-raised px-fluid-2xs py-fluid-2xs rounded-tight block border;
+    @apply rounded-tight border-line bg-surface-raised px-fluid-2xs py-fluid-2xs block border;
 }
 
 @utility form-focus {
-    @apply focus:border-surface focus:ring-focus focus:ring-2 focus:outline-none;
+    @apply focus:border-surface focus:ring-focus focus:outline-none focus:ring-2;
 }
 
 @utility list-li-base {
-    @apply pl-fluid-m relative list-none leading-normal before:absolute before:top-0 before:left-0 before:w-[1.5rem];
+    @apply pl-fluid-m relative list-none leading-normal before:absolute before:left-0 before:top-0 before:w-[1.5rem];
 }
 
 @utility list-li-bullet {
@@ -394,12 +421,13 @@
 }
 
 @utility label-base {
-    @apply px-fluid-3xs rounded-tight text-step--2/none inline-block border py-px align-text-bottom uppercase;
+    @apply rounded-tight px-fluid-3xs text-step--2/none inline-block border py-px align-text-bottom uppercase;
 }
 
 @utility container {
-    @apply px-fluid-m;
-    max-width: 78.75rem; /* 1260px */
+    @apply px-tramline;
+    /* max-width: 78.75rem; 1260px */
+    max-width: 87.5rem; /* 1400px */
 }
 
 /* prettier-ignore */
@@ -448,6 +476,12 @@
     }
 }
 
+@custom-variant cloak {
+    [data-cloak] {
+        @slot;
+    }
+}
+
 /* Layer | Utilities
 ------------------------------------------------------------ */
 @layer utilities {
@@ -471,28 +505,28 @@
     .form__textarea,
     .form__checkbox {
         &.error {
-            @apply focus:border-focus focus:ring-focus ring-attention border-transparent ring-2;
+            @apply ring-attention focus:border-focus focus:ring-focus border-transparent ring-2;
         }
     }
 
     .form__input,
     .form__select {
         &:read-only {
-            @apply border-line-quiet bg-line-whisper focus:border-line-quiet focus:bg-line-whisper pointer-events-none select-none focus:ring-0 focus:outline-hidden;
+            @apply border-line-quiet bg-line-whisper focus:border-line-quiet focus:bg-line-whisper focus:outline-hidden pointer-events-none select-none focus:ring-0;
         }
     }
 
     .form__checkbox {
-        @apply text-primary border-line form-focus rounded-xs border p-2;
+        @apply form-focus rounded-xs border-line text-primary border p-2;
     }
 
     .form__radio {
-        @apply text-primary border-line form-focus border p-2;
+        @apply form-focus border-line text-primary border p-2;
     }
 
     /*--- Lists ---*/
     .list {
-        @apply space-y-2 pl-0!;
+        @apply pl-0! space-y-2;
         li {
             @apply list-li-base;
         }
@@ -593,7 +627,7 @@
     blockquote {
         @apply my-fluid-l pl-fluid-xs font-georgia text-step-1 relative block text-left;
         &::before {
-            @apply text-primary i-lucide-message-square-quote block text-[1.5em] leading-none;
+            @apply i-lucide-message-square-quote text-primary block text-[1.5em] leading-none;
             content: '';
         }
         cite {
@@ -661,7 +695,7 @@
     }
 
     .rte :where(ul):not(:where(.not-rte, .not-rte *, .list)):not([class]) {
-        @apply space-y-2 pl-0!;
+        @apply pl-0! space-y-2;
         li {
             @apply list-li-base list-li-bullet;
         }
@@ -722,29 +756,6 @@
 }
 .pswp {
     --pswp-bg: var(--color-slate-950);
-}
-
-/* Lenis smooth scrolling 
----------------------------------------------------------------------------------*/
-html.lenis,
-html.lenis body {
-    height: auto;
-}
-
-.lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-    overflow: hidden;
-}
-
-.lenis.lenis-scrolling iframe {
-    pointer-events: none;
 }
 
 /* Prism | New diff- syntax

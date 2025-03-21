@@ -1,66 +1,66 @@
 ---
-import smartypants from 'smartypants';
-import siteInfo from '~/data/site';
-import pjson from '~/../package.json';
-import Favicon from '~/components/SEO/Favicon.astro';
+import smartypants from "smartypants";
+import siteInfo from "~/data/site";
+import pjson from "~/../package.json";
+import Favicon from "~/components/SEO/Favicon.astro";
 
-import { SEO } from 'astro-seo';
+import { SEO } from "astro-seo";
 
 interface OpengraphProps {
-    title?: string;
-    description?: string;
-    image?: {
-        src?: ImageMetadata;
-        alt?: string;
-    };
+	title?: string;
+	description?: string;
+	image?: {
+		src?: ImageMetadata;
+		alt?: string;
+	};
 }
 
 export type Props = {
-    title: string;
-    description?: string;
-    og?: OpengraphProps;
-    canonicalURL?: URL;
-    pageType?: 'website' | 'article';
-    includeSiteTitle?: boolean;
-    isHeroDark?: boolean;
-    // Article
-    published_time?: string;
-    author?: string[];
-    section?: string;
-    tags?: string[];
+	title: string;
+	description?: string;
+	og?: OpengraphProps;
+	canonicalURL?: URL;
+	pageType?: "website" | "article";
+	includeSiteTitle?: boolean;
+	isHeroDark?: boolean;
+	// Article
+	published_time?: string;
+	author?: string[];
+	section?: string;
+	tags?: string[];
 };
 
 const {
-    title,
-    description = siteInfo.description,
-    og: {
-        title: ogTitle = title || siteInfo.og.title,
-        description: ogDescription = siteInfo.og.description,
-        image: {
-            src: ogImage = siteInfo.og.image.src,
-            alt: ogAlt = siteInfo.og.image.alt,
-        } = {}, // Default `image` object
-    } = {},
-    canonicalURL = new URL(Astro.request.url, Astro.site),
-    pageType = 'website',
-    includeSiteTitle = true,
-    isHeroDark = false,
-    // Articles
-    published_time,
-    author,
-    section,
-    tags,
+	title,
+	description = siteInfo.description,
+	og: {
+		title: ogTitle = title || siteInfo.og.title,
+		description: ogDescription = siteInfo.og.description,
+		image: {
+			src: ogImage = siteInfo.og.image.src,
+			alt: ogAlt = siteInfo.og.image.alt,
+		} = {}, // Default `image` object
+	} = {},
+	canonicalURL = new URL(Astro.request.url, Astro.site),
+	pageType = "website",
+	includeSiteTitle = true,
+	isHeroDark = false,
+	// Articles
+	published_time,
+	author,
+	section,
+	tags,
 } = Astro.props;
 
 let article = {}; // Initialize as an empty object
 
-if (pageType === 'article') {
-    article = {
-        publishedTime: published_time,
-        authors: [`${author}`],
-        tags: tags,
-        section: section,
-    };
+if (pageType === "article") {
+	article = {
+		publishedTime: published_time,
+		authors: [`${author}`],
+		tags: tags,
+		section: section,
+	};
 }
 
 const resolvedTitle = includeSiteTitle ? `${title} - ${siteInfo.title}` : title;
@@ -79,9 +79,11 @@ const resolvedOgTitle = smartypants(ogTitle, 1);
 <meta name="generator" content={Astro.generator} />
 {
     isHeroDark ? (
-        <meta name="theme-color" content="#09090b" />
+    <meta name="theme-color" content="rgb(31, 31, 40)" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="rgb(31, 31, 40)" media="(prefers-color-scheme: dark)" />
     ) : (
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="rgb(252, 252, 252)" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="rgb(31, 31, 40)" media="(prefers-color-scheme: dark)" />
     )
 }
 

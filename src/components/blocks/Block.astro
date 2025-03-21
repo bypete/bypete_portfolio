@@ -1,152 +1,147 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-import { Image } from 'astro:assets';
-import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
-import SwipePrompt from '~/components/ui/SwipePrompt.astro';
+import type { HTMLAttributes } from "astro/types";
+import { Image } from "astro:assets";
+import ScrollPrompt from "~/components/ui/ScrollPrompt.astro";
+import SwipePrompt from "~/components/ui/SwipePrompt.astro";
 
-type LayoutType = 'default' | 'left' | 'right' | 'center';
+type LayoutType = "default" | "left" | "right" | "center";
 type SlotNumber = 1 | 2 | 3 | 4;
 
 // Discriminated union for the layout type based on the slot count
 type LayoutConfig =
-    | { slots: 1; type: LayoutType }
-    | { slots: 2; type: LayoutType }
-    | { slots: 3; type: Extract<LayoutType, 'default' | 'center'> }
-    | { slots: 4; type: Extract<LayoutType, 'default'> };
+	| { slots: 1; type: LayoutType }
+	| { slots: 2; type: LayoutType }
+	| { slots: 3; type: Extract<LayoutType, "default" | "center"> }
+	| { slots: 4; type: Extract<LayoutType, "default"> };
 
 // Define a type that enforces the correct layout types for each slot count
 type LayoutMatrix = {
-    1: Record<LayoutType, MatrixConfig>;
-    2: Record<LayoutType, MatrixConfig>;
-    3: Record<Extract<LayoutType, 'default' | 'center'>, MatrixConfig>;
-    4: Record<Extract<LayoutType, 'default'>, MatrixConfig>;
+	1: Record<LayoutType, MatrixConfig>;
+	2: Record<LayoutType, MatrixConfig>;
+	3: Record<Extract<LayoutType, "default" | "center">, MatrixConfig>;
+	4: Record<Extract<LayoutType, "default">, MatrixConfig>;
 };
 
 type SlotConfig = Partial<Record<SlotNumber, string[]>>; // All optional
 
 type MatrixConfig = {
-    grid?: string[];
-    slots?: SlotConfig;
+	grid?: string[];
+	slots?: SlotConfig;
 };
 
 type BackgroundConfig = {
-    src: ImageMetadata;
-    alt: string;
+	src: ImageMetadata;
+	alt: string;
 };
 
-export interface Props extends HTMLAttributes<'div'> {
-    layout?: LayoutConfig;
-    gridClass?: string;
-    wrapperClass?: string;
-    className?: string;
-    legibility?: string;
-    overflow?: boolean;
-    container?: boolean;
-    prompt?: 'swipe' | 'scroll';
-    breakout?: boolean;
-    background?: BackgroundConfig;
-    dark?: boolean;
-    slotConfig?: SlotConfig;
+export interface Props extends HTMLAttributes<"div"> {
+	layout?: LayoutConfig;
+	gridClass?: string;
+	wrapperClass?: string;
+	class?: string;
+	legibility?: string;
+	overflow?: boolean;
+	container?: boolean;
+	prompt?: "swipe" | "scroll";
+	breakout?: boolean;
+	background?: BackgroundConfig;
+	dark?: boolean;
+	slotConfig?: SlotConfig;
 }
 
 const {
-    layout = { type: 'default', slots: 1 }, // Default to 1 slots
-    gridClass = '', // Override grid layout
-    wrapperClass = '',
-    class: className,
-    legibility,
-    overflow = false,
-    container = true,
-    prompt,
-    breakout = true,
-    background,
-    dark = false,
-    slotConfig = {},
-    ...rest
+	layout = { type: "default", slots: 1 }, // Default to 1 slots
+	gridClass = "", // Override grid layout
+	wrapperClass = "",
+	class: className,
+	legibility,
+	overflow = false,
+	container = true,
+	prompt,
+	breakout = true,
+	background,
+	dark = false,
+	slotConfig = {},
+	...rest
 } = Astro.props;
 
 // Determine text color based on legibility or dark mode
-const color = legibility || (dark ? 'text-content-light' : 'text-content-dark');
+const color = legibility || (dark ? "text-content-light" : "text-content-dark");
 
 // Type-safe layout matrix
 const layoutMatrix: LayoutMatrix = {
-    1: {
-        default: {
-            grid: ['items-center', 'justify-center', 'gap-fluid-2xs'],
-            slots: { 1: ['max-w-[40ch]'] },
-        },
-        left: {
-            grid: ['grid-flow-row', 'md:grid-cols-[1fr_2fr]', 'gap-fluid-m'],
-            slots: { 1: ['py-fluid-2xl'] },
-        },
-        right: {
-            grid: ['grid-flow-row', 'md:grid-cols-[2fr_1fr]', 'gap-fluid-m'],
-            slots: { 1: ['py-fluid-2xl'] },
-        },
-        center: {
-            grid: ['grid-cols-1', 'text-center'],
-            slots: { 1: ['max-w-[40ch]', 'py-fluid-2xl'] },
-        },
-    },
-    2: {
-        default: {
-            grid: ['grid-flow-row', 'md:grid-cols-[1fr_1fr]', 'gap-fluid-m'],
-        },
-        left: {
-            grid: ['grid-flow-row', 'md:grid-cols-[3fr_2fr]', 'gap-fluid-m'],
-        },
-        right: {
-            grid: ['grid-flow-row', 'md:grid-cols-[2fr_3fr]', 'gap-fluid-m'],
-        },
-        center: {
-            grid: ['grid-cols-1', 'text-center'],
-        },
-    },
-    3: {
-        default: {
-            grid: ['grid-cols-1', 'md:grid-cols-3', 'gap-fluid-m'],
-        },
-        center: {
-            grid: [
-                'grid-cols-1',
-                'md:grid-cols-3',
-                'text-center',
-                'gap-fluid-m',
-            ],
-        },
-    },
-    4: {
-        default: {
-            grid: ['grid-cols-2', 'md:grid-cols-4', 'gap-fluid-m'],
-        },
-    },
+	1: {
+		default: {
+			grid: ["items-center", "justify-center", "gap-fluid-2xs"],
+			slots: { 1: ["max-w-[40ch]"] },
+		},
+		left: {
+			grid: ["grid-flow-row", "md:grid-cols-[1fr_2fr]", "gap-fluid-m"],
+			slots: { 1: ["py-fluid-2xl"] },
+		},
+		right: {
+			grid: ["grid-flow-row", "md:grid-cols-[2fr_1fr]", "gap-fluid-m"],
+			slots: { 1: ["py-fluid-2xl"] },
+		},
+		center: {
+			grid: ["grid-cols-1", "text-center"],
+			slots: { 1: ["max-w-[40ch]", "py-fluid-2xl"] },
+		},
+	},
+	2: {
+		default: {
+			grid: ["grid-flow-row", "md:grid-cols-[1fr_1fr]", "gap-fluid-m"],
+		},
+		left: {
+			grid: ["grid-flow-row", "md:grid-cols-[3fr_2fr]", "gap-fluid-m"],
+		},
+		right: {
+			grid: ["grid-flow-row", "md:grid-cols-[2fr_3fr]", "gap-fluid-m"],
+		},
+		center: {
+			grid: ["grid-cols-1", "text-center"],
+		},
+	},
+	3: {
+		default: {
+			grid: ["grid-cols-1", "md:grid-cols-3", "gap-fluid-m"],
+		},
+		center: {
+			grid: ["grid-cols-1", "md:grid-cols-3", "text-center", "gap-fluid-m"],
+		},
+	},
+	4: {
+		default: {
+			grid: ["grid-cols-2", "md:grid-cols-4", "gap-fluid-m"],
+		},
+	},
 };
 
 // Select the current layout configuration based on the number of slots and layout type
 const currentLayout =
-    layoutMatrix[layout.slots][layout.type] || layoutMatrix[2].default;
+	layoutMatrix[layout.slots][layout.type] || layoutMatrix[2].default;
 
-const grid = gridClass ? gridClass.split(' ') : currentLayout.grid ?? [];
+const grid = gridClass ? gridClass.split(" ") : (currentLayout.grid ?? []);
 
 const layoutClass = [
-    ...grid,
-    overflow && 'overflow-hidden',
-    container && 'mx-auto w-full container',
-    color,
+	...grid,
+	overflow && "overflow-hidden",
+	container && "mx-auto w-full container",
+	color,
 ].filter(Boolean); // Filter out falsey values like `undefined` or `false`
 
 // Define background properties if background exists
 let backgroundProps;
 if (background) {
-    backgroundProps = {
-        src: background.src,
-        alt: background.alt,
-        widths: [480, 1800],
-        sizes: '100vw',
-        class: 'absolute h-full w-full object-cover',
-        format: 'webp',
-        quality: 80,
-    };
+	backgroundProps = {
+		src: background.src,
+		alt: background.alt,
+		widths: [480, 1800],
+		sizes: "100vw",
+		class: "absolute h-full w-full object-cover",
+		format: "webp",
+		quality: 80,
+	};
 }
 ---
 

@@ -4,14 +4,18 @@
         --black: rgb(0, 0, 0); /* absolute black */
         --offblack: rgb(24, 24, 27); /* zinc-800 */
 
-        --banner: transparent;
-        --banner-up: rgb(255, 255, 255); /* absolute white */
+        --banner: rgba(255, 255, 255, 0);
+        --banner-up: rgba(255, 255, 255, 1); /* absolute white */
 
         --surface-10: rgb(255, 255, 255); /* #FFFFFF Shade +1 */
         --surface: rgb(252, 252, 252); /* #fcfcfc */
         --surface--20: rgb(234, 234, 232); /* #f3f3f2 Shade -2 */
         --surface--10: rgb(243, 243, 242); /* #f3f3f2 Shade -1 */
         --surface--100: rgb(20, 20, 26); /* 14141a Footer and offscreen */
+
+        --shadow-surface-10: rgba(24, 24, 27, 0.12); /* #18181B */
+        --shadow-light: rgba(255, 255, 255, 0.75); /* absolute white */
+        --shadow-dark: rgba(24, 24, 27, 0.25); /* #18181B */
 
         --accent-light: rgb(240, 25, 101); /* #f01965 */
         --accent: rgb(230, 15, 91); /* #E60F5B */
@@ -78,18 +82,20 @@
 
         --focus: rgb(56, 189, 248); /* sky-400 */
 
-        --shader: svg-load('arcs__shadow.svg');
         --plus: svg-load('heap__plus.svg');
 
-        --shadow-highlight: rgba(255, 255, 255, 0.75); /* absolute white */
-        --shadow-dark: rgba(24, 24, 27, 0.25); /* #18181B */
-        --shadow-floated: rgba(24, 24, 27, 0.12); /* #18181B */
-
         --container-max: 75rem;
+
+        --offset: 0px;
+        --tramline: var(--spacing-fluid-m);
 
         --z-toast: 2001;
         --z-overlay: 2000;
         --z-shortcuts: 1001;
+        --z-header: 1000;
+        --z-logo: 501;
+        --z-hero: 500;
+        --z-nav: 999;
         --z-banner: 1000;
         --z-underlay: 990;
         --z-toc: 900;
@@ -113,10 +119,17 @@
         --gtr-home: auto minmax(0, 1fr);
     }
 
+    @media (min-width: 768px) {
+        :root {
+            --offset: var(--spacing-fluid-xl);
+            --tramline: var(--spacing-fluid-xl);
+        }
+    }
+
     /* Alpine will set data-theme value based on (prefers-color-scheme: dark)  */
     :root[data-theme='dark'] {
-        --banner: transparent;
-        --banner-up: rgb(11, 11, 15); /* #0A0A0D */
+        --banner: rgba(11, 11, 15, 0);
+        --banner-up: rgba(11, 11, 15, 1); /* #0A0A0D */
 
         --surface-10: rgb(42, 42, 54); /* #2a2a36 +1 Shade */
         --surface: rgb(31, 31, 40); /* #1f1f28 */
@@ -124,7 +137,7 @@
         --surface--20: rgb(14, 14, 18); /* #0e0e12 -2 Shade */
         --surface--100: rgb(3, 3, 4); /* #030304 Footer and offscreen */
 
-        --shadow-highlight: rgb(54, 54, 70); /* #363646 */
+        --shadow-light: rgb(54, 54, 70); /* #363646 */
 
         --footer-start: rgb(22, 22, 29); /* #16161d */
         --footer: rgb(14, 14, 18); /* #0e0e12 */
@@ -149,8 +162,6 @@
         --copy-featured: rgb(31, 41, 55); /* gray-800 */
 
         --focus: rgb(3, 105, 161); /* sky-700 */
-
-        /* --shader: svg-load('shade__dark.svg'); */
 
         --color-blockquote: var(--copy-light);
 

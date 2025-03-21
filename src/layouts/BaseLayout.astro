@@ -2,19 +2,23 @@
 import MainSEO, { type Props as HeadProps } from '~/components/SEO/Main.astro';
 import GoogleTagNoScript from '~/components/SEO/GoogleTagNoScript.astro';
 import GoogleTag from '~/components/SEO/GoogleTag.astro';
-import Header from '~/components/layout/Header.astro';
+import Header from '~/components/preact/layout/Header';
+import ThemeIcon from '~/components/preact/ThemeIcon';
 import Footer from '~/components/layout/Footer.astro';
-import Underlay from '~/components/ui/Underlay.astro';
-import CookieNotice from '~/components/ui/CookieNotice.astro';
-import Shortcuts from '~/components/ui/Shortcuts.astro';
+import Underlay from '~/components/preact/overlays/Underlay';
+import Overlay from '~/components/preact/overlays/Overlay';
+import CookieNotice from '~/components/preact/overlays/CookieNotice.tsx';
+import PageTop from '~/components/preact/navigation/PageTop';
 import Accessibility from '~/components/ui/Accessibility.astro';
-import Overlay from '~/components/ui/Overlay.astro';
-import OffCanvasNavigation from '~/components/layout/OffCanvasNavigation.astro';
+import OffCanvasNavigation from '~/components/preact/navigation/OffCanvasNavigation';
+
+import BypeteBrand from '~/assets/svg/bypete__brand.svg?react';
+import BypeteWhite from '~/assets/svg/bypete__white.svg?react';
 
 const fm = Astro.props.frontmatter || Astro.props;
 
 const { head = {}, isHeroDark = false } = fm;
-
+const currentPath = new URL(Astro.request.url).pathname;
 const isProduction = process.env.NODE_ENV === 'production';
 import '~/styles/global.css';
 ---
@@ -27,13 +31,10 @@ import '~/styles/global.css';
 >
     <head>
         <MainSEO {...head} {isHeroDark} />
-        <!-- {isProduction && <GoogleTag />} -->
         <GoogleTag />
     </head>
     <body
-        class="bg-surface font-Roboto text-step-0 text-content relative m-0 overflow-x-hidden antialiased"
-        x-data="{ isMobileNavOpen: false, showOverlay: false, showUnderlay: false, }"
-        x-ref="body"
+        class="relative overflow-x-hidden bg-surface font-Roboto text-step-0 text-content antialiased"
         id="top"
     >
         {isProduction && <GoogleTagNoScript />}
@@ -44,72 +45,105 @@ import '~/styles/global.css';
             ]}
         />
 
-        <div id="wrapperCanvas" class="relative">
-            <OffCanvasNavigation id="wrapperOffCanvasRight" {isHeroDark} />
+        <Header client:load />
 
-            <Overlay class="bg-overlay-dark/80" />
+        <div
+            class="absolute top-fluid-m z-(--z-logo) container mx-auto hidden w-full px-fluid-3xl md:block"
+        >
+            <a
+                href="/"
+                aria-label="byPete - home"
+                class="left-fluid-3xl h-fluid-l"
+            >
+                {
+                    isHeroDark ? (
+                        <BypeteWhite
+                            class="h-fluid-l w-auto"
+                            title="byPete logo in white"
+                        />
+                    ) : (
+                        <BypeteBrand
+                            class="h-fluid-l w-auto"
+                            title="byPete logo in brand colour"
+                        />
+                    )
+                }
+            </a>
+        </div>
+
+        <div id="wrapperCanvas" class="relative">
+            <OffCanvasNavigation {currentPath} client:load />
+
+            <Overlay client:load />
 
             <div
                 id="wrapperContent"
-                class="bg-surface @container/page relative grid grid-cols-1 grid-rows-[auto_1fr_auto]"
+                class="@container/page relative grid grid-cols-1 grid-rows-[auto_1fr_auto] bg-surface md:pl-offset"
             >
-                <Header {isHeroDark} />
-                <Underlay {isHeroDark} />
-                <div class="bg-surface outline-hidden">
-                    <div
-                        class="shader pointer-events-none absolute inset-0 h-full w-full opacity-[2%]"
-                    >
-                    </div>
+                <!-- <Banner {isHeroDark} {currentPath} client:load /> -->
+                <Underlay client:load {isHeroDark} />
+
+                <div class="relative w-full bg-surface outline-hidden">
                     <slot />
+                    <!-- Page tools -->
+                    <div
+                        class="sticky right-fluid-m bottom-0 z-[1000] mr-0 ml-auto flex w-auto max-w-fit justify-end"
+                    >
+                        <div
+                            class="absolute right-0 bottom-0 -translate-y-fluid-m"
+                        >
+                            <PageTop client:load />
+                        </div>
+                    </div>
                 </div>
                 <Footer />
             </div>
         </div>
 
         <div
-            class="p-fluid-xs not-dynamic:top-[100vh] pointer-events-none fixed top-[100svh] left-1/2 z-(--z-toast) w-full -translate-x-1/2 -translate-y-full md:max-w-sm"
+            class="pointer-events-none fixed top-[100svh] left-1/2 z-(--z-toast) w-full max-w-sm -translate-x-1/2 -translate-y-full p-fluid-xs not-dynamic:top-[100vh]"
         >
-            <CookieNotice />
+            <CookieNotice client:load />
         </div>
-
-        <Shortcuts />
 
         <style is:inline>
             /* Alpine.js
 ---------------------------------------------------------------------------------*/
-            [x-cloak] {
+            [x-cloak],
+            [data-cloak] {
                 visibility: hidden;
                 opacity: 0;
+                position: absolute;
             }
         </style>
-        <script>
-            import Lenis from '@studio-freight/lenis';
-            const lenis = new Lenis();
-
-            const raf = (time) => {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
-            };
-            requestAnimationFrame(raf);
-
-            const jumps = document.querySelectorAll('[data-jump]');
-
-            jumps &&
-                jumps.forEach((jump) => {
-                    jump.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const href = jump.getAttribute('href'); // Get the href attribute value
-                        history.pushState(
-                            '',
-                            document.title,
-                            window.location.pathname + window.location.search,
-                        );
-
-                        if (href && href.startsWith('#')) {
-                            lenis.scrollTo(`${href}`);
-                        }
-                    });
-                });
-        </script>
     </body>
 </html>
+
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+        const cloakedElements = document.querySelectorAll('[data-cloak]');
+        for (const el of cloakedElements) {
+            el.removeAttribute('data-cloak');
+        }
+    });
+    (function () {
+        const storedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia(
+            '(prefers-color-scheme: dark)'
+        ).matches;
+        const theme = storedTheme ?? (prefersDark ? 'dark' : 'light');
+        if (!storedTheme) {
+            localStorage.setItem('theme', theme);
+        }
+
+        const metaTags = document.querySelectorAll('meta[name="theme-color"]');
+
+        for (const metaTag of metaTags) {
+            metaTag.setAttribute(
+                'content',
+                theme === 'light' ? 'rgb(252, 252, 252)' : 'rgb(31, 31, 40)'
+            );
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+    })();
+</script>

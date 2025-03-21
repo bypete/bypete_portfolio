@@ -1,7 +1,7 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 interface Props {
-    credit: string;
+	credit: string;
 }
 const { credit } = Astro.props;
 ---
@@ -29,56 +29,39 @@ const { credit } = Astro.props;
 </div>
 
 <script>
-    import { timeline, type TimelineDefinition } from 'motion';
+  import { animate } from 'motion';
 
-    const toggleCreditVisibility = (visible, target) => {
-        if (target) {
-            const show: TimelineDefinition = [
-                [
-                    target,
-                    {
-                        opacity: [1],
-                    },
-                ],
-                [
-                    target,
-                    {
-                        transform: ['translateX(-100%)', 'translateX(0%)'],
-                    },
-                    { duration: 0.75 },
-                ],
-            ];
-            const hide: TimelineDefinition = [
-                [
-                    target,
-                    {
-                        opacity: [1, 0],
-                    },
-                ],
-            ];
+  const toggleCreditVisibility = (visible, target) => {
+    if (target) {
+        
 
-            if (visible) {
-                target.classList.toggle('hidden', !visible);
-                timeline(show, {}).finished.then(() => {});
-            } else {
-                timeline(hide, {}).finished.then(() => {
-                    target.classList.toggle('hidden', !visible);
-                });
-            }
+        if (visible) {
+            target.classList.toggle('hidden', !visible);
+
+            animate(target, {
+              transform: ['translateX(-100%)', 'translateX(0%)'],
+            }, {duration: 0.25});
+
+
+        } else {
+          animate(target, {
+              transform: ['translateX(0%)', 'translateX(-100%)'],
+            }, {duration: 0.25}).then(() => {target.classList.toggle('hidden', !visible);});
         }
-    };
+    }
+  };
 
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('credit', () => ({
-            open: false,
-            toggle() {
-                this.open = !this.open;
-            },
-            init() {
-                this.$watch('open', (value) => {
-                    toggleCreditVisibility(value, this.$refs.credit);
-                });
-            },
-        }));
-    });
+  document.addEventListener('alpine:init', () => {
+      Alpine.data('credit', () => ({
+          open: false,
+          toggle() {
+              this.open = !this.open;
+          },
+          init() {
+              this.$watch('open', (value) => {
+                  toggleCreditVisibility(value, this.$refs.credit);
+              });
+          },
+      }));
+  });
 </script>

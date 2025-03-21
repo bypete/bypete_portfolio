@@ -1,7 +1,7 @@
 ---
 import { footerNavigation } from '~/data/navigation';
-import { Icon } from 'astro-icon/components';
-import Availability from '~/components/ui/Availability.astro';
+import BypeteDark from '~/assets/svg/bypete__footer.svg?react';
+
 import siteInfo from '~/data/site';
 import Social from '~/components/ui/Social.astro';
 
@@ -9,25 +9,25 @@ const year = new Date().getFullYear();
 ---
 
 <footer
-    class="bg-surface-bedrock py-fluid-2xl text-content-footer shadow-inset relative hidden lg:block"
+    class="relative hidden border-t border-t-line bg-surface py-fluid-2xl text-content md:block"
 >
     <div
-        class="gap-fluid-m pr-fluid-xl relative container mx-auto grid grid-cols-3 items-end leading-none"
+        class="relative container mx-auto grid grid-cols-1 items-end gap-fluid-m leading-none md:grid-cols-2"
     >
         <a
             href="/"
-            class="justify-self-start md:col-span-3"
+            class="justify-self-start md:col-span-2"
             title="Return to home"
         >
-            <Icon
-                name="bypete__footer"
+            <BypeteDark
+                name="bypete__dark"
                 title="byPete logo in white"
                 class="h-fluid-l w-auto"
             />
         </a>
         {
             footerNavigation && (
-                <ul class="gap-fluid-s flex flex-row flex-wrap leading-tight">
+                <ul class="flex flex-row flex-wrap gap-fluid-s leading-tight">
                     {footerNavigation.map((item) => (
                         <li>
                             <a href={item.url} class="link" title={item.label}>
@@ -39,11 +39,8 @@ const year = new Date().getFullYear();
                 </ul>
             )
         }
-        <p class="text-step--1/relaxed justify-self-center">
-            I'm <Availability url={`/connect/`} /> for new roles.
-        </p>
 
-        <div class="-mx-fluid-2xs flex justify-self-end">
+        <div class="flex gap-fluid-2xs justify-self-end">
             {
                 siteInfo.socials.map((channel) => (
                     <Social

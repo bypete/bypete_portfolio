@@ -1,105 +1,135 @@
-import { defineConfig } from 'astro/config';
-import icon from 'astro-icon';
-import { remarkReadingTime } from './src/js/remark-reading-time.mjs';
-import preact from '@astrojs/preact';
+import {
+  defineConfig
+} from 'astro/config';
 import mdx from '@astrojs/mdx';
+import { rehypeHeadingIds } from '@astrojs/markdown-remark';
+import icon from 'astro-icon';
+import {
+  remarkReadingTime
+} from './src/js/remark-reading-time.mjs';
+import {
+  remarkExtractHeadings
+} from './src/js/remark-extract-headings.mjs';
+import preact from '@astrojs/preact';
+import svgr from "vite-plugin-svgr";
 import rehypeAttrs from 'rehype-attr';
 import rehypeExternalLinks from 'rehype-external-links';
 import sitemap from '@astrojs/sitemap';
-import alpine from '@astrojs/alpinejs'
+import tailwindcss from '@tailwindcss/vite';
 import partytown from '@astrojs/partytown';
+import alpine from '@astrojs/alpinejs';
+
+let svgoPrefixIdsCount = 0;
+
+const SVGOConfig = {
+  multipass: true,
+  plugins: [
+    {
+      name: 'preset-default',
+      params: {
+        overrides: {
+          inlineStyles: { onlyMatchedOnce: false },
+          cleanupIds: { minify: true },
+          removeDoctype: false,
+          removeViewBox: false,
+        },
+      },
+    },
+    {
+      name: 'prefixIds',
+      params: {
+        delim: '',
+        prefixIds: true,
+        prefix: () => `_${svgoPrefixIdsCount++}`,
+      },
+    },
+    {
+      name: 'removeUnknownsAndDefaults',
+      params: {
+        defaultAttrs: false,
+      },
+    },
+
+  ],
+};
+
 
 const rehypeExternalLinksConfig = [
-    rehypeExternalLinks,
-    {
-        target: '_blank',
-        rel: ['noopener', 'noreferrer'],
-        // content: {
-        //     type: 'text',
-        //     value: '🔗',
-        // },
-        properties: {
+  rehypeExternalLinks,
+  {
+      target: '_blank',
+      rel: ['noopener', 'noreferrer'],
+      // content: {
+      //     type: 'text',
+      //     value: '🔗',
+      // },
+      properties: {
           className: ['external']
-        }
-    },
+      }
+  },
 ];
-let svgoPrefixIdsCount = 0;
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://bypete.uk',
-    trailingSlash: 'always',
-    // redirects: {
-    //     '/bio/': '/about',
-    // },
-    compressHTML: true,
-    // build: {
-    //     format: 'file',
-    // },
-    integrations: [
-      alpine({ entrypoint: '/src/entrypoint' }),
-      preact(),
+  site: 'https://bypete.uk',
+  trailingSlash: 'always',
+  compressHTML: true,
+  // redirects: {
+  //     '/bio/': '/about',
+  // },
+  // build: {
+  //     format: 'file',
+  // },
 
+  integrations: [
+      preact({
+          compat: true
+      }),
       mdx({
+          remarkPlugins: [remarkReadingTime, remarkExtractHeadings],
           rehypePlugins: [rehypeAttrs, rehypeExternalLinksConfig],
       }),
       icon({
           include: {
               mdi: ['*'],
               lucide: ['*'],
+              "fa6-brands": ['*'],
           },
-          svgoOptions: {
-            multipass: true,
-            plugins: [
-                {
-                    name: 'preset-default',
-                    params: {
-                        overrides: {
-                            // customize default plugin options
-                            inlineStyles: {
-                                onlyMatchedOnce: false,
-                            },
-                            cleanupIds: {
-                                minify: true,
-                            },
-                            // or disable plugins
-                            // removeUnknownsAndDefaults: {
-                            //   defaultAttrs: false,  // Prevents removing common attributes like `preserveAspectRatio`
-                            //   keepDataAttrs: true,  // Keep any `data-*` attributes
-                            // },
-                            removeDoctype: false,   // Keep DOCTYPE if present
-                            cleanupIds: {
-                                minify: true,  // Minify IDs but don't remove them
-                            },
-                            removeViewBox: false,   // Ensure the viewBox attribute is not removed
-                        },
-                    },
-                },
-                {
-                    name: 'prefixIds',
-                    params: {
-                        delim: '',
-                        prefix: () => `bp__${svgoPrefixIdsCount++}`,
-                    },
-                },
-                {
-                          name: 'removeUnknownsAndDefaults',
-                          params: {
-                              defaultAttrs: false, // Ensures `enable-background`, `preserveAspectRatio`, etc. are preserved
-                            },
-                },
-            ],
-        },
+          svgoOptions: SVGOConfig,
       }),
-      sitemap(),
       partytown({
           config: {
-            forward: ['dataLayer.push', 'gtag'],
+              forward: ['dataLayer.push', 'gtag'],
           },
       }),
-    ],
-    markdown: {
-        rehypePlugins: [rehypeAttrs, rehypeExternalLinksConfig],
-        remarkPlugins: [remarkReadingTime],
-    },
+      sitemap(),
+      alpine({
+          entrypoint: '/src/entrypoint'
+      })
+  ],
+
+  markdown: {
+      rehypePlugins: [rehypeAttrs, rehypeExternalLinksConfig, rehypeHeadingIds],
+      remarkPlugins: [remarkReadingTime, remarkExtractHeadings],
+  },
+
+  vite: {
+      plugins: [
+          svgr({
+            svgrOptions: {
+              plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx"],
+              titleProp: true,
+              svgoConfig: SVGOConfig
+            },
+          }),
+          tailwindcss(),
+      ],
+      resolve: {
+          alias: {
+              'react': 'preact/compat',
+              'react-dom': 'preact/compat',
+              'react/jsx-runtime': 'preact/jsx-runtime'
+          }
+      }
+  },
 });

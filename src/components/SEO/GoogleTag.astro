@@ -34,7 +34,8 @@ declare global {
     }
     window.gtag = gtag;
     // Set default consent
-    if (localStorage.getItem('ConsentMode') === null) {
+    if (localStorage.getItem('consentMode') === null) {
+      console.log('no Local storage');
         gtag('consent', 'default', {
             ad_storage: 'denied',
             analytics_storage: 'denied',

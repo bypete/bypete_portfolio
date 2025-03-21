@@ -1,16 +1,16 @@
 ---
-import Block from '~/components/blocks/Block.astro';
-import { Image } from 'astro:assets';
-import Button from '~/components/ui/Button.astro';
-import RandomLink from '~/components/ui/RandomLink.astro';
-import product from '~/assets/work/mykringapp/product.png';
+import Block from "~/components/blocks/Block.astro";
+import { Image } from "astro:assets";
+import Button from "~/components/preact/Button";
+import product from "~/assets/work/mykringapp/product.png";
 
-import pieces from '~/data/work';
+import pieces from "~/data/work";
 
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
+import type { inView } from "motion";
 interface Props {
-    wrapper?: string;
-    class?: string;
+	wrapper?: string;
+	class?: string;
 }
 const { wrapper, class: className } = Astro.props;
 ---
@@ -54,7 +54,8 @@ const { wrapper, class: className } = Astro.props;
             <Button data-animate="scaleIn" theme="secondary" href="/work/"
                 >Explore the portfolio</Button
             >
-            <RandomLink
+            <Button
+                client:load
                 theme="disco"
                 href="/work/"
                 data-animate="scaleIn"
@@ -65,47 +66,45 @@ const { wrapper, class: className } = Astro.props;
                     name="lucide:shuffle"
                     class="h-fluid-xs w-auto animate-pulse"
                 />
-            </RandomLink>
+            </Button>
         </p>
     </div>
 </Block>
 
 <script>
-    import { inView, timeline, type TimelineDefinition, stagger } from 'motion';
+    import { inView, animate, type AnimationSequence, stagger } from 'motion';
 
     const focus = document.querySelectorAll('[data-inview="portfolio"]');
     inView(
         focus,
-        (info) => {
+        (el) => {
             const queryElementsByAnimation = (animation) => {
-                return info.target.querySelectorAll(
+                return el.querySelectorAll(
                     `[data-animate="${animation}"]`,
                 );
             };
             const scaleIn = queryElementsByAnimation('scaleIn');
             const fadeInDown = queryElementsByAnimation('fadeInDown');
 
-            const sequence: TimelineDefinition = [
-                [
-                    fadeInDown,
-                    {
-                        opacity: [0, 1],
-                        transform: ['translateY(-25%)', 'translateY(0%)'],
-                    },
-                    { duration: 0.25, delay: stagger(0.1) },
-                ],
-                [
-                    scaleIn,
-                    {
-                        opacity: [0, 1],
-                        scale: [0.85, 1],
-                    },
-                    { duration: 0.25, delay: stagger(0.25) },
-                ],
+            const sequenceIn: AnimationSequence = [
+              [
+              fadeInDown,
+                { opacity: [0, 1], transform: ['translateY(-25%)', 'translateY(0%)'] },
+                { duration: 0.25, delay: stagger(0.25), at: 0 }
+              ],
+              [
+                scaleIn,
+                { opacity: [0, 1], scale: [0.85, 1] },
+                { duration: 0.25, delay: stagger(0.25), at: '<' }
+              ]
             ];
-            const animation = timeline(sequence, {});
+            
+            animate(sequenceIn, {});
 
-            return (leaveInfo) => animation.reverse();
+            return (leaveInfo) =>  animate([
+              [fadeInDown, { opacity: 0 }, { at: 0 }],
+              [scaleIn, { opacity: 0 }, { at: '<' }]
+            ]);
         },
         { amount: 0.25 },
     );

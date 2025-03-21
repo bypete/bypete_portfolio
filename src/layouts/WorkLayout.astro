@@ -1,14 +1,14 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import { type Props as HeadProps } from '~/components/SEO/Main.astro';
+import type { Props as HeadProps } from '~/components/SEO/Main.astro';
 
 import Tags from '~/components/ui/Tags.astro';
-import Button from '~/components/ui/Button.astro';
+import Button from '~/components/preact/Button.tsx';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import HeroPicture from '~/components/images/HeroPicture.astro';
 import { readableDate, htmlDateString } from '~/js/utils.js';
-import TableOfContents from '~/components/ui/TableOfContents.astro';
+import TocMenu from '~/components/preact/navigation/TocMenu';
 import NextPrev from '~/components/ui/NextPrev.astro';
 import BlockPicture from '~/components/images/BlockPicture.astro';
 import ReadTime from '~/components/ui/ReadTime.astro';
@@ -21,6 +21,7 @@ export interface Props {
     prevPost: any;
     nextPost: any;
 }
+
 const { frontmatter, section, minutesRead, headings, prevPost, nextPost } =
     Astro.props;
 
@@ -39,8 +40,7 @@ const head: HeadProps = {
     pageType: 'article',
 };
 
-const isHeroDark =
-    (fm.isHeroDark || (fm.heroConfig && fm.heroConfig.dark)) ?? false;
+const isHeroDark = (fm.isHeroDark || fm.heroConfig?.dark) ?? false;
 
 // Simplify the post before passing to NextPrev component
 const formatPostData = (post) => {
@@ -65,14 +65,14 @@ const formatPostData = (post) => {
     };
 };
 
-let nextPostData = nextPost ? formatPostData(nextPost) : undefined;
-let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
+const nextPostData = nextPost ? formatPostData(nextPost) : undefined;
+const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
 ---
 
 <BaseLayout head={head} {isHeroDark}>
     <slot name="hero">
         <div
-            class="shadow-content-dark/10 lg:not-dynamic:h-screen @min-page/page:grid-cols-(--gtc-workcontianer) relative z-10 grid w-full grid-cols-1 shadow-lg lg:h-svh lg:grid-cols-2"
+            class="relative z-10 grid w-full grid-cols-1 shadow-lg shadow-content-dark/10 lg:h-screen lg:grid-cols-2 @min-page/page:grid-cols-(--gtc-workcontianer)"
         >
             <div
                 class="relative flex h-[75vw] items-center justify-center lg:h-full"
@@ -96,16 +96,16 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                     )
                 }
             </div>
-            <div class="rte px-fluid-m py-fluid-m self-end">
+            <div class="rte self-end px-fluid-m py-fluid-m md:px-fluid-xl">
                 <h1
                     class="capline text-step-3/none"
                     set:html={frontmatter.title}
                 /><ReadTime
                     duration={minutesRead}
-                    class="text-step--1 text-content-quiet my-fluid-2xs"
+                    class="my-fluid-2xs text-step--1 text-content-quiet"
                 />
                 <p>{frontmatter.taster}</p>
-                <div class="mt-fluid-m not-rte flex justify-between">
+                <div class="not-rte mt-fluid-m flex justify-between">
                     <Tags tags={frontmatter.tags} url={true} />
                 </div>
                 <p class="mt-fluid-m hidden md:block">
@@ -118,7 +118,7 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                     >
                         Scroll to start <Icon
                             name="lucide:mouse"
-                            class="animate-nudge-down h-4 w-4"
+                            class="h-4 w-4 animate-nudge-down"
                         />
                     </Button>
                 </p>
@@ -126,12 +126,15 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
         </div>
     </slot>
 
-    <main id="main-content" class="pb-fluid-xl relative container mx-auto">
+    <main
+        id="main-content"
+        class="@container/main relative container mx-auto pb-fluid-xl"
+    >
         <article id="start" class="relative">
-            <div class="rte prose text-step-0 @container mx-auto max-w-3xl">
+            <div class="rte prose @container mx-auto max-w-3xl text-step-0">
                 {
                     frontmatter.product && (
-                        <div class="h-square not-prose not-rte breakout md:h-block to-surface/0 from-surface-sunken via-surface-sunk flex items-center justify-center bg-linear-to-b from-[50%] via-[50%] to-[58%]">
+                        <div class="not-prose not-rte breakout flex h-square items-center justify-center bg-linear-to-b from-surface-sunken from-[50%] via-surface-sunk via-[50%] to-surface/0 to-[58%] md:h-block">
                             <BlockPicture
                                 src={frontmatter.product.src}
                                 widths={[480, 1200]}
@@ -148,14 +151,16 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
 
                 {
                     headings && headings.length > 2 && !hideToc && (
-                        <TableOfContents headings={headings} />
+                        <TocMenu headings={headings} client:load />
                     )
                 }
                 <slot />
             </div>
-            <aside class="mt-fluid-m py-fluid-m mx-auto w-full max-w-3xl">
+            <aside
+                class="mx-auto mt-fluid-2xl grid w-full max-w-3xl grid-cols-1 items-start gap-fluid-s @xl/main:grid-cols-[auto_1fr]"
+            >
                 <p
-                    class="text-step--1 text-content-quiet inline-flex items-center"
+                    class="inline-flex items-center text-step--1 text-content-quiet"
                 >
                     <Icon
                         name="lucide:calendar"
@@ -164,20 +169,26 @@ let prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                     <span class="mx-fluid-3xs">Last updated:</span>
                     <time
                         datetime={htmlDateString(
-                            frontmatter.modDate || frontmatter.pubDate,
+                            frontmatter.modDate || frontmatter.pubDate
                         )}
                         >{
                             readableDate(
-                                frontmatter.modDate || frontmatter.pubDate,
+                                frontmatter.modDate || frontmatter.pubDate
                             )
                         }
                     </time>
                 </p>
-                <Tags tags={frontmatter.tags} url={true} class="mt-fluid-m" />
+                <Tags
+                    tags={frontmatter.tags}
+                    url={true}
+                    class="@xl/main:justify-self-end"
+                />
             </aside>
         </article>
     </main>
-    <aside class="bg-surface-sunken px-fluid-m py-fluid-2xl shadow-highlight">
+    <aside
+        class="bg-teal-400 px-fluid-m py-fluid-2xl shadow-inset shadow-teal-800/20"
+    >
         {
             (nextPostData || prevPostData) && (
                 <NextPrev next={nextPostData} prev={prevPostData} />

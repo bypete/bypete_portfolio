@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 import Breadcrumbs from '~/components/ui/Breadcrumbs.astro';
-import type { Props as CTALinks } from '~/components/ui/Button.astro';
+import type { Props as CTALinks } from '~/components/preact/Button.tsx';
 import ModePlain from '~/components/hero/ModePlain.astro';
 import ModeCover from '~/components/hero/ModeCover.astro';
 import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
@@ -46,6 +46,17 @@ export interface CTA extends CTALinks {
     jump: boolean;
     href: string;
     icon: string;
+    theme:
+        | 'primary'
+        | 'secondary'
+        | 'disco'
+        | 'whiteline'
+        | 'white'
+        | 'outline'
+        | 'quiet'
+        | 'link'
+        | 'disabled';
+    class: string;
 }
 
 export interface HeroKeys {
@@ -91,19 +102,13 @@ const {
 const color = legibility || (dark ? 'text-content-light' : 'text-content');
 const heroTitle = headline || title;
 
-let inView = {
+const inView = {
     'data-inview': `${mode}`,
 };
 
 const heroThemes: Record<string, HeroTheme> = {
     plain: {
-        // wrapper: ['mb-fluid-xl'],
-        hero: [
-            'bg-surface-sunken',
-            'shadow-hero',
-            'shadow-surface-sunk',
-            'pt-headerheight',
-        ],
+        hero: ['bg-surface-sunken', 'py-fluid-3xl'],
     },
     image: {
         hero: [''],
@@ -116,7 +121,7 @@ const heroThemes: Record<string, HeroTheme> = {
 
 const currentHero = heroThemes[mode as keyof typeof heroThemes];
 const heroResult = [
-    ...(ClassName ? ClassName.split(' ') : currentHero.hero ?? []),
+    ...(ClassName ? ClassName.split(' ') : (currentHero.hero ?? [])),
     ...(currentHero.mandatory ?? []),
     overflow && 'overflow-hidden',
     color,
@@ -125,7 +130,10 @@ const heroResult = [
 
 <div
     id="hero"
-    class:list={[wrapperClass ? wrapperClass : currentHero.wrapper]}
+    class:list={[
+        wrapperClass ? wrapperClass : currentHero.wrapper,
+        'relative z-(--z-hero)',
+    ]}
     {...mode && { 'data-mode': `${mode}` }}
 >
     <div
@@ -157,7 +165,7 @@ const heroResult = [
 
         {
             prompt && (
-                <div class="bottom-fluid-s pointer-events-none absolute left-1/2 z-100 -translate-x-1/2">
+                <div class="pointer-events-none absolute bottom-fluid-s left-1/2 z-100 -translate-x-1/2">
                     {prompt === 'scroll' && <ScrollPrompt />}
                     {prompt === 'swipe' && <SwipePrompt />}
                 </div>

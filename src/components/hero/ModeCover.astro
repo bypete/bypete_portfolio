@@ -1,6 +1,6 @@
 ---
 import type { VisualKeys, CoverKeys, CTA } from '~/components/hero/Hero.astro';
-import Button from '~/components/ui/Button.astro';
+import Button from '~/components/preact/Button.tsx';
 import { Image, Picture } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 
@@ -44,11 +44,11 @@ const {
 }
 
 <div
-    class="gap-fluid-s md:min-h-widescreen lg:h-block lg:min-h-block pt-headerheight relative container mx-auto grid grid-cols-1 grid-rows-1 md:grid-cols-(--gtc-block50) 2xl:grid-cols-(--gtc-block33)"
+    class="relative container mx-auto grid grid-cols-1 grid-rows-1 gap-fluid-s px-fluid-m pt-headerheight md:h-screen md:grid-cols-(--gtc-block50) md:px-fluid-3xl"
 >
-    <div class="w-full self-center" x-cloak>
+    <div class="w-full self-center">
         <h1
-            class="text-step-6/tight text-shadow-headline relative mb-0 shadow-black/10"
+            class="text-shadow-headline relative mb-0 text-step-6/tight shadow-black/10"
             data-animate="fadeInDown"
         >
             {headline}
@@ -105,21 +105,19 @@ const {
 </div>
 
 <script>
-    import { inView, timeline, type TimelineDefinition, stagger } from 'motion';
+    import { inView, animate, type AnimationSequence, stagger } from 'motion';
 
     const focus = document.querySelectorAll('[data-inview="cover"]');
     inView(
         focus,
-        (info) => {
+        (el) => {
             const queryElementsByAnimation = (animation) => {
-                return info.target.querySelectorAll(
-                    `[data-animate="${animation}"]`,
-                );
+                return el.querySelectorAll(`[data-animate="${animation}"]`);
             };
             const slideInRight = queryElementsByAnimation('slideInRight');
             const fadeInDown = queryElementsByAnimation('fadeInDown');
 
-            const sequence: TimelineDefinition = [
+            const sequenceIn: AnimationSequence = [
                 [
                     slideInRight,
                     {
@@ -137,10 +135,14 @@ const {
                     { duration: 0.25, delay: stagger(0.15) },
                 ],
             ];
-            const animation = timeline(sequence, {});
+            animate(sequenceIn, {});
 
-            return (leaveInfo) => animation.reverse();
+            return (leaveInfo) =>
+                animate([
+                    [fadeInDown, { opacity: 0 }, { at: 0 }],
+                    [slideInRight, { opacity: 0 }, { at: '<' }],
+                ]);
         },
-        { amount: 0.25 },
+        { amount: 0.25 }
     );
 </script>

@@ -80,7 +80,8 @@ import heroSM from '~/assets/hero/concrete--teal@sm.jpg';
 
 import ogImage from '~/assets/og/og__about.jpg';
 
-<PageLayout {...frontmatter} og={{
+
+<PageLayout  {...frontmatter}  og={{
     ...frontmatter.og,
     title: 'About Pete Wallace',
     description: 'Pete Wallace is an experienced Front-End developer based in Surrey, UK. Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.',
@@ -94,7 +95,7 @@ import ogImage from '~/assets/og/og__about.jpg';
       heroConfig={{
           ...frontmatter.heroConfig,
           mode: 'cover',
-          copy: "<p class='text-step-1' data-animate='fadeInDown'>I'm Pete, a surrey based Front-End developer with over two decades of experience in digital.</p>",
+          copy: "<p class='text-step-1' data-animate='fadeInDown'>I'm Pete, a Surrey based Front-End developer with over two decades of experience in digital.</p>",
           actions: [
               {
                   text: 'Read my bio',
@@ -130,7 +131,6 @@ import ogImage from '~/assets/og/og__about.jpg';
           threshold: 25,
       }}
   />
-
 
 
 ## The backstory

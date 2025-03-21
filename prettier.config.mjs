@@ -7,13 +7,13 @@ export default {
     semi: true,
     overrides: [
         {
-            files: '*.md',
+            files: '*.mdx',
             options: {
                 tabWidth: 4,
             },
         },
     ],
     plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
-    tailwindConfig: './tailwind.config.cjs',
     pluginSearchDirs: false,
+    tailwindStylesheet: "./src/styles/global.css",
 };

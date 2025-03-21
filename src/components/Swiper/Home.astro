@@ -15,8 +15,8 @@ const { slides } = Astro.props;
 ---
 
 <div
-    class="swiper swiper--home group x-cloak:opacity-0 h-full w-full transition-opacity duration-300"
-    x-cloak
+    class="swiper swiper--home group h-full w-full transition-opacity duration-300 cloak:opacity-0"
+    data-cloak
 >
     <div class="swiper-wrapper not-prose not-rte flex items-center">
         {
@@ -29,14 +29,14 @@ const { slides } = Astro.props;
     </div>
     <Prev
         swiper="swiper--home"
-        class="text-content-light left-0 hidden md:block"
+        class="left-0 hidden text-content-light md:block"
     />
     <Next
         swiper="swiper--home"
-        class="text-content-light right-0 hidden md:block"
+        class="right-0 hidden text-content-light md:block"
     />
     <div
-        class="swiper--home__pagination bottom-fluid-s! absolute z-10 mx-auto text-left lg:text-right"
+        class="swiper--home__pagination absolute bottom-fluid-s! z-10 mx-auto text-left lg:text-right"
     >
     </div>
 </div>
@@ -50,7 +50,7 @@ const { slides } = Astro.props;
         Scrollbar,
         EffectCreative,
     } from 'swiper/modules';
-    import { timeline } from 'motion';
+    import { animate } from 'motion';
 
     const swiperClass = '.swiper--home';
     const swiperDom = document.querySelector(swiperClass);
@@ -137,9 +137,9 @@ const { slides } = Astro.props;
                 ],
             ];
 
-            timeline(sequenceIn, {
+            animate(sequenceIn, {
                 easing: 'ease-in-out',
-            }).finished.then(() => {
+            }).then(() => {
                 animationInProgress = false;
             });
         };

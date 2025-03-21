@@ -17,7 +17,7 @@ if (tags.includes('featured')) {
         <ul
             data-inview="tags"
             class:list={[
-                'gap-fluid-2xs text-step--1 flex w-full flex-wrap items-center leading-none',
+                'flex flex-wrap items-center gap-fluid-2xs text-step--1 leading-none',
                 className,
             ]}
         >
@@ -37,14 +37,11 @@ if (tags.includes('featured')) {
 }
 <script>
     import { inView, animate, stagger } from 'motion';
-    const focus = document.querySelectorAll('[data-inview="tags"]');
     inView(
-        focus,
-        (info) => {
-            const queryElementsByAnimation = (animation) => {
-                return info.target.querySelectorAll(
-                    `[data-animate="${animation}"]`,
-                );
+        "[data-inview='tags']",
+        (info: Element) => {
+            const queryElementsByAnimation = (animation: string) => {
+                return info.querySelectorAll(`[data-animate="${animation}"]`);
             };
             const tag = queryElementsByAnimation('tag');
 
@@ -55,11 +52,11 @@ if (tags.includes('featured')) {
                         opacity: [0, 1],
                         transform: ['translateX(10px)', 'translateX(0px)'],
                     },
-                    { duration: 0.2, delay: stagger(0.1) },
+                    { duration: 0.2, delay: stagger(0.1) }
                 );
-                return (leaveInfo) => animation.reverse();
+                return () => (animation.speed = -1); // Reverse animation on exit
             }
         },
-        { amount: 0.25 },
+        { amount: 0.25 }
     );
 </script>
