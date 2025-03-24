@@ -26,13 +26,13 @@ export default function Header() {
   return (
     <div
       ref={bannerRef}
-      class="fixed top-0 left-0 z-(--z-banner) flex w-full flex-row items-center justify-between border-0 border-line border-b bg-surface px-fluid-m py-fluid-2xs backdrop-blur-[10px] md:h-full md:w-fluid-xl md:flex-col md:border-r md:border-b-0 md:px-0 md:pt-fluid-m md:pb-fluid-m"
+      class="fixed top-0 left-0 z-(--z-banner) flex w-full flex-row items-center justify-between border-0 border-line border-b bg-surface px-fluid-m py-fluid-2xs backdrop-blur-[10px] md:h-full md:w-fluid-xl md:flex-col md:border-r md:border-b-0 md:px-0 md:pt-fluid-l md:pb-fluid-l"
     >
       <div class=" flex flex-row gap-fluid-s">
         <HamburgerButton />
-        <a href="/" aria-label="byPete - home" class="h-fluid-l md:hidden">
+        <a href="/" aria-label="byPete - home" class="h-fluid-m md:hidden">
           <BypeteBrand
-            class="h-fluid-l w-auto"
+            class="h-fluid-m w-auto"
             title="byPete logo in brand colour"
           />
         </a>

@@ -95,7 +95,7 @@ export default function OffCanvasNavigation({ currentPath = '' }: Props) {
   return (
     <div
       ref={canvasRef}
-      className="transform-[translateY(-100%)] md:transform-[translateX(-100%)] z-(--z-nav) pt-(--spacing-headerheight) md:pt-fluid-m md:px-fluid-xl bg-surface not-dynamic:h-screen fixed inset-0 flex h-dvh w-full overflow-y-scroll"
+      className="transform-[translateY(-100%)] md:transform-[translateX(-100%)] z-(--z-nav) pt-(--spacing-headerheight) md:pt-fluid-l md:px-fluid-xl bg-surface not-dynamic:h-screen fixed inset-0 flex h-dvh w-full overflow-y-scroll"
     >
       <div
         id="navigation"
@@ -109,7 +109,7 @@ export default function OffCanvasNavigation({ currentPath = '' }: Props) {
           />
         </nav>
 
-        <div class="pb-fluid-m flex flex-row justify-between">
+        <div class="pb-fluid-l flex flex-row justify-between">
           {footerNavigation && (
             <ul class="gap-fluid-xs min-h-fluid-l flex flex-row items-center">
               {footerNavigation.map((item) => (

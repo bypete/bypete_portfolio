@@ -263,8 +263,18 @@
     --animate-nudge-right: nudge-right 1s 3;
     --animate-nudge-down: nudge-down 1s 3;
     --animate-fade-in-up: fade-in-up 250ms ease-in-out forwards;
+    --animate-slide-left-infinite: slide-left 120s linear infinite;
 
     /* Animation Keyframes */
+    @keyframes slide-left {
+        from {
+            transform: translate3d(0, 0, 0);
+        }
+        to {
+            transform: translate3d(-100%, 0, 0);
+        }
+    }
+
     @keyframes blink {
         0%,
         100% {
@@ -389,6 +399,10 @@
         right: calc(50% + var(--spacing-fluid-3xl));
     }
 } */
+
+@utility animation-pause {
+    animation-play-state: paused;
+}
 
 @utility breakout {
     width: calc(100vw - var(--offset));

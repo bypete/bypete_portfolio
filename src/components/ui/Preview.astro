@@ -1,5 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components';
 import { type Post } from '~/components/ui/NextPrev.astro';
 import { Image } from 'astro:assets';
 
@@ -23,7 +22,7 @@ const { url, title, excerpt, thumb, overlay } = post || {};
     />
     {
         thumb && (
-            <span class="relative aspect-cinema overflow-hidden rounded-tight border-[3px] border-content xl:aspect-widescreen">
+            <span class="relative aspect-cinema overflow-hidden rounded-tight xl:aspect-widescreen">
                 <Image
                     widths={[400]}
                     quality="high"

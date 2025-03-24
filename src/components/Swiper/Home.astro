@@ -20,7 +20,7 @@ const { slides } = Astro.props;
 >
     <div class="swiper-wrapper not-prose not-rte flex items-center">
         {
-            slides.map((slide, i) => (
+            slides.map((slide) => (
                 <div class="slide swiper-slide">
                     <Slide slide={slide} />
                 </div>
@@ -50,7 +50,7 @@ const { slides } = Astro.props;
         Scrollbar,
         EffectCreative,
     } from 'swiper/modules';
-    import { animate } from 'motion';
+    import { animate, type AnimationSequence } from 'motion';
 
     const swiperClass = '.swiper--home';
     const swiperDom = document.querySelector(swiperClass);
@@ -108,7 +108,6 @@ const { slides } = Astro.props;
             },
         });
 
-        swiperHome = swiperDom.swiper;
         let animationInProgress = false;
 
         const mountSlide = (swiperInstance) => {
@@ -119,7 +118,7 @@ const { slides } = Astro.props;
             const caption = currentSlide.querySelector('[data-caption]');
             const visual = currentSlide.querySelector('[data-visual]');
 
-            const sequenceIn = [
+            const sequenceIn: AnimationSequence = [
                 [
                     visual,
                     {
@@ -127,7 +126,7 @@ const { slides } = Astro.props;
                     },
                     {
                         duration: 0.25,
-                        easing: [0.17, 0.55, 0.55, 1],
+                        ease: 'easeInOut',
                     },
                 ],
                 [
@@ -137,9 +136,7 @@ const { slides } = Astro.props;
                 ],
             ];
 
-            animate(sequenceIn, {
-                easing: 'ease-in-out',
-            }).then(() => {
+            animate(sequenceIn).then(() => {
                 animationInProgress = false;
             });
         };

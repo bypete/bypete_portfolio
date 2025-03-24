@@ -3,7 +3,6 @@ import MainSEO, { type Props as HeadProps } from '~/components/SEO/Main.astro';
 import GoogleTagNoScript from '~/components/SEO/GoogleTagNoScript.astro';
 import GoogleTag from '~/components/SEO/GoogleTag.astro';
 import Header from '~/components/preact/layout/Header';
-import ThemeIcon from '~/components/preact/ThemeIcon';
 import Footer from '~/components/layout/Footer.astro';
 import Underlay from '~/components/preact/overlays/Underlay';
 import Overlay from '~/components/preact/overlays/Overlay';
@@ -12,7 +11,6 @@ import PageTop from '~/components/preact/navigation/PageTop';
 import Accessibility from '~/components/ui/Accessibility.astro';
 import OffCanvasNavigation from '~/components/preact/navigation/OffCanvasNavigation';
 
-import BypeteBrand from '~/assets/svg/bypete__brand.svg?react';
 import BypeteWhite from '~/assets/svg/bypete__white.svg?react';
 
 const fm = Astro.props.frontmatter || Astro.props;
@@ -48,27 +46,17 @@ import '~/styles/global.css';
         <Header client:load />
 
         <div
-            class="absolute top-fluid-m z-(--z-logo) container mx-auto hidden w-full px-fluid-3xl md:block"
+            class="absolute top-0 right-0 left-fluid-xl z-(--z-logo) container mx-auto hidden w-full md:block"
         >
             <a
                 href="/"
                 aria-label="byPete - home"
-                class="left-fluid-3xl h-fluid-l"
+                class="inline-flex w-auto items-end bg-primary bg-gradient-to-b from-85% to-primary-dark p-fluid-2xs pt-fluid-l shadow-md shadow-black/[0.08]"
+                ><BypeteWhite
+                    class="h-fluid-m w-auto"
+                    title="byPete logo in white"
+                /></a
             >
-                {
-                    isHeroDark ? (
-                        <BypeteWhite
-                            class="h-fluid-l w-auto"
-                            title="byPete logo in white"
-                        />
-                    ) : (
-                        <BypeteBrand
-                            class="h-fluid-l w-auto"
-                            title="byPete logo in brand colour"
-                        />
-                    )
-                }
-            </a>
         </div>
 
         <div id="wrapperCanvas" class="relative">
@@ -80,7 +68,6 @@ import '~/styles/global.css';
                 id="wrapperContent"
                 class="@container/page relative grid grid-cols-1 grid-rows-[auto_1fr_auto] bg-surface md:pl-offset"
             >
-                <!-- <Banner {isHeroDark} {currentPath} client:load /> -->
                 <Underlay client:load {isHeroDark} />
 
                 <div class="relative w-full bg-surface outline-hidden">

@@ -9,6 +9,7 @@ import Button from '~/components/preact/Button.tsx';
 import { Icon } from 'astro-icon/components';
 import Roles from '~/components/Roles.astro';
 import SwiperClients from '~/components/Swiper/Clients.astro';
+import Clients from '~/components/marquees/Clients.astro';
 import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
 
 const title = 'Home';
@@ -44,7 +45,7 @@ const formattedPosts = formatBlogPosts(allWork, {
 
 <SplashLayout title={title} isHeroDark={heroConfig.dark} {og}>
     <section
-        class="angleclip-fluid-3xl pb-fluid-6xl [&+*]:-mt-fluid-6xl relative origin-top items-center overflow-x-hidden bg-slate-900 bg-cover"
+        class="relative origin-top items-center overflow-x-hidden bg-slate-900 bg-cover pb-fluid-6xl angleclip-fluid-3xl [&+*]:-mt-fluid-6xl"
     >
         <div class="absolute inset-0 h-full w-full">
             <Picture
@@ -63,19 +64,19 @@ const formattedPosts = formatBlogPosts(allWork, {
         </div>
 
         <div
-            class="not-dynamic:h-screen pt-headerheight relative container mx-auto grid h-svh w-full grid-cols-1 grid-rows-(--gtr-home) lg:grid-flow-col lg:grid-cols-(--gtc-block40) lg:grid-rows-1"
+            class="relative container mx-auto grid h-svh w-full grid-cols-1 grid-rows-(--gtr-home) pt-headerheight not-dynamic:h-screen lg:grid-flow-col lg:grid-cols-(--gtc-block40) lg:grid-rows-1"
         >
             <!-- content -->
             <div class="rte-content pt-fluid-l lg:max-w-[60ch] lg:self-center">
                 <Roles roles={roles} />
                 <p
-                    class="my-fluid-s text-step-0 text-content-light text-shadow-emboss shadow-slate-900"
+                    class="text-shadow-emboss my-fluid-s text-step-0 text-content-light shadow-slate-900"
                 >
                     Discover the stories behind my projects, the challenges
                     addressed, and the solutions crafted.
                 </p>
                 <p
-                    class="gap-fluid-xs text-shadow-none flex flex-wrap items-center"
+                    class="text-shadow-none flex flex-wrap items-center gap-fluid-xs"
                 >
                     <Button
                         theme="primary"
@@ -103,21 +104,21 @@ const formattedPosts = formatBlogPosts(allWork, {
             <!-- END visual -->
         </div>
         <div
-            class="pb-fluid-s text-content-light not-dynamic:top-[100vh] pointer-events-none absolute top-[100svh] left-1/2 z-100 -translate-x-1/2 -translate-y-full"
+            class="pointer-events-none absolute top-[100svh] left-1/2 z-100 -translate-x-1/2 -translate-y-full pb-fluid-s text-content-light not-dynamic:top-[100vh]"
         >
             <ScrollPrompt />
         </div>
     </section>
 
-    <section id="featured" class="from-page-contrast pb-fluid-s bg-linear-to-b">
+    <section id="featured" class="from-page-contrast bg-linear-to-b pb-fluid-s">
         <div class="relative container mx-auto">
             <h2
-                class="font-headline text-step-4 text-content-light m-0 text-center font-bold tracking-tight"
+                class="m-0 text-center font-headline text-step-4 font-bold tracking-tight text-content-light"
             >
                 Featured work
             </h2>
             <div
-                class="my-fluid-m gap-fluid-xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                class="my-fluid-m grid grid-cols-1 gap-fluid-xl md:grid-cols-2 lg:grid-cols-3"
             >
                 {
                     formattedPosts.map(async (post) => {
@@ -143,7 +144,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                     <span
                         class="i-lucide-folder-archive h-fluid-l w-fluid-l animate-pulse"
                     ></span>
-                    <h2 class="text-step-2 mt-0">Want to see more...?</h2>
+                    <h2 class="mt-0 text-step-2">Want to see more...?</h2>
                     <p>
                         A complete list of case studies can be found in the <strong
                             >Work</strong
@@ -166,13 +167,14 @@ const formattedPosts = formatBlogPosts(allWork, {
             </div>
         </div>
     </section>
-    <div class="py-fluid-2xl relative container mx-auto">
+    <div class="relative container mx-auto py-fluid-2xl">
         <h3
-            class="mb-fluid-s text-step-1 text-content-quiet text-center font-bold"
+            class="mb-fluid-s text-center text-step-1 font-bold text-content-quiet"
         >
             Some of the brands I've worked with:
         </h3>
-        <SwiperClients clients={clientSlides} />
+        <Clients clients={clientSlides} />
+        <!-- <SwiperClients clients={clientSlides} /> -->
     </div>
 </SplashLayout>
 <script>

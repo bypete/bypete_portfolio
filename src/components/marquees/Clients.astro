@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+import { type SwiperClient } from '~/data/clients';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+interface Props {
+    clients: SwiperClient[];
+}
+
+const { clients } = Astro.props;
+---
+
+<div
+    class="group relative max-w-full gap-fluid-m overflow-hidden rounded border-x-2 border-line-quiet py-fluid-m leading-0 whitespace-nowrap [mask-image:_linear-gradient(to_right,_transparent_0,_white_128px,white_calc(100%-128px),_transparent_100%)]"
+>
+    <div
+        class="inline-flex w-max animate-slide-left-infinite gap-fluid-l pr-fluid-l will-change-transform group-hover:animation-pause motion-reduce:animation-pause"
+    >
+        {
+            clients.map((client) => (
+                <div class="rounded-sm p-fluid-2xs grayscale hover:bg-white hover:shadow-raised hover:filter-none">
+                    <Image
+                        src={client.src}
+                        alt={client.alt}
+                        width={200}
+                        loading="eager"
+                        class="h-fluid-m-l w-auto max-w-[200px] opacity-50 transition-all hover:opacity-100"
+                    />
+                </div>
+            ))
+        }
+    </div>
+
+    <div
+        aria-hidden="true"
+        class="inline-flex w-max animate-slide-left-infinite gap-fluid-l pr-fluid-l will-change-transform group-hover:animation-pause motion-reduce:animation-pause"
+    >
+        {
+            clients.map((client) => (
+                <div class="rounded-sm p-fluid-2xs grayscale hover:bg-white hover:filter-none">
+                    <Image
+                        src={client.src}
+                        alt={client.alt}
+                        width={200}
+                        loading="eager"
+                        class="h-fluid-m-l w-auto max-w-[200px] opacity-50 transition-all hover:opacity-100"
+                    />
+                </div>
+            ))
+        }
+    </div>
+</div>
