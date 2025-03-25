@@ -69,9 +69,10 @@
 
     /* Custom */
     --spacing-splash-overlap: calc(var(--spacing-fluid-3xl) * 2);
-    --spacing-headerheight: calc(
+    /* --spacing-headerheight: calc(
         var(--spacing-fluid-l) + (var(--spacing-fluid-2xs) * 2)
-    );
+    ); */
+    --spacing-headerheight: var(--headerheight);
     --spacing-tramline: var(--tramline);
     --spacing-offset: var(--offset);
 
