@@ -1,15 +1,15 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
-import type { Props as HeadProps } from "~/components/SEO/Main.astro";
-import Hero from "~/components/hero/Hero.astro";
-import TocMenu from "~/components/preact/navigation/TocMenu";
+import BaseLayout from './BaseLayout.astro';
+import type { Props as HeadProps } from '~/components/SEO/Main.astro';
+import Hero from '~/components/hero/Hero.astro';
+import TocMenu from '~/components/preact/navigation/TocMenu';
 
 const {
-	frontmatter,
-	headings,
-	customHeadings,
-	isWide = false,
-	prose = true,
+    frontmatter,
+    headings,
+    customHeadings,
+    isWide = false,
+    prose = true,
 } = Astro.props;
 const fm = frontmatter || Astro.props;
 const { heroConfig = {}, class: className } = fm;
@@ -18,30 +18,40 @@ const { hideToc = false, hideBreadcrumbs = false } = fm;
 const finalHeadings = headings || customHeadings || []; // Ensure it's always an array
 
 const head: HeadProps = {
-	...fm.head, // Spread any existing values in `fm.head`
-	title: fm.title || fm.head?.title,
-	description: fm.description || fm.head?.description,
-	og: fm.og || fm.head?.og,
+    ...fm.head, // Spread any existing values in `fm.head`
+    title: fm.title || fm.head?.title,
+    description: fm.description || fm.head?.description,
+    og: fm.og || fm.head?.og,
 };
 
 const isHeroDark = (fm.isHeroDark || fm.heroConfig?.dark) ?? false;
 ---
 
 <BaseLayout {head} {isHeroDark}>
-  <slot name="slothero">
+    <slot name="slothero">
         <Hero heroConfig={heroConfig} title={head.title} />
     </slot>
-    <main id="main-content" class:list={[className && className]}>
+    <main
+        id="main-content"
+        class:list={[
+            '@container/main relative container mx-auto',
+            className && className,
+        ]}
+    >
         <div
             class:list={[
-                'py-fluid-2xl text-step-0 mx-auto w-full',
+                'mx-auto w-full py-fluid-2xl text-step-0',
                 prose && 'rte prose',
-                isWide ? 'container' : 'px-fluid-m max-w-3xl',
+                isWide ? 'container' : 'max-w-3xl',
             ]}
         >
             {
                 finalHeadings && finalHeadings.length > 2 && !hideToc && (
-                    <TocMenu class="mb-fluid-l" headings={finalHeadings} client:load/>
+                    <TocMenu
+                        class="mb-fluid-l"
+                        headings={finalHeadings}
+                        client:load
+                    />
                 )
             }
             <slot />

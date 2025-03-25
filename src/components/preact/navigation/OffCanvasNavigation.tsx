@@ -1,6 +1,6 @@
 import { useStore } from '@nanostores/preact';
-import { useEffect, useRef, useState } from 'preact/hooks';
-import { isMenuOpen, showOverlay, hideOverlay } from '~/stores/layersStore';
+import { useEffect, useRef } from 'preact/hooks';
+import { isMenuOpen, openMenu } from '~/stores/layersStore';
 import { animate, type AnimationSequence } from 'motion';
 import NavSmallScreen from '~/components/preact/navigation/NavSmallScreen';
 import { navigation, footerNavigation } from '~/data/navigation';
@@ -16,7 +16,19 @@ export default function OffCanvasNavigation({ currentPath = '' }: Props) {
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const navRef = useRef<HTMLDivElement | null>(null);
   const animationInProgress = useRef<boolean>(false);
-  const hasShownOverlay = useRef(false);
+
+  useEffect(() => {
+    const handleFocus = (event: FocusEvent) => {
+      if ($MenuState !== true && event.target === canvasRef.current) {
+        openMenu(); // Open menu when #navigation (canvasRef) is focused
+      }
+    };
+    document.addEventListener('focusin', handleFocus);
+
+    return () => {
+      document.removeEventListener('focusin', handleFocus);
+    };
+  }, []);
 
   useEffect(() => {
     const wrapper = document.getElementById('wrapperContent');
@@ -93,12 +105,12 @@ export default function OffCanvasNavigation({ currentPath = '' }: Props) {
   }, [$MenuState]);
 
   return (
-    <div
+    <div id="navigation" tabIndex={-1}
       ref={canvasRef}
       className="transform-[translateY(-100%)] md:transform-[translateX(-100%)] z-(--z-nav) pt-(--spacing-headerheight) md:pt-fluid-l md:px-fluid-xl bg-surface not-dynamic:h-screen fixed inset-0 flex h-dvh w-full overflow-y-scroll"
     >
       <div
-        id="navigation"
+
         ref={navRef}
         class="gap-fluid-m px-fluid-m md:px-fluid-2xl text-content grid w-full grid-rows-[1fr_auto]"
       >

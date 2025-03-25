@@ -31,7 +31,7 @@ const {
     <div
         class:list={[
             bg,
-            breakout ? 'breakout' : '-mx-fluid-s-m rounded-tight p-fluid-s-m',
+            breakout ? 'breakout' : '-mx-tramline rounded-tight p-tramline',
             grid,
         ]}
     >
@@ -39,10 +39,10 @@ const {
     </div>
     {
         caption && (
-            <figcaption class="mt-fluid-xs text-content-quiet gap-fluid-xs text-step--1 flex w-full flex-col justify-between leading-snug md:flex-row">
+            <figcaption class="mt-fluid-xs flex w-full flex-col justify-between gap-fluid-xs text-step--1 leading-snug text-content-quiet md:flex-row">
                 <p>{caption}</p>
                 {credit && (
-                    <span class="gap-fluid-3xs text-step--2/tight text-content-quiet grid grid-cols-(--gtc-icon)">
+                    <span class="grid grid-cols-(--gtc-icon) gap-fluid-3xs text-step--2/tight text-content-quiet">
                         <Icon
                             name="lucide:camera"
                             class="h-fluid-xs w-fluid-xs"
