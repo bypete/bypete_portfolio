@@ -18,7 +18,7 @@ const { collections = [], breakout = false } = Astro.props;
 const allGalleries = await getCollection('galleries');
 
 const galleries = allGalleries.filter((gallery) =>
-    collections.some((item) => item.id === gallery.id),
+    collections.some((item) => item.id === gallery.id)
 );
 ---
 
@@ -26,16 +26,18 @@ const galleries = allGalleries.filter((gallery) =>
     collections && (
         <div
             class:list={[
-                'not-prose bg-surface-sunken p-fluid-s-m shadow-inset relative',
-                !breakout ? '-mx-fluid-m my-fluid-xl @3xl:rounded' : 'breakout',
+                'not-prose relative bg-surface-sunken p-tramline shadow-inset',
+                !breakout
+                    ? '-mx-tramline my-fluid-xl @3xl:rounded'
+                    : 'breakout',
             ]}
         >
             <div class="grid grid-flow-row justify-between leading-snug md:grid-flow-col">
                 <slot name="title" slot="title" />
-                <div class="gap-fluid-2xs text-step--1 text-content-quiet pointer-events-none grid grid-cols-(--gtc-icon) md:max-w-[36ch]">
+                <div class="pointer-events-none grid grid-cols-(--gtc-icon) gap-fluid-2xs text-step--1 text-content-quiet md:max-w-[36ch]">
                     <Icon
                         name="lucide:zoom-in"
-                        class="w-fluid-s inline-block h-auto"
+                        class="inline-block h-auto w-fluid-s"
                     />
                     <p class="mt-0">
                         Tap any image to view in more detail. Pinch or mouse

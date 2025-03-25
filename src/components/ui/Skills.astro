@@ -45,20 +45,20 @@ const processedAreas = await Promise.all(
     areas.map(async (area) => ({
         ...area,
         processedSkills: await Promise.all(
-            area.skills.map((skill) => parseMarkdown(skill)),
+            area.skills.map((skill) => parseMarkdown(skill))
         ),
-    })),
+    }))
 );
 ---
 
 <div
     class:list={[
-        'not-prose not-rte p-fluid-m relative',
+        'not-prose not-rte relative p-fluid-m',
         className
             ? className
             : `shadow-inset ${
                   !breakout
-                      ? '-mx-fluid-m my-fluid-xl @3xl:rounded'
+                      ? '-mx-tramline my-fluid-xl @3xl:rounded'
                       : 'breakout'
               }`,
         bg,
@@ -74,7 +74,7 @@ const processedAreas = await Promise.all(
         <slot />
         <ul
             class:list={[
-                'gap-fluid-m grid grid-cols-1 lg:grid-cols-2',
+                'grid grid-cols-1 gap-fluid-m lg:grid-cols-2',
                 text || 'text-content-light',
                 shadow || 'text-shadow-emboss shadow-black/25',
             ]}
@@ -91,7 +91,7 @@ const processedAreas = await Promise.all(
                         >
                             {area.skills.map((skill) => (
                                 <li
-                                    class="pl-fluid-m before:i-lucide-check-circle-2 before:top-tight before:h-fluid-s before:w-fluid-s relative leading-normal before:absolute before:left-0 before:leading-normal"
+                                    class="relative pl-fluid-m leading-normal before:absolute before:top-tight before:left-0 before:i-lucide-check-circle-2 before:h-fluid-s before:w-fluid-s before:leading-normal"
                                     set:html={parseMarkdown(skill)}
                                 />
                             ))}
