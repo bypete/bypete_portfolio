@@ -73,8 +73,10 @@
         var(--spacing-fluid-l) + (var(--spacing-fluid-2xs) * 2)
     ); */
     --spacing-headerheight: var(--headerheight);
+    --spacing-logoheight: var(--logoheight);
     --spacing-tramline: var(--tramline);
     --spacing-offset: var(--offset);
+    --spacing-safe-top: var(--safe-top);
 
     --spacing-tight: 3px;
     --spacing-block: 40vw; /* 5:2 default block / cinema */
