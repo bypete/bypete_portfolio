@@ -134,14 +134,14 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
             <div class="rte prose @container mx-auto max-w-3xl text-step-0">
                 {
                     frontmatter.product && (
-                        <div class="not-prose not-rte breakout flex h-square items-center justify-center bg-linear-to-b from-surface-sunken from-[50%] via-surface-sunk via-[50%] to-surface/0 to-[58%] md:h-block">
+                        <div class="not-prose not-rte @container/breakout breakout flex h-square items-center justify-center bg-linear-to-b from-surface-sunken from-[50%] via-surface-sunk via-[50%] to-surface/0 to-[58%] md:h-block">
                             <BlockPicture
                                 src={frontmatter.product.src}
                                 widths={[480, 1200]}
                                 sizes={`100vw, (min-width: 75rem) 75rem`}
                                 class="h-full w-full object-contain"
                                 breakout={false}
-                                wrapper="w-full h-full max-w-[75rem] "
+                                wrapper="w-full h-full container"
                                 alt={frontmatter.product.alt}
                                 credit={frontmatter.title}
                             />
