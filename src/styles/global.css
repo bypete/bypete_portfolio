@@ -77,6 +77,7 @@
     --spacing-tramline: var(--tramline);
     --spacing-offset: var(--offset);
     --spacing-safe-top: var(--safe-top);
+    --spacing-safe-inline: var(--safe-inline);
 
     --spacing-tight: 3px;
     --spacing-block: 40vw; /* 5:2 default block / cinema */
@@ -85,7 +86,6 @@
     --spacing-widescreen: 56.25vw; /* 16:9 */
     --spacing-photo: 66.67vw; /* 3:2 */
 
-    --container-page: 78.75rem; /* 1260px */
     --container-page: 87.5rem; /* 1400px */
 
     --aspect-retro: 4 / 3;
@@ -388,30 +388,25 @@
     @apply relative mb-[1em] before:absolute before:-bottom-[0.5em] before:left-0 before:w-[1.25em] before:border-b-[3px] before:border-b-teal-400;
 }
 
-/* @utility breakout {
-    width: 100vw;
-    max-width: none;
-    left: 50%;
-    right: 50%;
-    position: relative;
-    margin-inline: -50vw;
-    @media (min-width: 768px) {
-        opacity: 0.5;
-        width: calc(100vw - (var(--spacing-container-padding) * 2));
-        left: calc(50% - var(--spacing-fluid-3xl));
-        right: calc(50% + var(--spacing-fluid-3xl));
-    }
-} */
-
 @utility animation-pause {
     animation-play-state: paused;
 }
 
+/* 
 @utility breakout {
     width: calc(100vw - var(--offset));
     max-width: none;
     position: relative;
     margin-left: calc(-50vw + 50% + (var(--offset) / 2));
+} */
+
+@utility breakout {
+    width: 100vw;
+    max-width: none;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-inline: -50vw;
 }
 
 @utility bookmarkclip {
@@ -442,8 +437,11 @@
 }
 
 @utility container {
-    @apply px-tramline;
-    /* max-width: 78.75rem; 1260px */
+    padding-inline: clamp(
+        0rem,
+        calc(var(--safe-inline) - ((100vw - 87.5rem) / 2)),
+        var(--safe-inline)
+    );
     max-width: 87.5rem; /* 1400px */
 }
 

@@ -1,17 +1,17 @@
 ---
-import { Icon } from "astro-icon/components";
+import { Icon } from 'astro-icon/components';
 interface Props {
-	credit: string;
+    credit: string;
 }
 const { credit } = Astro.props;
 ---
 
 <div
-    class="bottom-fluid-2xs left-fluid-s text-content-light absolute z-50 grid cursor-help grid-cols-(--gtc-credit) items-center overflow-hidden rounded-l-full text-left opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+    class="absolute bottom-fluid-2xs left-fluid-s z-50 grid cursor-help grid-cols-(--gtc-credit) items-center overflow-hidden rounded-l-full text-left text-content-light opacity-0 transition-opacity duration-300 group-hover:opacity-100 @min-[100vw]/breakout:left-safe-inline"
     x-data="credit"
 >
     <button
-        class="bg-primary p-fluid-3xs z-10 flex items-center justify-center rounded-full"
+        class="z-10 flex items-center justify-center rounded-full bg-primary p-fluid-3xs"
         @click="toggle()"
         aria-label="show image credit"
         x-bind:aria-expanded="open ? 'true' : 'false'"
@@ -20,7 +20,7 @@ const { credit } = Astro.props;
         <span class="sr-only">Show image credit</span>
     </button>
     <div
-        class="-ml-fluid-2xs py-fluid-3xs pl-fluid-xs pr-fluid-3xs text-step--2/none z-0 hidden origin-left rounded-xs rounded-l-none bg-black/75"
+        class="z-0 -ml-fluid-2xs hidden origin-left rounded-xs rounded-l-none bg-black/75 py-fluid-3xs pr-fluid-3xs pl-fluid-xs text-step--2/none"
         x-cloak
         x-ref="credit"
     >
@@ -29,39 +29,45 @@ const { credit } = Astro.props;
 </div>
 
 <script>
-  import { animate } from 'motion';
+    import { animate } from 'motion';
 
-  const toggleCreditVisibility = (visible, target) => {
-    if (target) {
-        
+    const toggleCreditVisibility = (visible, target) => {
+        if (target) {
+            if (visible) {
+                target.classList.toggle('hidden', !visible);
 
-        if (visible) {
-            target.classList.toggle('hidden', !visible);
-
-            animate(target, {
-              transform: ['translateX(-100%)', 'translateX(0%)'],
-            }, {duration: 0.25});
-
-
-        } else {
-          animate(target, {
-              transform: ['translateX(0%)', 'translateX(-100%)'],
-            }, {duration: 0.25}).then(() => {target.classList.toggle('hidden', !visible);});
+                animate(
+                    target,
+                    {
+                        transform: ['translateX(-100%)', 'translateX(0%)'],
+                    },
+                    { duration: 0.25 }
+                );
+            } else {
+                animate(
+                    target,
+                    {
+                        transform: ['translateX(0%)', 'translateX(-100%)'],
+                    },
+                    { duration: 0.25 }
+                ).then(() => {
+                    target.classList.toggle('hidden', !visible);
+                });
+            }
         }
-    }
-  };
+    };
 
-  document.addEventListener('alpine:init', () => {
-      Alpine.data('credit', () => ({
-          open: false,
-          toggle() {
-              this.open = !this.open;
-          },
-          init() {
-              this.$watch('open', (value) => {
-                  toggleCreditVisibility(value, this.$refs.credit);
-              });
-          },
-      }));
-  });
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('credit', () => ({
+            open: false,
+            toggle() {
+                this.open = !this.open;
+            },
+            init() {
+                this.$watch('open', (value) => {
+                    toggleCreditVisibility(value, this.$refs.credit);
+                });
+            },
+        }));
+    });
 </script>

@@ -107,12 +107,12 @@ export default function OffCanvasNavigation({ currentPath = '' }: Props) {
   return (
     <div id="navigation" tabIndex={-1}
       ref={canvasRef}
-      className="transform-[translateY(-100%)] md:transform-[translateX(-100%)] z-(--z-nav) pt-headerheight px-offset bg-surface not-dynamic:h-screen fixed inset-0 flex h-dvh w-full overflow-y-scroll"
+      className="transform-[translateY(-100%)] md:transform-[translateX(-100%)] z-(--z-nav) pt-headerheight px-safe-inline bg-surface not-dynamic:h-screen fixed inset-0 flex h-dvh w-full overflow-y-scroll"
     >
       <div
 
         ref={navRef}
-        class="gap-fluid-m pt-fluid-l px-tramline text-content grid w-full grid-rows-[1fr_auto]"
+        class="gap-fluid-m pt-fluid-l text-content grid w-full grid-rows-[1fr_auto]"
       >
         <nav>
           <NavSmallScreen

@@ -20,7 +20,7 @@ export default function HamburgerButton({ class: className }: Props) {
     >
       <div class="grid w-full items-center justify-items-start gap-1 self-center">
         <span
-          className={`bg-brand duration-750 h-1 w-full rounded-full transition-all ${open ? 'translate-y-2 -rotate-45' : ''}`}
+          className={`bg-brand duration-750 h-1 w-full rounded-full  transition-all ${open ? 'translate-y-2 -rotate-45' : ''}`}
         />
         <span
           className={`bg-brand duration-750 h-1 w-3/4 rounded-full transition ${open ? 'opacity-0' : ''}`}
