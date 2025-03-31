@@ -16,6 +16,7 @@
         --shadow-surface-10: rgba(24, 24, 27, 0.12); /* #18181B */
         --shadow-light: rgba(255, 255, 255, 0.75); /* absolute white */
         --shadow-dark: rgba(24, 24, 27, 0.25); /* #18181B */
+        --shadow-inset: rgba(24, 24, 27, 0.25); /* #18181B */
 
         --accent-light: rgb(240, 25, 101); /* #f01965 */
         --accent: rgb(230, 15, 91); /* #E60F5B */

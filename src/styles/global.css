@@ -113,8 +113,8 @@
         inset 0 2px 0px -1px rgba(0, 0, 0, 0.08);
 
     --shadow-inset:
-        inset 0 2px 6px -1px var(--color-shadow-inset),
-        0px 0px 1px 1px var(--color-shadow-highlight);
+        inset 0 4px 4px -1px var(--color-shadow-inset),
+        0px 0px 1px 0px rgba(255, 255, 255, 0.08);
 
     --shadow-highlight: 0px -1px 0px 0px var(--color-shadow-highlight);
 
@@ -185,7 +185,7 @@
     --color-shadow-sunk: var(--shadow-dark);
     --color-shadow-floated: var(--shadow-surface-10);
     --color-shadow-overlay: var(--shadow-dark);
-    --color-shadow-inset: var(--shadow-dark);
+    --color-shadow-inset: var(--shadow-inset);
     --color-shadow-highlight: var(--shadow-light);
 
     --color-line-whisper: var(--line-whisper);
