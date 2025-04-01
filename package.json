@@ -67,7 +67,6 @@
     "remark-attr": "^0.11.1",
     "remark-html": "^16.0.1",
     "smartypants": "^0.2.2",
-    "stylelint-config-tailwindcss": "^1.0.0",
     "swiper": "^11.1.14",
     "vite-plugin-svgr": "^4.3.0"
   },
