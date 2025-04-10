@@ -74,6 +74,7 @@
     ); */
     --spacing-headerheight: var(--headerheight);
     --spacing-logoheight: var(--logoheight);
+    --spacing-gutter: var(--gutter);
     --spacing-tramline: var(--tramline);
     --spacing-offset: var(--offset);
     --spacing-safe-top: var(--safe-top);
@@ -508,6 +509,84 @@
 /* Layer | Components
 ------------------------------------------------------------ */
 @layer components {
+    .layout > * {
+        grid-column: full;
+    }
+
+    /* Layout */
+
+    /* .layout {
+      --gap: clamp(1rem, 6vw, 3rem);
+      --full: minmax(var(--gap), 1fr);
+      --content: min(60ch, 100% - var(--gap) * 2);
+      --popout: minmax(0, 2rem);
+      --feature: minmax(0, 5rem);
+      display:grid;
+      grid-template-columns:[full-start] var(--full) [feature-start] var(--feature) [popout-start] var(--popout) [content-start] var(--content) [content-end] var(--popout) [popout-end] var(--feature) [feature-end] var(--full) [full-end]
+    } */
+
+    .layout {
+        --gap: var(--offset);
+        --full: var(--offset);
+        /* --full: minmax(var(--offset), 1fr); */
+        --page: minmax(0, 87.5rem);
+        --content: min(64ch, calc(100% - var(--safe-inline) * 2));
+        --gutter: minmax(calc(var(--tramline) / 2), 1fr);
+        --pullout: minmax(0, calc(var(--tramline) / 2));
+        /* --pullout: min(var(--spacing-fluid-m)); */
+        --gtc-layout: [full-start] var(--full) [gutter-start] var(--gutter)
+            [pullout-start] var(--pullout) [content-start] var(--content)
+            [content-end] var(--pullout) [pullout-end] var(--gutter)
+            [gutter-end] var(--full) [full-end];
+    }
+
+    [data-layout='page'] {
+        --content: min(100% - (var(--safe-inline) * 2), 87.5rem);
+        --gtc-layout: [full-start] var(--full) [gutter-start] var(--gutter)
+            [content-start pullout-start] var(--content) [content-end
+            pullout-end] var(--gutter) [gutter-end] var(--full) [full-end];
+    }
+
+    [data-layout='content'] {
+        --gtc-layout: [full-start] var(--full) [gutter-start] var(--gutter)
+            [pullout-start] var(--pullout) [content-start] var(--content)
+            [content-end] var(--pullout) [pullout-end] var(--gutter)
+            [gutter-end] var(--full) [full-end];
+    }
+
+    /* main > :not(.sticky, .col-[full], .col-[pullout], iframe, article) {
+        grid-column: content;
+        border: 1px dotted red;
+    } */
+
+    :where(
+            main > *:not(.rte, article),
+            main > .rte > *,
+            main article > .rte > *
+        ):not(.sticky, .col-[full], .col-[pullout], iframe, article) {
+        grid-column: content;
+        /* background: #f2f2f2; */
+    }
+
+    main
+        article
+        > .rte
+        > *:not(.sticky, .col-[full], .col-[pullout], iframe, article) {
+        grid-column: content;
+        /* background: #f2f2f2; */
+    }
+
+    /* :where(.layout > *:not(.rte), .layout > .rte > *, ):not(
+            .sticky,
+            .col-[full],
+            .col-[pullout],
+            iframe,
+            article
+        ) {
+        grid-column: content;
+        border: 1px dotted red;
+    } */
+
     /*--- Forms --- */
     .form__input,
     .form__select,
@@ -692,9 +771,9 @@
         margin-top: 1.5em;
     }
 
-    .rte :where(p):not(:where(.not-rte, .not-rte *)):not(:last-child) {
+    /* .rte :where(p):not(:where(.not-rte, .not-rte *)):not(:last-child) {
         margin-bottom: var(--spacing-fluid-s);
-    }
+    } */
 
     .rte > :last-child {
         margin-bottom: 0;
@@ -702,7 +781,10 @@
 
     .rte pre {
         padding: var(--spacing-fluid-m);
-        margin-block: var(--spacing-fluid-m);
+    }
+
+    .rte pre code {
+        font-size: var(--text-step--1);
     }
 
     .rte :where(ul, ul > li):not(:where(.not-rte, .not-rte *)) {
@@ -777,6 +859,7 @@
 ---------------------------------------------------------------------------------*/
 pre[class*='language-diff-'] {
     --code-padding: 1.25em;
+    font-size: 8px;
     padding-left: var(--code-padding);
     padding-right: var(--code-padding);
 }

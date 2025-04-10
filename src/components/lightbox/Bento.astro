@@ -18,19 +18,19 @@ const optimizedImages = await Promise.all(
             format: 'webp',
         });
         return { ...item, optimizedSrc: optimizedImage.src };
-    }),
+    })
 );
 ---
 
 <div data-inview="lightbox" class:list={['lightbox not-prose']}>
     <slot />
     <div
-        class="gap-fluid-s relative grid grid-flow-dense auto-rows-[100px] grid-cols-3 md:auto-rows-[160px] md:grid-cols-4"
+        class="-mr-fluid-m grid h-[60svh] max-h-[400px] snap-x scroll-px-fluid-m auto-cols-[25cqw] grid-flow-col-dense grid-rows-2 gap-fluid-s overflow-x-auto overscroll-x-contain pr-fluid-m pb-fluid-s"
     >
         {
             optimizedImages.map((item, i) => {
                 return (
-                    <div class:list={[item.class || '']}>
+                    <div class:list={['snap-center', item.class || '']}>
                         <a
                             href={item.src.src}
                             data-cropped={item.cropped || ''}
@@ -38,7 +38,7 @@ const optimizedImages = await Promise.all(
                             data-pswp-srcset={item.optimizedSrc}
                             data-pswp-width={item.src.width}
                             data-pswp-height={item.src.height}
-                            class="bg-surface-raised relative block h-full w-full overflow-hidden rounded-xs shadow-xs hover:cursor-pointer"
+                            class="relative block h-full w-full overflow-hidden rounded-xs bg-surface-raised shadow-xs hover:cursor-pointer"
                         >
                             <Image
                                 src={item.src}
@@ -59,7 +59,7 @@ const optimizedImages = await Promise.all(
                                 />
                             )}
                             <span class="absolute z-1 h-full w-full opacity-0 backdrop-blur-xs backdrop-brightness-125 transition duration-300 hover:bg-slate-900/75 hover:opacity-100">
-                                <span class="i-lucide-zoom-in text-content-light absolute top-1/2 left-1/2 z-10 h-10 w-10 -translate-x-1/2 -translate-y-1/2" />
+                                <span class="absolute top-1/2 left-1/2 z-10 i-lucide-zoom-in h-10 w-10 -translate-x-1/2 -translate-y-1/2 text-content-light" />
                             </span>
                         </a>
                     </div>

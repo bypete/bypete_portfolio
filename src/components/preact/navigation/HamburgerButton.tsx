@@ -29,7 +29,7 @@ export default function HamburgerButton({ class: className }: Props) {
           className={`bg-brand duration-750 h-1 w-3/4 rounded-full transition-all ${open ? 'w-full -translate-y-2 rotate-45' : ''}`}
         />
       </div>
-      <span class="hidden text-center text-[8px] md:block leading-fluid-2xs">
+      <span class="hidden text-center text-[8px] md:block mix-blend-difference leading-fluid-2xs">
         {open ? 'CLOSE' : 'MENU'}
       </span>
     </button>

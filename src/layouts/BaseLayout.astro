@@ -7,7 +7,6 @@ import Footer from '~/components/layout/Footer.astro';
 import Underlay from '~/components/preact/overlays/Underlay';
 import Overlay from '~/components/preact/overlays/Overlay';
 import CookieNotice from '~/components/preact/overlays/CookieNotice.tsx';
-import PageTop from '~/components/preact/navigation/PageTop';
 import Accessibility from '~/components/ui/Accessibility.astro';
 import OffCanvasNavigation from '~/components/preact/navigation/OffCanvasNavigation';
 
@@ -43,8 +42,6 @@ import '~/styles/global.css';
             ]}
         />
 
-        <Header client:load />
-
         <div
             class="absolute top-0 left-safe-inline z-(--z-logo) hidden md:block"
         >
@@ -59,32 +56,18 @@ import '~/styles/global.css';
             >
         </div>
 
-        <div id="wrapperCanvas" class="relative">
-            <OffCanvasNavigation {currentPath} client:load />
+        <OffCanvasNavigation {currentPath} client:load />
 
-            <Overlay client:load />
+        <Overlay client:load />
 
-            <div
-                id="wrapperContent"
-                class="@container/page relative grid grid-cols-1 grid-rows-[1fr_auto] bg-surface"
-            >
-                <Underlay client:load {isHeroDark} />
-
-                <div class="relative w-full bg-surface outline-hidden">
-                    <slot />
-                    <!-- Page tools -->
-                    <div
-                        class="sticky right-fluid-m bottom-0 z-[--z-shortcuts] mr-0 ml-auto flex w-auto max-w-fit justify-end"
-                    >
-                        <div
-                            class="absolute right-0 bottom-0 -translate-y-fluid-m"
-                        >
-                            <PageTop client:load />
-                        </div>
-                    </div>
-                </div>
-                <Footer />
-            </div>
+        <div
+            id="wrapperContent"
+            class="@container/page relative grid grid-cols-1 grid-rows-[1fr_auto] bg-surface"
+        >
+            <Header client:load />
+            <Underlay client:load {isHeroDark} />
+            <slot />
+            <Footer />
         </div>
 
         <div

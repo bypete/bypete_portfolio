@@ -3,6 +3,7 @@ import type { HTMLAttributes } from 'astro/types';
 import Breadcrumbs from '~/components/ui/Breadcrumbs.astro';
 import type { Props as CTALinks } from '~/components/preact/Button.tsx';
 import ModePlain from '~/components/hero/ModePlain.astro';
+import ModeWork from '~/components/hero/ModeWork.astro';
 import ModeCover from '~/components/hero/ModeCover.astro';
 import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
 import SwipePrompt from '~/components/ui/SwipePrompt.astro';
@@ -60,12 +61,12 @@ export interface CTA extends CTALinks {
 }
 
 export interface HeroKeys {
-    wrapperClass?: string;
+    wrapper?: string;
     breadcrumbs?: boolean;
     dark?: boolean;
     bg?: string;
     headline?: string;
-    mode?: 'plain' | 'cover' | 'custom';
+    mode?: 'plain' | 'cover' | 'work' | 'custom';
     class?: string;
     visual?: VisualKeys;
     copy?: string;
@@ -84,7 +85,7 @@ export interface Props extends HTMLAttributes<'div'> {
 const { title, heroConfig = {}, ...rest } = Astro.props;
 const {
     dark = false,
-    wrapperClass = '',
+    wrapper = '',
     breadcrumbs = false,
     bg = '',
     mode = 'plain',
@@ -113,6 +114,18 @@ const heroThemes: Record<string, HeroTheme> = {
     image: {
         hero: [''],
     },
+    work: {
+        hero: [
+            'grid w-full',
+            'grid-cols-1',
+            'shadow-lg',
+            'shadow-content-dark/10',
+            'lg:h-screen',
+            'lg:grid-cols-2',
+            '@min-page/page:grid-cols-(--gtc-workcontianer)',
+        ],
+        mandatory: ['shadow-hero'],
+    },
     cover: {
         hero: ['bg-surface-sunken', 'shadow-surface-sunk'],
         mandatory: ['shadow-hero'],
@@ -131,20 +144,23 @@ const heroResult = [
 <div
     id="hero"
     class:list={[
-        wrapperClass ? wrapperClass : currentHero.wrapper,
-        'relative z-(--z-hero)',
+        wrapper ? wrapper : currentHero.wrapper,
+        'relative z-(--z-hero) col-[full]',
     ]}
     {...mode && { 'data-mode': `${mode}` }}
 >
     <div
-        class:list={[
-            'relative flow-root w-full border-b border-transparent outline-hidden',
-            heroResult,
-        ]}
+        class:list={['relative flow-root w-full outline-hidden', heroResult]}
         {...inView}
         {...rest}
     >
-        {mode === 'plain' && <ModePlain headline={heroTitle} />}
+        {
+            mode === 'plain' && (
+                <ModePlain headline={heroTitle}>
+                    <slot />
+                </ModePlain>
+            )
+        }
 
         {
             mode === 'cover' && (
@@ -156,12 +172,20 @@ const heroResult = [
                         legibility={color}
                         {copy}
                         {actions}
-                    />
+                    >
+                        <slot />
+                    </ModeCover>
                 </>
             )
         }
 
-        <slot />
+        {
+            mode === 'work' && (
+                <ModeWork headline={heroTitle}>
+                    <slot />
+                </ModeWork>
+            )
+        }
 
         {
             prompt && (

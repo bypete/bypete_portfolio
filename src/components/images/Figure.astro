@@ -23,18 +23,13 @@ const {
 
 <figure
     class:list={[
-        'not-prose not-rte relative',
-        className ? className : 'my-fluid-xl',
+        'not-rte relative',
+        className ? className : 'my-fluid-l',
+        breakout ? 'col-[full]' : 'col-[pullout] rounded-tight',
     ]}
     {...attrs}
 >
-    <div
-        class:list={[
-            bg,
-            breakout ? 'breakout' : '-mx-tramline rounded-tight p-tramline',
-            grid,
-        ]}
-    >
+    <div class:list={[bg, grid]}>
         <slot />
     </div>
     {

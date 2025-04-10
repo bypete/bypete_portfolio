@@ -1,13 +1,13 @@
 ---
-import type { Props as HeadProps } from "~/components/SEO/Main.astro";
-import BaseLayout from "./BaseLayout.astro";
+import type { Props as HeadProps } from '~/components/SEO/Main.astro';
+import BaseLayout from './BaseLayout.astro';
 
 const fm = Astro.props.frontmatter || Astro.props;
 const head: HeadProps = {
-	...fm.head, // Spread any existing values in `fm.head`
-	title: fm.title || fm.head?.title,
-	description: fm.description || fm.head?.description,
-	og: fm.og || fm.head?.og,
+    ...fm.head, // Spread any existing values in `fm.head`
+    title: fm.title || fm.head?.title,
+    description: fm.description || fm.head?.description,
+    og: fm.og || fm.head?.og,
 };
 
 const isHeroDark = (fm.isHeroDark || fm.heroConfig.dark) ?? false;

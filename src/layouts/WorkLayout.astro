@@ -6,12 +6,14 @@ import Tags from '~/components/ui/Tags.astro';
 import Button from '~/components/preact/Button.tsx';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
+import Hero from '~/components/hero/Hero.astro';
 import HeroPicture from '~/components/images/HeroPicture.astro';
 import { readableDate, htmlDateString } from '~/js/utils.js';
 import TocMenu from '~/components/preact/navigation/TocMenu';
 import NextPrev from '~/components/ui/NextPrev.astro';
 import BlockPicture from '~/components/images/BlockPicture.astro';
 import ReadTime from '~/components/ui/ReadTime.astro';
+import PageTools from '~/components/ui/PageTools.astro';
 
 export interface Props {
     frontmatter: any;
@@ -26,6 +28,7 @@ const { frontmatter, section, minutesRead, headings, prevPost, nextPost } =
     Astro.props;
 
 const fm = frontmatter || Astro.props;
+const { heroConfig = {}, class: className } = fm;
 const { hideToc = false, hideBreadcrumbs = false } = fm;
 
 const head: HeadProps = {
@@ -41,6 +44,11 @@ const head: HeadProps = {
 };
 
 const isHeroDark = (fm.isHeroDark || fm.heroConfig?.dark) ?? false;
+
+const resolvedHeroConfig = {
+    ...heroConfig,
+    mode: heroConfig.mode || 'work',
+};
 
 // Simplify the post before passing to NextPrev component
 const formatPostData = (post) => {
@@ -70,110 +78,122 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
 ---
 
 <BaseLayout head={head} {isHeroDark}>
-    <slot name="hero">
-        <div
-            class="@container relative z-10 grid w-full grid-cols-1 shadow-lg shadow-content-dark/10 lg:h-screen lg:grid-cols-2 @min-page/page:grid-cols-(--gtc-workcontianer)"
+    <main id="main-content" class="@container/main outline-hidden">
+        <article
+            class="layout relative grid grid-cols-(--gtc-layout)"
+            data-layout="content"
         >
-            <div
-                class="relative flex h-[75vw] items-center justify-center lg:h-full"
+            <Hero
+                slot="slothero"
+                heroConfig={resolvedHeroConfig}
+                title={head.title}
             >
-                <HeroPicture
-                    src={frontmatter.cover.src}
-                    credit={frontmatter.title}
-                    alt={frontmatter.cover.alt}
-                    widths={[400, 960, frontmatter.cover.src.width]}
-                    sizes={'100vw, (min-width: var(--container-width-lg)) 50vw, (min-width: 1264px) 56.25vw'}
-                    class="h-full w-full object-cover"
-                    wrapper={'absolute inset-0 h-full w-full '}
-                />
+                <div
+                    class="relative flex h-[75vw] items-center justify-center lg:h-full"
+                >
+                    <HeroPicture
+                        src={frontmatter.cover.src}
+                        credit={frontmatter.title}
+                        alt={frontmatter.cover.alt}
+                        widths={[400, 960, frontmatter.cover.src.width]}
+                        sizes={'100vw, (min-width: var(--container-width-lg)) 50vw, (min-width: 1264px) 56.25vw'}
+                        class="h-full w-full object-cover"
+                        wrapper={'absolute inset-0 h-full w-full '}
+                    />
+                    {
+                        frontmatter.logo && (
+                            <Image
+                                src={
+                                    frontmatter.logo.light ||
+                                    frontmatter.logo.src
+                                }
+                                alt={frontmatter.title + ' logo'}
+                                class="relative h-auto w-auto max-w-1/2 lg:max-w-1/3"
+                            />
+                        )
+                    }
+                </div>
+                <div class="self-end px-fluid-m py-fluid-m md:px-fluid-xl">
+                    <h1
+                        class="capline text-step-3/none"
+                        set:html={frontmatter.title}
+                    /><ReadTime
+                        duration={minutesRead}
+                        class="my-fluid-2xs text-step--1 text-content-quiet"
+                    />
+                    <p>{frontmatter.taster}</p>
+                    <div class="mt-fluid-m flex justify-between">
+                        <Tags tags={frontmatter.tags} url={true} />
+                    </div>
+                    <p class="mt-fluid-m hidden md:block">
+                        <Button
+                            theme="outline"
+                            isIcon={true}
+                            class="inline-flex transform duration-300"
+                            data-jump
+                            href="#start"
+                        >
+                            Scroll to start <Icon
+                                name="lucide:mouse"
+                                class="h-4 w-4 animate-nudge-down"
+                            />
+                        </Button>
+                    </p>
+                </div>
+            </Hero>
+
+            <div
+                id="start"
+                class="rte col-[full] grid grid-cols-subgrid gap-y-fluid-s"
+            >
                 {
-                    frontmatter.logo && (
-                        <Image
-                            src={frontmatter.logo.light || frontmatter.logo.src}
-                            alt={frontmatter.title + ' logo'}
-                            class="relative h-auto w-auto max-w-1/2 lg:max-w-1/3"
+                    frontmatter.product && (
+                        <BlockPicture
+                            src={frontmatter.product.src}
+                            widths={[480, 1200]}
+                            sizes={`100vw, (min-width: 75rem) 75rem`}
+                            class="h-full w-full object-contain"
+                            breakout={true}
+                            wrapper="grid col-[full] grid-cols-1 grid-rows-1 h-square  md:h-block"
+                            alt={frontmatter.product.alt}
+                            credit={frontmatter.title}
                         />
                     )
                 }
-            </div>
-            <div class="rte self-end px-fluid-m py-fluid-m md:px-fluid-xl">
-                <h1
-                    class="capline text-step-3/none"
-                    set:html={frontmatter.title}
-                /><ReadTime
-                    duration={minutesRead}
-                    class="my-fluid-2xs text-step--1 text-content-quiet"
-                />
-                <p>{frontmatter.taster}</p>
-                <div class="not-rte mt-fluid-m flex justify-between">
-                    <Tags tags={frontmatter.tags} url={true} />
-                </div>
-                <p class="mt-fluid-m hidden md:block">
-                    <Button
-                        theme="outline"
-                        isIcon={true}
-                        class="inline-flex transform duration-300"
-                        data-jump
-                        href="#start"
-                    >
-                        Scroll to start <Icon
-                            name="lucide:mouse"
-                            class="h-4 w-4 animate-nudge-down"
-                        />
-                    </Button>
-                </p>
-            </div>
-        </div>
-    </slot>
-
-    <main
-        id="main-content"
-        class="@container/main relative container mx-auto pb-fluid-xl"
-    >
-        <article id="start" class="relative">
-            {
-                frontmatter.product && (
-                    <BlockPicture
-                        src={frontmatter.product.src}
-                        widths={[480, 1200]}
-                        sizes={`100vw, (min-width: 75rem) 75rem`}
-                        class="h-full w-full object-contain"
-                        breakout={true}
-                        wrapper="grid grid-cols-1 grid-rows-1 h-square bg-linear-to-b from-surface-sunken from-[50%] via-surface-sunk via-[50%] to-surface/0 to-[58%] md:h-block"
-                        alt={frontmatter.product.alt}
-                        credit={frontmatter.title}
-                    />
-                )
-            }
-            <div class="rte prose @container mx-auto max-w-3xl text-step-0">
                 {
                     headings && headings.length > 2 && !hideToc && (
-                        <TocMenu headings={headings} client:load />
+                        <TocMenu
+                            class="col-[content] my-fluid-l self-start"
+                            headings={headings}
+                            client:load
+                        />
                     )
                 }
                 <slot />
             </div>
             <aside
-                class="mx-auto mt-fluid-2xl grid w-full max-w-3xl grid-cols-1 items-start gap-fluid-s @xl/main:grid-cols-[auto_1fr]"
+                class="col-[content] my-fluid-2xl grid grid-cols-1 gap-fluid-s @xl/main:grid-cols-[auto_1fr]"
             >
                 <p
-                    class="inline-flex items-center text-step--1 text-content-quiet"
+                    class="inline-flex items-center gap-x-fluid-3xs text-step--1 text-content-quiet"
                 >
                     <Icon
                         name="lucide:calendar"
                         class="inline-block h-4 w-auto"
                     />
-                    <span class="mx-fluid-3xs">Last updated:</span>
-                    <time
-                        datetime={htmlDateString(
-                            frontmatter.modDate || frontmatter.pubDate
-                        )}
-                        >{
-                            readableDate(
+                    <span>
+                        Last updated:
+                        <time
+                            datetime={htmlDateString(
                                 frontmatter.modDate || frontmatter.pubDate
-                            )
-                        }
-                    </time>
+                            )}
+                            >{
+                                readableDate(
+                                    frontmatter.modDate || frontmatter.pubDate
+                                )
+                            }
+                        </time>
+                    </span>
                 </p>
                 <Tags
                     tags={frontmatter.tags}
@@ -182,14 +202,16 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                 />
             </aside>
         </article>
+        <aside
+            class="layout relative grid grid-cols-(--gtc-layout) bg-brand py-fluid-2xl text-content-dark shadow-inset shadow-brand-shade/20"
+            data-layout="content"
+        >
+            {
+                (nextPostData || prevPostData) && (
+                    <NextPrev next={nextPostData} prev={prevPostData} />
+                )
+            }
+        </aside>
+        <PageTools />
     </main>
-    <aside
-        class="bg-brand px-fluid-m py-fluid-2xl text-content-dark shadow-inset shadow-brand-shade"
-    >
-        {
-            (nextPostData || prevPostData) && (
-                <NextPrev next={nextPostData} prev={prevPostData} />
-            )
-        }
-    </aside>
 </BaseLayout>

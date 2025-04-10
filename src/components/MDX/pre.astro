@@ -1,0 +1,15 @@
+---
+interface Props {
+    class?: string;
+}
+const { class: className, ...attrs } = Astro.props;
+---
+
+<Fragment>
+    <pre
+        {...attrs}
+        class:list={[
+            'col-[pullout] my-fluid-l rounded p-fluid-m',
+            className,
+        ]}><slot /></pre>
+</Fragment>

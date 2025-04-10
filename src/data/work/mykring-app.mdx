@@ -28,9 +28,6 @@ cover:
   credit: 'K Wearables'
 skillset:
   text: 'text-white'
-  icon: ''
-  heading: 'permalink:text-white permalink:before:text-[#00a3e2]'
-  shadow: ''
   areas:
     - title: 'Apps'
       skills:
@@ -57,14 +54,20 @@ import { Image } from 'astro:assets'
 
 import BlockPicture from '~/components/images/BlockPicture.astro';
 import floating_handsets from '~/assets/work/mykringapp/floating-handsets.jpg';
-import Skills from '~/components/ui/Skills.astro'
+
 import Block from '~/components/blocks/Block.astro'
 import UL from '~/components/MDX/ul.astro'
+import BLOCKQUOTE from '~/components/MDX/blockquote.astro'
+import PRE from '~/components/MDX/pre.astro'
+import Skills from '~/components/ui/Skills.astro'
+
+import Lightbox from '~/components/MDX/Lightbox.astro'
+
+export const components = {ul: UL, blockquote: BLOCKQUOTE, pre: PRE}
 
 import Reviews from '~/components/Swiper/Reviews.astro'
 import Figure from '~/components/images/Figure.astro'
 
-import Lightbox from '~/components/MDX/Lightbox.astro'
 import web_autotopup from '~/assets/work/mykringapp/web-autotopup.jpg'
 import auto_topup from '~/assets/work/mykringapp/1.1.0_auto-topup.jpg'
 import auto_topup_open from '~/assets/work/mykringapp/1.1.0_auto-topup-open.jpg'
@@ -72,7 +75,6 @@ import iphone_hand from '~/assets/work/mykringapp/iPhone__hand.png'
 import splitscreen_auto_topup from '~/assets/work/mykringapp/app1.1__autotopup.jpg'
 import svgbg from '~/icons/contour.svg'
 
-export const components = {ul: UL}
 export const reviews = [
     {
       "headline": "Awesome product, great app",

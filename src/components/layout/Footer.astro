@@ -1,6 +1,6 @@
 ---
 import { footerNavigation } from '~/data/navigation';
-import BypeteDark from '~/assets/svg/bypete__footer.svg?react';
+import BypeteBrand from '~/assets/svg/bypete__footer.svg?react';
 import siteInfo from '~/data/site';
 import Social from '~/components/ui/Social.astro';
 
@@ -8,47 +8,39 @@ const year = new Date().getFullYear();
 ---
 
 <footer
-    class="relative hidden border-t border-t-line bg-surface py-fluid-2xl text-content md:block"
+    class="hidden grid-cols-2 items-center gap-fluid-m border-t border-t-line bg-surface px-safe-inline py-fluid-2xl leading-tight md:grid"
 >
-    <div
-        class="relative container mx-auto grid grid-cols-1 items-end gap-fluid-m leading-none md:grid-cols-2"
-    >
-        <a
-            href="/"
-            class="justify-self-start md:col-span-2"
-            title="Return to home"
-        >
-            <BypeteDark
-                name="bypete__dark"
-                title="byPete logo in white"
-                class="h-fluid-l w-auto"
-            />
-        </a>
-        {
-            footerNavigation && (
-                <ul class="flex flex-row flex-wrap gap-fluid-s leading-tight">
-                    {footerNavigation.map((item) => (
-                        <li>
-                            <a href={item.url} class="link" title={item.label}>
-                                {item.label}
-                            </a>
-                        </li>
-                    ))}
-                    <li>©{year}</li>
-                </ul>
-            )
-        }
+    <a href="/" class="justify-self-start md:col-span-2" title="Return to home">
+        <BypeteBrand
+            name="bypete__brand"
+            title="byPete logo in brand colour"
+            class="h-fluid-l w-auto"
+        />
+    </a>
+    {
+        footerNavigation && (
+            <ul class="flex flex-row flex-wrap gap-fluid-s">
+                {footerNavigation.map((item) => (
+                    <li>
+                        <a href={item.url} class="link" title={item.label}>
+                            {item.label}
+                        </a>
+                    </li>
+                ))}
+                <li>©{year}</li>
+            </ul>
+        )
+    }
 
-        <div class="flex gap-fluid-2xs justify-self-end">
-            {
-                siteInfo.socials.map((channel) => (
-                    <Social
-                        platform={channel.platform}
-                        url={channel.url}
-                        name={channel.icon}
-                    />
-                ))
-            }
-        </div>
+    <div class="flex gap-fluid-2xs justify-self-end">
+        {
+            siteInfo.socials.map((channel) => (
+                <Social
+                    platform={channel.platform}
+                    url={channel.url}
+                    name={channel.icon}
+                />
+            ))
+        }
     </div>
 </footer>

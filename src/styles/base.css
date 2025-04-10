@@ -89,12 +89,13 @@
 
         --offset: 0px;
         --logoheight: 0rem;
-        --tramline: var(--spacing-fluid-m);
+
         --headerheight: calc(
             var(--spacing-fluid-l) + (var(--spacing-fluid-2xs) * 2)
         );
         --safe-top: calc(var(--headerheight) + var(--spacing-fluid-l));
         --safe-inline: calc(var(--offset) + var(--spacing-fluid-m));
+        --tramline: var(--spacing-fluid-m);
         --z-toast: 2001;
         --z-overlay: 2000;
         --z-header: 1000;
@@ -130,6 +131,8 @@
         :root {
             --offset: var(--spacing-fluid-xl);
             --tramline: var(--spacing-fluid-xl);
+            /* --gutter: var(--spacing-fluid-xl); */
+            --gap: var(--spacing-fluid-xl);
             --headerheight: 0rem;
             --logoheight: var(--spacing-fluid-2xl);
             --safe-top: calc(var(--logoheight) + var(--spacing-fluid-l));

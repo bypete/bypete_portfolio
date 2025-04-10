@@ -47,10 +47,9 @@ const work = defineCollection({
       credit: z.string().optional()
     }).optional(),
     skillset: z.object({
-      text: z.string(),
-      icon: z.string(),
-      heading: z.string(),
-      shadow: z.string(),
+      text: z.string().optional(),
+      icon: z.string().optional(),
+      shadow: z.string().optional(),
       areas: z.array(
         z.object({
           title: z.string(),

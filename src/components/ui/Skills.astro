@@ -12,7 +12,6 @@ interface Area {
 interface SkillsetProps {
     text?: string;
     icon?: string;
-    heading?: string;
     shadow?: string;
     areas: Area[];
 }
@@ -32,7 +31,7 @@ const {
     ...rest
 } = Astro.props;
 
-const { text, icon, heading, shadow, areas } = skillset as SkillsetProps;
+const { text, icon, shadow, areas } = skillset as SkillsetProps;
 
 // Function to parse markdown
 async function parseMarkdown(content: string) {
@@ -53,30 +52,26 @@ const processedAreas = await Promise.all(
 
 <div
     class:list={[
-        'not-prose not-rte relative p-tramline',
+        'not-rte @container/skills',
         className
             ? className
-            : `shadow-inset ${
-                  !breakout
-                      ? '-mx-tramline my-fluid-xl @3xl:rounded'
-                      : 'breakout'
-              }`,
-        bg,
+            : `my-fluid-l [&+*]:mt-0 ${!breakout ? '-mx-fluid-m' : 'col-[full]'}`,
     ]}
     {...rest}
 >
     <div
         class:list={[
-            'relative mx-auto max-w-3xl',
-            heading || 'permalink:text-white',
+            bg,
+            text || 'text-content',
+            'w-full rounded p-fluid-m shadow-inset @min-[99.9vw]/skills:rounded-none',
         ]}
     >
         <slot />
         <ul
             class:list={[
-                'grid grid-cols-1 gap-fluid-m lg:grid-cols-2',
-                text || 'text-content-light',
-                shadow || 'text-shadow-emboss shadow-black/25',
+                'grid grid-cols-1 gap-fluid-m leading-normal @min-[60ch]:grid-cols-2',
+
+                shadow || 'text-shadow-emboss shadow-black/10',
             ]}
         >
             {
@@ -85,13 +80,13 @@ const processedAreas = await Promise.all(
                         <h3>{area.title}</h3>
                         <ul
                             class:list={[
-                                'space-y-fluid-2xs',
+                                'space-y-fluid-2xs leading-normal',
                                 icon || '[&>li]:before:text-white!',
                             ]}
                         >
                             {area.skills.map((skill) => (
                                 <li
-                                    class="relative pl-fluid-m leading-normal before:absolute before:top-tight before:left-0 before:i-lucide-check-circle-2 before:h-fluid-s before:w-fluid-s before:leading-normal"
+                                    class="relative pl-fluid-m before:absolute before:top-tight before:left-0 before:i-lucide-check-circle-2 before:size-fluid-s"
                                     set:html={parseMarkdown(skill)}
                                 />
                             ))}

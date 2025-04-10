@@ -26,44 +26,51 @@ const galleries = allGalleries.filter((gallery) =>
     collections && (
         <div
             class:list={[
-                'not-prose relative bg-surface-sunken p-tramline shadow-inset',
-                !breakout
-                    ? '-mx-tramline my-fluid-xl @3xl:rounded'
-                    : 'breakout',
+                'not-rte @container/lightbox my-fluid-l',
+                !breakout ? '-mx-fluid-m' : 'col-[full]',
             ]}
         >
-            <div class="grid grid-flow-row justify-between leading-snug md:grid-flow-col">
-                <slot name="title" slot="title" />
-                <div class="pointer-events-none grid grid-cols-(--gtc-icon) gap-fluid-2xs text-step--1 text-content-quiet md:max-w-[36ch]">
-                    <Icon
-                        name="lucide:zoom-in"
-                        class="inline-block h-auto w-fluid-s"
-                    />
-                    <p class="mt-0">
-                        Tap any image to view in more detail. Pinch or mouse
-                        scroll to zoom in.
-                    </p>
-                </div>
-            </div>
-
-            <slot />
-
-            {collections.map((item) => {
-                const gallery = galleries.find((g) => g.id === item.id);
-                return gallery ? (
-                    <div class="mt-fluid-m">
-                        {item.title && (
-                            <h3 class="font-display" id={item.id}>
-                                {item.title}
-                            </h3>
-                        )}
-                        {item.description && (
-                            <p class="mb-fluid-m" set:html={item.description} />
-                        )}
-                        <Bento {gallery} />
+            <div
+                class:list={[
+                    'relative w-full rounded bg-surface-sunken p-fluid-m shadow-inset [scrollbar-color:var(--accent)_var(--color-surface-sunken)] @min-[99.9vw]/lightbox:rounded-none',
+                ]}
+            >
+                <div class="grid grid-flow-row justify-between leading-snug md:grid-flow-col">
+                    <slot name="title" slot="title" />
+                    <div class="pointer-events-none grid grid-cols-(--gtc-icon) gap-fluid-2xs text-step--1 text-content-quiet md:max-w-[36ch]">
+                        <Icon
+                            name="lucide:zoom-in"
+                            class="inline-block h-auto w-fluid-s"
+                        />
+                        <p class="mt-0">
+                            Tap any image to view in more detail. Pinch or mouse
+                            scroll to zoom in.
+                        </p>
                     </div>
-                ) : null;
-            })}
+                </div>
+
+                <slot />
+
+                {collections.map((item) => {
+                    const gallery = galleries.find((g) => g.id === item.id);
+                    return gallery ? (
+                        <div class="mt-fluid-m">
+                            {item.title && (
+                                <h3 class="font-display" id={item.id}>
+                                    {item.title}
+                                </h3>
+                            )}
+                            {item.description && (
+                                <p
+                                    class="mb-fluid-m"
+                                    set:html={item.description}
+                                />
+                            )}
+                            <Bento {gallery} />
+                        </div>
+                    ) : null;
+                })}
+            </div>
         </div>
     )
 }

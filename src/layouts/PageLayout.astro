@@ -1,6 +1,8 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import type { Props as HeadProps } from '~/components/SEO/Main.astro';
+import PageTools from '~/components/ui/PageTools.astro';
+
 import Hero from '~/components/hero/Hero.astro';
 import TocMenu from '~/components/preact/navigation/TocMenu';
 
@@ -25,37 +27,45 @@ const head: HeadProps = {
 };
 
 const isHeroDark = (fm.isHeroDark || fm.heroConfig?.dark) ?? false;
+
+const resolvedHeroConfig = {
+    ...heroConfig,
+    wrapper: heroConfig.wrapper || '',
+    mode: heroConfig.mode || 'plain',
+};
 ---
 
 <BaseLayout {head} {isHeroDark}>
-    <slot name="slothero">
-        <Hero heroConfig={heroConfig} title={head.title} />
-    </slot>
     <main
         id="main-content"
-        class:list={[
-            '@container/main relative container mx-auto',
-            className && className,
-        ]}
+        class:list={['@container/main outline-hidden', className && className]}
     >
-        <div
-            class:list={[
-                'mx-auto w-full py-fluid-2xl text-step-0',
-                prose && 'rte prose',
-                isWide ? '' : 'max-w-3xl',
-            ]}
+        <article
+            class="layout relative grid grid-cols-(--gtc-layout)"
+            data-layout={isWide ? 'page' : 'content'}
         >
-            {
-                finalHeadings && finalHeadings.length > 2 && !hideToc && (
-                    <TocMenu
-                        class="mb-fluid-l"
-                        headings={finalHeadings}
-                        client:load
-                    />
-                )
-            }
-            <slot />
-        </div>
+            <Hero
+                slot="slothero"
+                heroConfig={resolvedHeroConfig}
+                title={head.title}
+            />
+
+            <div
+                class="rte col-[full] grid grid-cols-subgrid gap-y-fluid-s py-fluid-2xl"
+            >
+                {
+                    finalHeadings && finalHeadings.length > 2 && !hideToc && (
+                        <TocMenu
+                            class="col-[content]"
+                            headings={finalHeadings}
+                            client:load
+                        />
+                    )
+                }
+                <slot />
+            </div>
+            <PageTools />
+        </article>
+        <slot name="slotbanner" />
     </main>
-    <slot name="slotbanner" />
 </BaseLayout>
