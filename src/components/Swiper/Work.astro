@@ -1,7 +1,7 @@
 ---
 import Next from '~/components/Swiper/Next.astro';
 import Prev from '~/components/Swiper/Prev.astro';
-import SwipePrompt from '~/components/ui/SwipePrompt.astro';
+import Prompt from '~/components/ui/Prompt.astro';
 import 'swiper/css';
 import 'swiper/css/pagination';
 ---
@@ -18,11 +18,11 @@ import 'swiper/css/pagination';
         </div>
         <Prev
             swiper="swiper--work"
-            class="left-fluid-s hidden text-content-light md:block"
+            class="left-safe-inline hidden text-content-light md:block"
         />
         <Next
             swiper="swiper--work"
-            class="right-fluid-s hidden text-content-light md:block"
+            class="right-safe-inline hidden text-content-light md:block"
         />
         <div
             class="swiper--work__pagination absolute right-auto bottom-fluid-s! left-fluid-s! z-10 mx-auto w-auto text-left text-step--1 font-light text-content-light! md:right-fluid-s! md:left-auto! md:text-right"
@@ -31,7 +31,7 @@ import 'swiper/css/pagination';
         <div
             class="top-screenSvh pointer-events-none absolute left-1/2 z-(--z-shortcuts) -translate-x-1/2 -translate-y-full pb-fluid-s"
         >
-            <SwipePrompt />
+            <Prompt dir="right" label="Swipe through" type="swipe" />
         </div>
     </div>
 </section>

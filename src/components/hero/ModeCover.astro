@@ -1,29 +1,18 @@
 ---
-import type { VisualKeys, CoverKeys, CTA } from '~/components/hero/Hero.astro';
-import Button from '~/components/preact/Button.tsx';
-import { Image, Picture } from 'astro:assets';
-import { Icon } from 'astro-icon/components';
+import type { VisualKeys, CoverKeys } from '~/components/hero/Hero.astro';
+import { Picture } from 'astro:assets';
 
 import ArtDirection from '~/components/images/ArtDirection.astro';
 
 interface Props {
-    headline: string;
     visual?: VisualKeys;
     cover?: CoverKeys;
     legibility?: string;
     copy?: string;
-    actions?: CTA[];
     class?: string;
 }
 
-const {
-    class: ClassName,
-    copy,
-    actions = [],
-    visual,
-    cover,
-    headline,
-} = Astro.props;
+const { class: ClassName, copy, visual, cover } = Astro.props;
 ---
 
 {
@@ -47,38 +36,7 @@ const {
     class="relative container mx-auto grid grid-cols-1 gap-fluid-s pt-headerheight md:h-svh md:grid-cols-(--gtc-block50) md:not-dynamic:h-screen"
 >
     <div class="w-full self-center py-fluid-xl">
-        <h1
-            class="text-shadow-headline relative mb-0 text-step-6/tight shadow-black/10"
-            data-animate="fadeInDown"
-        >
-            {headline}
-        </h1>
-        <div class="rte">
-            <Fragment set:html={copy} />
-            {
-                actions?.length > 0 && (
-                    <p class="flex flex-row gap-2" data-animate="fadeInDown">
-                        {actions.map((action) => (
-                            <Button
-                                theme={action.theme}
-                                class={action.class}
-                                href={action.href}
-                                isIcon={!!action.icon}
-                                {...(action.jump && { 'data-jump': '' })}
-                            >
-                                {action.text}
-                                {action.icon && (
-                                    <Icon
-                                        name={action.icon}
-                                        class="h-fluid-s w-fluid-s"
-                                    />
-                                )}
-                            </Button>
-                        ))}
-                    </p>
-                )
-            }
-        </div>
+        <slot />
     </div>
     {
         visual && (
@@ -103,7 +61,6 @@ const {
         )
     }
 </div>
-<slot />
 
 <script>
     import { inView, animate, type AnimationSequence, stagger } from 'motion';

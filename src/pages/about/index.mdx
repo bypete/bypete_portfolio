@@ -65,7 +65,9 @@ import listing_index from '~/assets/listing-index.jpg';
 import woodland from '~/assets/blocks/woodland.webp';
 import google_lens from '~/assets/google-lens.png';
 import { Image } from 'astro:assets';
-import Figure from '~/components/images/Figure.astro'
+import Button from '~/components/preact/Button.tsx';
+import { Icon } from 'astro-icon/components';
+import Figure from '~/components/images/Figure.astro';
 import BlockPicture from '~/components/images/BlockPicture.astro';
 import BlockImage from '~/components/images/BlockImage.astro';
 
@@ -94,21 +96,6 @@ import ogImage from '~/assets/og/og__about.jpg';
       heroConfig={{
           ...frontmatter.heroConfig,
           mode: 'cover',
-          copy: "<p class='text-step-1' data-animate='fadeInDown'>I'm Pete, a Surrey based Front-End developer with over two decades of experience in digital.</p>",
-          actions: [
-              {
-                  text: 'Read my bio',
-                  theme: 'secondary',
-                  jump: true,
-                  href: '#main-content',
-                  icon: 'lucide:arrow-down-circle',
-              },
-              {
-                  text: 'Contact me',
-                  theme: 'whiteline',
-                  href: '/connect/',
-              },
-          ],
           visual: {
               src: profile,
               alt: 'Profile picture of Pete Wallace',
@@ -129,7 +116,23 @@ import ogImage from '~/assets/og/og__about.jpg';
           overflow: true,
           threshold: 25,
       }}
-  />
+  >
+  <h1
+            class="text-shadow-headline relative mb-0 text-step-6/tight shadow-black/10"
+            data-animate="fadeInDown"
+        >
+            Hello!
+        </h1>
+  <p class='text-step-1 mb-fluid-s' data-animate='fadeInDown'>I'm Pete, a Surrey based Front-End developer with over two decades of experience in digital.</p>
+  <p class="flex flex-row gap-2" data-animate="fadeInDown">
+    <Button theme="secondary" href="#start" data-jump isIcon="true">Read my bio <Icon
+                                        name="lucide:arrow-down-circle"
+                                        class="h-fluid-s w-fluid-s"
+                                    /></Button>
+                                    <Button theme="whiteline" href="/connect/">Contact me</Button>
+  </p>
+  </Hero>
+
 
 
 ## The backstory

@@ -5,8 +5,7 @@ import type { Props as CTALinks } from '~/components/preact/Button.tsx';
 import ModePlain from '~/components/hero/ModePlain.astro';
 import ModeWork from '~/components/hero/ModeWork.astro';
 import ModeCover from '~/components/hero/ModeCover.astro';
-import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
-import SwipePrompt from '~/components/ui/SwipePrompt.astro';
+import Prompt from '~/components/ui/Prompt.astro';
 
 type HeroTheme = {
     wrapper?: string[];
@@ -109,7 +108,7 @@ const inView = {
 
 const heroThemes: Record<string, HeroTheme> = {
     plain: {
-        hero: ['bg-surface-sunken', 'py-fluid-3xl'],
+        hero: ['bg-surface-sunken', 'py-fluid-2xl'],
     },
     image: {
         hero: [''],
@@ -165,14 +164,7 @@ const heroResult = [
         {
             mode === 'cover' && (
                 <>
-                    <ModeCover
-                        headline={heroTitle}
-                        {visual}
-                        {cover}
-                        legibility={color}
-                        {copy}
-                        {actions}
-                    >
+                    <ModeCover {visual} {cover} legibility={color} {copy}>
                         <slot />
                     </ModeCover>
                 </>
@@ -190,8 +182,7 @@ const heroResult = [
         {
             prompt && (
                 <div class="pointer-events-none absolute bottom-fluid-s left-1/2 z-100 -translate-x-1/2">
-                    {prompt === 'scroll' && <ScrollPrompt />}
-                    {prompt === 'swipe' && <SwipePrompt />}
+                    <Prompt dir="down" type={prompt} />
                 </div>
             )
         }

@@ -10,7 +10,7 @@ import { Icon } from 'astro-icon/components';
 import Roles from '~/components/Roles.astro';
 import SwiperClients from '~/components/Swiper/Clients.astro';
 import Clients from '~/components/marquees/Clients.astro';
-import ScrollPrompt from '~/components/ui/ScrollPrompt.astro';
+import Prompt from '~/components/ui/Prompt.astro';
 
 const title = 'Home';
 const heroConfig = {
@@ -44,73 +44,80 @@ const formattedPosts = formatBlogPosts(allWork, {
 ---
 
 <SplashLayout title={title} isHeroDark={heroConfig.dark} {og}>
-    <section
-        class="@container relative origin-top items-center overflow-x-hidden bg-primary bg-cover pb-fluid-6xl angleclip-fluid-3xl [&+*]:-mt-fluid-6xl"
+    <main
+        id="content"
+        class="layout grid grid-cols-(--gtc-layout)"
+        data-layout="page"
     >
-        <div class="absolute inset-0 h-full w-full">
-            <Picture
-                src={heatmap}
-                quality={'max'}
-                loading={'eager'}
-                formats={['avif', 'webp']}
-                alt="Purple gradient background"
-                class="absolute h-full w-full object-cover object-bottom md:object-center"
-            />
-            <div
-                id="particleField"
-                class="absolute inset-0 h-full w-full overflow-hidden"
-            >
-            </div>
-        </div>
-
-        <div
-            class="relative container mx-auto grid h-svh grid-cols-1 grid-rows-(--gtr-home) pt-safe-top not-dynamic:h-screen landscape:grid-flow-col landscape:grid-cols-(--gtc-home) landscape:grid-rows-1 landscape:pt-0"
+        <section
+            class="@container relative col-[full] grid grid-cols-subgrid overflow-x-hidden bg-primary pb-fluid-6xl angleclip-fluid-3xl [&+*]:-mt-fluid-6xl"
         >
-            <div class="w-full max-w-[40ch] self-center">
-                <Roles roles={roles} />
-                <p
-                    class="text-shadow-emboss my-fluid-s text-step-0 text-content-light shadow-slate-900"
+            <div class="absolute inset-0 h-full w-full">
+                <Picture
+                    src={heatmap}
+                    quality={'max'}
+                    loading={'eager'}
+                    formats={['avif', 'webp']}
+                    alt="Purple gradient background"
+                    class="absolute h-full w-full object-cover object-bottom md:object-center"
+                />
+                <div
+                    id="particleField"
+                    class="absolute inset-0 h-full w-full overflow-hidden"
                 >
-                    Discover the stories behind my projects, the challenges
-                    addressed, and the solutions crafted.
-                </p>
-                <p class="flex flex-wrap items-center gap-fluid-xs">
-                    <Button
-                        theme="primary"
-                        isIcon={true}
-                        class="md:inline-flex"
-                        href="/work/"
-                    >
-                        View the portfolio <Icon
-                            name="lucide:arrow-right-circle"
-                            class="h-fluid-s w-fluid-s animate-nudge-right"
-                        />
-                    </Button>
-                    <Button href="/about/" theme="whiteline">Read my bio</Button
-                    >
-                </p>
+                </div>
             </div>
 
-            <div class="relative flex min-h-0 items-center">
-                <SwiperHome slides={heroSlides} />
+            <div
+                class="relative col-[content] grid h-svh grid-cols-1 grid-rows-(--gtr-home) pt-safe-top not-dynamic:h-screen landscape:grid-flow-col landscape:grid-cols-(--gtc-home) landscape:grid-rows-1 landscape:pt-0"
+            >
+                <div class="w-full max-w-[40ch] self-center">
+                    <Roles roles={roles} />
+                    <p
+                        class="text-shadow-emboss my-fluid-s text-step-0 text-content-light shadow-slate-900"
+                    >
+                        Discover the stories behind my projects, the challenges
+                        addressed, and the solutions crafted.
+                    </p>
+                    <p class="flex flex-wrap items-center gap-fluid-xs">
+                        <Button
+                            theme="primary"
+                            isIcon={true}
+                            class="md:inline-flex"
+                            href="/work/"
+                        >
+                            View the portfolio <Icon
+                                name="lucide:arrow-right-circle"
+                                class="h-fluid-s w-fluid-s animate-nudge-right"
+                            />
+                        </Button>
+                        <Button href="/about/" theme="whiteline"
+                            >Read my bio</Button
+                        >
+                    </p>
+                </div>
+
+                <div class="relative flex min-h-0 items-center">
+                    <SwiperHome slides={heroSlides} />
+                </div>
             </div>
-        </div>
-        <div
-            class="pointer-events-none absolute top-[100svh] left-1/2 z-100 -translate-x-1/2 -translate-y-full pb-fluid-s text-content-light not-dynamic:top-[100vh]"
+            <div
+                class="pointer-events-none absolute top-[100svh] left-1/2 z-100 -translate-x-1/2 -translate-y-full pb-fluid-s text-content-light not-dynamic:top-[100vh]"
+            >
+                <Prompt label="Scroll" dir="down" />
+            </div>
+        </section>
+        <section
+            id="featured"
+            class="from-page-contrast relative col-[full] grid grid-cols-subgrid gap-y-fluid-m bg-linear-to-b"
         >
-            <ScrollPrompt />
-        </div>
-    </section>
-
-    <section id="featured" class="from-page-contrast bg-linear-to-b pb-fluid-s">
-        <div class="relative container mx-auto">
             <h2
-                class="m-0 text-center font-headline text-step-4 font-bold tracking-tight text-content-light"
+                class="col-[content] m-0 text-center font-headline text-step-4 font-bold text-content-light"
             >
                 Featured work
             </h2>
             <div
-                class="my-fluid-m grid grid-cols-1 gap-fluid-xl md:grid-cols-2 lg:grid-cols-3"
+                class="col-[content] grid grid-cols-1 gap-fluid-xl md:grid-cols-2 lg:grid-cols-3"
             >
                 {
                     formattedPosts.map(async (post) => {
@@ -157,16 +164,16 @@ const formattedPosts = formatBlogPosts(allWork, {
                     </p>
                 </div>
             </div>
+        </section>
+        <div class="col-[content] py-fluid-2xl">
+            <h3
+                class="mb-fluid-m text-center text-step-1 font-bold text-content-quiet"
+            >
+                Some of the brands I've worked with:
+            </h3>
+            <Clients clients={clientSlides} />
         </div>
-    </section>
-    <div class="relative container mx-auto py-fluid-2xl">
-        <h3
-            class="mb-fluid-s text-center text-step-1 font-bold text-content-quiet"
-        >
-            Some of the brands I've worked with:
-        </h3>
-        <Clients clients={clientSlides} />
-    </div>
+    </main>
 </SplashLayout>
 <script>
     import { inView, animate, stagger, type AnimationSequence } from 'motion';

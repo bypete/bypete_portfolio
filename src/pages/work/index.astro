@@ -33,27 +33,29 @@ const og = {
 ---
 
 <SplashLayout title={title} isHeroDark={heroConfig.dark} {og}>
-    <Work>
-        {
-            formattedPosts.map(async (post) => {
-                const { remarkPluginFrontmatter } = await render(post);
-                const featured = post.data.tags.includes('featured');
-                return (
-                    <div class="slide swiper-slide">
-                        <WorkSlide
-                            url={`/${post.collection}/${post.id}/`}
-                            title={post.data.title}
-                            taster={post.data.taster}
-                            tags={post.data.tags}
-                            cover={post.data.cover}
-                            logo={post.data.logo}
-                            product={post.data.product}
-                            readTime={remarkPluginFrontmatter.minutesRead}
-                            featured={featured}
-                        />
-                    </div>
-                );
-            })
-        }
-    </Work>
+    <main id="content">
+        <Work>
+            {
+                formattedPosts.map(async (post) => {
+                    const { remarkPluginFrontmatter } = await render(post);
+                    const featured = post.data.tags.includes('featured');
+                    return (
+                        <div class="slide swiper-slide">
+                            <WorkSlide
+                                url={`/${post.collection}/${post.id}/`}
+                                title={post.data.title}
+                                taster={post.data.taster}
+                                tags={post.data.tags}
+                                cover={post.data.cover}
+                                logo={post.data.logo}
+                                product={post.data.product}
+                                readTime={remarkPluginFrontmatter.minutesRead}
+                                featured={featured}
+                            />
+                        </div>
+                    );
+                })
+            }
+        </Work>
+    </main>
 </SplashLayout>

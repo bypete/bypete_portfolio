@@ -1,0 +1,161 @@
+---
+interface Props {
+    dir?: 'left' | 'right' | 'up' | 'down';
+    type?: 'scroll' | 'swipe';
+    label?: string;
+    bg?: string;
+}
+const { type = 'scroll', dir = 'down', label, bg } = Astro.props;
+---
+
+<div
+    class:list={[
+        bg && `${bg} shadow-prompt`,
+        'scrollPrompt flex items-center gap-fluid-3xs rounded p-fluid-3xs text-step--1 opacity-0',
+    ]}
+    data-dir={dir}
+>
+    <slot>
+        {
+            (type === 'scroll' || type === 'swipe') && (
+                <span
+                    set:html={
+                        label || type.charAt(0).toUpperCase() + type.slice(1)
+                    }
+                />
+            )
+        }
+    </slot>
+
+    {
+        type === 'scroll' && (
+            <span class="nudge i-hugeicons-mouse-scroll-02 inline-block size-fluid-s" />
+        )
+    }
+    {
+        type === 'swipe' && (
+            <span class="nudge i-hugeicons-swipe-left-07 inline-block size-fluid-s" />
+        )
+    }
+</div>
+
+<script>
+    import { animate, type AnimationSequence, inView, spring } from 'motion';
+
+    const scrollers = document.querySelectorAll('.scrollPrompt');
+    const nudgeSequences = {
+        right: {
+            transform: {
+                x: ['0%', '25%', '-5%', '0%'],
+                skew: ['0deg', '0deg', '10deg', '0deg'],
+            },
+            options: {
+                delay: 1.5,
+                repeat: 1,
+                repeatDelay: 1.5,
+                duration: 0.25,
+                ease: 'easeInOut',
+            },
+        },
+        left: {
+            transform: {
+                x: ['0%', '-25%', '-10%', '0%'],
+                rotate: ['0deg', '-5deg', '0deg'],
+            },
+
+            options: {
+                delay: 1.5,
+                repeat: 3,
+                repeatDelay: 3,
+                duration: 0.5,
+                ease: 'easeInOut',
+            },
+        },
+        up: {
+            transform: {
+                y: ['0%', '-25%', '-10%', '0%'],
+                skewY: ['0deg', '-10deg', '0deg'],
+            },
+
+            options: {
+                delay: 1.5,
+                repeat: 3,
+                repeatDelay: 3,
+                duration: 0.5,
+                ease: 'easeInOut',
+            },
+        },
+        down: {
+            transform: {
+                y: ['0%', '25%', '-10%', '0%', '25%', '-10%', '0%'],
+                skewY: ['0deg', '7deg', '0deg'],
+                rotate: ['0deg', '-5deg', '0deg'],
+            },
+            options: {
+                delay: 1.5,
+                repeat: 2,
+                repeatDelay: 1.5,
+                duration: 0.5,
+                ease: 'easeInOut',
+            },
+        },
+    };
+
+    if (scrollers != null) {
+        inView(
+            scrollers,
+            (el) => {
+                const nudge = el.querySelector('.nudge') as HTMLElement;
+                const direction = (el as HTMLElement).dataset.dir ?? 'down';
+                const nudgeConfig =
+                    nudgeSequences[direction] || nudgeSequences.down;
+
+                const sequence: AnimationSequence = [
+                    [
+                        el,
+                        {
+                            opacity: [0, 1],
+                            y: ['25%', '0%'],
+                        },
+                        {
+                            duration: 0.25,
+                            delay: 0.25,
+                            ease: 'easeOut',
+                        },
+                    ],
+                ];
+
+                animate(sequence).then(() => {
+                    if (nudge) {
+                        animate(
+                            nudge,
+                            nudgeConfig.transform,
+                            nudgeConfig.options
+                        ).then(() => {
+                            animate(
+                                el,
+                                { opacity: 0 },
+                                { duration: 0.75, delay: 1 }
+                            ).then(() => {
+                                el.remove();
+                            });
+                        });
+                    }
+                });
+
+                return (leave) => {
+                    if (leave) {
+                        animate(el, { opacity: 0 }, { duration: 0.25 }).then(
+                            () => {
+                                el.remove();
+                            }
+                        );
+                    }
+                };
+            },
+            {
+                margin: '-25% 0px 0px 0px',
+            }
+        );
+    }
+</script>

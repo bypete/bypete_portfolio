@@ -1,0 +1,15 @@
+---
+interface Props {
+    class?: string;
+}
+const { class: className, ...attrs } = Astro.props;
+---
+
+<Fragment>
+    <table
+        {...attrs}
+        class:list={['table--padded table--rows table', className]}
+    >
+        <slot />
+    </table>
+</Fragment>

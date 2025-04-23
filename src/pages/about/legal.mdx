@@ -9,6 +9,12 @@ import { Image } from 'astro:assets';
 import Figure from '~/components/images/Figure.astro'
 import listing_index from '~/assets/listing-index.jpg';
 
+import UL from '~/components/MDX/ul.astro'
+import BLOCKQUOTE from '~/components/MDX/blockquote.astro'
+import PRE from '~/components/MDX/pre.astro'
+import TABLE from '~/components/MDX/table.astro'
+export const components = {ul: UL, blockquote: BLOCKQUOTE, pre: PRE, table: TABLE}
+
 ## Disclaimer
 
 The information contained in this website is for general information purposes only. The information is provided by byPete and while we endeavour to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose. Any reliance you place on such information is therefore strictly at your own risk.
@@ -22,11 +28,10 @@ Every effort is made to keep the website up and running smoothly. However, byPet
 
 ## Cookie policy
 
-<div class="col-[full] px-safe-inline">
+<div class="col-[full] px-safe-inline text-left ">
 | Name                        | Why?                                          | When?                             | What is collected                                 | How long? |
 | --------------------------- | --------------------------------------------- | --------------------------------- | ------------------------------------------------- | --------- |
-| cnotice                     | Stops the cookie notice appearing repeatedly  | Once user clicks 'ok' to continue | Nothing collected; JS checks if cookie is present | 1 year    |
-| Google analytics **\_ga\*** | Gives insights to improve the user experience | On page load                      | Identify computer                                 | 2years    |
+| consentMode                 | Allows user to set preferences and stops the notice appearing repeatedly  | Local storage created once a user submits their choices | Four choices, set via checkboxes. JavaScript will load analytics scripts accordingly  | No expiry    |
+| Google analytics **\_ga\*** | Gives insights to improve the user experience | On page load, if permission has been granted                      | Identify computer                                 | 2 years   |
 </div>
 
-## Privacy notice

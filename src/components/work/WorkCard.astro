@@ -37,12 +37,12 @@ const { title, featured, url, cover, logo, product, taster, tags, readTime } =
     class="group @container relative grid w-full grid-rows-(--gtr-workcard) rounded-tight bg-surface-raised no-underline opacity-0 shadow-raised hover:no-underline hover:shadow-lg hover:duration-300"
 >
     <div
-        class="relative grid aspect-photo grid-cols-1 grid-rows-1 items-center overflow-hidden bg-line-quiet hover:rounded-t-tight @md:aspect-widescreen"
+        class="relative grid aspect-photo grid-cols-1 grid-rows-1 items-center overflow-hidden bg-line-quiet hover:rounded-t-tight @md:aspect-widescreen [&>*]:col-start-1 [&>*]:row-start-1"
     >
         <Image
             src={cover.src}
             alt={cover.alt}
-            class="col-start-1 row-start-1 m-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-125 group-focus:scale-125"
+            class="m-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-125 group-focus:scale-125"
             quality="high"
             loading="eager"
             densities={[1.5, 2]}
@@ -55,7 +55,7 @@ const { title, featured, url, cover, logo, product, taster, tags, readTime } =
                     densities={[1.5, 2]}
                     width={300}
                     alt={title + ' logo'}
-                    class="relative col-start-1 row-start-1 m-auto h-auto max-w-1/3 transition-all duration-200"
+                    class="relative m-auto h-auto max-w-1/3 transition-all duration-200"
                 />
             )
         }
@@ -79,7 +79,5 @@ const { title, featured, url, cover, logo, product, taster, tags, readTime } =
         />
         {taster && <p class="text-base/snug" set:html={taster} />}
     </div>
-    <div class="p-fluid-s">
-        <Tags {tags} />
-    </div>
+    <Tags {tags} class="m-0 p-fluid-s" />
 </a>

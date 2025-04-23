@@ -48,7 +48,10 @@ export default function TocMenu({ headings, class: className }: Props) {
     ];
 
     const sequenceClose: AnimationSequence = [
-      [tocPanelRef.current, { opacity: 0, height: 0 }, { duration: 0.25 }],
+      [
+        tocPanelRef.current,
+        { opacity: 0, height: 0 },
+        { duration: 0.25 }],
     ];
 
     animationInProgress.current = true;
@@ -62,6 +65,7 @@ export default function TocMenu({ headings, class: className }: Props) {
         animationInProgress.current = false;
       });
     }
+    animationInProgress.current = false;
   }, [isOpen]);
 
   useEffect(() => {
@@ -97,7 +101,7 @@ export default function TocMenu({ headings, class: className }: Props) {
       observerOptions,
     );
 
-    const headings = document.querySelectorAll("#main-content :is(h2,h3,h4)");
+    const headings = document.querySelectorAll("main :is(h2,h3,h4)");
     for (const index in headings) {
       if (headings[index] instanceof HTMLElement) {
         headingObserver.observe(headings[index]);

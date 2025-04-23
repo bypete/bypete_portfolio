@@ -9,17 +9,17 @@ const title = 'Connect';
 ---
 
 <PageLayout title={title} isWide={true} prose={false}>
-    <div class="gap-fluid-m grid grid-cols-1 md:grid-cols-2">
-        <div class="md:mt-fluid-m md:order-2">
+    <div class="grid grid-cols-1 gap-fluid-m md:grid-cols-2">
+        <div class="md:order-2 md:mt-fluid-m">
             <div class="mr-auto w-full max-w-[40ch]">
                 <Note theme="info" hasIcon={true}>
-                    <p class="text-step-0 mt-0 font-semibold">
+                    <p class="mb-fluid-xs text-step-0 font-semibold">
                         Use this form to send me a message and I'll get back to
                         you shortly.
                     </p>
                     {
                         available && (
-                            <p>
+                            <p class="mb-fluid-xs">
                                 I'm
                                 <span class="hilite inline-block py-px whitespace-nowrap">
                                     currently available
@@ -31,7 +31,7 @@ const title = 'Connect';
                             </p>
                         )
                     }
-                    <p>
+                    <p class="mb-fluid-xs">
                         For more information please read my <a
                             href="/about/"
                             class="link">bio</a
@@ -40,7 +40,7 @@ const title = 'Connect';
                     <p>
                         <a
                             href="https://www.linkedin.com/in/peter-wallace-a5002a7a/"
-                            class="px-fluid-2xs py-fluid-3xs flex items-center justify-center gap-2 rounded-xs border border-solid border-slate-800 bg-slate-800 text-sky-400 no-underline hover:border-sky-500 hover:bg-sky-500 hover:text-white hover:no-underline"
+                            class="flex items-center justify-center gap-2 rounded-xs border border-solid border-slate-800 bg-slate-800 px-fluid-2xs py-fluid-3xs text-sky-400 no-underline hover:border-sky-500 hover:bg-sky-500 hover:text-white hover:no-underline"
                         >
                             View my profile
                             <Icon
@@ -53,7 +53,7 @@ const title = 'Connect';
             </div>
         </div>
         <div
-            class="bg-surface-raised p-fluid-m shadow-raised rounded-xs md:order-1"
+            class="rounded-xs bg-surface-raised p-fluid-m shadow-raised md:order-1"
         >
             <ContactForm />
         </div>

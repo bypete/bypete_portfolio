@@ -2,6 +2,7 @@
 import 'photoswipe/style.css';
 import { type CollectionEntry } from 'astro:content';
 import { getImage, Image } from 'astro:assets';
+import Prompt from '../ui/Prompt.astro';
 
 export interface Props {
     gallery: CollectionEntry<'galleries'>;
@@ -24,47 +25,63 @@ const optimizedImages = await Promise.all(
 
 <div data-inview="lightbox" class:list={['lightbox not-prose']}>
     <slot />
-    <div
-        class="-mr-fluid-m grid h-[60svh] max-h-[400px] snap-x scroll-px-fluid-m auto-cols-[25cqw] grid-flow-col-dense grid-rows-2 gap-fluid-s overflow-x-auto overscroll-x-contain pr-fluid-m pb-fluid-s"
-    >
-        {
-            optimizedImages.map((item, i) => {
-                return (
-                    <div class:list={['snap-center', item.class || '']}>
-                        <a
-                            href={item.src.src}
-                            data-cropped={item.cropped || ''}
-                            data-lightbox
-                            data-pswp-srcset={item.optimizedSrc}
-                            data-pswp-width={item.src.width}
-                            data-pswp-height={item.src.height}
-                            class="relative block h-full w-full overflow-hidden rounded-xs bg-surface-raised shadow-xs hover:cursor-pointer"
-                        >
-                            <Image
-                                src={item.src}
-                                width={480}
-                                height={
-                                    (item.src.height * 480) / item.src.width
-                                }
-                                densities={[2, 3]}
-                                format="webp"
-                                alt={item.title}
-                                class="absolute inset-0 h-full w-full object-cover object-top"
-                            />
-                            {item.caption && (
-                                <span
-                                    data-caption=""
-                                    class="hidden"
-                                    set:html={item.caption}
+    <div class="relative">
+        <div
+            class="-mr-fluid-m grid h-[60svh] max-h-[400px] snap-x scroll-px-fluid-m auto-cols-[25cqw] grid-flow-col-dense grid-rows-2 gap-fluid-s overflow-x-auto overflow-y-hidden overscroll-x-contain pr-fluid-m pb-fluid-s"
+        >
+            {
+                optimizedImages.map((item, i) => {
+                    return (
+                        <div class:list={['snap-center', item.class || '']}>
+                            <a
+                                href={item.src.src}
+                                data-cropped={item.cropped || ''}
+                                data-lightbox
+                                data-pswp-srcset={item.optimizedSrc}
+                                data-pswp-width={item.src.width}
+                                data-pswp-height={item.src.height}
+                                class="relative block h-full w-full overflow-hidden rounded-xs bg-surface-raised shadow-xs hover:cursor-pointer"
+                            >
+                                <Image
+                                    src={item.src}
+                                    width={480}
+                                    height={
+                                        (item.src.height * 480) / item.src.width
+                                    }
+                                    densities={[2, 3]}
+                                    format="webp"
+                                    alt={item.title}
+                                    class="absolute inset-0 h-full w-full object-cover object-top"
                                 />
-                            )}
-                            <span class="absolute z-1 h-full w-full opacity-0 backdrop-blur-xs backdrop-brightness-125 transition duration-300 hover:bg-slate-900/75 hover:opacity-100">
-                                <span class="absolute top-1/2 left-1/2 z-10 i-lucide-zoom-in h-10 w-10 -translate-x-1/2 -translate-y-1/2 text-content-light" />
-                            </span>
-                        </a>
-                    </div>
-                );
-            })
+                                {item.caption && (
+                                    <span
+                                        data-caption=""
+                                        class="hidden"
+                                        set:html={item.caption}
+                                    />
+                                )}
+                                <span class="absolute z-1 h-full w-full opacity-0 backdrop-blur-xs backdrop-brightness-125 transition duration-300 hover:bg-slate-900/75 hover:opacity-100">
+                                    <span class="absolute top-1/2 left-1/2 z-10 i-lucide-zoom-in h-10 w-10 -translate-x-1/2 -translate-y-1/2 text-content-light" />
+                                </span>
+                            </a>
+                        </div>
+                    );
+                })
+            }
+        </div>
+        {
+            optimizedImages.length > 3 && (
+                <div class="pointer-events-none absolute top-1/2 right-0 z-(--z-shortcuts) -translate-y-1/2">
+                    <Prompt
+                        dir="right"
+                        bg="bg-brand text-content-dark"
+                        type="swipe"
+                    >
+                        <span class="xl:hidden">Swipe</span>
+                        <span class="hidden xl:inline-block">Scroll</span>
+                    </Prompt>
+                </div>
+            )
         }
     </div>
 </div>

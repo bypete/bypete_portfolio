@@ -31,26 +31,23 @@ const isHeroDark = (fm.isHeroDark || fm.heroConfig?.dark) ?? false;
 const resolvedHeroConfig = {
     ...heroConfig,
     wrapper: heroConfig.wrapper || '',
-    mode: heroConfig.mode || 'plain',
 };
 ---
 
 <BaseLayout {head} {isHeroDark}>
     <main
-        id="main-content"
         class:list={['@container/main outline-hidden', className && className]}
     >
         <article
+            id="content"
             class="layout relative grid grid-cols-(--gtc-layout)"
             data-layout={isWide ? 'page' : 'content'}
         >
-            <Hero
-                slot="slothero"
-                heroConfig={resolvedHeroConfig}
-                title={head.title}
-            />
-
+            <slot name="slothero">
+                <Hero heroConfig={resolvedHeroConfig} title={head.title} />
+            </slot>
             <div
+                id="start"
                 class="rte col-[full] grid grid-cols-subgrid gap-y-fluid-s py-fluid-2xl"
             >
                 {

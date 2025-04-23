@@ -123,6 +123,8 @@
     --shadow-banner: -4px 0px 8px 4px var(--tw-shadow-color);
     --shadow-dropdown: 0px 5px 15px var(--tw-shadow-color);
 
+    --shadow-prompt: 0px 0px 25px 5px var(--color-shadow-raised);
+
     --shadow-floated:
         0px 2px 1px -1px var(--white),
         inset 0px 2px 1px 1px var(--color-shadow-floated),
@@ -647,6 +649,7 @@
     .table thead {
         text-align: left;
         font-weight: var(--font-weight-bold);
+        white-space: nowrap;
     }
 
     .table th {
@@ -658,6 +661,7 @@
     .table th,
     .table tbody td {
         padding-block: calc(var(--spacing) * 1);
+        vertical-align: top;
     }
 
     .table--rows tr {
