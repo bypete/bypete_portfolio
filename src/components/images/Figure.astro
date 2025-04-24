@@ -23,7 +23,7 @@ const {
 
 <figure
     class:list={[
-        'not-rte relative',
+        'not-rte @container/figure relative',
         className ? className : 'my-fluid-l',
         breakout ? 'col-[full]' : 'col-[pullout] rounded-tight',
     ]}
@@ -34,10 +34,10 @@ const {
     </div>
     {
         caption && (
-            <figcaption class="mt-fluid-xs flex w-full flex-col justify-between gap-fluid-xs text-step--1 leading-snug text-content-quiet md:flex-row">
+            <figcaption class="mt-fluid-xs flex w-full flex-col justify-between gap-fluid-xs text-step--1 text-content-quiet md:flex-row @min-[100vw]/figure:px-safe-inline">
                 <p>{caption}</p>
                 {credit && (
-                    <span class="grid grid-cols-(--gtc-icon) gap-fluid-3xs text-step--2/tight text-content-quiet">
+                    <span class="grid grid-cols-(--gtc-icon) gap-fluid-3xs text-step--2/tight whitespace-nowrap">
                         <Icon
                             name="lucide:camera"
                             class="h-fluid-xs w-fluid-xs"

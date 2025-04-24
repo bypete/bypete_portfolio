@@ -1,16 +1,15 @@
 ---
-import Block from "~/components/blocks/Block.astro";
-import { Image } from "astro:assets";
-import Button from "~/components/preact/Button";
-import product from "~/assets/work/mykringapp/product.png";
+import Block from '~/components/blocks/Block.astro';
+import { Image } from 'astro:assets';
+import Button from '~/components/preact/Button';
+import product from '~/assets/work/mykringapp/product.png';
 
-import pieces from "~/data/work";
+import pieces from '~/data/work';
 
-import { Icon } from "astro-icon/components";
-import type { inView } from "motion";
+import { Icon } from 'astro-icon/components';
 interface Props {
-	wrapper?: string;
-	class?: string;
+    wrapper?: string;
+    class?: string;
 }
 const { wrapper, class: className } = Astro.props;
 ---
@@ -18,7 +17,7 @@ const { wrapper, class: className } = Astro.props;
 <Block
     layout={{ slots: 2, type: 'default' }}
     data-inview="portfolio"
-    wrapperClass={`${wrapper && wrapper} not-prose not-rte`}
+    wrapperClass={`${wrapper && wrapper} not-rte`}
     class:list={[className && className]}
     legibility="text-content-dark"
     slotConfig={{
@@ -50,7 +49,7 @@ const { wrapper, class: className } = Astro.props;
             Curious to see my work in action? Discover the stories behind my
             projects, the challenges addressed, and the solutions crafted.
         </p>
-        <p class="gap-fluid-3xs flex flex-row">
+        <p class="flex flex-row gap-fluid-3xs">
             <Button data-animate="scaleIn" theme="secondary" href="/work/"
                 >Explore the portfolio</Button
             >
@@ -79,33 +78,35 @@ const { wrapper, class: className } = Astro.props;
         focus,
         (el) => {
             const queryElementsByAnimation = (animation) => {
-                return el.querySelectorAll(
-                    `[data-animate="${animation}"]`,
-                );
+                return el.querySelectorAll(`[data-animate="${animation}"]`);
             };
             const scaleIn = queryElementsByAnimation('scaleIn');
             const fadeInDown = queryElementsByAnimation('fadeInDown');
 
             const sequenceIn: AnimationSequence = [
-              [
-              fadeInDown,
-                { opacity: [0, 1], transform: ['translateY(-25%)', 'translateY(0%)'] },
-                { duration: 0.25, delay: stagger(0.25), at: 0 }
-              ],
-              [
-                scaleIn,
-                { opacity: [0, 1], scale: [0.85, 1] },
-                { duration: 0.25, delay: stagger(0.25), at: '<' }
-              ]
+                [
+                    fadeInDown,
+                    {
+                        opacity: [0, 1],
+                        transform: ['translateY(-25%)', 'translateY(0%)'],
+                    },
+                    { duration: 0.25, delay: stagger(0.25), at: 0 },
+                ],
+                [
+                    scaleIn,
+                    { opacity: [0, 1], scale: [0.85, 1] },
+                    { duration: 0.25, delay: stagger(0.25), at: '<' },
+                ],
             ];
-            
+
             animate(sequenceIn, {});
 
-            return (leaveInfo) =>  animate([
-              [fadeInDown, { opacity: 0 }, { at: 0 }],
-              [scaleIn, { opacity: 0 }, { at: '<' }]
-            ]);
+            return (leaveInfo) =>
+                animate([
+                    [fadeInDown, { opacity: 0 }, { at: 0 }],
+                    [scaleIn, { opacity: 0 }, { at: '<' }],
+                ]);
         },
-        { amount: 0.25 },
+        { amount: 0.25 }
     );
 </script>

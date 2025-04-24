@@ -78,12 +78,11 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
 ---
 
 <BaseLayout head={head} {isHeroDark}>
-    <main class="@container/main outline-hidden">
-        <article
-            id="content"
-            class="layout relative grid grid-cols-(--gtc-layout)"
-            data-layout="content"
-        >
+    <main
+        class="layout @container/main grid grid-cols-(--gtc-layout) outline-hidden"
+        data-layout="content"
+    >
+        <article id="content" class="relative grid grid-cols-subgrid">
             <slot name="slothero">
                 <Hero heroConfig={resolvedHeroConfig} title={head.title}>
                     <div
@@ -202,12 +201,15 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
             </aside>
         </article>
         <aside
-            class="layout relative grid grid-cols-(--gtc-layout) bg-brand py-fluid-2xl text-content-dark shadow-inset shadow-brand-shade/20"
-            data-layout="content"
+            class="col-[full] grid grid-cols-subgrid bg-brand py-fluid-2xl text-content-dark shadow-inset shadow-brand-shade/20"
         >
             {
                 (nextPostData || prevPostData) && (
-                    <NextPrev next={nextPostData} prev={prevPostData} />
+                    <NextPrev
+                        next={nextPostData}
+                        prev={prevPostData}
+                        class="col-[content]"
+                    />
                 )
             }
         </aside>

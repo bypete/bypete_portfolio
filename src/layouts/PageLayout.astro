@@ -36,13 +36,13 @@ const resolvedHeroConfig = {
 
 <BaseLayout {head} {isHeroDark}>
     <main
-        class:list={['@container/main outline-hidden', className && className]}
+        class:list={[
+            'layout @container/main grid grid-cols-(--gtc-layout) outline-hidden',
+            className && className,
+        ]}
+        data-layout={isWide ? 'page' : 'content'}
     >
-        <article
-            id="content"
-            class="layout relative grid grid-cols-(--gtc-layout)"
-            data-layout={isWide ? 'page' : 'content'}
-        >
+        <article id="content" class="relative grid grid-cols-subgrid">
             <slot name="slothero">
                 <Hero heroConfig={resolvedHeroConfig} title={head.title} />
             </slot>
@@ -61,8 +61,8 @@ const resolvedHeroConfig = {
                 }
                 <slot />
             </div>
-            <PageTools />
         </article>
+        <PageTools />
         <slot name="slotbanner" />
     </main>
 </BaseLayout>

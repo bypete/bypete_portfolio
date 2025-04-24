@@ -532,7 +532,7 @@
         --full: var(--offset);
         /* --full: minmax(var(--offset), 1fr); */
         --page: minmax(0, 87.5rem);
-        --content: min(64ch, calc(100% - var(--safe-inline) * 2));
+        --content: min(68ch, calc(100% - var(--safe-inline) * 2));
         --gutter: minmax(calc(var(--tramline) / 2), 1fr);
         --pullout: minmax(0, calc(var(--tramline) / 2));
         /* --pullout: min(var(--spacing-fluid-m)); */
