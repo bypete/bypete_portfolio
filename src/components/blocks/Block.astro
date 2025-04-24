@@ -64,6 +64,7 @@ const {
     ...rest
 } = Astro.props;
 
+console.log(breakout);
 // Determine text color based on legibility or dark mode
 const color = legibility || (dark ? 'text-content-light' : 'text-content-dark');
 
@@ -152,9 +153,9 @@ if (background) {
 <div
     {...layout.type && { 'data-layout': `block-${layout.type}` }}
     class:list={[
-        'relative',
+        'relative [&+*]:mt-0',
         wrapperClass && wrapperClass,
-        breakout && 'breakout',
+        breakout && 'col-[full]',
     ]}
 >
     {

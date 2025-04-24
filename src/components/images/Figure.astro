@@ -34,10 +34,10 @@ const {
     </div>
     {
         caption && (
-            <figcaption class="mt-fluid-xs flex w-full flex-col justify-between gap-fluid-xs text-step--1 text-content-quiet md:flex-row @min-[100vw]/figure:px-safe-inline">
+            <figcaption class="mt-fluid-xs grid w-full items-start gap-fluid-xs-s text-step--1 leading-tight text-content-quiet @md:grid-cols-[1fr_auto] @min-[100vw]/figure:px-safe-inline">
                 <p>{caption}</p>
                 {credit && (
-                    <span class="grid grid-cols-(--gtc-icon) gap-fluid-3xs text-step--2/tight whitespace-nowrap">
+                    <span class="grid grid-cols-(--gtc-icon) items-center gap-fluid-3xs text-step--2 whitespace-nowrap">
                         <Icon
                             name="lucide:camera"
                             class="h-fluid-xs w-fluid-xs"
