@@ -73,7 +73,7 @@ const { class: ClassName, copy, visual, cover } = Astro.props;
                 return el.querySelectorAll(`[data-animate="${animation}"]`);
             };
             const slideInRight = queryElementsByAnimation('slideInRight');
-            const fadeInDown = queryElementsByAnimation('fadeInDown');
+            const turnIn = queryElementsByAnimation('turnIn');
 
             const sequenceIn: AnimationSequence = [
                 [
@@ -85,10 +85,14 @@ const { class: ClassName, copy, visual, cover } = Astro.props;
                     { duration: 0.75, delay: stagger(0.25) },
                 ],
                 [
-                    fadeInDown,
+                    turnIn,
                     {
                         opacity: [0, 1],
-                        transform: ['translateY(-25%)', 'translateY(0%)'],
+                        // transform: ['translateY(-25%)', 'translateY(0%)'],
+                        transform: [
+                            'perspective(200px) rotateY(25deg) translate(15%)',
+                            'perspective(200px) rotateY(0deg) translate(0)',
+                        ],
                     },
                     { duration: 0.25, delay: stagger(0.15) },
                 ],
@@ -97,7 +101,7 @@ const { class: ClassName, copy, visual, cover } = Astro.props;
 
             return (leaveInfo) =>
                 animate([
-                    [fadeInDown, { opacity: 0 }, { at: 0 }],
+                    [turnIn, { opacity: 0 }, { at: 0 }],
                     [slideInRight, { opacity: 0 }, { at: '<' }],
                 ]);
         },

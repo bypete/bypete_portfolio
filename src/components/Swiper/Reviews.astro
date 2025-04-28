@@ -19,13 +19,13 @@ const { data } = Astro.props;
 
 <div class="swiper swiper--reviews">
     <div
-        class="swiper-wrapper not-prose not-rte py-fluid-3xl-4xl! flex items-center"
+        class="swiper-wrapper not-prose not-rte flex items-center py-fluid-3xl"
     >
         {
             data.map((review, i) => (
-                <div class="slide swiper-slide px-fluid-m flex! items-center justify-center">
-                    <blockquote class="md:text-step-1 mx-auto mt-0 max-w-3xl px-0">
-                        <p class="font-headline text-step-2 m-0 leading-tight">
+                <div class="slide swiper-slide flex! items-center justify-center px-fluid-m">
+                    <blockquote class="mx-auto mt-0 max-w-3xl px-0 md:text-step-1">
+                        <p class="m-0 font-headline text-step-2 leading-tight">
                             <strong>{review.headline}</strong>
                         </p>
                         <Fragment set:html={review.comment} />
@@ -34,7 +34,7 @@ const { data } = Astro.props;
                                 {[...Array(5)].map((_, index) => (
                                     <Icon
                                         name="mdi:star"
-                                        class={`h-fluid-s inline-block w-auto ${
+                                        class={`inline-block h-fluid-s w-auto ${
                                             index < review.rating
                                                 ? 'text-gold'
                                                 : 'text-content-quiet'
@@ -50,7 +50,7 @@ const { data } = Astro.props;
         }
     </div>
     <div
-        class="swiper--reviews__pagination bottom-fluid-m! absolute z-10 mx-auto text-center"
+        class="swiper--reviews__pagination absolute bottom-fluid-m! z-10 mx-auto text-center"
     >
     </div>
 </div>

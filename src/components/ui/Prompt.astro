@@ -3,15 +3,15 @@ interface Props {
     dir?: 'left' | 'right' | 'up' | 'down';
     type?: 'scroll' | 'swipe';
     label?: string;
-    bg?: string;
+    class?: string;
 }
-const { type = 'scroll', dir = 'down', label, bg } = Astro.props;
+const { type = 'scroll', dir = 'down', label, class: className } = Astro.props;
 ---
 
 <div
     class:list={[
-        bg && `${bg} shadow-prompt`,
-        'scrollPrompt flex items-center gap-fluid-3xs rounded p-fluid-3xs text-step--1 opacity-0',
+        className ? `${className} ` : `rounded p-fluid-3xs`,
+        'scrollPrompt flex items-center gap-fluid-3xs text-step--1 opacity-0',
     ]}
     data-dir={dir}
 >
@@ -118,8 +118,8 @@ const { type = 'scroll', dir = 'down', label, bg } = Astro.props;
                             y: ['25%', '0%'],
                         },
                         {
-                            duration: 0.25,
-                            delay: 0.25,
+                            duration: 0.5,
+                            delay: 0.75,
                             ease: 'easeOut',
                         },
                     ],
@@ -134,8 +134,8 @@ const { type = 'scroll', dir = 'down', label, bg } = Astro.props;
                         ).then(() => {
                             animate(
                                 el,
-                                { opacity: 0 },
-                                { duration: 0.75, delay: 1 }
+                                { opacity: 0, y: ['0%', '25%'] },
+                                { duration: 0.5, delay: 1 }
                             ).then(() => {
                                 el.remove();
                             });

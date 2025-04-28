@@ -25,9 +25,9 @@ const optimizedImages = await Promise.all(
 
 <div data-inview="lightbox" class:list={['lightbox not-prose']}>
     <slot />
-    <div class="relative">
+    <div class="relative -mr-fluid-m overflow-x-hidden">
         <div
-            class="-mr-fluid-m grid h-[60svh] max-h-[400px] snap-x scroll-px-fluid-m auto-cols-[25cqw] grid-flow-col-dense grid-rows-2 gap-fluid-s overflow-x-auto overflow-y-hidden overscroll-x-contain pr-fluid-m pb-fluid-s"
+            class="grid h-[60svh] max-h-[400px] snap-x scroll-px-fluid-m auto-cols-[25cqw] grid-flow-col-dense grid-rows-2 gap-fluid-s overflow-x-auto overflow-y-hidden overscroll-x-contain pr-fluid-m pb-fluid-s"
         >
             {
                 optimizedImages.map((item, i) => {
@@ -71,10 +71,10 @@ const optimizedImages = await Promise.all(
         </div>
         {
             optimizedImages.length > 3 && (
-                <div class="pointer-events-none absolute top-1/2 right-0 z-(--z-shortcuts) -translate-y-1/2">
+                <div class="pointer-events-none absolute top-1/2 left-1/2 z-(--z-shortcuts) -translate-x-1/2 -translate-y-1/2">
                     <Prompt
                         dir="right"
-                        bg="bg-brand text-content-dark"
+                        class="rounded-full bg-surface p-fluid-xs text-content-dark shadow-inset"
                         type="swipe"
                     >
                         <span class="xl:hidden">Swipe</span>

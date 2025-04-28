@@ -125,6 +125,8 @@
 
     --shadow-prompt: 0px 0px 25px 5px var(--color-shadow-raised);
 
+    --shadow-inlineinset: inset 3px 0px 3px -2px var(--color-shadow-raised);
+
     --shadow-floated:
         0px 2px 1px -1px var(--white),
         inset 0px 2px 1px 1px var(--color-shadow-floated),
