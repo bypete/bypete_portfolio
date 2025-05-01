@@ -77,8 +77,10 @@ const optimizedImages = await Promise.all(
                         class="rounded-full bg-surface p-fluid-xs text-content-dark shadow-inset"
                         type="swipe"
                     >
-                        <span class="xl:hidden">Swipe</span>
-                        <span class="hidden xl:inline-block">Scroll</span>
+                        <span class="mouse-only:hidden">Swipe</span>
+                        <span class="hidden mouse-only:inline-block">
+                            Scroll
+                        </span>
                     </Prompt>
                 </div>
             )

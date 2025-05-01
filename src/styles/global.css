@@ -476,6 +476,7 @@
 @utility grid-areas-* {
     grid-template-areas: --value(--gta-*);
 }
+@custom-variant mouse-only (@media screen and (pointer: fine));
 
 @custom-variant permalink {
     h1,
