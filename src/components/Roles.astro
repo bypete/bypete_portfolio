@@ -1,6 +1,7 @@
 ---
 interface Role {
     preposition: string;
+    subject: string;
     role: string;
 }
 
@@ -11,22 +12,21 @@ export interface Props {
 
 const { roles, class: className } = Astro.props;
 let stringRoles = JSON.stringify(roles);
-stringRoles = stringRoles.replace(/\"/g, "'");
 ---
 
 <div class={className} x-data={`roles(${stringRoles})`}>
     <h1 class="font-headline text-step-2/tight font-black">
         <span
-            class="mb-fluid-2xs text-shadow-emboss block text-white shadow-black/40"
-            >I like to <span x-text="preposition" class="text-brand"
-                >work in</span
+            class="text-shadow-emboss mb-fluid-2xs block text-white shadow-black/40"
+            ><span x-text="subject">I'm an</span>
+            <span x-text="preposition" class="text-brand">experienced</span
             ></span
         >
         <span
-            class="rounded-tight bg-surface-raised px-fluid-2xs py-fluid-3xs text-content relative inline-block mix-blend-screen duration-150"
+            class="relative inline-block rounded-tight bg-surface-raised px-fluid-2xs py-fluid-3xs text-content mix-blend-screen duration-150"
             x-cloak
         >
-            <span x-text="role">Front-End Development</span><span
+            <span x-text="role">Creative Developer</span><span
                 class="animate-blink font-normal"
                 x-text="(caret ? '|' : '')"></span>
         </span>
@@ -40,6 +40,7 @@ stringRoles = stringRoles.replace(/\"/g, "'");
             roleArray: [],
             role: '',
             preposition: '',
+            subject: '',
             caret: true,
             doneTypingInterval: 6000,
 
@@ -55,7 +56,7 @@ stringRoles = stringRoles.replace(/\"/g, "'");
             getRandomBetween(
                 min = 20,
                 max = 150,
-                randomNumber = Math.random(),
+                randomNumber = Math.random()
             ) {
                 return Math.floor(randomNumber * (max - min) + min);
             },
@@ -98,6 +99,7 @@ stringRoles = stringRoles.replace(/\"/g, "'");
             async startTyping() {
                 const current = this.roleArray[this.roleIndex];
                 this.preposition = current.preposition;
+                this.subject = current.subject;
                 await this.draw(current.role);
             },
         }));

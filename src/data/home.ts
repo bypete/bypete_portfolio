@@ -65,15 +65,17 @@ export const heroSlides: SwiperImage[] = [
 ];
 
 export interface Activity {
+  subject: string
   preposition: string
   role: string
 }
 
 export const roles: Activity[] = [
-  { preposition: 'work in', role: 'Front-End Development' },
-  { preposition: 'work on', role: 'Ui/UX Design' },
-  { preposition: 'create', role: 'inspired products' },
-  { preposition: 'build', role: 'E-mail layouts' },
-  { preposition: 'oversee', role: 'Content management' },
+  { subject: "I'm an", preposition: "experienced", role: "Creative Developer" },
+  { subject: "I adopt a", preposition: 'mobile first', role: 'dev approach' },
+  { subject: "I build", preposition: 'engaging', role: 'landing pages' },
+  { subject: "I like to", preposition: "work in", role: "FrontEnd Development" },
+  { subject: "I'm focused", preposition: 'on', role: 'Ui/UX Design' },
+  { subject: "I like to", preposition: 'oversee', role: 'Content management' },
 ];
 
