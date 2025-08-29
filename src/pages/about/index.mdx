@@ -4,7 +4,7 @@ taster: 'I’m a Surrey based Front-End developer with over two decades of exper
 excerpt: 'I’m a Surrey based Front-End developer with over two decades of experience in digital.'
 description: 'Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.'
 keywords: 'Surrey based Front-End developer, Bespoke website development, HTML, CSS, Creative development, The Great Outdoors, Balance and wellbeing'
-heroConfig: 
+heroConfig:
     headline: 'Hello!'
     bg: 'bg-teal-400'
     dark: true
@@ -13,7 +13,7 @@ skillset:
     icon: '[&>li]:before:text-primary!'
     shadow: 'text-shadow-emboss shadow-surface-sunken/20'
     areas:
-        - title: 'Front-End Development'
+        - title: 'Development'
           skills:
               - '**Tailwind CSS**, SCSS, **Utopia**, Foundation CSS, **PostCSS**'
               - '**Astro**, Eleventy(11ty), Nunjucks, Panini, Handlebars'
@@ -22,19 +22,14 @@ skillset:
               - 'Markdown, **MDX**'
               - 'Gulp, **npm**, Webpack'
               - 'Xamarin.Forms'
-        - title: 'Email Development'
-          skills:
-              - 'Foundation for Emails'
-              - 'Maizzle (Tailwind for email)'
-              - 'SCSS/ Inline CSS'
         - title: 'Tools'
           skills:
-            - 'Visual Studio Code, Visual Studio'
-            - 'Figma'
-            - 'Adobe Creative Cloud (Photoshop, Illustrator, Acrobat, Lightroom)'
-            - 'Microsoft Office'
-            - 'npm, git, github'
-            - 'Netlify'
+              - 'Visual Studio Code, Visual Studio'
+              - 'Figma'
+              - 'Adobe Creative Cloud (Photoshop, Illustrator, Acrobat, Lightroom)'
+              - 'Microsoft Office'
+              - 'npm, git, github'
+              - 'Netlify, Cloudflare'
         - title: 'SaaS / PaaS'
           skills:
               - 'Mailchimp'
@@ -42,23 +37,26 @@ skillset:
               - 'Slack'
               - 'Microsoft Teams'
               - 'Azure Dev Ops'
-        - title: 'Role-Specific Responsibilities'
+        - title: 'Responsibilities'
           class: 'col-span-full'
           skills:
-              - 'HTML Templates'
-              - 'HTML Email templates'
+              - 'Design Systems'
+              - 'UX/UI'
+              - 'HTML / Email templates'
+              - 'Accessibility (WCAG)'
+              - 'Performance optimisation'
               - 'Content management, Markdown'
               - 'Wireframes'
               - 'Asset generation'
-              - 'UX/UI'
         - title: 'Key Competencies'
           class: 'col-span-full'
           skills:
               - 'Creativity and problem solving'
 ---
+
 import PageLayout from '~/layouts/PageLayout.astro';
-import Skills from '~/components/ui/Skills.astro'
-import Availability from '~/components/ui/Availability.astro'
+import Skills from '~/components/ui/Skills.astro';
+import Availability from '~/components/ui/Availability.astro';
 import Banner from '~/components/banners/Portfolio.astro';
 
 import Hero from '~/components/hero/Hero.astro';
@@ -82,7 +80,6 @@ import heroLG from '~/assets/hero/concrete--teal.jpg';
 import heroSM from '~/assets/hero/concrete--teal@sm.jpg';
 
 import ogImage from '~/assets/og/og__about.jpg';
-
 
 <PageLayout  {...frontmatter}  og={{
     ...frontmatter.og,
@@ -125,27 +122,36 @@ import ogImage from '~/assets/og/og__about.jpg';
         >
             Hello!
         </h1>
-  <p class='text-step-1 mb-fluid-s' data-animate='turnIn'>I'm Pete, a Surrey based Front-End developer with over two decades of experience in digital.</p>
+  <p class='text-step-1 mb-fluid-s' data-animate='turnIn'>I'm Pete, a UX Designer and front-end developer with over ten years’ experience creating thoughtful, accessible, and mobile-first digital experiences. </p>
+    <p class='text-step-0 mb-fluid-s' data-animate='turnIn'>I specialise in design systems, performance-focused development, and building interfaces that make life easier for users.</p>
   <p class="flex flex-row gap-2" data-animate="turnIn">
-    <Button theme="secondary" href="#start" data-jump isIcon="true">Read my bio <Icon
-                                        name="lucide:arrow-down-circle"
-                                        class="h-fluid-s w-fluid-s"
-                                    /></Button>
-                                    <Button theme="whiteline" href="/connect/">Contact me</Button>
+    <Button theme="secondary" href="#start" data-jump isIcon="true">Read my bio <Icon name="lucide:arrow-down-circle" class="h-fluid-s w-fluid-s"/></Button>
+    <Button theme="whiteline" href="/connect/">Contact me</Button>
   </p>
   </Hero>
 
+## What I do
 
+Over the years I’ve worked with fintech startups, e-money services, and global brands, delivering high-performing websites and multilingual applications. My background spans creative design, responsive front-end builds, and user-centred problem solving - always with an eye on accessibility and detail.
+
+I help businesses bring their digital visions to life through clean, efficient code and user-friendly designs. My expertise includes:
+
+- UX & UI Design
+- Design Systems & Prototyping (Figma)
+- Responsive Front-End Development (Tailwind, TypeScript, Astro)
+- Accessibility (WCAG)
+- Continuous Deployment Workflows (GitHub, Netlify)
 
 ## The backstory
 
 I began my career in multimedia, developing engaging e-learning, training, and press pack applications for top-tier clients such as **BBC Worldwide**, **BBC Active**, **University of Cambridge**, **Oxford University Press**, **UKTV**, and **Kellogg's** through the award-winning agency, Fifth Dimension Productions.
 As the industry shifted from physical media to online platforms, I adapted by moving into Front-End development — a transition focused on rapid prototyping.
 
-Starting out, I helped build support sites for innovative projects like BBC Active’s  [Get Into French](https://www.cam.ac.uk/news/get-into-french-wins-gold-award), an IVCA Gold award winner. Subsequently, I progressed to developing full-fledged online solutions. 
+Starting out, I helped build support sites for innovative projects like BBC Active’s [Get Into French](https://www.cam.ac.uk/news/get-into-french-wins-gold-award), an IVCA Gold award winner. Subsequently, I progressed to developing full-fledged online solutions.
 
 ## Focus on Fintech and Agile Development
-In 2009, the agency refocused its efforts and established itself as *the* marketing agency for Europe's emerging payments sector. Since then, I've concentrated solely on Front-End development, primarily within the fintech landscape. This environment demands quick, testable solutions, enabling clients and teams to quickly validate ideas and innovate.
+
+In 2009, the agency refocused its efforts and established itself as _the_ marketing agency for Europe's emerging payments sector. Since then, I've concentrated solely on Front-End development, primarily within the fintech landscape. This environment demands quick, testable solutions, enabling clients and teams to quickly validate ideas and innovate.
 
 <Skills skillset={frontmatter.skillset} bg='bg-surface-sunken' >
 ## Current Skills
@@ -155,30 +161,28 @@ In 2009, the agency refocused its efforts and established itself as *the* market
 
 <Banner wrapper="bg-brand" class="min-h-block" />
 
-## Prototype-Driven Workflow
-My development process now centers on static site generators. I started with **Panini** within the [Foundation](https://get.foundation) framework, and and later transitioned to [nunjucks](https://mozilla.github.io/nunjucks/) paired with [11ty](https://www.11ty.dev/). I am currently using [Astro](https://astro.build/). This component-based workflow keeps my projects consistent but also allows for fast, reliable updates across templates.
+## Looking Ahead
 
-Using a <abbr title="Static Site Generator">SSG</abbr> for prototyping means I can quickly turn client ideas into working models — bridging the gap between initial concept and final product while reducing the risk of scope creep.
-
-<Figure caption='Snapshot of a typical listing index. Clients, developers, and third-party agencies have access to the most recent version of any page.'>
-  <Image src={listing_index} alt="Devices view" class="w-full h-auto shadow-md border border-line hover:cursor-pointer" />
-</Figure>
-
-## Enhancing Multilingual Support
-Recognising the importance of context in translations, I introduced a template index system that guides third-party translators. This resource enables translators to review user pathways and full-page layouts without needing extra access to test environments, ensuring that every version of a site retains its intended clarity and usability.
-
-## Looking Ahead 
 This static site was crafted using [Astro v5](https://astro.build/), integrating [Tailwind CSS v4](https://tailwindcss.com/) alongside [Alpine.js](https://alpinejs.dev/). It replaces the previous build, which was developed using **11ty** and **Webpack**. I’ve really enjoyed diving into Astro and am excited about exploring its potential for rapid prototyping in future projects.
 
-<BlockPicture widths={[400,768,1920]} src={woodland} class="w-full h-full object-cover inset-0 absolute" alt="Woodland scene" credit="Adobe Photoshop (beta) - Generative fill" wrapper="my-fluid-2xl h-photo md:h-block" />
-
 ## Balancing Life and Work
+
 Beyond work, I love spending time outdoors with my family, especially my two young adventurous sons. I have found nature to be a great counterbalance to the demands of development, although we often revert back to technology like [Google Lens](https://lens.google/intl/en-GB/#cta-section) for assistance!
 
-<BlockImage src={google_lens} width={768} breakout={false} class="my-0 w-full" alt="Beach scene with close up of jellyfish. Detail shows iPhone with google lens app" credit="Google Lens (App visuals)" wrapper="my-fluid-l" />
+<BlockImage
+    src={google_lens}
+    width={768}
+    breakout={false}
+    class="my-0 w-full"
+    alt="Beach scene with close up of jellyfish. Detail shows iPhone with google lens app"
+    credit="Google Lens (App visuals)"
+    wrapper="my-fluid-l"
+/>
 
 ## Availability
-Thanks for exploring my bio! I'm currently <Availability url={`/connect/`} /> for new roles in Front-End development. If you think I could be a great fit for your team, please [connect](/connect/) or reach out via [LinkedIn](https://www.linkedin.com/in/peter-wallace-a5002a7a/).
+
+Thanks for exploring my bio! I'm currently <Availability url={`/connect/`} /> for new roles in UX/UI and front-end development. If you think I could be a great fit for your team, please [connect](/connect/) or reach out via [LinkedIn](https://www.linkedin.com/in/peter-wallace-a5002a7a/).
 
 For a closer look at my portfolio, head over to the [work](/work/) section. There are currently **{postCount} case studies** to explore.
+
 </PageLayout>

@@ -85,7 +85,7 @@ export default function ThemeIcon() {
   };
 
   return (
-    <div className="grid-col-1 grid-row-1 size-fluid-l bg-surface-overlay text-content shadow-inset relative grid justify-center overflow-hidden rounded-full text-center leading-none transition-colors duration-[750ms]">
+    <div className="grid-col-1 grid-row-1 relative grid size-fluid-l justify-center overflow-hidden rounded-full bg-surface-overlay text-center text-content leading-none shadow-inset transition-colors duration-[750ms]">
       <button
         id="setThemeLight"
         ref={lightRef}
