@@ -7,101 +7,185 @@ taster: 'Establish and maintain an online presence for a prestigious wedding cha
 description: 'See how I launched and maintained an online presence for a prestigious wedding chauffeur business.'
 author: 'Pete Wallace'
 og:
-  title: 'Shirley Chauffeurs'
-  description: 'See how I launched and maintained an online presence for a prestigious wedding chauffeur business.'
-  image: 
-    src: '~/assets/work/shirleychauffeurs/og__image.jpg'
-    alt: 'Shirley Chauffeurs'
-brand: 
-  bg: 'bg-[#0a1a29]'
-  color: 'text-[#00cccc]'
+    title: 'Shirley Chauffeurs'
+    description: 'See how I launched and maintained an online presence for a prestigious wedding chauffeur business.'
+    image:
+        src: '~/assets/work/shirleychauffeurs/og__image.jpg'
+        alt: 'Shirley Chauffeurs'
+brand:
+    bg: 'bg-[#0a1a29]'
+    color: 'text-[#00cccc]'
 logo:
-  src: '~/assets/logos/sc__logo.svg'
-  light: '~/assets/logos/light/sc__white.svg'
-product: 
-  src: '~/assets/work/shirleychauffeurs/product.png'
-  alt: 'Shirley Chauffeurs responsive site'
+    src: '~/assets/logos/sc__logo.svg'
+    light: '~/assets/logos/light/sc__white.svg'
+product:
+    src: '~/assets/work/shirleychauffeurs/product.png'
+    alt: 'Shirley Chauffeurs responsive site'
 cover:
-  src: '~/assets/work/shirleychauffeurs/cover.jpg'
-  alt: 'Shirley Chauffeurs logo'
-  credit: 'Shirley Chauffeurs'
+    src: '~/assets/work/shirleychauffeurs/cover.jpg'
+    alt: 'Shirley Chauffeurs logo'
+    credit: 'Shirley Chauffeurs'
 skillset:
-  text: 'text-content-light'
-  areas:
-    - title: 'My Role'
-      class: 'col-span-full border-b border-b-line pb-fluid-m'
-      skills:
-        - 'Branding, Visual design, User experience'
-        - 'Rapid Prototyping'
-        - 'Full development'
-        - 'Prepare visual assets and populate content'
-        - 'Publish Astro site to Netlify and maintain updates'
-    - title: 'Tools'
-      skills:
-        - 'Visual Studio Code'
-        - 'Adobe Photoshop, Lightroom, Illustrator'
-        - 'npm, git, github'
-        - 'Netlify'
-    - title: 'Development'
-      skills:
-          - 'Astro, MDX Content management'
-          - 'Typescript, Alpine.js and vanilla js'
-          - 'Motion (JS Animation library)'
-          - 'Tailwind, Utopia, CSS, PostCSS'
-tags: 
-  - 'case study'
-  - 'featured'
-  - 'responsive'
+    text: 'text-content-light'
+    areas:
+        - title: 'My Role'
+          class: 'col-span-full border-b border-b-line pb-fluid-m'
+          skills:
+              - 'Branding, Design system, Visual design, User experience'
+              - 'Rapid Prototyping'
+              - 'Full development'
+              - 'Prepare visual assets and populate content'
+              - 'Publish Astro site to Netlify and maintain updates'
+        - title: 'Tools'
+          skills:
+              - 'Figma'
+              - 'Visual Studio Code'
+              - 'Adobe Photoshop, Lightroom, Illustrator'
+              - 'npm, git, github'
+              - 'Netlify'
+        - title: 'Development'
+          skills:
+              - 'Astro, MDX Content management'
+              - 'Typescript, Alpine.js and vanilla js'
+              - 'Motion (JS Animation library)'
+              - 'Tailwind, Utopia, CSS, PostCSS'
+tags:
+    - 'case study'
+    - 'featured'
+    - 'responsive'
+    - 'design system'
 ---
+
 import BlockPicture from '~/components/images/BlockPicture.astro';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
-import Note from '~/components/ui/Note.astro'
+import Note from '~/components/ui/Note.astro';
 import basket_40 from '~/assets/work/shirleychauffeurs/basket_40.jpg';
 import quotation from '~/assets/work/shirleychauffeurs/quote.jpg';
+import light from '~/assets/work/shirleychauffeurs/light.png';
+import dark from '~/assets/work/shirleychauffeurs/dark.png';
+import palette from '~/assets/work/shirleychauffeurs/palette.png';
+import vars_brand from '~/assets/work/shirleychauffeurs/vars_brand.png';
+import vars_alias from '~/assets/work/shirleychauffeurs/vars_alias.png';
+import vars_mapped from '~/assets/work/shirleychauffeurs/vars_mapped.png';
 import cta from '~/assets/work/shirleychauffeurs/cta.jpg';
-import lighthouse from '~/assets/work/shirleychauffeurs/lighthouse.png'
-import Figure from '~/components/images/Figure.astro'
-import UL from '~/components/MDX/ul.astro'
-import BLOCKQUOTE from '~/components/MDX/blockquote.astro'
-import PRE from '~/components/MDX/pre.astro'
-import Skills from '~/components/ui/Skills.astro'
+import lighthouse from '~/assets/work/shirleychauffeurs/lighthouse.png';
+import Figure from '~/components/images/Figure.astro';
+import UL from '~/components/MDX/ul.astro';
+import BLOCKQUOTE from '~/components/MDX/blockquote.astro';
+import PRE from '~/components/MDX/pre.astro';
+import Skills from '~/components/ui/Skills.astro';
 
-import Lightbox from '~/components/MDX/Lightbox.astro'
+import Lightbox from '~/components/MDX/Lightbox.astro';
 
-export const components = {ul: UL, blockquote: BLOCKQUOTE, pre: PRE}
+export const components = { ul: UL, blockquote: BLOCKQUOTE, pre: PRE };
 
-<p class="text-step-1">[Shirley Chauffeurs](https://shirleychauffeurs.co.uk/) is a family-run business known for its exceptional service and meticulous attention to detail. The business takes great pride in ensuring its role in the customer's special day is as perfect as possible.</p>
+<p class="text-step-1">
+    [Shirley Chauffeurs](https://shirleychauffeurs.co.uk/) is a family-run
+    business known for its exceptional service and meticulous attention to
+    detail. The business takes great pride in ensuring its role in the
+    customer's special day is as perfect as possible.
+</p>
 
-I was commissioned to build an online presence that would reflect their professional standards and build trust in their expertise. 
+I was approached to build an online presence that would reflect their professional standards and build trust in their expertise.
 
 <Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
-## Experience
+    ## Experience
 </Skills>
+
+## Design system
+
+A comprehensive design system was created in Figma to keep the site consistent. The colour palette is based on shades of blue and cyan, which are associated with trust, reliability, and professionalism. The typography combines a serif font for headings to convey elegance and tradition, with a sans-serif font for body text to ensure readability and a modern feel.
+
+<Image
+        src={palette}
+        alt="Brand palette"
+        class="h-auto w-full col-[pullout]"
+        quality={'high'}
+        widths={[400, 720]}
+        sizes={`720px`}
+    />
+
+The **`Brand`** variable collection forms the core palette. An **`Alias`** collection assigns semantic names (like Primary, Secondary), and the **`Mapped`** collection references these for use in classes (such as Surface, Link, Info). The mapped variables also define a light and dark variant.
+<Figure bg="transparent" breakout="true" grid="grid grid-cols-2" caption="Light and dark mode colour palettes defined in Figma">
+    <Image
+        src={light}
+        alt="Light mode"
+        class=" h-auto max-w-full"
+        quality={100}
+        widths={[400, 760]}
+        sizes={`50%`}
+    />     <Image
+        src={dark}
+        alt="Dark mode"
+        class="h-auto max-w-full"
+        quality={100}
+        widths={[400, 760]}
+        sizes={`50%`}
+    />
+</Figure>
+
+Each brand palette is generated from an initial colour value using tints.dev and then Hue, Saturation and Lightness steps are refined to ensure sufficient contrast and accessibility. The Alias ensures that the brand colours are not referenced
+directly in the CSS, which allows for easy updates in the future.
+
+<Figure caption="Figma variables for mapped colours">
+    <Image
+        src={vars_mapped}
+        alt="Alias variables are picked within the Mapped collection"
+        class="mx-auto h-auto max-w-full"
+        quality={100}
+        widths={[400, 760]}
+        sizes={`768px`}
+    />
+</Figure>
+
+<Image
+        src={cta}
+        alt="Call to action"
+        class="h-auto w-full"
+        quality={'high'}
+        widths={[400, 720, 960]}
+        sizes={`768px`}
+    />
+
+The layout is clean and uncluttered, with plenty of white space to allow the content to breathe. This minimalist approach helps to focus attention on the key messages and calls to action.
 
 ## Performance
 
-The live site performs well and adopts a variety of best practice methods to remain optimized. The site is built in Astro, a performant <abbr title="Static Site Generator">SSG</abbr>. It deploys to Netlify via a linked repository on GitHub and makes use of Netlify's serverless form handling. 
+The live site performs well and adopts a variety of best practice methods to remain optimized. The site is built in Astro, a performant <abbr title="Static Site Generator">SSG</abbr>. It deploys to Netlify via a linked repository on GitHub and makes use of Netlify's serverless form handling.
 
 The Chrome [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview) results are excellent.
 
-<div class="angleclip-tl-fluid-l px-safe-inline lg:angleclip-tl-fluid-2xl -mb-fluid-5xl pb-fluid-5xl col-[full] bg-radial-[at_50%_75%] from-slate-700 to-slate-950 to-90% pt-fluid-2xl lg:pt-fluid-3xl text-center not-rte">
-  <div class="max-w-[100ch] mx-auto ">
-  <Icon name="mdi:lighthouse" class="h-fluid-2xl w-fluid-2xl text-content-light mx-auto rounded-full bg-slate-700/80 p-fluid-xs mb-fluid-s" />
-  <p class="font-headline text-step-2 md:text-step-4/tight font-normal text-content-light ">Site optimisation was a key focus during development, and the effort has produced some <strong class="font-extrabold">excellent</strong> Lighthouse results</p>
-  </div>
+<div class="angleclip-tl-fluid-l px-safe-inline lg:angleclip-tl-fluid-2xl -mb-fluid-5xl pb-fluid-5xl bg-radial-[at_50%_75%] pt-fluid-2xl lg:pt-fluid-3xl not-rte col-[full] from-slate-700 to-slate-950 to-90% text-center">
+    <Icon
+        name="mdi:lighthouse"
+        class="h-fluid-2xl w-fluid-2xl text-content-light p-fluid-xs mb-fluid-s mx-auto rounded-full bg-slate-700/80"
+    />
+    <div class=" mx-auto max-w-[96ch] font-normal">
+        <p class="font-headline text-step-2 md:text-step-4/tight text-content-light">Site optimisation was a key focus during development, and the effort has
+        produced some <strong class="font-extrabold">excellent</strong> Lighthouse results</p>
+    </div>
 </div>
 
-<Figure  caption='100% achieved in 3 out of 4 categories' credit='Google Chrome Lighthouse' >
-  <Image src={lighthouse} alt="Call to action" class="max-w-full mx-auto h-auto" quality={100} widths={[400, 760]} sizes={`768px`} />
+<Figure
+    caption="100% achieved in 3 out of 4 categories"
+    credit="Google Chrome Lighthouse"
+>
+    <Image
+        src={lighthouse}
+        alt="Call to action"
+        class="mx-auto h-auto max-w-full"
+        quality={100}
+        widths={[400, 760]}
+        sizes={`768px`}
+    />
 </Figure>
 
-
-
 ## UX/UI
-The site is presented in a light or dark theme based on the users device preference. This can also be switched with the header icon which visually toggles from sun to moon. All of the colours in the site are defined via CSS variables and are overwritten when the attribute `data-theme=dark` is present in the root `<html>` tag. 
 
-``` css
+The site is presented in a light or dark theme based on the users device preference. This can also be switched with the header icon which visually toggles from sun to moon. All of the colours in the site are defined via CSS variables and are overwritten when the attribute `data-theme=dark` is present in the root `<html>` tag.
+
+```css
 @layer base {
   :root {
       --surface-10: 0deg 0% 100%; /* #FFFFFF */
@@ -109,7 +193,7 @@ The site is presented in a light or dark theme based on the users device prefere
       --surface--10: 80deg 10% 95%; /* #F7F8F8 */
       --surface--20: 80deg 5% 92%; /* #EBECEA */
       --surface--100: 209deg 61% 10%; /* #0A1A29 */
-      
+
       ...
 
       /* Semantic Tailwind variables */
@@ -129,26 +213,16 @@ The site is presented in a light or dark theme based on the users device prefere
       --surface--100: 240deg 13% 6%; /* #0D0D11 */
       ...
   }
-}    
+}
 ```
 
 These semantic variables are then referenced in `tailwind.config.cjs`, and the human-friendly naming keeps the file readable.
 
-The resultant Tailwind class would be `bg-surface-sunken` or `bg-surface`. This design system ensures consistency when adding new elements, and any edits to the colour values will cascade throughout the CSS. 
+The resultant Tailwind class would be `bg-surface-sunken` or `bg-surface`. This design system ensures consistency when adding new elements, and any edits to the colour values will cascade throughout the CSS.
 
-``` javascript
-surface: {
-    raised: 'hsl(var(--color-surface-raised) / <alpha-value>)',
-    DEFAULT: 'hsl(var(--color-surface) / <alpha-value>)',
-    sunken: 'hsl(var(--color-surface-sunken) / <alpha-value>)',
-    sunk: 'hsl(var(--color-surface-sunk) / <alpha-value>)',
-    bedrock: 'hsl(var(--color-surface-bedrock) / <alpha-value>)',
-    overlay: 'hsl(var(--color-surface-overlay) / <alpha-value>)',
-},
-```
-
-
-<Lightbox collections={[{
+<Lightbox
+    collections={[
+        {
             id: 'shirleychauffeurs',
         },
         {
@@ -158,58 +232,85 @@ surface: {
         {
             id: 'shirleychauffeurs-ux',
             title: 'UX',
-        },]} >
-<Fragment slot='title'>
-## Screens
-</Fragment>
-Light and dark themes are available. A user's system preference is detected using vanilla JS, and then managed with Alpine.js and local storage.
+        },
+    ]}
+>
+    <Fragment slot="title">
+    ## Screens
+    </Fragment>
+    Light and dark themes are available. A user's system preference is detected
+    using vanilla JS, and then managed with Alpine.js and local storage.
 </Lightbox>
 
-<Figure  caption='Custom call to action for each car in the fleet' credit='Shirley Chauffeurs' >
-  <Image src={cta} alt="Call to action" class="w-full h-auto" quality={'high'} widths={[400, 720, 960]} sizes={`768px`} />
+<Figure
+    caption="Custom call to action for each car in the fleet"
+    credit="Shirley Chauffeurs"
+>
+    <Image
+        src={cta}
+        alt="Call to action"
+        class="h-auto w-full"
+        quality={'high'}
+        widths={[400, 720, 960]}
+        sizes={`768px`}
+    />
 </Figure>
 
-
-<Figure  caption='Relevant testimonals are sorted to the front of the list using key words, and then limited to five. Selected words are highlighted with a svg underline to add emphasis and make the recommendataion appear more personable.'  >
-  <Image src={quotation} alt="Sample customer quote" class="w-full h-auto" quality={'high'} widths={[400, 720, 960]} sizes={`769px`} />
+<Figure caption="Relevant testimonals are sorted to the front of the list using key words, and then limited to five. Selected words are highlighted with a svg underline to add emphasis and make the recommendataion appear more personable.">
+    <Image
+        src={quotation}
+        alt="Sample customer quote"
+        class="h-auto w-full"
+        quality={'high'}
+        widths={[400, 720, 960]}
+        sizes={`769px`}
+    />
 </Figure>
 
-``` astro
+```astro
 ---
-id: 1
-title: 'Pleasurable and *utterly* professional'
-referee: 'Adele and Rich'
-tags:
-    - 'Gordon'
+id: 1;
+title: 'Pleasurable and *utterly* professional';
+referee: 'Adele and Rich';
+tags: -'Gordon';
 ---
 
-Just a quick note to say what a fantastic job your driver and Gordon did for us on our wedding...
+Just a quick note to say what a fantastic job your driver and Gordon did for us
+on our wedding...
 ```
 
-A custom helper function parses titles that have been wrapped with asterisks for emphasis. This function wraps `*utterly*` with the Underlined component and applies an absolutely positioned SVG, thereby simplifying the MDX files. 
+A custom helper function parses titles that have been wrapped with asterisks for emphasis. This function wraps `*utterly*` with the Underlined component and applies an absolutely positioned SVG, thereby simplifying the MDX files.
 
-``` javascript
+```javascript
 // Helper function to parse underlined titles
 export function parseTitle(title) {
-    return title.split(/(\*[^*]+\*)/).map((part, index) => 
-        part.startsWith('*') && part.endsWith('*')
-            ? { type: 'emphasized', content: part.slice(1, -1), key: index }
-            : { type: 'regular', content: part, key: index }
-    );
+    return title
+        .split(/(\*[^*]+\*)/)
+        .map((part, index) =>
+            part.startsWith('*') && part.endsWith('*')
+                ? { type: 'emphasized', content: part.slice(1, -1), key: index }
+                : { type: 'regular', content: part, key: index },
+        );
 }
 ```
 
 ## Learning points
-This was a freelance project that I delivered independently. It was a good introduction to Netlify's automated deployments and expanded my knowledge of Astro. User preferences and themes are now managed using local storage rather than cookies.
+
+This was a freelance project that I delivered independently. It was a good introduction to Netlify's automated deployments and helped build my knowledge of Astro. User preferences and themes are now managed using local storage rather than cookies.
 
 A lot of attention was given to site optimization, and the effort has produced some excellent Lighthouse scores.
 
-<BlockPicture src={basket_40} wrapper="my-fluid-l" alt="Close up of Wedding couple" credit={frontmatter.title}  />
+<BlockPicture
+    src={basket_40}
+    wrapper="my-fluid-l"
+    alt="Close up of Wedding couple"
+    credit={frontmatter.title}
+/>
 
 ## Scope for improvement
-All of the site's colours are set with HSL variables and made available as Tailwind classes. This allows for precise control, but it results in a significantly large base CSS file. It also requires an extensive `tailwind.config.cjs` file, which can be challenging to maintain. The next phase would be to explore Tailwind CSS v4.0 to take advantage of its improved handling of CSS variables. 
 
+All of the site's colours are set with HSL variables and made available as Tailwind classes. This allows for precise control, but it results in a significantly large base CSS file. It also requires an extensive `tailwind.config.cjs` file, which can be challenging to maintain. The next phase would be to explore Tailwind CSS v4.0 to take advantage of its improved handling of CSS variables.
 
 ## Final thoughts
 
-The site is live and can be viewed at [Shirley Chauffeurs](https://shirleychauffeurs.co.uk/). 
+The site is live and can be viewed at [Shirley Chauffeurs](https://shirleychauffeurs.co.uk/).
