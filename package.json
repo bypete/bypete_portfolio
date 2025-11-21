@@ -33,7 +33,7 @@
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/tabler": "^1.2.17",
     "@nanostores/preact": "^0.5.2",
-    "@tailwindcss/vite": "^4.0.12",
+    "@tailwindcss/vite": "^4.1.17",
     "@types/alpinejs": "^3.13.11",
     "alpinejs": "^3.14.8",
     "astro": "^5.5.2",
@@ -43,7 +43,7 @@
     "nanostores": "^0.11.4",
     "photoswipe": "^5.4.4",
     "reading-time": "^1.5.0",
-    "tailwindcss": "^4.0.14",
+    "tailwindcss": "^4.1.17",
     "typescript": "^5.8.2"
   },
   "devDependencies": {
@@ -67,7 +67,7 @@
     "remark-attr": "^0.11.1",
     "remark-html": "^16.0.1",
     "smartypants": "^0.2.2",
-    "swiper": "^11.1.14",
+    "swiper": "^12.0.3",
     "vite-plugin-svgr": "^4.3.0"
   },
   "browserslist": [

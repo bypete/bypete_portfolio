@@ -27,13 +27,13 @@ interface Props {
 const { cover, logo, readTime, tags, taster, title, url } = Astro.props;
 ---
 
-<article class="gap-fluid-m grid grid-cols-1 md:grid-cols-(--gtc-listing)">
+<article class="grid grid-cols-1 gap-fluid-m md:grid-cols-(--gtc-listing)">
     {
         cover && (
             <div class="md:order-2">
                 <a
                     href={url}
-                    class="aspect-photo relative block w-full md:aspect-video"
+                    class="relative block aspect-photo w-full md:aspect-video"
                 >
                     <Image
                         src={cover.src}
@@ -58,10 +58,10 @@ const { cover, logo, readTime, tags, taster, title, url } = Astro.props;
             </div>
         )
     }
-    <div class="gap-fluid-xs grid grid-cols-1 md:order-1">
+    <div class="grid grid-cols-1 gap-fluid-xs md:order-1">
         <div>
-            <h2 class="font-headline text-step-3 leading-tight">
-                <a href={url} class="link" set:html={title} />
+            <h2 class="font-display text-step-3/tight font-black">
+                <a href={url} class="link font-inherit" set:html={title} />
             </h2>
             {taster && <p set:html={taster} />}
         </div>

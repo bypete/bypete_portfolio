@@ -138,21 +138,21 @@ export default function TocMenu({ headings, class: className }: Props) {
       ref={tocRef}
       aria-label="Contents"
       className={clsx(
-        "sticky-root  sticky top-[calc(var(--headerheight)-1px))] z-(--z-toc) flex w-full flex-row items-center justify-center",
-        className ? className : "my-fluid-l",
+        "sticky-root sticky top-[calc(var(--headerheight)+var(--spacing-fluid-s)))] z-(--z-toc) flex w-full flex-row items-center justify-center mb-fluid-l",
+        className ? className : "my-fluid-l pb-fluid-l",
       )}
     >
       <div
         ref={tocWrapperRef}
         id="tocWrapper"
-        className="shadow-raised relative mx-auto w-full rounded-b"
+        className="absolute top-0 left-0 mx-auto block w-full rounded-(--spacing-fluid-s) bg-surface-raised shadow-raised"
       >
         <button
           type="button"
           aria-controls="tocPanel"
           ref={tocRefButton}
           aria-expanded={isOpen ? "true" : "false"}
-          className={`${isOpen && "rounded-none"} group gap-x-fluid-2xs border-line bg-surface-raised px-fluid-s py-fluid-2xs flex w-full items-center justify-between rounded-xs border font-semibold whitespace-nowrap hover:cursor-pointer`}
+          className={`${isOpen && "rounded-b-none"} text-step-0/[1] group gap-x-fluid-2xs px-fluid-s py-fluid-xs flex w-full items-center justify-between   font-semibold whitespace-nowrap hover:cursor-pointer`}
           onClick={() => toggleToc()}
           aria-label="Toggle page links"
         >
@@ -161,14 +161,13 @@ export default function TocMenu({ headings, class: className }: Props) {
             className={`block h-5 w-5 group-focus:ring-2 ${isOpen ? "i-lucide-x-circle" : "i-lucide-file-text"}`}
           />
         </button>
-        <div className="relative z-10">
-          <div
-            ref={tocPanelRef}
-            id="tocPanel"
-            className={`${isOpen ? "" : " pointer-events-none"} opacity-0 border-line bg-surface-overlay px-fluid-s py-fluid-2xs shadow-raised absolute top-0 left-0  max-h-[calc(100dvh-var(--spacing-headerheight))] w-full grow overflow-y-scroll rounded-b border border-t-0`}
-          >
-            <ol className="m-0">{toc.map(renderHeading)}</ol>
-          </div>
+
+        <div
+          ref={tocPanelRef}
+          id="tocPanel"
+          className={`${isOpen ? "" : " pointer-events-none"} opacity-0 px-fluid-s max-h-[calc(100dvh-var(--spacing-headerheight))] w-full grow overflow-y-scroll `}
+        >
+          <ol className="m-0">{toc.map(renderHeading)}</ol>
         </div>
       </div>
     </nav>

@@ -2,67 +2,36 @@
 import { Icon } from 'astro-icon/components';
 interface Props {
     featured?: boolean;
-    href?: string;
-    isLink?: boolean;
 }
-const { featured = false, href, isLink = false } = Astro.props;
-const common =
-    'inline-flex items-center gap-x-fluid-3xs whitespace-nowrap rounded-tight font-medium leading-none px-fluid-3xs py-fluid-3xs';
+const { featured = false } = Astro.props;
 ---
 
 {
-    isLink ? (
-        <a
-            href={href}
-            class:list={[
-                common,
-                'hover:bg-tag-bg__hover border',
-                featured
-                    ? 'border-tag-featured bg-tag-featured text-content-featured'
-                    : 'border-tag-link bg-tag-link text-content-tag',
-            ]}
-        >
-            {featured && (
-                <div class="before:bookmarkclip -my-fluid-s pb-fluid-2xs pt-fluid-3xs before:bg-brand pointer-events-none relative z-10 block text-center drop-shadow-xs before:absolute before:inset-0 before:h-full before:w-full">
-                    <div class="relative flex justify-center">
-                        <Icon
-                            name="mdi:star"
-                            class="h-fluid-s w-fluid-s relative mx-auto text-white"
-                        />
-                        <Icon
-                            name="mdi:star"
-                            class="h-fluid-s w-fluid-s absolute mx-auto animate-ping text-white opacity-40"
-                        />
-                    </div>
-                </div>
-            )}
-            <slot />
-        </a>
-    ) : (
-        <span
-            class:list={[
-                common,
-                'border',
-                featured
-                    ? 'border-tag-featured bg-tag-featured text-content-featured'
-                    : 'border-line border',
-            ]}
-        >
-            {featured && (
-                <div class="before:bookmarkclip -my-fluid-s pb-fluid-2xs pt-fluid-3xs before:bg-brand pointer-events-none relative z-10 block text-center drop-shadow-xs before:absolute before:inset-0 before:h-full before:w-full">
-                    <div class="relative flex justify-center">
-                        <Icon
-                            name="mdi:star"
-                            class="h-fluid-s w-fluid-s relative mx-auto text-white"
-                        />
-                        <Icon
-                            name="mdi:star"
-                            class="h-fluid-s w-fluid-s absolute mx-auto animate-ping text-white opacity-40"
-                        />
-                    </div>
-                </div>
-            )}
-            <slot />
-        </span>
+    featured && (
+        <div class="relative -my-fluid-3xs grid w-fluid-s">
+            <div class="pointer-events-none z-10 -mt-px flex items-center justify-center">
+                <svg
+                    preserveAspectRatio="none"
+                    class="absolute -top-[2px] h-[125%] w-full text-featured"
+                    width="16"
+                    height="32"
+                    viewBox="0 0 16 32"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path d="M16 0H0V32L8 30L16 32V0Z" fill="currentColor" />
+                </svg>
+
+                <Icon
+                    name="mdi:star"
+                    class="relative mx-auto h-auto w-[80%] text-white"
+                />
+                <Icon
+                    name="mdi:star"
+                    class="absolute mx-auto h-auto w-[80%] animate-ping text-white opacity-40"
+                />
+            </div>
+        </div>
     )
 }
+<slot />

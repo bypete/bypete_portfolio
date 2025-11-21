@@ -9,7 +9,7 @@ import Overlay from '~/components/preact/overlays/Overlay';
 import CookieNotice from '~/components/preact/overlays/CookieNotice.tsx';
 import Accessibility from '~/components/ui/Accessibility.astro';
 import OffCanvasNavigation from '~/components/preact/navigation/OffCanvasNavigation';
-
+import { getImage } from 'astro:assets';
 import BypeteWhite from '~/assets/svg/bypete__white.svg?react';
 
 const fm = Astro.props.frontmatter || Astro.props;
@@ -31,7 +31,7 @@ import '~/styles/global.css';
         <GoogleTag />
     </head>
     <body
-        class="relative overflow-x-hidden bg-surface font-Roboto text-step-0 text-content antialiased"
+        class="relative overflow-x-hidden bg-surface-raised font-body text-step-0 text-content antialiased"
         id="top"
     >
         {isProduction && <GoogleTagNoScript />}
@@ -48,7 +48,7 @@ import '~/styles/global.css';
             <a
                 href="/"
                 aria-label="byPete - home"
-                class="inline-flex h-logoheight w-auto items-end bg-primary bg-gradient-to-b from-85% to-primary-dark p-fluid-2xs shadow-md shadow-black/[0.08]"
+                class="inline-flex w-auto items-end rounded-b-(--spacing-fluid-s) bg-secondary p-fluid-xs pt-fluid-l inset-shadow-sm shadow-secondary-shade/25"
                 ><BypeteWhite
                     class="h-fluid-m w-auto"
                     title="byPete logo in white"
@@ -62,7 +62,7 @@ import '~/styles/global.css';
 
         <div
             id="wrapperContent"
-            class="@container/page relative grid grid-cols-1 grid-rows-[1fr_auto] bg-surface"
+            class="@container/page relative grid grid-cols-1 grid-rows-[1fr_auto] bg-surface grains-default dark:grains-dark-default"
         >
             <Header client:load />
             <Underlay client:load {isHeroDark} />

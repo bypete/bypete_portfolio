@@ -9,9 +9,11 @@ export interface Props {
 const { slide } = Astro.props;
 const { caption }: { caption?: SwiperImage['caption'] } = slide || {};
 
-const resolvedWidths = slide.widths ? slide.widths : [480, 720];
+const resolvedWidths = slide.widths
+    ? slide.widths
+    : [480, 640, 960, slide.src.width];
 const resolvedSizes =
-    slide.sizes || `(min-width: 75em) 720px, (min-width: 64em) 60vw, 100vw`;
+    slide.sizes || '(min-width: 64em) calc(100vw - 40ch), 100vw';
 
 const slideClass =
     slide.class ||
@@ -25,50 +27,50 @@ const imageProps = {
     widths: resolvedWidths,
     quality: 'high',
 };
+
+const SvgBg = slide?.svgBg;
 ---
 
 {
     (
         <a
             href={slide.url}
-            class="py-fluid-l flex h-full w-full items-center justify-center"
+            class="swiper-slide relative flex h-full !w-auto shrink-0"
         >
-            {slide.wrapper ? (
-                <div class={slide.wrapper}>
-                    <Image
-                        {...imageProps}
-                        class="h-full w-full object-contain opacity-0"
-                        data-visual
-                    />
-                </div>
-            ) : (
-                <>
-                    <Image
-                        {...imageProps}
-                        data-visual
-                        class="h-full w-full object-contain opacity-0"
-                    />
-                    {caption && (
-                        <span
-                            data-caption
-                            class:list={[
-                                'max-w-fluid-4xl text-content-light absolute flex flex-col items-start opacity-0',
-                                caption.label && caption.label,
-                            ]}
-                        >
-                            {caption.title && (
-                                <h2 class="-mb-fluid-3xs rounded-tight bg-primary-dark p-fluid-3xs font-headline text-step-0 shadow-primary-shade relative z-10 inline-block -rotate-1 leading-none font-semibold tracking-tight shadow-xs">
-                                    {caption.title}{' '}
-                                </h2>
-                            )}
-                            {caption.copy && (
-                                <p class="rounded-tight p-fluid-3xs text-step--2 relative inline-block translate-x-px translate-y-0.5 bg-black/15 leading-snug">
-                                    {caption.copy}
-                                </p>
-                            )}
-                        </span>
+            {SvgBg && (
+                <SvgBg
+                    name="halftone"
+                    title="halftone gradient"
+                    class="pointer-events-none absolute inset-0 h-full w-full text-sky-300/5"
+                    fill="currentColor"
+                    aria-hidden="true"
+                />
+            )}
+
+            <Image
+                {...imageProps}
+                data-visual
+                class="relative block h-full w-auto"
+            />
+            {caption && (
+                <span
+                    data-caption
+                    class:list={[
+                        'absolute flex max-w-fluid-4xl flex-col items-start text-content-light opacity-0',
+                        caption.label && caption.label,
+                    ]}
+                >
+                    {caption.title && (
+                        <h2 class="relative z-10 -mb-fluid-3xs inline-block -rotate-1 rounded-tight bg-secondary p-fluid-3xs font-display text-step-0 leading-none font-semibold tracking-tight shadow-xs shadow-secondary-shade/12">
+                            {caption.title}{' '}
+                        </h2>
                     )}
-                </>
+                    {caption.copy && (
+                        <p class="relative inline-block translate-x-fluid-3xs translate-y-0.5 rounded-tight bg-secondary-dark p-fluid-3xs text-step--2 leading-snug">
+                            {caption.copy}
+                        </p>
+                    )}
+                </span>
             )}
         </a>
     )

@@ -1,20 +1,20 @@
 ---
-import { Icon } from "astro-icon/components";
+import { Icon } from 'astro-icon/components';
 interface Props {
-	name: string;
-	url: string;
-	platform: string;
-	wrap?: string;
-	css?: string;
-	class?: string;
+    name: string;
+    url: string;
+    platform: string;
+    wrap?: string;
+    css?: string;
+    class?: string;
 }
 const {
-	platform,
-	url,
-	name,
-	wrap = "mx-fluid-2xs",
-	css = "w-fluid-m h-fluid-m fill-current",
-	class: ClassName,
+    platform,
+    url,
+    name,
+    wrap = 'mx-fluid-2xs',
+    css = 'w-fluid-m h-fluid-m fill-current',
+    class: ClassName,
 } = Astro.props;
 ---
 
@@ -22,7 +22,7 @@ const {
     href={`${url}`}
     rel="nofollow"
     class:list={[
-        ClassName ? ClassName : 'text-content hover:text-brand',
+        ClassName ? ClassName : 'text-content hover:text-primary',
         wrap && wrap,
     ]}
     title={platform}

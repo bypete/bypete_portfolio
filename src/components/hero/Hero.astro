@@ -9,7 +9,7 @@ import Prompt from '~/components/ui/Prompt.astro';
 
 type HeroTheme = {
     wrapper?: string[];
-    hero?: string[];
+    layout?: string[];
     mandatory?: string[];
 };
 
@@ -108,32 +108,27 @@ const inView = {
 
 const heroThemes: Record<string, HeroTheme> = {
     plain: {
-        hero: ['bg-surface-sunken', 'py-fluid-2xl'],
+        layout: ['bg-surface-sunken', 'py-fluid-2xl'],
     },
     image: {
-        hero: [''],
+        layout: [''],
     },
     work: {
-        hero: [
-            'grid w-full',
-            'grid-cols-1',
-            'shadow-lg',
-            'shadow-content-dark/10',
-            'lg:h-screen',
-            'lg:grid-cols-2',
-            '@min-page/page:grid-cols-(--gtc-workcontianer)',
+        layout: [
+            'grid w-full gap-y-fluid-m grid-cols-1 grid-rows-(--gtr-work)',
+            'lg:grid-rows-1 lg:min-h-svh lg:grid-cols-(--gtc-work)',
+            '@min-page/page:grid-cols-(--gtc-work)',
         ],
-        mandatory: ['shadow-hero'],
     },
     cover: {
-        hero: ['bg-surface-sunken', 'shadow-surface-sunk'],
-        mandatory: ['shadow-hero'],
+        layout: ['bg-surface-sunken', 'shadow-surface-sunk'],
+        mandatory: ['inset-shadow-hero'],
     },
 };
 
 const currentHero = heroThemes[mode as keyof typeof heroThemes];
 const heroResult = [
-    ...(ClassName ? ClassName.split(' ') : (currentHero.hero ?? [])),
+    ...(ClassName ? ClassName.split(' ') : (currentHero.layout ?? [])),
     ...(currentHero.mandatory ?? []),
     overflow && 'overflow-hidden',
     color,

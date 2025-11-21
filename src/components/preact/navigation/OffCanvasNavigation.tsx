@@ -144,7 +144,7 @@ export default function OffCanvasNavigation({ currentPath = '' }: Props) {
                 key={channel}
                 href={`${channel.url}`}
                 rel="nofollow"
-                className="text-content hover:text-brand"
+                className="text-content hover:text-primary"
                 title={channel.platform}
               >
                 <span

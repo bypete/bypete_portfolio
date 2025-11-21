@@ -11,7 +11,7 @@ import Roles from '~/components/Roles.astro';
 import SwiperClients from '~/components/Swiper/Clients.astro';
 import Clients from '~/components/marquees/Clients.astro';
 import Prompt from '~/components/ui/Prompt.astro';
-
+import Stripes from '~/components/objects/stripes.astro';
 const title = 'Home';
 const heroConfig = {
     dark: true,
@@ -28,8 +28,6 @@ const og = {
         alt: 'ByPete Homepage',
     },
 };
-
-import heatmap from '~/assets/hero/heatmap__right-center.png';
 
 import { formatBlogPosts } from '~/js/utils';
 import { getCollection, render } from 'astro:content';
@@ -50,56 +48,38 @@ const formattedPosts = formatBlogPosts(allWork, {
         data-layout="page"
     >
         <section
-            class="relative col-[full] grid grid-cols-subgrid overflow-x-hidden bg-primary pb-fluid-6xl angleclip-fluid-3xl [&+*]:-mt-fluid-6xl"
+            class="relative col-[full] grid w-full grid-cols-1 grid-rows-(--gtr-work) gap-y-fluid-m pb-fluid-l text-content outline-hidden lg:h-svh lg:grid-cols-(--gtc-work) lg:grid-rows-1 @min-page/page:grid-cols-(--gtc-work)"
         >
-            <div class="absolute inset-0 h-full w-full">
-                <Picture
-                    src={heatmap}
-                    quality={'max'}
-                    loading={'eager'}
-                    formats={['avif', 'webp']}
-                    alt="Purple gradient background"
-                    class="absolute h-full w-full object-cover object-bottom md:object-center"
-                />
-                <div
-                    id="particleField"
-                    class="absolute inset-0 h-full w-full overflow-hidden"
+            <div
+                class="order-2 self-end px-safe-inline lg:order-1 lg:mt-safe-top lg:pr-0"
+            >
+                <Roles roles={roles} />
+                <p
+                    class="text-shadow-emboss my-fluid-s text-step-0 shadow-slate-900"
                 >
-                </div>
+                    Discover the stories behind my projects, the challenges
+                    addressed, and the solutions crafted.
+                </p>
+                <p class="flex flex-wrap items-center gap-fluid-xs">
+                    <Button
+                        theme="primary"
+                        isIcon={true}
+                        class="md:inline-flex"
+                        href="/work/"
+                    >
+                        View the portfolio <Icon
+                            name="lucide:arrow-right-circle"
+                            class="h-fluid-s w-fluid-s animate-nudge-right"
+                        />
+                    </Button>
+                    <Button href="/about/" theme="white">Read my bio</Button>
+                </p>
             </div>
 
             <div
-                class="relative col-[content] grid h-svh grid-cols-1 grid-rows-(--gtr-home) pt-safe-top not-dynamic:h-screen landscape:grid-flow-col landscape:grid-cols-(--gtc-home) landscape:grid-rows-1 landscape:pt-0"
+                class="relative order-1 flex h-full w-full items-center lg:order-2"
             >
-                <div class="w-full max-w-[40ch] self-center">
-                    <Roles roles={roles} />
-                    <p
-                        class="text-shadow-emboss my-fluid-s text-step-0 text-content-light shadow-slate-900"
-                    >
-                        Discover the stories behind my projects, the challenges
-                        addressed, and the solutions crafted.
-                    </p>
-                    <p class="flex flex-wrap items-center gap-fluid-xs">
-                        <Button
-                            theme="primary"
-                            isIcon={true}
-                            class="md:inline-flex"
-                            href="/work/"
-                        >
-                            View the portfolio <Icon
-                                name="lucide:arrow-right-circle"
-                                class="h-fluid-s w-fluid-s animate-nudge-right"
-                            />
-                        </Button>
-                        <Button href="/about/" theme="whiteline"
-                            >Read my bio</Button
-                        >
-                    </p>
-                </div>
-
-                <div class="relative flex min-h-0 items-center">
-                    <SwiperHome slides={heroSlides} />
-                </div>
+                <SwiperHome slides={heroSlides} />
             </div>
             <div
                 class="pointer-events-none absolute top-[100svh] left-1/2 z-100 -translate-x-1/2 -translate-y-full pb-fluid-s text-content-light not-dynamic:top-[100vh]"
@@ -112,9 +92,9 @@ const formattedPosts = formatBlogPosts(allWork, {
             class="from-page-contrast relative col-[full] grid grid-cols-subgrid gap-y-fluid-m bg-linear-to-b"
         >
             <h2
-                class="col-[content] m-0 text-center font-headline text-step-4 font-bold text-content-light"
+                class="col-[content] m-0 text-center font-display text-step-5 font-bold text-content"
             >
-                Featured work
+                Latest work
             </h2>
             <div
                 class="col-[content] grid grid-cols-1 gap-fluid-xl md:grid-cols-2 lg:grid-cols-3"
@@ -122,7 +102,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                 {
                     formattedPosts.map(async (post) => {
                         const { remarkPluginFrontmatter } = await render(post);
-                        const featured = post.data.tags.includes('featured');
+                        // const featured = post.data.tags.includes('featured');
                         return (
                             <WorkCard
                                 url={`/${post.collection}/${post.id}/`}
@@ -133,7 +113,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                                 logo={post.data.logo}
                                 product={post.data.product}
                                 readTime={remarkPluginFrontmatter.minutesRead}
-                                featured={featured}
+                                featured={post.data.featured}
                             />
                         );
                     })

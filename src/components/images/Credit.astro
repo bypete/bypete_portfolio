@@ -2,16 +2,26 @@
 import { Icon } from 'astro-icon/components';
 interface Props {
     credit: string;
+    class?: string;
+    dir?: 'ltr' | 'rtl';
 }
-const { credit } = Astro.props;
+const {
+    credit,
+    dir = 'ltr',
+    class: ClassName = 'absolute bottom-fluid-2xs left-fluid-s @min-[100vw]:left-safe-inline',
+} = Astro.props;
 ---
 
 <div
-    class="absolute bottom-fluid-2xs left-fluid-s z-50 grid cursor-help grid-cols-(--gtc-credit) items-center overflow-hidden rounded-l-full text-left text-content-light opacity-0 transition-opacity duration-300 group-hover:opacity-100 @min-[100vw]:left-safe-inline"
+    class:list={[
+        'z-50 grid cursor-help grid-cols-(--gtc-credit) items-center overflow-hidden rounded-s-full text-content-dark opacity-0 transition-opacity duration-300 group-hover:opacity-100',
+        ClassName && ClassName,
+    ]}
+    {dir}
     x-data="credit"
 >
     <button
-        class="z-10 flex items-center justify-center rounded-full bg-primary p-fluid-3xs"
+        class="z-10 flex items-center justify-center rounded-full bg-action p-fluid-3xs"
         @click="toggle()"
         aria-label="show image credit"
         x-bind:aria-expanded="open ? 'true' : 'false'"
@@ -20,7 +30,10 @@ const { credit } = Astro.props;
         <span class="sr-only">Show image credit</span>
     </button>
     <div
-        class="z-0 -ml-fluid-2xs hidden origin-left rounded-xs rounded-l-none bg-black/75 py-fluid-3xs pr-fluid-3xs pl-fluid-xs text-step--2/none"
+        class:list={[
+            dir === 'ltr' ? 'origin-left' : 'origin-right',
+            'z-0 -ms-fluid-2xs hidden origin-left rounded-xs rounded-s-none bg-white py-fluid-3xs ps-fluid-xs pe-fluid-3xs text-step--2/none',
+        ]}
         x-cloak
         x-ref="credit"
     >
@@ -29,28 +42,42 @@ const { credit } = Astro.props;
 </div>
 
 <script>
-    import { animate } from 'motion';
+    import { animate, type AnimationSequence } from 'motion';
 
-    const toggleCreditVisibility = (visible, target) => {
+    const toggleCreditVisibility = (visible, target, dir) => {
         if (target) {
+            const sequenceOpen: AnimationSequence = [
+                [
+                    target,
+                    {
+                        transform:
+                            dir === 'ltr'
+                                ? ['translateX(-100%)', 'translateX(0%) ']
+                                : ['translateX(100%)', 'translateX(0%) '],
+                    },
+                    { duration: 0.25 },
+                ],
+            ];
+
+            const sequenceShut: AnimationSequence = [
+                [
+                    target,
+                    {
+                        transform:
+                            dir === 'ltr'
+                                ? ['translateX(0%)', 'translateX(-100%) ']
+                                : ['translateX(0%)', 'translateX(100%) '],
+                    },
+                    { duration: 0.25 },
+                ],
+            ];
+
             if (visible) {
                 target.classList.toggle('hidden', !visible);
 
-                animate(
-                    target,
-                    {
-                        transform: ['translateX(-100%)', 'translateX(0%)'],
-                    },
-                    { duration: 0.25 }
-                );
+                animate(sequenceOpen);
             } else {
-                animate(
-                    target,
-                    {
-                        transform: ['translateX(0%)', 'translateX(-100%)'],
-                    },
-                    { duration: 0.25 }
-                ).then(() => {
+                animate(sequenceShut).then(() => {
                     target.classList.toggle('hidden', !visible);
                 });
             }
@@ -60,12 +87,18 @@ const { credit } = Astro.props;
     document.addEventListener('alpine:init', () => {
         Alpine.data('credit', () => ({
             open: false,
+            direction: 'ltr',
             toggle() {
                 this.open = !this.open;
             },
             init() {
+                this.direction = this.$el.getAttribute('dir') || 'ltr';
                 this.$watch('open', (value) => {
-                    toggleCreditVisibility(value, this.$refs.credit);
+                    toggleCreditVisibility(
+                        value,
+                        this.$refs.credit,
+                        this.direction
+                    );
                 });
             },
         }));

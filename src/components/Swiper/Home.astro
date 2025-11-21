@@ -18,14 +18,12 @@ const { slides } = Astro.props;
     class="swiper swiper--home group h-full w-full transition-opacity duration-300 cloak:opacity-0"
     data-cloak
 >
-    <div class="swiper-wrapper not-prose not-rte flex items-center">
-        {
-            slides.map((slide) => (
-                <div class="slide swiper-slide">
-                    <Slide slide={slide} />
-                </div>
-            ))
-        }
+    <div
+        class="absolute inset-0 h-full w-full bg-[#06928b] bg-radial-[at_50%_75%] from-[#14ccc3] via-[#15586d] to-[#02303b] to-90% mask-(--mask-blob_1_185) mask-cover mask-bottom-left mask-no-repeat before:absolute before:inset-0 before:grains-dark-default dark:before:grains-dark-loud"
+    >
+    </div>
+    <div class="swiper-wrapper relative flex">
+        {slides.map((slide) => <Slide slide={slide} />)}
     </div>
     <Prev
         swiper="swiper--home"
@@ -36,7 +34,7 @@ const { slides } = Astro.props;
         class="right-0 hidden text-content-light md:block"
     />
     <div
-        class="swiper--home__pagination absolute bottom-fluid-s! z-10 mx-auto text-left lg:text-right"
+        class="swiper--home__pagination absolute bottom-0! z-10 pr-fluid-m text-right"
     >
     </div>
 </div>
@@ -65,17 +63,23 @@ const { slides } = Astro.props;
                 Scrollbar,
                 EffectCreative,
             ],
-            loop: true,
+            slidesPerView: 'auto',
+            spaceBetween: 0,
+            // loop: true,
+            // centeredSlides: true,
             effect: 'creative',
             creativeEffect: {
+                limitProgress: 2,
                 perspective: false,
                 prev: {
+                    scale: 0.15,
                     opacity: 0,
-                    scale: 0.4,
+                    translate: ['-10%', 0, -300],
                 },
                 next: {
-                    opacity: 0,
-                    scale: 0.75,
+                    opacity: 1,
+                    scale: 0.85,
+                    translate: ['100%', 0, -500],
                 },
             },
             speed: 250,
@@ -92,11 +96,11 @@ const { slides } = Astro.props;
                 el: `${swiperClass}__pagination`,
                 clickable: true,
                 bulletClass:
-                    'cursor-pointer mx-fluid-3xs transition-all duration-300 inline-block w-fluid-2xs h-fluid-2xs border border-content-light/50 rounded-full',
+                    'cursor-pointer mx-fluid-3xs transition-all duration-300 inline-block w-fluid-2xs h-fluid-2xs border border-surface-raised bg-surface-raised rounded-full',
                 bulletActiveClass:
-                    'w-fluid-s! shadow-floated bg-content-light! border-content-light!',
+                    'w-fluid-s! shadow-raised inset-shadow-xs inset-shadow-secondary-shade/25 border-transparent !bg-secondary',
             },
-            watchOverflow: true, // disable if only single slide
+            // watchOverflow: true, // disable if only single slide
             on: {
                 afterInit: () => {
                     swiperDom.removeAttribute('x-cloak');
@@ -116,23 +120,13 @@ const { slides } = Astro.props;
             const currentSlide =
                 swiperInstance.slides[swiperInstance.activeIndex];
             const caption = currentSlide.querySelector('[data-caption]');
-            const visual = currentSlide.querySelector('[data-visual]');
 
             const sequenceIn: AnimationSequence = [
                 [
-                    visual,
-                    {
-                        opacity: [0, 1],
-                    },
-                    {
-                        duration: 0.25,
-                        ease: 'easeInOut',
-                    },
-                ],
-                [
                     caption,
-                    { opacity: [0.85, 1], scale: [0, 1.1, 1] },
-                    { duration: 0.25 },
+                    { opacity: [0.85, 1], scale: [0, 1.25, 1] },
+
+                    { delay: 1, duration: 0.25, ease: 'easeInOut' },
                 ],
             ];
 

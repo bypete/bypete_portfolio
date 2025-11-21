@@ -1,194 +1,142 @@
-@layer base {
+:root {
+    --white: hsl(0deg 0% 100%); /* absolute white */
+    --black: hsl(0deg 0% 0%); /* absolute black */
+    --offset: 0px;
+
+    --headerheight: calc(
+        var(--spacing-fluid-l) + (var(--spacing-fluid-2xs) * 2)
+    );
+    --safe-top: calc(var(--headerheight) + var(--spacing-fluid-l));
+    --safe-inline: calc(var(--offset) + var(--spacing-fluid-m));
+    --tramline: var(--spacing-fluid-m);
+
+    --z-toast: 2001;
+    --z-overlay: 2000;
+    --z-header: 1000;
+    --z-banner: 1000;
+    --z-nav: 999;
+    --z-shortcuts: 800;
+    --z-logo: 501;
+    --z-hero: 500;
+    --z-underlay: 990;
+    --z-toc: 900;
+
+    --plus: svg-load('heap__plus.svg');
+    --mask-pill: svg-load('mask-pill-01.svg');
+    --mask-shape: svg-load('mask-shape-01.svg');
+    --mask-blob_1_1: svg-load('mask-blob_1_1.svg');
+    --mask-blob_1_185: svg-load('mask-blob_1_185.svg');
+    --mask-blob_16_9: svg-load('mask-blob_16_9.svg');
+    --bg-dust: url('/images/dust.webp');
+    --bg-dust-dark: url('/images/dust--dark.webp');
+    --bg-grains: url('/images/dust.webp');
+    --bg-grains-dark: url('/images/dust--dark.webp');
+
+    --grains-quiet: url('/images/dust-quiet.webp');
+    --grains-default: url('/images/dust.webp');
+    --grains-loud: url('/images/dust-loud.webp');
+
+    --texture-noise: var(--bg-dust);
+
+    --container-max: 75rem;
+
+    --logoheight: 0rem;
+
+    /* Grid Template Columns */
+    --gtc-block33: minmax(0, 1fr) minmax(0, 2fr);
+    --gtc-block40: minmax(0, 2fr) minmax(0, 3fr);
+    --gtc-block50: repeat(2, minmax(0, 1fr));
+    --gtc-block60: minmax(0, 3fr) minmax(0, 2fr);
+    --gtc-block66: minmax(0, 2fr) minmax(0, 1fr);
+    --gtc-listing: minmax(0, 2fr) minmax(0, 1fr);
+    --gtc-prevnext: repeat(2, minmax(0, 320px));
+    --gtc-home: auto minmax(0, 1fr);
+    --gtc-credit: auto minmax(auto, 1fr);
+    --gtc-icon: auto minmax(auto, 1fr);
+    --gtc-featured: var(--spacing-fluid-m) minmax(auto, 1fr);
+    --gtc-workcontainer: var(--spacing-widescreen)
+        calc(43.75vw - ((100vw - 78.75rem) / 2)) minmax(0, 1fr);
+    --gtc-work: minmax(0, 1fr) minmax(0, 2fr);
+
+    /* Grid Template Rows */
+    --gtr-workcard: auto auto minmax(0, 1fr) auto;
+    --gtr-work: 100vw auto;
+    --gtr-home: auto minmax(0, 1fr);
+}
+
+@media (min-width: 768px) {
     :root {
-        --white: rgb(255, 255, 255); /* absolute white */
-        --black: rgb(0, 0, 0); /* absolute black */
-        --offblack: rgb(24, 24, 27); /* zinc-800 */
-
-        --banner: rgba(255, 255, 255, 0);
-        --banner-up: rgba(255, 255, 255, 1); /* absolute white */
-
-        --surface-10: rgb(255, 255, 255); /* #FFFFFF Shade +1 */
-        --surface: rgb(252, 252, 252); /* #fcfcfc */
-        --surface--20: rgb(234, 234, 232); /* #f3f3f2 Shade -2 */
-        --surface--10: rgb(243, 243, 242); /* #f3f3f2 Shade -1 */
-        --surface--100: rgb(20, 20, 26); /* 14141a Footer and offscreen */
-
-        --shadow-surface-10: rgba(24, 24, 27, 0.12); /* #18181B */
-        --shadow-light: rgba(255, 255, 255, 0.75); /* absolute white */
-        --shadow-dark: rgba(24, 24, 27, 0.25); /* #18181B */
-        --shadow-inset: rgba(24, 24, 27, 0.25); /* #18181B */
-
-        --accent-light: rgb(240, 25, 101); /* #f01965 */
-        --accent: rgb(230, 15, 91); /* #E60F5B */
-        --accent-dark: rgb(212, 14, 84); /* #d40e54 */
-        --accent-shade: rgb(212, 14, 84); /* #d40e54 */
-
-        --brand-light: rgb(255, 213, 20); /* #ffd514 */
-        --brand: rgb(255, 210, 0); /* #ffd200 */
-        --brand-dark: rgb(235, 194, 0); /* #ebc200 */
-        --brand-shade: rgb(255, 189, 0); /* #ffbd00 */
-
-        --primary-light: rgb(240, 25, 101); /* #f01965 */
-        --primary: rgb(230, 15, 91); /* #E60F5B */
-        --primary-dark: rgb(212, 14, 84); /* #d40e54 */
-        --primary-shade: rgb(212, 14, 84); /* #d40e54 */
-
-        --secondary-light: rgb(51, 65, 85); /* slate-700 */
-        --secondary: rgb(30, 41, 59); /* slate-800 */
-        --secondary-dark: rgb(15, 23, 42); /* slate-900 */
-        --secondary-shade: rgb(2, 6, 23); /* slate-950 */
-
-        --link-light: rgb(240, 25, 101); /* #f01965 */
-        --link: rgb(230, 15, 91); /* #E60F5B */
-        --link-dark: rgb(212, 14, 84); /* #d40e54 */
-        --link-shade: rgb(212, 14, 84); /* #d40e54 */
-
-        --copy-light: rgb(250, 250, 250); /* zinc-50 */
-        --copy-dark: rgb(31, 41, 55); /* gray-800 */
-
-        --copy-whisper: rgb(209, 213, 219); /* gray-300 */
-        --copy-quiet: rgb(107, 114, 128); /* gray-500 */
-        --copy: rgb(55, 65, 81); /* gray-700 */
-        --copy-loud: rgb(17, 24, 39); /* gray-900 */
-        --copy-shout: rgb(3, 7, 18); /* gray-950 */
-
-        --line-whisper: rgb(251, 251, 252); /* #fbfbfc Shade + 2 */
-        --line-quiet: rgb(240, 241, 244); /* #f0f1f4 Shade + 1 */
-        --line: rgb(228, 228, 231); /* zinc-200 #e5e7eb Shade + 0 */
-        --line-loud: rgb(207, 211, 218); /* #cfd3da Shade - 2 */
-        --line-shout: rgb(185, 190, 201); /* #b9bec9 Shade - 4 */
-
-        --copy-tag: rgb(63, 63, 70); /* zinc-700 */
-        --copy-featured: rgb(63, 63, 70); /* zinc-700 */
-
-        --tag: rgb(244, 244, 245); /* zinc-100 */
-        --tag-link: rgb(253, 224, 71); /* yellow-300 */
-        --tag-hover: rgb(250, 204, 21); /* yellow-400 */
-        --tag-featured: rgb(253, 224, 71); /* yellow-300 */
-
-        --note: rgb(254, 240, 138); /* yellow-200 */
-        --note-shade: rgb(250, 204, 21); /* yellow-400 */
-
-        --info: rgb(56, 189, 248); /* sky-400 */
-        --info-shade: rgb(14, 165, 233); /* sky-500 */
-
-        --attention: rgb(253, 224, 71); /* yellow-300 */
-        --attention-shade: rgb(234, 179, 8); /* yellow-500 */
-
-        --warning: rgb(220, 38, 38); /* red-600 */
-        --warning-shade: rgb(185, 28, 28); /* red-700 */
-
-        --hilite: rgb(253, 224, 71); /* yellow-300 */
-        --gold: rgb(182, 160, 108); /* #b6a06c */
-
-        --focus: rgb(56, 189, 248); /* sky-400 */
-
-        --plus: svg-load('heap__plus.svg');
-
-        --container-max: 75rem;
-
-        --offset: 0px;
-        --logoheight: 0rem;
-
-        --headerheight: calc(
-            var(--spacing-fluid-l) + (var(--spacing-fluid-2xs) * 2)
+        --offset: var(--spacing-fluid-xl);
+        --tramline: var(--spacing-fluid-xl);
+        /* --gutter: var(--spacing-fluid-xl); */
+        --gap: var(--spacing-fluid-xl);
+        --headerheight: 0rem;
+        --logoheight: var(--spacing-fluid-m);
+        --safe-top: calc(
+            var(--logoheight) + var(--spacing-fluid-s) + var(--spacing-fluid-l)
         );
-        --safe-top: calc(var(--headerheight) + var(--spacing-fluid-l));
         --safe-inline: calc(var(--offset) + var(--spacing-fluid-m));
-        --tramline: var(--spacing-fluid-m);
-        --z-toast: 2001;
-        --z-overlay: 2000;
-        --z-header: 1000;
-        --z-banner: 1000;
-        --z-nav: 999;
-        --z-shortcuts: 800;
-        --z-logo: 501;
-        --z-hero: 500;
-        --z-underlay: 990;
-        --z-toc: 900;
-
-        /* Grid Template Columns */
-        --gtc-block33: minmax(0, 1fr) minmax(0, 2fr);
-        --gtc-block40: minmax(0, 2fr) minmax(0, 3fr);
-        --gtc-block50: repeat(2, minmax(0, 1fr));
-        --gtc-block60: minmax(0, 3fr) minmax(0, 2fr);
-        --gtc-block66: minmax(0, 2fr) minmax(0, 1fr);
-        --gtc-listing: minmax(0, 2fr) minmax(0, 1fr);
-        --gtc-prevnext: repeat(2, minmax(0, 320px));
-        --gtc-home: auto minmax(0, 1fr);
-        --gtc-credit: auto minmax(auto, 1fr);
-        --gtc-icon: auto minmax(auto, 1fr);
-        --gtc-workcontianer: 56.25vw calc(43.75vw - ((100vw - 78.75rem) / 2))
-            minmax(0, 1fr);
-
-        /* Grid Template Rows */
-        --gtr-workcard: auto auto minmax(0, 1fr) auto;
-        --gtr-work: auto minmax(0, 1fr);
-        --gtr-home: auto minmax(0, 1fr);
     }
+}
 
-    @media (min-width: 768px) {
-        :root {
-            --offset: var(--spacing-fluid-xl);
-            --tramline: var(--spacing-fluid-xl);
-            /* --gutter: var(--spacing-fluid-xl); */
-            --gap: var(--spacing-fluid-xl);
-            --headerheight: 0rem;
-            --logoheight: var(--spacing-fluid-2xl);
-            --safe-top: calc(var(--logoheight) + var(--spacing-fluid-l));
-            --safe-inline: calc(var(--offset) + var(--spacing-fluid-m));
-        }
-    }
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+}
 
-    /* Alpine will set data-theme value based on (prefers-color-scheme: dark)  */
-    :root[data-theme='dark'] {
-        --banner: rgba(11, 11, 15, 0);
-        --banner-up: rgba(11, 11, 15, 1); /* #0A0A0D */
+:where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: 0.333em;
+}
+:where(h1, h2, h3, h4, h5, h6) a {
+    font-weight: var(--font-weight-extrabold);
+    line-height: 1;
+}
 
-        --surface-10: rgb(42, 42, 54); /* #2a2a36 +1 Shade */
-        --surface: rgb(31, 31, 40); /* #1f1f28 */
-        --surface--10: rgb(22, 22, 29); /* #16161d -1 Shade */
-        --surface--20: rgb(14, 14, 18); /* #0e0e12 -2 Shade */
-        --surface--100: rgb(3, 3, 4); /* #030304 Footer and offscreen */
+h1 {
+    font-weight: var(--font-weight-extrabold);
+}
 
-        --shadow-light: rgb(54, 54, 70); /* #363646 */
+h2 {
+    font-size: var(--text-step-3);
+    font-weight: var(--font-weight-bold);
+}
 
-        --footer-start: rgb(22, 22, 29); /* #16161d */
-        --footer: rgb(14, 14, 18); /* #0e0e12 */
-        --footer-end: rgb(14, 14, 18); /* #0e0e12 */
+h3 {
+    font-size: var(--text-step-1);
+    font-weight: var(--font-weight-bold);
+}
 
-        --line-whisper: rgb(37, 37, 48); /* #252530 Shade + 2 */
-        --line-quiet: rgb(54, 54, 70); /* #363646 Shade + 4 */
-        --line: rgb(71, 71, 93); /* #47475D Shade + 6 */
-        --line-loud: rgb(88, 88, 115); /* #585873 Shade + 8 */
-        --line-shout: rgb(105, 105, 137); /* #696989 Shade + 10 */
+h4 {
+    font-size: var(--text-step-0);
+    font-weight: var(--font-weight-medium);
+}
 
-        --copy-light: rgb(249, 250, 251); /* gray-50  */
-        --copy-dark: rgb(31, 41, 55); /* gray-800 */
+svg {
+    stroke-width: 2;
+}
 
-        --copy-whisper: rgb(55, 65, 81); /* gray-700 */
-        --copy-quiet: rgb(107, 114, 128); /* gray-500 */
-        --copy: rgb(229, 231, 235); /* gray-200 */
-        --copy-loud: rgb(243, 244, 246); /* gray-100 */
-        --copy-shout: rgb(249, 250, 251); /* gray-50 */
+path,
+circle,
+ellipse,
+line,
+polygon,
+polyline,
+rect {
+    stroke-width: inherit;
+}
 
-        --copy-tag: rgb(63, 63, 70); /* zinc-700 */
-        --copy-featured: rgb(31, 41, 55); /* gray-800 */
+/* Remove spinner from number forms */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
-        --focus: rgb(3, 105, 161); /* sky-700 */
-
-        --color-blockquote: var(--copy-light);
-
-        --color-underlay-light: var(--surface);
-        --color-underlay-dark: var(--surface--10);
-
-        --color-overlay-light: var(--surface);
-        --color-overlay-dark: var(--surface--10);
-
-        --color-headline: var(--copy);
-        --color-headline-start: var(--copy-light);
-        --color-headline-end: var(--copy);
-
-        --color-blockquote: var(--copy-light);
-    }
+input[type='number'] {
+    -moz-appearance: textfield;
 }

@@ -4,7 +4,9 @@ interface Props {
     class?: string;
 }
 const { isHeroDark, class: className } = Astro.props;
-const shade = isHeroDark ? 'bg-underlay-dark/90' : 'bg-underlay-light/90';
+const shade = isHeroDark
+    ? 'bg-surface-underlay-dark/90'
+    : 'bg-surface-underlay-light/90';
 ---
 
 <div

@@ -10,7 +10,7 @@ heroConfig:
     dark: true
 skillset:
     text: 'text-content'
-    icon: '[&>li]:before:text-primary!'
+    icon: '[&>li]:before:text-secondary'
     shadow: 'text-shadow-emboss shadow-surface-sunken/20'
     areas:
         - title: 'Development'
@@ -117,7 +117,7 @@ import ogImage from '~/assets/og/og__about.jpg';
       }}
   >
   <h1
-            class="text-shadow-headline relative mb-0 text-step-6/tight shadow-black/10"
+            class="relative mb-0 text-step-6/tight shadow-black/10"
             data-animate="turnIn"
         >
             Hello!
@@ -125,7 +125,7 @@ import ogImage from '~/assets/og/og__about.jpg';
   <p class='text-step-1 mb-fluid-s' data-animate='turnIn'>I'm Pete, a UX Designer and front-end developer with over ten years’ experience creating thoughtful, accessible, and mobile-first digital experiences. </p>
     <p class='text-step-0 mb-fluid-s' data-animate='turnIn'>I specialise in design systems, performance-focused development, and building interfaces that make life easier for users.</p>
   <p class="flex flex-row gap-2" data-animate="turnIn">
-    <Button theme="secondary" href="#start" data-jump isIcon="true">Read my bio <Icon name="lucide:arrow-down-circle" class="h-fluid-s w-fluid-s"/></Button>
+    <Button theme="primary" href="#start" data-jump isIcon="true">Read my bio <Icon name="lucide:arrow-down-circle" class="h-fluid-s w-fluid-s"/></Button>
     <Button theme="whiteline" href="/connect/">Contact me</Button>
   </p>
   </Hero>
@@ -153,13 +153,13 @@ Starting out, I helped build support sites for innovative projects like BBC Acti
 
 In 2009, the agency refocused its efforts and established itself as _the_ marketing agency for Europe's emerging payments sector. Since then, I've concentrated solely on Front-End development, primarily within the fintech landscape. This environment demands quick, testable solutions, enabling clients and teams to quickly validate ideas and innovate.
 
-<Skills skillset={frontmatter.skillset} bg='bg-surface-sunken' >
+<Skills skillset={frontmatter.skillset} bg='bg-surface-raised inset-shadow-white' >
 ## Current Skills
 
 <p class="text-step--1 text-content-quiet mb-fluid-m">My current working stack is marked in **bold**</p>
 </Skills>
 
-<Banner wrapper="bg-brand" class="min-h-block" />
+<Banner wrapper="bg-surface-brand" class="min-h-block" />
 
 ## Looking Ahead
 

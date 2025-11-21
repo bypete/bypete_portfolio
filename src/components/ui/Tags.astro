@@ -1,15 +1,13 @@
 ---
-import Tag from '~/components/ui/Tag.astro';
 interface Props {
     tags: string[];
     url?: boolean;
     class?: string;
 }
 const { tags, url = false, class: className = ' ' } = Astro.props;
-// Move 'featured' to the beginning of the array, if it exists
-if (tags.includes('featured')) {
-    tags.unshift(tags.splice(tags.indexOf('featured'), 1)[0]);
-}
+
+const common =
+    'flex font-normal border relative gap-x-fluid-3xs whitespace-nowrap rounded-tight p-fluid-3xs  text-step--1/none -tracking-[0.125px]';
 ---
 
 {
@@ -17,21 +15,36 @@ if (tags.includes('featured')) {
         <ul
             data-inview="tags"
             class:list={[
-                'flex flex-wrap items-center gap-fluid-2xs text-step--1 leading-none',
+                'flex flex-wrap items-center gap-fluid-2xs',
                 className,
             ]}
         >
-            {tags.map((tag) => (
-                <li data-animate="tag">
-                    <Tag
-                        href={`/tags/${tag}/`}
-                        isLink={url}
-                        featured={tag.toLowerCase() === 'featured'}
-                    >
-                        {tag}
-                    </Tag>
-                </li>
-            ))}
+            {tags.map((tag) => {
+                return (
+                    <li data-animate="tag">
+                        {url ? (
+                            <a
+                                href={`/tags/${tag}/`}
+                                class:list={[
+                                    common,
+                                    'border-[transparent] bg-surface-raised text-content drop-shadow-xl drop-shadow-shadow-dark/5 hover:border-primary hover:bg-primary hover:text-content-loud hover:no-underline hover:drop-shadow-shadow-light/25',
+                                ]}
+                            >
+                                {tag}
+                            </a>
+                        ) : (
+                            <span
+                                class:list={[
+                                    common,
+                                    'border-surface/25 bg-surface/25 text-content',
+                                ]}
+                            >
+                                {tag}
+                            </span>
+                        )}
+                    </li>
+                );
+            })}
         </ul>
     )
 }

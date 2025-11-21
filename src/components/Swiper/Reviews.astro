@@ -25,7 +25,7 @@ const { data } = Astro.props;
             data.map((review, i) => (
                 <div class="slide swiper-slide flex! items-center justify-center px-fluid-m">
                     <blockquote class="mx-auto mt-0 max-w-3xl px-0 md:text-step-1">
-                        <p class="m-0 font-headline text-step-2 leading-tight">
+                        <p class="m-0 font-display text-step-2 leading-tight">
                             <strong>{review.headline}</strong>
                         </p>
                         <Fragment set:html={review.comment} />
@@ -36,7 +36,7 @@ const { data } = Astro.props;
                                         name="mdi:star"
                                         class={`inline-block h-fluid-s w-auto ${
                                             index < review.rating
-                                                ? 'text-gold'
+                                                ? 'text-featured'
                                                 : 'text-content-quiet'
                                         }`}
                                     />
@@ -96,7 +96,7 @@ const { data } = Astro.props;
                 clickable: true,
                 bulletClass:
                     'cursor-pointer mx-fluid-3xs transition-all duration-300 inline-block w-fluid-2xs h-fluid-2xs border border-line rounded-full ',
-                bulletActiveClass: 'w-fluid-s! bg-primary border-transparent!',
+                bulletActiveClass: 'w-fluid-s! bg-action border-transparent!',
             },
             autoplay: {
                 delay: 5000,

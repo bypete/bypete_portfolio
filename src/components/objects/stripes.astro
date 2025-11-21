@@ -1,0 +1,21 @@
+---
+interface Props {
+    s1?: string;
+    s2?: string;
+    class?: string;
+    texture?: string;
+}
+const {
+    class: className,
+    s1 = 'bg-pink-300',
+    s2 = 'bg-green-300',
+    ...attrs
+} = Astro.props;
+---
+
+<div {...attrs} class:list={['', className]}>
+    <div class="grid h-full grid-cols-[2fr_3fr] gap-fluid-xs">
+        <div class:list={['h-4/6 w-full', s1]}></div>
+        <div class:list={['h-full w-full', s2]}></div>
+    </div>
+</div>

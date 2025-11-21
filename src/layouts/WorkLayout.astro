@@ -14,7 +14,9 @@ import NextPrev from '~/components/ui/NextPrev.astro';
 import BlockPicture from '~/components/images/BlockPicture.astro';
 import ReadTime from '~/components/ui/ReadTime.astro';
 import PageTools from '~/components/ui/PageTools.astro';
-
+import Stripes from '~/components/objects/stripes.astro';
+import FeaturedIcon from '~/components/ui/FeaturedIcon.astro';
+import Credit from '~/components/images/Credit.astro';
 export interface Props {
     frontmatter: any;
     section: string;
@@ -49,6 +51,8 @@ const resolvedHeroConfig = {
     ...heroConfig,
     mode: heroConfig.mode || 'work',
 };
+
+const featured = fm.featured || false;
 
 // Simplify the post before passing to NextPrev component
 const formatPostData = (post) => {
@@ -86,17 +90,35 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
             <slot name="slothero">
                 <Hero heroConfig={resolvedHeroConfig} title={head.title}>
                     <div
-                        class="relative flex h-[75vw] items-center justify-center lg:h-full"
+                        class="order-2 self-end px-safe-inline pb-fluid-l lg:order-1 lg:mt-safe-top lg:pr-0"
+                    >
+                        <h1
+                            class="text-step-4/none"
+                            set:html={frontmatter.title}
+                        />
+                        <p>{frontmatter.taster}</p>
+                    </div>
+                    <div
+                        class="relative order-1 flex h-full w-full items-center justify-center bg-surface mask-(--mask-blob_1_185) mask-cover mask-bottom-left mask-no-repeat lg:order-2"
                     >
                         <HeroPicture
                             src={frontmatter.cover.src}
-                            credit={frontmatter.title}
                             alt={frontmatter.cover.alt}
                             widths={[400, 960, frontmatter.cover.src.width]}
                             sizes={'100vw, (min-width: var(--container-width-lg)) 50vw, (min-width: 1264px) 56.25vw'}
                             class="h-full w-full object-cover"
                             wrapper={'absolute inset-0 h-full w-full '}
-                        />
+                        >
+                            <div
+                                class="absolute top-0 left-fluid-m grid grid-cols-(--gtc-icon) items-center gap-tight py-fluid-3xs text-[9px] text-content-light opacity-75 mix-blend-screen"
+                            >
+                                <Icon
+                                    name="lucide:camera"
+                                    class="size-fluid-2xs"
+                                />
+                                {`Credit: ${frontmatter.title}`}
+                            </div>
+                        </HeroPicture>
                         {
                             frontmatter.logo && (
                                 <Image
@@ -104,38 +126,36 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                                         frontmatter.logo.light ||
                                         frontmatter.logo.src
                                     }
+                                    quality={'high'}
                                     alt={frontmatter.title + ' logo'}
-                                    class="relative h-auto w-auto max-w-1/2 lg:max-w-1/3"
+                                    class="relative h-auto w-full max-w-1/3"
                                 />
                             )
                         }
-                    </div>
-                    <div class="self-end px-fluid-m py-fluid-m md:px-fluid-xl">
-                        <h1
-                            class="capline text-step-3/none"
-                            set:html={frontmatter.title}
-                        /><ReadTime
-                            duration={minutesRead}
-                            class="my-fluid-2xs text-step--1 text-content-quiet"
-                        />
-                        <p>{frontmatter.taster}</p>
-                        <div class="mt-fluid-m flex justify-between">
-                            <Tags tags={frontmatter.tags} url={true} />
-                        </div>
-                        <p class="mt-fluid-m hidden md:block">
-                            <Button
-                                theme="outline"
-                                isIcon={true}
-                                class="inline-flex transform duration-300"
-                                data-jump
-                                href="#start"
-                            >
-                                Scroll to start <Icon
-                                    name="lucide:mouse"
-                                    class="h-4 w-4 animate-nudge-down"
-                                />
-                            </Button>
-                        </p>
+
+                        <ul
+                            class="fixed top-0 right-safe-inline flex flex-col gap-fluid-m"
+                        >
+                            {
+                                featured && (
+                                    <li class="relative grid w-fluid-m-l grid-cols-1 grid-rows-1 items-center justify-center px-1 pt-fluid-2xs pb-fluid-xs drop-shadow-overlay drop-shadow-shadow-dark/25">
+                                        <FeaturedIcon />
+                                    </li>
+                                )
+                            }
+
+                            {
+                                frontmatter.title && (
+                                    <li>
+                                        <Credit
+                                            dir={'rtl'}
+                                            class="relative"
+                                            credit={frontmatter.title}
+                                        />
+                                    </li>
+                                )
+                            }
+                        </ul>
                     </div>
                 </Hero>
             </slot>
@@ -154,7 +174,6 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                             breakout={true}
                             wrapper="grid grid-cols-1 grid-rows-1 h-square md:h-block"
                             alt={frontmatter.product.alt}
-                            credit={frontmatter.title}
                         />
                     )
                 }
@@ -201,7 +220,7 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
             </aside>
         </article>
         <aside
-            class="col-[full] grid grid-cols-subgrid bg-brand py-fluid-2xl text-content-dark shadow-inset shadow-brand-shade/20"
+            class="col-[full] grid grid-cols-subgrid bg-primary py-fluid-2xl text-content-dark inset-shadow-sm shadow-primary-shade/20"
         >
             {
                 (nextPostData || prevPostData) && (

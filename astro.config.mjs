@@ -74,6 +74,9 @@ export default defineConfig({
   site: 'https://bypete.uk',
   trailingSlash: 'always',
   compressHTML: true,
+   experimental: {
+   svg: true,
+ },
   // redirects: {
   //     '/bio/': '/about',
   // },

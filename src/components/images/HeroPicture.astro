@@ -11,7 +11,6 @@ interface Props {
     breakout?: boolean;
     formats?: Array<'avif' | 'webp' | 'jpeg' | 'png'>;
     wrapper?: string;
-    credit?: string;
 }
 
 const {
@@ -22,12 +21,11 @@ const {
     sizes,
     formats = ['avif', 'webp'],
     wrapper = '',
-    credit = '',
     ...attrs
 } = Astro.props;
 
 const resolvedWidths = widths.length ? widths : [360, 960, 1400, src.width];
-const resolvedSizes = sizes || `100vw`;
+const resolvedSizes = sizes || '100vw';
 
 const imageProps = {
     ...(className ? { class: className } : {}),
@@ -42,12 +40,13 @@ const imageProps = {
 ---
 
 {
-    wrapper || credit.length ? (
-        <div class:list={[wrapper || '', credit && 'group']}>
+    wrapper ? (
+        <div class:list={[wrapper || '', ]}>
             <Picture {...imageProps} />
-            {credit && <Credit {credit} />}
+            <slot/>
         </div>
     ) : (
         <Picture {...imageProps} />
+        <slot/>
     )
 }

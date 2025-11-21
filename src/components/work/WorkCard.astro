@@ -1,6 +1,7 @@
 ---
 import Tags from '~/components/ui/Tags.astro';
 import { Image } from 'astro:assets';
+import FeaturedIcon from '~/components/ui/FeaturedIcon.astro';
 import ReadTime from '~/components/ui/ReadTime.astro';
 
 interface CoverImage {
@@ -60,6 +61,18 @@ const { title, featured, url, cover, logo, product, taster, tags, readTime } =
             )
         }
     </div>
+    <ul class="absolute top-0 right-fluid-2xs z-10 grid gap-fluid-2xs">
+        {
+            featured && (
+                <li class="pointer-events-none relative -top-px drop-shadow-overlay drop-shadow-shadow-dark/25">
+                    <span class="sr-only">Featured</span>
+                    <div class="grid w-fluid-m grid-cols-1 grid-rows-1 items-center justify-center px-1 pt-fluid-2xs pb-fluid-xs">
+                        <FeaturedIcon />
+                    </div>
+                </li>
+            )
+        }
+    </ul>
     {
         product && (
             <Image
@@ -74,7 +87,7 @@ const { title, featured, url, cover, logo, product, taster, tags, readTime } =
     <div class="px-fluid-s">
         {readTime && <ReadTime duration={readTime} />}
         <h2
-            class="link mb-fluid-2xs font-headline text-step-1/tight font-extrabold"
+            class="mb-fluid-2xs font-display text-step-1/tight link font-extrabold"
             set:html={title}
         />
         {taster && <p class="text-base/snug" set:html={taster} />}

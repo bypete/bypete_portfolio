@@ -6,7 +6,7 @@ import { Icon } from 'astro-icon/components';
     x-data="theme"
     x-cloak
     class:list={[
-        'grid-col-1 grid-row-1 size-fluid-l bg-surface-overlay text-content shadow-inset relative grid justify-center overflow-hidden rounded-full text-center leading-none transition-colors duration-[750ms]',
+        'grid-col-1 grid-row-1 relative grid size-fluid-l justify-center overflow-hidden rounded-full bg-surface-overlay text-center leading-none text-content inset-shadow-sm transition-colors duration-[750ms]',
     ]}
 >
     <button
@@ -14,7 +14,7 @@ import { Icon } from 'astro-icon/components';
         type="button"
         aria-label="set light theme"
         @click="theme = 'light'"
-        class="size-fluid-l col-start-1 row-start-1 flex items-center justify-center rounded-full"
+        class="col-start-1 row-start-1 flex size-fluid-l items-center justify-center rounded-full"
         ><Icon name="lucide:sun-moon" class="h-fluid-m-s w-fluid-m-s" />
     </button>
     <button
@@ -22,7 +22,7 @@ import { Icon } from 'astro-icon/components';
         type="button"
         aria-label="set dark theme"
         @click="theme = 'dark'"
-        class="size-fluid-l col-start-1 row-start-1 flex items-center justify-center rounded-full"
+        class="col-start-1 row-start-1 flex size-fluid-l items-center justify-center rounded-full"
         ><Icon name="lucide:sun" class="h-fluid-m-s w-fluid-m-s" />
     </button>
 </span>
@@ -115,7 +115,7 @@ import { Icon } from 'astro-icon/components';
                 html?.setAttribute('data-theme', value);
                 meta?.setAttribute(
                     'content',
-                    value === 'dark' ? '#1f1f28' : '#ffffff',
+                    value === 'dark' ? '#1f1f28' : '#ffffff'
                 );
             },
 

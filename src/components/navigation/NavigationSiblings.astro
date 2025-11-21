@@ -38,10 +38,10 @@ const currentPath = Astro.url.pathname;
                                     href={postPath}
                                     title={post.data.title}
                                     class:list={[
-                                        'border-l-tight px-fluid-2xs py-fluid-3xs text-step-0 lg:border-r-tight block focus:outline-hidden lg:border-l-0',
+                                        'border-l-tight lg:border-r-tight block px-fluid-2xs py-fluid-3xs text-step-0 focus:outline-hidden lg:border-l-0',
                                         isActive
-                                            ? 'border-brand bg-surface text-content-loud font-medium'
-                                            : 'hover:bg-surface border-transparent',
+                                            ? 'border-secondary bg-surface font-medium text-content-loud'
+                                            : 'border-transparent hover:bg-surface',
                                     ]}
                                     {...(isActive && {
                                         'data-state': 'active',
