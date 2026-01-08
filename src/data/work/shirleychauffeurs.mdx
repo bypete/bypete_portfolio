@@ -13,7 +13,7 @@ og:
         src: '~/assets/work/shirleychauffeurs/og__image.jpg'
         alt: 'Shirley Chauffeurs'
 brand:
-    bg: 'bg-[#0a1a29]'
+    bg: 'bg-[#00cccc]'
     color: 'text-[#00cccc]'
 logo:
     src: '~/assets/logos/sc__logo.svg'
@@ -26,10 +26,11 @@ cover:
     alt: 'Shirley Chauffeurs logo'
     credit: 'Shirley Chauffeurs'
 skillset:
-    text: 'text-content-light'
+    text: 'text-content-light [&_li]:before:text-white'
+    icon: ''
     areas:
         - title: 'My Role'
-          class: 'col-span-full border-b border-b-line pb-fluid-m'
+          class: 'col-span-full border-b border-b-black/8 pb-fluid-m'
           skills:
               - 'Branding, Design system, Visual design, User experience'
               - 'Rapid Prototyping'
@@ -80,12 +81,10 @@ import Lightbox from '~/components/MDX/Lightbox.astro';
 
 export const components = { ul: UL, blockquote: BLOCKQUOTE, pre: PRE };
 
-<p class="text-step-1">
-    [Shirley Chauffeurs](https://shirleychauffeurs.co.uk/) is a family-run
-    business known for its exceptional service and meticulous attention to
-    detail. The business takes great pride in ensuring its role in the
-    customer's special day is as perfect as possible.
-</p>
+<p class="text-step-2/snug font-medium ">[Shirley Chauffeurs](https://shirleychauffeurs.co.uk/) is a family-run
+business known for its exceptional service and meticulous attention to
+detail. The business takes great pride in ensuring its role in the
+customer's special day is as perfect as possible.</p>
 
 I was approached to build an online presence that would reflect their professional standards and build trust in their expertise.
 
@@ -96,18 +95,19 @@ I was approached to build an online presence that would reflect their profession
 ## Design system
 
 A comprehensive design system was created in Figma to keep the site consistent. The colour palette is based on shades of blue and cyan, which are associated with trust, reliability, and professionalism. The typography combines a serif font for headings to convey elegance and tradition, with a sans-serif font for body text to ensure readability and a modern feel.
-
-<Image
-        src={palette}
-        alt="Brand palette"
-        class="h-auto w-full col-[pullout]"
-        quality={'high'}
-        widths={[400, 720]}
-        sizes={`720px`}
-    />
+<Figure mode='bleed' caption="Figma palette for brand colours">
+  <Image
+          src={palette}
+          alt="Brand palette"
+          class="h-auto max-w-full"
+          quality={'high'}
+          widths={[380, 760]}
+          sizes={`760px`}
+      />
+</Figure>
 
 The **`Brand`** variable collection forms the core palette. An **`Alias`** collection assigns semantic names (like Primary, Secondary), and the **`Mapped`** collection references these for use in classes (such as Surface, Link, Info). The mapped variables also define a light and dark variant.
-<Figure bg="transparent" breakout="true" grid="grid grid-cols-2" caption="Light and dark mode colour palettes defined in Figma">
+<Figure mode="page"  grid="grid grid-cols-2" caption="Light and dark mode colour palettes defined in Figma">
     <Image
         src={light}
         alt="Light mode"
@@ -128,7 +128,7 @@ The **`Brand`** variable collection forms the core palette. An **`Alias`** colle
 Each brand palette is generated from an initial colour value using tints.dev and then Hue, Saturation and Lightness steps are refined to ensure sufficient contrast and accessibility. The Alias ensures that the brand colours are not referenced
 directly in the CSS, which allows for easy updates in the future.
 
-<Figure caption="Figma variables for mapped colours">
+<Figure mode='bleed' caption="Figma variables for mapped colours">
     <Image
         src={vars_mapped}
         alt="Alias variables are picked within the Mapped collection"
@@ -139,7 +139,14 @@ directly in the CSS, which allows for easy updates in the future.
     />
 </Figure>
 
-<Image
+The layout is clean and uncluttered, with plenty of white space to allow the content to breathe. This minimalist approach helps to focus attention on the key messages and calls to action.
+
+
+<Figure mode='default'
+    caption="Custom call to action for each car in the fleet"
+    credit="Shirley Chauffeurs"
+>
+    <Image
         src={cta}
         alt="Call to action"
         class="h-auto w-full"
@@ -147,8 +154,7 @@ directly in the CSS, which allows for easy updates in the future.
         widths={[400, 720, 960]}
         sizes={`768px`}
     />
-
-The layout is clean and uncluttered, with plenty of white space to allow the content to breathe. This minimalist approach helps to focus attention on the key messages and calls to action.
+</Figure>
 
 ## Performance
 
@@ -156,7 +162,7 @@ The live site performs well and adopts a variety of best practice methods to rem
 
 The Chrome [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview) results are excellent.
 
-<div class="angleclip-tl-fluid-l px-safe-inline lg:angleclip-tl-fluid-2xl -mb-fluid-5xl pb-fluid-5xl bg-radial-[at_50%_75%] pt-fluid-2xl lg:pt-fluid-3xl not-rte col-[full] from-slate-700 to-slate-950 to-90% text-center">
+<div class="angleclip-tl-fluid-l px-(--viewport-safe-inline) lg:angleclip-tl-fluid-2xl -mb-fluid-5xl pb-fluid-5xl bg-radial-[at_50%_75%] pt-fluid-2xl lg:pt-fluid-3xl not-rte col-[full] from-slate-700 to-slate-950 to-90% text-center">
     <Icon
         name="mdi:lighthouse"
         class="h-fluid-2xl w-fluid-2xl text-content-light p-fluid-xs mb-fluid-s mx-auto rounded-full bg-slate-700/80"
@@ -167,7 +173,7 @@ The Chrome [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview) r
     </div>
 </div>
 
-<Figure
+<Figure mode='default'
     caption="100% achieved in 3 out of 4 categories"
     credit="Google Chrome Lighthouse"
 >
@@ -242,21 +248,7 @@ The resultant Tailwind class would be `bg-surface-sunken` or `bg-surface`. This 
     using vanilla JS, and then managed with Alpine.js and local storage.
 </Lightbox>
 
-<Figure
-    caption="Custom call to action for each car in the fleet"
-    credit="Shirley Chauffeurs"
->
-    <Image
-        src={cta}
-        alt="Call to action"
-        class="h-auto w-full"
-        quality={'high'}
-        widths={[400, 720, 960]}
-        sizes={`768px`}
-    />
-</Figure>
-
-<Figure caption="Relevant testimonals are sorted to the front of the list using key words, and then limited to five. Selected words are highlighted with a svg underline to add emphasis and make the recommendataion appear more personable.">
+<Figure mode='default' caption="Relevant testimonals are sorted to the front of the list using key words, and then limited to five. Selected words are highlighted with a svg underline to add emphasis and make the recommendataion appear more personable.">
     <Image
         src={quotation}
         alt="Sample customer quote"
@@ -302,7 +294,7 @@ A lot of attention was given to site optimization, and the effort has produced s
 
 <BlockPicture
     src={basket_40}
-    wrapper="my-fluid-l"
+   mode={'page'}
     alt="Close up of Wedding couple"
     credit={frontmatter.title}
 />

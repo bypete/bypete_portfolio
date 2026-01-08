@@ -1,15 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components';
+
 interface Props {
     credit: string;
     class?: string;
     dir?: 'ltr' | 'rtl';
 }
-const {
-    credit,
-    dir = 'ltr',
-    class: ClassName = 'absolute bottom-fluid-2xs left-fluid-s @min-[100vw]:left-safe-inline',
-} = Astro.props;
+const { credit, dir = 'ltr', class: ClassName } = Astro.props;
 ---
 
 <div
@@ -21,7 +18,7 @@ const {
     x-data="credit"
 >
     <button
-        class="z-10 flex items-center justify-center rounded-full bg-action p-fluid-3xs"
+        class="z-10 flex items-center justify-center rounded-full bg-action p-fluid-3xs text-content-light"
         @click="toggle()"
         aria-label="show image credit"
         x-bind:aria-expanded="open ? 'true' : 'false'"

@@ -1,6 +1,6 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
 import { Image } from 'astro:assets';
+import type { HTMLAttributes } from 'astro/types';
 import Prompt from '~/components/ui/Prompt.astro';
 
 type LayoutType = 'default' | 'left' | 'right' | 'center';
@@ -11,14 +11,14 @@ type LayoutConfig =
     | { slots: 1; type: LayoutType }
     | { slots: 2; type: LayoutType }
     | { slots: 3; type: Extract<LayoutType, 'default' | 'center'> }
-    | { slots: 4; type: Extract<LayoutType, 'default'> };
+    | { slots: 4; type: Extract<LayoutType, 'default' | 'center'> };
 
 // Define a type that enforces the correct layout types for each slot count
 type LayoutMatrix = {
     1: Record<LayoutType, MatrixConfig>;
     2: Record<LayoutType, MatrixConfig>;
     3: Record<Extract<LayoutType, 'default' | 'center'>, MatrixConfig>;
-    4: Record<Extract<LayoutType, 'default'>, MatrixConfig>;
+    4: Record<Extract<LayoutType, 'default' | 'center'>, MatrixConfig>;
 };
 
 type SlotConfig = Partial<Record<SlotNumber, string[]>>; // All optional
@@ -28,37 +28,54 @@ type MatrixConfig = {
     slots?: SlotConfig;
 };
 
-type BackgroundConfig = {
+type CoverConfig = {
     src: ImageMetadata;
     alt: string;
+    widths?: number[] | undefined;
+    sizes?: string | undefined;
+};
+
+type DisplayTheme = {
+    wrap?: string[];
+    block?: string[];
+    panel?: string[];
+    shadow?: boolean;
+    coverImgProps?: {
+        widths?: number[] | undefined;
+        sizes?: string | undefined;
+    };
 };
 
 export interface Props extends HTMLAttributes<'div'> {
+    wrap?: string;
+    panel?: string;
+    aspect?: string;
+    mode?: 'plain' | 'breakout' | 'bleed' | 'page';
+    shadow?: boolean | string;
     layout?: LayoutConfig;
     gridClass?: string;
-    wrapperClass?: string;
     class?: string;
     legibility?: string;
     overflow?: boolean;
     container?: boolean;
     prompt?: 'swipe' | 'scroll';
-    breakout?: boolean;
-    background?: BackgroundConfig;
     dark?: boolean;
     slotConfig?: SlotConfig;
 }
 
 const {
+    wrap,
+    panel,
+    aspect,
+    shadow,
+    mode = 'breakout',
+    container,
     layout = { type: 'default', slots: 1 }, // Default to 1 slots
     gridClass = '', // Override grid layout
-    wrapperClass = '',
-    class: className,
+    class: className, // block outer class
     legibility,
     overflow = false,
-    container = true,
     prompt,
-    breakout = true,
-    background,
     dark = false,
     slotConfig = {},
     ...rest
@@ -89,13 +106,25 @@ const layoutMatrix: LayoutMatrix = {
     },
     2: {
         default: {
-            grid: ['grid-flow-row', 'md:grid-cols-[1fr_1fr]', 'gap-fluid-m'],
+            grid: [
+                'grid-flow-row',
+                '@lg/block:grid-cols-[1fr_1fr]',
+                'gap-fluid-m',
+            ],
         },
         left: {
-            grid: ['grid-flow-row', 'md:grid-cols-[3fr_2fr]', 'gap-fluid-m'],
+            grid: [
+                'grid-flow-row',
+                '@lg/block:grid-cols-[3fr_2fr]',
+                'gap-fluid-m',
+            ],
         },
         right: {
-            grid: ['grid-flow-row', 'md:grid-cols-[2fr_3fr]', 'gap-fluid-m'],
+            grid: [
+                'grid-flow-row',
+                '@lg/block:grid-cols-[2fr_3fr]',
+                'gap-fluid-m',
+            ],
         },
         center: {
             grid: ['grid-cols-1', 'text-center'],
@@ -118,6 +147,49 @@ const layoutMatrix: LayoutMatrix = {
         default: {
             grid: ['grid-cols-2', 'md:grid-cols-4', 'gap-fluid-m'],
         },
+        center: {
+            grid: [
+                'grid-cols-2',
+                'md:grid-cols-4',
+                'text-center',
+                'gap-fluid-m',
+            ],
+        },
+    },
+};
+
+const displayThemes: Record<string, DisplayTheme> = {
+    plain: {
+        wrap: ['rounded-tight'],
+        shadow: true,
+    },
+    breakout: {
+        wrap: ['col-[full]'],
+        panel: [
+            aspect ? aspect : 'aspect-cinema',
+            'container',
+            'mx-auto',
+            'w-full',
+        ],
+        shadow: false,
+    },
+    bleed: {
+        wrap: [
+            'col-[content]',
+            '-mx-(--viewport-safe-inline)',
+            'rounded-tight',
+        ],
+        panel: ['bg-surface-raised'],
+        shadow: true,
+    },
+    page: {
+        wrap: ['col-[full]', 'w-full', 'container', 'mx-auto'],
+        panel: [aspect ? aspect : 'min-h-[40cwq]', 'rounded-tight'],
+        shadow: true,
+        coverImgProps: {
+            widths: [480, 720, 1200],
+            sizes: '(max-width: 480px) 480px, (max-width: 768px) 720px, 1200px',
+        },
     },
 };
 
@@ -125,55 +197,55 @@ const layoutMatrix: LayoutMatrix = {
 const currentLayout =
     layoutMatrix[layout.slots][layout.type] || layoutMatrix[2].default;
 
+const config = displayThemes[mode] ?? displayThemes.default;
+
+const shadowEnabled = shadow !== undefined ? shadow : (config.shadow ?? false);
+
+const shadowClasses =
+    typeof shadowEnabled === 'string'
+        ? shadowEnabled
+        : shadowEnabled
+          ? 'rounded-tight shadow-raised shadow-shadow-dark/10 @min-[99.9vw]/block:rounded-none'
+          : null;
+
 const grid = gridClass ? gridClass.split(' ') : (currentLayout.grid ?? []);
+const wrapClasses = wrap ?? config?.wrap ?? [];
+const panelClasses = panel ?? config?.panel ?? [];
 
-const layoutClass = [
-    ...grid,
-    overflow && 'overflow-hidden',
-    container && 'mx-auto w-full container',
-    color,
-].filter(Boolean); // Filter out falsey values like `undefined` or `false`
-
-// Define background properties if background exists
-let backgroundProps;
-if (background) {
-    backgroundProps = {
-        src: background.src,
-        alt: background.alt,
-        widths: [480, 1800],
-        sizes: '100vw',
-        class: 'absolute h-full w-full object-cover',
-        format: 'webp',
-        quality: 80,
-    };
-}
+const layoutClass = [...grid, color].filter(Boolean);
 ---
 
 <div
     {...layout.type && { 'data-layout': `block-${layout.type}` }}
+    {...mode && { 'data-mode': mode }}
     class:list={[
-        'relative [&+*]:mt-0',
-        wrapperClass && wrapperClass,
-        breakout && 'col-[full]',
-    ]}
+        'not-rte @container/block relative after-block:mt-0',
+        wrapClasses,
+        className,
+        overflow && 'overflow-hidden',
+    ].filter(Boolean)}
 >
-    {
-        background ? (
-            <div class="absolute inset-0 h-full w-full">
-                <Image {...backgroundProps} />
-            </div>
-        ) : (
-            <slot name="background" />
-        )
-    }
-    <div class:list={['grid', layoutClass, className && className]} {...rest}>
+    <div class:list={['absolute inset-0 h-full w-full', shadowClasses]}>
+        <slot name="background" />
+    </div>
+
+    <div
+        data-panel
+        class:list={[
+            'relative grid h-full w-full',
+            panelClasses,
+            layoutClass,
+            shadowClasses,
+        ]}
+        {...rest}
+    >
         <slot />
 
         {
             layout.slots >= 1 && (
                 <div
                     class:list={[
-                        'relative',
+                        'relative min-h-0',
                         currentLayout.slots?.[1],
                         slotConfig[1],
                     ]}
@@ -186,7 +258,7 @@ if (background) {
             layout.slots >= 2 && (
                 <div
                     class:list={[
-                        'relative',
+                        'relative min-h-0',
                         currentLayout.slots?.[2],
                         slotConfig[2],
                     ]}
@@ -199,7 +271,7 @@ if (background) {
             layout.slots >= 3 && (
                 <div
                     class:list={[
-                        'relative',
+                        'relative min-h-0',
                         currentLayout.slots?.[3],
                         slotConfig[3],
                     ]}
@@ -212,7 +284,7 @@ if (background) {
             layout.slots >= 4 && (
                 <div
                     class:list={[
-                        'relative',
+                        'relative min-h-0',
                         currentLayout.slots?.[4],
                         slotConfig[4],
                     ]}
@@ -221,13 +293,13 @@ if (background) {
                 </div>
             )
         }
-    </div>
 
-    {
-        prompt && (
-            <div class="pointer-events-none absolute bottom-fluid-s left-1/2 z-100 -translate-x-1/2">
-                <Prompt dir="down" type={prompt} />
-            </div>
-        )
-    }
+        {
+            prompt && (
+                <div class="pointer-events-none absolute bottom-fluid-s left-1/2 z-100 -translate-x-1/2">
+                    <Prompt dir="down" type={prompt} />
+                </div>
+            )
+        }
+    </div>
 </div>

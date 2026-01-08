@@ -1,7 +1,34 @@
 ---
 import { Picture } from 'astro:assets';
 import Credit from '~/components/images/Credit.astro';
+
+type DisplayTheme = {
+    shadow?: boolean;
+    wrap?: string[];
+    block?: string[];
+    mandatory?: string[];
+};
+
+export interface Visual {
+    src: ImageMetadata;
+    alt: string;
+    widths?: number[];
+    densities?: number[];
+    width?: number;
+    sizes?: string;
+    filter?: 'rgb-split' | 'rgb-split-soft' | 'duotone';
+    url?: string;
+    cell?: string;
+    class?: string;
+}
+
 interface Props {
+    wrap?: string;
+    block?: string;
+    shadow?: boolean | string;
+
+    credit?: string;
+    mode?: 'default' | 'breakout' | 'bleed' | 'page';
     src: ImageMetadata;
     alt: string;
     class: string;
@@ -11,26 +38,72 @@ interface Props {
     breakout?: boolean;
     formats?: Array<'avif' | 'webp' | 'jpeg' | 'png'>;
     wrapper?: string;
-    credit?: string;
 }
 const {
+    wrap,
+    shadow,
+    block,
+    mode = 'default',
     src,
     alt,
     class: className,
     widths = [],
     sizes,
     formats = ['avif', 'webp'],
-    breakout = true,
-    wrapper = '',
     credit = '',
     ...attrs
 } = Astro.props;
+
+const displayThemes: Record<string, DisplayTheme> = {
+    default: {
+        block: ['rounded-tight', 'my-fluid-xl', '[&+*]:mt-fluid-l'],
+        wrap: ['bg-surface-raised'],
+        shadow: false,
+    },
+    plain: {
+        shadow: false,
+    },
+    breakout: {
+        block: ['col-[full]'],
+        shadow: false,
+    },
+    bleed: {
+        block: ['-mx-(--viewport-safe-inline)', 'rounded-tight'],
+        wrap: ['rounded-tight'],
+        shadow: false,
+    },
+    page: {
+        block: [
+            'col-[full]',
+            'w-full',
+            'container',
+            'mx-auto',
+            'rounded-tight',
+        ],
+        wrap: ['rounded-tight'],
+        shadow: true,
+    },
+};
+
+const currentDisplay = displayThemes[mode] ?? displayThemes.default;
+
+const shadowEnabled =
+    shadow !== undefined ? shadow : (currentDisplay.shadow ?? false);
+
+const shadowClasses =
+    typeof shadowEnabled === 'string'
+        ? shadowEnabled
+        : shadowEnabled
+          ? 'rounded-tight bg-surface-raised p-fluid-2xs shadow-raised shadow-shadow-dark/10'
+          : null;
+
+const blockClasses = block ?? currentDisplay?.block ?? [];
+const wrapClasses = wrap ?? currentDisplay?.wrap ?? [];
 
 const resolvedWidths = widths.length ? widths : [400, 768, 1920, src.width];
 const resolvedSizes = sizes || `100vw`;
 
 const imageProps = {
-    ...(className ? { class: className } : {}),
     src,
     alt,
     ...attrs,
@@ -42,18 +115,31 @@ const imageProps = {
 ---
 
 {
-    wrapper || breakout == true || credit.length ? (
-        <div
-            class:list={[
-                'group relative',
-                wrapper || 'my-fluid-l [&+*]:mt-fluid-l',
-                breakout && 'col-[full]',
-            ]}
-        >
-            <Picture {...imageProps} />
-            {credit && <Credit {credit} />}
+    wrapClasses.length || blockClasses.length || credit.length ? (
+        <div class:list={[blockClasses]}>
+            <div
+                class:list={[
+                    credit.length && 'group relative',
+                    wrapClasses,
+                    shadowClasses,
+                ]}
+            >
+                <Picture
+                    class:list={[className && className]}
+                    {...imageProps}
+                />
+                {credit && (
+                    <Credit
+                        {credit}
+                        class="absolute bottom-fluid-s left-fluid-s @min-[100vw]:left-safe-inline"
+                    />
+                )}
+            </div>
         </div>
     ) : (
-        <Picture {...imageProps} />
+        <Picture
+            class:list={[className && className, shadowClasses]}
+            {...imageProps}
+        />
     )
 }

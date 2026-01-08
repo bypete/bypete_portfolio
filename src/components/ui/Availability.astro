@@ -13,7 +13,7 @@ const { url } = Astro.props;
     available ? (
         <>
             <Button
-                theme="primary"
+                theme="action"
                 size="sm"
                 href={url}
                 isIcon={true}
@@ -21,7 +21,7 @@ const { url } = Astro.props;
             >
                 <Icon
                     name="lucide:handshake"
-                    class="h-fluid-s w-fluid-s inline"
+                    class="inline h-fluid-s w-fluid-s"
                 />
                 available
             </Button>

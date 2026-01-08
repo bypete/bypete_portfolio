@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "preact/hooks";
-import { animate, type AnimationSequence } from "motion";
 import clsx from "clsx";
+import { type AnimationSequence, animate, inView } from "motion";
+import { useEffect, useRef, useState } from "preact/hooks";
 import { buildToc } from "~/js/utils";
 
 export interface Heading {
@@ -16,6 +16,8 @@ interface Props {
 }
 
 export default function TocMenu({ headings, class: className }: Props) {
+  const [activeTitle, setActiveTitle] = useState("On this page");
+  const hasRevealed = useRef(false);
   const tocRef = useRef<HTMLElement | null>(null);
   const tocWrapperRef = useRef<HTMLDivElement | null>(null);
   const tocPanelRef = useRef<HTMLDivElement | null>(null);
@@ -26,6 +28,29 @@ export default function TocMenu({ headings, class: className }: Props) {
   const panelHeight = useRef<number>(null);
 
   useEffect(() => {
+    if (!tocRef.current || hasRevealed.current) return;
+
+    // Only reveal once — on first meaningful render
+    if (!hasRevealed.current && tocRef.current) {
+      requestAnimationFrame(() => {
+        tocRef.current?.removeAttribute("data-cloaked");
+        hasRevealed.current = true;
+      });
+    }
+
+    inView(tocRef.current, (element) => {
+      const animation = animate(
+        element,
+        { opacity: [0, 1], y: ["var(--spacing-fluid-m)", 0] },
+        { duration: 0.5, delay: 0.5 },
+      );
+      return () => {
+        animation.speed = -1;
+      };
+    });
+  }, []);
+
+  useEffect(() => {
     if (tocPanelRef.current) {
       panelHeight.current = tocPanelRef.current.getBoundingClientRect().height;
     }
@@ -33,6 +58,7 @@ export default function TocMenu({ headings, class: className }: Props) {
 
   useEffect(() => {
     if (
+      !tocRef.current ||
       !tocWrapperRef.current ||
       !tocPanelRef.current ||
       animationInProgress.current
@@ -42,16 +68,13 @@ export default function TocMenu({ headings, class: className }: Props) {
     const sequenceOpen: AnimationSequence = [
       [
         tocPanelRef.current,
-        { opacity: [0, 1], height: [0, `${panelHeight.current}px`] },
+        { opacity: 1, height: [0, `${panelHeight.current}px`] },
         { duration: 0.25 },
       ],
     ];
 
     const sequenceClose: AnimationSequence = [
-      [
-        tocPanelRef.current,
-        { opacity: 0, height: 0 },
-        { duration: 0.25 }],
+      [tocPanelRef.current, { opacity: 0, height: 0 }, { duration: 0.25 }],
     ];
 
     animationInProgress.current = true;
@@ -69,25 +92,30 @@ export default function TocMenu({ headings, class: className }: Props) {
   }, [isOpen]);
 
   useEffect(() => {
+    let lastActiveId = "";
+
     const setCurrent: IntersectionObserverCallback = (entries) => {
-      if (!tocRef.current) return;
-
-      const links = tocRef.current.querySelectorAll("a");
-
-      for (const index in entries) {
-        const entry = entries[index];
-        const { id } = entry.target;
-        const tocHeadingEl = tocRef.current.querySelector(`a[href="#${id}"]`);
-
-        if (!tocHeadingEl) continue;
-
+      for (const entry of entries) {
         if (entry.isIntersecting) {
-          for (const linkIndex in links) {
-            if (links[linkIndex] instanceof HTMLElement) {
-              links[linkIndex].setAttribute("data-state", "");
+          const id = entry.target.id;
+          if (id === lastActiveId) continue;
+
+          const link = tocRef.current?.querySelector(
+            `a[href="#${id}"]`,
+          ) as HTMLAnchorElement | null;
+          if (link) {
+            setActiveTitle(`${link.textContent}` || "On this page");
+            const links = tocRef.current?.querySelectorAll("a");
+            if (links) {
+              for (const a of links) {
+                a.setAttribute("data-state", "");
+              }
             }
+
+            link.setAttribute("data-state", "active");
+            lastActiveId = id;
           }
-          tocHeadingEl.setAttribute("data-state", "active");
+          break; // only handle the first intersecting heading
         }
       }
     };
@@ -111,7 +139,7 @@ export default function TocMenu({ headings, class: className }: Props) {
     return () => headingObserver.disconnect();
   }, []);
 
-  const toggleToc = (event?: Event) => {
+  const toggleToc = (_event?: Event) => {
     setIsOpen((prev) => !prev);
   };
 
@@ -122,7 +150,7 @@ export default function TocMenu({ headings, class: className }: Props) {
         href={`#${heading.slug}`}
         onClick={() => setIsOpen(false)}
         data-state
-        className="data-[state=active]:font-semibold data-[state=active]:text-content data-[state=active]:no-underline"
+        className="link data-[state=active]:font-semibold data-[state=active]:text-content data-[state=active]:no-underline"
       >
         {heading.text}
       </a>
@@ -136,38 +164,46 @@ export default function TocMenu({ headings, class: className }: Props) {
     <nav
       id="toc"
       ref={tocRef}
+      data-cloaked
       aria-label="Contents"
       className={clsx(
-        "sticky-root sticky top-[calc(var(--headerheight)+var(--spacing-fluid-s)))] z-(--z-toc) flex w-full flex-row items-center justify-center mb-fluid-l",
-        className ? className : "my-fluid-l pb-fluid-l",
+        "cloaked:invisible sticky top-(--safe-top) z-(--z-toc) mx-auto min-h-fluid-l w-full max-w-[40ch] opacity-0 md:top-fluid-m",
+        className ? className : "not-first:mt-fluid-2xl mb-fluid-2xl",
       )}
     >
       <div
         ref={tocWrapperRef}
         id="tocWrapper"
-        className="absolute top-0 left-0 mx-auto block w-full rounded-(--spacing-fluid-s) bg-surface-raised shadow-raised"
+        className="absolute mx-auto grid w-full grid-cols-1 grid-rows-(--gtr-toc) rounded-(--spacing-fluid-s) bg-surface-raised px-fluid-s shadow-raised shadow-shadow-dark/10"
       >
         <button
           type="button"
           aria-controls="tocPanel"
           ref={tocRefButton}
           aria-expanded={isOpen ? "true" : "false"}
-          className={`${isOpen && "rounded-b-none"} text-step-0/[1] group gap-x-fluid-2xs px-fluid-s py-fluid-xs flex w-full items-center justify-between   font-semibold whitespace-nowrap hover:cursor-pointer`}
+          className={
+            "group grid h-fluid-l w-full grid-cols-[1fr_auto] items-center gap-x-fluid-2xs whitespace-nowrap font-semibold text-step-0/[1] hover:cursor-pointer"
+          }
           onClick={() => toggleToc()}
           aria-label="Toggle page links"
         >
-          On this page{" "}
+          <span class="overflow-hidden text-ellipsis text-nowrap text-left">
+            {activeTitle}
+          </span>
           <span
-            className={`block h-5 w-5 group-focus:ring-2 ${isOpen ? "i-lucide-x-circle" : "i-lucide-file-text"}`}
+            className={`block size-fluid-s group-focus:ring-2 ${isOpen ? "i-lucide-x-circle" : "i-lucide-file-text"}`}
           />
         </button>
 
         <div
           ref={tocPanelRef}
           id="tocPanel"
-          className={`${isOpen ? "" : " pointer-events-none"} opacity-0 px-fluid-s max-h-[calc(100dvh-var(--spacing-headerheight))] w-full grow overflow-y-scroll `}
+          className={`${isOpen ? "overflow-auto" : "pointer-events-none"} cloaked:invisible max-h-[calc(100dvh-var(--spacing-headerheight))] w-full overflow-y-scroll`}
+          style={"opacity: 0;"}
         >
-          <ol className="m-0">{toc.map(renderHeading)}</ol>
+          <ol className="not-rte list m-0 list--counter space-y-fluid-2xs pb-fluid-xs">
+            {toc.map(renderHeading)}
+          </ol>
         </div>
       </div>
     </nav>

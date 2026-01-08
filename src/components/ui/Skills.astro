@@ -8,87 +8,127 @@ interface Area {
     skills: string[];
     class?: string;
 }
-
-interface SkillsetProps {
+interface Skillset {
     text?: string;
-    icon?: string;
-    shadow?: string;
+    emboss?: string;
     areas: Area[];
 }
 
 export interface Props extends HTMLAttributes<'div'> {
-    breakout?: boolean;
+    mode?: 'default' | 'breakout' | 'bleed' | 'page';
+    wrap?: string | string[];
+    panel?: string | string[];
+    shadow?: boolean | string;
     bg?: string;
     class?: string;
-    skillset?: SkillsetProps;
+    skillset?: Skillset;
 }
 
+type DisplayTheme = {
+    shadow?: boolean;
+    panel?: string[];
+    wrap?: string[];
+};
+
+const displayModes: Record<string, DisplayTheme> = {
+    default: {
+        panel: ['rounded-tight', 'p-(--viewport-safe-inline)'],
+        shadow: true,
+    },
+    breakout: {
+        wrap: ['col-[full]'],
+        panel: ['p-(--viewport-safe-inline)'],
+        shadow: false,
+    },
+    bleed: {
+        wrap: ['-mx-(--viewport-safe-inline)'],
+        panel: ['rounded-tight', 'p-(--viewport-safe-inline)'],
+        shadow: true,
+    },
+    page: {
+        wrap: ['col-[full]', 'w-full', 'mx-auto', 'container'],
+        panel: ['rounded-tight', 'p-(--viewport-safe-inline)'],
+        shadow: true,
+    },
+};
+
 const {
-    breakout = false,
+    mode = 'bleed',
+    wrap,
+    panel,
+    shadow,
+    bg = 'bg-surface-raised',
     class: className,
-    bg = 'bg-slate-900',
     skillset,
     ...rest
 } = Astro.props;
 
-const { text, icon, shadow, areas } = skillset as SkillsetProps;
+const { text, emboss, areas: rawAreas } = skillset as Skillset;
 
-// Function to parse markdown
-async function parseMarkdown(content: string) {
-    const result = await remark().use(remarkHtml).process(content);
-    return String(result);
-}
+const config = displayModes[mode] ?? displayModes.default;
 
-// Pre-process all skills markdown
+const shadowEnabled = shadow !== undefined ? shadow : (config.shadow ?? true);
+
+const shadowClasses =
+    typeof shadowEnabled === 'string'
+        ? shadowEnabled
+        : shadowEnabled
+          ? 'shadow-raised shadow-shadow-dark/10'
+          : null;
+
+const wrapClasses = wrap ?? config?.wrap ?? [];
+const panelClasses = panel ?? config?.panel ?? [];
+
+// Shared parser
+const parser = remark().use(remarkHtml, { sanitize: false });
+
+// Strip wrapping <p> tags from any markdown that is a single paragraph
+const stripParagraph = (html: string) =>
+    html.replace(/^<p>(.*)<\/p>\n?$/s, '$1').trim();
+
+// Process titles and skills — no <p> ever
 const processedAreas = await Promise.all(
-    areas.map(async (area) => ({
-        ...area,
-        processedSkills: await Promise.all(
-            area.skills.map((skill) => parseMarkdown(skill))
+    rawAreas.map(async (area) => ({
+        titleHtml: stripParagraph(
+            await parser.process(area.title).then((r) => String(r))
         ),
+        skillsHtml: await Promise.all(
+            area.skills.map(async (skill) =>
+                stripParagraph(
+                    await parser.process(skill).then((r) => String(r))
+                )
+            )
+        ),
+        class: area.class,
     }))
 );
 ---
 
 <div
-    class:list={[
-        'not-rte @container/skills',
-        className
-            ? className
-            : `my-fluid-l [&+*]:mt-0 ${!breakout ? '-mx-fluid-m' : 'col-[full]'}`,
-    ]}
+    class:list={['not-rte @container/skills', wrapClasses, className]}
     {...rest}
 >
     <div
         class:list={[
+            'w-full rounded @min-[99.9vw]/skills:rounded-none',
+            panelClasses,
+            shadowClasses,
             bg,
-            text || 'text-content',
-            'w-full rounded p-fluid-m inset-shadow-sm @min-[99.9vw]/skills:rounded-none',
+            text ?? 'text-content [&_li]:before:text-secondary',
+            emboss && emboss,
         ]}
     >
-        <slot />
         <ul
-            class:list={[
-                'grid grid-cols-1 gap-fluid-m leading-normal @min-[60ch]:grid-cols-2',
-
-                shadow || 'text-shadow-emboss shadow-black/10',
-            ]}
+            class="grid grid-cols-1 gap-fluid-m @min-[60ch]:grid-cols-2 @min-[96ch]:grid-cols-3"
         >
+            <li class="col-span-full *:last:mb-0"><slot /></li>
             {
-                areas.map((area) => (
-                    <li class:list={['list-none', area?.class]}>
-                        <h3>{area.title}</h3>
-                        <ul
-                            class:list={[
-                                'space-y-fluid-2xs leading-normal',
-                                icon || '[&>li]:before:text-white!',
-                            ]}
-                        >
-                            {area.skills.map((skill) => (
-                                <li
-                                    class="relative pl-fluid-m before:absolute before:top-tight before:left-0 before:i-lucide-check-circle-2 before:size-fluid-s"
-                                    set:html={parseMarkdown(skill)}
-                                />
+                processedAreas.map((area) => (
+                    <li class:list={[area?.class]}>
+                        <h3 set:html={area.titleHtml} />
+                        <ul class:list={['list list--checklist']}>
+                            {area.skillsHtml.map((html) => (
+                                <li set:html={html} />
                             ))}
                         </ul>
                     </li>

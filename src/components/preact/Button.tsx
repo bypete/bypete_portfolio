@@ -3,6 +3,7 @@ import { useState } from "preact/hooks";
 
 export interface Props extends h.JSX.HTMLAttributes<HTMLElement> {
   theme?:
+  | "action"
   | "primary"
   | "secondary"
   | "disco"
@@ -22,7 +23,7 @@ export interface Props extends h.JSX.HTMLAttributes<HTMLElement> {
 }
 
 export default function Button({
-  theme = "primary",
+  theme = "action",
   class: className,
   size = "md",
   isIcon = false,
@@ -43,7 +44,7 @@ export default function Button({
     "items-center",
     "rounded-full",
     "align-middle",
-    "font-bold",
+    "font-semibold",
     "transition-colors",
     "text-shadow-none",
     "hover:inset-shadow-sm",
@@ -64,6 +65,12 @@ export default function Button({
 
   const themeClasses = {
     link: [],
+    action: [
+      "bg-action",
+      "text-content-light",
+      "hover:border-black/10",
+      "hover:bg-action-light",
+    ],
     primary: [
       "bg-action",
       "text-content-dark",
@@ -79,7 +86,7 @@ export default function Button({
       "ring-inset",
       "ring-content-light",
     ],
-    outline: ["bg-transparent", "ring-2", "ring-inset", "ring-line"],
+    outline: ["bg-transparent", "text-action", "ring-2", "ring-inset", "ring-action"],
     disco: [
       "bg-linear-to-r",
       "from-indigo-900",

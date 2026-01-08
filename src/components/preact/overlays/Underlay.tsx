@@ -1,16 +1,25 @@
 import { useStore } from "@nanostores/preact";
+import clsx from "clsx";
 import { activeUnderlays } from "~/stores/layersStore";
+
 interface Props {
-  isHeroDark?: boolean;
+  shade?: "dark" | "light";
 }
-export default function Overlay({ isHeroDark = false }: Props) {
+export default function Overlay({ shade = "dark" }: Props) {
   const amount = useStore(activeUnderlays);
-  const shade = isHeroDark ? "bg-surface-underlay-dark/90" : "bg-surface-underlay-light/90";
+  const shadeColor =
+    shade === "dark"
+      ? "bg-surface-underlay-dark/90"
+      : "bg-surface-underlay-light/90";
 
   return (
     <div
       id="underlay"
-      className={`fixed inset-0 z-(--z-underlay) h-full min-h-screen backdrop-blur-xs backdrop-grayscale transition-opacity duration-300 ${shade} ${amount > 0 ? "" : "hidden"}`}
+      className={clsx(
+        shadeColor,
+        "fixed inset-0 z-(--z-overlay) h-full min-h-screen bg-surface-overlay-dark/80 backdrop-blur-xs backdrop-grayscale transition-opacity duration-300",
+        amount > 0 ? "" : "hidden",
+      )}
     />
   );
 }

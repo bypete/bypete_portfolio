@@ -56,7 +56,7 @@ import Button from '~/components/preact/Button.tsx';
             </div>
         </div>
         <div class="mt-fluid-m">
-            <Button type="submit" theme="primary">Send now</Button>
+            <Button type="submit" theme="action">Send now</Button>
         </div>
     </form>
 </div>
@@ -89,7 +89,7 @@ import Button from '~/components/preact/Button.tsx';
                     ],
                     {
                         errorsContainer: '#input_name_error',
-                    },
+                    }
                 )
                 .addField(
                     '#input_email',
@@ -105,7 +105,7 @@ import Button from '~/components/preact/Button.tsx';
                     ],
                     {
                         errorsContainer: '#input_email_error',
-                    },
+                    }
                 )
                 .addField(
                     '#input_message',
@@ -124,7 +124,7 @@ import Button from '~/components/preact/Button.tsx';
                     ],
                     {
                         errorsContainer: '#input_message_error',
-                    },
+                    }
                 )
                 .addField('#_sc', [
                     {
@@ -180,7 +180,7 @@ import Button from '~/components/preact/Button.tsx';
                     group.classList.toggle('has-error', hasError);
                     group.classList.toggle(
                         'has-success',
-                        hasSuccess && !hasError,
+                        hasSuccess && !hasError
                     );
                 };
 

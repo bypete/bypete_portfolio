@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, useCallback } from "preact/hooks";
-import { animate, type AnimationSequence } from "motion";
+import { type AnimationSequence, animate } from "motion";
+import { useCallback, useEffect, useRef, useState } from "preact/hooks";
 
 export default function ThemeIcon() {
   const lightRef = useRef<HTMLButtonElement>(null);
@@ -29,23 +29,24 @@ export default function ThemeIcon() {
     if (!lightRef.current || !darkRef.current || animationInProgress.current)
       return;
 
+    const easeOverShoot = [0.175, 0.885, 0.320, 1.275] as const;
+
     const sequenceLight: AnimationSequence = [
       [
         lightRef.current,
         {
-          x: ["0%", "100%"],
-          y: ["0%", "15%"],
-          rotate: ["0deg", "30deg"],
+          y: ["100%"],
+          rotate: ["0deg", "-90deg"],
         },
+        { duration: 0.25, },
       ],
       [
         darkRef.current,
         {
-          x: ["-100%", "0%"],
-          y: ["15%", "0%"],
-          rotate: ["-30deg", "0deg"],
+          y: ["100%", "0%"],
+          rotate: ["0deg"],
         },
-        { at: "<" },
+        { duration: 0.75, at: '<', delay: 0.15, ease: easeOverShoot },
       ],
     ];
 
@@ -53,29 +54,27 @@ export default function ThemeIcon() {
       [
         darkRef.current,
         {
-          x: ["0%", "100%"],
-          y: ["0%", "15%"],
-          rotate: ["0deg", "30deg"],
+          y: ["100%"],
+          rotate: ["0deg", "-90deg"],
         },
-        { duration: 0.75 },
+        { duration: 0.25, },
       ],
       [
         lightRef.current,
         {
-          x: ["-100%", "0%"],
-          y: ["15%", "0%"],
-          rotate: ["-30deg", "0deg"],
+          y: ["100%", "0%"],
+          rotate: ["0deg"],
         },
-        { at: "<", duration: 0.75 },
+        { duration: 0.75, at: '<', delay: 0.15, ease: easeOverShoot },
       ],
     ];
 
     const sequence = theme === "light" ? sequenceLight : sequenceDark;
     animationInProgress.current = true;
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+    updateMetaTags(theme);
     animate(sequence).then(() => {
-      document.documentElement.setAttribute("data-theme", theme);
-      localStorage.setItem("theme", theme);
-      updateMetaTags(theme);
       animationInProgress.current = false;
     });
   }, [theme, updateMetaTags]); // Include theme and updateMetaTags as dependencies
@@ -85,7 +84,7 @@ export default function ThemeIcon() {
   };
 
   return (
-    <div className="grid-col-1 grid-row-1 relative grid size-fluid-l justify-center overflow-hidden rounded-full bg-surface-overlay text-center text-content leading-none inset-shadow-sm transition-colors duration-[750ms]">
+    <div className="grid-col-1 grid-row-1 relative inset-shadow-sm grid size-fluid-l justify-center overflow-hidden rounded-full bg-action text-center text-content-light leading-none transition-colors duration-[750ms]">
       <button
         id="setThemeLight"
         ref={lightRef}
@@ -93,9 +92,9 @@ export default function ThemeIcon() {
         type="button"
         aria-label="set light theme"
         aria-pressed={theme === "light"}
-        className="size-fluid-l hover:cursor-pointer col-start-1 row-start-1 flex items-center justify-center rounded-full"
+        className="col-start-1 row-start-1 flex size-fluid-l items-center justify-center rounded-full hover:cursor-pointer"
       >
-        <span className="i-lucide-sun-moon s-m-s" />
+        <span className="i-lucide-sun size-fluid-s" />
       </button>
       <button
         id="setThemeDark"
@@ -104,9 +103,9 @@ export default function ThemeIcon() {
         type="button"
         aria-label="set dark theme"
         aria-pressed={theme === "dark"}
-        className="size-fluid-l  hover:cursor-pointer col-start-1 row-start-1 flex items-center justify-center rounded-full"
+        className="col-start-1 row-start-1 flex size-fluid-l items-center justify-center rounded-full hover:cursor-pointer"
       >
-        <span className="i-lucide-sun s-m-s" />
+        <span className="i-lucide-moon size-fluid-s" />
       </button>
     </div>
   );

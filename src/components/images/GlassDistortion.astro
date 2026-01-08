@@ -1,0 +1,137 @@
+---
+// LiquidGlass.astro ← just replace your old file with this
+import type { ImageMetadata } from 'astro';
+
+export interface Props {
+    visual: ImageMetadata;
+    alt?: string;
+    /** 8–22 = how many flowing bands */
+    strips?: number;
+    /** 1–10 = intensity & speed (6–8 feels perfect) */
+    intensity?: number;
+}
+
+const { visual, alt = '', strips = 16, intensity = 7 } = Astro.props;
+---
+
+<div
+    class="liquid-glass relative h-full w-full overflow-hidden"
+    style={`aspect-ratio: ${visual.width}/${visual.height};`}
+    data-src={visual.src}
+    data-strips={strips}
+    data-intensity={intensity}
+>
+    <img
+        src={visual.src}
+        alt={alt}
+        width={visual.width}
+        height={visual.height}
+        class="pointer-events-none absolute inset-0 h-full w-full object-cover select-none"
+        loading="lazy"
+    />
+</div>
+
+<style is:global>
+    .liquid-glass {
+        container-type: inline-size;
+    }
+
+    .flow {
+        position: absolute;
+        inset: 0;
+        background: var(--bg);
+        background-size: cover;
+        background-position-x: var(--pos);
+        clip-path: var(--clip);
+        mix-blend-mode: overlay;
+        opacity: 0.78;
+        filter: brightness(1.06) contrast(1.08);
+        will-change: transform;
+        pointer-events: none;
+    }
+
+    .liquid-glass::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            90deg,
+            transparent 40%,
+            rgba(255, 255, 255, 0.07) 50%,
+            transparent 60%
+        );
+        animation: gentle-glow 26s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes gentle-glow {
+        0% {
+            transform: translateX(-180%);
+        }
+        100% {
+            transform: translateX(180%);
+        }
+    }
+</style>
+
+<script>
+    import { inView, animate, stagger } from 'motion';
+
+    document.querySelectorAll('.liquid-glass').forEach((el) => {
+        const container = el as HTMLElement;
+        const src = container.dataset.src!;
+        const count = Math.max(8, Number(container.dataset.strips ?? 16));
+        const power = Number(container.dataset.intensity ?? 7) * 1.4;
+
+        const flows: HTMLElement[] = [];
+
+        for (let i = 0; i < count; i++) {
+            const f = document.createElement('div');
+            f.className = 'flow';
+
+            const w = 100 / count;
+            const left = i * w;
+            const right = 100 - (i + 1) * w;
+
+            f.style.cssText = `
+        --bg: url(${src});
+        --pos: ${left}%;
+        --clip: inset(0 ${right}% 0 ${left}%);
+      `;
+
+            container.appendChild(f);
+            flows.push(f);
+        }
+
+        inView(
+            container,
+            () => {
+                animate(
+                    flows,
+                    {
+                        x: [0, power, power * -0.7, power * 0.4, 0],
+                        scaleX: [1, 1.05, 0.97, 1.03, 1],
+                    },
+                    {
+                        duration: 18 + Math.random() * 10,
+                        delay: stagger(0.3, { from: 'center' }),
+                        repeat: Infinity,
+                        easing: 'easeInOut',
+                    }
+                );
+
+                animate(
+                    flows,
+                    { y: [0, power * 0.3, power * -0.2, 0] },
+                    {
+                        duration: 22,
+                        delay: stagger(0.4, { from: 'center' }),
+                        repeat: Infinity,
+                        easing: 'easeInOut',
+                    }
+                );
+            },
+            { amount: 0.3 }
+        );
+    });
+</script>

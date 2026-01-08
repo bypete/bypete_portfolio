@@ -1,21 +1,22 @@
-import { useStore } from '@nanostores/preact';
-import { useEffect, useRef } from 'preact/hooks';
-import { isMenuOpen, openMenu } from '~/stores/layersStore';
-import { animate, type AnimationSequence } from 'motion';
-import NavSmallScreen from '~/components/preact/navigation/NavSmallScreen';
-import { navigation, footerNavigation } from '~/data/navigation';
-import siteInfo from '~/data/site';
+import { useStore } from "@nanostores/preact";
+import { type AnimationSequence, animate, easeIn, easeInOut, easeOut } from "motion";
+import { useEffect, useRef } from "preact/hooks";
+import NavSmallScreen from "~/components/preact/navigation/NavSmallScreen";
+import { footerNavigation, navigation } from "~/data/navigation";
+import siteInfo from "~/data/site";
+import { isMenuOpen, openMenu } from "~/stores/layersStore";
 
 interface Props {
   currentPath?: string;
 }
 
-export default function OffCanvasNavigation({ currentPath = '' }: Props) {
+export default function OffCanvasNavigation({ currentPath = "" }: Props) {
   const year = new Date().getFullYear();
   const $MenuState = useStore(isMenuOpen);
+  const hasRevealed = useRef(false);
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const navRef = useRef<HTMLDivElement | null>(null);
-  const animationInProgress = useRef<boolean>(false);
+  const isAnimating = useRef(false);
 
   useEffect(() => {
     const handleFocus = (event: FocusEvent) => {
@@ -23,51 +24,56 @@ export default function OffCanvasNavigation({ currentPath = '' }: Props) {
         openMenu(); // Open menu when #navigation (canvasRef) is focused
       }
     };
-    document.addEventListener('focusin', handleFocus);
+    document.addEventListener("focusin", handleFocus);
 
     return () => {
-      document.removeEventListener('focusin', handleFocus);
+      document.removeEventListener("focusin", handleFocus);
     };
-  }, []);
+  }, [$MenuState]);
 
   useEffect(() => {
-    const wrapper = document.getElementById('wrapperContent');
-    const html = document.documentElement;
-    if (
-      !navRef.current ||
-      !canvasRef.current ||
-      !wrapper ||
-      animationInProgress.current ||
-      typeof window === 'undefined'
-    )
+    if (!canvasRef.current || !navRef.current || typeof window === "undefined")
       return;
-    const viewWidth =
-      window.innerWidth || document.documentElement.clientWidth;
+
+    // Skip the first mount when menu is closed by default
+    if (!hasRevealed.current && !$MenuState) {
+      // First load, menu closed → just reveal silently, no animation
+      requestAnimationFrame(() => {
+        canvasRef.current?.removeAttribute("data-cloaked");
+        hasRevealed.current = true;
+      });
+      return;
+    }
+
+    const html = document.documentElement;
+    const easeGentle = [0.22, 1, 0.36, 1] as const;
+    const isMobile = (window.innerWidth || html.clientWidth) <= 768;
+
     const sequenceIn: AnimationSequence = [
       [
         canvasRef.current,
         {
-          transform:
-            viewWidth <= 768 ? 'translateY(0%)' : 'translateX(0%)',
+          visibility: ["visible"],
         },
-        { duration: 0.75, ease: 'easeInOut' },
+        { duration: 0 },
+      ],
+      [
+        canvasRef.current,
+        {
+          clipPath: [
+            "circle(150% at 50% 50%)",
+          ],
+        },
+        { duration: 2.5, ease: easeGentle },
       ],
       [
         navRef.current,
         {
-          opacity: [0, 1],
-          transform:
-            viewWidth <= 768
-              ? [
-                'translateY(calc(1 * var(--spacing-fluid-m)))',
-                'translateY(0)',
-              ]
-              : [
-                'translateX(calc(1 * var(--spacing-fluid-m)))',
-                'translateX(0%)',
-              ],
+          opacity: [0, 100],
+          x: isMobile ? ["0%", "0%"] : ["var(--spacing-fluid-m)", 0],
+          y: isMobile ? ["var(--spacing-fluid-m)", 0] : ["0%", "0%"],
         },
-        { at: '<', delay: 0.5, duration: 0.75, ease: 'easeInOut' },
+        { duration: 1, delay: 0.25, ease: easeGentle, at: "<" },
       ],
     ];
 
@@ -75,60 +81,66 @@ export default function OffCanvasNavigation({ currentPath = '' }: Props) {
       [
         canvasRef.current,
         {
-          transform:
-            viewWidth <= 768
-              ? 'translateY(-100%)'
-              : 'translateX(-100%)',
+          clipPath: [
+            "circle(0% at var(--hamburger-center) var(--hamburger-center))",
+          ],
         },
-        { duration: 0.75, ease: 'easeInOut' },
+        { duration: 1, ease: easeInOut },
+      ],
+      [
+        canvasRef.current,
+        {
+          visibility: ["hidden"],
+        },
+        { duration: 0.1 },
       ],
     ];
 
-    animationInProgress.current = true;
-    if (typeof window === 'undefined') return; // Ensure client-side execution
-
     if ($MenuState) {
-      animate(sequenceIn).then(() => {
-        document.documentElement.style.overflow = $MenuState
-          ? 'hidden'
-          : '';
-        animationInProgress.current = false;
-      });
+      html.style.overflow = "hidden";
+      animate(sequenceIn);
     } else {
-      document.documentElement.style.overflow = $MenuState
-        ? 'hidden'
-        : '';
-      animate(sequenceOut).then(() => {
-        animationInProgress.current = false;
+      html.style.overflow = "";
+      animate(sequenceOut);
+    }
+    // Only reveal once — on first meaningful render
+    if (!hasRevealed.current && canvasRef.current) {
+      requestAnimationFrame(() => {
+        canvasRef.current?.removeAttribute("data-cloaked");
+        hasRevealed.current = true;
       });
     }
   }, [$MenuState]);
 
   return (
-    <div id="navigation" tabIndex={-1}
+    <div
+      id="navigation"
+      data-cloaked
+      tabIndex={-1}
       ref={canvasRef}
-      className="transform-[translateY(-100%)] md:transform-[translateX(-100%)] z-(--z-nav) pt-headerheight px-safe-inline bg-surface not-dynamic:h-screen fixed inset-0 flex h-dvh w-full overflow-y-scroll"
+      class="cloaked:invisible fixed inset-0 z-(--z-offscreen) flex h-dvh not-dynamic:h-screen w-full overflow-y-scroll bg-[image:var(--filter-noise)] bg-size-[960px] bg-surface-brand px-(--viewport-safe-inline) pt-headerheight text-content-dark"
+      style={
+        "clip-path: circle(0% at var(--hamburger-center) var(--hamburger-center));"
+      }
     >
       <div
-
         ref={navRef}
-        class="gap-fluid-m pt-fluid-l text-content grid w-full grid-rows-[1fr_auto]"
+        class="grid w-full grid-rows-[1fr_auto] gap-fluid-m"
       >
-        <nav>
-          <NavSmallScreen
-            items={navigation}
-            currentPath={currentPath}
-          />
-        </nav>
+        <NavSmallScreen
+          items={navigation}
+          currentPath={currentPath}
+          className="self-end"
+        />
 
-        <div class="pb-fluid-l flex flex-row justify-between">
+        <div class="flex min-h-fluid-l flex-col justify-between gap-fluid-m pb-fluid-m md:flex-row">
           {footerNavigation && (
-            <ul class="gap-fluid-xs min-h-fluid-l flex flex-row items-center">
+            <ul class="flex flex-row items-center gap-fluid-xs">
               {footerNavigation.map((item) => (
                 <li key={item}>
                   <a
                     href={item.url}
-                    class="link"
+                    class="text-content-dark hover:text-content-light"
                     title={item.label}
                   >
                     {item.label}
@@ -138,17 +150,17 @@ export default function OffCanvasNavigation({ currentPath = '' }: Props) {
               <li>©{year}</li>
             </ul>
           )}
-          <div class="gap-fluid-2xs min-h-fluid-l grid grid-flow-col items-center">
+          <div class="grid grid-flow-col items-center justify-start gap-fluid-xs">
             {siteInfo.socials.map((channel) => (
               <a
                 key={channel}
                 href={`${channel.url}`}
                 rel="nofollow"
-                className="text-content hover:text-primary"
+                className="text-content-dark hover:text-content-light"
                 title={channel.platform}
               >
                 <span
-                  className={`${channel.class} w-fluid-m h-fluid-m block fill-current`}
+                  className={`${channel.class} block h-fluid-m w-fluid-m fill-current`}
                 />
               </a>
             ))}

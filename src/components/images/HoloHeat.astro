@@ -1,0 +1,84 @@
+---
+import { getImage, Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+export interface Props {
+    visual: ImageMetadata;
+    alt?: string;
+    /** 1–10 → strength of the liquid warp */
+    intensity?: number;
+    /** 1–10 → speed of the flow */
+    speed?: number;
+}
+
+const { visual, alt = '', intensity = 7, speed = 6 } = Astro.props;
+const optimizedBackground = await getImage({
+    src: visual,
+    format: 'webp',
+    quality: 'high',
+});
+---
+
+<div
+    class="warp-field relative h-full w-full overflow-hidden contain-inline-size"
+    style={`--img: url(${optimizedBackground.src}); `}
+    data-intensity={intensity}
+    data-speed={speed}
+>
+    <!-- Static base image -->
+    <img
+        src={optimizedBackground.src}
+        alt={alt}
+        width={visual.width}
+        height={visual.height}
+        class="pointer-events-none relative z-20 h-full w-full object-contain object-bottom select-none"
+        loading="lazy"
+    />
+
+    <div
+        class="warp-layer b pointer-events-none absolute inset-0 z-10 origin-bottom"
+    >
+        <div
+            class="absolute inset-0 origin-bottom translate-x-fluid-s bg-(image:--img) bg-contain bg-bottom bg-no-repeat [filter:url(#duotone)] will-change-transform"
+        >
+        </div>
+    </div>
+</div>
+<!-- 
+<script>
+    import { inView, animate } from 'motion';
+
+    document.querySelectorAll('.warp-field').forEach((el) => {
+        const container = el as HTMLElement;
+        const layers = container.querySelectorAll('.warp-layer');
+        const intensity = Number(container.dataset.intensity ?? 7) * 0.08;
+        const speed = Number(container.dataset.speed ?? 6);
+
+        inView(
+            container,
+            () => {
+                layers.forEach((layer, i) => {
+                    animate(
+                        layer,
+                        {
+                            x: [0, intensity * 18 * (i === 0 ? -1 : 1), 0],
+                            // y: [0, intensity * 14 * (i === 0 ? 1 : -1), 0],
+                            scale: [
+                                1.02 + i * 0.01,
+                                1.05 + i * 0.01,
+                                1.02 + i * 0.01,
+                            ],
+                        },
+                        {
+                            duration: ((22 + i * 6) / speed) * 10,
+                            // repeat: Infinity,
+                            ease: 'easeInOut',
+                            delay: i * 2,
+                        }
+                    );
+                });
+            },
+            { amount: 0.4 }
+        );
+    });
+</script> -->

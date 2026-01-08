@@ -1,9 +1,17 @@
 ---
 import { Icon } from 'astro-icon/components';
 
+type FigureTheme = {
+    figure?: string[];
+    shadow?: boolean;
+    wrap?: string[];
+};
+
 interface Props {
-    bg?: string;
-    breakout?: boolean;
+    wrap?: string;
+    figure?: string;
+    shadow?: boolean | string;
+    mode?: 'default' | 'breakout' | 'bleed' | 'page';
     caption?: string;
     class?: string;
     credit?: string;
@@ -11,25 +19,63 @@ interface Props {
 }
 
 const {
-    bg = 'bg-surface-raised',
-    breakout = false,
+    wrap,
+    shadow,
+    figure,
     caption,
     class: className,
     credit,
+    mode = 'default',
     grid = 'grid grid-cols-1 items-center gap-fluid-m',
     ...attrs
 } = Astro.props;
+
+const figureThemes: Record<string, FigureTheme> = {
+    default: {
+        figure: ['rounded-tight'],
+        wrap: ['bg-surface-raised'],
+        shadow: true,
+    },
+    breakout: {
+        figure: ['col-[full]'],
+        shadow: false,
+    },
+    bleed: {
+        figure: ['-mx-(--viewport-safe-inline)', 'rounded-tight'],
+        wrap: ['bg-surface-raised'],
+        shadow: true,
+    },
+    page: {
+        figure: ['col-[full]', 'w-full', 'container', 'mx-auto'],
+        wrap: ['bg-surface-raised'],
+    },
+};
+
+const currentFigure = figureThemes[mode] ?? figureThemes.default;
+
+const shadowEnabled =
+    shadow !== undefined ? shadow : (currentFigure.shadow ?? true);
+
+const shadowClasses =
+    typeof shadowEnabled === 'string'
+        ? shadowEnabled
+        : shadowEnabled
+          ? 'rounded-tight bg-surface-raised p-fluid-2xs shadow-raised shadow-shadow-dark/10'
+          : null;
+
+const figureClasses = figure ?? currentFigure?.figure ?? [];
+const wrapClasses = wrap ?? currentFigure?.wrap ?? [];
 ---
 
 <figure
     class:list={[
         'not-rte @container/figure relative',
-        className ? className : 'my-fluid-l',
-        breakout ? 'col-[full]' : 'col-[pullout] rounded-tight',
-    ]}
+        className ?? 'my-fluid-l',
+        figureClasses,
+    ].filter(Boolean)}
     {...attrs}
 >
-    <div class:list={[bg, grid]}>
+    <div class:list={[wrapClasses, shadowClasses, grid].filter(Boolean)}>
         <slot />
     </div>
     {

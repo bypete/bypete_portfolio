@@ -1,46 +1,120 @@
 ---
-import { footerNavigation } from '~/data/navigation';
-import BypeteBrand from '~/assets/svg/bypete__footer.svg?react';
-import siteInfo from '~/data/site';
+import LogoType from '~/assets/svg/bypete--wire.svg';
+import Swoosh from '~/assets/svg/swoosh.svg';
 import Social from '~/components/ui/Social.astro';
+import { footerNavigation } from '~/data/navigation';
+import siteInfo from '~/data/site';
 
 const year = new Date().getFullYear();
 ---
 
 <footer
-    class="hidden grid-cols-2 items-center gap-fluid-m border-t border-t-line bg-surface px-safe-inline py-fluid-2xl leading-tight md:grid"
+    id="footer"
+    class="relative z-(--z-footer) hidden border-t border-t-shadow-dark/8 bg-surface-bedrock bg-[image:var(--filter-dark-noise)] bg-size-[700px] text-content-footer md:block"
 >
-    <a href="/" class="justify-self-start md:col-span-2" title="Return to home">
-        <BypeteBrand
-            name="bypete__brand"
-            title="byPete logo in brand colour"
-            class="h-fluid-l w-auto"
-        />
-    </a>
-    {
-        footerNavigation && (
-            <ul class="flex flex-row flex-wrap gap-fluid-s">
-                {footerNavigation.map((item) => (
-                    <li>
-                        <a href={item.url} class="link" title={item.label}>
-                            {item.label}
-                        </a>
-                    </li>
-                ))}
-                <li>©{year}</li>
-            </ul>
-        )
-    }
-
-    <div class="flex gap-fluid-2xs justify-self-end">
+    <div
+        class="relative z-(--z-content) grid w-full grid-cols-2 items-center gap-fluid-m px-safe-inline py-fluid-2xl"
+    >
+        <a
+            href="/"
+            class="justify-self-start md:col-span-2"
+            title="Return to home"
+        >
+            <LogoType
+                id="footerLogo"
+                data-animate-logotype
+                name="bypete__brand"
+                class="drop-shadow-shadow-shade/25 h-fluid-l w-auto text-primary drop-shadow-brandlogo svgpath:stroke-[currentColor]"
+            />
+        </a>
         {
-            siteInfo.socials.map((channel) => (
-                <Social
-                    platform={channel.platform}
-                    url={channel.url}
-                    name={channel.icon}
-                />
-            ))
+            footerNavigation && (
+                <ul class="flex flex-row flex-wrap gap-fluid-s">
+                    {footerNavigation.map((item) => (
+                        <li>
+                            <a href={item.url} class="link" title={item.label}>
+                                {item.label}
+                            </a>
+                        </li>
+                    ))}
+                    <li>©{year}</li>
+                </ul>
+            )
         }
+
+        <div class="flex gap-fluid-2xs justify-self-end">
+            {
+                siteInfo.socials.map((channel) => (
+                    <Social
+                        platform={channel.platform}
+                        url={channel.url}
+                        name={channel.icon}
+                        class={'text-content-light hover:text-primary'}
+                    />
+                ))
+            }
+        </div>
     </div>
+    <Swoosh
+        data-animate-swoosh
+        id="swoosh"
+        class="pointer-events-none absolute right-0 bottom-0 z-(--z-swoosh) h-auto w-full opacity-0"
+    />
 </footer>
+<script>
+    import { inView, animate, stagger, type AnimationSequence } from 'motion';
+    const { body, documentElement: page } = document;
+    const footer = document.querySelector('#footer');
+
+    const logo = footer?.querySelector('[data-animate-logotype]');
+    const swoosh = footer?.querySelector('[data-animate-swoosh]');
+
+    let hasPlayed = false;
+    if (footer) {
+        inView(
+            footer,
+            () => {
+                if (hasPlayed) return;
+                hasPlayed = true;
+
+                if (swoosh && logo) {
+                    animate([
+                        [
+                            logo.querySelectorAll('path'),
+                            {
+                                pathLength: [0, 1],
+                                strokeWidth: [0, 96, 64],
+                            },
+                            {
+                                duration: 2.5,
+                                ease: [0.22, 1, 0.36, 1],
+                                delay: stagger(0.5),
+                            },
+                        ],
+                        [
+                            swoosh,
+                            {
+                                opacity: 1,
+                            },
+                            {
+                                at: '<',
+                            },
+                        ],
+                        [
+                            swoosh.querySelectorAll('path'),
+                            {
+                                pathLength: [0, 1],
+                            },
+                            {
+                                duration: 12.5,
+                                ease: [0.22, 1, 0.36, 1],
+                                delay: stagger(0.5),
+                            },
+                        ],
+                    ]);
+                }
+            },
+            { margin: '50%' }
+        );
+    }
+</script>

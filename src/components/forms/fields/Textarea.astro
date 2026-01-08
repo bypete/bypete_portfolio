@@ -31,18 +31,21 @@ const attrs = {
 };
 ---
 
-<div class:list={['group', ClassName && ClassName]} data-form-group>
+<div
+    class:list={['group leading-none', ClassName && ClassName]}
+    data-form-group
+>
     <div
         class="relative grid grid-cols-1 grid-rows-1 items-center *:col-start-1 *:row-start-1"
     >
         <textarea {...attrs}></textarea>
         <label
-            class="ml-fluid-3xs bg-surface-raised px-fluid-2xs text-step--1 text-content-quiet shadow-surface-raised text-shadow-xs peer-placeholder-shown:translate-y-fluid-2xs peer-placeholder-shown:text-step-0 peer-focus:text-step--1 pointer-events-none -translate-y-1/2 self-start justify-self-start leading-none font-medium transition-all peer-placeholder-shown:self-start peer-focus:-translate-y-1/2 peer-focus:self-start"
+            class="pointer-events-none relative left-fluid-2xs -ml-fluid-3xs -translate-y-1/2 self-start justify-self-start bg-surface-raised px-fluid-3xs text-step--1 leading-none font-medium text-content-quiet transition-all peer-placeholder-shown:translate-y-fluid-2xs peer-placeholder-shown:self-start peer-placeholder-shown:text-step-0 peer-placeholder-shown:text-content peer-focus:-translate-y-1/2 peer-focus:self-start peer-focus:text-step--1"
             for={id}>{label}</label
         >
         {
             !required && (
-                <span class="text-step--2/loose text-content-quiet -translate-y-full self-start justify-self-end">
+                <span class="-translate-y-full self-start justify-self-end text-step--2/loose text-content-quiet">
                     Optional
                 </span>
             )

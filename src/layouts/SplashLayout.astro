@@ -9,10 +9,8 @@ const head: HeadProps = {
     description: fm.description || fm.head?.description,
     og: fm.og || fm.head?.og,
 };
-
-const isHeroDark = (fm.isHeroDark || fm.heroConfig.dark) ?? false;
 ---
 
-<BaseLayout head={head} {isHeroDark}>
+<BaseLayout head={head}>
     <slot />
 </BaseLayout>

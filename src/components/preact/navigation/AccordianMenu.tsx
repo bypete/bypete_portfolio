@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "preact/hooks";
-import { animate } from "motion";
 import clsx from "clsx";
+import { animate } from "motion";
+import { useEffect, useRef, useState } from "preact/hooks";
 
 interface AccordianMenuProps {
   items: Array<{ url: string; label: string }>;
@@ -10,7 +10,7 @@ interface AccordianMenuProps {
 }
 
 const defaultClasses =
-  "hover:text-link-light focus:text-link-light  px-fluid-2xs py-0 text-step-0  block w-full focus:outline-hidden";
+  "hover:text-content-light focus:text-content-light px-fluid-2xs py-0 text-step-0 block w-full focus:outline-hidden";
 
 export default function AccordianMenu({
   items,
@@ -48,15 +48,17 @@ export default function AccordianMenu({
     <div
       id={dropdownId} // Use the dropdownId passed from parent
       ref={accordianElement}
-      className={` w-full overflow-y-scroll text-content ${isHidden ? "  pointer-events-none" : ""}`}
+      className={`w-full overflow-y-scroll text-content ${isHidden ? "pointer-events-none" : ""}`}
       aria-hidden={!isOpen}
     >
-      <ul class="mt-fluid-s grid-cols-[repeat(auto-fit,minmax(40ch,1fr))] gap-y-fluid-xs gap-x-fluid-m grid">
+      <ul class="mt-fluid-s grid grid-cols-[repeat(auto-fit,minmax(min(40ch,100%),1fr))] gap-x-fluid-m gap-y-fluid-xs">
         {items.map((child) => {
           const isActive = currentPath === child.url;
           const linkClass = clsx(
             defaultClasses,
-            isActive ? "border-l-[3px] border-l-secondary font-semibold text-content" : "text-link",
+            isActive
+              ? "border-l-[3px] border-l-secondary font-semibold text-content-dark"
+              : "text-black",
           );
           return (
             <li key={child.url}>
@@ -65,7 +67,7 @@ export default function AccordianMenu({
                 className={linkClass}
                 data-state={isActive ? "active" : undefined}
               >
-                <span className="line-clamp-5">{child.label}</span>
+                <span className="line-clamp-2">{child.label}</span>
               </a>
             </li>
           );

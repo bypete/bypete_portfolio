@@ -1,18 +1,14 @@
 ---
-import type { VisualKeys, CoverKeys } from '~/components/hero/Hero.astro';
 import { Picture } from 'astro:assets';
-
+import type { Elements } from '~/components/hero/Hero.astro';
 import ArtDirection from '~/components/images/ArtDirection.astro';
 
 interface Props {
-    visual?: VisualKeys;
-    cover?: CoverKeys;
-    legibility?: string;
-    copy?: string;
-    class?: string;
+    elements?: Elements;
 }
 
-const { class: ClassName, copy, visual, cover } = Astro.props;
+const { elements } = Astro.props;
+const { visual, cover, copy } = elements as Elements;
 ---
 
 {
@@ -24,8 +20,8 @@ const { class: ClassName, copy, visual, cover } = Astro.props;
                 alt={cover.alt}
                 loading="eager"
                 class:list={[
-                    cover.class ||
-                        'h-full w-full object-cover object-bottom md:object-center',
+                    'h-full w-full',
+                    cover.class ?? 'object-cover object-bottom',
                 ]}
             />
         </div>
@@ -33,78 +29,158 @@ const { class: ClassName, copy, visual, cover } = Astro.props;
 }
 
 <div
-    class="relative container mx-auto grid grid-cols-1 gap-fluid-s pt-headerheight md:h-svh md:grid-cols-(--gtc-block50) md:not-dynamic:h-screen"
+    class="relative container mx-auto grid grid-cols-1 items-stretch gap-fluid-s md:h-svh md:grid-cols-(--gtc-block50) md:not-dynamic:h-screen"
 >
-    <div class="w-full self-center py-fluid-xl">
+    <div class:list={['w-full', copy?.cell ?? 'self-center pt-safe-top']}>
         <slot />
     </div>
+
     {
         visual && (
-            <div
-                class:list={[visual.wrapper ? visual.wrapper : 'relative']}
-                data-animate="slideInRight"
-            >
-                {
-                    <Picture
-                        src={visual.src as ImageMetadata}
-                        densities={visual.densities ?? [1.5, 2]}
-                        width={visual.width ?? 600}
-                        class:list={[
-                            visual.class ||
-                                'h-full w-full object-contain object-bottom',
-                        ]}
-                        alt={visual.alt}
-                        loading={'eager'}
-                    />
-                }
+            <div class:list={[visual?.cell ?? 'relative min-h-0']}>
+                <Picture
+                    src={visual.src as ImageMetadata}
+                    densities={visual.densities ?? [1.5, 2]}
+                    width={visual.width ?? 600}
+                    alt={visual.alt}
+                    loading="eager"
+                    class:list={[
+                        'h-full max-h-full w-full',
+                        visual.class ?? 'object-contain object-bottom',
+                    ]}
+                    {...(visual.filter && {
+                        style: { filter: `url(#${visual.filter})` },
+                        'data-animate': visual.filter,
+                    })}
+                />
             </div>
         )
     }
 </div>
-
 <script>
-    import { inView, animate, type AnimationSequence, stagger } from 'motion';
+    import { inView, animate, stagger, type AnimationSequence } from 'motion';
 
-    const focus = document.querySelectorAll('[data-inview="cover"]');
+    const easeOverShoot = [0.16, 1, 0.3, 1] as const;
+    const easeGentle = [0.22, 1, 0.36, 1] as const;
+
+    const SEQUENCES = {
+        none: [] as AnimationSequence,
+
+        minimal: [
+            [
+                '[data-animate]',
+                { opacity: [0, 1], x: [60, 0] },
+                { duration: 0.8, delay: stagger(0.15) },
+            ],
+        ] as AnimationSequence,
+
+        'slide-only': [
+            [
+                '[data-animate]',
+                { opacity: [0, 1], x: [100, 0] },
+                {
+                    duration: 1.1,
+                    delay: stagger(0.2),
+                    ease: easeGentle,
+                },
+            ],
+        ] as AnimationSequence,
+
+        glitch: [
+            [
+                '[data-animate="turnIn"]',
+                {
+                    opacity: [0, 1],
+                    transform: [
+                        'perspective(200px) rotateY(25deg) translate(15%)',
+                        'perspective(200px) rotateY(0deg) translate(0)',
+                    ],
+                },
+                { duration: 0.25, delay: stagger(0.15) },
+            ],
+            [
+                '[data-animate="rgb-split"]',
+                { opacity: [0, 1] },
+                { duration: 0.75 },
+            ],
+            ['#red-offset', { dx: [16, 3] }, { duration: 0.25, at: '<' }],
+            [
+                '#cyan-offset',
+                { dx: [-16, -3] },
+                {
+                    duration: 0.75,
+                    at: '<',
+                },
+            ],
+            [
+                '[data-animate="slideInRight"]',
+                {
+                    opacity: [0, 1],
+                    x: ['-5%', '0'],
+                },
+                { duration: 0.25, delay: stagger(0.25) },
+            ],
+        ] as AnimationSequence,
+
+        heroic: [
+            [
+                '[data-animate]',
+                { opacity: 0, y: 80, scale: 0.88 },
+                { duration: 0 },
+            ],
+            [
+                '[data-animate]',
+                { opacity: 1, y: 0, scale: 1 },
+                {
+                    duration: 1.4,
+                    delay: stagger(0.12),
+                    ease: easeGentle,
+                },
+            ],
+        ] as AnimationSequence,
+
+        default: [
+            [
+                '[data-animate="turnIn"]',
+                {
+                    opacity: [0, 1],
+                    transform: [
+                        'perspective(200px) rotateY(25deg) translate(15%)',
+                        'perspective(200px) rotateY(0deg) translate(0)',
+                    ],
+                },
+                { duration: 0.25, delay: stagger(0.15) },
+            ],
+            [
+                '[data-animate="slideInRight"]',
+                {
+                    opacity: [0, 1],
+                    transform: ['translateX(5%)', 'translateX(0%)'],
+                },
+                { duration: 0.75, delay: stagger(0.25) },
+            ],
+        ] as AnimationSequence,
+    };
+
     inView(
-        focus,
-        (el) => {
-            const queryElementsByAnimation = (animation) => {
-                return el.querySelectorAll(`[data-animate="${animation}"]`);
-            };
-            const slideInRight = queryElementsByAnimation('slideInRight');
-            const turnIn = queryElementsByAnimation('turnIn');
+        '#hero',
+        (element) => {
+            const name = element.getAttribute('data-sequence') || 'default';
+            const sequence =
+                SEQUENCES[name as keyof typeof SEQUENCES] ?? SEQUENCES.default;
 
-            const sequenceIn: AnimationSequence = [
-                [
-                    slideInRight,
-                    {
-                        opacity: [0, 1],
-                        transform: ['translateX(5%)', 'translateX(0%)'],
-                    },
-                    { duration: 0.75, delay: stagger(0.25) },
-                ],
-                [
-                    turnIn,
-                    {
-                        opacity: [0, 1],
-                        // transform: ['translateY(-25%)', 'translateY(0%)'],
-                        transform: [
-                            'perspective(200px) rotateY(25deg) translate(15%)',
-                            'perspective(200px) rotateY(0deg) translate(0)',
-                        ],
-                    },
-                    { duration: 0.25, delay: stagger(0.15) },
-                ],
-            ];
-            animate(sequenceIn, {});
-
-            return (leaveInfo) =>
-                animate([
-                    [turnIn, { opacity: 0 }, { at: 0 }],
-                    [slideInRight, { opacity: 0 }, { at: '<' }],
-                ]);
+            if (sequence.length) {
+                const controls = animate(sequence);
+                // return () => {
+                //     console.log('exit hero');
+                //     // animate(
+                //     //     element.querySelectorAll('[data-animate]'),
+                //     //     { opacity: 1 },
+                //     //     { duration: 0.25 }
+                //     // );
+                // };
+            }
         },
-        { amount: 0.25 }
+        { amount: 0.3 }
     );
 </script>

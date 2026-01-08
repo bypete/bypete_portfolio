@@ -1,38 +1,43 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import Breadcrumbs from '~/components/ui/Breadcrumbs.astro';
-import type { Props as CTALinks } from '~/components/preact/Button.tsx';
-import ModePlain from '~/components/hero/ModePlain.astro';
-import ModeWork from '~/components/hero/ModeWork.astro';
 import ModeCover from '~/components/hero/ModeCover.astro';
+import ModePlain from '~/components/hero/ModePlain.astro';
+import Breadcrumbs from '~/components/ui/Breadcrumbs.astro';
 import Prompt from '~/components/ui/Prompt.astro';
 
-type HeroTheme = {
-    wrapper?: string[];
+type DisplayTheme = {
+    wrap?: string[];
     layout?: string[];
     mandatory?: string[];
 };
 
-export interface VisualKeys {
+export interface Elements {
+    visual?: Visual;
+    cover?: Cover;
+    copy?: Copy;
+}
+
+export interface Visual {
     src: ImageMetadata;
     alt: string;
     widths?: number[];
     densities?: number[];
     width?: number;
     sizes?: string;
+    filter?: 'rgb-split' | 'rgb-split-soft' | 'duotone';
     url?: string;
-    wrapper?: string;
+    cell?: string;
     class?: string;
 }
 
-export interface ArtKeys {
+export interface ArtDirective {
     src: ImageMetadata;
     media: string;
 }
 
-export interface CoverKeys {
+export interface Cover {
     src: ImageMetadata;
-    artDirectives?: ArtKeys[];
+    artDirectives?: ArtDirective[];
     widths?: number[];
     sizes?: string;
     alt: string;
@@ -41,115 +46,112 @@ export interface CoverKeys {
     class?: string;
 }
 
-export interface CTA extends CTALinks {
-    text: string;
-    jump: boolean;
-    href: string;
-    icon: string;
-    theme:
-        | 'primary'
-        | 'secondary'
-        | 'disco'
-        | 'whiteline'
-        | 'white'
-        | 'outline'
-        | 'quiet'
-        | 'link'
-        | 'disabled';
-    class: string;
+export interface Copy {
+    cell?: string | string[];
 }
 
-export interface HeroKeys {
-    wrapper?: string;
-    breadcrumbs?: boolean;
+export interface HeroConfig {
+    mode?: 'default' | 'cover' | 'work';
+    sequence?:
+        | 'default'
+        | 'glitch'
+        | 'slide-only'
+        | 'heroic'
+        | 'minimal'
+        | 'none';
     dark?: boolean;
-    bg?: string;
+    wrap?: string | string[];
+    layout?: string | string[];
+    breadcrumbs?: boolean;
     headline?: string;
-    mode?: 'plain' | 'cover' | 'work' | 'custom';
-    class?: string;
-    visual?: VisualKeys;
-    copy?: string;
-    cover?: CoverKeys;
-    legibility: string;
-    overflow?: boolean;
-    actions?: CTA[];
+    elements?: Elements;
+    legibility?: string;
     prompt?: 'swipe' | 'scroll';
+    class?: string;
 }
 
 export interface Props extends HTMLAttributes<'div'> {
     title: string;
-    heroConfig?: Partial<HeroKeys>;
+    config?: Partial<HeroConfig>;
 }
 
-const { title, heroConfig = {}, ...rest } = Astro.props;
-const {
-    dark = false,
-    wrapper = '',
-    breadcrumbs = false,
-    bg = '',
-    mode = 'plain',
-    class: ClassName = '',
-    legibility,
-    overflow,
-    prompt,
-    visual,
-    cover,
-    headline,
-    actions,
-    copy,
-} = heroConfig as HeroKeys;
+const { title, config = {}, ...rest } = Astro.props;
 
-const color = legibility || (dark ? 'text-content-light' : 'text-content');
-const heroTitle = headline || title;
+const {
+    mode = 'default',
+    sequence = 'default',
+    dark = false,
+    wrap: wrapProp,
+    layout: layoutProp,
+    breadcrumbs = false,
+    headline,
+    elements,
+    legibility: legibilityProp,
+    prompt,
+    class: className = '',
+} = config as HeroConfig;
+
+const heroTitle = headline ?? title;
+const textColor =
+    legibilityProp ?? (dark ? 'text-content-light' : 'text-content');
+
+const themes: Record<string, DisplayTheme> = {
+    default: {
+        wrap: ['bg-surface-sunken'],
+        layout: ['py-fluid-2xl'],
+    },
+    cover: {
+        wrap: ['bg-surface-sunken'],
+        layout: ['shadow-surface-sunk'],
+        mandatory: ['inset-shadow-hero overflow-hidden'],
+    },
+    work: {
+        layout: [
+            'grid',
+            'grid-cols-1',
+            'grid-rows-(--gtr-work)',
+            'gap-y-fluid-m',
+            'pb-fluid-l',
+            'lg:h-svh',
+            'lg:grid-cols-(--gtc-work)',
+            'lg:grid-rows-1',
+            '@min-page/page:grid-cols-(--gtc-work)',
+        ],
+    },
+};
 
 const inView = {
     'data-inview': `${mode}`,
 };
+const theme = themes[mode] ?? themes.default;
 
-const heroThemes: Record<string, HeroTheme> = {
-    plain: {
-        layout: ['bg-surface-sunken', 'py-fluid-2xl'],
-    },
-    image: {
-        layout: [''],
-    },
-    work: {
-        layout: [
-            'grid w-full gap-y-fluid-m grid-cols-1 grid-rows-(--gtr-work)',
-            'lg:grid-rows-1 lg:min-h-svh lg:grid-cols-(--gtc-work)',
-            '@min-page/page:grid-cols-(--gtc-work)',
-        ],
-    },
-    cover: {
-        layout: ['bg-surface-sunken', 'shadow-surface-sunk'],
-        mandatory: ['inset-shadow-hero'],
-    },
-};
-
-const currentHero = heroThemes[mode as keyof typeof heroThemes];
-const heroResult = [
-    ...(ClassName ? ClassName.split(' ') : (currentHero.layout ?? [])),
-    ...(currentHero.mandatory ?? []),
-    overflow && 'overflow-hidden',
-    color,
-].filter(Boolean); // Filter out any falsey values (e.g., undefined, false)
+const wrapClasses = wrapProp ?? theme?.wrap ?? [];
+const layoutClasses = layoutProp ?? theme?.layout ?? [];
+const mandatoryClasses = theme?.mandatory ?? [];
 ---
 
 <div
     id="hero"
     class:list={[
-        wrapper ? wrapper : currentHero.wrapper,
         'relative z-(--z-hero) col-[full]',
-    ]}
+        wrapClasses,
+        className,
+    ].filter(Boolean)}
     {...mode && { 'data-mode': `${mode}` }}
+    {...sequence && { 'data-sequence': `${sequence}` }}
+    {...inView}
+    {...rest}
 >
     <div
-        class:list={['relative flow-root w-full outline-hidden', heroResult]}
-        {...inView}
-        {...rest}
+        class:list={[
+            'relative flow-root w-full outline-hidden',
+            layoutClasses,
+            mandatoryClasses,
+            textColor,
+        ].filter(Boolean)}
     >
         {
-            mode === 'plain' && (
+            mode === 'default' && (
                 <ModePlain headline={heroTitle}>
                     <slot />
                 </ModePlain>
@@ -159,20 +161,14 @@ const heroResult = [
         {
             mode === 'cover' && (
                 <>
-                    <ModeCover {visual} {cover} legibility={color} {copy}>
+                    <ModeCover {elements}>
                         <slot />
                     </ModeCover>
                 </>
             )
         }
 
-        {
-            mode === 'work' && (
-                <ModeWork headline={heroTitle}>
-                    <slot />
-                </ModeWork>
-            )
-        }
+        {mode === 'work' && <slot />}
 
         {
             prompt && (

@@ -28,7 +28,7 @@ splash:
   src: '~/assets/work/eastsidelocks/laptop_iphone_front.jpg'
   alt: 'Laptop and iPhone image showing Eastside Locks website'
 skillset:
-  text: 'text-white'
+  text: 'text-content-light [&_li]:before:text-white'
   areas:
     - title: 'Apps'
       skills:
@@ -70,7 +70,7 @@ import home_detail from '~/assets/work/eastsidelocks/home--detail.jpg'
 
 ## Overview
 
-<p class="text-step-1">Eastside Locks, Birmingham was an urban development of over 650,000 sq ft of prime Grade A office space within three distinct developments at the time of its launch. An inspiring brochure site was commissioned to help deliver their vision and secure prospective clients.</p>
+<p class="text-step-2/snug font-medium ">Eastside Locks, Birmingham was an urban development of over 650,000 sq ft of prime Grade A office space within three distinct developments at the time of its launch. An inspiring brochure site was commissioned to help deliver their vision and secure prospective clients.</p>
 
 
 <Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
@@ -86,7 +86,7 @@ import home_detail from '~/assets/work/eastsidelocks/home--detail.jpg'
 -   I assisted in configuring the content management system (Umbraco) and took responsibility for the initial population of all launch content. <span class="label-info m-0!">collaboration</span>
 
 
-<Figure caption='Clear branding was required across all media formats' credit='Eastside Locks, Goodman'>
+<Figure mode='default' caption='Clear branding was required across all media formats' credit='Eastside Locks, Goodman'>
   <Image src={home_detail} alt="Homepage view" class="w-full h-auto shadow-md border border-line" />
   <Image src={vision_detail} alt="Map showing the development plan" class="w-full h-auto shadow-md border border-line" />
 </Figure>

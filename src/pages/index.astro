@@ -1,21 +1,16 @@
 ---
-import { Picture } from 'astro:assets';
-import { heroSlides, roles } from '~/data/home';
-import { clientSlides } from '~/data/clients';
-import SwiperHome from '~/components/Swiper/Home.astro';
-import SplashLayout from '~/layouts/SplashLayout.astro';
-import WorkCard from '~/components/work/WorkCard.astro';
-import Button from '~/components/preact/Button.tsx';
 import { Icon } from 'astro-icon/components';
-import Roles from '~/components/Roles.astro';
-import SwiperClients from '~/components/Swiper/Clients.astro';
 import Clients from '~/components/marquees/Clients.astro';
+import Button from '~/components/preact/Button.tsx';
+import Roles from '~/components/Roles.astro';
+import SwiperHome from '~/components/Swiper/Home.astro';
 import Prompt from '~/components/ui/Prompt.astro';
-import Stripes from '~/components/objects/stripes.astro';
+import WorkCard from '~/components/work/WorkCard.astro';
+import { clientSlides } from '~/data/clients';
+import { heroSlides, roles } from '~/data/home';
+import SplashLayout from '~/layouts/SplashLayout.astro';
+
 const title = 'Home';
-const heroConfig = {
-    dark: true,
-};
 
 import ogImage from '~/assets/og/og__home.jpg';
 
@@ -29,8 +24,9 @@ const og = {
     },
 };
 
-import { formatBlogPosts } from '~/js/utils';
 import { getCollection, render } from 'astro:content';
+import { formatBlogPosts } from '~/js/utils';
+
 const allWork = await getCollection('work');
 
 const formattedPosts = formatBlogPosts(allWork, {
@@ -41,17 +37,17 @@ const formattedPosts = formatBlogPosts(allWork, {
 });
 ---
 
-<SplashLayout title={title} isHeroDark={heroConfig.dark} {og}>
+<SplashLayout title={title} {og}>
     <main
         id="content"
-        class="layout grid grid-cols-(--gtc-layout)"
+        class="layout grid grid-cols-(--gtc-layout) gap-x-(--viewport-safe-inline)"
         data-layout="page"
     >
         <section
             class="relative col-[full] grid w-full grid-cols-1 grid-rows-(--gtr-work) gap-y-fluid-m pb-fluid-l text-content outline-hidden lg:h-svh lg:grid-cols-(--gtc-work) lg:grid-rows-1 @min-page/page:grid-cols-(--gtc-work)"
         >
             <div
-                class="order-2 self-end px-safe-inline lg:order-1 lg:mt-safe-top lg:pr-0"
+                class="order-2 self-end px-safe-inline lg:order-1 lg:my-safe-top lg:pr-0"
             >
                 <Roles roles={roles} />
                 <p
@@ -62,7 +58,7 @@ const formattedPosts = formatBlogPosts(allWork, {
                 </p>
                 <p class="flex flex-wrap items-center gap-fluid-xs">
                     <Button
-                        theme="primary"
+                        theme="action"
                         isIcon={true}
                         class="md:inline-flex"
                         href="/work/"
@@ -87,22 +83,20 @@ const formattedPosts = formatBlogPosts(allWork, {
                 <Prompt label="Scroll" dir="down" />
             </div>
         </section>
-        <section
-            id="featured"
-            class="from-page-contrast relative col-[full] grid grid-cols-subgrid gap-y-fluid-m bg-linear-to-b"
-        >
+        <section id="featured" class="relative col-[content] py-fluid-2xl">
             <h2
-                class="col-[content] m-0 text-center font-display text-step-5 font-bold text-content"
+                class="mt-0 mb-fluid-2xl bg-linear-to-br from-content to-content-shout bg-clip-text text-center font-display text-step-7/none font-black tracking-tight text-transparent uppercase"
             >
-                Latest work
+                Recent work
             </h2>
             <div
-                class="col-[content] grid grid-cols-1 gap-fluid-xl md:grid-cols-2 lg:grid-cols-3"
+                data-inview="cards"
+                data-cloaked
+                class="grid grid-cols-1 gap-fluid-xl md:grid-cols-2 lg:grid-cols-3 cloaked:invisible"
             >
                 {
                     formattedPosts.map(async (post) => {
                         const { remarkPluginFrontmatter } = await render(post);
-                        // const featured = post.data.tags.includes('featured');
                         return (
                             <WorkCard
                                 url={`/${post.collection}/${post.id}/`}
@@ -114,15 +108,13 @@ const formattedPosts = formatBlogPosts(allWork, {
                                 product={post.data.product}
                                 readTime={remarkPluginFrontmatter.minutesRead}
                                 featured={post.data.featured}
+                                animate-card
                             />
                         );
                     })
                 }
 
-                <div animate-card class="self-center">
-                    <span
-                        class="i-lucide-folder-archive h-fluid-l w-fluid-l animate-pulse"
-                    ></span>
+                <div animate-card class="self-start">
                     <h2 class="mt-0 text-step-2">Want to see more...?</h2>
                     <p class="mb-fluid-s">
                         A complete list of case studies can be found in the <strong
@@ -131,13 +123,13 @@ const formattedPosts = formatBlogPosts(allWork, {
                     </p>
                     <p>
                         <Button
-                            theme="primary"
+                            theme="action"
                             isIcon={true}
                             class="md:inline-flex"
                             href="/work/"
                         >
                             Explore the collection <Icon
-                                name="lucide:arrow-right-circle"
+                                name="lucide:folder-archive"
                                 class="h-fluid-s w-fluid-s animate-nudge-right"
                             />
                         </Button>
@@ -145,164 +137,56 @@ const formattedPosts = formatBlogPosts(allWork, {
                 </div>
             </div>
         </section>
-        <div class="col-[content] py-fluid-2xl">
+        <section class="z-(--z-content) col-[content] py-fluid-2xl">
             <h3
                 class="mb-fluid-m text-center text-step-1 font-bold text-content-quiet"
             >
                 Some of the brands I've worked with:
             </h3>
             <Clients clients={clientSlides} />
-        </div>
+        </section>
     </main>
 </SplashLayout>
 <script>
     import { inView, animate, stagger, type AnimationSequence } from 'motion';
 
-    const { body, documentElement: page } = document;
-    const viewWidth = window.innerWidth || page.clientWidth;
-    const viewHeight = window.innerHeight || page.clientHeight;
-    const featured = document.getElementById('featured');
-    const particleField = document.querySelector('#particleField');
+    const section = document.querySelector("[data-inview='cards']");
 
-    if (featured != null) {
-        viewWidth <= 768
-            ? inView(
-                  '[animate-card]',
-                  (element) => {
-                      animate(
-                          element,
-                          { opacity: [0, 1], y: ['40px', '0'] },
-                          { delay: 0.25, duration: 0.75 }
-                      );
-                  },
-                  { margin: '0%' }
-              )
-            : inView(
-                  featured,
-                  (element) => {
-                      animate(
-                          element.querySelectorAll('[animate-card]'),
-                          { opacity: [0, 1] },
-                          { duration: 0.25, delay: stagger(0.15) }
-                      );
-                  },
-                  { margin: '-20%' }
-              );
+    if (section) {
+        requestAnimationFrame(() => {
+            section.removeAttribute('data-cloaked');
+        });
     }
 
-    // Function to create particles
-    const createParticles = () => {
-        const amount = viewWidth <= 768 ? 80 : 240;
-        const range = viewWidth <= 768 ? 4 : 5;
-
-        if (particleField) {
-            for (let i = 0; i < amount; i += 1) {
-                const particle = document.createElement('div');
-                particle.className = 'particle absolute bg-white rounded-full ';
-
-                // Set initial position within the visible area
-                const initialX = Math.random() * viewWidth;
-                const initialY = Math.random() * viewHeight;
-                const opacity = (Math.random() * 0.25).toFixed(2);
-                // Set initial size with some variation
-                const size = Math.floor(Math.random() * range) + 1; // Random size between 1 and {range} pixels
-                particle.style.opacity = `${opacity}`;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-
-                particle.style.left = `${initialX}px`;
-                particle.style.top = `${initialY}px`;
-
-                particleField.appendChild(particle);
-            }
-        }
-    };
-
-    let animationInProgress = false;
-    let shootTimer: boolean | null = null;
-
-    const wait = (ms = 0) => {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-    };
-
-    const handleParticles = async (interval: number) => {
-        if (shootTimer) {
-            return;
-        }
-
-        shootTimer = true;
-        while (shootTimer) {
-            if (!animationInProgress) {
-                shootParticle();
-            }
-            await wait(interval);
-        }
-    };
-
-    const shootParticle = () => {
-        animationInProgress = true;
-        const particles = document.querySelectorAll('.particle');
-        const randomIndex = Math.floor(Math.random() * particles.length);
-        const randomParticle = particles[randomIndex];
-
-        const vectorA = Math.random() * 0.5 * Math.max(viewWidth, viewHeight);
-        const vectorB =
-            Math.random() * 0.5 * Math.min(window.innerWidth, viewHeight);
-        const directionX = Math.random() > 0.5 ? 1 : -1; // Randomly choose left or right direction
-        const directionY = Math.random() > 0.5 ? 1 : -1; // Randomly choose up or down direction
-
-        const shoot: AnimationSequence = [
-            [
-                randomParticle,
-                {
-                    x: [0, `${vectorA * directionX}px`],
-                    y: [0, `${vectorB * directionY}px`],
-                    scale: [1, 1.5, 1],
-                    opacity: [1, 0.25, 0],
-                },
-                { duration: 2.75 },
-            ],
-            [randomParticle, { x: 0, y: 0 }],
-            [
-                randomParticle,
-                {
-                    opacity: [0, Math.random() * 0.25],
-                },
-                { duration: 0.25, delay: 2 },
-            ],
-        ];
-        animate(shoot).then(() => {
-            animationInProgress = false;
-        });
-    };
-
-    // Function to restart animation on screen size change
-    const restartAnimationOnResize = () => {
-        if (particleField) {
-            particleField.innerHTML = ''; // Clear existing particles
-        }
-        createParticles();
-        handleParticles(1200); // Interval in seconds
-    };
-
-    // Initialize particle animation
-    const initParticleAnimation = () => {
-        createParticles();
-        handleParticles(1200); // Interval in milliseconds
-
-        let previousWidth = viewWidth;
-
-        window.addEventListener('resize', () => {
-            const currentWidth = window.innerWidth;
-            if (currentWidth !== previousWidth) {
-                // Width has changed, trigger your resize logic here
-                restartAnimationOnResize();
-                // Update the previous width
-                previousWidth = currentWidth;
-            }
-        });
-    };
-
-    // Run the animation
-    initParticleAnimation();
+    inView(
+        "[data-inview='cards'] [animate-card]",
+        (element) => {
+            const sequence: AnimationSequence = [
+                [
+                    element,
+                    {
+                        opacity: [0, 1],
+                        y: ['var(--spacing-fluid-xl)', 0],
+                    },
+                    {
+                        duration: 0.25,
+                        ease: [0.22, 1, 0.36, 1],
+                    },
+                ],
+                [
+                    element.querySelectorAll('h2, p'),
+                    {
+                        opacity: [0, 1],
+                    },
+                    {
+                        delay: stagger(0.25),
+                        duration: 1.25,
+                        ease: 'easeIn',
+                    },
+                ],
+            ];
+            animate(sequence).then(() => {});
+        },
+        { margin: '-48px' }
+    );
 </script>

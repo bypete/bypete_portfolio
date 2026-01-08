@@ -1,23 +1,21 @@
-import {
-  defineConfig
-} from 'astro/config';
-import mdx from '@astrojs/mdx';
+import alpine from '@astrojs/alpinejs';
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
+import mdx from '@astrojs/mdx';
+import partytown from '@astrojs/partytown';
+import preact from '@astrojs/preact';
+import sitemap from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'astro/config';
 import icon from 'astro-icon';
-import {
-  remarkReadingTime
-} from './src/js/remark-reading-time.mjs';
+import rehypeAttrs from 'rehype-attr';
+import rehypeExternalLinks from 'rehype-external-links';
+import svgr from "vite-plugin-svgr";
 import {
   remarkExtractHeadings
 } from './src/js/remark-extract-headings.mjs';
-import preact from '@astrojs/preact';
-import svgr from "vite-plugin-svgr";
-import rehypeAttrs from 'rehype-attr';
-import rehypeExternalLinks from 'rehype-external-links';
-import sitemap from '@astrojs/sitemap';
-import tailwindcss from '@tailwindcss/vite';
-import partytown from '@astrojs/partytown';
-import alpine from '@astrojs/alpinejs';
+import {
+  remarkReadingTime
+} from './src/js/remark-reading-time.mjs';
 
 let svgoPrefixIdsCount = 0;
 
@@ -31,10 +29,11 @@ const SVGOConfig = {
           inlineStyles: { onlyMatchedOnce: false },
           cleanupIds: { minify: true },
           removeDoctype: false,
-          removeViewBox: false,
+          mergePaths: false,
         },
       },
     },
+    { name: 'removeViewBox', active: false },
     {
       name: 'prefixIds',
       params: {
@@ -52,6 +51,7 @@ const SVGOConfig = {
 
   ],
 };
+
 
 
 const rehypeExternalLinksConfig = [
@@ -74,9 +74,11 @@ export default defineConfig({
   site: 'https://bypete.uk',
   trailingSlash: 'always',
   compressHTML: true,
-   experimental: {
-   svg: true,
- },
+  experimental: {
+    svgo: {
+      plugins: SVGOConfig.plugins
+    },
+  },
   // redirects: {
   //     '/bio/': '/about',
   // },
@@ -116,23 +118,26 @@ export default defineConfig({
       remarkPlugins: [remarkReadingTime, remarkExtractHeadings],
   },
 
-  vite: {
-      plugins: [
-          svgr({
-            svgrOptions: {
-              plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx"],
-              titleProp: true,
-              svgoConfig: SVGOConfig
-            },
-          }),
-          tailwindcss(),
-      ],
-      resolve: {
-          alias: {
-              'react': 'preact/compat',
-              'react-dom': 'preact/compat',
-              'react/jsx-runtime': 'preact/jsx-runtime'
-          }
-      }
+vite: {
+  plugins: [
+    svgr({
+      svgrOptions: {
+        ref: true, 
+        titleProp: true,
+        svgo: true,
+        svgoConfig: SVGOConfig,
+        plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx"],
+      },
+    }),
+    tailwindcss(),
+  ],
+  resolve: {
+    alias: {
+      react: 'preact/compat',
+      'react-dom': 'preact/compat',
+      'react/jsx-runtime': 'preact/jsx-runtime',
+    },
   },
+},
+
 });

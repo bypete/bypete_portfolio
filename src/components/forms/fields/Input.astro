@@ -33,33 +33,36 @@ const attrs = {
 };
 ---
 
-<div class:list={['group', ClassName && ClassName]} data-form-group>
+<div
+    class:list={['group leading-none', ClassName && ClassName]}
+    data-form-group
+>
     <div
         class="relative grid grid-cols-1 grid-rows-1 items-center *:col-start-1 *:row-start-1"
     >
         <input {...attrs} />
 
         <label
-            class="ml-fluid-3xs bg-surface-raised px-fluid-2xs text-step--1 text-content-quiet shadow-surface-raised text-shadow-xs peer-placeholder-shown:text-step-0 peer-focus:text-step--1 pointer-events-none -translate-y-1/2 self-start justify-self-start leading-none font-medium transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:self-center peer-focus:-translate-y-1/2 peer-focus:self-start"
+            class="pointer-events-none relative left-fluid-2xs -ml-fluid-3xs -translate-y-1/2 self-start justify-self-start bg-surface-raised px-fluid-3xs text-step--1 leading-none font-medium text-content-quiet transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:self-center peer-placeholder-shown:text-step-0 peer-placeholder-shown:text-content peer-focus:-translate-y-1/2 peer-focus:self-start peer-focus:text-step--1"
             for={id}>{label}</label
         >
         {
             type === 'email' && (
-                <div class="pr-fluid-2xs pointer-events-none absolute inset-y-0 right-0 flex items-center">
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-fluid-2xs">
                     <Icon
                         name="lucide:alert-circle"
-                        class="h-fluid-s w-fluid-s hidden text-red-500 group-[.has-error]:block"
+                        class="hidden h-fluid-s w-fluid-s text-red-500 group-[.has-error]:block"
                     />
                     <Icon
                         name="lucide:check-circle"
-                        class="h-fluid-s w-fluid-s hidden text-green-500 group-[.has-success]:block"
+                        class="hidden h-fluid-s w-fluid-s text-green-500 group-[.has-success]:block"
                     />
                 </div>
             )
         }
         {
             !required && (
-                <span class="text-step--2/relaxed text-content-quiet -translate-y-full self-start justify-self-end">
+                <span class="-translate-y-full self-start justify-self-end text-step--2/relaxed text-content-quiet">
                     Optional
                 </span>
             )

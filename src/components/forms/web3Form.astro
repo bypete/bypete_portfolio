@@ -1,7 +1,8 @@
 ---
-import Textarea from '~/components/forms/fields/Textarea.astro';
 import Input from '~/components/forms/fields/Input.astro';
+import Textarea from '~/components/forms/fields/Textarea.astro';
 import Button from '~/components/preact/Button.tsx';
+
 declare global {
     interface Window {
         turnstileCallback: (token: string) => void;
@@ -10,7 +11,7 @@ declare global {
 }
 ---
 
-<div class="not-prose not-rte">
+<div class="not-rte">
     <form name="contact" id="contactForm" class="form" method="POST">
         <input
             type="hidden"
@@ -74,7 +75,7 @@ declare global {
         </div>
 
         <div class="mt-fluid-m">
-            <Button type="submit" theme="secondary">Send now</Button>
+            <Button type="submit" theme="action">Send now</Button>
         </div>
     </form>
 </div>
@@ -100,10 +101,13 @@ declare global {
         if (form) {
             const validator = new JustValidate(form, {
                 errorFieldCssClass: ['error'],
+                errorLabelStyle: null,
                 errorLabelCssClass: [
-                    'text-red-600',
-                    'text-step--1',
-                    'mt-fluid-3xs',
+                    'error__label',
+                    '-ml-fluid-3xs',
+                    'relative',
+                    'rounded-t-none',
+                    'left-fluid-2xs',
                 ],
                 successFieldCssClass: ['valid'],
                 successLabelCssClass: ['valid'],
@@ -121,7 +125,7 @@ declare global {
                     ],
                     {
                         errorsContainer: '#input_name_error',
-                    },
+                    }
                 )
                 .addField(
                     '#input_email',
@@ -137,7 +141,7 @@ declare global {
                     ],
                     {
                         errorsContainer: '#input_email_error',
-                    },
+                    }
                 )
                 .addField(
                     '#input_message',
@@ -156,7 +160,7 @@ declare global {
                     ],
                     {
                         errorsContainer: '#input_message_error',
-                    },
+                    }
                 )
                 .addField('#_bp', [
                     {
@@ -189,7 +193,7 @@ declare global {
                             const formData = new FormData(form);
                             formData.delete('cf-turnstile-response');
                             const jsonData = JSON.stringify(
-                                Object.fromEntries(formData),
+                                Object.fromEntries(formData)
                             );
 
                             await fetch('https://api.web3forms.com/submit', {
@@ -212,7 +216,7 @@ declare global {
                     console.error(
                         isValid
                             ? 'Missing Turnstile token'
-                            : 'Form validation failed',
+                            : 'Form validation failed'
                     );
                 }
             });

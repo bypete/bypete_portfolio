@@ -1,0 +1,25 @@
+<svg viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
+  <filter id="grains">
+    <feTurbulence baseFrequency="0.1509"/>
+    <feComponentTransfer in="noise" result="thresholded">
+      <feFuncA type="discrete" tableValues="0 0 0 0 0 0 0 0 0 0 1 0 1 1 1 0"/>
+    </feComponentTransfer>
+    <feColorMatrix values="0 0 0 9 -4
+                            0 0 0 9 -4
+                            0 0 0 9 -4
+                            0 0 0 0 1"/>
+    <feFlood flood-color="hsl(206 11% 88%)" result="color"/>
+    <feComposite in="color" in2="thresholded" operator="in"/>
+  </filter>
+  <filter id="noise">
+   <feTurbulence type="fractalNoise" baseFrequency="1" numOctaves="5" stitchTiles="stitch" result="noise"/>
+    <feComponentTransfer in="noise" result="thresholded">
+      <feFuncA type="discrete" tableValues="0 0 0 0 1 1 1 1"/>
+    </feComponentTransfer>
+    <feFlood flood-color="hsl(206 11% 88%)" result="color"/>
+    <feComposite in="color" in2="thresholded" operator="in"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#noise)" opacity="0.04" />
+  <rect width="100%" height="100%" filter="url(#grains)" opacity="0.11" />
+</svg>
+

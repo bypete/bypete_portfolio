@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import Bento from '~/components/lightbox/Bento.astro';
 import { Icon } from 'astro-icon/components';
+import Bento from '~/components/lightbox/Bento.astro';
+
 interface CollectionItem {
     id: string;
     title?: string;
@@ -32,7 +33,7 @@ const galleries = allGalleries.filter((gallery) =>
         >
             <div
                 class:list={[
-                    'relative w-full rounded-(--spacing-fluid-s) bg-surface-raised grains-quiet p-fluid-m shadow-xs shadow-shadow-dark/10 [scrollbar-color:var(--primary-default)_var(--color-surface-sunken)] @min-[99.9vw]/lightbox:rounded-none dark:grains-dark-loud',
+                    'relative w-full rounded-(--spacing-fluid-s) bg-surface-raised bg-[image:var(--filter-noise_quiet)] bg-size-[960px] p-fluid-m shadow-xs shadow-shadow-dark/10 [scrollbar-color:var(--primary-default)_var(--color-surface-sunken)] @min-[99.9vw]/lightbox:rounded-none dark:bg-[image:var(--filter-dark-noise_quiet)]',
                 ]}
             >
                 <div class="grid grid-flow-row justify-between leading-snug md:grid-flow-col">

@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef, useCallback } from "preact/hooks";
-import { scroll, animate } from "motion";
+import { animate, scroll } from "motion";
+import { useCallback, useEffect, useRef, useState } from "preact/hooks";
 export default function PageTop() {
   const progressCircleRef = useRef<SVGCircleElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -49,12 +49,12 @@ export default function PageTop() {
       ref={pageTopRef}
       title={"jump to page top"}
       data-jump
-      className="opacity-0 relative scroll h-fluid-m w-fluid-m flex items-center leading-[0] text-primary hover:bg-surface-raised focus:bg-surface-raised rounded-full stroke-2 p-0 backdrop-blur-xs focus:outline-hidden"
+      className="scroll relative grid h-fluid-l w-fluid-l grid-cols-1 grid-rows-1 items-center justify-items-center rounded-full bg-action text-content-light leading-none opacity-0 focus:outline-hidden"
     >
-      <div className="i-lucide-arrow-up m-fluid-3xs h-full w-full" />
+      <div className="i-lucide-arrow-up size-fluid-s" />
       <svg
         viewBox="0 0 100 100"
-        className="absolute inset-0 h-full w-full -rotate-90 stroke-[5px]"
+        className="-rotate-90 absolute inset-0 m-1 stroke-[6px]"
       >
         <title>Progress</title>
         <circle
@@ -63,7 +63,7 @@ export default function PageTop() {
           r="45"
           pathLength="1"
           strokeLinecap="round"
-          className="stroke-primary-dark/20 fill-transparent"
+          className="fill-transparent stroke-white/25"
         />
         <circle
           ref={progressCircleRef}
@@ -72,7 +72,7 @@ export default function PageTop() {
           r="45"
           pathLength="1"
           strokeLinecap="round"
-          className="progress stroke-primary fill-transparent"
+          className="progress fill-transparent stroke-white"
           strokeDasharray="0, 1"
         />
       </svg>

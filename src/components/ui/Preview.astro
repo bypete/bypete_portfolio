@@ -1,6 +1,6 @@
 ---
-import { type Post } from '~/components/ui/NextPrev.astro';
 import { Image } from 'astro:assets';
+import { type Post } from '~/components/ui/NextPrev.astro';
 
 type Props = {
     post: Post;
@@ -15,14 +15,14 @@ const { url, title, excerpt, thumb, overlay } = post || {};
 <a href={url} class:list={[ClassName, 'group grid grid-cols-1 gap-fluid-2xs']}>
     <span
         class:list={[
-            '-mb-fluid-2xs flex w-full items-baseline gap-fluid-3xs px-fluid-3xs text-step-3 leading-[0.65] font-black text-content',
+            'text-light -mb-fluid-2xs flex w-full items-baseline gap-fluid-3xs px-fluid-3xs text-step-3 leading-[0.65] font-black',
             direction === 'next' && 'flex-row-reverse justify-start',
         ]}
         set:html={direction === 'next' ? 'Next' : 'Previous'}
     />
     {
         thumb && (
-            <span class="relative aspect-cinema overflow-hidden rounded-tight xl:aspect-widescreen">
+            <span class="relative aspect-widescreen overflow-hidden rounded-tight">
                 <Image
                     widths={[400]}
                     quality="high"

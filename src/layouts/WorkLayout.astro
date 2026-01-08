@@ -1,37 +1,23 @@
 ---
-import BaseLayout from './BaseLayout.astro';
-import type { Props as HeadProps } from '~/components/SEO/Main.astro';
-
-import Tags from '~/components/ui/Tags.astro';
-import Button from '~/components/preact/Button.tsx';
+import { Image, Picture } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
+import Halftone16x9A from '~/assets/svg/halftone_16x9_infinity.svg';
 import Hero from '~/components/hero/Hero.astro';
-import HeroPicture from '~/components/images/HeroPicture.astro';
-import { readableDate, htmlDateString } from '~/js/utils.js';
-import TocMenu from '~/components/preact/navigation/TocMenu';
-import NextPrev from '~/components/ui/NextPrev.astro';
 import BlockPicture from '~/components/images/BlockPicture.astro';
-import ReadTime from '~/components/ui/ReadTime.astro';
-import PageTools from '~/components/ui/PageTools.astro';
-import Stripes from '~/components/objects/stripes.astro';
-import FeaturedIcon from '~/components/ui/FeaturedIcon.astro';
 import Credit from '~/components/images/Credit.astro';
-export interface Props {
-    frontmatter: any;
-    section: string;
-    minutesRead: string;
-    headings: any;
-    prevPost: any;
-    nextPost: any;
-}
+import HeroPicture from '~/components/images/HeroPicture.astro';
+import TocMenu from '~/components/preact/navigation/TocMenu';
+import type { Props as HeadProps } from '~/components/SEO/Main.astro';
+import FeaturedIcon from '~/components/ui/FeaturedIcon.astro';
+import NextPrev from '~/components/ui/NextPrev.astro';
+import PageTools from '~/components/ui/PageTools.astro';
+import Tags from '~/components/ui/Tags.astro';
+import { htmlDateString, readableDate } from '~/js/utils.js';
+import BaseLayout from './BaseLayout.astro';
 
-const { frontmatter, section, minutesRead, headings, prevPost, nextPost } =
-    Astro.props;
+const { frontmatter, section, headings, prevPost, nextPost } = Astro.props;
 
 const fm = frontmatter || Astro.props;
-const { heroConfig = {}, class: className } = fm;
-const { hideToc = false, hideBreadcrumbs = false } = fm;
 
 const head: HeadProps = {
     title: fm.title,
@@ -43,13 +29,6 @@ const head: HeadProps = {
     section: section ?? undefined,
     tags: fm.tags,
     pageType: 'article',
-};
-
-const isHeroDark = (fm.isHeroDark || fm.heroConfig?.dark) ?? false;
-
-const resolvedHeroConfig = {
-    ...heroConfig,
-    mode: heroConfig.mode || 'work',
 };
 
 const featured = fm.featured || false;
@@ -81,19 +60,20 @@ const nextPostData = nextPost ? formatPostData(nextPost) : undefined;
 const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
 ---
 
-<BaseLayout head={head} {isHeroDark}>
-    <main
-        class="layout @container/main grid grid-cols-(--gtc-layout) outline-hidden"
-        data-layout="content"
-    >
-        <article id="content" class="relative grid grid-cols-subgrid">
+<BaseLayout head={head}>
+    <main class="@container/main relative">
+        <article
+            data-layout="content"
+            id="content"
+            class="layout grid grid-cols-(--gtc-layout) gap-x-(--viewport-safe-inline) outline-hidden"
+        >
             <slot name="slothero">
-                <Hero heroConfig={resolvedHeroConfig} title={head.title}>
+                <Hero config={{ mode: 'work' }} title={frontmatter.title}>
                     <div
-                        class="order-2 self-end px-safe-inline pb-fluid-l lg:order-1 lg:mt-safe-top lg:pr-0"
+                        class="order-2 self-end pl-(--viewport-safe-inline) lg:order-1 lg:mt-safe-top lg:pr-0"
                     >
                         <h1
-                            class="text-step-4/none"
+                            class="font-display text-step-6/none font-black uppercase"
                             set:html={frontmatter.title}
                         />
                         <p>{frontmatter.taster}</p>
@@ -116,7 +96,9 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                                     name="lucide:camera"
                                     class="size-fluid-2xs"
                                 />
-                                {`Credit: ${frontmatter.title}`}
+                                <span
+                                    set:html={`Credit: ${frontmatter.title}`}
+                                />
                             </div>
                         </HeroPicture>
                         {
@@ -134,12 +116,14 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                         }
 
                         <ul
-                            class="fixed top-0 right-safe-inline flex flex-col gap-fluid-m"
+                            class="fixed top-headerheight right-safe-inline flex flex-col gap-fluid-m lg:top-0 lg:right-[calc(var(--spacing-fluid-l)+var(--spacing-fluid-m)+var(--spacing-fluid-xs))]"
                         >
                             {
                                 featured && (
-                                    <li class="relative grid w-fluid-m-l grid-cols-1 grid-rows-1 items-center justify-center px-1 pt-fluid-2xs pb-fluid-xs drop-shadow-overlay drop-shadow-shadow-dark/25">
-                                        <FeaturedIcon />
+                                    <li class="relative grid w-fluid-l pt-fluid-s-m pb-fluid-3xs drop-shadow-overlay drop-shadow-shadow-dark/25">
+                                        <span class="grid h-fluid-l w-full grid-cols-1 grid-rows-1 items-center justify-center p-fluid-3xs">
+                                            <FeaturedIcon />
+                                        </span>
                                     </li>
                                 )
                             }
@@ -162,28 +146,34 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
 
             <div
                 id="start"
-                class="rte col-[full] grid grid-cols-subgrid gap-y-fluid-s"
+                class="cols-[full] rte grid grid-cols-subgrid gap-y-fluid-m py-fluid-2xl"
             >
                 {
-                    frontmatter.product && (
-                        <BlockPicture
-                            src={frontmatter.product.src}
-                            widths={[480, 1200]}
-                            sizes={`100vw, (min-width: 75rem) 75rem`}
-                            class="h-full w-full object-contain"
-                            breakout={true}
-                            wrapper="grid grid-cols-1 grid-rows-1 h-square md:h-block"
-                            alt={frontmatter.product.alt}
+                    headings && headings.length > 2 && (
+                        <TocMenu
+                            class="col-[content] -mb-fluid-s"
+                            headings={headings}
+                            client:load
                         />
                     )
                 }
                 {
-                    headings && headings.length > 2 && !hideToc && (
-                        <TocMenu
-                            class="col-[content] my-fluid-l self-start"
-                            headings={headings}
-                            client:load
-                        />
+                    frontmatter.product && (
+                        <div class="relative col-[full] container mx-auto grid aspect-cinema grid-cols-1 grid-rows-1">
+                            <Picture
+                                src={frontmatter.product.src}
+                                alt={frontmatter.product.alt}
+                                widths={[480, 1200]}
+                                sizes={`100vw, (min-width: 75rem) 75rem`}
+                                class="relative z-10 h-full w-full object-contain"
+                            />
+
+                            <Halftone16x9A
+                                class="pointer-events-none absolute inset-0 h-full w-full scale-110 -rotate-5 text-white opacity-30"
+                                fill="currentColor"
+                                aria-hidden="true"
+                            />
+                        </div>
                     )
                 }
                 <slot />
@@ -220,14 +210,15 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
             </aside>
         </article>
         <aside
-            class="col-[full] grid grid-cols-subgrid bg-primary py-fluid-2xl text-content-dark inset-shadow-sm shadow-primary-shade/20"
+            class="layout grid w-full grid-cols-(--gtc-layout) gap-x-(--viewport-safe-inline) bg-surface-bedrock bg-[image:var(--filter-dark-noise)] bg-size-[700px] py-fluid-2xl text-content-light outline-hidden"
+            data-layout="content"
         >
             {
                 (nextPostData || prevPostData) && (
                     <NextPrev
                         next={nextPostData}
                         prev={prevPostData}
-                        class="col-[content]"
+                        class="z-(--z-content) col-[content]"
                     />
                 )
             }

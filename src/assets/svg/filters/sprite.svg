@@ -1,0 +1,68 @@
+<svg class="invisible w-0 h-0" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+    <filter id="duotone">
+        <!-- Grab the SourceGraphic (implicit) and convert it to grayscale -->
+        <feColorMatrix type="matrix" values=".33 .33 .33 0 0
+              .33 .33 .33 0 0
+              .33 .33 .33 0 0
+              0 0 0 1 0">
+        </feColorMatrix>
+
+        <!-- Map the grayscale result to the gradient map provided in tableValues -->
+        <feComponentTransfer color-interpolation-filters="sRGB">
+            <feFuncR type="table" tableValues=".996078431  .984313725"></feFuncR>
+            <feFuncG type="table" tableValues=".125490196  .941176471"></feFuncG>
+            <feFuncB type="table" tableValues=".552941176  .478431373"></feFuncB>
+        </feComponentTransfer>
+    </filter>
+
+    <filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />    
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+        </filter>
+<filter id="rgb-split">
+  <feOffset id="red-offset" in="SourceGraphic" dx="3" dy="0" result="layer-one" />
+  <feComponentTransfer in="layer-one" result="red">
+    <feFuncR type="identity" />
+    <feFuncG type="discrete" tableValues="0" />
+    <feFuncB type="discrete" tableValues="0" />
+  </feComponentTransfer>
+  <feOffset id="cyan-offset" in="SourceGraphic" dx="-6" dy="0" result="layer-two" />
+  <feComponentTransfer in="layer-two" result="cyan">
+    <feFuncR type="discrete" tableValues="0" />
+    <feFuncG type="identity" />
+    <feFuncB type="identity" />
+  </feComponentTransfer>
+  <feBlend in="red" in2="cyan" mode="screen" result="color-split" />
+</filter>
+
+<filter id="rgb-split-soft" color-interpolation-filters="sRGB">
+  <!-- Red offset -->
+  <feOffset in="SourceGraphic" dx="6" dy="0" result="offset-red-src" />
+  <feComponentTransfer in="offset-red-src" result="red">
+    <feFuncR type="identity" />
+    <feFuncG type="discrete" tableValues="0" />
+    <feFuncB type="discrete" tableValues="0" />
+  </feComponentTransfer>
+  <!-- Soften JUST the red ghost -->
+  <feGaussianBlur in="red" stdDeviation="1.5" result="red-soft" />
+
+  <!-- Cyan offset -->
+  <feOffset in="SourceGraphic" dx="-6" dy="0" result="offset-cyan-src" />
+  <feComponentTransfer in="offset-cyan-src" result="cyan">
+    <feFuncR type="discrete" tableValues="0" />
+    <feFuncG type="identity" />
+    <feFuncB type="identity" />
+  </feComponentTransfer>
+  <!-- Soften JUST the cyan ghost -->
+  <feGaussianBlur in="cyan" stdDeviation="1.5" result="cyan-soft" />
+
+  <!-- Blend softened channels -->
+  <feBlend in="red-soft" in2="cyan-soft" mode="screen" result="color-split" />
+
+  <!-- Re-apply original, sharp image on top -->
+  <feComposite in="SourceGraphic" in2="color-split" operator="over" />
+</filter>
+
+    </defs>
+</svg>

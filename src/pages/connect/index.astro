@@ -1,61 +1,46 @@
 ---
 import { Icon } from 'astro-icon/components';
 import ContactForm from '~/components/forms/web3Form.astro';
-import PageLayout from '~/layouts/PageLayout.astro';
+import Button from '~/components/preact/Button.tsx';
 import Note from '~/components/ui/Note.astro';
 import siteInfo from '~/data/site';
+import PageLayout from '~/layouts/PageLayout.astro';
+
 const available = siteInfo.available;
 const title = 'Connect';
 ---
 
-<PageLayout title={title} isWide={true} prose={false}>
-    <div class="grid grid-cols-1 gap-fluid-m md:grid-cols-2">
-        <div class="md:order-2 md:mt-fluid-m">
-            <div class="mr-auto w-full max-w-[40ch]">
-                <Note theme="info" hasIcon={true}>
-                    <p class="mb-fluid-xs text-step-0 font-semibold">
-                        Use this form to send me a message and I'll get back to
-                        you shortly.
-                    </p>
-                    {
-                        available && (
-                            <p class="mb-fluid-xs">
-                                I'm
-                                <span class="hilite inline-block py-px whitespace-nowrap">
-                                    currently available
-                                </span>
-                                for new roles in
-                                <span class="whitespace-nowrap">Front-End</span>
-                                development. Get in touch if you think I could
-                                be a good fit for your team.
-                            </p>
-                        )
-                    }
-                    <p class="mb-fluid-xs">
-                        For more information please read my <a
-                            href="/about/"
-                            class="link">bio</a
-                        > or visit my LinkedIn profile.
-                    </p>
-                    <p>
-                        <a
-                            href="https://www.linkedin.com/in/peter-wallace-a5002a7a/"
-                            class="flex items-center justify-center gap-2 rounded-xs border border-solid border-slate-800 bg-slate-800 px-fluid-2xs py-fluid-3xs text-sky-400 no-underline hover:border-sky-500 hover:bg-sky-500 hover:text-white hover:no-underline"
-                        >
-                            View my profile
-                            <Icon
-                                name="mdi:linkedin"
-                                class="h-fluid-m w-auto fill-current"
-                            />
-                        </a>
-                    </p>
-                </Note>
-            </div>
-        </div>
-        <div
-            class="rounded-xs bg-surface-raised p-fluid-m shadow-raised md:order-1"
+<PageLayout title={title} isWide={false} hideToc={true}>
+    <p class="text-loud text-step-2/snug font-medium">
+        Send me a message and I'll get back to you shortly. {
+            available && (
+                <>
+                    I'm currently
+                    <span class="inline-block rounded-tight bg-attention px-fluid-3xs py-px font-medium whitespace-nowrap text-content-dark">
+                        available
+                    </span>
+                    for new roles in UX/UI and{' '}
+                    <span class="whitespace-nowrap">Front-End</span>{' '}
+                    development.
+                </>
+            )
+        }
+    </p>
+    <p>
+        More info can be found in my <a href="/about/" class="link">bio</a> or
+
+        <Button
+            theme="action"
+            href={'https://www.linkedin.com/in/peter-wallace-a5002a7a/'}
+            class="not-rte mx-0.5 after:ml-1 after:i-lucide-external-link after:text-step--1"
         >
-            <ContactForm />
-        </div>
+            View my LinkedIn profile
+        </Button>
+    </p>
+
+    <div
+        class="rounded-xs bg-surface-raised p-fluid-m shadow-raised md:order-1"
+    >
+        <ContactForm />
     </div>
 </PageLayout>

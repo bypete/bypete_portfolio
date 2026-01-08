@@ -83,9 +83,9 @@
     --spacing-fluid-s-xs: clamp(0.9375rem, 1.0227rem + -0.1136vw, 1rem);
 
     /* Custom */
+    --spacing-viewport-safe-inline: var(--viewport-safe-inline);
     --spacing-splash-overlap: calc(var(--spacing-fluid-3xl) * 2);
     --spacing-headerheight: var(--headerheight);
-    --spacing-logoheight: var(--logoheight);
     --spacing-gutter: var(--gutter);
     --spacing-tramline: var(--tramline);
     --spacing-offset: var(--offset);
@@ -101,6 +101,7 @@
     --spacing-portrait: 150vw; /* 2:3 */
     --spacing-tv: 75vw; /* 4:3 */
     --spacing-super16: 60vw; /* 5:3 mobile block image */
+
     --container-page: 87.5rem; /* 1400px */
 
     --aspect-retro: 4 / 3;
@@ -110,8 +111,17 @@
     --aspect-portrait: 2 / 3;
     --aspect-super16: 5 / 3;
     --aspect-spread: 2 / 1;
+    --aspect-logo: 2 / 1;
 
-    --radius-tight: 3px;
+    --gradient-banner: linear-gradient(
+        179deg,
+        var(--color-surface-raised) 50%,
+        --alpha(var(--color-shadow-dark) / 15%) 51%,
+        transparent 60%
+    );
+
+    --radius-tight: var(--spacing-tight);
+    --radius-px: 1px;
 
     --font-weight-inherit: inherit;
 
@@ -121,8 +131,8 @@
     --shadow-icon: inset 0 2px 6px -1px var(--tw-shadow-color);
 
     --shadow-raised:
-        0px 2px 8px -2px --alpha(var(--color-shadow-dark) / 10%),
-        0px 0px 4px -1px --alpha(var(--color-shadow-dark) / 10%);
+        0px 12px 10px -18px var(--tw-shadow-color),
+        0px 8px 12px -8px var(--tw-shadow-color);
 
     --shadow-floated:
         0px 2px 1px -1px var(--color-shadow-light),
@@ -143,7 +153,10 @@
     --inset-shadow-stripe: inset 3px 0px 5px 0px var(--tw-inset-shadow-color);
 
     --drop-shadow-svg: 0px 0px 16px rgba(0, 0, 0, 0.1);
-    --drop-shadow-logo: 1px 1px 5px var(--tw-shadow-color);
+    --drop-shadow-logo: 0px 1px 0px var(--tw-shadow-color);
+
+    --drop-shadow-brandlogo: 0px 1px 1px var(--tw-shadow-color);
+    --drop-shadow-squircle: 0px 2px 1px var(--tw-shadow-color);
 
     --drop-shadow-icon: 0px 0px 2px var(--tw-shadow-color);
     --drop-shadow-overlay: 0px 0px 3px var(--tw-shadow-color);
@@ -151,8 +164,10 @@
     --drop-shadow-banner: 1px 1px 5px rgba(0, 0, 0, 0.12);
     --drop-shadow-transparent: 0 0 0 rgba(0, 0, 0, 0);
 
-    --font-body: 'Roboto', 'sans-serif';
-    --font-display: 'Montserrat', 'sans-serif';
+    --font-body: 'Inter Variable', 'sans-serif';
+    /* --font-body: 'Readex Pro Variable', 'sans-serif'; */
+
+    --font-display: 'Reddit Sans Condensed Variable', 'sans-serif';
     --font-georgia: 'Georgia', 'Times New Roman', 'Times,serif';
 
     /* Semantic Tailwind variables | Loaded from Mapped with light/dark theme */
@@ -395,23 +410,39 @@
     clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 10%), 0 100%);
 }
 
+/* @utility squircle {
+    clip-path: shape(
+        from 0 --value(--spacing-*, [length]),
+        curve to --value(--spacing-*, [length]) 0 with 0 0 / 0 0,
+        hline to calc(100% - --value(--spacing-*, [length])),
+        curve to 100% --value(--spacing-*, [length]) with 100% 0 / 100% 0,
+        vline to calc(100% - --value(--spacing-*, [length])),
+        curve to calc(100% - --value(--spacing-*, [length])) 100% with 100% 100% /
+            100% 100%,
+        hline to --value(--spacing-*, [length]),
+        curve to 0 calc(100% - --value(--spacing-*, [length])) with 0 100% / 0
+            100%,
+        close
+    );
+} */
+
 @utility form-base {
-    @apply rounded-tight border-line bg-surface-raised px-fluid-2xs py-fluid-2xs placeholder:text-content-quiet block border;
+    @apply rounded-tight border-line bg-surface-raised px-fluid-2xs py-fluid-2xs placeholder:text-content-quiet block border leading-normal ring-2 ring-transparent;
 }
 
 @utility form-focus {
-    @apply focus:border-surface focus:ring-focus focus:outline-none focus:ring-2;
+    @apply focus:border-surface focus:ring-focus focus:outline-none;
 }
 
 @utility list-li-base {
-    @apply pl-fluid-m relative list-none leading-normal before:absolute before:left-0 before:top-0 before:w-[1.5rem];
+    @apply before:w-fluid-m relative list-none pl-[1.5em] before:absolute before:left-0 before:top-0;
 }
 
 @utility list-li-bullet {
     @apply before:i-ci-dummy-square-small before:text-secondary before:translate-y-px before:text-[24px];
 }
 @utility list-li-checklist {
-    @apply before:i-lucide-check-circle-2 before:text-teal-500;
+    @apply before:i-lucide-check-circle-2 before:h-auto before:min-h-[1.5em] before:w-[1em] before:text-teal-500;
 }
 
 @utility label-base {
@@ -421,22 +452,51 @@
 @utility container {
     padding-inline: clamp(
         0rem,
-        calc(var(--safe-inline) - ((100vw - 87.5rem) / 2)),
-        var(--safe-inline)
+        calc(var(--viewport-safe-inline) - ((100vw - 87.5rem) / 2)),
+        var(--viewport-safe-inline)
     );
     max-width: 87.5rem; /* 1400px */
 }
 
 /* prettier-ignore */
-/* @utility texture {
-    background-image: var(--bg-grains);
-    background-repeat: repeat;
-} */
-
-/* prettier-ignore */
 @utility grains-* {
     background-image: --value(--grains-*);
     background-repeat: repeat;
+}
+
+.squircle {
+    --squircle-displacement: 25pt;
+
+    clip-path: shape(
+        from 0 var(--squircle-displacement),
+        curve to var(--squircle-displacement) 0 with 0 0 / 0 0,
+        hline to calc(100% - var(--squircle-displacement)),
+        curve to 100% var(--squircle-displacement) with 100% 0 / 100% 0,
+        vline to calc(100% - var(--squircle-displacement)),
+        curve to calc(100% - var(--squircle-displacement)) 100% with 100% 100% /
+            100% 100%,
+        hline to var(--squircle-displacement),
+        curve to 0 calc(100% - var(--squircle-displacement)) with 0 100% / 0
+            100%,
+        close
+    );
+}
+
+/* prettier-ignore */
+@utility squircle-* {
+    clip-path: shape(
+        from 0 --value(--spacing-*, [length]),
+        curve to --value(--spacing-*, [length]) 0 with 0 0 / 0 0,
+        hline to calc(100% - --value(--spacing-*, [length])),
+        curve to 100% --value(--spacing-*, [length]) with 100% 0 / 100% 0,
+        vline to calc(100% - --value(--spacing-*, [length])),
+        curve to calc(100% - --value(--spacing-*, [length])) 100% with 100% 100% /
+            100% 100%,
+        hline to --value(--spacing-*, [length]),
+        curve to 0 calc(100% - --value(--spacing-*, [length])) with 0 100% / 0
+            100%,
+        close
+    );
 }
 
 /* prettier-ignore */
@@ -470,6 +530,18 @@
 
 @custom-variant mouse-only (@media screen and (pointer: fine));
 
+@custom-variant svgpath {
+    path {
+        @slot;
+    }
+}
+
+@custom-variant img {
+    img {
+        @slot;
+    }
+}
+
 @custom-variant permalink {
     h1,
     h2 {
@@ -489,19 +561,21 @@
     }
 }
 
-@custom-variant cloak {
-    [data-cloak] {
+@custom-variant cloaked {
+    &:where([data-cloaked], [data-cloaked] *) {
         @slot;
     }
 }
 
+@custom-variant after-block (
+  & + :is(h1,h2,h3,h4,h5,h6,p,div,section,article,ul,ol,figure):not(script):not(style),
+  & + script + :is(h1,h2,h3,h4,h5,h6,p,div,section,article,ul,ol,figure)
+);
+
 /* Layer | Utilities
 ------------------------------------------------------------ */
-/* @layer utilities {
-    [data-theme='dark'] .texture {
-        background-image: var(--bg-grains-dark, var(--bg-grains));
-    }
-} */
+@layer utilities {
+}
 
 /* Layer | Components
 ------------------------------------------------------------ */
@@ -511,52 +585,38 @@
     }
 
     .layout {
-        --gap: var(--offset);
-        --full: var(--offset);
-        --page: minmax(0, 87.5rem);
-        --content: min(68ch, calc(100% - var(--safe-inline) * 2));
-        --gutter: minmax(calc(var(--tramline) / 2), 1fr);
-        --pullout: minmax(0, calc(var(--tramline) / 2));
-        --gtc-layout: [full-start] var(--full) [gutter-start] var(--gutter)
-            [pullout-start] var(--pullout) [content-start] var(--content)
-            [content-end] var(--pullout) [pullout-end] var(--gutter)
-            [gutter-end] var(--full) [full-end];
-    }
+        --content-max: max(47.5rem, 64ch);
+        --content-width: min(
+            var(--content-max),
+            calc(100% - var(--viewport-safe-inline) * 2)
+        );
 
-    [data-layout='page'] {
-        --content: min(100% - (var(--safe-inline) * 2), 87.5rem);
-        --gtc-layout: [full-start] var(--full) [gutter-start] var(--gutter)
-            [content-start pullout-start] var(--content) [content-end
-            pullout-end] var(--gutter) [gutter-end] var(--full) [full-end];
+        --gtc-layout: [full-start] 1fr [content-start] var(--content-width)
+            [content-end] 1fr [full-end];
     }
 
     [data-layout='content'] {
-        --gtc-layout: [full-start] var(--full) [gutter-start] var(--gutter)
-            [pullout-start] var(--pullout) [content-start] var(--content)
-            [content-end] var(--pullout) [pullout-end] var(--gutter)
-            [gutter-end] var(--full) [full-end];
+        --gtc-layout: [full-start] 1fr [content-start] var(--content-width)
+            [content-end] 1fr [full-end];
     }
 
-    /* main > :not(.sticky, .col-[full], .col-[pullout], iframe, article) {
-        grid-column: content;
-        border: 1px dotted red;
-    } */
-
-    :where(
-            main > *:not(.rte, article),
-            main > .rte > *,
-            main article > .rte > *
-        ):not(.sticky, .col-[full], .col-[pullout], iframe, article) {
-        grid-column: content;
-        /* background: #f2f2f2; */
+    [data-layout='page'] {
+        --content-max: min(100% - (var(--safe-inline) * 2), 87.5rem);
+        --gtc-layout: [full-start] 1fr [content-start] var(--content-width)
+            [content-end] 1fr [full-end];
     }
 
-    main
-        article
-        > .rte
-        > *:not(.sticky, .col-[full], .col-[pullout], iframe, article) {
+    :where([data-layout='content'], [data-layout='page'])
+        > :where(.grid-cols-subgrid, .rte)
+        > :not(
+            .sticky,
+            [class*='col-[full'],
+            [class*='col-[pullout'],
+            iframe,
+            article
+        ) {
         grid-column: content;
-        /* background: #f2f2f2; */
+        z-index: var(--z-content);
     }
 
     /*--- Forms --- */
@@ -573,6 +633,9 @@
         &.error {
             @apply ring-attention border-transparent;
         }
+    }
+    .error__label {
+        @apply bg-attention text-step--2/none p-fluid-3xs rounded-tight text-content-dark inline-block;
     }
 
     .form__input,
@@ -608,12 +671,15 @@
         @apply list-li-checklist;
     }
     .list--counter {
+        --counter-name: count;
+        counter-reset: var(--count);
+        list-style: none;
         & > li {
-            @apply pl-fluid-l relative list-none;
-            counter-increment: a;
+            @apply pl-fluid-m relative;
+            counter-increment: var(--counter-name);
             &::before {
-                @apply top-fluid-3xs mr-fluid-xs h-fluid-m w-fluid-m bg-secondary text-step-1 absolute left-0 block rounded-full text-center font-black text-white;
-                content: counter(a);
+                @apply text-secondary w-fluid-m font-medium;
+                content: counters(var(--counter-name), '.') '. ';
             }
         }
     }
@@ -748,9 +814,9 @@
     .rte :where(h1, h2, h3, h4, h5, h6) a {
         line-height: inherit;
     }
-    .rte :where(p):not(:where(.not-rte, .not-rte *)):not(:last-child) {
+    /* .rte :where(p):not(:where(.not-rte, .not-rte *)):not(:last-child) {
         margin-bottom: var(--spacing-fluid-s);
-    }
+    } */
 
     .rte > :last-child {
         margin-bottom: 0;
@@ -781,7 +847,7 @@
 
     .rte :where(ol, ol > li):not(:where(.not-rte, .not-rte *)) {
         list-style-type: decimal;
-        padding-inline-start: var(--spacing-fluid-m);
+        padding-inline-start: var(--spacing-fluid-s);
     }
 
     .rte :where(ol > li):not(:where(.not-rte, .not-rte *)) {

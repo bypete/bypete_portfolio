@@ -29,7 +29,7 @@ splash:
   alt: 'Laptop and iPhone image showing GamesYouLoved website'
   credit: 'GamesYouLoved'
 skillset:
-  text: 'text-white'
+  text: 'text-content-light [&_li]:before:text-white'
   areas:
     - title: 'Apps'
       skills:
@@ -71,25 +71,38 @@ import Block from '~/components/blocks/Block.astro'
 import Note from '~/components/ui/Note.astro'
 
 import gyl_logo from '~/assets/work/gyl/gyl_logo_tv.png';
-import svgbg from '~/assets/details/heap__plus.svg';
+import HeapRepeat from '~/assets/svg/heap_repeat_x.svg';
 import block__sw_40 from '~/assets/work/gyl/block__sw_40.jpg';
 
 
 ## Overview
-<p class="text-step-1">Gamesyouloved.com began as a fun website lovingly curated by gaming enthusiasts and quickly became a huge retro hit. Every genre of game was meticulously documented to help fans relive those sweet nostalgic childhood memories.</p>
+<p class="text-step-2/snug font-medium ">Gamesyouloved.com began as a fun website lovingly curated by gaming enthusiasts and quickly became a huge retro hit. Every genre of game was meticulously documented to help fans relive those sweet nostalgic childhood memories.</p>
 
 The site encouraged the community to submit their own game reviews, effectively crowdsourcing content and giving the fanbase a genuine sense of ownership. An article submission form kept editorial content consistent and streamlined the publishing/moderation process. This was the impetus behind the site's rapid expansion, which until recently, included twelve game genres and several hundred entries.
 
 GYL has a substantial social media presence across multiple platforms and the site served as a central hub for these platforms, allowing for deeper engagement through rich editorial content.
 
 <Block
-    layout={{ slots: 4, type: 'default' }}
+    layout={{ slots: 4, type: 'center' }}
     data-inview="portfolio"
-    wrapperClass="bg-sky-400  not-rte my-fluid-xl"
-    class="py-fluid-3xl text-center"
+    mode={'page'}
+    aspect={'aspect-none'}
+    class="my-fluid-xl"
+    panel={'py-fluid-3xl'}
+    shadow={true}
     legibility='text-content-light'
 >
-    <div slot="background" class="absolute w-full h-full inset-0 bg-bottom bg-cover opacity-[0.12]" style={`background-image: url(${svgbg.src});`}></div>
+   <div
+        slot="background"
+        class="absolute inset-0 h-full w-full bg-sky-400"
+    >
+        <div
+            class="h-full w-full bg-[size:auto_100%] bg-bottom bg-repeat-x opacity-25 bg-blend-soft-light"
+            style={`background-image: url(${HeapRepeat.src});`}
+        >
+        </div>
+    </div>
+
     <p slot="s1" class="text-step-5/tight font-black"><Icon name="fa6-brands:youtube" class="w-fluid-xl-2xl h-fluid-xl-2xl mx-auto block" title="youtube" />6.44K <span class="text-step--1 block font-medium">Youtube subscribers</span></p>
     <p slot="s2" class="text-step-5/tight font-black"><Icon name="fa6-brands:instagram" class="w-fluid-xl-2xl h-fluid-xl-2xl mx-auto block" title="instagram" />61.3K <span class="text-step--1 block font-medium">Instagram followers</span></p>
     <p slot="s3" class="text-step-5/tight font-black"><Icon name="fa6-brands:x-twitter" class="w-fluid-xl-2xl h-fluid-xl-2xl mx-auto block" title="x-twitter" />99.7K <span class="text-step--1 block font-medium">X Followers</span></p>
@@ -104,7 +117,7 @@ GYL has a substantial social media presence across multiple platforms and the si
 ## My responsibilities
 
 - My first task was to design the brand logo. An analogue TV brandmark was then introduced to connect with the retro audience and provide a consistent identity across all social channels. This provided a clear visual framework from which to design the site.
-<BlockPicture src={gyl_logo} wrapper="my-fluid-l [&+*]:mt-fluid-l" alt="GamesYouLoved Logo" breakout={false} credit={frontmatter.title} class="w-full h-auto max-w-1/2 mx-auto my-fluid-m" widths={[400, 720]} />
+<BlockPicture src={gyl_logo}  alt="GamesYouLoved Logo" credit={frontmatter.title} mode="plain" class="w-full h-auto max-w-1/2 mx-auto py-fluid-m" widths={[400, 720]} />
 
 - The designs and static templates were hosted in a secure listing to keep stakeholders informed throughout the development process. <span class="label-info m-0!">Project management</span>
 - Working closely with the client's direction, I created a few key screens for visual approval. The website needed to strike a balance between being distinctively recognisable and also evoking vintage styling from the past.
@@ -126,7 +139,7 @@ GYL has a substantial social media presence across multiple platforms and the si
 </Fragment>
 </Lightbox>
 
-<BlockPicture src={block__sw_40} wrapper="my-fluid-l [&+*]:mt-fluid-l" alt="Exhibition event" credit='GamesYouLoved' />
+<BlockPicture src={block__sw_40} mode="page" alt="Exhibition event" credit='GamesYouLoved' />
 
 ## Final comments
 

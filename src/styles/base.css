@@ -4,22 +4,30 @@
     --offset: 0px;
 
     --headerheight: calc(
-        var(--spacing-fluid-l) + (var(--spacing-fluid-2xs) * 2)
+        var(--spacing-fluid-l) + (var(--spacing-fluid-xs) * 2)
     );
-    --safe-top: calc(var(--headerheight) + var(--spacing-fluid-l));
-    --safe-inline: calc(var(--offset) + var(--spacing-fluid-m));
+    --safe-top: calc(var(--headerheight) + var(--spacing-fluid-m));
+    --safe-inline: var(--spacing-fluid-m);
+    --hamburger-center: calc(
+        var(--spacing-fluid-m) + (var(--spacing-fluid-l) / 2)
+    );
     --tramline: var(--spacing-fluid-m);
+    --viewport-safe-inline: var(--spacing-fluid-m);
 
     --z-toast: 2001;
     --z-overlay: 2000;
-    --z-header: 1000;
+    --z-offscreen: 999;
     --z-banner: 1000;
-    --z-nav: 999;
+    --z-toc: 900;
     --z-shortcuts: 800;
     --z-logo: 501;
     --z-hero: 500;
     --z-underlay: 990;
-    --z-toc: 900;
+
+    --z-content: 100;
+    --z-main: 100;
+    --z-swoosh: 20;
+    --z-footer: 0;
 
     --plus: svg-load('heap__plus.svg');
     --mask-pill: svg-load('mask-pill-01.svg');
@@ -27,20 +35,33 @@
     --mask-blob_1_1: svg-load('mask-blob_1_1.svg');
     --mask-blob_1_185: svg-load('mask-blob_1_185.svg');
     --mask-blob_16_9: svg-load('mask-blob_16_9.svg');
-    --bg-dust: url('/images/dust.webp');
-    --bg-dust-dark: url('/images/dust--dark.webp');
-    --bg-grains: url('/images/dust.webp');
-    --bg-grains-dark: url('/images/dust--dark.webp');
 
-    --grains-quiet: url('/images/dust-quiet.webp');
-    --grains-default: url('/images/dust.webp');
-    --grains-loud: url('/images/dust-loud.webp');
+    --filter-grains: svg-load('filters/grains.svg');
+    --filter-microbes: svg-load('filters/microbes.svg');
 
-    --texture-noise: var(--bg-dust);
+    --filter-noise: svg-load('filters/noise.svg');
+    --filter-noise_loud: svg-load('filters/noise_loud.svg');
+    --filter-noise_quiet: svg-load('filters/noise_quiet.svg');
+
+    --filter-dark-grains: svg-load('filters/dark-grains.svg');
+    --filter-dark-noise: svg-load('filters/dark-noise.svg');
+    --filter-dark-noise_loud: svg-load('filters/dark-noise_loud.svg');
+    --filter-dark-noise_quiet: svg-load('filters/dark-noise_quiet.svg');
+
+    /* prettier-ignore */
+    --squircle: svg-load(
+            'mask-squircle.svg',
+            preserveAspectRatio=none,
+            fill= 'inheritColor'
+        );
+
+    --clip-blade-top: polygon(0% 0%, 100% 0%, 100% 40%, 0% 60%);
+    --clip-blade-bottom: polygon(0% 70%, 100% 50%, 100% 100%, 0% 100%);
+    --clip-circle: circle(50% at 50% 50%);
 
     --container-max: 75rem;
 
-    --logoheight: 0rem;
+    --squircle-displacement: 25pt;
 
     /* Grid Template Columns */
     --gtc-block33: minmax(0, 1fr) minmax(0, 2fr);
@@ -50,32 +71,33 @@
     --gtc-block66: minmax(0, 2fr) minmax(0, 1fr);
     --gtc-listing: minmax(0, 2fr) minmax(0, 1fr);
     --gtc-prevnext: repeat(2, minmax(0, 320px));
+    --gtc-banner: auto auto minmax(0, 1fr);
     --gtc-home: auto minmax(0, 1fr);
     --gtc-credit: auto minmax(auto, 1fr);
     --gtc-icon: auto minmax(auto, 1fr);
+
     --gtc-featured: var(--spacing-fluid-m) minmax(auto, 1fr);
     --gtc-workcontainer: var(--spacing-widescreen)
         calc(43.75vw - ((100vw - 78.75rem) / 2)) minmax(0, 1fr);
     --gtc-work: minmax(0, 1fr) minmax(0, 2fr);
 
     /* Grid Template Rows */
-    --gtr-workcard: auto auto minmax(0, 1fr) auto;
+    --gtr-workcard: auto minmax(0, 1fr) auto;
     --gtr-work: 100vw auto;
     --gtr-home: auto minmax(0, 1fr);
+    --gtr-toc: auto auto;
 }
 
 @media (min-width: 768px) {
     :root {
-        --offset: var(--spacing-fluid-xl);
-        --tramline: var(--spacing-fluid-xl);
+        --offset: var(--spacing-fluid-l);
+        --tramline: var(--spacing-fluid-m);
         /* --gutter: var(--spacing-fluid-xl); */
         --gap: var(--spacing-fluid-xl);
-        --headerheight: 0rem;
-        --logoheight: var(--spacing-fluid-m);
-        --safe-top: calc(
-            var(--logoheight) + var(--spacing-fluid-s) + var(--spacing-fluid-l)
+
+        --headerheight: calc(
+            var(--spacing-fluid-l) + (var(--spacing-fluid-m) * 2)
         );
-        --safe-inline: calc(var(--offset) + var(--spacing-fluid-m));
     }
 }
 
@@ -88,8 +110,7 @@
 }
 
 :where(h1, h2, h3, h4, h5, h6) {
-    font-family: var(--font-display);
-    letter-spacing: var(--tracking-tight);
+    letter-spacing: -0.03125em;
     margin-bottom: 0.333em;
 }
 :where(h1, h2, h3, h4, h5, h6) a {
@@ -120,7 +141,7 @@ svg {
     stroke-width: 2;
 }
 
-path,
+/* path,
 circle,
 ellipse,
 line,
@@ -128,7 +149,7 @@ polygon,
 polyline,
 rect {
     stroke-width: inherit;
-}
+} */
 
 /* Remove spinner from number forms */
 input::-webkit-outer-spin-button,

@@ -1,10 +1,11 @@
 ---
-import SplashLayout from '~/layouts/SplashLayout.astro';
-import WorkSlide from '~/components/Swiper/WorkSlide.astro';
+import { getCollection, render } from 'astro:content';
 import Work from '~/components/Swiper/Work.astro';
+import WorkSlide from '~/components/Swiper/WorkSlide.astro';
 
 import { formatBlogPosts } from '~/js/utils';
-import { getCollection, render } from 'astro:content';
+import SplashLayout from '~/layouts/SplashLayout.astro';
+
 const allWork = await getCollection('work');
 
 const formattedPosts = formatBlogPosts(allWork, {
@@ -15,9 +16,6 @@ const formattedPosts = formatBlogPosts(allWork, {
 });
 
 const title = 'Show your workings';
-const heroConfig = {
-    dark: true,
-};
 
 import ogImage from '~/assets/og/og__work.jpg';
 
@@ -32,7 +30,7 @@ const og = {
 };
 ---
 
-<SplashLayout title={title} isHeroDark={heroConfig.dark} {og}>
+<SplashLayout title={title} {og}>
     <main id="content">
         <Work>
             {

@@ -27,46 +27,46 @@ const imageProps = {
     widths: resolvedWidths,
     quality: 'high',
 };
-
-const SvgBg = slide?.svgBg;
 ---
 
 {
     (
         <a
             href={slide.url}
-            class="swiper-slide relative flex h-full !w-auto shrink-0"
+            class="swiper-slide relative flex h-full w-full items-center justify-center pt-safe-top lg:pt-0"
         >
-            {SvgBg && (
-                <SvgBg
-                    name="halftone"
-                    title="halftone gradient"
-                    class="pointer-events-none absolute inset-0 h-full w-full text-sky-300/5"
-                    fill="currentColor"
-                    aria-hidden="true"
-                />
-            )}
+            {slide.bg &&
+                (() => {
+                    const SvgBackground = slide.bg;
+                    return (
+                        <SvgBackground
+                            class="pointer-events-none absolute inset-0 h-full w-full text-red-600 opacity-10"
+                            fill="currentColor"
+                            aria-hidden="true"
+                        />
+                    );
+                })()}
 
             <Image
                 {...imageProps}
                 data-visual
-                class="relative block h-full w-auto"
+                class="relative block h-full w-full object-contain object-center"
             />
             {caption && (
                 <span
                     data-caption
                     class:list={[
-                        'absolute flex max-w-fluid-4xl flex-col items-start text-content-light opacity-0',
+                        'absolute flex flex-col items-start text-content-light opacity-0',
                         caption.label && caption.label,
                     ]}
                 >
                     {caption.title && (
-                        <h2 class="relative z-10 -mb-fluid-3xs inline-block -rotate-1 rounded-tight bg-secondary p-fluid-3xs font-display text-step-0 leading-none font-semibold tracking-tight shadow-xs shadow-secondary-shade/12">
+                        <h2 class="relative z-10 -mb-tight inline-block rounded-tight bg-action px-fluid-2xs py-fluid-3xs font-display text-step-2 leading-none font-black tracking-tight uppercase shadow-xs shadow-shadow-dark/25">
                             {caption.title}{' '}
                         </h2>
                     )}
                     {caption.copy && (
-                        <p class="relative inline-block translate-x-fluid-3xs translate-y-0.5 rounded-tight bg-secondary-dark p-fluid-3xs text-step--2 leading-snug">
+                        <p class="relative inline-block translate-x-fluid-3xs -rotate-1 rounded-tight bg-surface-raised p-fluid-2xs text-step--1 leading-none text-content">
                             {caption.copy}
                         </p>
                     )}

@@ -9,7 +9,7 @@ const { class: className, ...attrs } = Astro.props;
     <pre
         {...attrs}
         class:list={[
-            'col-[pullout] my-fluid-l rounded p-fluid-m',
+            '-mx-viewport-safe-inline my-fluid-l rounded p-fluid-m',
             className,
         ]}><slot /></pre>
 </Fragment>

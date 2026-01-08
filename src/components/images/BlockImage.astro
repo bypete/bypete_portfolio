@@ -45,7 +45,12 @@ const imageProps = {
             ]}
         >
             <Image {...imageProps} />
-            {credit && <Credit credit={credit} />}
+            {credit && (
+                <Credit
+                    credit={credit}
+                    class="absolute bottom-fluid-2xs left-fluid-s @min-[100vw]:left-safe-inline"
+                />
+            )}
         </div>
     ) : (
         <Image {...imageProps} />

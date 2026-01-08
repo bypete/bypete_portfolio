@@ -1,6 +1,6 @@
 ---
-import PageLayout from '~/layouts/PageLayout.astro';
 import Banner from '~/components/banners/Portfolio.astro';
+import PageLayout from '~/layouts/PageLayout.astro';
 ---
 
 <PageLayout title={'Oops!'} hideBreadcrumbs={true} hideToc={true}>
@@ -12,7 +12,11 @@ import Banner from '~/components/banners/Portfolio.astro';
         to send me a message and I'll look into it.
     </p>
 
-    <aside slot="slotbanner" class="col-[full]">
-        <Banner wrapper="bg-surface-brand" class="min-h-block" />
+    <aside
+        class="layout col-[full] grid grid-cols-(--gtc-layout) gap-fluid-s"
+        data-layout="content"
+        slot="slotbanner"
+    >
+        <Banner mode={'breakout'} aspect="aspect-cinema" />
     </aside>
 </PageLayout>

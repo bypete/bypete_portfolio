@@ -1,4 +1,4 @@
-import type { ComponentType } from 'astro';
+import type { SvgComponent } from "astro/types";
 
 export interface Caption {
 	title?: string;
@@ -8,7 +8,7 @@ export interface Caption {
 
 export interface SwiperImage {
 	src: ImageMetadata;
-	svgBg?: ComponentType;
+	bg?: SvgComponent;
 	widths?: number[];
 	sizes?: string;
 	alt: string;
@@ -18,49 +18,46 @@ export interface SwiperImage {
 	caption?: Caption;
 }
 
-import one from "~/assets/home/mykring__phone-isometric.png";
-import two from "~/assets/home/shirleychauffeurs__ipad.png";
-import three from "~/assets/home/onepay__laptop-phone.png";
-
-import HalftoneA from "~/assets/svg/halftone_1x1_kidney.svg";
-import HalftoneB from "~/assets/svg/halftone_1x1_deathstar.svg";
-import HalftoneC from "~/assets/svg/halftone_4x3_glasses.svg";
+import myKring from "~/assets/home/mykring__phone_pair.png";
+import onepay from "~/assets/home/onepay__laptop-phone.png";
+import shirleyChauffuers from "~/assets/home/shirleychauffeurs__ipad.png";
+import Halftone1x1B from "~/assets/svg/halftone_1x1_deathstar.svg";
+import Halftone1x1A from "~/assets/svg/halftone_1x1_kidney.svg";
+import Halftone4x3A from "~/assets/svg/halftone_4x3_glasses.svg";
+import Halftone4x3B from "~/assets/svg/halftone_4x3_whale.svg";
 
 export const heroSlides: SwiperImage[] = [
 	{
-		src: one,
-		svgBg: <HalftoneA />,
+		src: myKring,
+		bg: Halftone1x1B,
 		alt: "3 phones showing the myKRing app in use",
 		url: "/work/mykring-app/",
 		caption: {
 			title: "MyKRing app",
 			copy: "iOS + Android solution",
-			label:
-				"bottom-fluid-xl left-0 md:left-auto md:bottom-[20%] md:right-[15%]",
+			label: "bottom-fluid-xl left-fluid-m  md:top-[70%] md:left-[70%]",
 		},
 	},
 	{
-		src: two,
-		svgBg: HalftoneB,
+		src: shirleyChauffuers,
+		bg: Halftone1x1B,
 		alt: "laptop and mobile showing site in use",
 		url: "/work/shirleychauffeurs/",
 		caption: {
 			title: "Shirley Chauffeurs",
 			copy: "Branding and Online",
-			label:
-				"bottom-fluid-xl left-0 md:left-auto md:bottom-[15%] md:right-[45%]",
+			label: "bottom-fluid-xl left-fluid-m  md:top-[40%] md:left-[65%]",
 		},
 	},
 	{
-		src: three,
-		svgBg: HalftoneC,
+		src: onepay,
+		bg: Halftone4x3A,
 		alt: "laptop and mobile",
 		url: "/work/onepay/",
 		caption: {
 			title: "OnePay",
 			copy: "Fast, easy, efficient wage payments",
-			label:
-				"bottom-fluid-xl left-0 md:left-auto md:bottom-[15%] md:left-[40%]",
+			label: "bottom-fluid-xl left-fluid-m  md:top-[80%] md:left-[40%]",
 		},
 	},
 ];

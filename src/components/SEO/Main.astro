@@ -1,66 +1,63 @@
 ---
-import smartypants from "smartypants";
-import siteInfo from "~/data/site";
-import pjson from "~/../package.json";
-import Favicon from "~/components/SEO/Favicon.astro";
-
-import { SEO } from "astro-seo";
+import { SEO } from 'astro-seo';
+import smartypants from 'smartypants';
+import pjson from '~/../package.json';
+import Favicon from '~/components/SEO/Favicon.astro';
+import siteInfo from '~/data/site';
 
 interface OpengraphProps {
-	title?: string;
-	description?: string;
-	image?: {
-		src?: ImageMetadata;
-		alt?: string;
-	};
+    title?: string;
+    description?: string;
+    image?: {
+        src?: ImageMetadata;
+        alt?: string;
+    };
 }
 
 export type Props = {
-	title: string;
-	description?: string;
-	og?: OpengraphProps;
-	canonicalURL?: URL;
-	pageType?: "website" | "article";
-	includeSiteTitle?: boolean;
-	isHeroDark?: boolean;
-	// Article
-	published_time?: string;
-	author?: string[];
-	section?: string;
-	tags?: string[];
+    title: string;
+    description?: string;
+    og?: OpengraphProps;
+    canonicalURL?: URL;
+    pageType?: 'website' | 'article';
+    includeSiteTitle?: boolean;
+    // Article
+    published_time?: string;
+    author?: string[];
+    section?: string;
+    tags?: string[];
 };
 
 const {
-	title,
-	description = siteInfo.description,
-	og: {
-		title: ogTitle = title || siteInfo.og.title,
-		description: ogDescription = siteInfo.og.description,
-		image: {
-			src: ogImage = siteInfo.og.image.src,
-			alt: ogAlt = siteInfo.og.image.alt,
-		} = {}, // Default `image` object
-	} = {},
-	canonicalURL = new URL(Astro.request.url, Astro.site),
-	pageType = "website",
-	includeSiteTitle = true,
-	isHeroDark = false,
-	// Articles
-	published_time,
-	author,
-	section,
-	tags,
+    title,
+    description = siteInfo.description,
+    og: {
+        title: ogTitle = title || siteInfo.og.title,
+        description: ogDescription = siteInfo.og.description,
+        image: {
+            src: ogImage = siteInfo.og.image.src,
+            alt: ogAlt = siteInfo.og.image.alt,
+        } = {}, // Default `image` object
+    } = {},
+    canonicalURL = new URL(Astro.request.url, Astro.site),
+    pageType = 'website',
+    includeSiteTitle = true,
+    // Articles
+    published_time,
+    author,
+    section,
+    tags,
 } = Astro.props;
 
 let article = {}; // Initialize as an empty object
 
-if (pageType === "article") {
-	article = {
-		publishedTime: published_time,
-		authors: [`${author}`],
-		tags: tags,
-		section: section,
-	};
+if (pageType === 'article') {
+    article = {
+        publishedTime: published_time,
+        authors: [`${author}`],
+        tags: tags,
+        section: section,
+    };
 }
 
 const resolvedTitle = includeSiteTitle ? `${title} - ${siteInfo.title}` : title;
@@ -77,15 +74,16 @@ const resolvedOgTitle = smartypants(ogTitle, 1);
 />
 <title set:html={smartypants(resolvedTitle, 1)} />
 <meta name="generator" content={Astro.generator} />
-{
-    isHeroDark ? (
-    <meta name="theme-color" content="rgb(42, 42, 54)" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="rgb(42, 42, 54)" media="(prefers-color-scheme: dark)" />
-    ) : (
-        <meta name="theme-color" content="rgb(252, 252, 252)" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="rgb(42, 42, 54)" media="(prefers-color-scheme: dark)" />
-    )
-}
+<meta
+    name="theme-color"
+    content="rgb(252, 252, 252)"
+    media="(prefers-color-scheme: light)"
+/>
+<meta
+    name="theme-color"
+    content="rgb(42, 42, 54)"
+    media="(prefers-color-scheme: dark)"
+/>
 
 <!-- Low Priority Global Metadata -->
 <Favicon />
@@ -97,14 +95,6 @@ const resolvedOgTitle = smartypants(ogTitle, 1);
 <meta name="msapplication-TileColor" content="#00aba9" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" />
-
-<!-- Assets | Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;0,800;1,300;1,400;1,500;1,700;1,800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap"
-    rel="stylesheet"
-/>
 
 <SEO
     description={description}

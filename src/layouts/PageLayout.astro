@@ -1,21 +1,21 @@
 ---
-import BaseLayout from './BaseLayout.astro';
-import type { Props as HeadProps } from '~/components/SEO/Main.astro';
-import PageTools from '~/components/ui/PageTools.astro';
-
 import Hero from '~/components/hero/Hero.astro';
 import TocMenu from '~/components/preact/navigation/TocMenu';
+import type { Props as HeadProps } from '~/components/SEO/Main.astro';
+import PageTools from '~/components/ui/PageTools.astro';
+import BaseLayout from './BaseLayout.astro';
 
 const {
     frontmatter,
     headings,
     customHeadings,
     isWide = false,
-    prose = true,
+    hideToc = false,
+    hideBreadcrumbs = true,
 } = Astro.props;
+
 const fm = frontmatter || Astro.props;
-const { heroConfig = {}, class: className } = fm;
-const { hideToc = false, hideBreadcrumbs = false } = fm;
+const { heroConfig = {} } = fm;
 
 const finalHeadings = headings || customHeadings || []; // Ensure it's always an array
 
@@ -25,30 +25,21 @@ const head: HeadProps = {
     description: fm.description || fm.head?.description,
     og: fm.og || fm.head?.og,
 };
-
-const isHeroDark = (fm.isHeroDark || fm.heroConfig?.dark) ?? false;
-
-const resolvedHeroConfig = {
-    ...heroConfig,
-    wrapper: heroConfig.wrapper || '',
-};
 ---
 
-<BaseLayout {head} {isHeroDark}>
-    <main
-        class:list={[
-            'layout @container/main grid grid-cols-(--gtc-layout) outline-hidden',
-            className && className,
-        ]}
-        data-layout={isWide ? 'page' : 'content'}
-    >
-        <article id="content" class="relative grid grid-cols-subgrid">
+<BaseLayout {head}>
+    <main>
+        <article
+            data-layout={isWide ? 'page' : 'content'}
+            id="content"
+            class="layout grid grid-cols-(--gtc-layout) gap-x-(--viewport-safe-inline) outline-hidden"
+        >
             <slot name="slothero">
-                <Hero heroConfig={resolvedHeroConfig} title={head.title} />
+                <Hero config={heroConfig} title={head.title} />
             </slot>
             <div
                 id="start"
-                class="rte col-[full] grid grid-cols-subgrid gap-y-fluid-s py-fluid-2xl"
+                class="rte col-[full] grid grid-cols-subgrid gap-y-fluid-m py-fluid-2xl"
             >
                 {
                     finalHeadings && finalHeadings.length > 2 && !hideToc && (

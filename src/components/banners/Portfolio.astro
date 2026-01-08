@@ -1,56 +1,81 @@
 ---
-import Block from '~/components/blocks/Block.astro';
 import { Image } from 'astro:assets';
-import Button from '~/components/preact/Button';
-import product from '~/assets/work/mykringapp/product.png';
+import { Icon } from 'astro-icon/components';
+import HeapRepeat from '~/assets/svg/heap_repeat_x.svg';
 
+import product from '~/assets/work/mykringapp/product.png';
+import Block from '~/components/blocks/Block.astro';
+import Button from '~/components/preact/Button';
 import pieces from '~/data/work';
 
-import { Icon } from 'astro-icon/components';
 interface Props {
-    wrapper?: string;
+    wrap?: string;
+    panel?: string;
+    aspect?: string;
+    shadow?: boolean;
     class?: string;
+    mode?: 'plain' | 'breakout' | 'bleed' | 'page';
 }
-const { wrapper, class: className } = Astro.props;
+const {
+    wrap,
+    panel,
+    aspect,
+    shadow = false,
+    mode = 'breakout',
+    class: className,
+} = Astro.props;
 ---
 
 <Block
     layout={{ slots: 2, type: 'default' }}
     data-inview="portfolio"
-    wrapperClass={`${wrapper && wrapper} not-rte`}
+    {mode}
+    {shadow}
+    {panel}
+    {wrap}
+    {aspect}
     class:list={[className && className]}
     legibility="text-content-dark"
     slotConfig={{
-        1: ['self-center'],
-        2: ['self-center'],
+        1: ['py-fluid-m self-center', '@lg/block:order-2'],
+        2: ['@lg/block:self-stretch', '@lg/block:order-1'],
     }}
 >
-    <div class="plusheap absolute inset-0 h-full w-full opacity-20"></div>
+    <div
+        slot="background"
+        class="absolute inset-0 h-full w-full bg-surface-brand"
+    >
+        <div
+            class="h-full w-full bg-[size:auto_100%] bg-bottom bg-repeat-x opacity-25 bg-blend-soft-light"
+            style={`background-image: url(${HeapRepeat.src});`}
+        >
+        </div>
+    </div>
 
     <Image
         data-animate="scaleIn"
-        slot="s1"
+        slot="s2"
         src={product}
-        quality="high"
+        quality={'max'}
         loading="eager"
         densities={[1.5, 2]}
-        width={600}
-        class="relative m-0 h-full w-full object-contain"
+        width={720}
+        class="relative bottom-0 h-auto w-full object-contain object-bottom @lg/block:absolute @lg/block:h-[calc(100%+var(--spacing-fluid-2xl))]"
         alt="iPhones with mykring app in use"
     />
-    <div slot="s2" class="py-fluid-m">
+    <div slot="s1" class="relative z-(--z-content)">
         <h2
-            class="font-display text-step-3/tight font-bold tracking-tight"
+            class="m-0 font-display text-step-4/tight font-black tracking-tight uppercase"
             data-animate="fadeInDown"
         >
             Show and tell
         </h2>
         <p class="mb-fluid-m" data-animate="fadeInDown">
-            Curious to see my work in action? Discover the stories behind my
-            projects, the challenges addressed, and the solutions crafted.
+            Discover the stories behind my projects, the challenges addressed,
+            and the solutions crafted.
         </p>
-        <p class="flex flex-row gap-fluid-3xs">
-            <Button data-animate="scaleIn" theme="secondary" href="/work/"
+        <p class="flex flex-wrap gap-fluid-s">
+            <Button data-animate="scaleIn" theme="action" href="/work/"
                 >Explore the portfolio</Button
             >
             <Button

@@ -29,7 +29,7 @@ splash:
   alt: 'iPad image showing twotw website'
   credit: 'ORP'
 skillset:
-  text: 'text-white'
+  text: 'text-content-light [&_li]:before:text-white'
   areas:
     - title: 'Apps'
       skills:
@@ -61,11 +61,11 @@ import Lightbox from '~/components/MDX/Lightbox.astro'
 export const components = {ul: UL, blockquote: BLOCKQUOTE, pre: PRE}
 import Block from '~/components/blocks/Block.astro'
 
-import svgbg from '~/assets/details/heap__plus.svg';
+import HeapRepeat from '~/assets/svg/heap_repeat_x.svg';
 
 ## Overview
 
-<p class="text-step-1">Originally created to promote the discography of **Jeff Wayne's Musical Version of The War of the Worlds**, the site quickly evolved to become the primary resource for explaining the story, connecting with fans, and introducing new listeners to the TWOTW experience.</p>
+<p class="text-step-2/snug font-medium ">Originally created to promote the discography of **Jeff Wayne's Musical Version of The War of the Worlds**, the site quickly evolved to become the primary resource for explaining the story, connecting with fans, and introducing new listeners to the TWOTW experience.</p>
 
 A tour section was subsequently included to promote the hugely successful live musical version - _Jeff Wayne's Musical Version of The War of The Worlds - Alive on Stage!_ - as it toured the UK and Europe, Australia, and New Zealand.
 
@@ -74,17 +74,32 @@ User engagement was critical to the site's success because the album had a large
 The site promoted and then documented **8 Arena tours**, culminating in the _40<sup>th</sup> Anniversary UK tour_ in 2018.
 
 <Block
-    layout={{slots: 3, type: 'default'}}
+    layout={{slots: 3, type: 'center'}}
     data-inview="portfolio"
-    wrapperClass="bg-amber-400 not-prose not-rte my-fluid-2xl"
-    class="py-fluid-3xl justify-center text-center relative"
+     mode={'page'}
+      aspect={'aspect-none'}
+       class="my-fluid-xl"
+    panel={'py-fluid-3xl'}
+     shadow={true}
     legibility='text-teal-500'
 >
-    <div slot="background" class="absolute w-full h-full inset-0 bg-bottom bg-cover opacity-[0.12]" style={`background-image: url(${svgbg.src});`}></div>
+   <div
+        slot="background"
+        class="absolute inset-0 h-full w-full bg-amber-400"
+    >
+        <div
+            class="absolute inset-0 h-full w-full bg-[size:auto_100%] bg-bottom bg-repeat-x opacity-25 bg-blend-soft-light"
+            style={`background-image: url(${HeapRepeat.src});`}
+        >
+        </div>
+    </div>
+   
     <p slot="s1" class="text-step-7/tight font-black"><Icon name="lucide:message-circle-heart" class="w-fluid-xl-2xl h-fluid-xl-2xl mx-auto block" title="youtube" />20K <span class="text-step--1 block font-medium">Users</span></p>
     <p slot="s2" class="text-step-7/tight font-black"><Icon name="lucide:message-square-text"  class="w-fluid-xl-2xl h-fluid-xl-2xl mx-auto block" title="instagram" />19 <span class="text-step--1 block font-medium">Message boards</span></p>
     <p slot="s3" class="text-step-7/tight font-black"><Icon name="lucide:messages-square" class="w-fluid-xl-2xl h-fluid-xl-2xl mx-auto block" title="x-twitter" />3.2K <span class="text-step--1 block font-medium">Topics</span></p>
 </Block>
+
+
 
 <Skills skillset={frontmatter.skillset} bg={frontmatter.brand.bg}>
 ## My Skills and Contributions

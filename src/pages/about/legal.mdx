@@ -2,8 +2,6 @@
 title: 'Legal notices'
 description: 'Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.'
 layout: '~/layouts/PageLayout.astro'
-heroConfig:
-    mode: 'plain'
 ---
 import { Image } from 'astro:assets';
 import Figure from '~/components/images/Figure.astro'
@@ -28,7 +26,7 @@ Every effort is made to keep the website up and running smoothly. However, byPet
 
 ## Cookie policy
 
-<div class="col-[full] px-safe-inline text-left ">
+<div class="col-[full] mx-auto container text-left z-(--z-content) ">
 | Name                        | Why?                                          | When?                             | What is collected                                 | How long? |
 | --------------------------- | --------------------------------------------- | --------------------------------- | ------------------------------------------------- | --------- |
 | consentMode                 | Allows user to set preferences and stops the notice appearing repeatedly  | Local storage created once a user submits their choices | Four choices, set via checkboxes. JavaScript will load analytics scripts accordingly  | No expiry    |

@@ -1,33 +1,33 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
-import WorkLayout from "~/layouts/WorkLayout.astro";
-import { formatBlogPosts } from "~/js/utils";
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import { formatBlogPosts } from '~/js/utils';
+import WorkLayout from '~/layouts/WorkLayout.astro';
 
 export async function getStaticPaths() {
-	const workEntries = await getCollection("work");
-	const numberOfPosts = workEntries?.length;
+    const workEntries = await getCollection('work');
+    const numberOfPosts = workEntries?.length;
 
-	const formattedPosts = formatBlogPosts(workEntries, {
-		filterOutDrafts: true,
-		filterOutFuturePosts: true,
-		sortByDate: true,
-		limit: undefined,
-	});
+    const formattedPosts = formatBlogPosts(workEntries, {
+        filterOutDrafts: true,
+        filterOutFuturePosts: true,
+        sortByDate: true,
+        limit: undefined,
+    });
 
-	return formattedPosts.map((entry, i) => ({
-		params: { id: entry.id },
-		props: {
-			entry,
-			prevPost: i + 1 !== numberOfPosts ? formattedPosts[i + 1] : null,
-			nextPost: i !== 0 ? formattedPosts[i - 1] : null,
-		},
-	}));
+    return formattedPosts.map((entry, i) => ({
+        params: { id: entry.id },
+        props: {
+            entry,
+            prevPost: i + 1 !== numberOfPosts ? formattedPosts[i + 1] : null,
+            nextPost: i !== 0 ? formattedPosts[i - 1] : null,
+        },
+    }));
 }
 
 type Props = {
-	entry: CollectionEntry<"work">;
-	prevPost: CollectionEntry<"work">;
-	nextPost: CollectionEntry<"work">;
+    entry: CollectionEntry<'work'>;
+    prevPost: CollectionEntry<'work'>;
+    nextPost: CollectionEntry<'work'>;
 };
 
 const { entry, prevPost, nextPost } = Astro.props;
