@@ -10,6 +10,8 @@ import GoogleTag from '~/components/SEO/GoogleTag.astro';
 import GoogleTagNoScript from '~/components/SEO/GoogleTagNoScript.astro';
 import MainSEO, { type Props as HeadProps } from '~/components/SEO/Main.astro';
 import Accessibility from '~/components/ui/Accessibility.astro';
+import { getMainNavigation } from '~/data/navigation.server';
+import { footerNavigation } from '~/data/navigation.static';
 
 // Supports weights 200-900
 import '@fontsource-variable/reddit-sans-condensed';
@@ -23,6 +25,7 @@ const fm = Astro.props.frontmatter || Astro.props;
 const { head = {} } = fm;
 const currentPath = new URL(Astro.request.url).pathname;
 const isProduction = process.env.NODE_ENV === 'production';
+const navItems = await getMainNavigation();
 import '~/styles/global.css';
 ---
 
@@ -47,7 +50,12 @@ import '~/styles/global.css';
             ]}
         />
 
-        <OffCanvasNavigation {currentPath} client:load />
+        <OffCanvasNavigation
+            {currentPath}
+            items={navItems}
+            footerItems={footerNavigation}
+            client:load
+        />
 
         <Overlay client:load />
 

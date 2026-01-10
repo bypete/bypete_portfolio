@@ -2,7 +2,6 @@ export type SocialLink = {
 	platform: string;
 	url: string;
 	icon: string;
-	class: string;
 	footerOnly?: boolean;
 };
 
@@ -72,20 +71,17 @@ const siteInfo: SiteInfo = {
 		{
 			platform: "linkedin",
 			url: "https://www.linkedin.com/in/peter-wallace-a5002a7a/",
-			class: "i-mdi-linkedin",
-			icon: "mdi:linkedin",
+			icon: "icon-[tabler--brand-linkedin-filled]",
 		},
 		{
 			platform: "github",
 			url: "https://github.com/bypete-io",
-			class: "i-mdi-github",
-			icon: "mdi:github",
+			icon: "icon-[tabler--brand-github-filled]",
 		},
 		{
 			platform: "instagram",
 			url: "https://www.instagram.com/bypete.uk/",
-			class: "i-mdi-instagram",
-			icon: "mdi:instagram",
+			icon: "icon-[tabler--brand-instagram-filled]",
 		},
 	],
 	feed: {

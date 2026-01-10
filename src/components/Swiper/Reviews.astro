@@ -1,7 +1,6 @@
 ---
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Icon } from 'astro-icon/components';
 
 interface DataKeys {
     headline: string;
@@ -32,13 +31,13 @@ const { data } = Astro.props;
                         <p class="cite">
                             <span class="mr-fluid-3xs block">
                                 {[...Array(5)].map((_, index) => (
-                                    <Icon
-                                        name="mdi:star"
-                                        class={`inline-block h-fluid-s w-auto ${
+                                    <span
+                                        class:list={[
+                                            'icon-[tabler--star-filled] inline-block size-fluid-s',
                                             index < review.rating
                                                 ? 'text-featured'
-                                                : 'text-content-quiet'
-                                        }`}
+                                                : 'text-content-quiet',
+                                        ]}
                                     />
                                 ))}
                             </span>

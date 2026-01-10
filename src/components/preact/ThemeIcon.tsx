@@ -29,7 +29,7 @@ export default function ThemeIcon() {
     if (!lightRef.current || !darkRef.current || animationInProgress.current)
       return;
 
-    const easeOverShoot = [0.175, 0.885, 0.320, 1.275] as const;
+    const easeOutQuart = [0.25, 1, 0.5, 1] as const;
 
     const sequenceLight: AnimationSequence = [
       [
@@ -38,7 +38,7 @@ export default function ThemeIcon() {
           y: ["100%"],
           rotate: ["0deg", "-90deg"],
         },
-        { duration: 0.25, },
+        { duration: 0.25 },
       ],
       [
         darkRef.current,
@@ -46,7 +46,7 @@ export default function ThemeIcon() {
           y: ["100%", "0%"],
           rotate: ["0deg"],
         },
-        { duration: 0.75, at: '<', delay: 0.15, ease: easeOverShoot },
+        { duration: 0.75, at: "<", delay: 0.15, ease: easeOutQuart },
       ],
     ];
 
@@ -57,7 +57,7 @@ export default function ThemeIcon() {
           y: ["100%"],
           rotate: ["0deg", "-90deg"],
         },
-        { duration: 0.25, },
+        { duration: 0.25 },
       ],
       [
         lightRef.current,
@@ -65,7 +65,7 @@ export default function ThemeIcon() {
           y: ["100%", "0%"],
           rotate: ["0deg"],
         },
-        { duration: 0.75, at: '<', delay: 0.15, ease: easeOverShoot },
+        { duration: 0.75, at: "<", delay: 0.15, ease: easeOutQuart },
       ],
     ];
 
@@ -94,7 +94,7 @@ export default function ThemeIcon() {
         aria-pressed={theme === "light"}
         className="col-start-1 row-start-1 flex size-fluid-l items-center justify-center rounded-full hover:cursor-pointer"
       >
-        <span className="i-lucide-sun size-fluid-s" />
+        <span className="icon-[tabler--sun-high-filled] size-fluid-s" />
       </button>
       <button
         id="setThemeDark"
@@ -105,7 +105,7 @@ export default function ThemeIcon() {
         aria-pressed={theme === "dark"}
         className="col-start-1 row-start-1 flex size-fluid-l items-center justify-center rounded-full hover:cursor-pointer"
       >
-        <span className="i-lucide-moon size-fluid-s" />
+        <span className="icon-[tabler--moon-filled] size-fluid-s" />
       </button>
     </div>
   );

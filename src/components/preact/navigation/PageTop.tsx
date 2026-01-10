@@ -51,7 +51,7 @@ export default function PageTop() {
       data-jump
       className="scroll relative grid h-fluid-l w-fluid-l grid-cols-1 grid-rows-1 items-center justify-items-center rounded-full bg-action text-content-light leading-none opacity-0 focus:outline-hidden"
     >
-      <div className="i-lucide-arrow-up size-fluid-s" />
+      <div className="icon-[tabler--arrow-up-dashed] size-fluid-s" />
       <svg
         viewBox="0 0 100 100"
         className="-rotate-90 absolute inset-0 m-1 stroke-[6px]"

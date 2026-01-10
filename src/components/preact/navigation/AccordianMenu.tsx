@@ -48,7 +48,7 @@ export default function AccordianMenu({
     <div
       id={dropdownId} // Use the dropdownId passed from parent
       ref={accordianElement}
-      className={`w-full overflow-y-scroll text-content ${isHidden ? "pointer-events-none" : ""}`}
+      className={clsx(['w-full', 'overflow-y-scroll', 'text-content', isHidden ? "pointer-events-none" : ""])}
       aria-hidden={!isOpen}
     >
       <ul class="mt-fluid-s grid grid-cols-[repeat(auto-fit,minmax(min(40ch,100%),1fr))] gap-x-fluid-m gap-y-fluid-xs">
@@ -67,7 +67,7 @@ export default function AccordianMenu({
                 className={linkClass}
                 data-state={isActive ? "active" : undefined}
               >
-                <span className="line-clamp-2">{child.label}</span>
+                <span className="line-clamp-2" dangerouslySetInnerHTML={{ __html: child.label }} />
               </a>
             </li>
           );

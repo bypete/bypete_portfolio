@@ -1,7 +1,12 @@
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "preact/hooks";
-import type { NavItem } from "~/data/navigation";
 import AccordianMenu from "./AccordianMenu";
+
+interface NavItem {
+  label: string;
+  url: string;
+  children?: NavItem[];
+}
 
 interface Props {
   items: NavItem[];
@@ -73,10 +78,15 @@ export default function NavSmallScreen({
                     onClick={() => toggleDropdown(index)}
                     aria-expanded={isOpen ? "true" : "false"}
                     aria-controls={dropdownId} // Set aria-controls to the generated dropdownId
-                    className="flex items-center justify-center rounded-full p-0 text-content-dark hover:cursor-pointer hover:text-content-light focus:outline-hidden focus:ring-2 focus:ring-primary focus:ring-inset"
+                    className="flex items-center justify-center rounded-full p-0 text-content-dark text-step-6/none hover:cursor-pointer hover:text-content-light focus:outline-hidden focus:ring-2 focus:ring-primary focus:ring-inset"
                   >
                     <span
-                      className={`i-hugeicons-plus-sign-circle block size-fluid-m transition-transform duration-300 ${isOpen ? "rotate-45" : "rotate-0"}`}
+                      className={clsx([
+                        "block transition-transform duration-300",
+                        isOpen
+                          ? "icon-[tabler--square-rounded-chevron-up]"
+                          : "icon-[tabler--square-rounded-chevron-down-filled]",
+                      ])}
                     />
                   </button>
                 )}

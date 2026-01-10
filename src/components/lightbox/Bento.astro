@@ -1,7 +1,7 @@
 ---
 import 'photoswipe/style.css';
-import { type CollectionEntry } from 'astro:content';
 import { getImage, Image } from 'astro:assets';
+import { type CollectionEntry } from 'astro:content';
 import Prompt from '../ui/Prompt.astro';
 
 export interface Props {
@@ -60,8 +60,8 @@ const optimizedImages = await Promise.all(
                                         set:html={item.caption}
                                     />
                                 )}
-                                <span class="absolute z-1 h-full w-full opacity-0 backdrop-blur-xs backdrop-brightness-125 transition duration-300 hover:bg-slate-900/75 hover:opacity-100">
-                                    <span class="absolute top-1/2 left-1/2 z-10 i-lucide-zoom-in h-10 w-10 -translate-x-1/2 -translate-y-1/2 text-content-light" />
+                                <span class="absolute z-1 grid h-full w-full items-center justify-items-center opacity-0 backdrop-blur-xs backdrop-brightness-125 transition duration-300 hover:bg-slate-900/75 hover:opacity-100">
+                                    <span class="z-10 icon-[tabler--zoom-in-filled] size-fluid-l text-content-light" />
                                 </span>
                             </a>
                         </div>

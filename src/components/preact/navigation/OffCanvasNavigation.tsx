@@ -1,26 +1,32 @@
 import { useStore } from "@nanostores/preact";
-import { type AnimationSequence, animate, easeIn, easeInOut, easeOut } from "motion";
+import clsx from "clsx";
+import { type AnimationSequence, animate, easeInOut } from "motion";
 import { useEffect, useRef } from "preact/hooks";
 import NavSmallScreen from "~/components/preact/navigation/NavSmallScreen";
-import { footerNavigation, navigation } from "~/data/navigation";
+import type { NavItem } from "~/data/navigation.static";
 import siteInfo from "~/data/site";
 import { isMenuOpen, openMenu } from "~/stores/layersStore";
 
 interface Props {
+  items: NavItem[];
+  footerItems: NavItem[];
   currentPath?: string;
 }
 
-export default function OffCanvasNavigation({ currentPath = "" }: Props) {
+export default function OffCanvasNavigation({
+  items,
+  footerItems,
+  currentPath = "",
+}: Props) {
   const year = new Date().getFullYear();
-  const $MenuState = useStore(isMenuOpen);
+  const $isMenuOpen = useStore(isMenuOpen);
   const hasRevealed = useRef(false);
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const navRef = useRef<HTMLDivElement | null>(null);
-  const isAnimating = useRef(false);
 
   useEffect(() => {
     const handleFocus = (event: FocusEvent) => {
-      if ($MenuState !== true && event.target === canvasRef.current) {
+      if (!$isMenuOpen && event.target === canvasRef.current) {
         openMenu(); // Open menu when #navigation (canvasRef) is focused
       }
     };
@@ -29,14 +35,14 @@ export default function OffCanvasNavigation({ currentPath = "" }: Props) {
     return () => {
       document.removeEventListener("focusin", handleFocus);
     };
-  }, [$MenuState]);
+  }, [$isMenuOpen]);
 
   useEffect(() => {
     if (!canvasRef.current || !navRef.current || typeof window === "undefined")
       return;
 
     // Skip the first mount when menu is closed by default
-    if (!hasRevealed.current && !$MenuState) {
+    if (!hasRevealed.current && !$isMenuOpen) {
       // First load, menu closed → just reveal silently, no animation
       requestAnimationFrame(() => {
         canvasRef.current?.removeAttribute("data-cloaked");
@@ -60,9 +66,7 @@ export default function OffCanvasNavigation({ currentPath = "" }: Props) {
       [
         canvasRef.current,
         {
-          clipPath: [
-            "circle(150% at 50% 50%)",
-          ],
+          clipPath: ["circle(150% at 50% 50%)"],
         },
         { duration: 2.5, ease: easeGentle },
       ],
@@ -96,7 +100,7 @@ export default function OffCanvasNavigation({ currentPath = "" }: Props) {
       ],
     ];
 
-    if ($MenuState) {
+    if ($isMenuOpen) {
       html.style.overflow = "hidden";
       animate(sequenceIn);
     } else {
@@ -110,7 +114,10 @@ export default function OffCanvasNavigation({ currentPath = "" }: Props) {
         hasRevealed.current = true;
       });
     }
-  }, [$MenuState]);
+    return () => {
+      html.style.overflow = "";
+    };
+  }, [$isMenuOpen]);
 
   return (
     <div
@@ -123,20 +130,17 @@ export default function OffCanvasNavigation({ currentPath = "" }: Props) {
         "clip-path: circle(0% at var(--hamburger-center) var(--hamburger-center));"
       }
     >
-      <div
-        ref={navRef}
-        class="grid w-full grid-rows-[1fr_auto] gap-fluid-m"
-      >
+      <div ref={navRef} class="grid w-full grid-rows-[1fr_auto] gap-fluid-m">
         <NavSmallScreen
-          items={navigation}
+          items={items}
           currentPath={currentPath}
           className="self-end"
         />
 
         <div class="flex min-h-fluid-l flex-col justify-between gap-fluid-m pb-fluid-m md:flex-row">
-          {footerNavigation && (
+          {footerItems && (
             <ul class="flex flex-row items-center gap-fluid-xs">
-              {footerNavigation.map((item) => (
+              {footerItems.map((item) => (
                 <li key={item}>
                   <a
                     href={item.url}
@@ -160,7 +164,13 @@ export default function OffCanvasNavigation({ currentPath = "" }: Props) {
                 title={channel.platform}
               >
                 <span
-                  className={`${channel.class} block h-fluid-m w-fluid-m fill-current`}
+                  className={clsx([
+                    channel.icon,
+                    "block",
+                    "h-fluid-m",
+                    "w-fluid-m",
+                    "fill-current",
+                  ])}
                 />
               </a>
             ))}

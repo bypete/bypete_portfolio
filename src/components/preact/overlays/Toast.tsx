@@ -27,12 +27,12 @@ const themeSet = {
   },
   settings: {
     container: "from-surface-raised to-surface bg-linear-to-b",
-    icon: "i-hugeicons-configuration-01",
+    icon: "icon-[tabler--settings-question]",
     iconPanel: "bg-secondary border-secondary-shade/20 text-content-light",
   },
   info: {
     container: "from-surface-raised to-surface bg-linear-to-b",
-    icon: "i-lucide-info",
+    icon: "icon-[tabler--info-square-rounded-filled]",
     iconPanel: ["border-r", "border-info-shade/20", "text-content-light"],
   },
 };
@@ -126,7 +126,7 @@ export default function Toast({
         onClick={() => onClose?.()}
         className="-mt-2 -mr-2 absolute top-0 right-0 rounded-full bg-warning p-fluid-3xs text-white shadow-floated hover:cursor-pointer hover:bg-warning-shade"
       >
-        <span className="i-mdi-hide block h-4 w-4" />
+        <span className="icon-[tabler--eye-off] block h-4 w-4" />
       </button>
     </div>
   );

@@ -169,7 +169,7 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                             />
 
                             <Halftone16x9A
-                                class="pointer-events-none absolute inset-0 h-full w-full scale-110 -rotate-5 text-white opacity-30"
+                                class="pointer-events-none absolute inset-0 h-full w-full scale-110 -rotate-5 text-surface-raised opacity-30"
                                 fill="currentColor"
                                 aria-hidden="true"
                             />
@@ -210,7 +210,7 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
             </aside>
         </article>
         <aside
-            class="layout grid w-full grid-cols-(--gtc-layout) gap-x-(--viewport-safe-inline) bg-surface-bedrock bg-[image:var(--filter-dark-noise)] bg-size-[700px] py-fluid-2xl text-content-light outline-hidden"
+            class="relative z-(--z-content) container mx-auto my-fluid-2xl w-full rounded-tight bg-surface-brand px-fluid-m py-fluid-xl outline-hidden"
             data-layout="content"
         >
             {
@@ -218,7 +218,7 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                     <NextPrev
                         next={nextPostData}
                         prev={prevPostData}
-                        class="z-(--z-content) col-[content]"
+                        class="z-(--z-content)"
                     />
                 )
             }

@@ -1,17 +1,18 @@
 ---
 import { Icon } from 'astro-icon/components';
+
 interface Props {
-    name: string;
     url: string;
     platform: string;
     wrap?: string;
     css?: string;
     class?: string;
+    icon: string;
 }
 const {
     platform,
     url,
-    name,
+    icon,
     wrap = 'mx-fluid-2xs',
     css = 'w-fluid-m h-fluid-m fill-current',
     class: ClassName,
@@ -27,5 +28,5 @@ const {
     ]}
     title={platform}
 >
-    <Icon {name} class={css} />
+    <span class:list={[icon, css]}></span>
 </a>

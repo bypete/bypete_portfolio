@@ -2,12 +2,17 @@
 import LogoType from '~/assets/svg/bypete--wire.svg';
 import Swoosh from '~/assets/svg/swoosh.svg';
 import Social from '~/components/ui/Social.astro';
-import { footerNavigation } from '~/data/navigation';
+import { footerNavigation } from '~/data/navigation.static';
 import siteInfo from '~/data/site';
 
 const year = new Date().getFullYear();
 ---
 
+<Swoosh
+    data-animate-swoosh
+    id="swoosh"
+    class="pointer-events-none absolute right-0 bottom-0 z-(--z-swoosh) h-auto w-full opacity-0 mix-blend-color-dodge"
+/>
 <footer
     id="footer"
     class="relative z-(--z-footer) hidden border-t border-t-shadow-dark/8 bg-surface-bedrock bg-[image:var(--filter-dark-noise)] bg-size-[700px] text-content-footer md:block"
@@ -48,18 +53,13 @@ const year = new Date().getFullYear();
                     <Social
                         platform={channel.platform}
                         url={channel.url}
-                        name={channel.icon}
+                        icon={channel.icon}
                         class={'text-content-light hover:text-primary'}
                     />
                 ))
             }
         </div>
     </div>
-    <Swoosh
-        data-animate-swoosh
-        id="swoosh"
-        class="pointer-events-none absolute right-0 bottom-0 z-(--z-swoosh) h-auto w-full opacity-0"
-    />
 </footer>
 <script>
     import { inView, animate, stagger, type AnimationSequence } from 'motion';
@@ -67,7 +67,7 @@ const year = new Date().getFullYear();
     const footer = document.querySelector('#footer');
 
     const logo = footer?.querySelector('[data-animate-logotype]');
-    const swoosh = footer?.querySelector('[data-animate-swoosh]');
+    const swoosh = body?.querySelector('[data-animate-swoosh]');
 
     let hasPlayed = false;
     if (footer) {
@@ -104,11 +104,12 @@ const year = new Date().getFullYear();
                             swoosh.querySelectorAll('path'),
                             {
                                 pathLength: [0, 1],
+                                strokeWidth: [0, 60],
                             },
                             {
-                                duration: 12.5,
+                                duration: 1.75,
                                 ease: [0.22, 1, 0.36, 1],
-                                delay: stagger(0.5),
+                                delay: stagger(0.15),
                             },
                         ],
                     ]);

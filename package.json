@@ -34,7 +34,8 @@
     "@iconify-json/hugeicons": "^1.2.4",
     "@iconify-json/lucide": "^1.2.29",
     "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/tabler": "^1.2.17",
+    "@iconify-json/solar": "^1.2.5",
+    "@iconify-json/tabler": "^1.2.26",
     "@nanostores/preact": "^0.5.2",
     "@tailwindcss/vite": "^4.1.17",
     "@types/alpinejs": "^3.13.11",
@@ -52,6 +53,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.8",
     "@egoist/tailwindcss-icons": "^1.9.0",
+    "@iconify/tailwind4": "^1.2.0",
     "@svgr/plugin-svgo": "^8.1.0",
     "@tailwindcss/forms": "^0.5.10",
     "clsx": "^2.1.1",

@@ -20,9 +20,10 @@ export default function TocMenu({ headings, class: className }: Props) {
   const hasRevealed = useRef(false);
   const tocRef = useRef<HTMLElement | null>(null);
   const tocWrapperRef = useRef<HTMLDivElement | null>(null);
+  const tocToggleRef = useRef<HTMLSpanElement | null>(null);
   const tocPanelRef = useRef<HTMLDivElement | null>(null);
   const animationInProgress = useRef<boolean>(false);
-  const tocRefButton = useRef<HTMLButtonElement | null>(null);
+  const tocButtonRef = useRef<HTMLButtonElement | null>(null);
   const toc = buildToc(headings);
   const [isOpen, setIsOpen] = useState(false);
   const panelHeight = useRef<number>(null);
@@ -59,6 +60,7 @@ export default function TocMenu({ headings, class: className }: Props) {
   useEffect(() => {
     if (
       !tocRef.current ||
+      !tocToggleRef.current ||
       !tocWrapperRef.current ||
       !tocPanelRef.current ||
       animationInProgress.current
@@ -71,10 +73,13 @@ export default function TocMenu({ headings, class: className }: Props) {
         { opacity: 1, height: [0, `${panelHeight.current}px`] },
         { duration: 0.25 },
       ],
+      [tocToggleRef.current, { rotate: "180deg" }, { duration: 0.25, at: "<" }],
     ];
 
     const sequenceClose: AnimationSequence = [
       [tocPanelRef.current, { opacity: 0, height: 0 }, { duration: 0.25 }],
+
+      [tocToggleRef.current, { rotate: "0deg" }, { duration: 0.25, at: "<" }],
     ];
 
     animationInProgress.current = true;
@@ -174,15 +179,15 @@ export default function TocMenu({ headings, class: className }: Props) {
       <div
         ref={tocWrapperRef}
         id="tocWrapper"
-        className="absolute mx-auto grid w-full grid-cols-1 grid-rows-(--gtr-toc) rounded-(--spacing-fluid-s) bg-surface-raised px-fluid-s shadow-raised shadow-shadow-dark/10"
+        className="absolute mx-auto grid w-full grid-cols-1 grid-rows-(--gtr-toc) rounded-(--spacing-fluid-s) bg-surface-raised shadow-raised shadow-shadow-dark/25"
       >
         <button
           type="button"
           aria-controls="tocPanel"
-          ref={tocRefButton}
+          ref={tocButtonRef}
           aria-expanded={isOpen ? "true" : "false"}
           className={
-            "group grid h-fluid-l w-full grid-cols-[1fr_auto] items-center gap-x-fluid-2xs whitespace-nowrap font-semibold text-step-0/[1] hover:cursor-pointer"
+            "group grid h-fluid-l w-full grid-cols-[1fr_auto] items-center gap-x-fluid-2xs whitespace-nowrap px-fluid-xs font-semibold text-step-0/[1] hover:cursor-pointer"
           }
           onClick={() => toggleToc()}
           aria-label="Toggle page links"
@@ -191,14 +196,17 @@ export default function TocMenu({ headings, class: className }: Props) {
             {activeTitle}
           </span>
           <span
-            className={`block size-fluid-s group-focus:ring-2 ${isOpen ? "i-lucide-x-circle" : "i-lucide-file-text"}`}
+            ref={tocToggleRef}
+            className={clsx([
+              "icon-[tabler--chevron-up] block size-fluid-m group-focus:ring-2",
+            ])}
           />
         </button>
 
         <div
           ref={tocPanelRef}
           id="tocPanel"
-          className={`${isOpen ? "overflow-auto" : "pointer-events-none"} cloaked:invisible max-h-[calc(100dvh-var(--spacing-headerheight))] w-full overflow-y-scroll`}
+          className={`${isOpen ? "overflow-auto" : "pointer-events-none"} cloaked:invisible max-h-[calc(100dvh-var(--spacing-headerheight))] w-full overflow-y-scroll px-fluid-xs`}
           style={"opacity: 0;"}
         >
           <ol className="not-rte list m-0 list--counter space-y-fluid-2xs pb-fluid-xs">

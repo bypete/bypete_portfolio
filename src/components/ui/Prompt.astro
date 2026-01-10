@@ -27,16 +27,14 @@ const { type = 'scroll', dir = 'down', label, class: className } = Astro.props;
         }
     </slot>
 
-    {
-        type === 'scroll' && (
-            <span class="nudge i-hugeicons-mouse-scroll-02 inline-block size-fluid-s" />
-        )
-    }
-    {
-        type === 'swipe' && (
-            <span class="nudge i-hugeicons-swipe-left-07 inline-block size-fluid-s" />
-        )
-    }
+    <div class="nudge flex items-center">
+        <span
+            class="icon-[tabler--fingerprint] inline-block size-fluid-s mouse-only:hidden"
+        ></span>
+        <span
+            class="nudge icon-[tabler--mouse] hidden size-fluid-s mouse-only:inline-block"
+        ></span>
+    </div>
 </div>
 
 <script>

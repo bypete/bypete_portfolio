@@ -28,7 +28,7 @@ const { next, prev, class: ClassName } = Astro.props;
 <div
     class:list={[
         ClassName && ClassName,
-        'grid grid-cols-1 items-start justify-between gap-fluid-l md:grid-cols-(--gtc-prevnext)',
+        'grid grid-cols-1 items-start justify-evenly gap-fluid-l md:grid-cols-(--gtc-prevnext)',
     ]}
 >
     {prev && <Preview post={prev} direction={'prev'} class="md:col-start-1" />}
