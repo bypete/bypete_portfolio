@@ -1,0 +1,16 @@
+---
+interface Props {
+    class?: string;
+}
+const { class: className, ...attrs } = Astro.props;
+---
+
+<Fragment>
+    <h2
+        {...attrs}
+        class:list={['animate-neon', className]}
+        style="filter: url(#distorted-rgb-glow)"
+    >
+        <slot />
+    </h2>
+</Fragment>

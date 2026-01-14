@@ -12,7 +12,7 @@ export default function CookieNotice() {
   const [consent, setConsent] = useState({
     necessary: true,
     marketing: false,
-    analytics: false,
+    analytics: true,
     preferences: false,
   });
 
@@ -99,6 +99,7 @@ export default function CookieNotice() {
       <div class="mt-2 flex gap-2">
         <Button
           size="sm"
+          theme="quiet"
           onClick={() =>
             updateConsent({
               necessary: true,
@@ -111,7 +112,7 @@ export default function CookieNotice() {
           Reject All
         </Button>
         <Button size="sm" onClick={() => updateConsent(consent)}>
-          Accept Choices
+          Apply Choices
         </Button>
       </div>
     </Toast>

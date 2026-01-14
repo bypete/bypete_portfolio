@@ -30,6 +30,7 @@
     --z-footer: 0;
 
     --plus: svg-load('heap__plus.svg');
+    --pattern: svg-load('diagonal-stripes.svg');
     --mask-pill: svg-load('mask-pill-01.svg');
     --mask-shape: svg-load('mask-shape-01.svg');
     --mask-blob_1_1: svg-load('mask-blob_1_1.svg');
@@ -123,17 +124,17 @@ h1 {
 }
 
 h2 {
-    font-size: var(--text-step-3);
+    font-size: var(--text-step-4);
     font-weight: var(--font-weight-bold);
 }
 
 h3 {
-    font-size: var(--text-step-1);
+    font-size: var(--text-step-2);
     font-weight: var(--font-weight-bold);
 }
 
 h4 {
-    font-size: var(--text-step-0);
+    font-size: var(--text-step-1);
     font-weight: var(--font-weight-medium);
 }
 

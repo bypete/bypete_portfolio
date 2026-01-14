@@ -275,6 +275,8 @@
     --animate-fade-out: wait 250ms, fade-out 1s ease-out 250ms;
     --animate-fade-in-up: fade-in-up 250ms ease-out forwards;
     --animate-fade-in-down: wait 100ms, fade-in-down 500ms ease-in-out 100ms;
+    --animate-glitch: long-glitch 30s ease-out infinite;
+    --animate-neon: neon-flicker 30s linear infinite;
 
     /* Animation Keyframes */
     @keyframes wait {
@@ -367,6 +369,91 @@
     @keyframes spin {
         100% {
             transform: rotate(1turn);
+        }
+    }
+    @keyframes glitch-loop {
+        0%,
+        50% {
+            filter: none;
+        }
+        50%,
+        50.416% {
+            filter: url(#distorted-rgb-glow);
+        }
+        50.416%,
+        100% {
+            filter: none;
+        }
+    }
+    @keyframes neon-flicker {
+        0%,
+        5% {
+            filter: url(#distorted-rgb-glow);
+        }
+
+        6%,
+        10% {
+            filter: none;
+        }
+
+        11%,
+        12% {
+            filter: url(#distorted-rgb-glow);
+        }
+
+        13%,
+        20% {
+            filter: none;
+        }
+
+        21%,
+        22% {
+            filter: url(#distorted-rgb-glow);
+        }
+
+        23%,
+        35% {
+            filter: none;
+        }
+
+        36%,
+        36.5% {
+            filter: url(#distorted-rgb-glow);
+        }
+
+        37%,
+        45% {
+            filter: none;
+        }
+
+        46%,
+        46.5% {
+            filter: url(#distorted-rgb-glow);
+        }
+
+        47%,
+        60% {
+            filter: none;
+        }
+
+        61%,
+        61.5% {
+            filter: url(#distorted-rgb-glow);
+        }
+
+        62%,
+        80% {
+            filter: none;
+        }
+
+        81%,
+        81.5% {
+            filter: url(#distorted-rgb-glow);
+        }
+
+        82%,
+        100% {
+            filter: none;
         }
     }
 }
@@ -498,6 +585,13 @@
             100%,
         close
     );
+}
+
+/* prettier-ignore */
+@utility chunkyline-* {
+  background-image:linear-gradient(180deg, transparent 60%, --value(--color-*) 60%);
+  box-decoration-break: clone;
+  display: inline;
 }
 
 /* prettier-ignore */
@@ -803,10 +897,10 @@
     .rte :not(:where(.not-rte, .not-rte *, h1, h2, h3, h4, h5, h6)) {
         @apply leading-relaxed;
     }
-
+    /* 
     .rte h2:not(:where(.not-rte, .not-rte *)) {
         @apply capline;
-    }
+    } */
 
     .rte :where(h1, h2, h3, h4, h5, h6):not(:first-child) {
         margin-top: 1.5em;

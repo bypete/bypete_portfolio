@@ -5,6 +5,12 @@ export interface NavItem {
 }
 
 export const footerNavigation: NavItem[] = [
-	{ label: "Privacy", url: "/privacy/" },
-	{ label: "Terms", url: "/terms/" },
+	{
+		label: "Contact",
+		url: "/connect/",
+	},
+	{
+		label: "Legal notices",
+		url: "/about/legal/",
+	},
 ];

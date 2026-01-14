@@ -73,7 +73,7 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                         class="order-2 self-end pl-(--viewport-safe-inline) lg:order-1 lg:mt-safe-top lg:pr-0"
                     >
                         <h1
-                            class="font-display text-step-6/none font-black uppercase"
+                            class="chunkyline-surface-raised font-display text-step-6/none font-black uppercase"
                             set:html={frontmatter.title}
                         />
                         <p>{frontmatter.taster}</p>
@@ -151,7 +151,7 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                 {
                     headings && headings.length > 2 && (
                         <TocMenu
-                            class="col-[content] -mb-fluid-s"
+                            class="col-[content]"
                             headings={headings}
                             client:load
                         />
@@ -159,20 +159,23 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                 }
                 {
                     frontmatter.product && (
-                        <div class="relative col-[full] container mx-auto grid aspect-cinema grid-cols-1 grid-rows-1">
-                            <Picture
-                                src={frontmatter.product.src}
-                                alt={frontmatter.product.alt}
-                                widths={[480, 1200]}
-                                sizes={`100vw, (min-width: 75rem) 75rem`}
-                                class="relative z-10 h-full w-full object-contain"
-                            />
-
-                            <Halftone16x9A
-                                class="pointer-events-none absolute inset-0 h-full w-full scale-110 -rotate-5 text-surface-raised opacity-30"
-                                fill="currentColor"
-                                aria-hidden="true"
-                            />
+                        <div class="relative col-[full] grid grid-cols-1 grid-rows-1 items-center *:col-start-1 *:row-start-1">
+                            <div class="container mx-auto aspect-super16 md:aspect-cinema">
+                                <Picture
+                                    src={frontmatter.product.src}
+                                    alt={frontmatter.product.alt}
+                                    widths={[480, 1200]}
+                                    sizes={`100vw, (min-width: 75rem) 75rem`}
+                                    class="relative z-10 h-full w-full object-contain"
+                                />
+                            </div>
+                            <div class="pointer-events-none absolute h-[150%] w-full overflow-hidden">
+                                <Halftone16x9A
+                                    class="absolute h-full w-auto -rotate-5 text-surface-raised opacity-30"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                />
+                            </div>
                         </div>
                     )
                 }
@@ -210,15 +213,15 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
             </aside>
         </article>
         <aside
-            class="relative z-(--z-content) container mx-auto my-fluid-2xl w-full rounded-tight bg-surface-brand px-fluid-m py-fluid-xl outline-hidden"
-            data-layout="content"
+            data-layout="page"
+            class="relative z-(--z-content) container mx-auto mb-fluid-l outline-hidden md:-mb-fluid-l"
         >
             {
                 (nextPostData || prevPostData) && (
                     <NextPrev
                         next={nextPostData}
                         prev={prevPostData}
-                        class="z-(--z-content)"
+                        class="w-full rounded-tight bg-surface-brand bg-[image:var(--filter-grains)] bg-size-[700px] px-fluid-m py-fluid-xl text-content-dark outline-hidden"
                     />
                 )
             }
