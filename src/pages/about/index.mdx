@@ -50,6 +50,11 @@ skillset:
           skills:
               - 'Creativity and problem solving'
 ---
+import UL from '~/components/MDX/ul.astro'
+import H2 from '~/components/MDX/h2.astro'
+import BLOCKQUOTE from '~/components/MDX/blockquote.astro'
+import PRE from '~/components/MDX/pre.astro'
+export const components = {ul: UL, blockquote: BLOCKQUOTE, pre: PRE, h2: H2};
 
 import PageLayout from '~/layouts/PageLayout.astro';
 import Skills from '~/components/ui/Skills.astro';

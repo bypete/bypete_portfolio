@@ -165,10 +165,9 @@
     --drop-shadow-banner: 1px 1px 5px rgba(0, 0, 0, 0.12);
     --drop-shadow-transparent: 0 0 0 rgba(0, 0, 0, 0);
 
-    --font-body: 'Inter Variable', 'sans-serif';
-    /* --font-body: 'Readex Pro Variable', 'sans-serif'; */
-
-    --font-display: 'Reddit Sans Condensed Variable', 'sans-serif';
+    /* --font-body: 'Inter Variable', 'sans-serif'; */
+    --font-body: var(--font-inter);
+    --font-display: var(--font-reddit-sans-condensed);
     --font-georgia: 'Georgia', 'Times New Roman', 'Times,serif';
 
     /* Semantic Tailwind variables | Loaded from Mapped with light/dark theme */

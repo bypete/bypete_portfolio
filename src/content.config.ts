@@ -11,6 +11,7 @@ const ogSchema = (image) =>
 				.object({
 					src: image(),
 					alt: z.string(),
+          originalSrc: z.string().optional(),
 				})
 				.optional(),
 		})

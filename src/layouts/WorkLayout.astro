@@ -3,7 +3,6 @@ import { Image, Picture } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import Halftone16x9A from '~/assets/svg/halftone_16x9_infinity.svg';
 import Hero from '~/components/hero/Hero.astro';
-import BlockPicture from '~/components/images/BlockPicture.astro';
 import Credit from '~/components/images/Credit.astro';
 import HeroPicture from '~/components/images/HeroPicture.astro';
 import TocMenu from '~/components/preact/navigation/TocMenu';
@@ -15,14 +14,23 @@ import Tags from '~/components/ui/Tags.astro';
 import { htmlDateString, readableDate } from '~/js/utils.js';
 import BaseLayout from './BaseLayout.astro';
 
-const { frontmatter, section, headings, prevPost, nextPost } = Astro.props;
+const { post, frontmatter, section, headings, prevPost, nextPost } =
+    Astro.props;
 
 const fm = frontmatter || Astro.props;
+const opengraph = {
+    title: fm.title,
+    description: fm.description,
+    image: {
+        src: fm.og?.image?.src || `/og/${post.id}.png`,
+        alt: fm.og?.image?.alt || fm.title,
+    },
+};
 
 const head: HeadProps = {
     title: fm.title,
     description: fm.description,
-    og: fm.og,
+    og: opengraph,
     // Articles
     published_time: fm.pubDate,
     author: fm.author,

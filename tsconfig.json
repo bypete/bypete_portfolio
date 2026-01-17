@@ -11,6 +11,9 @@
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
     "strictNullChecks": true,
+    "types": [
+      "vite-plugin-arraybuffer/types"
+    ],
     "allowJs": true,
     "baseUrl": ".",
     "paths": {

@@ -5,10 +5,11 @@ import partytown from '@astrojs/partytown';
 import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import icon from 'astro-icon';
 import rehypeAttrs from 'rehype-attr';
 import rehypeExternalLinks from 'rehype-external-links';
+import arraybuffer from "vite-plugin-arraybuffer";
 import svgr from "vite-plugin-svgr";
 import {
   remarkExtractHeadings
@@ -75,6 +76,22 @@ export default defineConfig({
   trailingSlash: 'always',
   compressHTML: true,
   experimental: {
+    fonts: [
+      {
+        name: 'Reddit Sans Condensed',
+        cssVariable: '--font-reddit-sans-condensed',
+        provider: fontProviders.fontsource(),
+        weights: ["200 900"],
+        formats: ["woff2", "woff"],
+        fallbacks: ["sans-serif"],
+      },
+      {
+        name: "Inter",
+        cssVariable: "--font-inter",
+        provider: fontProviders.fontsource(),
+        weights: ["200 900"],
+        formats: ["woff2", "woff"],
+      },],
     svgo: {
       plugins: SVGOConfig.plugins
     },
@@ -98,7 +115,6 @@ export default defineConfig({
           include: {
               mdi: ['*'],
               lucide: ['*'],
-              "fa6-brands": ['*'],
           },
           svgoOptions: SVGOConfig,
       }),
@@ -120,6 +136,7 @@ export default defineConfig({
 
 vite: {
   plugins: [
+    arraybuffer(),
     svgr({
       svgrOptions: {
         ref: true, 

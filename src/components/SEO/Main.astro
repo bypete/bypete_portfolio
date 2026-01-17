@@ -9,7 +9,7 @@ interface OpengraphProps {
     title?: string;
     description?: string;
     image?: {
-        src?: ImageMetadata;
+        src?: ImageMetadata | string;
         alt?: string;
     };
 }
@@ -62,7 +62,10 @@ if (pageType === 'article') {
 
 const resolvedTitle = includeSiteTitle ? `${title} - ${siteInfo.title}` : title;
 
-const resolvedOgImage = new URL(ogImage.src, Astro.site).toString();
+const resolvedOgImage =
+    typeof ogImage === 'string'
+        ? new URL(ogImage, Astro.site).toString()
+        : new URL(ogImage.src, Astro.site).toString();
 const resolvedOgTitle = smartypants(ogTitle, 1);
 ---
 

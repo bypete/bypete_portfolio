@@ -1,4 +1,5 @@
 ---
+import { Font } from 'astro:assets';
 import Sprite from '~/assets/svg/filters/sprite.svg?raw';
 import Footer from '~/components/layout/Footer.astro';
 import Banner from '~/components/preact/layout/Banner';
@@ -14,11 +15,11 @@ import { getMainNavigation } from '~/data/navigation.server';
 import { footerNavigation } from '~/data/navigation.static';
 
 // Supports weights 200-900
-import '@fontsource-variable/reddit-sans-condensed';
+// import '@fontsource-variable/reddit-sans-condensed';
 // Supports weights 100-900
-import '@fontsource-variable/inter';
+// import '@fontsource-variable/inter';
 // Supports weights 200-700
-import '@fontsource-variable/readex-pro';
+// import '@fontsource-variable/readex-pro';
 
 const fm = Astro.props.frontmatter || Astro.props;
 
@@ -35,6 +36,10 @@ import '~/styles/global.css';
     class="group/page h-full max-w-full scroll-smooth"
 >
     <head>
+        <!-- Experimental font -->
+        <Font cssVariable="--font-reddit-sans-condensed" preload />
+        <Font cssVariable="--font-inter" preload />
+        <!-- END Experimental font -->
         <MainSEO {...head} />
         <GoogleTag />
     </head>

@@ -4,9 +4,9 @@ import { formatBlogPosts } from '~/js/utils';
 import WorkLayout from '~/layouts/WorkLayout.astro';
 
 export async function getStaticPaths() {
-    const workEntries = await getCollection('work');
+    const posts = await getCollection('work');
 
-    const formattedPosts = formatBlogPosts(workEntries, {
+    const formattedPosts = formatBlogPosts(posts, {
         filterOutDrafts: true,
         filterOutFuturePosts: true,
         sortByDate: true,
@@ -15,43 +15,38 @@ export async function getStaticPaths() {
 
     const numberOfPosts = formattedPosts.length;
 
-    // Handle empty collection early (optional, but safe)
     if (numberOfPosts === 0) return [];
 
-    return formattedPosts.map((entry, i) => {
-        // Circular next: the post after current in the list, or the first if at the end
-        const nextPost =
-            i + 1 < numberOfPosts ? formattedPosts[i + 1] : formattedPosts[0];
-
-        // Circular previous: the post before current in the list, or the last if at the start
-        const prevPost =
-            i > 0 ? formattedPosts[i - 1] : formattedPosts[numberOfPosts - 1];
-
+    return formattedPosts.map((post, index) => {
         return {
-            params: { id: entry.id },
+            params: { id: post.id },
             props: {
-                entry,
-                prevPost,
-                nextPost,
+                post,
+                prevPost:
+                    formattedPosts[
+                        index - 1 < 0 ? numberOfPosts - 1 : index - 1
+                    ],
+                nextPost:
+                    formattedPosts[index + 1 >= numberOfPosts ? 0 : index + 1],
             },
         };
     });
 }
 
 type Props = {
-    entry: CollectionEntry<'work'>;
+    post: CollectionEntry<'work'>;
     prevPost: CollectionEntry<'work'>;
     nextPost: CollectionEntry<'work'>;
 };
 
-const { entry, prevPost, nextPost } = Astro.props;
-const { Content, headings, remarkPluginFrontmatter } = await render(entry);
+const { post, prevPost, nextPost } = Astro.props;
+const { Content, headings } = await render(post);
 ---
 
 <WorkLayout
-    frontmatter={entry.data}
-    section={entry.collection}
-    minutesRead={remarkPluginFrontmatter.minutesRead}
+    {post}
+    frontmatter={post.data}
+    section={post.collection}
     {headings}
     {prevPost}
     {nextPost}
