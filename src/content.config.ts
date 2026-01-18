@@ -11,7 +11,7 @@ const ogSchema = (image) =>
 				.object({
 					src: image(),
 					alt: z.string(),
-          originalSrc: z.string().optional(),
+					originalSrc: z.string().optional(),
 				})
 				.optional(),
 		})
@@ -48,13 +48,6 @@ const work = defineCollection({
 				.object({
 					src: image().optional(),
 					alt: z.string().optional(),
-				})
-				.optional(),
-			splash: z
-				.object({
-					src: image(),
-					alt: z.string(),
-					credit: z.string().optional(),
 				})
 				.optional(),
 			skillset: z.object({
