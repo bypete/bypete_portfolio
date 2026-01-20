@@ -105,14 +105,18 @@
 
     --container-page: 87.5rem; /* 1400px */
 
-    --aspect-retro: 4 / 3;
-    --aspect-cinema: 5 / 2;
-    --aspect-widescreen: 16 / 9;
-    --aspect-photo: 3 / 2;
-    --aspect-portrait: 2 / 3;
-    --aspect-super16: 5 / 3;
-    --aspect-spread: 2 / 1;
-    --aspect-logo: 2 / 1;
+    /* --- Wide (Landscape) --- */
+    --aspect-cinema: 5 / 2; /* 2.50 - Ultra-wide / Panavision */
+    --aspect-spread: 2 / 1; /* 2.00 - Double-square / Banner */
+    --aspect-logo: 2 / 1; /* 2.00 - Branding standard */
+    --aspect-widescreen: 16 / 9; /* 1.77 - Modern HD TV / Monitor */
+    --aspect-super16: 5 / 3; /* 1.66 - Euro Cinema / 16mm film */
+    --aspect-photo: 3 / 2; /* 1.50 - 35mm Film / DSLR */
+    --aspect-tv: 4 / 3; /* 1.33 - Retro SD TV / iPad */
+    --aspect-classic: 5 / 4; /* 1.25 - Vintage Photobox / 8x10 */
+
+    /* --- Tall (Portrait) --- */
+    --aspect-portrait: 2 / 3; /* 0.66 - Standard Vertical Photo */
 
     --gradient-banner: linear-gradient(
         179deg,
@@ -588,8 +592,9 @@
 
 /* prettier-ignore */
 @utility chunkyline-* {
-  background-image:linear-gradient(180deg, transparent 60%, --value(--color-*) 60%);
-  box-decoration-break: clone;
+  background-image:linear-gradient(180deg, transparent 50%, --value(--color-*) 50%, --value(--color-*) 90%, transparent 90%);
+  /* box-decoration-break: clone; */
+  /* -webkit-box-decoration-break: clone; */
   display: inline;
 }
 
@@ -896,10 +901,10 @@
     .rte :not(:where(.not-rte, .not-rte *, h1, h2, h3, h4, h5, h6)) {
         @apply leading-relaxed;
     }
-    /* 
-    .rte h2:not(:where(.not-rte, .not-rte *)) {
-        @apply capline;
-    } */
+
+    .rte :where(h1, h2, h3, h4, h5, h6) {
+        @apply leading-tight;
+    }
 
     .rte :where(h1, h2, h3, h4, h5, h6):not(:first-child) {
         margin-top: 1.5em;

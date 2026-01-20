@@ -18,26 +18,16 @@ export interface SwiperImage {
 	caption?: Caption;
 }
 
-import myKring from "~/assets/home/mykring__phone_pair.png";
-import onepay from "~/assets/home/onepay__laptop-phone.png";
-import shirleyChauffuers from "~/assets/home/shirleychauffeurs__ipad.png";
 import Halftone1x1B from "~/assets/svg/halftone_1x1_deathstar.svg";
 import Halftone1x1A from "~/assets/svg/halftone_1x1_kidney.svg";
 import Halftone4x3A from "~/assets/svg/halftone_4x3_glasses.svg";
 import Halftone4x3B from "~/assets/svg/halftone_4x3_whale.svg";
+import myKring from "~/assets/work/mykring/product_1x1_ipad_portrait_phone.png";
+import myKringApp from "~/assets/work/mykringapp/product_1x1_3_isometric-mobile.png";
+import onepay from "~/assets/work/onepay/product_1x1_ipad_landscape_phone.png";
+import shirleyChauffuers from "~/assets/work/shirleychauffeurs/product_1x1_ipad_portrait_phone.png";
 
 export const heroSlides: SwiperImage[] = [
-	{
-		src: myKring,
-		bg: Halftone1x1B,
-		alt: "3 phones showing the myKRing app in use",
-		url: "/work/mykring-app/",
-		caption: {
-			title: "MyKRing app",
-			copy: "iOS + Android solution",
-			label: "bottom-fluid-xl left-fluid-m  md:top-[70%] md:left-[70%]",
-		},
-	},
 	{
 		src: shirleyChauffuers,
 		bg: Halftone1x1B,
@@ -46,7 +36,18 @@ export const heroSlides: SwiperImage[] = [
 		caption: {
 			title: "Shirley Chauffeurs",
 			copy: "Branding and Online",
-			label: "bottom-fluid-xl left-fluid-m  md:top-[40%] md:left-[65%]",
+			label: "bottom-fluid-xl left-fluid-m  md:top-[40%] md:left-[14%]",
+		},
+	},
+	{
+		src: myKring,
+		bg: Halftone1x1B,
+		alt: "3 phones showing the myKRing app in use",
+		url: "/work/mykring/",
+		caption: {
+			title: "K Ring",
+			copy: "iOS + Android solution",
+			label: "bottom-fluid-xl left-fluid-m  md:top-[84.5%] md:left-[14%]",
 		},
 	},
 	{
@@ -57,7 +58,18 @@ export const heroSlides: SwiperImage[] = [
 		caption: {
 			title: "OnePay",
 			copy: "Fast, easy, efficient wage payments",
-			label: "bottom-fluid-xl left-fluid-m  md:top-[80%] md:left-[40%]",
+			label: "bottom-fluid-xl left-fluid-m  md:top-[80%] md:left-[8%]",
+		},
+	},
+	{
+		src: myKringApp,
+		bg: Halftone1x1B,
+		alt: "3 phones showing the myKRing app in use",
+		url: "/work/mykring-app/",
+		caption: {
+			title: "MyKRing app",
+			copy: "iOS + Android solution",
+			label: "bottom-fluid-xl left-fluid-m  md:top-[66%] md:left-[12%]",
 		},
 	},
 ];

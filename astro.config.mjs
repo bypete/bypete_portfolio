@@ -8,15 +8,16 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, fontProviders } from 'astro/config';
 import icon from 'astro-icon';
 import rehypeAttrs from 'rehype-attr';
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from 'rehype-external-links';
 import arraybuffer from "vite-plugin-arraybuffer";
 import svgr from "vite-plugin-svgr";
 import {
   remarkExtractHeadings
-} from './src/js/remark-extract-headings.mjs';
+} from './src/libs/remark-extract-headings.mjs';
 import {
   remarkReadingTime
-} from './src/js/remark-reading-time.mjs';
+} from './src/libs/remark-reading-time.mjs';
 
 let svgoPrefixIdsCount = 0;
 
@@ -53,20 +54,30 @@ const SVGOConfig = {
   ],
 };
 
-
-
 const rehypeExternalLinksConfig = [
   rehypeExternalLinks,
   {
       target: '_blank',
       rel: ['noopener', 'noreferrer'],
-      // content: {
-      //     type: 'text',
-      //     value: '🔗',
-      // },
       properties: {
           className: ['external']
       }
+  },
+];
+
+const rehypeAutolinkHeadingsConfig = [
+  rehypeAutolinkHeadings,
+  {
+    content: {
+      type: 'text',
+      value: '🔗',
+    },
+    headingProperties: { class: 'relative group flex items-center ' },
+    behavior: "append",
+    properties: {
+      ariaHidden: true,
+      class: 'invisible group-hover:visible absolute pr-fluid-3xs right-full text-link no-underline text-[0.60em]',
+    },
   },
 ];
 
@@ -109,7 +120,7 @@ export default defineConfig({
       }),
       mdx({
           remarkPlugins: [remarkReadingTime, remarkExtractHeadings],
-          rehypePlugins: [rehypeAttrs, rehypeExternalLinksConfig],
+          rehypePlugins: [rehypeAttrs, rehypeExternalLinksConfig, rehypeHeadingIds, rehypeAutolinkHeadingsConfig],
       }),
       icon({
           include: {
@@ -130,8 +141,8 @@ export default defineConfig({
   ],
 
   markdown: {
-      rehypePlugins: [rehypeAttrs, rehypeExternalLinksConfig, rehypeHeadingIds],
       remarkPlugins: [remarkReadingTime, remarkExtractHeadings],
+      rehypePlugins: [rehypeAttrs, rehypeExternalLinksConfig, rehypeHeadingIds, rehypeAutolinkHeadings],
   },
 
 vite: {

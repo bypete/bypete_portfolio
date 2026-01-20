@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 import type { NavItem } from "~/data/navigation.static";
-import { formatBlogPosts } from "~/js/utils";
+import { formatBlogPosts } from "~/libs";
 
 // Main navigation — async because Work is dynamic
 export async function getMainNavigation(): Promise<NavItem[]> {

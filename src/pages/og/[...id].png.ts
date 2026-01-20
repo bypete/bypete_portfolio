@@ -2,7 +2,7 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import fs from "node:fs/promises";
 import path from "node:path";
 import type { APIRoute } from "astro";
-import { generateOgImage } from "~/libs/open-graph";
+import { generateOgImage } from "~/libs/opengraph";
 
 export async function getStaticPaths() {
 	const posts = await getCollection("work");

@@ -2,9 +2,8 @@
 import { getCollection, render } from 'astro:content';
 import Work from '~/components/Swiper/Work.astro';
 import WorkSlide from '~/components/Swiper/WorkSlide.astro';
-
-import { formatBlogPosts } from '~/js/utils';
 import SplashLayout from '~/layouts/SplashLayout.astro';
+import { formatBlogPosts } from '~/libs';
 
 const allWork = await getCollection('work');
 

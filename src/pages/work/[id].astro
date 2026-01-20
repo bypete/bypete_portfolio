@@ -1,7 +1,7 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
-import { formatBlogPosts } from '~/js/utils';
 import WorkLayout from '~/layouts/WorkLayout.astro';
+import { formatBlogPosts } from '~/libs';
 
 export async function getStaticPaths() {
     const posts = await getCollection('work');

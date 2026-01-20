@@ -11,7 +11,7 @@ import FeaturedIcon from '~/components/ui/FeaturedIcon.astro';
 import NextPrev from '~/components/ui/NextPrev.astro';
 import PageTools from '~/components/ui/PageTools.astro';
 import Tags from '~/components/ui/Tags.astro';
-import { htmlDateString, readableDate } from '~/js/utils.js';
+import { htmlDateString, readableDate } from '~/libs';
 import BaseLayout from './BaseLayout.astro';
 
 const { post, frontmatter, section, headings, prevPost, nextPost } =
@@ -81,9 +81,13 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                         class="order-2 self-end pl-(--viewport-safe-inline) lg:order-1 lg:mt-safe-top lg:pr-0"
                     >
                         <h1
-                            class="chunkyline-surface-raised font-display text-step-6/none font-black uppercase"
-                            set:html={frontmatter.title}
-                        />
+                            class="font-display text-step-6/none font-black uppercase"
+                        >
+                            <span
+                                class="chunkyline-surface-raised"
+                                set:html={frontmatter.title}
+                            />
+                        </h1>
                         <p>{frontmatter.taster}</p>
                     </div>
                     <div
@@ -203,11 +207,11 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
                         Last updated:
                         <time
                             datetime={htmlDateString(
-                                frontmatter.modDate || frontmatter.pubDate
+                                frontmatter.modDate || frontmatter.pubDate,
                             )}
                             >{
                                 readableDate(
-                                    frontmatter.modDate || frontmatter.pubDate
+                                    frontmatter.modDate || frontmatter.pubDate,
                                 )
                             }
                         </time>
@@ -237,3 +241,49 @@ const prevPostData = prevPost ? formatPostData(prevPost) : undefined;
         <PageTools />
     </main>
 </BaseLayout>
+<script>
+    import { inView, animate, type AnimationSequence, stagger } from 'motion';
+    import { splitText } from '~/utils/splitText.client';
+
+    const headings = document.querySelectorAll<HTMLElement>('article h2');
+
+    headings.forEach((heading) => {
+        splitText(heading);
+    });
+
+    const titles = document.querySelectorAll('article h2 span[data-title]');
+
+    inView(
+        titles,
+        (el) => {
+            const child = el.querySelectorAll('[data-word]');
+
+            const sequenceIn: AnimationSequence = [
+                [
+                    child,
+                    {
+                        textShadow: [
+                            '0px 0px 0px var(--color-cyan-300), 0px 0px 0px var(--secondary-default)',
+                            '-2px -2px 1px var(--color-cyan-300), 2px 2px 1px var(--secondary-default)',
+                            '0px 0px 0px var(--color-cyan-300), 0px 0px 0px var(--secondary-default)',
+                        ],
+                    },
+                    { duration: 0.75 },
+                ],
+                [
+                    child,
+                    {
+                        opacity: [0, 1],
+                        y: [10, 0],
+                    },
+                    { duration: 0.25, delay: stagger(0.125), at: 0 },
+                ],
+            ];
+
+            animate(sequenceIn, {});
+
+            return (leaveInfo) => animate([[child, { opacity: 0 }, { at: 0 }]]);
+        },
+        { amount: 0.25 },
+    );
+</script>

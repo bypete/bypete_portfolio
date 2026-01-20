@@ -6,11 +6,7 @@ const { class: className, ...attrs } = Astro.props;
 ---
 
 <Fragment>
-    <h2
-        {...attrs}
-        class:list={['animate-neon', className]}
-        style="filter: url(#distorted-rgb-glow)"
-    >
+    <h2 {...attrs} class:list={['', className]}>
         <slot />
     </h2>
 </Fragment>

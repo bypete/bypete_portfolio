@@ -113,6 +113,7 @@
 :where(h1, h2, h3, h4, h5, h6) {
     letter-spacing: -0.03125em;
     margin-bottom: 0.333em;
+    line-height: 1.25;
 }
 :where(h1, h2, h3, h4, h5, h6) a {
     font-weight: var(--font-weight-extrabold);

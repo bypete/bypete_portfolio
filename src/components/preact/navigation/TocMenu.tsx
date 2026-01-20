@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { type AnimationSequence, animate, inView } from "motion";
 import { useEffect, useRef, useState } from "preact/hooks";
-import { buildToc } from "~/js/utils";
+import { buildToc } from "~/libs";
 
 export interface Heading {
   depth: number;

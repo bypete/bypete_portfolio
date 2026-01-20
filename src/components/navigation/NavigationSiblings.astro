@@ -1,7 +1,7 @@
 ---
-import { getCollection } from 'astro:content';
-import { formatBlogPosts } from '~/js/utils';
 import type { ContentEntryMap } from 'astro:content';
+import { getCollection } from 'astro:content';
+import { formatBlogPosts } from '~/libs';
 
 interface Props {
     collection: keyof ContentEntryMap;

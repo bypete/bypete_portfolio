@@ -57,3 +57,50 @@ const head: HeadProps = {
         <slot name="slotbanner" />
     </main>
 </BaseLayout>
+
+<script>
+    import { inView, animate, type AnimationSequence, stagger } from 'motion';
+    import { splitText } from '~/utils/splitText.client';
+
+    const headings = document.querySelectorAll<HTMLElement>('article h2');
+
+    headings.forEach((heading) => {
+        splitText(heading);
+    });
+
+    const titles = document.querySelectorAll('article h2 span[data-title]');
+
+    inView(
+        titles,
+        (el) => {
+            const child = el.querySelectorAll('[data-word]');
+
+            const sequenceIn: AnimationSequence = [
+                [
+                    child,
+                    {
+                        textShadow: [
+                            '0px 0px 0px var(--color-cyan-300), 0px 0px 0px var(--secondary-default)',
+                            '-2px -2px 1px var(--color-cyan-300), 2px 2px 1px var(--secondary-default)',
+                            '0px 0px 0px var(--color-cyan-300), 0px 0px 0px var(--secondary-default)',
+                        ],
+                    },
+                    { duration: 0.75 },
+                ],
+                [
+                    child,
+                    {
+                        opacity: [0, 1],
+                        y: [10, 0],
+                    },
+                    { duration: 0.25, delay: stagger(0.125), at: 0 },
+                ],
+            ];
+
+            animate(sequenceIn, {});
+
+            return (leaveInfo) => animate([[child, { opacity: 0 }, { at: 0 }]]);
+        },
+        { amount: 0.25 },
+    );
+</script>

@@ -1,11 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import Tags from '~/components/ui/Tags.astro';
-import PageLayout from '~/layouts/PageLayout.astro';
+import PlainLayout from '~/layouts/PlainLayout.astro';
 
-// const allPosts = await getCollection('posts');
 const allWorks = await getCollection('work');
-// const collection = [...allPosts, ...allWorks];
 const collection = [...allWorks];
 
 let tags = [
@@ -14,6 +12,6 @@ let tags = [
 const title = 'Tags';
 ---
 
-<PageLayout title={title}>
+<PlainLayout title={title}>
     {tags && <Tags tags={tags} url={true} class="my-fluid-m" />}
-</PageLayout>
+</PlainLayout>

@@ -66,7 +66,6 @@
 
 <filter id="distorted-rgb-glow" filterUnits="userSpaceOnUse">
 
-  <!-- 1. Create subtle organic distortion / wobble -->
   <feTurbulence 
     type="fractalNoise" 
     baseFrequency="0 0.00112" 
@@ -82,31 +81,66 @@
     result="WOBBLE"
   />
 
-  <!-- 2. Now create the subtle RGB glow layers – but from the distorted version -->
-  <feFlood flood-color="#ff0000" flood-opacity="0.25" result="RED"/>
-  <feFlood flood-color="#00ff00" flood-opacity="0.25" result="GREEN"/>
-  <feFlood flood-color="#0000ff" flood-opacity="0.30" result="BLUE"/>
+  <feFlood flood-color="#ff0000" flood-opacity="0.75" result="RED"/>
+  <!-- <feFlood flood-color="#00ff00" flood-opacity="0.25" result="GREEN"/> -->
+  <feFlood flood-color="#00FFFF" flood-opacity="0.30" result="BLUE"/>
 
-  <feComposite operator="in" in="RED"   in2="WOBBLE" result="RED_TEXT"/>   <!-- important: use WOBBLE instead of SourceAlpha -->
-  <feComposite operator="in" in="GREEN" in2="WOBBLE" result="GREEN_TEXT"/>
+  <feComposite operator="in" in="RED"   in2="WOBBLE" result="RED_TEXT"/>   
+  <!-- <feComposite operator="in" in="GREEN" in2="WOBBLE" result="GREEN_TEXT"/> -->
   <feComposite operator="in" in="BLUE"  in2="WOBBLE" result="BLUE_TEXT"/>
 
-  <feOffset in="RED_TEXT"   dx="-2" dy="0"   result="RED_OFF"/>
-  <feOffset in="GREEN_TEXT" dx="2"  dy="0"   result="GREEN_OFF"/>
-  <feOffset in="BLUE_TEXT"  dx="2"  dy="1"   result="BLUE_OFF"/>
+  <feOffset in="RED_TEXT"   dx="2" dy="2"   result="RED_OFF"/>
+  <!-- <feOffset in="GREEN_TEXT" dx="2"  dy="0"   result="GREEN_OFF"/> -->
+  <feOffset in="BLUE_TEXT"  dx="-1"  dy="-1"   result="BLUE_OFF"/>
 
-  <feGaussianBlur in="RED_OFF"   stdDeviation="0.25" result="RED_BLUR"/>
-  <feGaussianBlur in="GREEN_OFF" stdDeviation="0.25" result="GREEN_BLUR"/>
-  <feGaussianBlur in="BLUE_OFF"  stdDeviation="0.75" result="BLUE_BLUR"/>
+  <feGaussianBlur in="RED_OFF"   stdDeviation="0.020" result="RED_BLUR"/>
+  <!-- <feGaussianBlur in="GREEN_OFF" stdDeviation="0.025" result="GREEN_BLUR"/> -->
+  <feGaussianBlur in="BLUE_OFF"  stdDeviation="0.025" result="BLUE_BLUR"/>
 
-  <!-- 3. Merge: distorted RGB glow first → sharp original on top -->
   <feMerge>
     <feMergeNode in="RED_BLUR"/>
-    <feMergeNode in="GREEN_BLUR"/>
+    <!-- <feMergeNode in="GREEN_BLUR"/> -->
     <feMergeNode in="BLUE_BLUR"/>
-    <feMergeNode in="SourceGraphic"/>    <!-- clean original text -->
+    <feMergeNode in="SourceGraphic"/>
   </feMerge>
 </filter>
+
+<filter id="rb-glow" filterUnits="userSpaceOnUse">
+
+  <!-- color layers -->
+  <feFlood flood-color="#ff004f" result="RED"/>
+  <feFlood flood-color="#00f2ea" result="CYAN"/>
+
+  <!-- mask to text shape -->
+  <feComposite in="RED"  in2="SourceAlpha" operator="in" result="RED_TEXT"/>
+  <feComposite in="CYAN" in2="SourceAlpha" operator="in" result="CYAN_TEXT"/>
+
+  <!-- offsets -->
+  <feOffset  id="red-offset" in="RED_TEXT"  dx="1"  dy="1"  result="RED_OFF"/>
+  <feOffset  id="cyan-offset" in="CYAN_TEXT" dx="-1" dy="-1" result="CYAN_OFF"/>
+
+  <!-- very subtle blur (optional, can be 0) -->
+  <feGaussianBlur in="RED_OFF"  stdDeviation="0.15" result="RED_BLUR"/>
+  <feGaussianBlur in="CYAN_OFF" stdDeviation="0.15" result="CYAN_BLUR"/>
+
+  <!-- overlap becomes black -->
+  <feBlend
+    mode="multiply"
+    in="RED_BLUR"
+    in2="CYAN_BLUR"
+    result="RB_MULT"
+  />
+
+  <!-- output -->
+  <feMerge>
+    <feMergeNode in="RB_MULT"/>
+  </feMerge>
+
+</filter>
+
+
+
+
 
     <filter id="subtle-rgb-glow" filterUnits="userSpaceOnUse">
       <feTurbulence type="fractalNoise" baseFrequency="0 0.00112" result="NOISE" numOctaves="2" />

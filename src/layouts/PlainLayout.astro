@@ -1,0 +1,47 @@
+---
+import Hero from '~/components/hero/Hero.astro';
+import type { Props as HeadProps } from '~/components/SEO/Main.astro';
+import PageTools from '~/components/ui/PageTools.astro';
+import BaseLayout from './BaseLayout.astro';
+
+const {
+    frontmatter,
+    headings,
+    customHeadings,
+    isWide = false,
+    hideToc = false,
+    hideBreadcrumbs = true,
+} = Astro.props;
+
+const fm = frontmatter || Astro.props;
+const { heroConfig = {} } = fm;
+
+const finalHeadings = headings || customHeadings || []; // Ensure it's always an array
+
+const head: HeadProps = {
+    ...fm.head, // Spread any existing values in `fm.head`
+    title: fm.title || fm.head?.title,
+    description: fm.description || fm.head?.description,
+    og: fm.og || fm.head?.og,
+};
+---
+
+<BaseLayout {head}>
+    <main
+        data-layout={isWide ? 'page' : 'content'}
+        id="content"
+        class="layout grid grid-cols-(--gtc-layout) gap-x-(--viewport-safe-inline) outline-hidden"
+    >
+        <slot name="slothero">
+            <Hero config={heroConfig} title={head.title} />
+        </slot>
+        <div
+            id="start"
+            class="rte col-[full] grid grid-cols-subgrid gap-y-fluid-m py-fluid-2xl"
+        >
+            <slot />
+        </div>
+        <PageTools />
+        <slot name="slotbanner" />
+    </main>
+</BaseLayout>
