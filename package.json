@@ -89,5 +89,9 @@
     "Firefox ESR",
     "not dead",
     "ios >= 15"
-  ]
+  ],
+  "engines": {
+    "node": ">=20.19.0",
+    "npm": ">=9.6.5"
+  }
 }
