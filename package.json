@@ -1,7 +1,7 @@
 {
   "name": "astro-portfolio",
   "type": "module",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "scripts": {
     "dev": "astro dev --host",
     "toolbar": "npx astro preferences disable devToolbar",
