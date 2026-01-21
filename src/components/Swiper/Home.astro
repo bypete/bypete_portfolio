@@ -15,7 +15,7 @@ const { slides } = Astro.props;
 ---
 
 <div
-    class="swiper swiper--home group cloak:opacity-0 h-full w-full transition-opacity duration-300"
+    class="swiper swiper--home group cloak:opacity-0 relative h-full w-full pb-fluid-l transition-opacity duration-300"
     data-cloak
 >
     <div
@@ -33,12 +33,11 @@ const { slides } = Astro.props;
         swiper="swiper--home"
         class="right-0 hidden text-content-light md:block"
     />
-    <div
-        class="swiper--home__pagination absolute bottom-0! z-10 pr-fluid-m text-right"
-    >
-    </div>
 </div>
-
+<div
+    class="swiper--home__pagination absolute -bottom-fluid-m! z-10 pr-fluid-m text-right"
+>
+</div>
 <script>
     import Swiper from 'swiper';
     import {

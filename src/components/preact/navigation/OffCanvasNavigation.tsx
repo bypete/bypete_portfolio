@@ -102,10 +102,13 @@ export default function OffCanvasNavigation({
 
     if ($isMenuOpen) {
       html.style.overflow = "hidden";
+      html.style.setProperty('--z-toc', '900');
       animate(sequenceIn);
     } else {
       html.style.overflow = "";
-      animate(sequenceOut);
+      animate(sequenceOut).then(() => {
+        html.style.removeProperty('--z-toc');
+      });
     }
     // Only reveal once — on first meaningful render
     if (!hasRevealed.current && canvasRef.current) {

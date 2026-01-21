@@ -2,7 +2,6 @@
 import Hero from '~/components/hero/Hero.astro';
 import TocMenu from '~/components/preact/navigation/TocMenu';
 import type { Props as HeadProps } from '~/components/SEO/Main.astro';
-import PageTools from '~/components/ui/PageTools.astro';
 import BaseLayout from './BaseLayout.astro';
 
 const {
@@ -44,7 +43,7 @@ const head: HeadProps = {
                 {
                     finalHeadings && finalHeadings.length > 2 && !hideToc && (
                         <TocMenu
-                            class="col-[content]"
+                            title={fm.title}
                             headings={finalHeadings}
                             client:load
                         />
@@ -53,7 +52,6 @@ const head: HeadProps = {
                 <slot />
             </div>
         </article>
-        <PageTools />
         <slot name="slotbanner" />
     </main>
 </BaseLayout>

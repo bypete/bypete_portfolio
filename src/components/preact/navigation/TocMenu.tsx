@@ -1,23 +1,27 @@
+
+import type { MarkdownHeading } from "astro";
 import clsx from "clsx";
-import { type AnimationSequence, animate, inView } from "motion";
-import { useEffect, useRef, useState } from "preact/hooks";
+import { type AnimationSequence, animate, scroll } from "motion";
+import { useCallback, useEffect, useRef, useState } from "preact/hooks";
+import type { NestedHeading } from "~/libs";
 import { buildToc } from "~/libs";
 
-export interface Heading {
-  depth: number;
-  slug: string;
-  text: string;
-  subheadings: Heading[];
-}
-
 interface Props {
-  headings: Heading;
+  headings: MarkdownHeading[];
   class?: string;
+  title: string;
 }
 
-export default function TocMenu({ headings, class: className }: Props) {
-  const [activeTitle, setActiveTitle] = useState("On this page");
+export default function TocMenu({
+  title = "On this page",
+  headings,
+  class: className,
+}: Props) {
+  const [activeTitle, setActiveTitle] = useState(`${title}`);
   const hasRevealed = useRef(false);
+  const pageTopRef = useRef<HTMLAnchorElement | null>(null);
+  const progressCircleRef = useRef<SVGCircleElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const tocRef = useRef<HTMLElement | null>(null);
   const tocWrapperRef = useRef<HTMLDivElement | null>(null);
   const tocToggleRef = useRef<HTMLSpanElement | null>(null);
@@ -29,7 +33,8 @@ export default function TocMenu({ headings, class: className }: Props) {
   const panelHeight = useRef<number>(null);
 
   useEffect(() => {
-    if (!tocRef.current || hasRevealed.current) return;
+    if (!tocRef.current || !progressCircleRef.current || hasRevealed.current)
+      return;
 
     // Only reveal once — on first meaningful render
     if (!hasRevealed.current && tocRef.current) {
@@ -39,17 +44,45 @@ export default function TocMenu({ headings, class: className }: Props) {
       });
     }
 
-    inView(tocRef.current, (element) => {
-      const animation = animate(
-        element,
-        { opacity: [0, 1], y: ["var(--spacing-fluid-m)", 0] },
-        { duration: 0.5, delay: 0.5 },
-      );
-      return () => {
-        animation.speed = -1;
-      };
-    });
+    scroll(
+      animate(progressCircleRef.current, {
+        strokeDasharray: ["0, 1", "1.1, 1.1"],
+      }),
+    );
   }, []);
+
+  const checkScroll = useCallback(() => {
+    const scrollY = window.scrollY;
+    const vH = window.innerHeight;
+    const shouldBeVisible = scrollY > vH * 0.75;
+    if (shouldBeVisible !== isVisible) {
+      setIsVisible(shouldBeVisible);
+    }
+  }, [isVisible]);
+
+
+
+  useEffect(() => {
+    window.addEventListener("scroll", checkScroll);
+    checkScroll();
+
+    if (pageTopRef.current && tocRef.current) {
+      const sequenceAppear: AnimationSequence = [
+        [
+          tocRef.current,
+          {
+            opacity: isVisible ? 1 : 0,
+            y: isVisible ? 0 : "-200%",
+          },
+          { duration: 0.3, ease: "easeOut" },
+        ],
+      ];
+
+      animate(sequenceAppear);
+    }
+
+    return () => window.removeEventListener("scroll", checkScroll);
+  }, [isVisible, checkScroll]); // Runs when `isVisible` changes
 
   useEffect(() => {
     if (tocPanelRef.current) {
@@ -109,7 +142,9 @@ export default function TocMenu({ headings, class: className }: Props) {
             `a[href="#${id}"]`,
           ) as HTMLAnchorElement | null;
           if (link) {
-            setActiveTitle(`${link.textContent}` || "On this page");
+            setActiveTitle(
+              `${link.textContent}` || `${title}` || "On this page",
+            );
             const links = tocRef.current?.querySelectorAll("a");
             if (links) {
               for (const a of links) {
@@ -149,7 +184,7 @@ export default function TocMenu({ headings, class: className }: Props) {
   };
 
   // Render the table of contents recursively
-  const renderHeading = (heading: Heading) => (
+  const renderHeading = (heading: NestedHeading) => (
     <li key={heading.slug}>
       <a
         href={`#${heading.slug}`}
@@ -159,7 +194,7 @@ export default function TocMenu({ headings, class: className }: Props) {
       >
         {heading.text}
       </a>
-      {heading.subheadings && heading.subheadings.length > 0 && (
+      {heading.subheadings.length > 0 && (
         <ol>{heading.subheadings.map(renderHeading)}</ol>
       )}
     </li>
@@ -172,36 +207,72 @@ export default function TocMenu({ headings, class: className }: Props) {
       data-cloaked
       aria-label="Contents"
       className={clsx(
-        "cloaked:invisible sticky top-(--safe-top) z-(--z-toc) mx-auto min-h-fluid-l w-full max-w-[40ch] opacity-0 md:top-fluid-m",
-        className ? className : "not-first:mt-fluid-2xl mb-fluid-2xl",
+        className,
+        "-translate-x-1/2 cloaked:invisible fixed top-(--safe-top) left-1/2 z-(--z-toc) mx-auto min-h-fluid-l w-full max-w-[40ch] px-(--spacing-safe-inline) md:top-fluid-m",
       )}
+      style={"opacity: 0;"}
     >
       <div
         ref={tocWrapperRef}
         id="tocWrapper"
-        className="absolute mx-auto grid w-full grid-cols-1 grid-rows-(--gtr-toc) rounded-(--spacing-fluid-s) bg-surface-raised shadow-raised shadow-shadow-dark/25"
+        className="grid w-full grid-cols-(--gtc-toc) grid-rows-(--gtr-toc) rounded-(--spacing-fluid-s) bg-surface-raised shadow-raised shadow-shadow-dark/25"
       >
-        <button
-          type="button"
-          aria-controls="tocPanel"
-          ref={tocButtonRef}
-          aria-expanded={isOpen ? "true" : "false"}
-          className={
-            "group grid h-fluid-l w-full grid-cols-[1fr_auto] items-center gap-x-fluid-2xs whitespace-nowrap px-fluid-xs font-semibold text-step-0/[1] hover:cursor-pointer"
-          }
-          onClick={() => toggleToc()}
-          aria-label="Toggle page links"
-        >
-          <span class="overflow-hidden text-ellipsis text-nowrap text-left">
-            {activeTitle}
-          </span>
-          <span
-            ref={tocToggleRef}
-            className={clsx([
-              "icon-[tabler--chevron-up] block size-fluid-m group-focus:ring-2",
-            ])}
-          />
-        </button>
+        <div class="grid grid-cols-[auto_1fr] gap-fluid-2xs">
+          <a
+            href="#top"
+            ref={pageTopRef}
+            title={"jump to page top"}
+            data-jump
+            className="scroll cloaked:invisible relative grid h-fluid-l w-fluid-l grid-cols-1 grid-rows-1 items-center justify-items-center rounded-full bg-action text-content-light leading-none focus:outline-hidden"
+          >
+            <div className="icon-[tabler--arrow-up-dashed] size-fluid-s" />
+            <svg
+              viewBox="0 0 100 100"
+              className="-rotate-90 absolute inset-0 m-1 stroke-[6px]"
+            >
+              <title>Progress</title>
+              <circle
+                cx="50"
+                cy="50"
+                r="45"
+                pathLength="1"
+                strokeLinecap="round"
+                className="fill-transparent stroke-white/25"
+              />
+              <circle
+                ref={progressCircleRef}
+                cx="50"
+                cy="50"
+                r="45"
+                pathLength="1"
+                strokeLinecap="round"
+                className="progress fill-transparent stroke-white"
+                strokeDasharray="0, 1"
+              />
+            </svg>
+          </a>
+          <button
+            type="button"
+            aria-controls="tocPanel"
+            ref={tocButtonRef}
+            aria-expanded={isOpen ? "true" : "false"}
+            className={
+              "group grid h-fluid-l w-full grid-cols-[1fr_auto] items-center gap-x-fluid-2xs whitespace-nowrap pr-fluid-2xs font-semibold text-step-0/[1] hover:cursor-pointer"
+            }
+            onClick={() => toggleToc()}
+            aria-label="Toggle page links"
+          >
+            <span class="overflow-hidden text-ellipsis text-nowrap text-left">
+              {activeTitle}
+            </span>
+            <span
+              ref={tocToggleRef}
+              className={clsx([
+                "icon-[tabler--chevron-up] block size-fluid-m group-focus:ring-2",
+              ])}
+            />
+          </button>
+        </div>
 
         <div
           ref={tocPanelRef}
