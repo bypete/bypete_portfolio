@@ -76,7 +76,7 @@ const rehypeAutolinkHeadingsConfig = [
     behavior: "append",
     properties: {
       ariaHidden: true,
-      class: 'invisible group-hover:visible absolute pr-fluid-3xs right-full text-link no-underline text-[0.60em]',
+      class: 'invisible group-hover:visible absolute  right-full text-link no-underline text-[0.50em]',
     },
   },
 ];

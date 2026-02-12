@@ -465,7 +465,7 @@
 ------------------------------------------------------------ */
 
 @utility external {
-    @apply after:i-lucide-external-link after:text-step--1 after:ml-0.5 after:-translate-y-0.5;
+    @apply after:i-lucide-external-link after:text-step--1 text-nowrap after:ml-0.5 after:-translate-y-0.5;
 }
 
 @utility link {

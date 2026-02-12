@@ -41,7 +41,7 @@ const head: HeadProps = {
                 class="rte col-[full] grid grid-cols-subgrid gap-y-fluid-m py-fluid-2xl"
             >
                 {
-                    finalHeadings && finalHeadings.length > 2 && !hideToc && (
+                    finalHeadings && finalHeadings.length > 1 && !hideToc && (
                         <TocMenu
                             title={fm.title}
                             headings={finalHeadings}
@@ -52,7 +52,16 @@ const head: HeadProps = {
                 <slot />
             </div>
         </article>
-        <slot name="slotbanner" />
+        {
+            Astro.slots.has('footeroverlap') && (
+                <aside
+                    data-layout="content"
+                    class="layout relative z-(--z-content) col-[full] grid grid-cols-(--gtc-layout) gap-fluid-s lg:-mb-fluid-2xl"
+                >
+                    <slot name="footeroverlap" />
+                </aside>
+            )
+        }
     </main>
 </BaseLayout>
 

@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-import PageLayout from '~/layouts/PageLayout.astro';
+import PlainLayout from '~/layouts/PlainLayout.astro';
 
 const head = {
     title: 'On its way!',
@@ -8,11 +8,11 @@ const head = {
 };
 ---
 
-<PageLayout {head} isWide={false}>
+<PlainLayout {head} isWide={false}>
     <div class="rte w-full text-center">
         <Icon
             name="lucide:mail-check"
-            class="h-fluid-2xl animate-fade-in-up mx-auto w-auto text-green-500 duration-500"
+            class="mx-auto h-fluid-2xl w-auto animate-fade-in-up text-green-500 duration-500"
         />
         <h3 class="text-center">Your message has been sent</h3>
         <p>Thanks for getting in touch, I'll try to respond quickly.</p>
@@ -21,7 +21,7 @@ const head = {
         <Icon
             name="bypete__gray"
             title="byPete logo in dark gray"
-            class="h-fluid-l mx-auto w-auto"
+            class="mx-auto h-fluid-l w-auto"
         />
     </p>
-</PageLayout>
+</PlainLayout>

@@ -11,9 +11,9 @@ export default function CookieNotice() {
   const [visible, setVisible] = useState(false);
   const [consent, setConsent] = useState({
     necessary: true,
-    marketing: false,
+    adverts: false,
     analytics: true,
-    preferences: false,
+    personalisation: false,
   });
 
   useEffect(() => {
@@ -34,11 +34,13 @@ export default function CookieNotice() {
     setConsent(newConsent);
     localStorage.setItem("consentMode", JSON.stringify(newConsent));
     window.gtag("consent", "update", {
-      functionality_storage: newConsent.necessary ? "granted" : "denied",
-      security_storage: newConsent.necessary ? "granted" : "denied",
-      ad_storage: newConsent.marketing ? "granted" : "denied",
+      ad_storage: newConsent.adverts ? "granted" : "denied",
+      ad_user_data: newConsent.adverts ? "granted" : "denied",
+      ad_personalization: newConsent.personalisation ? "granted" : "denied",
       analytics_storage: newConsent.analytics ? "granted" : "denied",
-      personalization_storage: newConsent.preferences ? "granted" : "denied",
+      functionality_storage: newConsent.necessary ? "granted" : "denied",
+      personalization_storage: newConsent.personalisation ? "granted" : "denied",
+      security_storage: newConsent.necessary ? "granted" : "denied",
     });
     setVisible(false);
   };
@@ -75,25 +77,23 @@ export default function CookieNotice() {
         <label>
           <input
             type="checkbox"
-            checked={consent.preferences}
+            checked={consent.personalisation}
             onChange={() =>
               setConsent((prev) => ({
                 ...prev,
-                preferences: !prev.preferences,
+                personalisation: !prev.personalisation,
               }))
             }
-          />{" "}
-          Preferences
+          /> Personalisation
         </label>
         <label>
           <input
             type="checkbox"
-            checked={consent.marketing}
+            checked={consent.adverts}
             onChange={() =>
-              setConsent((prev) => ({ ...prev, marketing: !prev.marketing }))
+              setConsent((prev) => ({ ...prev, adverts: !prev.adverts }))
             }
-          />{" "}
-          Marketing
+          /> Ad cookies
         </label>
       </div>
       <div class="mt-2 flex gap-2">
@@ -103,9 +103,9 @@ export default function CookieNotice() {
           onClick={() =>
             updateConsent({
               necessary: true,
-              marketing: false,
+              adverts: false,
               analytics: false,
-              preferences: false,
+              personalisation: false,
             })
           }
         >

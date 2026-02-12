@@ -84,7 +84,7 @@
 
     /* Grid Template Rows */
     --gtr-workcard: auto minmax(0, 1fr) auto;
-    --gtr-work: 100vw auto;
+    --gtr-work: auto minmax(0, 1fr);
     --gtr-home: auto minmax(0, 1fr);
     --gtr-toc: auto auto;
 }

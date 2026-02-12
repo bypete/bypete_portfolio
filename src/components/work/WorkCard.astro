@@ -26,21 +26,10 @@ interface Props extends HTMLAttributes<'a'> {
     product: ProductImage;
     taster: string;
     tags: string[];
-    readTime: string;
 }
 
-const {
-    title,
-    featured,
-    url,
-    cover,
-    logo,
-    product,
-    taster,
-    tags,
-    readTime,
-    ...rest
-} = Astro.props;
+const { title, featured, url, cover, logo, product, taster, tags, ...rest } =
+    Astro.props;
 ---
 
 <a

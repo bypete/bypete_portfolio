@@ -1,16 +1,14 @@
 ---
-import { Icon } from 'astro-icon/components';
 import ContactForm from '~/components/forms/web3Form.astro';
 import Button from '~/components/preact/Button.tsx';
-import Note from '~/components/ui/Note.astro';
 import siteInfo from '~/data/site';
-import PageLayout from '~/layouts/PageLayout.astro';
+import PlainLayout from '~/layouts/PlainLayout.astro';
 
 const available = siteInfo.available;
 const title = 'Connect';
 ---
 
-<PageLayout title={title} isWide={false} hideToc={true}>
+<PlainLayout title={title} isWide={false} hideToc={true}>
     <p class="text-loud text-step-2/snug font-medium">
         Send me a message and I'll get back to you shortly. {
             available && (
@@ -43,4 +41,4 @@ const title = 'Connect';
     >
         <ContactForm />
     </div>
-</PageLayout>
+</PlainLayout>

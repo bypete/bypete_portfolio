@@ -1,7 +1,6 @@
 ---
 import Hero from '~/components/hero/Hero.astro';
 import type { Props as HeadProps } from '~/components/SEO/Main.astro';
-import PageTools from '~/components/ui/PageTools.astro';
 import BaseLayout from './BaseLayout.astro';
 
 const {
@@ -9,7 +8,6 @@ const {
     headings,
     customHeadings,
     isWide = false,
-    hideToc = false,
     hideBreadcrumbs = true,
 } = Astro.props;
 
@@ -41,7 +39,15 @@ const head: HeadProps = {
         >
             <slot />
         </div>
-        <PageTools />
-        <slot name="slotbanner" />
+        {
+            Astro.slots.has('footeroverlap') && (
+                <aside
+                    data-layout="content"
+                    class="layout relative z-(--z-content) col-[full] grid grid-cols-(--gtc-layout) gap-fluid-s lg:-mb-fluid-2xl"
+                >
+                    <slot name="footeroverlap" />
+                </aside>
+            )
+        }
     </main>
 </BaseLayout>

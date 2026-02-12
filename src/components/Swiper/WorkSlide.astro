@@ -1,9 +1,8 @@
 ---
-import Tags from '~/components/ui/Tags.astro';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import Button from '~/components/preact/Button.tsx';
-import ReadTime from '~/components/ui/ReadTime.astro';
+import Tags from '~/components/ui/Tags.astro';
 
 interface CoverImage {
     src: ImageMetadata;
@@ -16,21 +15,14 @@ interface ProductImage {
     alt: string;
 }
 
-interface LogoImage {
-    src: ImageMetadata;
-    light?: ImageMetadata;
-}
-
 interface Props {
     title: string;
     url: string;
     featured?: boolean;
-    logo: ImageMetadata;
     product: ProductImage;
     cover: CoverImage;
     taster: string;
     tags: string[];
-    readTime: string;
 }
 
 const {
@@ -38,90 +30,71 @@ const {
     url,
     featured = false,
     cover,
-    logo,
     product,
     taster,
     tags,
-    readTime,
 } = Astro.props;
 ---
 
-<div class="h-full">
+<div class="absolute inset-0 flex h-full w-full items-center justify-center">
+    <Image
+        src={cover.src}
+        alt={cover.alt}
+        class="absolute inset-0 m-0 h-full w-full object-cover"
+        quality="high"
+        widths={[400, 960, cover.src.width]}
+        sizes={`100vw`}
+    />
+</div>
+<div
+    class="container mx-auto grid h-full w-full grid-cols-1 grid-rows-(--gtr-work) items-center justify-items-center pt-safe-top text-content-light md:grid-rows-2 lg:grid-cols-(--gtc-block50) lg:grid-rows-1"
+>
     <div
-        class="absolute inset-0 flex h-full w-full items-center justify-center"
+        class="relative -mx-fluid-m max-w-[45ch] self-start rounded-lg p-fluid-m text-content-light backdrop-blur-lg backdrop-opacity-50 md:order-2 lg:self-center"
     >
-        <Image
-            src={cover.src}
-            alt={cover.alt}
-            class="absolute inset-0 m-0 h-full w-full object-cover"
-            quality="high"
-            widths={[400, 960, cover.src.width]}
-            sizes={`100vw`}
-        />
+        <div>
+            <h2 class="font-display text-step-5 leading-tight xl:text-step-5">
+                <a href={url} set:html={title} />
+            </h2>
+        </div>
+        {
+            taster && (
+                <p
+                    set:html={taster}
+                    class="mb-fluid-m line-clamp-3 lg:line-clamp-none"
+                />
+            )
+        }
+        <p>
+            <Button
+                href={url}
+                theme="action"
+                isIcon={true}
+                class="md:inline-flex"
+            >
+                View this project
+                <Icon
+                    name="lucide:arrow-right-circle"
+                    class="h-fluid-s w-auto animate-nudge-right"
+                />
+            </Button>
+        </p>
+        <span class="hidden md:block">
+            <Tags {tags} url={true} class="mt-fluid-m" />
+        </span>
     </div>
-    <div
-        class="container mx-auto grid h-full w-full grid-cols-1 grid-rows-(--gtr-work) items-center justify-items-center pt-headerheight text-content-light md:grid-rows-2 lg:grid-cols-(--gtc-block50) lg:grid-rows-1"
-    >
-        <div
-            class="relative max-w-[45ch] self-start rounded-xs pt-fluid-l text-content-light backdrop-blur-md backdrop-brightness-95 backdrop-opacity-10 md:order-2 md:pt-0 lg:self-center lg:py-0"
-        >
-            <div>
-                {
-                    readTime && (
-                        <ReadTime
-                            duration={readTime}
-                            class="text-step--1 text-content-light/75"
-                        />
-                    )
-                }
-
-                <h2
-                    class="capline font-display text-step-2 leading-tight xl:text-step-3"
-                >
-                    <a href={url} set:html={title} />
-                </h2>
-            </div>
-            {
-                taster && (
-                    <p
-                        set:html={taster}
-                        class="my-fluid-m line-clamp-4 lg:line-clamp-none"
-                    />
-                )
-            }
-            <p>
-                <Button
-                    href={url}
-                    theme="action"
-                    isIcon={true}
-                    class="md:inline-flex"
-                >
-                    View this project
-                    <Icon
-                        name="lucide:arrow-right-circle"
-                        class="h-fluid-s w-auto animate-nudge-right"
-                    />
-                </Button>
-            </p>
-            <span class="hidden md:block">
-                <Tags {tags} url={true} class="mt-fluid-m" />
-            </span>
-        </div>
-        <div
-            class="pb-fluid- md:pb-0l relative flex w-full md:order-1 md:h-full lg:pb-0"
-        >
-            {
-                product && (
-                    <Image
-                        loading={'eager'}
-                        src={product.src}
-                        densities={[1.5, 2]}
-                        width={600}
-                        class="h-full max-h-full w-full max-w-[full] self-end object-contain object-bottom lg:object-center"
-                        alt={product.alt}
-                    />
-                )
-            }
-        </div>
+    <div class="relative flex h-full min-h-0 self-center md:order-1">
+        {
+            product && (
+                <Image
+                    loading={'eager'}
+                    src={product.src}
+                    densities={[1.5, 2]}
+                    width={720}
+                    class="h-full max-h-full w-full self-end object-contain object-bottom lg:object-center"
+                    alt={product.alt}
+                />
+            )
+        }
     </div>
 </div>
