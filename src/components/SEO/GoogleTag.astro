@@ -47,11 +47,22 @@ declare global {
             security_storage: 'denied',
         });
     } else {
-        gtag(
-            'consent',
-            'default',
-            JSON.parse(localStorage.getItem('consentMode')),
-        );
+        localConsent = JSON.parse(localStorage.getItem('consentMode'));
+        gtag('consent', 'default', {
+            ad_storage: localConsent.adverts ? 'granted' : 'denied',
+            ad_user_data: localConsent.adverts ? 'granted' : 'denied',
+            ad_personalization: localConsent.personalisation
+                ? 'granted'
+                : 'denied',
+            analytics_storage: localConsent.analytics ? 'granted' : 'denied',
+            functionality_storage: localConsent.necessary
+                ? 'granted'
+                : 'denied',
+            personalization_storage: localConsent.personalisation
+                ? 'granted'
+                : 'denied',
+            security_storage: localConsent.necessary ? 'granted' : 'denied',
+        });
     }
     gtag('js', new Date());
     gtag('config', 'GTM-TNS273XC');
