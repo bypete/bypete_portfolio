@@ -2,6 +2,9 @@ import { useEffect, useState } from "preact/hooks";
 import Button from "~/components/preact/Button.tsx";
 import Toast from "~/components/preact/overlays/Toast.tsx";
 
+const CONSENT_STORAGE_KEY = "consentMode";
+const CONSENT_VERSION = 2;
+
 function wait(ms = 0) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -10,6 +13,7 @@ export default function CookieNotice() {
   // Initialize visible to false so the toast doesn't render immediately.
   const [visible, setVisible] = useState(false);
   const [consent, setConsent] = useState({
+    version: CONSENT_VERSION,
     necessary: true,
     adverts: false,
     analytics: true,
@@ -18,21 +22,36 @@ export default function CookieNotice() {
 
   useEffect(() => {
     const checkConsent = async () => {
-      const storedConsent = localStorage.getItem("consentMode");
-      if (storedConsent) {
-        setConsent(JSON.parse(storedConsent));
-        setVisible(false); // Do not show the toast if consent already exists.
-      } else {
-        await wait(2000); // Show the toast after a delay if no consent is found.
-        setVisible(true);
+
+      try {
+        const stored = localStorage.getItem(CONSENT_STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          // Validate version
+          if (parsed.version === CONSENT_VERSION) {
+            setConsent(parsed);
+            setVisible(false); // Do not show the toast if consent already exists.
+            return;
+          }
+
+          localStorage.removeItem(CONSENT_STORAGE_KEY);
+        }
+      } catch {
+        localStorage.removeItem(CONSENT_STORAGE_KEY);
       }
+      await wait(2000); // Show the toast after a delay if no consent is found.
+      setVisible(true);
     };
+
     checkConsent();
   }, []);
 
   const updateConsent = (newConsent) => {
-    setConsent(newConsent);
-    localStorage.setItem("consentMode", JSON.stringify(newConsent));
+
+    const versionedConsent = { version: CONSENT_VERSION, ...newConsent, };
+
+    setConsent(versionedConsent);
+    localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(versionedConsent));
     window.gtag("consent", "update", {
       ad_storage: newConsent.adverts ? "granted" : "denied",
       ad_user_data: newConsent.adverts ? "granted" : "denied",

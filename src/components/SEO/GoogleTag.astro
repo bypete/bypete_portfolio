@@ -28,15 +28,39 @@ declare global {
 
 <!-- Google Tag Manager -->
 <script is:inline type="text/partytown">
-    // Initialize dataLayer
+    const CONSENT_STORAGE_KEY = 'consentMode';
+    const CONSENT_VERSION = 2;
+
     window.dataLayer = window.dataLayer || [];
-    // Define gtag
     function gtag() {
         dataLayer.push(arguments);
     }
     window.gtag = gtag;
-    // Set default consent
-    if (localStorage.getItem('consentMode') === null) {
+
+    function getStoredConsent() {
+        try {
+            const stored = localStorage.getItem(CONSENT_STORAGE_KEY);
+            if (!stored) return null;
+
+            const parsed = JSON.parse(stored);
+
+            // Validate version
+            if (parsed.version !== CONSENT_VERSION) {
+                console.warn('Consent version outdated — clearing');
+                localStorage.removeItem(CONSENT_STORAGE_KEY);
+                return null;
+            }
+
+            return parsed;
+        } catch (e) {
+            localStorage.removeItem(CONSENT_STORAGE_KEY);
+            return null;
+        }
+    }
+
+    const localConsent = getStoredConsent();
+
+    if (!localConsent) {
         gtag('consent', 'default', {
             ad_storage: 'denied',
             ad_user_data: 'denied',
@@ -47,7 +71,6 @@ declare global {
             security_storage: 'denied',
         });
     } else {
-        localConsent = JSON.parse(localStorage.getItem('consentMode'));
         gtag('consent', 'default', {
             ad_storage: localConsent.adverts ? 'granted' : 'denied',
             ad_user_data: localConsent.adverts ? 'granted' : 'denied',
@@ -64,6 +87,7 @@ declare global {
             security_storage: localConsent.necessary ? 'granted' : 'denied',
         });
     }
+
     gtag('js', new Date());
     gtag('config', 'GTM-TNS273XC');
 </script>
