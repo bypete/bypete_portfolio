@@ -1,0 +1,191 @@
+---
+title: 'About'
+taster: 'I’m a Surrey based Front-End developer with over two decades of experience in digital.'
+excerpt: 'I’m a Surrey based Front-End developer with over two decades of experience in digital.'
+description: 'Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.'
+keywords: 'Surrey based Front-End developer, Bespoke website development, HTML, CSS, Creative development, The Great Outdoors, Balance and wellbeing'
+heroConfig:
+    headline: 'Hello!'
+    bg: 'bg-teal-400'
+    dark: true
+skillset:
+    areas:
+        - title: 'Development'
+          skills:
+              - '**Tailwind CSS**, SCSS, **Utopia**, Foundation CSS, **PostCSS**'
+              - '**Astro**, Eleventy(11ty), Nunjucks, Panini, Handlebars'
+              - 'Umbraco CMS, EPiServer, Wordpress'
+              - '**Typescript**, **Preact**, **Alpine.js**, **ES6**, jQuery, **JSON**, **Motion One**'
+              - 'Markdown, **MDX**'
+              - 'Gulp, **npm**, Webpack'
+              - 'Xamarin.Forms'
+        - title: 'Tools'
+          skills:
+              - 'Visual Studio Code, Visual Studio'
+              - 'Figma'
+              - 'Adobe Creative Cloud (Photoshop, Illustrator, Acrobat, Lightroom)'
+              - 'Microsoft Office'
+              - 'npm, git, github'
+              - 'Netlify, Cloudflare'
+        - title: 'SaaS / PaaS'
+          skills:
+              - 'Mailchimp'
+              - 'Zoho CRM'
+              - 'Slack'
+              - 'Microsoft Teams'
+              - 'Azure Dev Ops'
+        - title: 'Responsibilities'
+          class: 'col-span-full'
+          skills:
+              - 'Design Systems'
+              - 'UX/UI'
+              - 'HTML / Email templates'
+              - 'Accessibility (WCAG)'
+              - 'Performance optimisation'
+              - 'Content management, Markdown'
+              - 'Wireframes'
+              - 'Asset generation'
+        - title: 'Key Competencies'
+          class: 'col-span-full'
+          skills:
+              - 'Creativity and problem solving'
+---
+import UL from '~/components/MDX/ul.astro'
+import H2 from '~/components/MDX/h2.astro'
+import BLOCKQUOTE from '~/components/MDX/blockquote.astro'
+import PRE from '~/components/MDX/pre.astro'
+export const components = {ul: UL, blockquote: BLOCKQUOTE, pre: PRE, h2: H2};
+
+import PageLayout from '~/layouts/PageLayout.astro';
+import Skills from '~/components/ui/Skills.astro';
+import Availability from '~/components/ui/Availability.astro';
+import Banner from '~/components/banners/Portfolio.astro';
+
+import Hero from '~/components/hero/Hero.astro';
+
+import listing_index from '~/assets/listing-index.jpg';
+import woodland from '~/assets/blocks/woodland.webp';
+import google_lens from '~/assets/google-lens.png';
+import { Image } from 'astro:assets';
+import Button from '~/components/preact/Button.tsx';
+import { Icon } from 'astro-icon/components';
+import Figure from '~/components/images/Figure.astro';
+import BlockPicture from '~/components/images/BlockPicture.astro';
+import BlockImage from '~/components/images/BlockImage.astro';
+
+import { getCollection } from 'astro:content';
+export const allWork = await getCollection('work');
+export const postCount = allWork.length;
+
+import profile from '~/assets/profile__hd.png';
+import heroLG from '~/assets/hero/concrete--teal.jpg';
+import heroSM from '~/assets/hero/concrete--teal@sm.jpg';
+
+import ogImage from '~/assets/og/og__about.jpg';
+
+<PageLayout  {...frontmatter}  og={{
+    ...frontmatter.og,
+    title: 'About Pete Wallace',
+    description: 'Pete Wallace is an experienced Front-End developer based in Surrey, UK. Get to know more about my experience in the digital landscape, how I keep my skills sharp, and the methods I prefer to use to produce my best work.',
+    image: {
+      src: ogImage,
+      alt: "About Pete Wallace"
+    }
+  }} >
+  <Hero
+      slot="slothero"
+      config={{
+          ...frontmatter.heroConfig,
+          mode: 'cover',
+          sequence: 'glitch',
+          wrap: 'bg-primary bg-[image:var(--filter-grains)] bg-size-[700px]',
+          legibility: 'text-content-dark',
+          elements: {
+            copy: {
+              cell: 'self-center pt-safe-top grid grid-cols-1 gap-fluid-s',
+            }, 
+            visual: {
+              class: 'object-contain object-bottom translate-z-0',
+              src: profile,
+              alt: 'Profile picture of Pete Wallace',
+              filter: 'rgb-split',
+              densities: [1.5, 2],
+              width: 720,
+            },
+          },
+          prompt: 'scroll',
+          threshold: 25,
+      }}
+  >
+  <h1 class="mb-0 text-step-6/none" data-animate="turnIn">Hello!</h1>
+  <p class="text-step-1 font-semibold" data-animate='turnIn'>I’m Pete, a seasoned Creative Developer focused on UI & UX design principles. I enjoy producing intuitive, user-centred solutions that help simplify life for *all* users.</p>
+    <p data-animate='turnIn'>I draw on my knowledge of design systems, performant development and accessibility to simplify user journeys and improve business outcomes.</p>
+  <p class="flex flex-row gap-2" data-animate="turnIn">
+    <Button theme="action" href="#start" data-jump isIcon="true">Read my bio <Icon name="lucide:arrow-down-circle" class="h-fluid-s w-fluid-s"/></Button>
+    <Button theme="outline" href="/connect/">Contact me</Button>
+  </p>
+  </Hero>
+
+## What I do
+
+I have worked with fintech startups, e-money services, and global brands, delivering high-performing websites and multilingual apps that blend functionality and user experience. My work spans creative design, responsive front-end builds, and user-centred problem solving - always with an eye on accessibility and detail. 
+
+I help businesses bring their digital visions to life through clean, efficient code and user-friendly designs. My toolkit includes:
+
+- UI & UX Design
+- Design Systems & Prototyping (Figma)
+- Responsive Front-End Development (Tailwind, TypeScript, Astro)
+- Accessibility (WCAG)
+- Continuous Deployment Workflows (GitHub, Netlify)
+
+## The backstory
+
+I began my career in multimedia, developing award-winning e-learning, training, and press pack applications for renowned clients such as **BBC Worldwide**, **University of Cambridge**, and **Oxford University Press**. As the industry shifted online, I embraced the change and pivoted into Front-End development, focusing on rapid prototyping.
+
+Starting out, I helped build support sites for innovative projects like BBC Active’s [Get Into French](https://www.cam.ac.uk/news/get-into-french-wins-gold-award), an IVCA Gold award winner. Subsequently, I progressed to developing full-fledged online solutions.
+
+I shifted my focus to the fintech sector, where I led Front-End development for innovative products such as K Ring, the world’s first Mastercard-powered contactless payment ring. This environment demands quick, testable solutions, enabling clients and teams to rapidly validate ideas and innovate.
+
+<Skills skillset={frontmatter.skillset} mode="page">
+## Current Skills
+
+<p class="text-step--1 text-content-quiet mb-fluid-m ">My current working stack is marked in **bold**</p>
+</Skills>
+
+
+## Looking Ahead
+
+I’m always keen to explore new technologies and production methods. 
+This static site was crafted using [Astro v5](https://astro.build/), integrating Preact, and [Tailwind CSS v4](https://tailwindcss.com/). I’ve really enjoyed diving into Astro and have been impressed with its exceptional load times and lighthouse scores. 
+
+> ... performance can also have a material effect on whether your website's users follow through. Slow sites have a negative impact on revenue, and fast sites are shown to increase conversion rates and improve business outcomes
+>
+> <cite>Source: [Google Web.Dev - Why does speed matter?](https://web.dev/learn/performance/why-speed-matters/) </cite>
+
+This site is ‘hand-built’ and should serve as a marker of my capabilities in design and front-end development. 
+
+
+## Balancing Life and Work
+
+I love exploring the great outdoors with my young family and spending quality time at the nets with my cricket-obsessed sons. During the season, I volunteer as a parent coach at our local cricket club.
+
+Nature is my go-to for recharging and getting offline, but I’m not above using [Google Lens](https://lens.google/intl/en-GB/#cta-section) to identify what we’re discovering!
+
+
+<BlockImage
+    src={google_lens}
+    width={768}
+    breakout={false}
+    class="my-0 w-full"
+    alt="Beach scene with close up of jellyfish. Detail shows iPhone with google lens app"
+    credit="Google Lens (App visuals)"
+    wrapper="my-fluid-l"
+/>
+
+## Availability
+
+I'm currently <Availability url={`/connect/`} /> for new opportunities in UI/UX and front-end development. If you think I could be a great fit for your team, please [connect](/connect/) or reach out via [LinkedIn](https://www.linkedin.com/in/peter-wallace-a5002a7a/).
+
+Head over to the [work](/work/) section for a closer look at my portfolio. There are currently **{postCount} case studies** to explore.
+<Banner slot="footeroverlap" mode={'page'} shadow={true} aspect="min-h-[40cqw]" />
+</PageLayout>
