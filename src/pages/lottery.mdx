@@ -10,45 +10,31 @@ heroConfig:
     dark: true
 skillset:
     areas:
+
         - title: 'Development'
           skills:
               - '**Tailwind CSS**, SCSS, **Utopia**, Foundation CSS, **PostCSS**'
-              - '**Astro**, Eleventy(11ty), Nunjucks, Panini, Handlebars'
+              - '**Astro** javaScript framework for fast HTML prototyping'
               - 'Umbraco CMS, EPiServer, Wordpress'
               - '**Typescript**, **Preact**, **Alpine.js**, **ES6**, jQuery, **JSON**, **Motion One**'
               - 'Markdown, **MDX**'
-              - 'Gulp, **npm**, Webpack'
-              - 'Xamarin.Forms'
         - title: 'Tools'
           skills:
-              - 'Visual Studio Code, Visual Studio'
-              - 'Figma'
+              - 'Visual Studio Code'
+              - 'Figma, FigmaJam'
               - 'Adobe Creative Cloud (Photoshop, Illustrator, Acrobat, Lightroom)'
+              - 'Google Analytics GA4, Google Tag Manager'
               - 'Microsoft Office'
-              - 'npm, git, github'
-              - 'Netlify, Cloudflare'
-        - title: 'SaaS / PaaS'
-          skills:
-              - 'Mailchimp'
-              - 'Zoho CRM'
-              - 'Slack'
-              - 'Microsoft Teams'
-              - 'Azure Dev Ops'
+              - 'Slack, Microsoft Teams, Azure Dev Ops'
         - title: 'Responsibilities'
-          class: 'col-span-full'
           skills:
-              - 'Design Systems'
-              - 'UX/UI'
-              - 'HTML / Email templates'
+              - 'UI & UX Design'
+              - 'Design Systems & Prototyping (Figma)'
+              - 'Responsive Front-End Development (Tailwind, TypeScript, Astro)'
               - 'Accessibility (WCAG)'
-              - 'Performance optimisation'
-              - 'Content management, Markdown'
-              - 'Wireframes'
-              - 'Asset generation'
-        - title: 'Key Competencies'
-          class: 'col-span-full'
-          skills:
-              - 'Creativity and problem solving'
+              - 'Design delivery and developer handover'
+              - 'Content management and population'
+
 ---
 import UL from '~/components/MDX/ul.astro'
 import H2 from '~/components/MDX/h2.astro'
@@ -73,11 +59,25 @@ import Figure from '~/components/images/Figure.astro';
 import BlockPicture from '~/components/images/BlockPicture.astro';
 import BlockImage from '~/components/images/BlockImage.astro';
 
+import block__cyclist_40 from '~/assets/work/mykring/block__cyclist_40.jpg';
+
+
+import quotation from '~/assets/work/shirleychauffeurs/quote.jpg';
+import light from '~/assets/work/shirleychauffeurs/theme_light.png';
+import dark from '~/assets/work/shirleychauffeurs/theme_dark.png';
+import palette from '~/assets/work/shirleychauffeurs/palette.png';
+import vars_brand from '~/assets/work/shirleychauffeurs/vars_brand.png';
+import vars_alias from '~/assets/work/shirleychauffeurs/vars_alias.png';
+import vars_mapped from '~/assets/work/shirleychauffeurs/vars_mapped.png';
+import cta from '~/assets/work/shirleychauffeurs/cta.jpg';
+import lighthouse from '~/assets/work/shirleychauffeurs/lighthouse.png';
+
 import { getCollection } from 'astro:content';
 export const allWork = await getCollection('work');
 export const postCount = allWork.length;
 
 import profile from '~/assets/profile__hd.png';
+import kringProduct from '~/assets/work/mykring/product_1x1_ipad_portrait_phone.png';
 import heroLG from '~/assets/hero/concrete--teal.jpg';
 import heroSM from '~/assets/hero/concrete--teal@sm.jpg';
 
@@ -98,8 +98,8 @@ import ogImage from '~/assets/og/og__about.jpg';
           ...frontmatter.heroConfig,
           mode: 'cover',
           sequence: 'glitch',
-          wrap: 'bg-primary bg-[image:var(--filter-grains)] bg-size-[700px]',
-          legibility: 'text-content-dark',
+          wrap: 'bg-[#1ac7c9] bg-[image:var(--filter-grains)] bg-size-[700px]',
+          legibility: 'text-content-light',
           elements: {
             copy: {
               cell: 'self-center pt-safe-top grid grid-cols-1 gap-fluid-s',
@@ -117,75 +117,189 @@ import ogImage from '~/assets/og/og__about.jpg';
           threshold: 25,
       }}
   >
-  <h1 class="mb-0 text-step-6/none" data-animate="turnIn">Hello!</h1>
+  <h1 class="mb-0 text-step-5/none" data-animate="turnIn">Hello!</h1>
   <p class="text-step-1 font-semibold" data-animate='turnIn'>I’m Pete, a seasoned Creative Developer focused on UI & UX design principles. I enjoy producing intuitive, user-centred solutions that help simplify life for *all* users.</p>
-    <p data-animate='turnIn'>I draw on my knowledge of design systems, performant development and accessibility to simplify user journeys and improve business outcomes.</p>
+    <p>This is a guide to show how I could bring value as a <strong>User Experience Designer</strong> at the <strong>National Lottery Fund</strong></p>
   <p class="flex flex-row gap-2" data-animate="turnIn">
-    <Button theme="action" href="#start" data-jump isIcon="true">Read my bio <Icon name="lucide:arrow-down-circle" class="h-fluid-s w-fluid-s"/></Button>
-    <Button theme="outline" href="/connect/">Contact me</Button>
+    <Button theme="action" href="#start" data-jump isIcon="true">Am I a good fit?<Icon name="lucide:arrow-down-circle" class="h-fluid-s w-fluid-s"/></Button>
   </p>
   </Hero>
 
-## What I do
+<div class="px-(--viewport-safe-inline)  not-rte col-[full]  text-center">
+  <div class=" mx-auto max-w-[96ch] font-normal">
+    <blockquote >
+      <p class="font-display text-step-2 md:text-step-4/tight text-content-shout">I enjoy the challenge of reducing friction, and I’d love to help you build better user experiences. I bring a user-centred approach and expertise in <strong class="font-extrabold">site optimisation</strong>, <strong class="font-extrabold">accessibility</strong>, and <strong class="font-extrabold">design systems</strong>.</p>
+    </blockquote>
+  </div>
+</div>
+
+## What I bring
+
+I thrive when bridging creative ideas with technical know-how, and I see this position as an excellent opportunity to contribute to a UX team that uses research and iteration to align user needs with business goals. This could be a great opportunity to centre my broad experience into a more focused specialism. 
+
+I have over 10 years of experience creating clear, accessible and mobile-first user experiences, including leading research, prototyping and design delivery to simplify user journeys and improve business outcomes.
 
 I have worked with fintech startups, e-money services, and global brands, delivering high-performing websites and multilingual apps that blend functionality and user experience. My work spans creative design, responsive front-end builds, and user-centred problem solving - always with an eye on accessibility and detail. 
 
-I help businesses bring their digital visions to life through clean, efficient code and user-friendly designs. My toolkit includes:
+I help businesses bring their digital visions to life through clean, efficient code and user-friendly designs. 
 
-- UI & UX Design
-- Design Systems & Prototyping (Figma)
-- Responsive Front-End Development (Tailwind, TypeScript, Astro)
-- Accessibility (WCAG)
-- Continuous Deployment Workflows (GitHub, Netlify)
+This page highlights some of the projects mentioned in my supporting statement.
 
-## The backstory
+<Skills skillset={frontmatter.skillset} mode="page" class="my-fluid-xl">
+## Relevant Skills
 
-I began my career in multimedia, developing award-winning e-learning, training, and press pack applications for renowned clients such as **BBC Worldwide**, **University of Cambridge**, and **Oxford University Press**. As the industry shifted online, I embraced the change and pivoted into Front-End development, focusing on rapid prototyping.
-
-Starting out, I helped build support sites for innovative projects like BBC Active’s [Get Into French](https://www.cam.ac.uk/news/get-into-french-wins-gold-award), an IVCA Gold award winner. Subsequently, I progressed to developing full-fledged online solutions.
-
-I shifted my focus to the fintech sector, where I led Front-End development for innovative products such as K Ring, the world’s first Mastercard-powered contactless payment ring. This environment demands quick, testable solutions, enabling clients and teams to rapidly validate ideas and innovate.
-
-<Skills skillset={frontmatter.skillset} mode="page">
-## Current Skills
-
+<p>I have a lot of transferrable skills from a background in creative development.</p>
 <p class="text-step--1 text-content-quiet mb-fluid-m ">My current working stack is marked in **bold**</p>
 </Skills>
 
+## Complex organisations
+
+I am comfortable working within guidelines and understand the value of brand consistency. [OnePay](/work/onepay/), and [K Ring](/work/mykring/) are two projects that operated within the **Visa** and **MasterCard** networks respectively, each regulated by a unique set of brand and operational requirements. Naturally there is a lot of legal regulation and formal process in the fintech sector, so it was essential I was able to conduct accurate content updates, within industry timescales.
+
+<Figure mode='page' caption="Close up of K Ring and cyclist">
+  <Image
+          src={block__cyclist_40}
+          alt="Close up of K Ring and cyclist"
+          class="h-auto max-w-full"
+          quality={'high'}
+          widths={[380, 960]}
+          sizes={`960px`}
+      />
+</Figure>
+
+
+For [Shirley Chauffeurs](/work/shirleychauffuers/), I identified **user frustrations** and **motivations** through research and site audits, then translated those insights into design improvements. This process helped achieve a 30% uplift in enquires at relaunch.
+
+A comprehensive design system was created in Figma to keep the site consistent. The colour palette is based on shades of blue and cyan, which are associated with trust, reliability, and professionalism. The typography combines a serif font for headings to convey elegance and tradition, with a sans-serif font for body text to ensure readability and a modern feel.
+<Figure mode='bleed' class="my-0" caption="Each brand palette is generated from an initial colour value using tints.dev and then Hue, Saturation and Lightness steps are refined to ensure sufficient contrast and accessibility. The Alias ensures that the brand colours are not referenced directly in the CSS, which allows for easy updates in the future.">
+  <Image
+          src={palette}
+          alt="Brand palette"
+          class="h-auto max-w-full"
+          quality={'high'}
+          widths={[380, 760]}
+          sizes={`760px`}
+      />
+</Figure>
+
+
+
+
+## Figma and Prototyping
+I have designed user-focused layouts and transformed wireframes into responsive multilingual templates ensuring consistency across a diverse range of user groups. I can sketch out paper wireframes and progress them to production-ready fidelity by prioritising the feedback and continuously testing the product.
+
+I have transitioned my workflow from Photoshop to Figma, making good use of its responsive features and component handling. I can rapidly prototype in html and used static site generators to manage updates when working on [OnePay](/work/onepay/), and [K Ring](/work/mykring/).
+<Figure mode="page"  grid="grid grid-cols-2" caption="Light and dark mode colour palettes defined in Figma">
+    <Image
+        src={light}
+        alt="Light mode"
+        class=" h-auto max-w-full"
+        quality={100}
+        widths={[400, 760]}
+        sizes={`50%`}
+    />     <Image
+        src={dark}
+        alt="Dark mode"
+        class="h-auto max-w-full"
+        quality={100}
+        widths={[400, 760]}
+        sizes={`50%`}
+    />
+</Figure>
+
+With my development experience, I have a wider understanding of design feasibility, which helps with feature prioritisation and developer handover. I use Figma to design user interfaces, create prototypes at various levels of fidelity, and develop design systems. I use variables, modes and conditionals for advanced prototyping and consistent visuals. I’m also exploring FigJam as a tool for rapid ideation and mapping user journeys.
+
+<Figure mode='bleed' caption="The Brand variable collection forms the core palette. An Alias collection assigns semantic names (like Primary, Secondary), and the Mapped collection references these for use in classes (such as Surface, Link, Info). The mapped variables also define a light and dark variant.">
+    <Image
+        src={vars_mapped}
+        alt="Alias variables are picked within the Mapped collection"
+        class="mx-auto h-auto max-w-full"
+        quality={100}
+        widths={[400, 760]}
+        sizes={`768px`}
+    />
+</Figure>
+
+
+## Designing for accessibility
+
+I have a robust understanding of accessibility and inclusive design and will refer to resources like the Home Office’s designing for accessibility guidelines. As a creative developer, I use semantic HTML and structure in my content, follow proper heading outlines, and provide alternative text for images. I use assistive technologies to monitor legibility and screen reader compatibility and a variety of browser inspector tools to ensure the content is behaving as intended.
+
+The Chrome [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview) results are excellent.
+
+<div class="angleclip-tl-fluid-l px-(--viewport-safe-inline) lg:angleclip-tl-fluid-2xl -mb-fluid-5xl pb-fluid-5xl bg-radial-[at_50%_75%] pt-fluid-2xl lg:pt-fluid-3xl not-rte col-[full] from-teal-400 to-teal-900 to-90% text-center">
+    
+    <div class="inline-flex items-center justify-items-center p-fluid-xs mb-fluid-s mx-auto rounded-full bg-teal-700/80">
+      <span class="size-fluid-2xl text-content-light icon-[tabler--clipboard-data-filled]"></span>
+    </div>
+    
+    <div class=" mx-auto max-w-[96ch] font-normal">
+        <p class="font-display text-step-2 md:text-step-4/tight text-content-light">Site optimisation was a key focus during development, and the effort has
+        produced some <strong class="font-extrabold">excellent</strong> Lighthouse results</p>
+    </div>
+</div>
+
+<Figure mode='default'
+    caption="100% achieved in 3 out of 4 categories"
+    credit="Google Chrome Lighthouse"
+>
+    <Image
+        src={lighthouse}
+        alt="Call to action"
+        class="mx-auto h-auto max-w-full"
+        quality={100}
+        widths={[400, 760]}
+        sizes={`768px`}
+    />
+</Figure>
+
+
+## Agile environments
+I have worked in collaborative environments with back-end developers, translators and stakeholders. With [OnePay](/work/onepay/), a Visa prepaid card for temporary employees, I directly managed the supplied translation content for six languages and populated it into the Umbraco CMS as it became available. 
+
+Working closely with the client, and drawing on my experience within the prepaid sector, I was able to accommodate their ideas and introduce some key revisions to improve the customer experience.
+
+The static templates were then handed over to a team of back-end developers, complete with detailed annotations, listing indexes, and support documentation.
+
+I assisted in configuring the content management system (Umbraco) and took responsibility for the initial population of all launch content.
+
+I have also worked on regionalised campaigns and understand the specific tailoring they require. For the [K Ring](/work/mykring/) product, I curated a listing index of all the prototyped screens with working navigation.
+
+Any screen could be directly accessed by developers, partner clients and stakeholders. This was especially useful for translators, who often need more context to create concise translations as some screens can only be accessed under certain conditions, which can be difficult and sometimes impossible for third parties to recreate.
+
+<Figure mode='bleed' class="my-0">
+  <Image
+          src={kringProduct}
+          alt="K Ring product screens"
+          class="h-auto max-w-full"
+          quality={'high'}
+          widths={[380, 760]}
+          sizes={`760px`}
+      />
+</Figure>
+
+
+## Content management and campaigns
+
+I have overseen the management of Umbraco CMS sites, assembled landing pages, and built marketing campaigns for clients including K Ring (contactless Mastercard), OnePay (Visa), and [Kalixa](/work/kalixa/) Mastercard. Each of these projects demanded a combination of user experience insight, design support, and hands-on implementation skills.
 
 ## Looking Ahead
 
-I’m always keen to explore new technologies and production methods. 
-This static site was crafted using [Astro v5](https://astro.build/), integrating Preact, and [Tailwind CSS v4](https://tailwindcss.com/). I’ve really enjoyed diving into Astro and have been impressed with its exceptional load times and lighthouse scores. 
+I’m always keen to explore new technologies and production methods. This position could be a great opportunity to further specialise my skillset and learn alongside other user experience professionals. 
+
+This site is ‘hand-built’ and should serve as a marker of my capabilities in design and front-end development. It has been crafted using [Astro v5](https://astro.build/), integrating Preact, and [Tailwind CSS v4](https://tailwindcss.com/). I’ve really enjoyed diving into Astro and have been impressed with its exceptional load times and lighthouse scores. 
 
 > ... performance can also have a material effect on whether your website's users follow through. Slow sites have a negative impact on revenue, and fast sites are shown to increase conversion rates and improve business outcomes
 >
 > <cite>Source: [Google Web.Dev - Why does speed matter?](https://web.dev/learn/performance/why-speed-matters/) </cite>
 
-This site is ‘hand-built’ and should serve as a marker of my capabilities in design and front-end development. 
+## The Motivation
 
+While researching this position, I read your Chief Executive’s 2025 reflection and was inspired by its hopeful message of community strength rather than division. I would love to invest my skills into a cause that makes such a positive difference in the community. 
 
-## Balancing Life and Work
-
-I love exploring the great outdoors with my young family and spending quality time at the nets with my cricket-obsessed sons. During the season, I volunteer as a parent coach at our local cricket club.
-
-Nature is my go-to for recharging and getting offline, but I’m not above using [Google Lens](https://lens.google/intl/en-GB/#cta-section) to identify what we’re discovering!
-
-
-<BlockImage
-    src={google_lens}
-    width={768}
-    breakout={false}
-    class="my-0 w-full"
-    alt="Beach scene with close up of jellyfish. Detail shows iPhone with google lens app"
-    credit="Google Lens (App visuals)"
-    wrapper="my-fluid-l"
-/>
-
-## Availability
-
-I'm currently <Availability url={`/connect/`} /> for new opportunities in UI/UX and front-end development. If you think I could be a great fit for your team, please [connect](/connect/) or reach out via [LinkedIn](https://www.linkedin.com/in/peter-wallace-a5002a7a/).
+For me, success would be knowing that clearer guidance has helped community projects that might otherwise have abandoned the funding process, and that is a strong motivation for applying.
 
 Head over to the [work](/work/) section for a closer look at my portfolio. There are currently **{postCount} case studies** to explore.
 <Banner slot="footeroverlap" mode={'page'} shadow={true} aspect="min-h-[40cqw]" />
+
 </PageLayout>
