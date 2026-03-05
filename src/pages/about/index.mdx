@@ -35,7 +35,6 @@ skillset:
               - 'Microsoft Teams'
               - 'Azure Dev Ops'
         - title: 'Responsibilities'
-          class: 'col-span-full'
           skills:
               - 'Design Systems'
               - 'UX/UI'
@@ -46,7 +45,6 @@ skillset:
               - 'Wireframes'
               - 'Asset generation'
         - title: 'Key Competencies'
-          class: 'col-span-full'
           skills:
               - 'Creativity and problem solving'
 ---
@@ -58,6 +56,8 @@ export const components = {ul: UL, blockquote: BLOCKQUOTE, pre: PRE, h2: H2};
 
 import PageLayout from '~/layouts/PageLayout.astro';
 import Skills from '~/components/ui/Skills.astro';
+import Certificates from '~/components/ui/Certificates.astro';
+import certs from '~/data/certs';
 import Availability from '~/components/ui/Availability.astro';
 import Banner from '~/components/banners/Portfolio.astro';
 
@@ -150,8 +150,12 @@ I shifted my focus to the fintech sector, where I led Front-End development for 
 ## Current Skills
 
 <p class="text-step--1 text-content-quiet mb-fluid-m ">My current working stack is marked in **bold**</p>
+
 </Skills>
 
+<Certificates certs={certs} text="text-content-light" bg="bg-info-shade" mode="page">
+## Digital Certificates
+</Certificates>
 
 ## Looking Ahead
 

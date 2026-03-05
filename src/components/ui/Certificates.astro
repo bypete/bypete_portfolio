@@ -1,27 +1,16 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { remark } from 'remark';
-import remarkHtml from 'remark-html';
-
-interface Area {
-    title: string;
-    skills: string[];
-    class?: string;
-}
-interface Skillset {
-    text?: string;
-    emboss?: string;
-    areas: Area[];
-}
+import type { Certificate } from '~/data/certs';
 
 export interface Props extends HTMLAttributes<'div'> {
     mode?: 'default' | 'breakout' | 'bleed' | 'page';
     wrap?: string | string[];
     panel?: string | string[];
     shadow?: boolean | string;
+    text?: string;
     bg?: string;
     class?: string;
-    skillset?: Skillset;
+    certs: Certificate[];
 }
 
 type DisplayTheme = {
@@ -59,11 +48,10 @@ const {
     shadow,
     bg = 'bg-surface-raised',
     class: className,
-    skillset,
+    certs,
+    text,
     ...rest
 } = Astro.props;
-
-const { text, emboss, areas: rawAreas } = skillset as Skillset;
 
 const config = displayModes[mode] ?? displayModes.default;
 
@@ -78,30 +66,6 @@ const shadowClasses =
 
 const wrapClasses = wrap ?? config?.wrap ?? [];
 const panelClasses = panel ?? config?.panel ?? [];
-
-// Shared parser
-const parser = remark().use(remarkHtml, { sanitize: false });
-
-// Strip wrapping <p> tags from any markdown that is a single paragraph
-const stripParagraph = (html: string) =>
-    html.replace(/^<p>(.*)<\/p>\n?$/s, '$1').trim();
-
-// Process titles and skills — no <p> ever
-const processedAreas = await Promise.all(
-    rawAreas.map(async (area) => ({
-        titleHtml: stripParagraph(
-            await parser.process(area.title).then((r) => String(r)),
-        ),
-        skillsHtml: await Promise.all(
-            area.skills.map(async (skill) =>
-                stripParagraph(
-                    await parser.process(skill).then((r) => String(r)),
-                ),
-            ),
-        ),
-        class: area.class,
-    })),
-);
 ---
 
 <div
@@ -115,22 +79,50 @@ const processedAreas = await Promise.all(
             shadowClasses,
             bg,
             text ?? 'text-content [&_li]:before:text-secondary',
-            emboss && emboss,
         ]}
     >
+        <slot />
+
         <ul
             class="grid grid-cols-1 gap-fluid-m @min-[60ch]:grid-cols-2 @min-[96ch]:grid-cols-3"
         >
-            <li class="col-span-full *:last:mb-0"><slot /></li>
             {
-                processedAreas.map((area) => (
-                    <li class:list={[area?.class]}>
-                        <h3 class="text-step-1" set:html={area.titleHtml} />
-                        <ul class:list={['list list--checklist']}>
-                            {area.skillsHtml.map((html) => (
-                                <li set:html={html} />
-                            ))}
-                        </ul>
+                certs.map((cert) => (
+                    <li>
+                        <h3 class="text-step-1">{cert.title}</h3>
+                        <p>
+                            {cert.platform
+                                ? `${cert.issuer}, (${cert.platform})`
+                                : cert.issuer}
+                        </p>
+
+                        <div class="flex gap-fluid-m py-fluid-3xs text-step--1 font-light">
+                            <p>Issued: {cert.issued}</p>
+                            {cert.expires && <p>Expires: {cert.expires}</p>}
+                        </div>
+
+                        <p class="m-0 flex flex-wrap gap-fluid-3xs">
+                            {cert.url && (
+                                <a
+                                    href={cert.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-block link"
+                                >
+                                    <span class="icon-[hugeicons--certificate-01] inline-block size-fluid-m" />
+                                </a>
+                            )}
+                            {cert.pdf && (
+                                <a
+                                    href={cert.pdf}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="link"
+                                >
+                                    <span class="icon-[hugeicons--pdf-02] inline-block size-fluid-m" />
+                                </a>
+                            )}
+                        </p>
                     </li>
                 ))
             }
