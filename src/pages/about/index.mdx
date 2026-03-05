@@ -57,7 +57,7 @@ export const components = {ul: UL, blockquote: BLOCKQUOTE, pre: PRE, h2: H2};
 import PageLayout from '~/layouts/PageLayout.astro';
 import Skills from '~/components/ui/Skills.astro';
 import Certificates from '~/components/ui/Certificates.astro';
-import certs from '~/data/certs';
+import { certificates } from '~/data/certificates';
 import Availability from '~/components/ui/Availability.astro';
 import Banner from '~/components/banners/Portfolio.astro';
 
@@ -153,7 +153,7 @@ I shifted my focus to the fintech sector, where I led Front-End development for 
 
 </Skills>
 
-<Certificates certs={certs} text="text-content-light" bg="bg-info-shade" mode="page">
+<Certificates certificates={certificates} text="text-content-light" bg="bg-info-shade" mode="page">
 ## Digital Certificates
 </Certificates>
 

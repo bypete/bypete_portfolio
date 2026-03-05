@@ -43,6 +43,8 @@ import PRE from '~/components/MDX/pre.astro'
 export const components = {ul: UL, blockquote: BLOCKQUOTE, pre: PRE, h2: H2};
 
 import PageLayout from '~/layouts/PageLayout.astro';
+import Certificates from '~/components/ui/Certificates.astro';
+import { certificates } from '~/data/certificates';
 import Skills from '~/components/ui/Skills.astro';
 import Availability from '~/components/ui/Availability.astro';
 import Banner from '~/components/banners/Portfolio.astro';
@@ -151,6 +153,10 @@ This page highlights some of the projects mentioned in my supporting statement.
 <p>I have a lot of transferrable skills from a background in creative development.</p>
 <p class="text-step--1 text-content-quiet mb-fluid-m ">My current working stack is marked in **bold**</p>
 </Skills>
+
+<Certificates certificates={certificates} text="text-content-light" bg="bg-info-shade" mode="page">
+## Digital Certificates
+</Certificates>
 
 ## Complex organisations
 

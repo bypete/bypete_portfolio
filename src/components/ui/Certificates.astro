@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import type { Certificate } from '~/data/certs';
+import type { Certificate } from '~/data/certificates';
 
 export interface Props extends HTMLAttributes<'div'> {
     mode?: 'default' | 'breakout' | 'bleed' | 'page';
@@ -10,7 +10,7 @@ export interface Props extends HTMLAttributes<'div'> {
     text?: string;
     bg?: string;
     class?: string;
-    certs: Certificate[];
+    certificates: Certificate[];
 }
 
 type DisplayTheme = {
@@ -48,7 +48,7 @@ const {
     shadow,
     bg = 'bg-surface-raised',
     class: className,
-    certs,
+    certificates,
     text,
     ...rest
 } = Astro.props;
@@ -69,12 +69,12 @@ const panelClasses = panel ?? config?.panel ?? [];
 ---
 
 <div
-    class:list={['not-rte @container/skills', wrapClasses, className]}
+    class:list={['not-rte @container/certificates', wrapClasses, className]}
     {...rest}
 >
     <div
         class:list={[
-            'w-full rounded @min-[99.9vw]/skills:rounded-none',
+            'w-full rounded @min-[99.9vw]/certificates:rounded-none',
             panelClasses,
             shadowClasses,
             bg,
@@ -87,7 +87,7 @@ const panelClasses = panel ?? config?.panel ?? [];
             class="grid grid-cols-1 gap-fluid-m @min-[60ch]:grid-cols-2 @min-[96ch]:grid-cols-3"
         >
             {
-                certs.map((cert) => (
+                certificates.map((cert) => (
                     <li>
                         <h3 class="text-step-1">{cert.title}</h3>
                         <p>
@@ -108,6 +108,7 @@ const panelClasses = panel ?? config?.panel ?? [];
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="inline-block link"
+                                    aria-label={`View certificate for ${cert.title}`}
                                 >
                                     <span class="icon-[hugeicons--certificate-01] inline-block size-fluid-m" />
                                 </a>
@@ -118,6 +119,7 @@ const panelClasses = panel ?? config?.panel ?? [];
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="link"
+                                    aria-label={`Download certificate PDF for ${cert.title}`}
                                 >
                                     <span class="icon-[hugeicons--pdf-02] inline-block size-fluid-m" />
                                 </a>

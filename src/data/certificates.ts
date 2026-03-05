@@ -18,7 +18,7 @@ export interface Certificate {
 
 import ga4 from "~/assets/certificates/59aeafcd-4a9f-4ebe-9101-d8da708b9dab.png";
 
-const certificates: Certificate[] = [
+export const certificates: Certificate[] = [
 	{
 		title: "Google Analytics Certification",
 		issuer: "Google",
@@ -48,5 +48,3 @@ const certificates: Certificate[] = [
 		image: { src: ga4, alt: "Google Analytics Certification" },
 	},
 ];
-
-export default certificates;
