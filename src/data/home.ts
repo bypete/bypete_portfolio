@@ -82,6 +82,11 @@ export interface Activity {
 
 export const roles: Activity[] = [
 	{ subject: "I'm an", preposition: "experienced", role: "Creative Developer" },
+	{
+		subject: "Who has",
+		preposition: "specialised in",
+		role: "User Experience Design",
+	},
 	{ subject: "I adopt a", preposition: "mobile first", role: "dev approach" },
 	{ subject: "I build", preposition: "engaging", role: "landing pages" },
 	{
@@ -89,6 +94,4 @@ export const roles: Activity[] = [
 		preposition: "work in",
 		role: "FrontEnd Development",
 	},
-	{ subject: "I'm focused", preposition: "on", role: "Ui/UX Design" },
-	{ subject: "I like to", preposition: "oversee", role: "Content management" },
 ];
